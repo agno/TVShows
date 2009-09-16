@@ -1,10 +1,14 @@
 News
 
+0.4.1 (09-16-2009)
+- All links now point to TVShows new homepage.
+- Now using Sparkle 1.5b6 for auto updates.
+
 0.4 (09-11-2009)
-- Since TVShows has unofficially changed hands, all new builds will fall under the 0.4 branch and will be the only builds supported.
-- Replaced all instances of tvrss.net with the new torrent source, ezrss.it.
+Since TVShows has unofficially changed hands, all new builds will fall under the 0.4 branch and will be the only builds supported.
 - Fixed a critical bug where 0 byte torrents would be created.
-- Updated a few libraries that TVShows uses.
+- Now uses ezrss.it, since tvrss.net is no longer available.
+- Updated the simple-rss library for ruby.
 
 0.3.4 (04-30-2007)
 - Possibly fixed the "Could not download the show list. Are you connected to the internet?" bug
