@@ -1,624 +1,0 @@
-TTVShows
-v7
-r0
-t274632425.552825
-cCheck dependencies
-cProcessInfoPlistFile "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Info.plist" Info.plist
-cCpResource build/Debug/TVShows.app/Contents/Resources/TVShowsScript TVShowsScript
-cCpResource build/Debug/TVShows.app/Contents/Resources/GetShowDetails.rb GetShowDetails.rb
-cCpResource build/Debug/TVShows.app/Contents/Resources/GetLatestSeasonEpisodeForShow.rb GetLatestSeasonEpisodeForShow.rb
-cCpResource build/Debug/TVShows.app/Contents/Resources/DownloadShowList.rb DownloadShowList.rb
-cStripNIB "/Users/matthew/Active Projects/TVShows/trunk/English.lproj/MainMenu.nib"
-cCopyPlistFile "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/UserDefaults.plist" UserDefaults.plist
-cCopyStringsFile "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/English.lproj/InfoPlist.strings" English.lproj/InfoPlist.strings
-cCpResource build/Debug/TVShows.app/Contents/Resources/Reload.png Reload.png
-cCpResource build/Debug/TVShows.app/Contents/Resources/TVShows.icns TVShows.icns
-cCopyTiffFile "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/Play.tif" Play.tif
-cCpResource build/Debug/TVShows.app/Contents/Resources/Preferences.png Preferences.png
-cCpResource build/Debug/TVShows.app/Contents/Resources/Stop.png Stop.png
-cCopyTiffFile "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/Red.tif" Red.tif
-cCopyTiffFile "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/Green.tif" Green.tif
-cCpResource build/Debug/TVShows.app/Contents/Resources/Credits.rtf Credits.rtf
-cCpResource build/Debug/TVShows.app/Contents/Resources/Bookmark.png Bookmark.png
-cCpResource build/Debug/TVShows.app/Contents/Resources/Web.png Web.png
-cCpResource build/Debug/TVShows.app/Contents/Resources/Clock.png Clock.png
-cCompileC build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/main.o "/Users/matthew/Active Projects/TVShows/trunk/main.m" normal i386 objective-c com.apple.compilers.gcc.4_0
-cCompileC build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/Controller.o "/Users/matthew/Active Projects/TVShows/trunk/Controller.m" normal i386 objective-c com.apple.compilers.gcc.4_0
-cCompileC build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/Helper.o "/Users/matthew/Active Projects/TVShows/trunk/Helper.m" normal i386 objective-c com.apple.compilers.gcc.4_0
-cCompileC build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/TVTableView.o "/Users/matthew/Active Projects/TVShows/trunk/TVTableView.m" normal i386 objective-c com.apple.compilers.gcc.4_0
-cCompileC build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/ValueTransformers.o "/Users/matthew/Active Projects/TVShows/trunk/ValueTransformers.m" normal i386 objective-c com.apple.compilers.gcc.4_0
-cLd "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/MacOS/TVShows" normal i386
-cPBXCp build/Debug/TVShows.app/Contents/Frameworks/Sparkle.framework Sparkle.framework
-cPhaseScriptExecution "Run Script" "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/Script-5B240B3E0BC40F140081A28E.sh"
-cTouch "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app"
-
-N/Developer/SDKs/MacOSX10.4u.sdk
-c000000004A1199E200000000000000EE
-t1242667490
-s238
-
-N/Developer/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h
-c0000000040C4AA6800000000000001E5
-t1086630504
-s485
-
-N/Developer/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks/Security.framework/Headers/Security.h
-c00000000462EA4FB00000000000009A4
-t1177462011
-s2468
-
-N/System/Library/Frameworks/Cocoa.framework/Cocoa
-c000000004A1F2D63000000000000A5E0
-t1243557219
-s42464
-
-N/System/Library/Frameworks/Security.framework/Security
-c000000004A4D521F0000000000A0ECD0
-t1246581279
-s10546384
-
-N/Users/matthew/Active Projects/TVShows/trunk/Bookmark.png
-c000000004AAE4F9B000000000000025D
-t1252937627
-s605
-
-N/Users/matthew/Active Projects/TVShows/trunk/Clock.png
-c000000004AAE4F9F000000000000035C
-t1252937631
-s860
-
-N/Users/matthew/Active Projects/TVShows/trunk/Controller.h
-c000000004AAE4F9F0000000000000CD0
-t1252937631
-s3280
-i<Cocoa/Cocoa.h>
-i"Helper.h"
-
-N/Users/matthew/Active Projects/TVShows/trunk/Controller.m
-c000000004AAE57E50000000000005D0E
-t1252939749
-s23822
-i"Controller.h"
-i"ValueTransformers.h"
-
-N/Users/matthew/Active Projects/TVShows/trunk/Credits.rtf
-c000000004AAC4CC500000000000008C0
-t1252805829
-s2240
-
-N/Users/matthew/Active Projects/TVShows/trunk/DownloadShowList.rb
-c000000004AAE4DF10000000000000793
-t1252937201
-s1939
-
-N/Users/matthew/Active Projects/TVShows/trunk/English.lproj/InfoPlist.strings
-c000000004AAE4F9900000000000000D2
-t1252937625
-s210
-
-N/Users/matthew/Active Projects/TVShows/trunk/English.lproj/MainMenu.nib
-c000000004635F1C200000000000000AA
-t1177940418
-s170
-
-N/Users/matthew/Active Projects/TVShows/trunk/GetLatestSeasonEpisodeForShow.rb
-c000000004AABE47C0000000000000426
-t1252779132
-s1062
-
-N/Users/matthew/Active Projects/TVShows/trunk/GetShowDetails.rb
-c000000004AAD79E10000000000000DE9
-t1252882913
-s3561
-
-N/Users/matthew/Active Projects/TVShows/trunk/Green.tif
-c000000004AAE4F9B000000000000034A
-t1252937627
-s842
-
-N/Users/matthew/Active Projects/TVShows/trunk/Helper.h
-c000000004AAE4F930000000000000518
-t1252937619
-s1304
-i<Cocoa/Cocoa.h>
-
-N/Users/matthew/Active Projects/TVShows/trunk/Helper.m
-c000000004AAE550D00000000000024C2
-t1252939021
-s9410
-i"Helper.h"
-i<Security/Security.h>
-
-N/Users/matthew/Active Projects/TVShows/trunk/Play.tif
-c000000004AAE4F8800000000000007C8
-t1252937608
-s1992
-
-N/Users/matthew/Active Projects/TVShows/trunk/Preferences.png
-c000000004AAE4F880000000000000644
-t1252937608
-s1604
-
-N/Users/matthew/Active Projects/TVShows/trunk/Red.tif
-c000000004AAE4F88000000000000034C
-t1252937608
-s844
-
-N/Users/matthew/Active Projects/TVShows/trunk/Reload.png
-c000000004AAE4F9B000000000000072C
-t1252937627
-s1836
-
-N/Users/matthew/Active Projects/TVShows/trunk/Sparkle.framework
-c00000000461F625A00000000000000CC
-t1176461914
-s204
-
-N/Users/matthew/Active Projects/TVShows/trunk/Sparkle.framework/Sparkle
-c000000004AAE4F89000000000000001D
-t1252937609
-s29
-
-N/Users/matthew/Active Projects/TVShows/trunk/Stop.png
-c000000004AAE4F940000000000000F40
-t1252937620
-s3904
-
-N/Users/matthew/Active Projects/TVShows/trunk/TVShows.icns
-c000000004AAE4F94000000000000E541
-t1252937620
-s58689
-
-N/Users/matthew/Active Projects/TVShows/trunk/TVShowsScript
-c000000004AAE4E3600000000000000AA
-t1252937270
-s170
-
-N/Users/matthew/Active Projects/TVShows/trunk/TVTableView.h
-c000000004AAE4F880000000000000144
-t1252937608
-s324
-i<Cocoa/Cocoa.h>
-
-N/Users/matthew/Active Projects/TVShows/trunk/TVTableView.m
-c000000004AAE4F8800000000000006CE
-t1252937608
-s1742
-i"TVTableView.h"
-
-N/Users/matthew/Active Projects/TVShows/trunk/UserDefaults.plist
-c000000004AAE4F9C00000000000001CC
-t1252937628
-s460
-
-N/Users/matthew/Active Projects/TVShows/trunk/ValueTransformers.h
-c000000004AAE4F94000000000000050D
-t1252937620
-s1293
-i<Cocoa/Cocoa.h>
-
-N/Users/matthew/Active Projects/TVShows/trunk/ValueTransformers.m
-c000000004AAE4F990000000000000D9F
-t1252937625
-s3487
-i"ValueTransformers.h"
-
-N/Users/matthew/Active Projects/TVShows/trunk/Web.png
-c000000004AAE4F9C0000000000000354
-t1252937628
-s852
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app
-t1252939625
-s102
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Frameworks/Sparkle.framework
-t1252939625
-s204
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Info.plist
-t1252939623
-s2339
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/MacOS/TVShows
-t1252939625
-s69396
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/PkgInfo
-t1252939623
-s8
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/Bookmark.png
-t1252939623
-s605
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/Clock.png
-t1252939623
-s860
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/Credits.rtf
-t1252939623
-s2240
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/DownloadShowList.rb
-t1252939623
-s1939
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/English.lproj/InfoPlist.strings
-t1252939623
-s210
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/English.lproj/MainMenu.nib
-t1177940418
-s170
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/GetLatestSeasonEpisodeForShow.rb
-t1252939623
-s1062
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/GetShowDetails.rb
-t1252939623
-s3561
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/Green.tif
-t1252939623
-s842
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/Play.tif
-t1252939623
-s1992
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/Preferences.png
-t1252939623
-s1604
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/Red.tif
-t1252939623
-s844
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/Reload.png
-t1252939623
-s1836
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/Stop.png
-t1252939623
-s3904
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/TVShows.icns
-t1252939623
-s58689
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/TVShowsScript
-t1252939623
-s170
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/UserDefaults.plist
-t1252939623
-s460
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/Web.png
-t1252939623
-s852
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/Controller.o
-t1252939624
-s114888
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/Helper.o
-t1252939624
-s32540
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/TVShows.LinkFileList
-c000000004AAE5767000000000000024C
-t1252939623
-s588
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/TVTableView.o
-t1252939624
-s20240
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/ValueTransformers.o
-t1252939625
-s24376
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/main.o
-t1252939623
-s4688
-
-N/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/Script-5B240B3E0BC40F140081A28E.sh
-c000000004AAE57670000000000000576
-t1252939623
-s1398
-
-N/Users/matthew/Active Projects/TVShows/trunk/main.m
-c000000004AAE4F880000000000000112
-t1252937608
-s274
-i<Cocoa/Cocoa.h>
-
-NInfo.plist
-c000000004AAE4F9B0000000000000999
-t1252937627
-s2457
-
-CCheck dependencies
-r0
-lSLF07#2@18"Check dependencies274632423#274632423#0(0"0(0#1#0"7947009927035180032#0"0#
-
-CCompileC build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/Controller.o "/Users/matthew/Active Projects/TVShows/trunk/Controller.m" normal i386 objective-c com.apple.compilers.gcc.4_0
-s274632423.257657
-e274632424.212741
-r1
-xCompileC
-xbuild/TVShows.build/Debug/TVShows.build/Objects-normal/i386/Controller.o
-x/Users/matthew/Active Projects/TVShows/trunk/Controller.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_0
-lSLF07#2@65"Compile /Users/matthew/Active Projects/TVShows/trunk/Controller.m274632423#274632424#0(0"0(0#0#57"/Users/matthew/Active Projects/TVShows/trunk/Controller.m4300882208#1082"    cd "/Users/matthew/Active Projects/TVShows/trunk"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.0 -x objective-c -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/SDKs/MacOSX10.4u.sdk -mfix-and-continue -mmacosx-version-min=10.4 -gdwarf-2 "-I/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/TVShows.hmap" "-F/Users/matthew/Active Projects/TVShows/trunk/build/Debug" "-F/Users/matthew/Active Projects/TVShows/trunk" "-F/Users/matthew/Active Projects/TVShows/trunk" "-I/Users/matthew/Active Projects/TVShows/trunk/build/Debug/include" "-I/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/DerivedSources/i386" "-I/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/DerivedSources" -c "/Users/matthew/Active Projects/TVShows/trunk/Controller.m" -o "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/Controller.o"0#
-
-CCompileC build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/Helper.o "/Users/matthew/Active Projects/TVShows/trunk/Helper.m" normal i386 objective-c com.apple.compilers.gcc.4_0
-s274632423.947317
-e274632424.807614
-r1
-xCompileC
-xbuild/TVShows.build/Debug/TVShows.build/Objects-normal/i386/Helper.o
-x/Users/matthew/Active Projects/TVShows/trunk/Helper.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_0
-lSLF07#2@61"Compile /Users/matthew/Active Projects/TVShows/trunk/Helper.m274632423#274632424#0(0"0(0#0#53"/Users/matthew/Active Projects/TVShows/trunk/Helper.m4300882208#1074"    cd "/Users/matthew/Active Projects/TVShows/trunk"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.0 -x objective-c -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/SDKs/MacOSX10.4u.sdk -mfix-and-continue -mmacosx-version-min=10.4 -gdwarf-2 "-I/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/TVShows.hmap" "-F/Users/matthew/Active Projects/TVShows/trunk/build/Debug" "-F/Users/matthew/Active Projects/TVShows/trunk" "-F/Users/matthew/Active Projects/TVShows/trunk" "-I/Users/matthew/Active Projects/TVShows/trunk/build/Debug/include" "-I/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/DerivedSources/i386" "-I/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/DerivedSources" -c "/Users/matthew/Active Projects/TVShows/trunk/Helper.m" -o "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/Helper.o"0#
-
-CCompileC build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/TVTableView.o "/Users/matthew/Active Projects/TVShows/trunk/TVTableView.m" normal i386 objective-c com.apple.compilers.gcc.4_0
-s274632424.212857
-e274632424.894798
-r1
-xCompileC
-xbuild/TVShows.build/Debug/TVShows.build/Objects-normal/i386/TVTableView.o
-x/Users/matthew/Active Projects/TVShows/trunk/TVTableView.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_0
-o/Users/matthew/Active Projects/TVShows/trunk/TVTableView.m: In function '-[TVTableView drawStripesInRect:]':
-o/Users/matthew/Active Projects/TVShows/trunk/TVTableView.m:45: warning: no '-shouldGreenRowAtIndex:' method found
-o/Users/matthew/Active Projects/TVShows/trunk/TVTableView.m:45: warning: (Messages without a matching method signature
-o/Users/matthew/Active Projects/TVShows/trunk/TVTableView.m:45: warning: will be assumed to return 'id' and accept
-o/Users/matthew/Active Projects/TVShows/trunk/TVTableView.m:45: warning: '...' as arguments.)
-lSLF07#2@66"Compile /Users/matthew/Active Projects/TVShows/trunk/TVTableView.m274632424#274632424#0(548"/Users/matthew/Active Projects/TVShows/trunk/TVTableView.m: In function '-[TVTableView drawStripesInRect:]':/Users/matthew/Active Projects/TVShows/trunk/TVTableView.m:45: warning: no '-shouldGreenRowAtIndex:' method found/Users/matthew/Active Projects/TVShows/trunk/TVTableView.m:45: warning: (Messages without a matching method signature/Users/matthew/Active Projects/TVShows/trunk/TVTableView.m:45: warning: will be assumed to return 'id' and accept/Users/matthew/Active Projects/TVShows/trunk/TVTableView.m:45: warning: '...' as arguments.)2(22@41"No '-shouldGreenRowAtIndex:' method found274632424#109#114#0(6@58"/Users/matthew/Active Projects/TVShows/trunk/TVTableView.m274630408#45#0#45#0#19"no '*' method found0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)274632424#223#118#0(6@58"/Users/matthew/Active Projects/TVShows/trunk/TVTableView.m274630408#45#0#45#0#0"0(0#0#58"/Users/matthew/Active Projects/TVShows/trunk/TVTableView.m4300882208#1084"    cd "/Users/matthew/Active Projects/TVShows/trunk"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.0 -x objective-c -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/SDKs/MacOSX10.4u.sdk -mfix-and-continue -mmacosx-version-min=10.4 -gdwarf-2 "-I/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/TVShows.hmap" "-F/Users/matthew/Active Projects/TVShows/trunk/build/Debug" "-F/Users/matthew/Active Projects/TVShows/trunk" "-F/Users/matthew/Active Projects/TVShows/trunk" "-I/Users/matthew/Active Projects/TVShows/trunk/build/Debug/include" "-I/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/DerivedSources/i386" "-I/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/DerivedSources" -c "/Users/matthew/Active Projects/TVShows/trunk/TVTableView.m" -o "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/TVTableView.o"0#
-
-CCompileC build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/ValueTransformers.o "/Users/matthew/Active Projects/TVShows/trunk/ValueTransformers.m" normal i386 objective-c com.apple.compilers.gcc.4_0
-s274632424.807900
-e274632425.456924
-r1
-xCompileC
-xbuild/TVShows.build/Debug/TVShows.build/Objects-normal/i386/ValueTransformers.o
-x/Users/matthew/Active Projects/TVShows/trunk/ValueTransformers.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_0
-lSLF07#2@72"Compile /Users/matthew/Active Projects/TVShows/trunk/ValueTransformers.m274632424#274632425#0(0"0(0#0#64"/Users/matthew/Active Projects/TVShows/trunk/ValueTransformers.m4300882208#1096"    cd "/Users/matthew/Active Projects/TVShows/trunk"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.0 -x objective-c -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/SDKs/MacOSX10.4u.sdk -mfix-and-continue -mmacosx-version-min=10.4 -gdwarf-2 "-I/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/TVShows.hmap" "-F/Users/matthew/Active Projects/TVShows/trunk/build/Debug" "-F/Users/matthew/Active Projects/TVShows/trunk" "-F/Users/matthew/Active Projects/TVShows/trunk" "-I/Users/matthew/Active Projects/TVShows/trunk/build/Debug/include" "-I/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/DerivedSources/i386" "-I/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/DerivedSources" -c "/Users/matthew/Active Projects/TVShows/trunk/ValueTransformers.m" -o "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/ValueTransformers.o"0#
-
-CCompileC build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/main.o "/Users/matthew/Active Projects/TVShows/trunk/main.m" normal i386 objective-c com.apple.compilers.gcc.4_0
-s274632423.256721
-e274632423.947201
-r1
-xCompileC
-xbuild/TVShows.build/Debug/TVShows.build/Objects-normal/i386/main.o
-x/Users/matthew/Active Projects/TVShows/trunk/main.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_0
-lSLF07#2@59"Compile /Users/matthew/Active Projects/TVShows/trunk/main.m274632423#274632423#0(0"0(0#0#51"/Users/matthew/Active Projects/TVShows/trunk/main.m4300882208#1070"    cd "/Users/matthew/Active Projects/TVShows/trunk"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.0 -x objective-c -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/SDKs/MacOSX10.4u.sdk -mfix-and-continue -mmacosx-version-min=10.4 -gdwarf-2 "-I/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/TVShows.hmap" "-F/Users/matthew/Active Projects/TVShows/trunk/build/Debug" "-F/Users/matthew/Active Projects/TVShows/trunk" "-F/Users/matthew/Active Projects/TVShows/trunk" "-I/Users/matthew/Active Projects/TVShows/trunk/build/Debug/include" "-I/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/DerivedSources/i386" "-I/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/DerivedSources" -c "/Users/matthew/Active Projects/TVShows/trunk/main.m" -o "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/main.o"0#
-
-CCopyPlistFile "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/UserDefaults.plist" UserDefaults.plist
-s274632423.126422
-e274632423.153273
-r1
-xCopyPlistFile
-x/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/UserDefaults.plist
-xUserDefaults.plist
-lSLF07#2@23"Copy UserDefaults.plist274632423#274632423#0(0"0(0#0#63"/Users/matthew/Active Projects/TVShows/trunk/UserDefaults.plist4300882208#263"    cd "/Users/matthew/Active Projects/TVShows/trunk"    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copyplist UserDefaults.plist --outdir "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources"0#
-
-CCopyStringsFile "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/English.lproj/InfoPlist.strings" English.lproj/InfoPlist.strings
-s274632423.153379
-e274632423.202217
-r1
-xCopyStringsFile
-x/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/English.lproj/InfoPlist.strings
-xEnglish.lproj/InfoPlist.strings
-lSLF07#2@36"Copy English.lproj/InfoPlist.strings274632423#274632423#0(0"0(0#0#76"/Users/matthew/Active Projects/TVShows/trunk/English.lproj/InfoPlist.strings4300882208#382"    cd "/Users/matthew/Active Projects/TVShows/trunk"    setenv ICONV /usr/bin/iconv    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-16 --outputencoding UTF-16 English.lproj/InfoPlist.strings --outdir "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/English.lproj"0#
-
-CCopyTiffFile "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/Green.tif" Green.tif
-s274632423.207581
-e274632423.230449
-r1
-xCopyTiffFile
-x/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/Green.tif
-xGreen.tif
-lSLF07#2@14"Copy Green.tif274632423#274632423#0(0"0(0#0#54"/Users/matthew/Active Projects/TVShows/trunk/Green.tif4300882208#253"    cd "/Users/matthew/Active Projects/TVShows/trunk"    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copytiff Green.tif --outdir "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources"0#
-
-CCopyTiffFile "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/Play.tif" Play.tif
-s274632423.171669
-e274632423.196962
-r1
-xCopyTiffFile
-x/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/Play.tif
-xPlay.tif
-lSLF07#2@13"Copy Play.tif274632423#274632423#0(0"0(0#0#53"/Users/matthew/Active Projects/TVShows/trunk/Play.tif4300882208#252"    cd "/Users/matthew/Active Projects/TVShows/trunk"    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copytiff Play.tif --outdir "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources"0#
-
-CCopyTiffFile "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/Red.tif" Red.tif
-s274632423.200183
-e274632423.240338
-r1
-xCopyTiffFile
-x/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/Red.tif
-xRed.tif
-lSLF07#2@12"Copy Red.tif274632423#274632423#0(0"0(0#0#52"/Users/matthew/Active Projects/TVShows/trunk/Red.tif4300882208#251"    cd "/Users/matthew/Active Projects/TVShows/trunk"    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copytiff Red.tif --outdir "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources"0#
-
-CCpResource build/Debug/TVShows.app/Contents/Resources/Bookmark.png Bookmark.png
-s274632423.231492
-e274632423.250770
-r1
-xCpResource
-xbuild/Debug/TVShows.app/Contents/Resources/Bookmark.png
-xBookmark.png
-lSLF07#2@17"Copy Bookmark.png274632423#274632423#0(0"0(0#0#57"/Users/matthew/Active Projects/TVShows/trunk/Bookmark.png4300882208#352"    cd "/Users/matthew/Active Projects/TVShows/trunk"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks "/Users/matthew/Active Projects/TVShows/trunk/Bookmark.png" "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources"0#
-
-CCpResource build/Debug/TVShows.app/Contents/Resources/Clock.png Clock.png
-s274632423.237539
-e274632423.253809
-r1
-xCpResource
-xbuild/Debug/TVShows.app/Contents/Resources/Clock.png
-xClock.png
-lSLF07#2@14"Copy Clock.png274632423#274632423#0(0"0(0#0#54"/Users/matthew/Active Projects/TVShows/trunk/Clock.png4300882208#349"    cd "/Users/matthew/Active Projects/TVShows/trunk"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks "/Users/matthew/Active Projects/TVShows/trunk/Clock.png" "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources"0#
-
-CCpResource build/Debug/TVShows.app/Contents/Resources/Credits.rtf Credits.rtf
-s274632423.230544
-e274632423.256629
-r1
-xCpResource
-xbuild/Debug/TVShows.app/Contents/Resources/Credits.rtf
-xCredits.rtf
-lSLF07#2@16"Copy Credits.rtf274632423#274632423#0(0"0(0#0#56"/Users/matthew/Active Projects/TVShows/trunk/Credits.rtf4300882208#351"    cd "/Users/matthew/Active Projects/TVShows/trunk"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks "/Users/matthew/Active Projects/TVShows/trunk/Credits.rtf" "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources"0#
-
-CCpResource build/Debug/TVShows.app/Contents/Resources/DownloadShowList.rb DownloadShowList.rb
-s274632423.109545
-e274632423.125374
-r1
-xCpResource
-xbuild/Debug/TVShows.app/Contents/Resources/DownloadShowList.rb
-xDownloadShowList.rb
-lSLF07#2@24"Copy DownloadShowList.rb274632423#274632423#0(0"0(0#0#64"/Users/matthew/Active Projects/TVShows/trunk/DownloadShowList.rb4300882208#359"    cd "/Users/matthew/Active Projects/TVShows/trunk"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks "/Users/matthew/Active Projects/TVShows/trunk/DownloadShowList.rb" "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources"0#
-
-CCpResource build/Debug/TVShows.app/Contents/Resources/GetLatestSeasonEpisodeForShow.rb GetLatestSeasonEpisodeForShow.rb
-s274632423.108860
-e274632423.119858
-r1
-xCpResource
-xbuild/Debug/TVShows.app/Contents/Resources/GetLatestSeasonEpisodeForShow.rb
-xGetLatestSeasonEpisodeForShow.rb
-lSLF07#2@37"Copy GetLatestSeasonEpisodeForShow.rb274632423#274632423#0(0"0(0#0#77"/Users/matthew/Active Projects/TVShows/trunk/GetLatestSeasonEpisodeForShow.rb4300882208#372"    cd "/Users/matthew/Active Projects/TVShows/trunk"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks "/Users/matthew/Active Projects/TVShows/trunk/GetLatestSeasonEpisodeForShow.rb" "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources"0#
-
-CCpResource build/Debug/TVShows.app/Contents/Resources/GetShowDetails.rb GetShowDetails.rb
-s274632423.108168
-e274632423.118838
-r1
-xCpResource
-xbuild/Debug/TVShows.app/Contents/Resources/GetShowDetails.rb
-xGetShowDetails.rb
-lSLF07#2@22"Copy GetShowDetails.rb274632423#274632423#0(0"0(0#0#62"/Users/matthew/Active Projects/TVShows/trunk/GetShowDetails.rb4300882208#357"    cd "/Users/matthew/Active Projects/TVShows/trunk"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks "/Users/matthew/Active Projects/TVShows/trunk/GetShowDetails.rb" "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources"0#
-
-CCpResource build/Debug/TVShows.app/Contents/Resources/Preferences.png Preferences.png
-s274632423.197067
-e274632423.204129
-r1
-xCpResource
-xbuild/Debug/TVShows.app/Contents/Resources/Preferences.png
-xPreferences.png
-lSLF07#2@20"Copy Preferences.png274632423#274632423#0(0"0(0#0#60"/Users/matthew/Active Projects/TVShows/trunk/Preferences.png4300882208#355"    cd "/Users/matthew/Active Projects/TVShows/trunk"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks "/Users/matthew/Active Projects/TVShows/trunk/Preferences.png" "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources"0#
-
-CCpResource build/Debug/TVShows.app/Contents/Resources/Reload.png Reload.png
-s274632423.169913
-e274632423.180684
-r1
-xCpResource
-xbuild/Debug/TVShows.app/Contents/Resources/Reload.png
-xReload.png
-lSLF07#2@15"Copy Reload.png274632423#274632423#0(0"0(0#0#55"/Users/matthew/Active Projects/TVShows/trunk/Reload.png4300882208#350"    cd "/Users/matthew/Active Projects/TVShows/trunk"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks "/Users/matthew/Active Projects/TVShows/trunk/Reload.png" "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources"0#
-
-CCpResource build/Debug/TVShows.app/Contents/Resources/Stop.png Stop.png
-s274632423.198215
-e274632423.207477
-r1
-xCpResource
-xbuild/Debug/TVShows.app/Contents/Resources/Stop.png
-xStop.png
-lSLF07#2@13"Copy Stop.png274632423#274632423#0(0"0(0#0#53"/Users/matthew/Active Projects/TVShows/trunk/Stop.png4300882208#348"    cd "/Users/matthew/Active Projects/TVShows/trunk"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks "/Users/matthew/Active Projects/TVShows/trunk/Stop.png" "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources"0#
-
-CCpResource build/Debug/TVShows.app/Contents/Resources/TVShows.icns TVShows.icns
-s274632423.171048
-e274632423.177395
-r1
-xCpResource
-xbuild/Debug/TVShows.app/Contents/Resources/TVShows.icns
-xTVShows.icns
-lSLF07#2@17"Copy TVShows.icns274632423#274632423#0(0"0(0#0#57"/Users/matthew/Active Projects/TVShows/trunk/TVShows.icns4300882208#352"    cd "/Users/matthew/Active Projects/TVShows/trunk"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks "/Users/matthew/Active Projects/TVShows/trunk/TVShows.icns" "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources"0#
-
-CCpResource build/Debug/TVShows.app/Contents/Resources/TVShowsScript TVShowsScript
-s274632423.107061
-e274632423.126330
-r1
-xCpResource
-xbuild/Debug/TVShows.app/Contents/Resources/TVShowsScript
-xTVShowsScript
-lSLF07#2@18"Copy TVShowsScript274632423#274632423#0(0"0(0#0#58"/Users/matthew/Active Projects/TVShows/trunk/TVShowsScript4300882208#353"    cd "/Users/matthew/Active Projects/TVShows/trunk"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks "/Users/matthew/Active Projects/TVShows/trunk/TVShowsScript" "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources"0#
-
-CCpResource build/Debug/TVShows.app/Contents/Resources/Web.png Web.png
-s274632423.235187
-e274632423.254548
-r1
-xCpResource
-xbuild/Debug/TVShows.app/Contents/Resources/Web.png
-xWeb.png
-lSLF07#2@12"Copy Web.png274632423#274632423#0(0"0(0#0#52"/Users/matthew/Active Projects/TVShows/trunk/Web.png4300882208#347"    cd "/Users/matthew/Active Projects/TVShows/trunk"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks "/Users/matthew/Active Projects/TVShows/trunk/Web.png" "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources"0#
-
-CLd "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/MacOS/TVShows" normal i386
-s274632425.457040
-e274632425.519457
-r1
-xLd
-x/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/MacOS/TVShows
-xnormal
-xi386
-old: warning: in /Users/matthew/Active Projects/TVShows/trunk/Sparkle.framework/Sparkle, file is not of required architecture
-lSLF07#2@96"Link /Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/MacOS/TVShows274632425#274632425#0(125"ld: warning: in /Users/matthew/Active Projects/TVShows/trunk/Sparkle.framework/Sparkle, file is not of required architecture1(22@111"In /Users/matthew/Active Projects/TVShows/trunk/Sparkle.framework/Sparkle, file is not of required architecture274632425#0#125#0(6@0"274632425#0#0#0#0#0"0(0#0#0"4300882208#716"    cd "/Users/matthew/Active Projects/TVShows/trunk"    setenv MACOSX_DEPLOYMENT_TARGET 10.4    /Developer/usr/bin/gcc-4.0 -arch i386 -isysroot /Developer/SDKs/MacOSX10.4u.sdk "-L/Users/matthew/Active Projects/TVShows/trunk/build/Debug" "-F/Users/matthew/Active Projects/TVShows/trunk/build/Debug" "-F/Users/matthew/Active Projects/TVShows/trunk" "-F/Users/matthew/Active Projects/TVShows/trunk" -filelist "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/TVShows.LinkFileList" -mmacosx-version-min=10.4 -framework Cocoa -framework Sparkle -framework Security -o "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/MacOS/TVShows"0#
-
-CPBXCp build/Debug/TVShows.app/Contents/Frameworks/Sparkle.framework Sparkle.framework
-s274632425.519557
-e274632425.532443
-r1
-xPBXCp
-xbuild/Debug/TVShows.app/Contents/Frameworks/Sparkle.framework
-xSparkle.framework
-lSLF07#2@22"Copy Sparkle.framework274632425#274632425#0(0"0(0#0#62"/Users/matthew/Active Projects/TVShows/trunk/Sparkle.framework4300882208#358"    cd "/Users/matthew/Active Projects/TVShows/trunk"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks "/Users/matthew/Active Projects/TVShows/trunk/Sparkle.framework" "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Frameworks"0#
-
-CPhaseScriptExecution "Run Script" "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/Script-5B240B3E0BC40F140081A28E.sh"
-s274632425.532565
-e274632425.548532
-r1
-xPhaseScriptExecution
-xRun Script
-x/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/Script-5B240B3E0BC40F140081A28E.sh
-lSLF07#2@36"Run custom shell script 'Run Script'274632425#274632425#0(0"0(0#0#0"4300882208#16252"    cd "/Users/matthew/Active Projects/TVShows/trunk"    setenv ACTION build    setenv ALTERNATE_GROUP staff    setenv ALTERNATE_MODE u+w,go-w,a+rX    setenv ALTERNATE_OWNER matthew    setenv ALWAYS_SEARCH_USER_PATHS YES    setenv APPLE_INTERNAL_DEVELOPER_DIR /AppleInternal/Developer    setenv APPLE_INTERNAL_DIR /AppleInternal    setenv APPLE_INTERNAL_DOCUMENTATION_DIR /AppleInternal/Documentation    setenv APPLE_INTERNAL_LIBRARY_DIR /AppleInternal/Library    setenv APPLE_INTERNAL_TOOLS /AppleInternal/Developer/Tools    setenv APPLY_RULES_IN_COPY_FILES NO    setenv ARCHS i386    setenv ARCHS_STANDARD_32_64_BIT "x86_64 i386 ppc"    setenv ARCHS_STANDARD_32_BIT "i386 ppc"    setenv ARCHS_STANDARD_64_BIT x86_64    setenv BUILD_COMPONENTS "headers build"    setenv BUILD_DIR "/Users/matthew/Active Projects/TVShows/trunk/build"    setenv BUILD_ROOT "/Users/matthew/Active Projects/TVShows/trunk/build"    setenv BUILD_STYLE Debug    setenv BUILD_VARIANTS normal    setenv BUILT_PRODUCTS_DIR "/Users/matthew/Active Projects/TVShows/trunk/build/Debug"    setenv CACHE_ROOT /var/folders/Pl/PlQl-yyKEraeUPDwTgqGT++++TI/-Caches-/com.apple.Xcode.501    setenv CCHROOT /var/folders/Pl/PlQl-yyKEraeUPDwTgqGT++++TI/-Caches-/com.apple.Xcode.501    setenv CHMOD /bin/chmod    setenv CHOWN /usr/sbin/chown    setenv CLASS_FILE_DIR "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/JavaClasses"    setenv CLEAN_PRECOMPS YES    setenv CLONE_HEADERS NO    setenv CODESIGNING_FOLDER_PATH "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app"    setenv CODE_SIGNING_ALLOWED YES    setenv COMMAND_MODE legacy    setenv COMPOSITE_SDK_DIRS /var/folders/Pl/PlQl-yyKEraeUPDwTgqGT++++TI/-Caches-/com.apple.Xcode.501/CompositeSDKs    setenv CONFIGURATION Debug    setenv CONFIGURATION_BUILD_DIR "/Users/matthew/Active Projects/TVShows/trunk/build/Debug"    setenv CONFIGURATION_TEMP_DIR "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug"    setenv CONTENTS_FOLDER_PATH TVShows.app/Contents    setenv COPYING_PRESERVES_HFS_DATA NO    setenv COPY_PHASE_STRIP NO    setenv COPY_RESOURCES_FROM_STATIC_FRAMEWORKS YES    setenv CP /bin/cp    setenv CURRENT_ARCH i386    setenv CURRENT_PROJECT_VERSION 0.4.1    setenv CURRENT_VARIANT normal    setenv DEAD_CODE_STRIPPING NO    setenv DEBUGGING_SYMBOLS YES    setenv DEBUG_INFORMATION_FORMAT dwarf    setenv DEPLOYMENT_LOCATION NO    setenv DEPLOYMENT_POSTPROCESSING NO    setenv DERIVED_FILES_DIR "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/DerivedSources"    setenv DERIVED_FILE_DIR "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/DerivedSources"    setenv DERIVED_SOURCES_DIR "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/DerivedSources"    setenv DEVELOPER_APPLICATIONS_DIR /Developer/Applications    setenv DEVELOPER_BIN_DIR /Developer/usr/bin    setenv DEVELOPER_DIR /Developer    setenv DEVELOPER_FRAMEWORKS_DIR /Developer/Library/Frameworks    setenv DEVELOPER_FRAMEWORKS_DIR_QUOTED "\"/Developer/Library/Frameworks\""    setenv DEVELOPER_LIBRARY_DIR /Developer/Library    setenv DEVELOPER_SDK_DIR /Developer/SDKs    setenv DEVELOPER_TOOLS_DIR /Developer/Tools    setenv DEVELOPER_USR_DIR /Developer/usr    setenv DEVELOPMENT_LANGUAGE English    setenv DOCUMENTATION_FOLDER_PATH /Documentation    setenv DO_HEADER_SCANNING_IN_JAM NO    setenv DSTROOT /tmp/TVShows.dst    setenv DWARF_DSYM_FILE_NAME TVShows.app.dSYM    setenv DWARF_DSYM_FOLDER_PATH "/Users/matthew/Active Projects/TVShows/trunk/build/Debug"    setenv ENABLE_HEADER_DEPENDENCIES YES    setenv ENABLE_OPENMP_SUPPORT NO    setenv EXCLUDED_INSTALLSRC_SUBDIRECTORY_PATTERNS ".svn CVS"    setenv EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES "*.nib *.lproj *.framework *.gch (*) CVS .svn *.xcodeproj *.xcode *.pbproj *.pbxproj"    setenv EXECUTABLES_FOLDER_PATH TVShows.app/Contents/Executables    setenv EXECUTABLE_FOLDER_PATH TVShows.app/Contents/MacOS    setenv EXECUTABLE_NAME TVShows    setenv EXECUTABLE_PATH TVShows.app/Contents/MacOS/TVShows    setenv FILE_LIST "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/Objects/LinkFileList"    setenv FIXED_FILES_DIR "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/FixedFiles"    setenv FRAMEWORKS_FOLDER_PATH TVShows.app/Contents/Frameworks    setenv FRAMEWORK_FLAG_PREFIX -framework    setenv FRAMEWORK_SEARCH_PATHS "\"/Users/matthew/Active Projects/TVShows/trunk/build/Debug\"  \"/Users/matthew/Active Projects/TVShows/trunk\"  \"/Users/matthew/Active Projects/TVShows/trunk\""    setenv FRAMEWORK_SEARCH_PATHS_QUOTED_1 "\"/Users/matthew/Active Projects/TVShows/trunk\""    setenv FRAMEWORK_VERSION A    setenv FULL_PRODUCT_NAME TVShows.app    setenv GCC3_VERSION 3.3    setenv GCC_DYNAMIC_NO_PIC NO    setenv GCC_ENABLE_FIX_AND_CONTINUE YES    setenv GCC_INLINES_ARE_PRIVATE_EXTERN YES    setenv GCC_MODEL_TUNING G5    setenv GCC_OPTIMIZATION_LEVEL 0    setenv GCC_PFE_FILE_C_DIALECTS "c objective-c c++ objective-c++"    setenv GCC_PREPROCESSOR_DEFINITIONS DEBUG    setenv GCC_SYMBOLS_PRIVATE_EXTERN YES    setenv GCC_TREAT_WARNINGS_AS_ERRORS NO    setenv GCC_VERSION 4.0    setenv GCC_VERSION_IDENTIFIER __0    setenv GCC_WARN_ABOUT_RETURN_TYPE YES    setenv GCC_WARN_UNUSED_VARIABLE YES    setenv GENERATE_MASTER_OBJECT_FILE NO    setenv GENERATE_PKGINFO_FILE YES    setenv GENERATE_PROFILING_CODE NO    setenv GID 20    setenv GROUP staff    setenv HEADERMAP_INCLUDES_FLAT_ENTRIES_FOR_TARGET_BEING_BUILT YES    setenv HEADERMAP_INCLUDES_FRAMEWORK_ENTRIES_FOR_ALL_PRODUCT_TYPES YES    setenv HEADERMAP_INCLUDES_NONPUBLIC_NONPRIVATE_HEADERS YES    setenv HEADERMAP_INCLUDES_PROJECT_HEADERS YES    setenv HEADER_SEARCH_PATHS "\"/Users/matthew/Active Projects/TVShows/trunk/build/Debug/include\" "    setenv IBC_STRIP_NIBS NO    setenv ICONV /usr/bin/iconv    setenv INFOPLIST_EXPAND_BUILD_SETTINGS YES    setenv INFOPLIST_FILE Info.plist    setenv INFOPLIST_OUTPUT_FORMAT same-as-input    setenv INFOPLIST_PATH TVShows.app/Contents/Info.plist    setenv INFOPLIST_PREPROCESS NO    setenv INFOSTRINGS_PATH /InfoPlist.strings    setenv INSTALL_DIR /tmp/TVShows.dst/Users/matthew/Applications    setenv INSTALL_GROUP staff    setenv INSTALL_MODE_FLAG u+w,go-w,a+rX    setenv INSTALL_OWNER matthew    setenv INSTALL_PATH /Users/matthew/Applications    setenv INSTALL_ROOT /tmp/TVShows.dst    setenv JAVAC_DEFAULT_FLAGS "-J-Xms64m -J-XX:NewSize=4M -J-Dfile.encoding=UTF8"    setenv JAVA_APP_STUB /System/Library/Frameworks/JavaVM.framework/Resources/MacOS/JavaApplicationStub    setenv JAVA_ARCHIVE_CLASSES YES    setenv JAVA_ARCHIVE_TYPE JAR    setenv JAVA_COMPILER /usr/bin/javac    setenv JAVA_FOLDER_PATH TVShows.app/Contents/Resources/Java    setenv JAVA_FRAMEWORK_RESOURCES_DIRS Resources    setenv JAVA_JAR_FLAGS cv    setenv JAVA_SOURCE_SUBDIR .    setenv JAVA_USE_DEPENDENCIES YES    setenv JAVA_ZIP_FLAGS -urg    setenv JIKES_DEFAULT_FLAGS "+E +OLDCSO"    setenv KEEP_PRIVATE_EXTERNS NO    setenv LD_GENERATE_MAP_FILE NO    setenv LD_MAP_FILE_PATH "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/TVShows-LinkMap-normal-i386.txt"    setenv LD_OPENMP_FLAGS -fopenmp    setenv LEX /Developer/usr/bin/lex    setenv LIBRARY_FLAG_NOSPACE YES    setenv LIBRARY_FLAG_PREFIX -l    setenv LIBRARY_SEARCH_PATHS "\"/Users/matthew/Active Projects/TVShows/trunk/build/Debug\" "    setenv LINKER_DISPLAYS_MANGLED_NAMES NO    setenv LINK_FILE_LIST_normal_i386 "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/Objects-normal/i386/TVShows.LinkFileList"    setenv LINK_WITH_STANDARD_LIBRARIES YES    setenv LOCAL_ADMIN_APPS_DIR /Applications/Utilities    setenv LOCAL_APPS_DIR /Applications    setenv LOCAL_DEVELOPER_DIR /Library/Developer    setenv LOCAL_LIBRARY_DIR /Library    setenv MACH_O_TYPE mh_execute    setenv MACOSX_DEPLOYMENT_TARGET 10.4    setenv MAC_OS_X_VERSION_ACTUAL 1061    setenv MAC_OS_X_VERSION_MAJOR 1060    setenv MAC_OS_X_VERSION_MINOR 0601    setenv NATIVE_ARCH i386    setenv NATIVE_ARCH_32_BIT i386    setenv NATIVE_ARCH_64_BIT x86_64    setenv NATIVE_ARCH_ACTUAL x86_64    setenv NO_COMMON YES    setenv OBJECT_FILE_DIR "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/Objects"    setenv OBJECT_FILE_DIR_normal "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/Objects-normal"    setenv OBJROOT "/Users/matthew/Active Projects/TVShows/trunk/build"    setenv ONLY_ACTIVE_ARCH NO    setenv OPTIMIZATION_LEVEL 0    setenv OS MACOS    setenv OSAC /usr/bin/osacompile    setenv PACKAGE_TYPE com.apple.package-type.wrapper.application    setenv PASCAL_STRINGS YES    setenv PATH_PREFIXES_EXCLUDED_FROM_HEADER_DEPENDENCIES "/usr/include /usr/local/include /System/Library/Frameworks /System/Library/PrivateFrameworks /Developer/Headers /Developer/SDKs /Developer/Platforms"    setenv PBDEVELOPMENTPLIST_PATH TVShows.app/Contents/pbdevelopment.plist    setenv PFE_FILE_C_DIALECTS objective-c    setenv PKGINFO_FILE_PATH "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/PkgInfo"    setenv PKGINFO_PATH TVShows.app/Contents/PkgInfo    setenv PLATFORM_DEVELOPER_APPLICATIONS_DIR /Developer/Applications    setenv PLATFORM_DEVELOPER_BIN_DIR /Developer/usr/bin    setenv PLATFORM_DEVELOPER_LIBRARY_DIR /Developer/Library    setenv PLATFORM_DEVELOPER_SDK_DIR /Developer/SDKs    setenv PLATFORM_DEVELOPER_TOOLS_DIR /Developer/Tools    setenv PLATFORM_DEVELOPER_USR_DIR /Developer/usr    setenv PLATFORM_NAME macosx    setenv PLIST_FILE_OUTPUT_FORMAT same-as-input    setenv PLUGINS_FOLDER_PATH TVShows.app/Contents/PlugIns    setenv PREBINDING NO    setenv PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR YES    setenv PRECOMP_DESTINATION_DIR "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/PrefixHeaders"    setenv PRESERVE_DEAD_CODE_INITS_AND_TERMS NO    setenv PRIVATE_HEADERS_FOLDER_PATH TVShows.app/Contents/PrivateHeaders    setenv PRODUCT_NAME TVShows    setenv PRODUCT_SETTINGS_PATH "/Users/matthew/Active Projects/TVShows/trunk/Info.plist"    setenv PRODUCT_TYPE com.apple.product-type.application    setenv PROFILING_CODE NO    setenv PROJECT TVShows    setenv PROJECT_DERIVED_FILE_DIR "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/DerivedSources"    setenv PROJECT_DIR "/Users/matthew/Active Projects/TVShows/trunk"    setenv PROJECT_FILE_PATH "/Users/matthew/Active Projects/TVShows/trunk/TVShows.xcodeproj"    setenv PROJECT_NAME TVShows    setenv PROJECT_TEMP_DIR "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build"    setenv PUBLIC_HEADERS_FOLDER_PATH TVShows.app/Contents/Headers    setenv RECURSIVE_SEARCH_PATHS_FOLLOW_SYMLINKS YES    setenv REMOVE_CVS_FROM_RESOURCES YES    setenv REMOVE_SVN_FROM_RESOURCES YES    setenv REZ_COLLECTOR_DIR "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/ResourceManagerResources"    setenv REZ_OBJECTS_DIR "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/ResourceManagerResources/Objects"    setenv REZ_SEARCH_PATHS "\"/Users/matthew/Active Projects/TVShows/trunk/build/Debug\" "    setenv RUN_CLANG_STATIC_ANALYZER NO    setenv SCAN_ALL_SOURCE_FILES_FOR_INCLUDES NO    setenv SCRIPTS_FOLDER_PATH TVShows.app/Contents/Resources/Scripts    setenv SCRIPT_INPUT_FILE_COUNT 0    setenv SCRIPT_OUTPUT_FILE_COUNT 0    setenv SDKROOT /Developer/SDKs/MacOSX10.4u.sdk    setenv SDK_DIR /Developer/SDKs/MacOSX10.4u.sdk    setenv SDK_NAME macosx10.4    setenv SED /usr/bin/sed    setenv SEPARATE_STRIP NO    setenv SEPARATE_SYMBOL_EDIT NO    setenv SET_DIR_MODE_OWNER_GROUP YES    setenv SET_FILE_MODE_OWNER_GROUP NO    setenv SHARED_DERIVED_FILE_DIR "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/DerivedSources"    setenv SHARED_FRAMEWORKS_FOLDER_PATH TVShows.app/Contents/SharedFrameworks    setenv SHARED_PRECOMPS_DIR /var/folders/Pl/PlQl-yyKEraeUPDwTgqGT++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders    setenv SHARED_SUPPORT_FOLDER_PATH TVShows.app/Contents/SharedSupport    setenv SKIP_INSTALL NO    setenv SOURCE_ROOT "/Users/matthew/Active Projects/TVShows/trunk"    setenv SRCROOT "/Users/matthew/Active Projects/TVShows/trunk"    setenv STANDARD_C_PLUS_PLUS_LIBRARY_TYPE dynamic    setenv STRINGS_FILE_OUTPUT_ENCODING UTF-16    setenv STRIP_INSTALLED_PRODUCT YES    setenv STRIP_STYLE all    setenv SYMBOL_REPOSITORY_DIR "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/SymbolRepositories"    setenv SYMROOT "/Users/matthew/Active Projects/TVShows/trunk/build"    setenv SYSTEM_ADMIN_APPS_DIR /Applications/Utilities    setenv SYSTEM_APPS_DIR /Applications    setenv SYSTEM_CORE_SERVICES_DIR /System/Library/CoreServices    setenv SYSTEM_DEMOS_DIR /Applications/Extras    setenv SYSTEM_DEVELOPER_APPS_DIR /Developer/Applications    setenv SYSTEM_DEVELOPER_BIN_DIR /Developer/usr/bin    setenv SYSTEM_DEVELOPER_DEMOS_DIR "/Developer/Applications/Utilities/Built Examples"    setenv SYSTEM_DEVELOPER_DIR /Developer    setenv SYSTEM_DEVELOPER_DOC_DIR "/Developer/ADC Reference Library"    setenv SYSTEM_DEVELOPER_GRAPHICS_TOOLS_DIR "/Developer/Applications/Graphics Tools"    setenv SYSTEM_DEVELOPER_JAVA_TOOLS_DIR "/Developer/Applications/Java Tools"    setenv SYSTEM_DEVELOPER_PERFORMANCE_TOOLS_DIR "/Developer/Applications/Performance Tools"    setenv SYSTEM_DEVELOPER_RELEASENOTES_DIR "/Developer/ADC Reference Library/releasenotes"    setenv SYSTEM_DEVELOPER_TOOLS /Developer/Tools    setenv SYSTEM_DEVELOPER_TOOLS_DOC_DIR "/Developer/ADC Reference Library/documentation/DeveloperTools"    setenv SYSTEM_DEVELOPER_TOOLS_RELEASENOTES_DIR "/Developer/ADC Reference Library/releasenotes/DeveloperTools"    setenv SYSTEM_DEVELOPER_USR_DIR /Developer/usr    setenv SYSTEM_DEVELOPER_UTILITIES_DIR /Developer/Applications/Utilities    setenv SYSTEM_DOCUMENTATION_DIR /Library/Documentation    setenv SYSTEM_LIBRARY_DIR /System/Library    setenv TARGETNAME TVShows    setenv TARGET_BUILD_DIR "/Users/matthew/Active Projects/TVShows/trunk/build/Debug"    setenv TARGET_NAME TVShows    setenv TARGET_TEMP_DIR "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build"    setenv TEMP_DIR "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build"    setenv TEMP_FILES_DIR "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build"    setenv TEMP_FILE_DIR "/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build"    setenv TEMP_ROOT "/Users/matthew/Active Projects/TVShows/trunk/build"    setenv UID 501    setenv UNLOCALIZED_RESOURCES_FOLDER_PATH TVShows.app/Contents/Resources    setenv UNSTRIPPED_PRODUCT NO    setenv USER matthew    setenv USER_APPS_DIR /Users/matthew/Applications    setenv USER_LIBRARY_DIR /Users/matthew/Library    setenv USE_DYNAMIC_NO_PIC YES    setenv USE_HEADERMAP YES    setenv USE_HEADER_SYMLINKS NO    setenv VALID_ARCHS "i386 ppc ppc64 ppc7400 ppc970 x86_64"    setenv VERBOSE_PBXCP NO    setenv VERSIONPLIST_PATH TVShows.app/Contents/version.plist    setenv VERSION_INFO_BUILDER matthew    setenv VERSION_INFO_FILE TVShows_vers.c    setenv VERSION_INFO_STRING "\"@(#)PROGRAM:TVShows  PROJECT:TVShows-0.4.1\""    setenv WRAPPER_EXTENSION app    setenv WRAPPER_NAME TVShows.app    setenv WRAPPER_SUFFIX .app    setenv XCODE_APP_SUPPORT_DIR /Developer/Library/Xcode    setenv XCODE_VERSION_ACTUAL 0320    setenv XCODE_VERSION_MAJOR 0300    setenv XCODE_VERSION_MINOR 0320    setenv YACC /Developer/usr/bin/yacc    setenv ZERO_LINK NO    /bin/sh -c "\"/Users/matthew/Active Projects/TVShows/trunk/build/TVShows.build/Debug/TVShows.build/Script-5B240B3E0BC40F140081A28E.sh\""0#
-
-CProcessInfoPlistFile "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Info.plist" Info.plist
-s274632423.097976
-e274632423.106924
-r1
-xProcessInfoPlistFile
-x/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Info.plist
-xInfo.plist
-lSLF07#2@18"Process Info.plist274632423#274632423#0(0"0(0#0#55"/Users/matthew/Active Projects/TVShows/trunk/Info.plist8247268990593755136#326"    cd "/Users/matthew/Active Projects/TVShows/trunk"    builtin-infoPlistUtility Info.plist -genpkginfo "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/PkgInfo" -expandbuildsettings -platform macosx -o "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Info.plist"0#
-
-CStripNIB "/Users/matthew/Active Projects/TVShows/trunk/English.lproj/MainMenu.nib"
-s274632423.110193
-e274632423.169823
-r1
-xStripNIB
-x/Users/matthew/Active Projects/TVShows/trunk/English.lproj/MainMenu.nib
-lSLF07#2@35"StripNIB English.lproj/MainMenu.nib274632423#274632423#0(0"0(0#0#71"/Users/matthew/Active Projects/TVShows/trunk/English.lproj/MainMenu.nib4300882208#319"    cd "/Users/matthew/Active Projects/TVShows/trunk"    /Developer/usr/bin/ibtool --write "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app/Contents/Resources/English.lproj/MainMenu.nib" --output-format human-readable-text "/Users/matthew/Active Projects/TVShows/trunk/English.lproj/MainMenu.nib"0#
-
-CTouch "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app"
-s274632425.548630
-e274632425.552763
-r1
-xTouch
-x/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app
-lSLF07#2@74"Touch /Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app274632425#274632425#0(0"0(0#0#0"4300882208#147"    cd "/Users/matthew/Active Projects/TVShows/trunk"    /usr/bin/touch -c "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app"0#
-
