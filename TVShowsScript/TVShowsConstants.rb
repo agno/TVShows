@@ -34,5 +34,4 @@ QUALITIES = [
 ]
 
 VERSIONCHECK_VERSIONPLIST = "/System/Library/CoreServices/SystemVersion.plist"
-#VERSIONCHECK_URL = "http://tvshows.sourceforge.net/checkforupdate.php?v=%s&macosx=%s"
-VERSIONCHECK_URL = "http://tvshows.sourceforge.net/appcast.xml"
+VERSIONCHECK_URL = "http://www.deathtobunnies.com/tvshows/appcast.xml"
