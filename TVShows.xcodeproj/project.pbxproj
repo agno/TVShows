@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34AE57D7106091BE00F4BA66 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 34AE57D6106091BE00F4BA66 /* dsa_pub.pem */; };
 		34BA9DAF10607DCA00495297 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34BA9DAE10607DCA00495297 /* Sparkle.framework */; };
 		34BA9DBB10607E4800495297 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 34BA9DAE10607DCA00495297 /* Sparkle.framework */; };
 		5B1F7FF50BE22EB900B1094B /* Bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1F7FF40BE22EB900B1094B /* Bookmark.png */; };
@@ -65,6 +66,7 @@
 		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		34AE57D6106091BE00F4BA66 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		34BA9DAE10607DCA00495297 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		5B1F7FF40BE22EB900B1094B /* Bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bookmark.png; sourceTree = "<group>"; };
 		5B1F7FF60BE22F9600B1094B /* Web.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Web.png; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				5BE3B9940BCE4177003B6EAD /* Graphics */,
 				5B376D900B9B35B600663E2A /* TVShowsScript */,
 				5B52627A0BA0C4AC00FA11A4 /* Credits.rtf */,
+				34AE57D6106091BE00F4BA66 /* dsa_pub.pem */,
 				5B287EF70B95FB0800491D02 /* UserDefaults.plist */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
@@ -270,6 +273,7 @@
 				5B1F7FF50BE22EB900B1094B /* Bookmark.png in Resources */,
 				5B1F7FF70BE22F9600B1094B /* Web.png in Resources */,
 				5B1F7FF90BE22FF600B1094B /* Clock.png in Resources */,
+				34AE57D7106091BE00F4BA66 /* dsa_pub.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
