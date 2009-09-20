@@ -92,13 +92,13 @@
 			[NSDictionary dictionaryWithObjectsAndKeys:@"Very High (720p)",@"quality",@"1.2Gb per episode",@"label",nil],
 			nil];
 		
-		// Merge the defaults defaults with the defaults
-		NSDictionary *userDefaultsDefaults = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"UserDefaults" ofType:@"plist"]];
-		NSEnumerator *enumerator = [userDefaultsDefaults keyEnumerator];
+		// Merge the UserDefaults.plist with defaults in ~/Application Support/
+		NSDictionary *userDefaultsPlist = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"UserDefaults" ofType:@"plist"]];
+		NSEnumerator *enumerator = [userDefaultsPlist keyEnumerator];
 		NSString *key;
 		while ( key = [enumerator nextObject] ) {
 			if ( ![[NSUserDefaults standardUserDefaults] objectForKey:key] ) {
-				[[NSUserDefaults standardUserDefaults] setObject:[userDefaultsDefaults objectForKey:key] forKey:key];
+				[[NSUserDefaults standardUserDefaults] setObject:[userDefaultsPlist objectForKey:key] forKey:key];
 			}
 		}
 		[[NSUserDefaults standardUserDefaults] synchronize];
