@@ -38,4 +38,4 @@ QUALITIES = [
 ]
 
 VERSIONCHECK_VERSIONPLIST = "/System/Library/CoreServices/SystemVersion.plist"
-VERSIONCHECK_URL = "http://www.deathtobunnies.com/tvshows/appcast.xml"
+VERSIONCHECK_URL = "http://deathtobunnies.com/tvshows/appcast.xml"
