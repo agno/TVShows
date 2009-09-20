@@ -53,7 +53,7 @@
 #define RubyGetShowDetails			@"GetShowDetails"
 
 // Misc
-#define TVShowsURL					@"http://www.deathtobunnies.com/tvshows/"
+#define TVShowsURL					@"http://deathtobunnies.com/tvshows/"
 #define TVShowsFeedbackURL			@"http://sourceforge.net/tracker/?group_id=190705"
 #define TransmissionURL				@"http://transmission.m0k.org"
 
