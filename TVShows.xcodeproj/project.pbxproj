@@ -68,6 +68,7 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		34AE57D6106091BE00F4BA66 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		34BA9DAE10607DCA00495297 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		34CFF21910642D4B0090583F /* TVShows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShows.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B1F7FF40BE22EB900B1094B /* Bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bookmark.png; sourceTree = "<group>"; };
 		5B1F7FF60BE22F9600B1094B /* Web.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Web.png; sourceTree = "<group>"; };
 		5B1F7FF80BE22FF600B1094B /* Clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Clock.png; sourceTree = "<group>"; };
@@ -98,7 +99,6 @@
 		5BDF045C0BB87919007EC15A /* NEWS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NEWS; sourceTree = "<group>"; };
 		5BE3BC490BCE71A3003B6EAD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* TVShows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = TVShows.app; path = "/Users/matthew/Active Projects/TVShows/trunk/build/Debug/TVShows.app"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +133,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				34CFF21910642D4B0090583F /* TVShows.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -229,7 +230,7 @@
 			name = TVShows;
 			productInstallPath = "$(HOME)/Applications";
 			productName = tvrss;
-			productReference = 8D1107320486CEB800E47090 /* TVShows.app */;
+			productReference = 34CFF21910642D4B0090583F /* TVShows.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -237,6 +238,9 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = NO;
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TVShows" */;
 			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
@@ -281,7 +285,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		5B240B3E0BC40F140081A28E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -290,7 +294,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /usr/bin/ruby;
-			shellScript = "if ENV[\"CONFIGURATION\"] == \"Release\" then\n\tfolder = ENV[\"TARGET_BUILD_DIR\"]\n\tfile = \"#{ENV[\"TARGET_NAME\"]}_#{ENV[\"CURRENT_PROJECT_VERSION\"]}.zip\"\n\tpath = File.join(folder,file)\n\t`mv \"#{folder}/TVShows\" ~/.Trash`\n\t`mv #{folder}/*.zip ~/.Trash`\n\t`mv #{folder}/appcast.xml ~/.Trash`\n\t`mkdir \"#{folder}/TVShows\"`\n\t`cp \"#{File.join(ENV[\"PROJECT_DIR\"],\"..\",\"utils\",\"uninstall.sh\")}\" \"#{folder}/TVShows\"`\n\t`mv \"#{folder}/#{ENV[\"FULL_PRODUCT_NAME\"]}\" \"#{folder}/TVShows\"`\n\t`cd \"#{folder}\" && zip -qr \"#{file}\" TVShows`\n\tkey = `openssl dgst -sha1 -binary < #{path} | openssl dgst -dss1 -sign #{File.join(ENV[\"PROJECT_DIR\"],\"..\",\"keys\",\"dsa_priv.pem\")} | openssl enc -base64`\n\tkey = key.split(\"\\n\").first\n\tFile.open(\"#{ENV[\"TARGET_BUILD_DIR\"]}/appcast.xml\", \"w\") { |f|\n\t\tf << \"<item>\\n\"\n\t\tf << \"\\t<title>TVShows #{ENV[\"CURRENT_PROJECT_VERSION\"]}</title>\\n\"\n\t\tf << \"\\t<pubDate>#{Time.now}</pubDate>\\n\"\n\t\tf << \"\\t<enclosure sparkle:version=\\\"#{ENV[\"CURRENT_PROJECT_VERSION\"]}\\\" sparkle:dsaSignature=\\\"#{key}\\\" url=\\\"http://downloads.sourceforge.net/tvshows/#{file}\\\" length=\\\"#{File.size(path)}\\\" type=\\\"application/octet-stream\\\"/>\\n\"\n\t\tf << \"\\t<description><![CDATA[Changes in version #{ENV[\"CURRENT_PROJECT_VERSION\"]}:\\n\"\n\t\tf << \"\\t\\t<ul>\\n\"\n\t\tf << \"\\t\\t\\t<li></li>\\n\"\n\t\tf << \"\\t\\t\\t<li></li>\\n\"\n\t\tf << \"\\t\\t\\t<li></li>\\n\"\n\t\tf << \"\\t\\t</ul>\\n\\t]]></description>\\n\"\n\t\tf << \"</item>\"\n\t}\nend\n\n";
+			shellScript = "if ENV[\"CONFIGURATION\"] == \"Release\" then\n\tfolder = \"#{ENV[\"TARGET_BUILD_DIR\"]}\"\n\tfile = \"#{ENV[\"TARGET_NAME\"]}_#{ENV[\"CURRENT_PROJECT_VERSION\"]}.zip\"\n\tappname = \"#{ENV[\"TARGET_NAME\"]}_#{ENV[\"CURRENT_PROJECT_VERSION\"]}\"\n\tpath = File.join(folder,file)\n#\t`mv \"#{folder}/TVShows\" ~/.Trash`\n#\t`mv #{folder}/*.zip ~/.Trash`\n#\t`mv #{folder}/appcast.xml ~/.Trash`\n\t`mkdir \"#{folder}/#{appname}\"`\n\t`cp \"#{File.join(ENV[\"PROJECT_DIR\"],\"..\",\"utils\",\"uninstall.sh\")}\" \"#{folder}/#{appname}\"`\n\t`cp \"#{folder}/#{ENV[\"FULL_PRODUCT_NAME\"]}\" \"#{folder}/#{appname}\"`\n\t`cd \"#{folder}\" && zip -qr \"#{file}\" #{appname}`\n\tkey = `openssl dgst -sha1 -binary < \"#{path}\" | openssl dgst -dss1 -sign \"#{File.join(\"#{ENV[\"PROJECT_DIR\"]}\",\"..\",\"appcast\",\"dsa_priv.pem\")}\" | openssl enc -base64`\n\tkey = key.split(\"\\n\").first\n\tFile.open(\"#{folder}/appcast.xml\", \"w\") { |f|\n\t\tf << \"<item>\\n\"\n\t\tf << \"\\t<title>TVShows #{ENV[\"CURRENT_PROJECT_VERSION\"]}</title>\\n\"\n\t\tf << \"\\t<pubDate>#{Time.now}</pubDate>\\n\"\n\t\tf << \"\\t<enclosure sparkle:version=\\\"#{ENV[\"CURRENT_PROJECT_VERSION\"]}\\\" sparkle:dsaSignature=\\\"#{key}\\\" url=\\\"http://deathtobunnies.com/tvshows/releases/#{file}\\\" length=\\\"#{File.size(path)}\\\" type=\\\"application/octet-stream\\\"/>\\n\"\n\t\tf << \"\\t<description><![CDATA[[Changes in TVShows version #{ENV[\"CURRENT_PROJECT_VERSION\"]}:\\n\"\n\t\tf << \"\\t\\t<ul>\\n\"\n\t\tf << \"\\t\\t\\t<li></li>\\n\"\n\t\tf << \"\\t\\t\\t<li></li>\\n\"\n\t\tf << \"\\t\\t\\t<li></li>\\n\"\n\t\tf << \"\\t\\t</ul>\\n\\t]]></description>\\n\"\n\t\tf << \"</item>\"\n\t}\nend\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -402,6 +406,7 @@
 				CURRENT_PROJECT_VERSION = 0.4.1;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IBC_STRIP_NIBS = NO;
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
