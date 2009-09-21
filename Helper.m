@@ -201,7 +201,7 @@ OSStatus chownToUidAndGidAtPath(uid_t uid, gid_t gid, char *path) {
 	NSFileManager *fm = [NSFileManager defaultManager];
 	if ( ![fm fileExistsAtPath:path] )
 		if ( ![fm createDirectoryAtPath:path attributes:nil] )
-			[Helper dieWithErrorMessage:[NSString stringWithFormat:@"the folder %@ doesn't exist and I can't create it.",path]];
+			[Helper dieWithErrorMessage:[NSString stringWithFormat:@"The folder %@ doesn't exist and I can't create it.",path]];
 }
 
 - (void)chmodFolderAtPath: (NSString *)path
