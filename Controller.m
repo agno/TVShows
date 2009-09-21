@@ -18,7 +18,7 @@
 
 // Shows properties
 #define ShowsVersion			@"Version"
-#define ShowsLatestVersion		@"1"
+#define ShowsLatestVersion		@"0.4"
 #define ShowsShows				@"Shows"
 
 // Show properties
@@ -260,7 +260,7 @@
 	if ( [(NSTask *)[notification object] terminationStatus] != 0 ) {
 		[NSApp endSheet:progressPanel];
 		[progressPanel close];
-		[Helper dieWithErrorMessage:@"Could not download the show list. Are you connected to the internet ?"];
+		[Helper dieWithErrorMessage:@"Could not download the show list. Are you connected to the internet?"];
 	} else {
 		[self setShows:[NSDictionary dictionaryWithContentsOfFile:[h showsPath]]];
 		[NSApp endSheet:progressPanel];
