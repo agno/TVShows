@@ -18,7 +18,7 @@
 
 // Shows properties
 #define ShowsVersion			@"Version"
-#define ShowsLatestVersion		@"0.4"
+#define ShowsLatestVersion		@"1"
 #define ShowsShows				@"Shows"
 
 // Show properties
@@ -55,7 +55,7 @@
 // Misc
 #define TVShowsURL					@"http://deathtobunnies.com/tvshows/"
 #define TVShowsFeedbackURL			@"http://sourceforge.net/tracker/?group_id=190705"
-#define TransmissionURL				@"http://transmission.m0k.org"
+#define TransmissionURL				@"http://www.transmissionbt.com/"
 
 @implementation Controller
 
