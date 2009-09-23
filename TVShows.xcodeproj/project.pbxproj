@@ -38,24 +38,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		34B40C481069AAA800D6CE2F /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		34BA9DC510607E4B00495297 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 12;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		5B24323C0BC5394B00B3A95C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -230,8 +212,6 @@
 				8D11072E0486CEB800E47090 /* Frameworks */,
 				5B24323C0BC5394B00B3A95C /* CopyFiles */,
 				5B240B3E0BC40F140081A28E /* ShellScript */,
-				34BA9DC510607E4B00495297 /* CopyFiles */,
-				34B40C481069AAA800D6CE2F /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -304,7 +284,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /usr/bin/ruby;
-			shellScript = "if ENV[\"CONFIGURATION\"] == \"Release\" then\n\tfolder = \"#{ENV[\"TARGET_BUILD_DIR\"]}\"\n\tfile = \"#{ENV[\"TARGET_NAME\"]}_#{ENV[\"CURRENT_PROJECT_VERSION\"]}.zip\"\n\tappname = \"#{ENV[\"TARGET_NAME\"]}_#{ENV[\"CURRENT_PROJECT_VERSION\"]}\"\n\tpath = File.join(folder,file)\n#\t`mv \"#{folder}/TVShows\" ~/.Trash`\n#\t`mv #{folder}/*.zip ~/.Trash`\n#\t`mv #{folder}/appcast.xml ~/.Trash`\n\t`mkdir \"#{folder}/#{appname}\"`\n\t`cp \"#{File.join(ENV[\"PROJECT_DIR\"],\"..\",\"utils\",\"uninstall.sh\")}\" \"#{folder}/#{appname}\"`\n\t`cp \"#{folder}/#{ENV[\"FULL_PRODUCT_NAME\"]}\" \"#{folder}/#{appname}\"`\n\t`cd \"#{folder}\" && zip -qr \"#{file}\" #{appname}`\n\tkey = `openssl dgst -sha1 -binary < \"#{path}\" | openssl dgst -dss1 -sign \"#{File.join(\"#{ENV[\"PROJECT_DIR\"]}\",\"..\",\"appcast\",\"dsa_priv.pem\")}\" | openssl enc -base64`\n\tkey = key.split(\"\\n\").first\n\tFile.open(\"#{folder}/appcast.xml\", \"w\") { |f|\n\t\tf << \"<item>\\n\"\n\t\tf << \"\\t<title>TVShows #{ENV[\"CURRENT_PROJECT_VERSION\"]}</title>\\n\"\n\t\tf << \"\\t<pubDate>#{Time.now}</pubDate>\\n\"\n\t\tf << \"\\t<enclosure sparkle:version=\\\"#{ENV[\"CURRENT_PROJECT_VERSION\"]}\\\" sparkle:dsaSignature=\\\"#{key}\\\" url=\\\"http://deathtobunnies.com/tvshows/releases/#{file}\\\" length=\\\"#{File.size(path)}\\\" type=\\\"application/octet-stream\\\"/>\\n\"\n\t\tf << \"\\t<description><![CDATA[[Changes in TVShows version #{ENV[\"CURRENT_PROJECT_VERSION\"]}:\\n\"\n\t\tf << \"\\t\\t<ul>\\n\"\n\t\tf << \"\\t\\t\\t<li></li>\\n\"\n\t\tf << \"\\t\\t\\t<li></li>\\n\"\n\t\tf << \"\\t\\t\\t<li></li>\\n\"\n\t\tf << \"\\t\\t</ul>\\n\\t]]></description>\\n\"\n\t\tf << \"</item>\"\n\t}\nend\n\n";
+			shellScript = "if ENV[\"CONFIGURATION\"] == \"Release\" then\n\tfolder = \"#{ENV[\"TARGET_BUILD_DIR\"]}\"\n\tfile = \"#{ENV[\"TARGET_NAME\"]}_#{ENV[\"CURRENT_PROJECT_VERSION\"]}.zip\"\n\tappname = \"#{ENV[\"TARGET_NAME\"]}_#{ENV[\"CURRENT_PROJECT_VERSION\"]}\"\n\tpath = File.join(folder,file)\n#\t`mv \"#{folder}/TVShows\" ~/.Trash`\n#\t`mv #{folder}/*.zip ~/.Trash`\n#\t`mv #{folder}/appcast.xml ~/.Trash`\n\t`mkdir \"#{folder}/#{appname}\"`\n\t`cp \"#{File.join(ENV[\"PROJECT_DIR\"],\"..\",\"utils\",\"uninstall.sh\")}\" \"#{folder}/#{appname}\"`\n\t`mv \"#{folder}/#{ENV[\"FULL_PRODUCT_NAME\"]}\" \"#{folder}/#{appname}\"`\n\t`cd \"#{folder}\" && zip -qr \"#{file}\" #{appname}`\n\tkey = `openssl dgst -sha1 -binary < \"#{path}\" | openssl dgst -dss1 -sign \"#{File.join(\"#{ENV[\"PROJECT_DIR\"]}\",\"..\",\"appcast\",\"dsa_priv.pem\")}\" | openssl enc -base64`\n\tkey = key.split(\"\\n\").first\n\tFile.open(\"#{folder}/appcast.xml\", \"w\") { |f|\n\t\tf << \"<item>\\n\"\n\t\tf << \"\\t<title>TVShows #{ENV[\"CURRENT_PROJECT_VERSION\"]}</title>\\n\"\n\t\tf << \"\\t<pubDate>#{Time.now}</pubDate>\\n\"\n\t\tf << \"\\t<enclosure sparkle:version=\\\"#{ENV[\"CURRENT_PROJECT_VERSION\"]}\\\" sparkle:dsaSignature=\\\"#{key}\\\" url=\\\"http://deathtobunnies.com/tvshows/releases/#{file}\\\" length=\\\"#{File.size(path)}\\\" type=\\\"application/octet-stream\\\"/>\\n\"\n\t\tf << \"\\t<description><![CDATA[<h3 style=\\\"font-weight:bold;\\\">TVShows #{ENV[\"CURRENT_PROJECT_VERSION\"]}</h3>\\n\"\n\t\tf << \"\\t\\t<br />\\n\"\n\t\tf << \"\\t\\t<h3>Changes:</h3>\\n\"\n\t\tf << \"\\t\\t<ul>\\n\"\n\t\tf << \"\\t\\t\\t<li></li>\\n\"\n\t\tf << \"\\t\\t\\t<li></li>\\n\"\n\t\tf << \"\\t\\t\\t<li></li>\\n\"\n\t\tf << \"\\t\\t</ul>\\n\\t]]></description>\\n\"\n\t\tf << \"</item>\"\n\t}\nend\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

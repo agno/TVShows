@@ -54,7 +54,7 @@
 
 // Misc
 #define TVShowsURL					@"http://deathtobunnies.com/tvshows/"
-#define TVShowsFeedbackURL			@"http://sourceforge.net/tracker/?group_id=190705"
+#define TVShowsFeedbackURL			@"http://github.com/mattprice/TVShows/issues/"
 #define TransmissionURL				@"http://www.transmissionbt.com/"
 
 @implementation Controller
