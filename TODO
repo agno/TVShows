@@ -1,23 +1,22 @@
 High priority:
-- Fix crash on launch
-	"Quality" in plist gets set to "2147483647" seemingly at random. Causes crash.
-
-Medium priority:
+- Figure out why saving the NIB (even with no changes) breaks grabbing the Qualities preference.
+- Create a more user-friendly uninstaller
 - Block the misnamed CSI: New York S7E3
 	Create a whole blocklist preference where users can block shows, episodes, etc?
 	Maybe a blacklist.txt listing torrent URLs, to make this easier to update if this happens again?
-- Create a more user-friendly uninstaller
-- Ignore "The" at the beginning of the show's title when sorting the list
 
-Low priority:
+Medium priority:
+- Ignore "The" at the beginning of the show's title when sorting the list
 - Growl notifications
 - Merge misnamed/duplicate shows somehow
 	Similar to the blacklist.txt feature for misnamed and/or fake episodes?
 
+Low priority:
+- When updating the show list, highlight the new additions.
+
 Feature requests:
 - iCal or Mail.app alert for those that have automatic download disabled
 	Wrap in to the script for Growl notifications
-- When updating the show list, highlight the new additions.
 - Support for private trackers
 	And possibly any other sources of shows; highly unlikely.
 - Grab IMDB/Wikipedia/TV.com info about the show
