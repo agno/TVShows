@@ -1,15 +1,15 @@
 News
 
-0.4.1 (09-16-2009)
+0.4.1 (09-22-2009)
 TVShows is now being released under the GNU General Public License v3, or any later versions. For more information, please see <http://www.gnu.org/licenses/>.
-- All links should now point to TVShows new homepage.
-- Now using Sparkle 1.5b6 for auto updates.
-
-0.4 (09-11-2009)
-Since TVShows has unofficially changed hands, all new builds will fall under the 0.4 branch and will be the only builds supported.
 - Fixed a critical bug where 0 byte torrents would be created.
 - Now uses ezrss.it, since tvrss.net is no longer available.
 - Updated the simple-rss library for ruby.
+- Now using Sparkle 1.5b6 for auto updates.
+
+0.4 (09-11-2009)
+- Internal Build
+	* Changes have been merged with 0.4.1 fixes.
 
 0.3.4 (04-30-2007)
 - Possibly fixed the "Could not download the show list. Are you connected to the internet?" bug
