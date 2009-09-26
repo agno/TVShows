@@ -12,9 +12,9 @@
 
 #import "TVTableView.h"
 
-#define SoftGreenRed	(169.0 / 255.0)
-#define SoftGreeGreen	(191.0 / 255.0)
-#define SoftGreenBlue	(098.0 / 255.0)
+#define SoftGreenRed	(204.0 / 255.0)
+#define SoftGreeGreen	(255.0 / 255.0)
+#define SoftGreenBlue	(102.0 / 255.0)
 static NSColor *sStripeColor = nil;
 
 @class Controller;
@@ -39,7 +39,7 @@ static NSColor *sStripeColor = nil;
     stripeRect.origin.x = clipRect.origin.x;
     stripeRect.origin.y = firstStripe * fullRowHeight;
     stripeRect.size.width = clipRect.size.width;
-    stripeRect.size.height = fullRowHeight;
+    stripeRect.size.height = fullRowHeight - 1;
     // set the color
     if (sStripeColor == nil)
         sStripeColor = [[NSColor colorWithCalibratedRed:SoftGreenRed green:SoftGreeGreen blue:SoftGreenBlue alpha:1.0] retain];

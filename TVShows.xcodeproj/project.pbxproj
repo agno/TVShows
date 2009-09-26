@@ -10,7 +10,6 @@
 		34AE57D7106091BE00F4BA66 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 34AE57D6106091BE00F4BA66 /* dsa_pub.pem */; };
 		34B40C4F1069AAC800D6CE2F /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 34D40CEF1069A6AC00FAF8B4 /* Sparkle.framework */; };
 		34D40CF01069A6AC00FAF8B4 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D40CEF1069A6AC00FAF8B4 /* Sparkle.framework */; };
-		5B1F7FF50BE22EB900B1094B /* Bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1F7FF40BE22EB900B1094B /* Bookmark.png */; };
 		5B1F7FF70BE22F9600B1094B /* Web.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1F7FF60BE22F9600B1094B /* Web.png */; };
 		5B1F7FF90BE22FF600B1094B /* Clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1F7FF80BE22FF600B1094B /* Clock.png */; };
 		5B2D9A240BE14F15003F9377 /* TVShowsScript in Resources */ = {isa = PBXBuildFile; fileRef = 5B376D900B9B35B600663E2A /* TVShowsScript */; };
@@ -19,9 +18,7 @@
 		5B690A770BD945480041BF26 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5B52627A0BA0C4AC00FA11A4 /* Credits.rtf */; };
 		5B690A780BD945530041BF26 /* Reload.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B277F990BD4EA5700D39EAD /* Reload.png */; };
 		5B690A790BD945530041BF26 /* TVShows.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5BBC432F0BCF996000DEA4A7 /* TVShows.icns */; };
-		5B690A7A0BD945530041BF26 /* Play.tif in Resources */ = {isa = PBXBuildFile; fileRef = 5B287B410B95D58100491D02 /* Play.tif */; };
 		5B690A7B0BD945530041BF26 /* Preferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B287B340B95D53A00491D02 /* Preferences.png */; };
-		5B690A7C0BD945530041BF26 /* Stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B287B310B95D52000491D02 /* Stop.png */; };
 		5B690A7D0BD945530041BF26 /* Red.tif in Resources */ = {isa = PBXBuildFile; fileRef = 5B7FB09F0B8FB0E8006692A9 /* Red.tif */; };
 		5B690A7E0BD945530041BF26 /* Green.tif in Resources */ = {isa = PBXBuildFile; fileRef = 5B7FB0A00B8FB0E8006692A9 /* Green.tif */; };
 		5B690A7F0BD9455F0041BF26 /* UserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B287EF70B95FB0800491D02 /* UserDefaults.plist */; };
@@ -58,15 +55,12 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		34AE57D6106091BE00F4BA66 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
-		34CFF21910642D4B0090583F /* TVShows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShows.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34D40CEF1069A6AC00FAF8B4 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
-		5B1F7FF40BE22EB900B1094B /* Bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bookmark.png; sourceTree = "<group>"; };
+		34FA8CA2106C7D7B00FD2929 /* TVShows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShows.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B1F7FF60BE22F9600B1094B /* Web.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Web.png; sourceTree = "<group>"; };
 		5B1F7FF80BE22FF600B1094B /* Clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Clock.png; sourceTree = "<group>"; };
 		5B277F990BD4EA5700D39EAD /* Reload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Reload.png; sourceTree = "<group>"; };
-		5B287B310B95D52000491D02 /* Stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stop.png; sourceTree = "<group>"; };
 		5B287B340B95D53A00491D02 /* Preferences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Preferences.png; sourceTree = "<group>"; };
-		5B287B410B95D58100491D02 /* Play.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Play.tif; sourceTree = "<group>"; };
 		5B287B7D0B95D96500491D02 /* DownloadShowList.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = DownloadShowList.rb; sourceTree = "<group>"; };
 		5B287EF70B95FB0800491D02 /* UserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UserDefaults.plist; sourceTree = "<group>"; };
 		5B2880370B9609A600491D02 /* GetLatestSeasonEpisodeForShow.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = GetLatestSeasonEpisodeForShow.rb; sourceTree = "<group>"; };
@@ -124,7 +118,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				34CFF21910642D4B0090583F /* TVShows.app */,
+				34FA8CA2106C7D7B00FD2929 /* TVShows.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -188,12 +182,9 @@
 			children = (
 				5B1F7FF80BE22FF600B1094B /* Clock.png */,
 				5B1F7FF60BE22F9600B1094B /* Web.png */,
-				5B1F7FF40BE22EB900B1094B /* Bookmark.png */,
 				5B277F990BD4EA5700D39EAD /* Reload.png */,
 				5BBC432F0BCF996000DEA4A7 /* TVShows.icns */,
-				5B287B410B95D58100491D02 /* Play.tif */,
 				5B287B340B95D53A00491D02 /* Preferences.png */,
-				5B287B310B95D52000491D02 /* Stop.png */,
 				5B7FB09F0B8FB0E8006692A9 /* Red.tif */,
 				5B7FB0A00B8FB0E8006692A9 /* Green.tif */,
 			);
@@ -220,7 +211,7 @@
 			name = TVShows;
 			productInstallPath = "$(HOME)/Applications";
 			productName = tvrss;
-			productReference = 34CFF21910642D4B0090583F /* TVShows.app */;
+			productReference = 34FA8CA2106C7D7B00FD2929 /* TVShows.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -257,13 +248,10 @@
 				5B690A810BD9455F0041BF26 /* InfoPlist.strings in Resources */,
 				5B690A780BD945530041BF26 /* Reload.png in Resources */,
 				5B690A790BD945530041BF26 /* TVShows.icns in Resources */,
-				5B690A7A0BD945530041BF26 /* Play.tif in Resources */,
 				5B690A7B0BD945530041BF26 /* Preferences.png in Resources */,
-				5B690A7C0BD945530041BF26 /* Stop.png in Resources */,
 				5B690A7D0BD945530041BF26 /* Red.tif in Resources */,
 				5B690A7E0BD945530041BF26 /* Green.tif in Resources */,
 				5B690A770BD945480041BF26 /* Credits.rtf in Resources */,
-				5B1F7FF50BE22EB900B1094B /* Bookmark.png in Resources */,
 				5B1F7FF70BE22F9600B1094B /* Web.png in Resources */,
 				5B1F7FF90BE22FF600B1094B /* Clock.png in Resources */,
 				34AE57D7106091BE00F4BA66 /* dsa_pub.pem in Resources */,
