@@ -353,14 +353,14 @@
 
 - (IBAction)changeSaveFolder: (id)sender
 {
-	if ( 0 == [sender indexOfSelectedItem] ) {
+	if (0 == [sender indexOfSelectedItem]) {
 		return;
-	} else if ( 2 == [sender indexOfSelectedItem] ) {
+	} else if (2 == [sender indexOfSelectedItem]) {
 		int result;
 		NSOpenPanel *oPanel = [NSOpenPanel openPanel];
 		[oPanel setAllowsMultipleSelection:YES];
-		[oPanel setTitle:@"Torrents will be saved in..."];
-		[oPanel setMessage:@"Choose the folder in which torrents will be downloaded."];
+		[oPanel setTitle:@"Save torrents in..."];
+		[oPanel setMessage:@"Choose the folder where you want the torrent files to be downloaded."];
 		[oPanel setDelegate:self];
 		[oPanel setCanChooseFiles:NO];
 		[oPanel setCanChooseDirectories:YES];
@@ -650,12 +650,12 @@
 
 - (void)checkForBittorrentClient
 {
-	if ( kLSApplicationNotFoundErr == LSGetApplicationForInfo(kLSUnknownType,kLSUnknownCreator,CFSTR("torrent"),kLSRolesAll,NULL,NULL) ) {
+	if (kLSApplicationNotFoundErr == LSGetApplicationForInfo(kLSUnknownType,kLSUnknownCreator,CFSTR("torrent"),kLSRolesAll,NULL,NULL)) {
 		NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-		[alert addButtonWithTitle:@"Download Transmission"];
-		[alert addButtonWithTitle:@"No"];
-		[alert setMessageText:@"You need a Bittorrent client to use TVShows, would you like to download one?"];
-		[alert setInformativeText:@"We recommend Transmission, a great client."];
+		[alert addButtonWithTitle:@"Download"];
+		[alert addButtonWithTitle:@"Cancel"];
+		[alert setMessageText:@"TVShows Requires a Bittorrent Client"];
+		[alert setInformativeText:@"You need a bittorent client in order to download episodes. Clicking Download will take you to Transmission's website, a free bittorent client which we recommend."];
 		[alert setAlertStyle:NSWarningAlertStyle];
 		[alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:@selector(checkForBittorrentClientAlertDidEnd:returnCode:contextInfo:) contextInfo:nil];
 	}
