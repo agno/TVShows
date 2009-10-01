@@ -12,9 +12,9 @@
 
 #import "TVTableView.h"
 
-#define SoftGreenRed	(204.0 / 255.0)
-#define SoftGreeGreen	(255.0 / 255.0)
-#define SoftGreenBlue	(102.0 / 255.0)
+#define SoftGreenRed	(170.0 / 255.0)
+#define SoftGreeGreen	(215.0 / 255.0)
+#define SoftGreenBlue	(250.0 / 255.0)
 static NSColor *sStripeColor = nil;
 
 @class Controller;
