@@ -14,15 +14,18 @@ requires = [
 	File.join(File.dirname(__FILE__), 'TVShowsScript/lib/plist.rb')
 ]
 
-def die(message,exitstatus = 1)
-	$stderr.puts "TVShows Error: #{message}"
-	exit(exitstatus)
+def die(message)
+	time = Time.new
+	$stderr.puts "#{time.strftime("%m/%d/%y %H:%M:%S")}\tTVShows Error: #{message}"
+	exit(-1)
 end
 def printError(message)
-	$stderr.puts "TVShows Error: #{message}"
+	time = Time.new
+	$stderr.puts "#{time.strftime("%m/%d/%y %H:%M:%S")}\tTVShows Error: #{message}"
 end
 def printException(exception)
-	$stderr.puts "TVShows Error: #{exception.inspect}\n\t#{exception.backtrace.join("\n\t")}"
+	time = Time.new
+	$stderr.puts "#{time.strftime("%m/%d/%y %H:%M:%S")}\tTVShows Error: #{exception.inspect}\n\t#{exception.backtrace.join("\n\t")}"
 end
 
 requires.each { |r|

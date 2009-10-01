@@ -16,14 +16,17 @@ requires = [
 ]
 
 def die(message)
-	$stderr.puts "TVShows Error: #{message}"
+	time = Time.new
+	$stderr.puts "#{time.strftime("%m/%d/%y %H:%M:%S")}\tTVShows Error: #{message}"
 	exit(-1)
 end
 def printError(message)
-	$stderr.puts "TVShows Error: #{message}"
+	time = Time.new
+	$stderr.puts "#{time.strftime("%m/%d/%y %H:%M:%S")}\tTVShows Error: #{message}"
 end
 def printException(exception)
-	$stderr.puts "TVShows Error: #{exception.inspect}\n\t#{exception.backtrace.join("\n\t")}"
+	time = Time.new
+	$stderr.puts "#{time.strftime("%m/%d/%y %H:%M:%S")}\tTVShows Error: #{exception.inspect}\n\t#{exception.backtrace.join("\n\t")}"
 end
 
 if ( ARGV.length != 1 ) then
