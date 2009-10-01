@@ -48,7 +48,7 @@ begin
 	data = nil
 	3.times { |n|
 		begin
-			data = open("http://ezrss.it/shows")
+			data = open("http://ezrss.it/shows/")
 			break
 		rescue Exception, Timeout::Error => e
 			printError("Failed to download the list, retrying...")

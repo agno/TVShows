@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		349EBA0A106FFC970095711A /* TODO in Resources */ = {isa = PBXBuildFile; fileRef = 349EBA09106FFC970095711A /* TODO */; };
+		349EBA0C106FFC9C0095711A /* NEWS in Resources */ = {isa = PBXBuildFile; fileRef = 349EBA0B106FFC9C0095711A /* NEWS */; };
 		34AE57D7106091BE00F4BA66 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 34AE57D6106091BE00F4BA66 /* dsa_pub.pem */; };
 		34B40C4F1069AAC800D6CE2F /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 34D40CEF1069A6AC00FAF8B4 /* Sparkle.framework */; };
 		34D40CF01069A6AC00FAF8B4 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D40CEF1069A6AC00FAF8B4 /* Sparkle.framework */; };
@@ -54,6 +56,9 @@
 		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		344648D91073DB7100553A4D /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BWToolkitFramework.framework; path = /Users/matthew/Library/Frameworks/BWToolkitFramework.framework; sourceTree = "<absolute>"; };
+		349EBA09106FFC970095711A /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TODO; path = ../TODO; sourceTree = SOURCE_ROOT; };
+		349EBA0B106FFC9C0095711A /* NEWS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = NEWS; path = ../NEWS; sourceTree = SOURCE_ROOT; };
 		34AE57D6106091BE00F4BA66 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		34D40CEF1069A6AC00FAF8B4 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		34FA8CA2106C7D7B00FD2929 /* TVShows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShows.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,8 +85,6 @@
 		5BD935DC0B9717F4007EBF80 /* tvshows_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tvshows_Prefix.pch; sourceTree = "<group>"; };
 		5BD9367D0B972185007EBF80 /* TVTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVTableView.h; sourceTree = "<group>"; };
 		5BD9367E0B972185007EBF80 /* TVTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVTableView.m; sourceTree = "<group>"; };
-		5BDF043E0BB877CF007EC15A /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
-		5BDF045C0BB87919007EC15A /* NEWS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NEWS; sourceTree = "<group>"; };
 		5BE3BC490BCE71A3003B6EAD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,8 +129,8 @@
 		29B97314FDCFA39411CA2CEA /* tvrss */ = {
 			isa = PBXGroup;
 			children = (
-				5BDF043E0BB877CF007EC15A /* TODO */,
-				5BDF045C0BB87919007EC15A /* NEWS */,
+				349EBA0B106FFC9C0095711A /* NEWS */,
+				349EBA09106FFC970095711A /* TODO */,
 				5BBC437F0BCFA25800DEA4A7 /* COPYING */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -173,6 +176,7 @@
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				344648D91073DB7100553A4D /* BWToolkitFramework.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -255,6 +259,8 @@
 				5B1F7FF70BE22F9600B1094B /* Web.png in Resources */,
 				5B1F7FF90BE22FF600B1094B /* Clock.png in Resources */,
 				34AE57D7106091BE00F4BA66 /* dsa_pub.pem in Resources */,
+				349EBA0A106FFC970095711A /* TODO in Resources */,
+				349EBA0C106FFC9C0095711A /* NEWS in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,10 +328,14 @@
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_3)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_4)",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_3 = "\"$(SRCROOT)/../../../Library/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_4 = "\"$(SRCROOT)/../../../Library/Frameworks\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -354,10 +364,14 @@
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_3)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_4)",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_3 = "\"$(SRCROOT)/../../../Library/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_4 = "\"$(SRCROOT)/../../../Library/Frameworks\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_VERSION = 4.0;
