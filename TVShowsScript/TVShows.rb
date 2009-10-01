@@ -20,14 +20,17 @@ requires = [
 
 # Helper functions
 def die(message)
-	$stderr.puts "TVShows Error: #{message}"
+	time = Time.new
+	$stderr.puts "#{time.strftime("%m/%d/%y %H:%M:%S")}\tTVShows Error: #{message}"
 	exit(-1)
 end
 def printError(message)
-	$stderr.puts "TVShows Error: #{message}"
+	time = Time.new
+	$stderr.puts "#{time.strftime("%m/%d/%y %H:%M:%S")}\tTVShows Error: #{message}"
 end
 def printException(exception)
-	$stderr.puts "TVShows Error: #{exception.inspect}\n\t#{exception.backtrace.join("\n\t")}"
+	time = Time.new
+	$stderr.puts "#{time.strftime("%m/%d/%y %H:%M:%S")}\tTVShows Error: #{exception.inspect}\n\t#{exception.backtrace.join("\n\t")}"
 end
 
 # Load required files
@@ -175,10 +178,10 @@ class Show
 		begin
 			rawEpisodes = SimpleRSS.parse(open(FEED % @exactName,"User-Agent"=>"Apple-PubSub/65.1"))
 		rescue SocketError => e
-			printError "(SocketError, #{e.inspect}) unable to contact ezrss.it, are you connected to the internet?"
+			printError "(SocketError, #{e.inspect}) Unable to contact ezrss.it, are you connected to the internet?"
 			return nil
 		rescue Exception => e
-			printError "(Exception, #{e.inspect}) unable to parse RSS feed, skipping."
+			printError "(Exception, #{e.inspect}) Unable to parse RSS feed, skipping feed #{FEED % @exactName}"
 			return nil
 		end
 		flatEpisodes = []
