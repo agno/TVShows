@@ -191,21 +191,21 @@
     if ( [itemIdentifier isEqualToString:ToolbarFilter] ) {
 		[toolbarItem setLabel:@"Filter"];
 		[toolbarItem setPaletteLabel:@"Filter"];
-		[toolbarItem setToolTip:@"Filter shows name"];
+		[toolbarItem setToolTip:@"Filter the show list"];
 		[toolbarItem setView:searchToolbarItemView];
 		[toolbarItem setMinSize:NSMakeSize(NSWidth([searchToolbarItemView frame]),NSHeight([searchToolbarItemView frame]))];
 		[toolbarItem setMaxSize:NSMakeSize(150,NSHeight([searchToolbarItemView frame]))];
 	} else if ( [itemIdentifier isEqualToString:ToolbarPreferences] ) {
 		[toolbarItem setLabel:@"Preferences"];
 		[toolbarItem setPaletteLabel:@"Preferences"];
-		[toolbarItem setToolTip:@"Open preferences window"];
+		[toolbarItem setToolTip:@"Opens the preferences window"];
 		[toolbarItem setImage:[NSImage imageNamed:@"Preferences.png"]];
 		[toolbarItem setTarget:self];
 		[toolbarItem setAction:@selector(openPreferences:)];
 	} else if ( [itemIdentifier isEqualToString:ToolbarUpdateShowList] ) {
-		[toolbarItem setLabel:@"Update list"];
-		[toolbarItem setPaletteLabel:@"Update list"];
-		[toolbarItem setToolTip:@"Updates the show list"];
+		[toolbarItem setLabel:@"Update List"];
+		[toolbarItem setPaletteLabel:@"Update List"];
+		[toolbarItem setToolTip:@"Updates the list of shows"];
 		[toolbarItem setImage:[NSImage imageNamed:@"Reload.png"]];
 		[toolbarItem setTarget:self];
 		[toolbarItem setAction:@selector(downloadShowList)];
