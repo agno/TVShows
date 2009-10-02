@@ -170,6 +170,7 @@
 	mainToolbar = [[NSToolbar alloc] initWithIdentifier:@"mainToolbar"];
 	[mainToolbar setDelegate:self];
 	[mainToolbar setAllowsUserCustomization:YES];
+	[mainToolbar setAutosavesConfiguration:YES];
 	[mainWindow setToolbar:mainToolbar];
 	
 	[showsController setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:ShowSubscribed ascending:NO] autorelease]]];
@@ -266,20 +267,6 @@
 
 #pragma mark -
 #pragma mark Setters/Getters
-
-- (NSArray *)qualities
-{
-	return qualities;
-}
-
-- (void)setQualities: (NSArray *)someQualities
-{
-	if ( someQualities != qualities ) {
-		[qualities release];
-		qualities = [someQualities retain];
-	}
-}
-
 - (NSDictionary *)shows
 {
 	return shows;
@@ -440,7 +427,7 @@
 				errorDescription:&errorString];
 		
 		if ( errorString ) {
-			NSLog(@"TVShows: error getting show details (%@).",errorString);
+			NSLog(@"TVShows: Error getting show details (%@).",errorString);
 			[errorString release];
 			return;
 		}

@@ -952,12 +952,6 @@
 				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
 			</object>
 			<object class="NSUserDefaultsController" id="424934794">
-				<array class="NSMutableArray" key="NSDeclaredKeys">
-					<string>Quality</string>
-					<object class="NSMutableString">
-						<characters key="NS.bytes">values</characters>
-					</object>
-				</array>
 				<bool key="NSSharedInstance">YES</bool>
 			</object>
 			<object class="NSWindowTemplate" id="1514666">
@@ -1179,6 +1173,7 @@
 									</array>
 									<string key="NSFrame">{{0, 17}, {452, 445}}</string>
 									<reference key="NSSuperview" ref="877899352"/>
+									<reference key="NSNextKeyView" ref="808958808"/>
 									<reference key="NSDocView" ref="808958808"/>
 									<reference key="NSBGColor" ref="745949521"/>
 									<int key="NScvFlags">4</int>
@@ -1210,6 +1205,7 @@
 									</array>
 									<string key="NSFrameSize">{452, 17}</string>
 									<reference key="NSSuperview" ref="877899352"/>
+									<reference key="NSNextKeyView" ref="5891145"/>
 									<reference key="NSDocView" ref="5891145"/>
 									<reference key="NSBGColor" ref="745949521"/>
 									<int key="NScvFlags">4</int>
@@ -1218,6 +1214,7 @@
 							</array>
 							<string key="NSFrame">{{0, 24}, {452, 462}}</string>
 							<reference key="NSSuperview" ref="97841856"/>
+							<reference key="NSNextKeyView" ref="651648121"/>
 							<int key="NSsFlags">0</int>
 							<reference key="NSVScroller" ref="504684008"/>
 							<reference key="NSHScroller" ref="1063374565"/>
