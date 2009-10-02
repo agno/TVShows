@@ -40,10 +40,9 @@
 - (id)transformedValue:(id)value;
 @end
 
-@interface IndexesToIndexTransformer : NSValueTransformer {
+@interface QualityIndexToLabelTransformer : NSValueTransformer {
 }
 + (Class)transformedValueClass;
-+ (BOOL)allowsReverseTransformation;
 - (id)transformedValue:(id)value;
 @end
 

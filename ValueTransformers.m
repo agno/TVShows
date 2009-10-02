@@ -84,22 +84,22 @@
 }
 @end
 
-@implementation IndexesToIndexTransformer
+@implementation QualityIndexToLabelTransformer
 + (Class)transformedValueClass;
 {
-    return [NSIndexSet class];
-}
-+ (BOOL)allowsReverseTransformation
-{
-	return YES;
+    return [NSString class];
 }
 - (id)transformedValue:(id)value;
-{
-	return [NSIndexSet indexSetWithIndex:[value intValue]];
-}
-- (id)reverseTransformedValue:(id)value
-{
-	return [NSNumber numberWithInt:[value firstIndex]];
+{	
+	if ([value intValue] == 0) {
+		return @"350MB per episode";
+	} else if ([value intValue] == 1) {
+		return @"700MB per episode";
+	} else if ([value intValue] == 2) {
+		return @"1.2GB per episode";
+	} else {
+		return @"No selection";
+	}
 }
 @end
 
@@ -110,7 +110,7 @@
 }
 - (id)transformedValue:(id)value;
 {
-	if ( ( nil == [value objectForKey:@"Subscribed"] ) || [[value objectForKey:@"Subscribed"] boolValue] ) {
+	if ( ( nil == [value objectForKey:@"Subscribed"]) || [[value objectForKey:@"Subscribed"] boolValue] ) {
 		if ( [[value objectForKey:@"Type"] isEqualToString:@"SeasonEpisodeType"] ) {
 			return [NSString stringWithFormat:@"Season %@, Ep %@",[value objectForKey:@"Season"],[value objectForKey:@"Episode"]];
 		} else if ( [[value objectForKey:@"Type"] isEqualToString:@"DateType"] ) {

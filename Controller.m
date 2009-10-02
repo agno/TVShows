@@ -86,11 +86,6 @@
 		[NSDateFormatter setDefaultFormatterBehavior:NSDateFormatterBehavior10_4];
 		
 		retries = 0;
-		qualities = [NSArray arrayWithObjects:
-			[NSDictionary dictionaryWithObjectsAndKeys:@"Normal",@"quality",@"350Mb per episode",@"label",nil],
-			[NSDictionary dictionaryWithObjectsAndKeys:@"High",@"quality",@"700Mb per episode",@"label",nil],
-			[NSDictionary dictionaryWithObjectsAndKeys:@"Very High (720p)",@"quality",@"1.2Gb per episode",@"label",nil],
-			nil];
 		
 		// Merge the UserDefaults.plist with defaults in ~/Application Support/
 		NSDictionary *userDefaultsPlist = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"UserDefaults" ofType:@"plist"]];
@@ -129,9 +124,9 @@
 		[NSValueTransformer setValueTransformer:tr5
 										forName:@"PathToNameTransformer"];
 		
-		IndexesToIndexTransformer *tr6 = [[[IndexesToIndexTransformer alloc] init] autorelease];
+		QualityIndexToLabelTransformer *tr6 = [[[QualityIndexToLabelTransformer alloc] init] autorelease];
 		[NSValueTransformer setValueTransformer:tr6
-										forName:@"IndexesToIndexTransformer"];
+										forName:@"QualityIndexToLabelTransformer"];
 		
 		DetailToStringTransformer *tr7 = [[[DetailToStringTransformer alloc] init] autorelease];
 		[NSValueTransformer setValueTransformer:tr7
