@@ -11,7 +11,7 @@
 			<string key="com.brandonwalkin.BWToolkit">1.2.2</string>
 		</dictionary>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
-			<integer value="2"/>
+			<integer value="394"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -20,9 +20,7 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.Metadata"/>
 		<array class="NSMutableArray" key="IBDocument.RootObjects" id="220346803">
 			<object class="NSCustomObject" id="492719088">
-				<object class="NSMutableString" key="NSClassName">
-					<characters key="NS.bytes">NSApplication</characters>
-				</object>
+				<string key="NSClassName">NSApplication</string>
 			</object>
 			<object class="NSCustomObject" id="1064599445">
 				<string key="NSClassName">FirstResponder</string>
@@ -43,7 +41,7 @@
 				<string key="NSWindowContentMaxSize">{500, 600}</string>
 				<string key="NSWindowContentMinSize">{462, 272}</string>
 				<object class="NSView" key="NSWindowView" id="383902722">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSBox" id="531787958">
@@ -551,7 +549,6 @@
 						</object>
 					</array>
 					<string key="NSFrameSize">{470, 314}</string>
-					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{462, 294}</string>
@@ -1018,7 +1015,7 @@
 				<string key="NSWindowContentMaxSize">{1.79769e+308, 1.79769e+308}</string>
 				<string key="NSWindowContentMinSize">{213, 107}</string>
 				<object class="NSView" key="NSWindowView" id="97841856">
-					<nil key="NSNextResponder"/>
+					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSScrollView" id="877899352">
@@ -1181,7 +1178,7 @@
 								<object class="NSScroller" id="504684008">
 									<reference key="NSNextResponder" ref="877899352"/>
 									<int key="NSvFlags">-2147483392</int>
-									<string key="NSFrame">{{-100, -100}, {15, 445}}</string>
+									<string key="NSFrame">{{437, 17}, {15, 445}}</string>
 									<reference key="NSSuperview" ref="877899352"/>
 									<reference key="NSTarget" ref="877899352"/>
 									<string key="NSAction">_doScroller:</string>
@@ -1215,7 +1212,7 @@
 							<string key="NSFrame">{{0, 24}, {452, 462}}</string>
 							<reference key="NSSuperview" ref="97841856"/>
 							<reference key="NSNextKeyView" ref="651648121"/>
-							<int key="NSsFlags">0</int>
+							<int key="NSsFlags">528</int>
 							<reference key="NSVScroller" ref="504684008"/>
 							<reference key="NSHScroller" ref="1063374565"/>
 							<reference key="NSContentView" ref="651648121"/>
@@ -1225,7 +1222,7 @@
 						</object>
 						<object class="BWInsetTextField" id="952106106">
 							<reference key="NSNextResponder" ref="97841856"/>
-							<int key="NSvFlags">268</int>
+							<int key="NSvFlags">256</int>
 							<string key="NSFrame">{{17, -11}, {418, 28}}</string>
 							<reference key="NSSuperview" ref="97841856"/>
 							<bool key="NSEnabled">YES</bool>
@@ -1279,10 +1276,12 @@
 						</object>
 					</array>
 					<string key="NSFrameSize">{452, 486}</string>
+					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{213, 129}</string>
 				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
+				<string key="NSFrameAutosaveName">MainWindow</string>
 			</object>
 			<object class="NSCustomView" id="461538688">
 				<nil key="NSNextResponder"/>
@@ -5448,9 +5447,9 @@
 				<boolean value="YES" key="377.ImportedFromIB2"/>
 				<string key="378.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="378.ImportedFromIB2"/>
-				<string key="393.IBEditorWindowLastContentRect">{{394, 152}, {452, 486}}</string>
+				<string key="393.IBEditorWindowLastContentRect">{{494, 315}, {452, 486}}</string>
 				<string key="393.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="393.IBWindowTemplateEditedContentRect">{{394, 152}, {452, 486}}</string>
+				<string key="393.IBWindowTemplateEditedContentRect">{{494, 315}, {452, 486}}</string>
 				<boolean value="YES" key="393.ImportedFromIB2"/>
 				<boolean value="YES" key="393.NSWindowTemplate.visibleAtLaunch"/>
 				<boolean value="YES" key="393.windowTemplate.hasMinSize"/>
