@@ -12,8 +12,6 @@
 		34AE57D7106091BE00F4BA66 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 34AE57D6106091BE00F4BA66 /* dsa_pub.pem */; };
 		34B40C4F1069AAC800D6CE2F /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 34D40CEF1069A6AC00FAF8B4 /* Sparkle.framework */; };
 		34D40CF01069A6AC00FAF8B4 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D40CEF1069A6AC00FAF8B4 /* Sparkle.framework */; };
-		34D6D41B1075920800EAE2A0 /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 344648D91073DB7100553A4D /* BWToolkitFramework.framework */; };
-		34D6D4231075922900EAE2A0 /* BWToolkitFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 344648D91073DB7100553A4D /* BWToolkitFramework.framework */; };
 		5B1F7FF70BE22F9600B1094B /* Web.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1F7FF60BE22F9600B1094B /* Web.png */; };
 		5B1F7FF90BE22FF600B1094B /* Clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1F7FF80BE22FF600B1094B /* Clock.png */; };
 		5B2D9A240BE14F15003F9377 /* TVShowsScript in Resources */ = {isa = PBXBuildFile; fileRef = 5B376D900B9B35B600663E2A /* TVShowsScript */; };
@@ -45,7 +43,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				34D6D4231075922900EAE2A0 /* BWToolkitFramework.framework in CopyFiles */,
 				34B40C4F1069AAC800D6CE2F /* Sparkle.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -58,7 +55,6 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
-		344648D91073DB7100553A4D /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BWToolkitFramework.framework; path = /Users/matthew/Library/Frameworks/BWToolkitFramework.framework; sourceTree = "<absolute>"; };
 		349EBA09106FFC970095711A /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TODO; path = ../TODO; sourceTree = SOURCE_ROOT; };
 		349EBA0B106FFC9C0095711A /* NEWS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = NEWS; path = ../NEWS; sourceTree = SOURCE_ROOT; };
 		34AE57D6106091BE00F4BA66 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
@@ -99,7 +95,6 @@
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				5BE3BC7C0BCE71A3003B6EAD /* Security.framework in Frameworks */,
 				34D40CF01069A6AC00FAF8B4 /* Sparkle.framework in Frameworks */,
-				34D6D41B1075920800EAE2A0 /* BWToolkitFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,7 +173,6 @@
 				5BE3BC490BCE71A3003B6EAD /* Security.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
-				344648D91073DB7100553A4D /* BWToolkitFramework.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
