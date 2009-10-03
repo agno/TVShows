@@ -70,7 +70,7 @@ begin
 	}
 
 	# Merge
-	if ( File.exists?(path) ) then
+	if (File.exists?(path)) then
 		begin
 			knownShows = Plist::parse_xml(path)
 		rescue => e
@@ -81,7 +81,7 @@ begin
 		if !knownShows.nil? then
 			showsToAdd = []
 			shows["Shows"].each { |show|
-				if ( !knownShows["Shows"].find{|ks| ks["ExactName"] == show["ExactName"]} ) then
+				if (!knownShows["Shows"].find{|ks| ks["ExactName"] == show["ExactName"]}) then
 					showsToAdd << show
 				end
 			}
@@ -92,7 +92,7 @@ begin
 		end
 	end
 
-	shows["Shows"] = shows["Shows"].sort_by{ |s| s["HumanName"] }
+	shows["Shows"] = shows["Shows"].sort_by{ |x| x["HumanName"].sub(/^(the)\s/i, '').downcase }
 	shows.save_plist(path)
 
 rescue Exception, Timeout::Error => e
