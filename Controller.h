@@ -71,8 +71,6 @@
 - (void)downloadShowListDidFinish: (NSNotification *)notification;
 
 // Setters/getters
-- (NSArray *)qualities;
-- (void)setQualities: (NSArray *)someQualities;
 - (NSDictionary *)shows;
 - (void)setShows: (NSDictionary *)someShows;
 - (NSArray *)details;
