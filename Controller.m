@@ -235,13 +235,14 @@
 
 - (IBAction)downloadShowList
 {
-			
 	[NSApp beginSheet:progressPanel
 	   modalForWindow:mainWindow
 		modalDelegate:self
 	   didEndSelector:nil
 		  contextInfo:nil];
 	[progressPanelIndicator startAnimation:nil];
+	
+	[shows writeToFile:[h showsPath] atomically:YES];
 	
 	NSTask *aTask = [[NSTask alloc] init];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadShowListDidFinish:) name:NSTaskDidTerminateNotification object:aTask];
@@ -390,11 +391,6 @@
 		[getShowDetailsTask launch];
 	} else {
 		[currentShow setValue:[NSNumber numberWithBool:NO] forKeyPath:ShowSubscribed];
-		/*
-		[currentShow setValue:[NSNumber numberWithInt:0] forKeyPath:ShowSeason];
-		[currentShow setValue:[NSNumber numberWithInt:0] forKeyPath:ShowEpisode];
-		[currentShow setValue:[NSNumber numberWithBool:NO] forKeyPath:ShowSubscribed];
-		 */
 		[showsController rearrangeObjects];
 	}
 }
@@ -417,7 +413,6 @@
 	
 	// Ok
 	} else {
-	
 		retries = 0;
 		NSString *errorString;
 		id someDetails = [NSPropertyListSerialization
@@ -459,6 +454,7 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:NSTaskDidTerminateNotification object:getShowDetailsTask];
 	[getShowDetailsTask terminate];
 	[currentShow setValue:[NSNumber numberWithBool:NO] forKeyPath:ShowSubscribed];
+	
 	[NSApp endSheet:detailsSheet];
 	[detailsSheet close];
 }
@@ -616,11 +612,6 @@
 	[shows writeToFile:[h showsPath] atomically:YES];
 	[self saveLaunchdPlist];
 	[self loadIntoLaunchd];	
-}
-
-- (IBAction)test: (id)sender
-{
-	[defaultsController save:self];
 }
 
 - (BOOL)shouldGreenRowAtIndex: (int)index

@@ -103,7 +103,6 @@
 
 // Misc
 - (void)applicationWillTerminate: (NSNotification *)aNotification;
-- (IBAction)test: (id)sender;
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication;
 - (void)checkForBittorrentClient;
 - (void)checkForBittorrentClientAlertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo;
