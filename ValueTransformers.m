@@ -63,9 +63,9 @@
 - (id)transformedValue:(id)value;
 {
 	if ( [value boolValue] ) {
-		return @"Enabled (quit to start daemon)";
+		return @"Status: Enabled";
 	} else {
-		return @"Disabled";
+		return @"Status: Disabled";
 	}
 }
 @end
