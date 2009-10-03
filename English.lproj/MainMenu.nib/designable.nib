@@ -3574,6 +3574,26 @@
 					</object>
 					<int key="connectionID">964</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: values.IsEnabled</string>
+						<reference key="source" ref="275238329"/>
+						<reference key="destination" ref="424934794"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="275238329"/>
+							<reference key="NSDestination" ref="424934794"/>
+							<string key="NSLabel">value: values.IsEnabled</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">values.IsEnabled</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSValueTransformerName</string>
+								<string key="NS.object.0">EnabledToStringTransformer</string>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">974</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -5410,9 +5430,9 @@
 				<boolean value="YES" key="377.ImportedFromIB2"/>
 				<string key="378.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="378.ImportedFromIB2"/>
-				<string key="393.IBEditorWindowLastContentRect">{{494, 315}, {452, 486}}</string>
+				<string key="393.IBEditorWindowLastContentRect">{{424, 302}, {452, 486}}</string>
 				<string key="393.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="393.IBWindowTemplateEditedContentRect">{{494, 315}, {452, 486}}</string>
+				<string key="393.IBWindowTemplateEditedContentRect">{{424, 302}, {452, 486}}</string>
 				<boolean value="YES" key="393.ImportedFromIB2"/>
 				<boolean value="YES" key="393.NSWindowTemplate.visibleAtLaunch"/>
 				<boolean value="YES" key="393.windowTemplate.hasMinSize"/>
@@ -5728,7 +5748,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">969</int>
+			<int key="maxID">974</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -5868,13 +5888,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">AppKit.framework/Headers/NSUserInterfaceItemSearching.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSApplication</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">BWToolkitFramework.framework/Headers/NSApplication+BWAdditions.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -6286,13 +6299,6 @@
 					<reference key="sourceIdentifier" ref="735106945"/>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">NSView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">BWToolkitFramework.framework/Headers/NSView+BWAdditions.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">NSWindow</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
@@ -6312,13 +6318,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">AppKit.framework/Headers/NSWindowScripting.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSWindow</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">BWToolkitFramework.framework/Headers/NSWindow+BWAdditions.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
