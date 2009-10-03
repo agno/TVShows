@@ -51,7 +51,8 @@ class Episode
 	
 	def initialize(show,torrentURL,publishedTime)
 		@show = show
-		@torrentURL = URI.encode(torrentURL,"[]")
+		@torrentURL = URI.escape(torrentURL,"\[\]")
+		# @torrentURL = torrentURL.sub(/\[/, '%5B').sub(/\]/, '%5D')
 		@publishedTime = publishedTime
 	end
 	
