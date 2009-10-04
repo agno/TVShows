@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		349EBA0A106FFC970095711A /* TODO in Resources */ = {isa = PBXBuildFile; fileRef = 349EBA09106FFC970095711A /* TODO */; };
 		349EBA0C106FFC9C0095711A /* NEWS in Resources */ = {isa = PBXBuildFile; fileRef = 349EBA0B106FFC9C0095711A /* NEWS */; };
-		34AE57D7106091BE00F4BA66 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 34AE57D6106091BE00F4BA66 /* dsa_pub.pem */; };
 		34B40C4F1069AAC800D6CE2F /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 34D40CEF1069A6AC00FAF8B4 /* Sparkle.framework */; };
+		34C25FFF1078446300A5415B /* SUPublicDSAKeyFile.pem in Resources */ = {isa = PBXBuildFile; fileRef = 34C25FFE1078446300A5415B /* SUPublicDSAKeyFile.pem */; };
 		34D40CF01069A6AC00FAF8B4 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D40CEF1069A6AC00FAF8B4 /* Sparkle.framework */; };
 		5B1F7FF70BE22F9600B1094B /* Web.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1F7FF60BE22F9600B1094B /* Web.png */; };
 		5B1F7FF90BE22FF600B1094B /* Clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1F7FF80BE22FF600B1094B /* Clock.png */; };
@@ -57,7 +57,7 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		349EBA09106FFC970095711A /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TODO; path = ../TODO; sourceTree = SOURCE_ROOT; };
 		349EBA0B106FFC9C0095711A /* NEWS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = NEWS; path = ../NEWS; sourceTree = SOURCE_ROOT; };
-		34AE57D6106091BE00F4BA66 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		34C25FFE1078446300A5415B /* SUPublicDSAKeyFile.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SUPublicDSAKeyFile.pem; sourceTree = "<group>"; };
 		34D40CEF1069A6AC00FAF8B4 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		34FA8CA2106C7D7B00FD2929 /* TVShows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShows.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B1F7FF60BE22F9600B1094B /* Web.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Web.png; sourceTree = "<group>"; };
@@ -157,11 +157,11 @@
 				5BE3B9940BCE4177003B6EAD /* Graphics */,
 				5B376D900B9B35B600663E2A /* TVShowsScript */,
 				5B52627A0BA0C4AC00FA11A4 /* Credits.rtf */,
-				34AE57D6106091BE00F4BA66 /* dsa_pub.pem */,
 				5B287EF70B95FB0800491D02 /* UserDefaults.plist */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
+				34C25FFE1078446300A5415B /* SUPublicDSAKeyFile.pem */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -254,9 +254,9 @@
 				5B690A770BD945480041BF26 /* Credits.rtf in Resources */,
 				5B1F7FF70BE22F9600B1094B /* Web.png in Resources */,
 				5B1F7FF90BE22FF600B1094B /* Clock.png in Resources */,
-				34AE57D7106091BE00F4BA66 /* dsa_pub.pem in Resources */,
 				349EBA0A106FFC970095711A /* TODO in Resources */,
 				349EBA0C106FFC9C0095711A /* NEWS in Resources */,
+				34C25FFF1078446300A5415B /* SUPublicDSAKeyFile.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
