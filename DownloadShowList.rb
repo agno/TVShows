@@ -69,6 +69,11 @@ begin
 		}
 	}
 
+	list1 = ["A+Colbert+Christmas+++The+Greatest+Gift+of+All+%28", "The+Colbert+Report+08+Aug+07+%28", "The+Colbert+Report+08+Jan+08+%28", "The+Colbert+Report+16+May+07+%28", "The+Colbert+Report+4+Mar+08+%28", "The+Daily+Show+04+Jun+07+%28", "The+Daily+Show+08+Jan+08+%28", "The+Daily+Show+11+Oct+07+%28", "The+Daily+Show+3+Mar+08+%28", "The+Daily+Show+4+Mar+08+%28", "Doctor+Who+S04+Christmas+Special+%28", "How+I+Met+Your+Mother+%28", "The+Lost+Room+Part+1+%28", "The+Lost+Room+Part+2+%28", "The+Lost+Room+Part+3+%28", "Red+Dwarf+S9+Special+%28", "Wire+in+the+Blood+S5+Special+%28", "Without+a+Trace+%28"]
+	list2 = ["Little+Britain+Xmas+Special+Part1", "Little+Britain+Xmas+Special+Part2", "Lost+S03+The+Answers", "Lost+S05+A+Journey+In+Time+Recap+Special", "Lost+Missing+Pieces+E10+Jack+Meet+Ethan", "Lost+Survival+Guide", "Lost+Uncovered", "The+Last+Templar+Part1", "The+Last+Templar+Part2", "The+Last+Templar+Pt+2", "The+Last+Templar+Pt+I", "The+Last+Templar+Pt+II+PROPER"]
+
+	blockedShows = list1 + list2
+
 	# Merge
 	if (File.exists?(path)) then
 		begin
@@ -88,6 +93,11 @@ begin
 		
 			knownShows["Shows"] += showsToAdd
 			knownShows["Version"] = version
+
+			blockedShows.each_index { |x|
+				knownShows["Shows"].delete_if {|ks| ks["ExactName"] == blockedShows[x]}
+			}
+
 			shows = knownShows
 		end
 	end
