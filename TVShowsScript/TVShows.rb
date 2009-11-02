@@ -146,6 +146,7 @@ class Show
 		@type = params[SHOW_TYPE]
 		@exactName = params[SHOW_EXACTNAME]
 		@humanName = params[SHOW_HUMANNAME]
+		@showLinks = params[SHOW_LINKS]
 	
 		case @type
 		when TYPE_SEASONEPISODE
@@ -176,12 +177,12 @@ class Show
 
 	def parseRSSFeed
 		begin
-			rawEpisodes = SimpleRSS.parse(open(FEED % @exactName,"User-Agent"=>"Apple-PubSub/65.1"))
+			rawEpisodes = SimpleRSS.parse(open(@showLinks,"User-Agent"=>"TVShows/#{@preferences[PREFS_SCRIPTVERSION]}"))
 		rescue SocketError => e
 			printError "(SocketError, #{e.inspect}) Unable to contact ezrss.it, are you connected to the internet?"
 			return nil
 		rescue Exception => e
-			printError "(Exception, #{e.inspect}) Unable to parse RSS feed, skipping feed #{FEED % @exactName}"
+			printError "(Exception, #{e.inspect}) Unable to parse RSS feed, skipping feed #{@showLinks}"
 			return nil
 		end
 		flatEpisodes = []

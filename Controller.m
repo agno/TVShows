@@ -24,6 +24,7 @@
 // Show properties
 #define ShowHumanName			@"HumanName"
 #define ShowExactName			@"ExactName"
+#define ShowLinks				@"Links"
 #define ShowEpisode				@"Episode"
 #define	ShowSeason				@"Season"
 #define ShowSubscribed			@"Subscribed"
@@ -383,7 +384,7 @@
 		getShowDetailsTask = [[NSTask alloc] init];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getShowDetailsDidFinish:) name:NSTaskDidTerminateNotification object:getShowDetailsTask];
 		[getShowDetailsTask setArguments:[NSArray arrayWithObject:
-				[[[showsController arrangedObjects] objectAtIndex:[sender clickedRow]] valueForKey:ShowExactName]
+				[[[showsController arrangedObjects] objectAtIndex:[sender clickedRow]] valueForKey:ShowLinks]
 		]];
 		[getShowDetailsTask setLaunchPath:[[NSBundle mainBundle] pathForResource:RubyGetShowDetails ofType:@"rb"]];
 		getShowDetailsPipe = [NSPipe pipe];

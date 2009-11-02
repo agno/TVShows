@@ -42,15 +42,12 @@ requires.each { |r|
 }
 
 class Show
-	
-	def initialize(name)
-		@feed = "http://ezrss.it/search/index.php?show_name=%s&show_name_exact=true&mode=rss"
-		@name = name
+	def initialize(links)
+		@feed = links
 	end
 	
 	def getDetails
-		
-		url = @feed % @name
+		url = @feed
 		begin
 			rawEpisodes = SimpleRSS.parse(open(url))
 		rescue => exception
