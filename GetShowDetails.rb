@@ -59,6 +59,8 @@ class Show
 		episodesByDate = []
 		episodesByTitle = []
 		
+		blockedTorrents = ["http://torrent.zoink.it/CSI.New.York.S07E03.HDTV.XviD-LOL.[eztv].torrent", "http://www.bt-chat.com/download1.php?info_hash=6f22dae012c3563508141cbc6fec3fcffd9e8cd3"]
+		
 		rawEpisodes.items.each do |episode|
 			
 			#nameMatch		= /Show\ Name\s*:\ (.*?);/.match(episode.description)[1].sub(/\/|:/,'-')
@@ -66,65 +68,64 @@ class Show
 			seasonNoMatch	= /Season\s*:\s*([0-9]*?);/.match(episode.description)
 			episodeNoMatch	= /Episode\s*:\s*([0-9]*?)$/.match(episode.description)
 			dateMatch		= /Episode\s*Date:\s*([0-9\-]+)$/.match(episode.description)
-						
-			if ( !seasonNoMatch.nil? and !episodeNoMatch.nil? ) then
-				# Season/episode style of show (eg: Lost)
-				
-				s = seasonNoMatch[1].to_i
-				e = episodeNoMatch[1].to_i
-				t = episode.pubDate
-				
-				if ( episodesBySeasonAndEpisodeNumber.find_all { |ep| ep[SHOW_SEASON] == s and ep[SHOW_EPISODE] == e and (ep[SHOW_TIME] <=> t) > 0 }.length == 0 ) then
-					episodesBySeasonAndEpisodeNumber << {
-						SHOW_SEASON => s,
-						SHOW_EPISODE => e,
-						SHOW_TIME => t,
-						SHOW_TYPE => TYPE_SEASONEPISODE
-					}
-				end
-				
-			elsif ( !dateMatch.nil? )
-				# Date style of show (eg: The Daily Show)
-				
-				begin
-					d = Time.parse(dateMatch[1])
-					t = episode.pubDate
-				
-					if ( episodesByDate.find_all { |ep| ep[SHOW_DATE] == d and (ep[SHOW_TIME] <=> t) > 0 }.length == 0 ) then
-						episodesByDate << {
-							SHOW_DATE => d,
-							SHOW_TIME => episode.pubDate,
-							SHOW_TYPE => TYPE_DATE
-						}
-					end
-				rescue Exception => e
-				end
-				
-			elsif ( !titleMatch.nil? and titleMatch[1] != "n/a")
-				# Get-all-episodes style of show (eg: Discovery Channel)
-				
-				ti = titleMatch[1]
-				t = episode.pubDate
-				
-				if ( episodesByTitle.find_all { |ep| ep[SHOW_TIME] == ti and (ep[SHOW_TIME] <=> t) > 0 }.length == 0 ) then
-					episodesByTitle << {
-						SHOW_TITLE => titleMatch[1],
-						SHOW_TIME => episode.pubDate,
-						SHOW_TYPE => TYPE_TIME
-					}
-				end
-				
+			
+			if ( blockedTorrents.include?(episode.link) )
+				printError("The torrent #{episode.link} was blocked.")
 			else
-				# Should not happen
+  			if ( !seasonNoMatch.nil? and !episodeNoMatch.nil? ) then
+  				# Season/episode style of show (eg: Lost)
 				
-				printError("Could not categorize episode.")
+  				s = seasonNoMatch[1].to_i
+  				e = episodeNoMatch[1].to_i
+  				t = episode.pubDate
 				
+  				if ( episodesBySeasonAndEpisodeNumber.find_all { |ep| ep[SHOW_SEASON] == s and ep[SHOW_EPISODE] == e and (ep[SHOW_TIME] <=> t) > 0 }.length == 0 ) then
+  					episodesBySeasonAndEpisodeNumber << {
+  						SHOW_SEASON => s,
+  						SHOW_EPISODE => e,
+  						SHOW_TIME => t,
+  						SHOW_TYPE => TYPE_SEASONEPISODE
+  					}
+  				end
+				
+        elsif ( !dateMatch.nil? )
+  				# Date style of show (eg: The Daily Show)
+				
+  				begin
+  					d = Time.parse(dateMatch[1])
+  					t = episode.pubDate
+				
+  					if ( episodesByDate.find_all { |ep| ep[SHOW_DATE] == d and (ep[SHOW_TIME] <=> t) > 0 }.length == 0 ) then
+  						episodesByDate << {
+  							SHOW_DATE => d,
+  							SHOW_TIME => episode.pubDate,
+  							SHOW_TYPE => TYPE_DATE
+  						}
+  					end
+  				  rescue Exception => e
+  				end
+				
+  			elsif ( !titleMatch.nil? and titleMatch[1] != "n/a")
+  				# Get-all-episodes style of show (eg: Discovery Channel)
+  				ti = titleMatch[1]
+  				t = episode.pubDate
+				
+  				if ( episodesByTitle.find_all { |ep| ep[SHOW_TIME] == ti and (ep[SHOW_TIME] <=> t) > 0 }.length == 0 ) then
+  					episodesByTitle << {
+  						SHOW_TITLE => titleMatch[1],
+  						SHOW_TIME => episode.pubDate,
+  						SHOW_TYPE => TYPE_TIME
+  					}
+  				end
+  			  else
+  				  # Should not happen
+  				  printError("Could not categorize episode.")
+  			end
 			end
 			
 		end
-		
+    
 		return [episodesBySeasonAndEpisodeNumber,episodesByDate,episodesByTitle].max{|a,b| a.length<=>b.length}.to_plist
-		
 	end
 	
 end
@@ -132,7 +133,7 @@ end
 begin
 	$stdout.puts Show.new(ARGV[0]).getDetails
 rescue Timeout::Error, Exception => e
-	printError("GetShowDetails error (#{e.inspect})")
+	printError("GetShowDetails Error: (#{e.inspect})")
 	exit(1)
 end
 
