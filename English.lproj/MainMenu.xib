@@ -2,15 +2,16 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1040</int>
-		<string key="IBDocument.SystemVersion">10B504</string>
+		<string key="IBDocument.SystemVersion">10C540</string>
 		<string key="IBDocument.InterfaceBuilderVersion">732</string>
-		<string key="IBDocument.AppKitVersion">1038.2</string>
-		<string key="IBDocument.HIToolboxVersion">437.00</string>
+		<string key="IBDocument.AppKitVersion">1038.25</string>
+		<string key="IBDocument.HIToolboxVersion">458.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">732</string>
 		</object>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
+			<integer value="406"/>
 			<integer value="394"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
@@ -69,7 +70,7 @@
 								</object>
 								<object class="NSColor" key="NSTextColor">
 									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MCAwLjgwMDAwMDAxAA</bytes>
+									<bytes key="NSWhite">MCAwLjgwMDAwMDAxMTkAA</bytes>
 								</object>
 							</object>
 							<int key="NSBorderType">3</int>
@@ -95,7 +96,7 @@
 									<string key="NSColorName">controlColor</string>
 									<object class="NSColor" key="NSColor" id="305658992">
 										<int key="NSColorSpace">3</int>
-										<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
+										<bytes key="NSWhite">MC42NjY2NjY2ODY1AA</bytes>
 									</object>
 								</object>
 								<object class="NSColor" key="NSTextColor" id="985389125">
@@ -123,7 +124,7 @@
 								<reference key="NSBackgroundColor" ref="900734543"/>
 								<object class="NSColor" key="NSTextColor">
 									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MCAwLjgwMDAwMDAxAA</bytes>
+									<bytes key="NSWhite">MCAwLjgwMDAwMDAxMTkAA</bytes>
 								</object>
 							</object>
 							<int key="NSBorderType">3</int>
@@ -516,7 +517,7 @@
 								<reference key="NSBackgroundColor" ref="900734543"/>
 								<object class="NSColor" key="NSTextColor">
 									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MCAwLjgwMDAwMDAxAA</bytes>
+									<bytes key="NSWhite">MCAwLjgwMDAwMDAxMTkAA</bytes>
 								</object>
 							</object>
 							<int key="NSBorderType">3</int>
@@ -964,7 +965,7 @@
 				<object class="NSMutableString" key="NSViewClass">
 					<characters key="NS.bytes">View</characters>
 				</object>
-				<string key="NSWindowContentMaxSize">{1.79769e+308, 1.79769e+308}</string>
+				<string key="NSWindowContentMaxSize">{3.40282e+38, 3.40282e+38}</string>
 				<string key="NSWindowContentMinSize">{261, 81}</string>
 				<object class="NSView" key="NSWindowView" id="289694905">
 					<nil key="NSNextResponder"/>
@@ -999,7 +1000,7 @@
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{261, 103}</string>
-				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
+				<string key="NSMaxSize">{3.40282e+38, 3.40282e+38}</string>
 			</object>
 			<object class="NSWindowTemplate" id="384002739">
 				<int key="NSWindowStyleMask">4367</int>
@@ -1011,7 +1012,7 @@
 				<object class="NSMutableString" key="NSViewClass">
 					<characters key="NS.bytes">View</characters>
 				</object>
-				<string key="NSWindowContentMaxSize">{1.79769e+308, 1.79769e+308}</string>
+				<string key="NSWindowContentMaxSize">{3.40282e+38, 3.40282e+38}</string>
 				<string key="NSWindowContentMinSize">{213, 107}</string>
 				<object class="NSView" key="NSWindowView" id="97841856">
 					<reference key="NSNextResponder"/>
@@ -1037,7 +1038,7 @@
 								<reference key="NSBackgroundColor" ref="161328450"/>
 								<object class="NSColor" key="NSTextColor">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MSAxIDEgMC40NQA</bytes>
+									<bytes key="NSRGB">MSAxIDEgMC40NDk5OTk5ODgxAA</bytes>
 								</object>
 							</object>
 						</object>
@@ -1210,7 +1211,7 @@
 									<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									<reference key="NSTarget" ref="877899352"/>
 									<string key="NSAction">_doScroller:</string>
-									<double key="NSPercent">0.99775280898876406</double>
+									<double key="NSPercent">0.99775278568267822</double>
 								</object>
 								<object class="NSScroller" id="1063374565">
 									<reference key="NSNextResponder" ref="877899352"/>
@@ -1326,11 +1327,11 @@
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{213, 129}</string>
-				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
+				<string key="NSMaxSize">{3.40282e+38, 3.40282e+38}</string>
 				<string key="NSFrameAutosaveName">MainWindow</string>
 			</object>
 			<object class="NSCustomView" id="461538688">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">256</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSSearchField" id="860113637">
@@ -1341,17 +1342,17 @@
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSSearchFieldCell" key="NSCell" id="617501786">
 							<int key="NSCellFlags">343014976</int>
-							<int key="NSCellFlags2">268436480</int>
+							<int key="NSCellFlags2">1024</int>
 							<string key="NSContents"/>
 							<reference key="NSSupport" ref="1064406989"/>
-							<string key="NSPlaceholderString">Filter</string>
+							<string key="NSPlaceholderString">Search</string>
 							<reference key="NSControlView" ref="860113637"/>
 							<bool key="NSDrawsBackground">YES</bool>
 							<int key="NSTextBezelStyle">1</int>
 							<reference key="NSBackgroundColor" ref="900734543"/>
 							<reference key="NSTextColor" ref="985389125"/>
 							<object class="NSButtonCell" key="NSSearchButtonCell">
-								<int key="NSCellFlags">130560</int>
+								<int key="NSCellFlags">-2147353088</int>
 								<int key="NSCellFlags2">0</int>
 								<string key="NSContents">search</string>
 								<reference key="NSControlView" ref="860113637"/>
@@ -1387,6 +1388,7 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{101, 22}</string>
+				<reference key="NSSuperview"/>
 				<object class="NSMutableString" key="NSClassName">
 					<characters key="NS.bytes">NSView</characters>
 				</object>
@@ -1402,7 +1404,7 @@
 				<object class="NSMutableString" key="NSViewClass">
 					<characters key="NS.bytes">View</characters>
 				</object>
-				<string key="NSWindowContentMaxSize">{1.79769e+308, 1.79769e+308}</string>
+				<string key="NSWindowContentMaxSize">{3.40282e+38, 3.40282e+38}</string>
 				<string key="NSWindowContentMinSize">{200, 107}</string>
 				<object class="NSView" key="NSWindowView" id="37659798">
 					<nil key="NSNextResponder"/>
@@ -1468,7 +1470,7 @@
 														<reference key="NSSupport" ref="26"/>
 														<object class="NSColor" key="NSBackgroundColor" id="549019498">
 															<int key="NSColorSpace">3</int>
-															<bytes key="NSWhite">MC4zMzMzMzI5OQA</bytes>
+															<bytes key="NSWhite">MC4zMzMzMzI5ODU2AA</bytes>
 														</object>
 														<reference key="NSTextColor" ref="1044221821"/>
 													</object>
@@ -1686,7 +1688,7 @@
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{200, 129}</string>
-				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
+				<string key="NSMaxSize">{3.40282e+38, 3.40282e+38}</string>
 			</object>
 			<object class="NSArrayController" id="652635621">
 				<array class="NSMutableArray" key="NSDeclaredKeys">
@@ -1720,7 +1722,7 @@
 				<object class="NSMutableString" key="NSViewClass">
 					<characters key="NS.bytes">View</characters>
 				</object>
-				<string key="NSWindowContentMaxSize">{1.79769e+308, 1.79769e+308}</string>
+				<string key="NSWindowContentMaxSize">{3.40282e+38, 3.40282e+38}</string>
 				<string key="NSWindowContentMinSize">{213, 107}</string>
 				<object class="NSView" key="NSWindowView" id="683741909">
 					<nil key="NSNextResponder"/>
@@ -1757,7 +1759,7 @@
 														<reference key="NSSupport" ref="26"/>
 														<object class="NSColor" key="NSBackgroundColor">
 															<int key="NSColorSpace">3</int>
-															<bytes key="NSWhite">MC4zMzMzMzI5OQA</bytes>
+															<bytes key="NSWhite">MC4zMzMzMzI5ODU2AA</bytes>
 														</object>
 														<reference key="NSTextColor" ref="1044221821"/>
 													</object>
@@ -1776,7 +1778,7 @@
 											<double key="NSIntercellSpacingHeight">2</double>
 											<object class="NSColor" key="NSBackgroundColor">
 												<int key="NSColorSpace">2</int>
-												<bytes key="NSRGB">MC44OTgwMzkyMiAwLjkyOTQxMTc3IDAuOTY4NjI3NDUAA</bytes>
+												<bytes key="NSRGB">MC44OTgwMzkyMjE4IDAuOTI5NDExNzY4OSAwLjk2ODYyNzQ1MjkAA</bytes>
 											</object>
 											<reference key="NSGridColor" ref="759264307"/>
 											<double key="NSRowHeight">17</double>
@@ -1841,7 +1843,7 @@
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{213, 129}</string>
-				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
+				<string key="NSMaxSize">{3.40282e+38, 3.40282e+38}</string>
 			</object>
 			<object class="NSCustomView" id="761442030">
 				<nil key="NSNextResponder"/>
@@ -1938,7 +1940,7 @@
 													<reference key="NSSupport" ref="26"/>
 													<object class="NSColor" key="NSBackgroundColor" id="634606647">
 														<int key="NSColorSpace">3</int>
-														<bytes key="NSWhite">MC4zMzMzMzI5OQA</bytes>
+														<bytes key="NSWhite">MC4zMzMzMzI5ODU2AA</bytes>
 													</object>
 													<reference key="NSTextColor" ref="1044221821"/>
 												</object>
@@ -2360,7 +2362,7 @@
 							<reference key="NSBackgroundColor" ref="900734543"/>
 							<object class="NSColor" key="NSTextColor">
 								<int key="NSColorSpace">3</int>
-								<bytes key="NSWhite">MCAwLjgwMDAwMDAxAA</bytes>
+								<bytes key="NSWhite">MCAwLjgwMDAwMDAxMTkAA</bytes>
 							</object>
 						</object>
 						<int key="NSBorderType">3</int>
@@ -2699,7 +2701,7 @@
 							<reference key="NSBackgroundColor" ref="900734543"/>
 							<object class="NSColor" key="NSTextColor">
 								<int key="NSColorSpace">3</int>
-								<bytes key="NSWhite">MCAwLjgwMDAwMDAxAA</bytes>
+								<bytes key="NSWhite">MCAwLjgwMDAwMDAxMTkAA</bytes>
 							</object>
 						</object>
 						<int key="NSBorderType">3</int>
@@ -2781,7 +2783,7 @@
 							<reference key="NSBackgroundColor" ref="900734543"/>
 							<object class="NSColor" key="NSTextColor">
 								<int key="NSColorSpace">3</int>
-								<bytes key="NSWhite">MCAwLjgwMDAwMDAxAA</bytes>
+								<bytes key="NSWhite">MCAwLjgwMDAwMDAxMTkAA</bytes>
 							</object>
 						</object>
 						<int key="NSBorderType">3</int>
@@ -5527,9 +5529,9 @@
 				<boolean value="YES" key="377.ImportedFromIB2"/>
 				<string key="378.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="378.ImportedFromIB2"/>
-				<string key="393.IBEditorWindowLastContentRect">{{424, 302}, {452, 486}}</string>
+				<string key="393.IBEditorWindowLastContentRect">{{535, 50}, {452, 486}}</string>
 				<string key="393.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="393.IBWindowTemplateEditedContentRect">{{424, 302}, {452, 486}}</string>
+				<string key="393.IBWindowTemplateEditedContentRect">{{535, 50}, {452, 486}}</string>
 				<boolean value="YES" key="393.ImportedFromIB2"/>
 				<boolean value="YES" key="393.NSWindowTemplate.visibleAtLaunch"/>
 				<boolean value="YES" key="393.windowTemplate.hasMinSize"/>
@@ -5545,6 +5547,7 @@
 				<boolean value="YES" key="401.ImportedFromIB2"/>
 				<string key="402.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="402.ImportedFromIB2"/>
+				<string key="406.IBEditorWindowLastContentRect">{{321, 812}, {101, 22}}</string>
 				<string key="406.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="406.ImportedFromIB2"/>
 				<string key="407.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -5869,7 +5872,6 @@
 						<string key="openPreferences:">id</string>
 						<string key="sendFeedback:">id</string>
 						<string key="subscribe:">id</string>
-						<string key="test:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="defaultsController">NSUserDefaultsController</string>

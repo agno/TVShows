@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		349EBA0A106FFC970095711A /* TODO in Resources */ = {isa = PBXBuildFile; fileRef = 349EBA09106FFC970095711A /* TODO */; };
+		347EB90A10AF7E5100896FAC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 347EB90810AF7E5100896FAC /* MainMenu.xib */; };
+		349C86FC10ADB78E001C5B83 /* Canceled.txt in Resources */ = {isa = PBXBuildFile; fileRef = 349C86FA10ADB78E001C5B83 /* Canceled.txt */; };
+		349C86FD10ADB78E001C5B83 /* Misnamed.txt in Resources */ = {isa = PBXBuildFile; fileRef = 349C86FB10ADB78E001C5B83 /* Misnamed.txt */; };
+		349EBA0A106FFC970095711A /* ROADMAP in Resources */ = {isa = PBXBuildFile; fileRef = 349EBA09106FFC970095711A /* ROADMAP */; };
 		349EBA0C106FFC9C0095711A /* NEWS in Resources */ = {isa = PBXBuildFile; fileRef = 349EBA0B106FFC9C0095711A /* NEWS */; };
 		34B40C4F1069AAC800D6CE2F /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 34D40CEF1069A6AC00FAF8B4 /* Sparkle.framework */; };
 		34C25FFF1078446300A5415B /* SUPublicDSAKeyFile.pem in Resources */ = {isa = PBXBuildFile; fileRef = 34C25FFE1078446300A5415B /* SUPublicDSAKeyFile.pem */; };
@@ -25,7 +28,6 @@
 		5B690A7E0BD945530041BF26 /* Green.tif in Resources */ = {isa = PBXBuildFile; fileRef = 5B7FB0A00B8FB0E8006692A9 /* Green.tif */; };
 		5B690A7F0BD9455F0041BF26 /* UserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B287EF70B95FB0800491D02 /* UserDefaults.plist */; };
 		5B690A810BD9455F0041BF26 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
-		5B690A8A0BD945760041BF26 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		5B690A8B0BD945780041BF26 /* GetShowDetails.rb in Resources */ = {isa = PBXBuildFile; fileRef = 5B859FA70BA772320045E4BB /* GetShowDetails.rb */; };
 		5B690A8C0BD9457B0041BF26 /* DownloadShowList.rb in Resources */ = {isa = PBXBuildFile; fileRef = 5B287B7D0B95D96500491D02 /* DownloadShowList.rb */; };
 		5B690A8D0BD9457D0041BF26 /* GetLatestSeasonEpisodeForShow.rb in Resources */ = {isa = PBXBuildFile; fileRef = 5B2880370B9609A600491D02 /* GetLatestSeasonEpisodeForShow.rb */; };
@@ -53,9 +55,11 @@
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
-		349EBA09106FFC970095711A /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TODO; path = ../TODO; sourceTree = SOURCE_ROOT; };
+		347EB90910AF7E5100896FAC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		349C86FA10ADB78E001C5B83 /* Canceled.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Canceled.txt; sourceTree = "<group>"; };
+		349C86FB10ADB78E001C5B83 /* Misnamed.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Misnamed.txt; sourceTree = "<group>"; };
+		349EBA09106FFC970095711A /* ROADMAP */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ROADMAP; path = ../ROADMAP; sourceTree = SOURCE_ROOT; };
 		349EBA0B106FFC9C0095711A /* NEWS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = NEWS; path = ../NEWS; sourceTree = SOURCE_ROOT; };
 		34C25FFE1078446300A5415B /* SUPublicDSAKeyFile.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SUPublicDSAKeyFile.pem; sourceTree = "<group>"; };
 		34D40CEF1069A6AC00FAF8B4 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
@@ -128,7 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				349EBA0B106FFC9C0095711A /* NEWS */,
-				349EBA09106FFC970095711A /* TODO */,
+				349EBA09106FFC970095711A /* ROADMAP */,
 				5BBC437F0BCFA25800DEA4A7 /* COPYING */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -154,13 +158,14 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				349C86F910ADB78E001C5B83 /* Blocklists */,
 				5BE3B9940BCE4177003B6EAD /* Graphics */,
 				5B376D900B9B35B600663E2A /* TVShowsScript */,
 				5B52627A0BA0C4AC00FA11A4 /* Credits.rtf */,
 				5B287EF70B95FB0800491D02 /* UserDefaults.plist */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
-				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
+				347EB90810AF7E5100896FAC /* MainMenu.xib */,
 				34C25FFE1078446300A5415B /* SUPublicDSAKeyFile.pem */,
 			);
 			name = Resources;
@@ -175,6 +180,15 @@
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		349C86F910ADB78E001C5B83 /* Blocklists */ = {
+			isa = PBXGroup;
+			children = (
+				349C86FA10ADB78E001C5B83 /* Canceled.txt */,
+				349C86FB10ADB78E001C5B83 /* Misnamed.txt */,
+			);
+			path = Blocklists;
 			sourceTree = "<group>";
 		};
 		5BE3B9940BCE4177003B6EAD /* Graphics */ = {
@@ -243,7 +257,6 @@
 				5B690A8B0BD945780041BF26 /* GetShowDetails.rb in Resources */,
 				5B690A8D0BD9457D0041BF26 /* GetLatestSeasonEpisodeForShow.rb in Resources */,
 				5B690A8C0BD9457B0041BF26 /* DownloadShowList.rb in Resources */,
-				5B690A8A0BD945760041BF26 /* MainMenu.nib in Resources */,
 				5B690A7F0BD9455F0041BF26 /* UserDefaults.plist in Resources */,
 				5B690A810BD9455F0041BF26 /* InfoPlist.strings in Resources */,
 				5B690A780BD945530041BF26 /* Reload.png in Resources */,
@@ -254,9 +267,12 @@
 				5B690A770BD945480041BF26 /* Credits.rtf in Resources */,
 				5B1F7FF70BE22F9600B1094B /* Web.png in Resources */,
 				5B1F7FF90BE22FF600B1094B /* Clock.png in Resources */,
-				349EBA0A106FFC970095711A /* TODO in Resources */,
+				349EBA0A106FFC970095711A /* ROADMAP in Resources */,
 				349EBA0C106FFC9C0095711A /* NEWS in Resources */,
 				34C25FFF1078446300A5415B /* SUPublicDSAKeyFile.pem in Resources */,
+				349C86FC10ADB78E001C5B83 /* Canceled.txt in Resources */,
+				349C86FD10ADB78E001C5B83 /* Misnamed.txt in Resources */,
+				347EB90A10AF7E5100896FAC /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,12 +318,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		29B97318FDCFA39411CA2CEA /* MainMenu.nib */ = {
+		347EB90810AF7E5100896FAC /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				29B97319FDCFA39411CA2CEA /* English */,
+				347EB90910AF7E5100896FAC /* English */,
 			);
-			name = MainMenu.nib;
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -391,7 +407,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IBC_STRIP_NIBS = NO;
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -405,7 +420,6 @@
 				CURRENT_PROJECT_VERSION = 067;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IBC_STRIP_NIBS = YES;
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				VERSIONING_SYSTEM = "apple-generic";

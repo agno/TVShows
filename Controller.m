@@ -186,9 +186,9 @@
     NSToolbarItem *toolbarItem = [[[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier] autorelease];
 	
     if ( [itemIdentifier isEqualToString:ToolbarFilter] ) {
-		[toolbarItem setLabel:@"Filter"];
-		[toolbarItem setPaletteLabel:@"Filter"];
-		[toolbarItem setToolTip:@"Filter the show list"];
+		[toolbarItem setLabel:@"Search"];
+		[toolbarItem setPaletteLabel:@"Search"];
+		[toolbarItem setToolTip:@"Search for a show"];
 		[toolbarItem setView:searchToolbarItemView];
 		[toolbarItem setMinSize:NSMakeSize(NSWidth([searchToolbarItemView frame]),NSHeight([searchToolbarItemView frame]))];
 		[toolbarItem setMaxSize:NSMakeSize(150,NSHeight([searchToolbarItemView frame]))];
