@@ -92,13 +92,13 @@
 - (id)transformedValue:(id)value;
 {	
 	if ([value intValue] == 0) {
-		return @"350MB per episode";
+		return @"About 350MB per hour of show time.";
 	} else if ([value intValue] == 1) {
-		return @"700MB per episode";
+		return @"About 700MB per hour of show time.";
 	} else if ([value intValue] == 2) {
-		return @"1.2GB per episode";
+		return @"About 1.2GB per hour of show time.";
 	} else {
-		return @"No selection";
+		return @"No selection.";
 	}
 }
 @end
