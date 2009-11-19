@@ -361,7 +361,7 @@ class TVShows
 		die("Non-existent folder \"#{@preferences[PREFS_TORRENT_FOLDER]}\"") unless ( File.exists?(@preferences[PREFS_TORRENT_FOLDER]) )
 		
 		# Maintenance
-		deleteLogFile(File.dirname(showsFile))
+		self.deleteLogFile(File.dirname(showsFile))
 		checkForUpdates
 	end
 	
