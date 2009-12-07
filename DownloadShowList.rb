@@ -47,7 +47,7 @@ begin
 		"Shows" => [],
 		"Version" => version
 	}
-
+	
 	data = nil
 	3.times { |n|
 		begin
@@ -94,6 +94,12 @@ begin
 					showsToAdd << show
 				end
 			}
+			
+			# Hacked together. Deletes show list if version is reported as 1.
+			# Bad karma will soon ensue...
+			if (knownShows["Version"] == "1") then
+				knownShows["Shows"] = shows["Shows"]
+			end
 		
 			knownShows["Shows"] += showsToAdd
 			knownShows["Version"] = version

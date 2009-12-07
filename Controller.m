@@ -18,7 +18,7 @@
 
 // Shows properties
 #define ShowsVersion			@"Version"
-#define ShowsLatestVersion		@"1"
+#define ShowsLatestVersion		@"1.1"
 #define ShowsShows				@"Shows"
 
 // Show properties
