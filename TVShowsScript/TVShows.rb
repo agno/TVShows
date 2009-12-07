@@ -333,7 +333,7 @@ end
 class TVShows
 	
 	def initialize(preferencesFile,showsFile)
-		die("Can't reach ezrss.it, are you connected to the internet?") unless isConnectedToTheInternet
+		die("ezRSS is not loading. Are you connected to the internet?") unless isConnectedToTheInternet
 		
 		@showsFile = showsFile
 		@preferencesFile = preferencesFile
@@ -367,7 +367,7 @@ class TVShows
 	
 	def isConnectedToTheInternet
 		3.times {
-			return true if ( ping )
+			return true if (ping)
 			sleep(5)
 		}
 		return false
