@@ -95,10 +95,11 @@ begin
 				end
 			}
 			
-			# Hacked together. Deletes show list if version is reported as 1.
-			# Bad karma will soon ensue...
+			# Upgrade from 0.4.3 to 0.4.4
 			if (knownShows["Version"] == "1") then
-				knownShows["Shows"] = shows["Shows"]
+				knownShows["Shows"].each { |show|
+				  show["Links"] = "http://ezrss.it/search/index.php?show_name="+ show["ExactName"] + "&show_name_exact=true&mode=rss"
+			  }
 			end
 		
 			knownShows["Shows"] += showsToAdd
