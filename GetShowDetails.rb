@@ -59,7 +59,7 @@ class Show
 		episodesByDate = []
 		episodesByTitle = []
 		
-		blockedTorrents = ["http://torrent.zoink.it/CSI.New.York.S07E03.HDTV.XviD-LOL.[eztv].torrent", "http://www.bt-chat.com/download1.php?info_hash=6f22dae012c3563508141cbc6fec3fcffd9e8cd3"]
+		blockedTorrents = ["http://torrent.zoink.it/CSI.New.York.S07E03.HDTV.XviD-LOL.[eztv].torrent", "http://www.bt-chat.com/download1.php?info_hash=6f22dae012c3563508141cbc6fec3fcffd9e8cd3", "http://torrent.zoink.it/Doctor.Who.2005.The.Waters.Of.Mars.2009.Special.HDTV.XviD-FoV.%5Beztv%5D.torrent", "http://torrent.zoink.it/Doctor.Who.2005.The.Waters.Of.Mars.2009.Special.720p.HDTV.x264-FoV.%5Beztv%5D.torrent"]
 		
 		rawEpisodes.items.each do |episode|
 			

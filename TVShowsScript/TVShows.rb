@@ -56,12 +56,19 @@ class Episode
 	end
 	
 	def download
-		path = File.join(@show.preferences[PREFS_TORRENT_FOLDER],torrentFile)
-		file = File.new(path,'w')
-		open(@torrentURL) { |data| file.write(data.read) }
-		file.close
-		`open \"#{path}\"` if ( @show.preferences[PREFS_AUTOMATICALLY_OPEN_TORRENT] )
-		return true
+	  blockedTorrents = ["http://torrent.zoink.it/CSI.New.York.S07E03.HDTV.XviD-LOL.[eztv].torrent", "http://www.bt-chat.com/download1.php?info_hash=6f22dae012c3563508141cbc6fec3fcffd9e8cd3", "http://torrent.zoink.it/Doctor.Who.2005.The.Waters.Of.Mars.2009.Special.HDTV.XviD-FoV.%5Beztv%5D.torrent", "http://torrent.zoink.it/Doctor.Who.2005.The.Waters.Of.Mars.2009.Special.720p.HDTV.x264-FoV.%5Beztv%5D.torrent"]
+
+	  if ( blockedTorrents.include?(episode.link) )
+			printError("The torrent #{episode.link} was blocked.")
+			return false
+		else
+		  path = File.join(@show.preferences[PREFS_TORRENT_FOLDER],torrentFile)
+		  file = File.new(path,'w')
+		  open(@torrentURL) { |data| file.write(data.read) }
+		  file.close
+		  `open \"#{path}\"` if ( @show.preferences[PREFS_AUTOMATICALLY_OPEN_TORRENT] )
+		  return true
+		end
 	rescue => e
 		printException(e)
 		return false
