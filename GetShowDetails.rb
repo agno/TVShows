@@ -30,7 +30,7 @@ def printException(exception)
 end
 
 if ( ARGV.length != 1 ) then
-	die("Usage: TVShowDetails.rb ShowName")
+	die("Usage: GetShowDetails.rb RSSLink")
 	exit(-1)
 end
 requires.each { |r|
