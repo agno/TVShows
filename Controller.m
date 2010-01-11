@@ -10,6 +10,7 @@
 
 #import "Controller.h"
 #import "ValueTransformers.h"
+#import "PFMoveApplication.h"
 
 // Toolbar
 #define ToolbarFilter			@"Filter"
@@ -150,6 +151,10 @@
 	/*
 	[mainColumn setDataCell:[[TVTextFieldCell alloc] init]];
 	*/
+	
+	
+	// Ask the user to move the app to /Applications
+	PFMoveToApplicationsFolderIfNecessary();
 	
 	[mainView addSubview:preferencesView];
 	[mainView setNeedsDisplay:YES];

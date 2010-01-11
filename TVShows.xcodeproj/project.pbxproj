@@ -32,6 +32,7 @@
 		5BE3BC7C0BCE71A3003B6EAD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BE3BC490BCE71A3003B6EAD /* Security.framework */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		DAEFA2AE10F68C5F00031F44 /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = DAEFA2AD10F68C5F00031F44 /* PFMoveApplication.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -85,6 +86,8 @@
 		5BD9367E0B972185007EBF80 /* TVTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVTableView.m; sourceTree = "<group>"; };
 		5BE3BC490BCE71A3003B6EAD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DAEFA2AC10F68C5F00031F44 /* PFMoveApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMoveApplication.h; sourceTree = "<group>"; };
+		DAEFA2AD10F68C5F00031F44 /* PFMoveApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMoveApplication.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +145,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				DAEFA2AB10F68C1700031F44 /* Move Application */,
 				5B287B7D0B95D96500491D02 /* DownloadShowList.rb */,
 				5B2880370B9609A600491D02 /* GetLatestSeasonEpisodeForShow.rb */,
 				5B859FA70BA772320045E4BB /* GetShowDetails.rb */,
@@ -199,6 +203,15 @@
 				5B7FB0A00B8FB0E8006692A9 /* Green.tif */,
 			);
 			name = Graphics;
+			sourceTree = "<group>";
+		};
+		DAEFA2AB10F68C1700031F44 /* Move Application */ = {
+			isa = PBXGroup;
+			children = (
+				DAEFA2AC10F68C5F00031F44 /* PFMoveApplication.h */,
+				DAEFA2AD10F68C5F00031F44 /* PFMoveApplication.m */,
+			);
+			name = "Move Application";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,6 +309,7 @@
 				5B3557C70B9715E800080026 /* Helper.m in Sources */,
 				5BD9367F0B972185007EBF80 /* TVTableView.m in Sources */,
 				5B5DF5020B97325600E847D5 /* ValueTransformers.m in Sources */,
+				DAEFA2AE10F68C5F00031F44 /* PFMoveApplication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
