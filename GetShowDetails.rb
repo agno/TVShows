@@ -59,7 +59,7 @@ class Show
 		episodesByDate = []
 		episodesByTitle = []
 		
-		blockedTorrents = ["http://torrent.zoink.it/CSI.New.York.S07E03.HDTV.XviD-LOL.[eztv].torrent", "http://www.bt-chat.com/download1.php?info_hash=6f22dae012c3563508141cbc6fec3fcffd9e8cd3", "http://torrent.zoink.it/Doctor.Who.2005.The.Waters.Of.Mars.2009.Special.HDTV.XviD-FoV.%5Beztv%5D.torrent", "http://torrent.zoink.it/Doctor.Who.2005.The.Waters.Of.Mars.2009.Special.720p.HDTV.x264-FoV.%5Beztv%5D.torrent"]
+		blockedTorrents = ["http://torrent.zoink.it/CSI.New.York.S07E03.HDTV.XviD-LOL.%5Beztv%5D.torrent", "http://www.bt-chat.com/download1.php?info_hash=6f22dae012c3563508141cbc6fec3fcffd9e8cd3", "http://torrent.zoink.it/Doctor.Who.2005.The.Waters.Of.Mars.2009.Special.HDTV.XviD-FoV.%5Beztv%5D.torrent", "http://torrent.zoink.it/Doctor.Who.2005.The.Waters.Of.Mars.2009.Special.720p.HDTV.x264-FoV.%5Beztv%5D.torrent", "http://torrent.zoink.it/Doctor.Who.2005.S04.Special.The.End.Of.Time.Part1.720p.HDTV.x264-BiA.%5Beztv%5D.torrent","http://torrent.zoink.it/Doctor.Who.2005.S04.Special.The.End.Of.Time.Part2.720p.HDTV.x264-BiA.%5Beztv%5D.torrent"]
 		
 		rawEpisodes.items.each do |episode|
 			
@@ -69,8 +69,10 @@ class Show
 			episodeNoMatch	= /Episode\s*:\s*([0-9]*?)$/.match(episode.description)
 			dateMatch		= /Episode\s*Date:\s*([0-9\-]+)$/.match(episode.description)
 			
-			if ( blockedTorrents.include?(episode.link) )
-				printError("The torrent #{episode.link} was blocked.")
+			torrentURL = episode.link.gsub(/\[/, '%5B').gsub(/\]/, '%5D')
+			
+			if ( blockedTorrents.include?(torrentURL) )
+				printError("The torrent #{torrentURL} was blocked.")
 			else
   			if ( !seasonNoMatch.nil? and !episodeNoMatch.nil? ) then
   				# Season/episode style of show (eg: Lost)
