@@ -1,0 +1,508 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		349D2AE911836AD3007269E4 /* NSDate_FeedParserExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2ACB11836AD3007269E4 /* NSDate_FeedParserExtensions.h */; };
+		349D2AEA11836AD3007269E4 /* NSDate_FeedParserExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2ACC11836AD3007269E4 /* NSDate_FeedParserExtensions.m */; };
+		349D2AEB11836AD3007269E4 /* NSString_extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2ACD11836AD3007269E4 /* NSString_extensions.h */; };
+		349D2AEC11836AD3007269E4 /* NSString_extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2ACE11836AD3007269E4 /* NSString_extensions.m */; };
+		349D2AED11836AD3007269E4 /* FeedParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2ACF11836AD3007269E4 /* FeedParser.h */; };
+		349D2AEE11836AD3007269E4 /* FPEnclosure.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2AD011836AD3007269E4 /* FPEnclosure.h */; };
+		349D2AEF11836AD3007269E4 /* FPEnclosure.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2AD111836AD3007269E4 /* FPEnclosure.m */; };
+		349D2AF011836AD3007269E4 /* FPErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2AD211836AD3007269E4 /* FPErrors.h */; };
+		349D2AF111836AD3007269E4 /* FPFeed.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2AD311836AD3007269E4 /* FPFeed.h */; };
+		349D2AF211836AD3007269E4 /* FPFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2AD411836AD3007269E4 /* FPFeed.m */; };
+		349D2AF311836AD3007269E4 /* FPItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2AD511836AD3007269E4 /* FPItem.h */; };
+		349D2AF411836AD3007269E4 /* FPItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2AD611836AD3007269E4 /* FPItem.m */; };
+		349D2AF511836AD3007269E4 /* FPLink.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2AD711836AD3007269E4 /* FPLink.h */; };
+		349D2AF611836AD3007269E4 /* FPLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2AD811836AD3007269E4 /* FPLink.m */; };
+		349D2AF711836AD3007269E4 /* FPParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2AD911836AD3007269E4 /* FPParser.h */; };
+		349D2AF811836AD3007269E4 /* FPParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2ADA11836AD3007269E4 /* FPParser.m */; };
+		349D2AF911836AD3007269E4 /* FPExtensionElementNode_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2ADC11836AD3007269E4 /* FPExtensionElementNode_Private.h */; };
+		349D2AFA11836AD3007269E4 /* FPXMLPair.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2ADD11836AD3007269E4 /* FPXMLPair.h */; };
+		349D2AFB11836AD3007269E4 /* FPXMLPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2ADE11836AD3007269E4 /* FPXMLPair.m */; };
+		349D2AFC11836AD3007269E4 /* FPXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2ADF11836AD3007269E4 /* FPXMLParser.h */; };
+		349D2AFD11836AD3007269E4 /* FPXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2AE011836AD3007269E4 /* FPXMLParser.m */; };
+		349D2AFE11836AD3007269E4 /* FPXMLParserProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2AE111836AD3007269E4 /* FPXMLParserProtocol.h */; };
+		349D2AFF11836AD3007269E4 /* FPExtensionElementNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2AE311836AD3007269E4 /* FPExtensionElementNode.h */; };
+		349D2B0011836AD3007269E4 /* FPExtensionElementNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2AE411836AD3007269E4 /* FPExtensionElementNode.m */; };
+		349D2B0111836AD3007269E4 /* FPExtensionNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2AE511836AD3007269E4 /* FPExtensionNode.h */; };
+		349D2B0211836AD3007269E4 /* FPExtensionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2AE611836AD3007269E4 /* FPExtensionNode.m */; };
+		349D2B0311836AD3007269E4 /* FPExtensionTextNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2AE711836AD3007269E4 /* FPExtensionTextNode.h */; };
+		349D2B0411836AD3007269E4 /* FPExtensionTextNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2AE811836AD3007269E4 /* FPExtensionTextNode.m */; };
+		349FEE00118358CF00D24FC9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 349FEDFC118358CF00D24FC9 /* InfoPlist.strings */; };
+		349FEE01118358CF00D24FC9 /* TVShowsPref.xib in Resources */ = {isa = PBXBuildFile; fileRef = 349FEDFE118358CF00D24FC9 /* TVShowsPref.xib */; };
+		349FEE091183590500D24FC9 /* TVShows-Beta-Large.icns in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE031183590500D24FC9 /* TVShows-Beta-Large.icns */; };
+		349FEE0A1183590500D24FC9 /* TVShows-Beta.png in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE041183590500D24FC9 /* TVShows-Beta.png */; };
+		349FEE0B1183590500D24FC9 /* TVShows-Off-Large.icns in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE051183590500D24FC9 /* TVShows-Off-Large.icns */; };
+		349FEE0C1183590500D24FC9 /* TVShows-Off.png in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE061183590500D24FC9 /* TVShows-Off.png */; };
+		349FEE0D1183590500D24FC9 /* TVShows-On-Large.icns in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE071183590500D24FC9 /* TVShows-On-Large.icns */; };
+		349FEE0E1183590500D24FC9 /* TVShows-On.png in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE081183590500D24FC9 /* TVShows-On.png */; };
+		349FEE171183597500D24FC9 /* TVShowsPref.h in Headers */ = {isa = PBXBuildFile; fileRef = 349FEE151183597500D24FC9 /* TVShowsPref.h */; };
+		349FEE181183597500D24FC9 /* TVShowsPref.m in Sources */ = {isa = PBXBuildFile; fileRef = 349FEE161183597500D24FC9 /* TVShowsPref.m */; };
+		349FEEC111835A1C00D24FC9 /* WindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 349FEEBF11835A1C00D24FC9 /* WindowController.h */; };
+		349FEEC211835A1C00D24FC9 /* WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 349FEEC011835A1C00D24FC9 /* WindowController.m */; };
+		8D202CEA0486D31800D8A456 /* TVShows_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA20370C41700C91783 /* TVShows_Prefix.pch */; };
+		8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
+		8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F506C035013D953901CA16C8 /* PreferencePanes.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		32DBCFA20370C41700C91783 /* TVShows_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShows_Prefix.pch; sourceTree = "<group>"; };
+		349D2ACB11836AD3007269E4 /* NSDate_FeedParserExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDate_FeedParserExtensions.h; sourceTree = "<group>"; };
+		349D2ACC11836AD3007269E4 /* NSDate_FeedParserExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDate_FeedParserExtensions.m; sourceTree = "<group>"; };
+		349D2ACD11836AD3007269E4 /* NSString_extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_extensions.h; sourceTree = "<group>"; };
+		349D2ACE11836AD3007269E4 /* NSString_extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_extensions.m; sourceTree = "<group>"; };
+		349D2ACF11836AD3007269E4 /* FeedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedParser.h; sourceTree = "<group>"; };
+		349D2AD011836AD3007269E4 /* FPEnclosure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPEnclosure.h; sourceTree = "<group>"; };
+		349D2AD111836AD3007269E4 /* FPEnclosure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPEnclosure.m; sourceTree = "<group>"; };
+		349D2AD211836AD3007269E4 /* FPErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPErrors.h; sourceTree = "<group>"; };
+		349D2AD311836AD3007269E4 /* FPFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPFeed.h; sourceTree = "<group>"; };
+		349D2AD411836AD3007269E4 /* FPFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPFeed.m; sourceTree = "<group>"; };
+		349D2AD511836AD3007269E4 /* FPItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPItem.h; sourceTree = "<group>"; };
+		349D2AD611836AD3007269E4 /* FPItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPItem.m; sourceTree = "<group>"; };
+		349D2AD711836AD3007269E4 /* FPLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPLink.h; sourceTree = "<group>"; };
+		349D2AD811836AD3007269E4 /* FPLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPLink.m; sourceTree = "<group>"; };
+		349D2AD911836AD3007269E4 /* FPParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPParser.h; sourceTree = "<group>"; };
+		349D2ADA11836AD3007269E4 /* FPParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPParser.m; sourceTree = "<group>"; };
+		349D2ADC11836AD3007269E4 /* FPExtensionElementNode_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPExtensionElementNode_Private.h; sourceTree = "<group>"; };
+		349D2ADD11836AD3007269E4 /* FPXMLPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPXMLPair.h; sourceTree = "<group>"; };
+		349D2ADE11836AD3007269E4 /* FPXMLPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPXMLPair.m; sourceTree = "<group>"; };
+		349D2ADF11836AD3007269E4 /* FPXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPXMLParser.h; sourceTree = "<group>"; };
+		349D2AE011836AD3007269E4 /* FPXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPXMLParser.m; sourceTree = "<group>"; };
+		349D2AE111836AD3007269E4 /* FPXMLParserProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPXMLParserProtocol.h; sourceTree = "<group>"; };
+		349D2AE311836AD3007269E4 /* FPExtensionElementNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPExtensionElementNode.h; sourceTree = "<group>"; };
+		349D2AE411836AD3007269E4 /* FPExtensionElementNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPExtensionElementNode.m; sourceTree = "<group>"; };
+		349D2AE511836AD3007269E4 /* FPExtensionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPExtensionNode.h; sourceTree = "<group>"; };
+		349D2AE611836AD3007269E4 /* FPExtensionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPExtensionNode.m; sourceTree = "<group>"; };
+		349D2AE711836AD3007269E4 /* FPExtensionTextNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPExtensionTextNode.h; sourceTree = "<group>"; };
+		349D2AE811836AD3007269E4 /* FPExtensionTextNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPExtensionTextNode.m; sourceTree = "<group>"; };
+		349FEDFD118358CF00D24FC9 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = InfoPlist.strings; sourceTree = "<group>"; };
+		349FEDFF118358CF00D24FC9 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = TVShowsPref.xib; sourceTree = "<group>"; };
+		349FEE031183590500D24FC9 /* TVShows-Beta-Large.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "TVShows-Beta-Large.icns"; sourceTree = "<group>"; };
+		349FEE041183590500D24FC9 /* TVShows-Beta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TVShows-Beta.png"; sourceTree = "<group>"; };
+		349FEE051183590500D24FC9 /* TVShows-Off-Large.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "TVShows-Off-Large.icns"; sourceTree = "<group>"; };
+		349FEE061183590500D24FC9 /* TVShows-Off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TVShows-Off.png"; sourceTree = "<group>"; };
+		349FEE071183590500D24FC9 /* TVShows-On-Large.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "TVShows-On-Large.icns"; sourceTree = "<group>"; };
+		349FEE081183590500D24FC9 /* TVShows-On.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TVShows-On.png"; sourceTree = "<group>"; };
+		349FEE151183597500D24FC9 /* TVShowsPref.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShowsPref.h; sourceTree = "<group>"; };
+		349FEE161183597500D24FC9 /* TVShowsPref.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVShowsPref.m; sourceTree = "<group>"; };
+		349FEEBF11835A1C00D24FC9 /* WindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindowController.h; sourceTree = "<group>"; };
+		349FEEC011835A1C00D24FC9 /* WindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindowController.m; sourceTree = "<group>"; };
+		8D202CF70486D31800D8A456 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8D202CF80486D31800D8A456 /* TVShows.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVShows.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
+		F506C035013D953901CA16C8 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = /System/Library/Frameworks/PreferencePanes.framework; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D202CF20486D31800D8A456 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */,
+				8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		089C166AFE841209C02AAC07 /* TVShows */ = {
+			isa = PBXGroup;
+			children = (
+				349FEE141183597500D24FC9 /* Classes */,
+				32DBCFA10370C40200C91783 /* Other Sources */,
+				089C167CFE841241C02AAC07 /* Resources */,
+				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
+				19C28FB8FE9D52D311CA2CBB /* Products */,
+			);
+			name = TVShows;
+			sourceTree = "<group>";
+		};
+		089C1671FE841209C02AAC07 /* Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */,
+				1058C7AEFEA557BF11CA2CBB /* Other Frameworks */,
+			);
+			name = "Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		089C167CFE841241C02AAC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				349FEE021183590500D24FC9 /* Images */,
+				349FEDFC118358CF00D24FC9 /* InfoPlist.strings */,
+				349FEDFE118358CF00D24FC9 /* TVShowsPref.xib */,
+				8D202CF70486D31800D8A456 /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
+				F506C035013D953901CA16C8 /* PreferencePanes.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7AEFEA557BF11CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				089C1672FE841209C02AAC07 /* Foundation.framework */,
+				089C167FFE841241C02AAC07 /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FB8FE9D52D311CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D202CF80486D31800D8A456 /* TVShows.prefPane */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		32DBCFA10370C40200C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32DBCFA20370C41700C91783 /* TVShows_Prefix.pch */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		349D2AC911836AD3007269E4 /* FeedParser */ = {
+			isa = PBXGroup;
+			children = (
+				349D2ACA11836AD3007269E4 /* Extensions */,
+				349D2ACF11836AD3007269E4 /* FeedParser.h */,
+				349D2AD011836AD3007269E4 /* FPEnclosure.h */,
+				349D2AD111836AD3007269E4 /* FPEnclosure.m */,
+				349D2AD211836AD3007269E4 /* FPErrors.h */,
+				349D2AD311836AD3007269E4 /* FPFeed.h */,
+				349D2AD411836AD3007269E4 /* FPFeed.m */,
+				349D2AD511836AD3007269E4 /* FPItem.h */,
+				349D2AD611836AD3007269E4 /* FPItem.m */,
+				349D2AD711836AD3007269E4 /* FPLink.h */,
+				349D2AD811836AD3007269E4 /* FPLink.m */,
+				349D2AD911836AD3007269E4 /* FPParser.h */,
+				349D2ADA11836AD3007269E4 /* FPParser.m */,
+				349D2ADB11836AD3007269E4 /* Internal */,
+				349D2AE211836AD3007269E4 /* XML Extensions */,
+			);
+			name = FeedParser;
+			path = FeedParser/FeedParser;
+			sourceTree = "<group>";
+		};
+		349D2ACA11836AD3007269E4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				349D2ACB11836AD3007269E4 /* NSDate_FeedParserExtensions.h */,
+				349D2ACC11836AD3007269E4 /* NSDate_FeedParserExtensions.m */,
+				349D2ACD11836AD3007269E4 /* NSString_extensions.h */,
+				349D2ACE11836AD3007269E4 /* NSString_extensions.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		349D2ADB11836AD3007269E4 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				349D2ADC11836AD3007269E4 /* FPExtensionElementNode_Private.h */,
+				349D2ADD11836AD3007269E4 /* FPXMLPair.h */,
+				349D2ADE11836AD3007269E4 /* FPXMLPair.m */,
+				349D2ADF11836AD3007269E4 /* FPXMLParser.h */,
+				349D2AE011836AD3007269E4 /* FPXMLParser.m */,
+				349D2AE111836AD3007269E4 /* FPXMLParserProtocol.h */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
+		349D2AE211836AD3007269E4 /* XML Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				349D2AE311836AD3007269E4 /* FPExtensionElementNode.h */,
+				349D2AE411836AD3007269E4 /* FPExtensionElementNode.m */,
+				349D2AE511836AD3007269E4 /* FPExtensionNode.h */,
+				349D2AE611836AD3007269E4 /* FPExtensionNode.m */,
+				349D2AE711836AD3007269E4 /* FPExtensionTextNode.h */,
+				349D2AE811836AD3007269E4 /* FPExtensionTextNode.m */,
+			);
+			path = "XML Extensions";
+			sourceTree = "<group>";
+		};
+		349FEE021183590500D24FC9 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				349FEE031183590500D24FC9 /* TVShows-Beta-Large.icns */,
+				349FEE041183590500D24FC9 /* TVShows-Beta.png */,
+				349FEE051183590500D24FC9 /* TVShows-Off-Large.icns */,
+				349FEE061183590500D24FC9 /* TVShows-Off.png */,
+				349FEE071183590500D24FC9 /* TVShows-On-Large.icns */,
+				349FEE081183590500D24FC9 /* TVShows-On.png */,
+			);
+			name = Images;
+			path = Resources/Images;
+			sourceTree = "<group>";
+		};
+		349FEE141183597500D24FC9 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				349D2AC911836AD3007269E4 /* FeedParser */,
+				349FEEBF11835A1C00D24FC9 /* WindowController.h */,
+				349FEEC011835A1C00D24FC9 /* WindowController.m */,
+				349FEE151183597500D24FC9 /* TVShowsPref.h */,
+				349FEE161183597500D24FC9 /* TVShowsPref.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8D202CE90486D31800D8A456 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D202CEA0486D31800D8A456 /* TVShows_Prefix.pch in Headers */,
+				349FEE171183597500D24FC9 /* TVShowsPref.h in Headers */,
+				349FEEC111835A1C00D24FC9 /* WindowController.h in Headers */,
+				349D2AE911836AD3007269E4 /* NSDate_FeedParserExtensions.h in Headers */,
+				349D2AEB11836AD3007269E4 /* NSString_extensions.h in Headers */,
+				349D2AED11836AD3007269E4 /* FeedParser.h in Headers */,
+				349D2AEE11836AD3007269E4 /* FPEnclosure.h in Headers */,
+				349D2AF011836AD3007269E4 /* FPErrors.h in Headers */,
+				349D2AF111836AD3007269E4 /* FPFeed.h in Headers */,
+				349D2AF311836AD3007269E4 /* FPItem.h in Headers */,
+				349D2AF511836AD3007269E4 /* FPLink.h in Headers */,
+				349D2AF711836AD3007269E4 /* FPParser.h in Headers */,
+				349D2AF911836AD3007269E4 /* FPExtensionElementNode_Private.h in Headers */,
+				349D2AFA11836AD3007269E4 /* FPXMLPair.h in Headers */,
+				349D2AFC11836AD3007269E4 /* FPXMLParser.h in Headers */,
+				349D2AFE11836AD3007269E4 /* FPXMLParserProtocol.h in Headers */,
+				349D2AFF11836AD3007269E4 /* FPExtensionElementNode.h in Headers */,
+				349D2B0111836AD3007269E4 /* FPExtensionNode.h in Headers */,
+				349D2B0311836AD3007269E4 /* FPExtensionTextNode.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8D202CE80486D31800D8A456 /* TVShows */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DBD214808BA80EA00186707 /* Build configuration list for PBXNativeTarget "TVShows" */;
+			buildPhases = (
+				8D202CE90486D31800D8A456 /* Headers */,
+				8D202CEC0486D31800D8A456 /* Resources */,
+				8D202CF00486D31800D8A456 /* Sources */,
+				8D202CF20486D31800D8A456 /* Frameworks */,
+				8D202CF50486D31800D8A456 /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TVShows;
+			productInstallPath = "$(HOME)/Library/PreferencePanes";
+			productName = TVShows;
+			productReference = 8D202CF80486D31800D8A456 /* TVShows.prefPane */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		089C1669FE841209C02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DBD214C08BA80EA00186707 /* Build configuration list for PBXProject "TVShows" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 089C166AFE841209C02AAC07 /* TVShows */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D202CE80486D31800D8A456 /* TVShows */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D202CEC0486D31800D8A456 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				349FEE00118358CF00D24FC9 /* InfoPlist.strings in Resources */,
+				349FEE01118358CF00D24FC9 /* TVShowsPref.xib in Resources */,
+				349FEE091183590500D24FC9 /* TVShows-Beta-Large.icns in Resources */,
+				349FEE0A1183590500D24FC9 /* TVShows-Beta.png in Resources */,
+				349FEE0B1183590500D24FC9 /* TVShows-Off-Large.icns in Resources */,
+				349FEE0C1183590500D24FC9 /* TVShows-Off.png in Resources */,
+				349FEE0D1183590500D24FC9 /* TVShows-On-Large.icns in Resources */,
+				349FEE0E1183590500D24FC9 /* TVShows-On.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		8D202CF50486D31800D8A456 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D202CF00486D31800D8A456 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				349FEE181183597500D24FC9 /* TVShowsPref.m in Sources */,
+				349FEEC211835A1C00D24FC9 /* WindowController.m in Sources */,
+				349D2AEA11836AD3007269E4 /* NSDate_FeedParserExtensions.m in Sources */,
+				349D2AEC11836AD3007269E4 /* NSString_extensions.m in Sources */,
+				349D2AEF11836AD3007269E4 /* FPEnclosure.m in Sources */,
+				349D2AF211836AD3007269E4 /* FPFeed.m in Sources */,
+				349D2AF411836AD3007269E4 /* FPItem.m in Sources */,
+				349D2AF611836AD3007269E4 /* FPLink.m in Sources */,
+				349D2AF811836AD3007269E4 /* FPParser.m in Sources */,
+				349D2AFB11836AD3007269E4 /* FPXMLPair.m in Sources */,
+				349D2AFD11836AD3007269E4 /* FPXMLParser.m in Sources */,
+				349D2B0011836AD3007269E4 /* FPExtensionElementNode.m in Sources */,
+				349D2B0211836AD3007269E4 /* FPExtensionNode.m in Sources */,
+				349D2B0411836AD3007269E4 /* FPExtensionTextNode.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		349FEDFC118358CF00D24FC9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				349FEDFD118358CF00D24FC9 /* English */,
+			);
+			name = InfoPlist.strings;
+			path = Resources/English.lproj;
+			sourceTree = "<group>";
+		};
+		349FEDFE118358CF00D24FC9 /* TVShowsPref.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				349FEDFF118358CF00D24FC9 /* English */,
+			);
+			name = TVShowsPref.xib;
+			path = Resources/English.lproj;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1DBD214908BA80EA00186707 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TVShows_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
+				PRODUCT_NAME = TVShows;
+				WRAPPER_EXTENSION = prefPane;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		1DBD214A08BA80EA00186707 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TVShows_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
+				PRODUCT_NAME = TVShows;
+				WRAPPER_EXTENSION = prefPane;
+			};
+			name = Release;
+		};
+		1DBD214D08BA80EA00186707 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_VERSION = 4.2;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+				VALID_ARCHS = "i386 ppc x86_64";
+			};
+			name = Debug;
+		};
+		1DBD214E08BA80EA00186707 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_VERSION = 4.2;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+				VALID_ARCHS = "i386 ppc x86_64";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DBD214808BA80EA00186707 /* Build configuration list for PBXNativeTarget "TVShows" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DBD214908BA80EA00186707 /* Debug */,
+				1DBD214A08BA80EA00186707 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DBD214C08BA80EA00186707 /* Build configuration list for PBXProject "TVShows" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DBD214D08BA80EA00186707 /* Debug */,
+				1DBD214E08BA80EA00186707 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
+}
