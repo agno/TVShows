@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		343BF4CE1183DB3C008CE71D /* RSS-Large.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB966F118384DB005825C1 /* RSS-Large.png */; };
 		349D2AE911836AD3007269E4 /* NSDate_FeedParserExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2ACB11836AD3007269E4 /* NSDate_FeedParserExtensions.h */; };
 		349D2AEA11836AD3007269E4 /* NSDate_FeedParserExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2ACC11836AD3007269E4 /* NSDate_FeedParserExtensions.m */; };
 		349D2AEB11836AD3007269E4 /* NSString_extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2ACD11836AD3007269E4 /* NSString_extensions.h */; };
@@ -47,6 +48,8 @@
 		349FEE181183597500D24FC9 /* TVShowsPref.m in Sources */ = {isa = PBXBuildFile; fileRef = 349FEE161183597500D24FC9 /* TVShowsPref.m */; };
 		349FEEC111835A1C00D24FC9 /* WindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 349FEEBF11835A1C00D24FC9 /* WindowController.h */; };
 		349FEEC211835A1C00D24FC9 /* WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 349FEEC011835A1C00D24FC9 /* WindowController.m */; };
+		34EB966E11838131005825C1 /* showRSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB966D11838131005825C1 /* showRSS.png */; };
+		34EB967F118389FC005825C1 /* NZB.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB967E118389FC005825C1 /* NZB.png */; };
 		8D202CEA0486D31800D8A456 /* TVShows_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA20370C41700C91783 /* TVShows_Prefix.pch */; };
 		8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F506C035013D953901CA16C8 /* PreferencePanes.framework */; };
@@ -97,6 +100,9 @@
 		349FEE161183597500D24FC9 /* TVShowsPref.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVShowsPref.m; sourceTree = "<group>"; };
 		349FEEBF11835A1C00D24FC9 /* WindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindowController.h; sourceTree = "<group>"; };
 		349FEEC011835A1C00D24FC9 /* WindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindowController.m; sourceTree = "<group>"; };
+		34EB966D11838131005825C1 /* showRSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showRSS.png; sourceTree = "<group>"; };
+		34EB966F118384DB005825C1 /* RSS-Large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RSS-Large.png"; sourceTree = "<group>"; };
+		34EB967E118389FC005825C1 /* NZB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NZB.png; sourceTree = "<group>"; };
 		8D202CF70486D31800D8A456 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D202CF80486D31800D8A456 /* TVShows.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVShows.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
 		F506C035013D953901CA16C8 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = /System/Library/Frameworks/PreferencePanes.framework; sourceTree = "<absolute>"; };
@@ -244,6 +250,9 @@
 		349FEE021183590500D24FC9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				34EB967E118389FC005825C1 /* NZB.png */,
+				34EB966F118384DB005825C1 /* RSS-Large.png */,
+				34EB966D11838131005825C1 /* showRSS.png */,
 				349FEE031183590500D24FC9 /* TVShows-Beta-Large.icns */,
 				349FEE041183590500D24FC9 /* TVShows-Beta.png */,
 				349FEE051183590500D24FC9 /* TVShows-Off-Large.icns */,
@@ -349,6 +358,9 @@
 				349FEE0C1183590500D24FC9 /* TVShows-Off.png in Resources */,
 				349FEE0D1183590500D24FC9 /* TVShows-On-Large.icns in Resources */,
 				349FEE0E1183590500D24FC9 /* TVShows-On.png in Resources */,
+				34EB966E11838131005825C1 /* showRSS.png in Resources */,
+				34EB967F118389FC005825C1 /* NZB.png in Resources */,
+				343BF4CE1183DB3C008CE71D /* RSS-Large.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
