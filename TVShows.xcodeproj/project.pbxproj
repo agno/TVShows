@@ -46,14 +46,28 @@
 		349FEE0E1183590500D24FC9 /* TVShows-On.png in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE081183590500D24FC9 /* TVShows-On.png */; };
 		349FEE171183597500D24FC9 /* TVShowsPref.h in Headers */ = {isa = PBXBuildFile; fileRef = 349FEE151183597500D24FC9 /* TVShowsPref.h */; };
 		349FEE181183597500D24FC9 /* TVShowsPref.m in Sources */ = {isa = PBXBuildFile; fileRef = 349FEE161183597500D24FC9 /* TVShowsPref.m */; };
-		349FEEC111835A1C00D24FC9 /* WindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 349FEEBF11835A1C00D24FC9 /* WindowController.h */; };
-		349FEEC211835A1C00D24FC9 /* WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 349FEEC011835A1C00D24FC9 /* WindowController.m */; };
+		349FEEC111835A1C00D24FC9 /* TabController.h in Headers */ = {isa = PBXBuildFile; fileRef = 349FEEBF11835A1C00D24FC9 /* TabController.h */; };
+		349FEEC211835A1C00D24FC9 /* TabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 349FEEC011835A1C00D24FC9 /* TabController.m */; };
+		34A8FF9D1187C17000DDD3DE /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 34A8FF9C1187C17000DDD3DE /* LICENSE.txt */; };
 		34EB966E11838131005825C1 /* showRSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB966D11838131005825C1 /* showRSS.png */; };
 		34EB967F118389FC005825C1 /* NZB.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB967E118389FC005825C1 /* NZB.png */; };
 		8D202CEA0486D31800D8A456 /* TVShows_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA20370C41700C91783 /* TVShows_Prefix.pch */; };
 		8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F506C035013D953901CA16C8 /* PreferencePanes.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		340799BF11868C1000291D97 /* Copy Linked Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Copy Linked Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -98,8 +112,9 @@
 		349FEE081183590500D24FC9 /* TVShows-On.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TVShows-On.png"; sourceTree = "<group>"; };
 		349FEE151183597500D24FC9 /* TVShowsPref.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShowsPref.h; sourceTree = "<group>"; };
 		349FEE161183597500D24FC9 /* TVShowsPref.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVShowsPref.m; sourceTree = "<group>"; };
-		349FEEBF11835A1C00D24FC9 /* WindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindowController.h; sourceTree = "<group>"; };
-		349FEEC011835A1C00D24FC9 /* WindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindowController.m; sourceTree = "<group>"; };
+		349FEEBF11835A1C00D24FC9 /* TabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabController.h; sourceTree = "<group>"; };
+		349FEEC011835A1C00D24FC9 /* TabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabController.m; sourceTree = "<group>"; };
+		34A8FF9C1187C17000DDD3DE /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		34EB966D11838131005825C1 /* showRSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showRSS.png; sourceTree = "<group>"; };
 		34EB966F118384DB005825C1 /* RSS-Large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RSS-Large.png"; sourceTree = "<group>"; };
 		34EB967E118389FC005825C1 /* NZB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NZB.png; sourceTree = "<group>"; };
@@ -124,6 +139,7 @@
 		089C166AFE841209C02AAC07 /* TVShows */ = {
 			isa = PBXGroup;
 			children = (
+				34A8FF9C1187C17000DDD3DE /* LICENSE.txt */,
 				349FEE141183597500D24FC9 /* Classes */,
 				32DBCFA10370C40200C91783 /* Other Sources */,
 				089C167CFE841241C02AAC07 /* Resources */,
@@ -268,8 +284,8 @@
 			isa = PBXGroup;
 			children = (
 				349D2AC911836AD3007269E4 /* FeedParser */,
-				349FEEBF11835A1C00D24FC9 /* WindowController.h */,
-				349FEEC011835A1C00D24FC9 /* WindowController.m */,
+				349FEEBF11835A1C00D24FC9 /* TabController.h */,
+				349FEEC011835A1C00D24FC9 /* TabController.m */,
 				349FEE151183597500D24FC9 /* TVShowsPref.h */,
 				349FEE161183597500D24FC9 /* TVShowsPref.m */,
 			);
@@ -285,7 +301,7 @@
 			files = (
 				8D202CEA0486D31800D8A456 /* TVShows_Prefix.pch in Headers */,
 				349FEE171183597500D24FC9 /* TVShowsPref.h in Headers */,
-				349FEEC111835A1C00D24FC9 /* WindowController.h in Headers */,
+				349FEEC111835A1C00D24FC9 /* TabController.h in Headers */,
 				349D2AE911836AD3007269E4 /* NSDate_FeedParserExtensions.h in Headers */,
 				349D2AEB11836AD3007269E4 /* NSString_extensions.h in Headers */,
 				349D2AED11836AD3007269E4 /* FeedParser.h in Headers */,
@@ -314,6 +330,7 @@
 			buildPhases = (
 				8D202CE90486D31800D8A456 /* Headers */,
 				8D202CEC0486D31800D8A456 /* Resources */,
+				340799BF11868C1000291D97 /* Copy Linked Libraries */,
 				8D202CF00486D31800D8A456 /* Sources */,
 				8D202CF20486D31800D8A456 /* Frameworks */,
 				8D202CF50486D31800D8A456 /* Rez */,
@@ -333,6 +350,9 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Matthew Price";
+			};
 			buildConfigurationList = 1DBD214C08BA80EA00186707 /* Build configuration list for PBXProject "TVShows" */;
 			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;
@@ -361,6 +381,7 @@
 				34EB966E11838131005825C1 /* showRSS.png in Resources */,
 				34EB967F118389FC005825C1 /* NZB.png in Resources */,
 				343BF4CE1183DB3C008CE71D /* RSS-Large.png in Resources */,
+				34A8FF9D1187C17000DDD3DE /* LICENSE.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,7 +403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				349FEE181183597500D24FC9 /* TVShowsPref.m in Sources */,
-				349FEEC211835A1C00D24FC9 /* WindowController.m in Sources */,
+				349FEEC211835A1C00D24FC9 /* TabController.m in Sources */,
 				349D2AEA11836AD3007269E4 /* NSDate_FeedParserExtensions.m in Sources */,
 				349D2AEC11836AD3007269E4 /* NSString_extensions.m in Sources */,
 				349D2AEF11836AD3007269E4 /* FPEnclosure.m in Sources */,
@@ -473,6 +494,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
+				PRODUCT_NAME = "";
 				SDKROOT = macosx10.5;
 				VALID_ARCHS = "i386 ppc x86_64";
 			};
@@ -488,6 +510,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
+				PRODUCT_NAME = "";
 				SDKROOT = macosx10.5;
 				VALID_ARCHS = "i386 ppc x86_64";
 			};

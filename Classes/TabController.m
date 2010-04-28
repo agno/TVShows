@@ -12,13 +12,19 @@
  *
  */
 
-#import "WindowController.h"
+#import "TabController.h"
 #import "FeedParser.h"
 
+#define TVSHOWS_IDENTIFIER		@"com.github.TVShows2"
+#define TVSHOWS_WEBSITE			@"http://deathtobunnies.com/tvshows/"
 
-@implementation WindowController
 
-- (IBAction)showRssFeed:(id)sender {
+@implementation TabController
+
+#pragma mark -
+#pragma mark Leftover Test Code
+- (IBAction)showRssFeed:(id)sender
+{
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	
 	NSError * error;
@@ -43,6 +49,42 @@
 				stringWithFormat:@"\t Item Description: %@\n", item.description]];  
 	}
 	[pool drain];
+}
+
+#pragma mark -
+#pragma mark About Tab
+- (IBAction) visitWebsite:(id)sender
+{
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:TVSHOWS_WEBSITE]];
+}
+
+- (IBAction) showLicenseInfo:(id)sender
+{
+	NSString *licenseInfoText;
+	
+    [NSApp beginSheet: licenseInfoDialog
+	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
+		modalDelegate: nil
+	   didEndSelector: nil
+		  contextInfo: nil];
+
+	licenseInfoText = [NSString stringWithContentsOfURL:
+					   [NSURL fileURLWithPath: [[NSBundle bundleWithIdentifier:TVSHOWS_IDENTIFIER]
+										pathForResource: @"LICENSE" ofType:@"txt"]]
+											   encoding: NSUTF8StringEncoding
+												  error: NULL];
+	
+	[textView_licenseInfo setFont:[NSFont fontWithName:@"Monaco" size:10.0]];
+	[textView_licenseInfo insertText:licenseInfoText];
+	
+    [NSApp runModalForWindow: licenseInfoDialog];
+	[NSApp endSheet: licenseInfoDialog];
+}
+
+- (IBAction) closeLicenseInfoDialog:(id)sender
+{	
+    [NSApp stopModal];
+    [licenseInfoDialog orderOut: self];
 }
 
 @end

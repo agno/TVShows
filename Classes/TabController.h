@@ -12,16 +12,25 @@
  *
  */
 
-#import <Cocoa/Cocoa.h>
+#import <PreferencePanes/PreferencePanes.h>
 
 
-@interface WindowController : NSObject {
-	
+@interface TabController : NSPreferencePane
+{
 	IBOutlet NSTextView *mainTextView;
-	IBOutlet NSTableView *listViewOfShows;
-
+	
+	IBOutlet NSWindow *licenseInfoDialog;
+	IBOutlet NSTextView *textView_licenseInfo;
 }
 
-- (IBAction)showRssFeed:(id)sender;
+#pragma mark -
+#pragma mark Leftover Test Code
+- (IBAction) showRssFeed:(id)sender;
+
+#pragma mark -
+#pragma mark About Tab
+- (IBAction) visitWebsite:(id)sender;
+- (IBAction) showLicenseInfo:(id)sender;
+- (IBAction) closeLicenseInfoDialog:(id)sender;
 
 @end
