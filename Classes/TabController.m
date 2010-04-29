@@ -34,7 +34,10 @@
 	tabFrame = [[tabView window] frame];
 	
     if ([[tabViewItem identifier] isEqualTo:@"tabItemPreferences"]) {
-        newWinHeight = 500;
+        newWinHeight = 512;
+		
+    } else if ([[tabViewItem identifier] isEqualTo:@"tabItemSubscriptions"]) {
+        newWinHeight = 512;
 		
     } else {
         newWinHeight = 422;
