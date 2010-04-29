@@ -49,6 +49,7 @@
 		349FEEC111835A1C00D24FC9 /* TabController.h in Headers */ = {isa = PBXBuildFile; fileRef = 349FEEBF11835A1C00D24FC9 /* TabController.h */; };
 		349FEEC211835A1C00D24FC9 /* TabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 349FEEC011835A1C00D24FC9 /* TabController.m */; };
 		34A8FF9D1187C17000DDD3DE /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 34A8FF9C1187C17000DDD3DE /* LICENSE.txt */; };
+		34BE4A171188D80700C3E4F8 /* Credits.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = 34BE4A161188D80700C3E4F8 /* Credits.rtfd */; };
 		34EB966E11838131005825C1 /* showRSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB966D11838131005825C1 /* showRSS.png */; };
 		34EB967F118389FC005825C1 /* NZB.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB967E118389FC005825C1 /* NZB.png */; };
 		8D202CEA0486D31800D8A456 /* TVShows_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA20370C41700C91783 /* TVShows_Prefix.pch */; };
@@ -115,6 +116,7 @@
 		349FEEBF11835A1C00D24FC9 /* TabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabController.h; sourceTree = "<group>"; };
 		349FEEC011835A1C00D24FC9 /* TabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabController.m; sourceTree = "<group>"; };
 		34A8FF9C1187C17000DDD3DE /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		34BE4A161188D80700C3E4F8 /* Credits.rtfd */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; path = Credits.rtfd; sourceTree = "<group>"; };
 		34EB966D11838131005825C1 /* showRSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showRSS.png; sourceTree = "<group>"; };
 		34EB966F118384DB005825C1 /* RSS-Large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RSS-Large.png"; sourceTree = "<group>"; };
 		34EB967E118389FC005825C1 /* NZB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NZB.png; sourceTree = "<group>"; };
@@ -139,7 +141,6 @@
 		089C166AFE841209C02AAC07 /* TVShows */ = {
 			isa = PBXGroup;
 			children = (
-				34A8FF9C1187C17000DDD3DE /* LICENSE.txt */,
 				349FEE141183597500D24FC9 /* Classes */,
 				32DBCFA10370C40200C91783 /* Other Sources */,
 				089C167CFE841241C02AAC07 /* Resources */,
@@ -161,6 +162,8 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				34A8FF9C1187C17000DDD3DE /* LICENSE.txt */,
+				34BE4A161188D80700C3E4F8 /* Credits.rtfd */,
 				349FEE021183590500D24FC9 /* Images */,
 				349FEDFC118358CF00D24FC9 /* InfoPlist.strings */,
 				349FEDFE118358CF00D24FC9 /* TVShowsPref.xib */,
@@ -382,6 +385,7 @@
 				34EB967F118389FC005825C1 /* NZB.png in Resources */,
 				343BF4CE1183DB3C008CE71D /* RSS-Large.png in Resources */,
 				34A8FF9D1187C17000DDD3DE /* LICENSE.txt in Resources */,
+				34BE4A171188D80700C3E4F8 /* Credits.rtfd in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

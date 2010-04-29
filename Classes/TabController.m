@@ -21,6 +21,31 @@
 
 @implementation TabController
 
+- (id) init
+{
+	[self drawAboutBox];
+	return self;
+}
+
+- (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem {
+	NSRect  tabFrame;
+    int    newWinHeight;
+	
+	tabFrame = [[tabView window] frame];
+	
+    if ([[tabViewItem identifier] isEqualTo:@"tabItemPreferences"]) {
+        newWinHeight = 500;
+		
+    } else {
+        newWinHeight = 422;
+		
+    }
+	
+	tabFrame = NSMakeRect(tabFrame.origin.x, tabFrame.origin.y - (newWinHeight - (int)(NSHeight(tabFrame))), (int)(NSWidth(tabFrame)), newWinHeight);
+	
+    [[tabView window] setFrame:tabFrame display:YES animate:YES];
+}
+
 #pragma mark -
 #pragma mark Leftover Test Code
 - (IBAction)showRssFeed:(id)sender
@@ -75,7 +100,7 @@
 												  error: NULL];
 	
 	[textView_licenseInfo setFont:[NSFont fontWithName:@"Monaco" size:10.0]];
-	[textView_licenseInfo insertText:licenseInfoText];
+	[textView_licenseInfo setString:licenseInfoText];
 	
     [NSApp runModalForWindow: licenseInfoDialog];
 	[NSApp endSheet: licenseInfoDialog];
@@ -85,6 +110,20 @@
 {	
     [NSApp stopModal];
     [licenseInfoDialog orderOut: self];
+}
+
+- (void) drawAboutBox {
+	NSString *pathToAboutBoxText = [[NSBundle bundleWithIdentifier: TVSHOWS_IDENTIFIER]
+									pathForResource: @"Credits"
+									ofType: @"rtfd"];
+	
+	NSAttributedString *aboutBoxText = [[NSAttributedString alloc]
+										initWithPath: pathToAboutBoxText
+										documentAttributes: NULL];
+
+	[textView_aboutBox setString: @"TEST"];
+	NSLog(@"Test");
+	[[textView_aboutBox textStorage] setAttributedString:aboutBoxText];
 }
 
 @end

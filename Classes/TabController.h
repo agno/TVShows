@@ -13,24 +13,30 @@
  */
 
 #import <PreferencePanes/PreferencePanes.h>
+#import <Cocoa/Cocoa.h>
 
 
-@interface TabController : NSPreferencePane
+@interface TabController : NSObject
 {
 	IBOutlet NSTextView *mainTextView;
 	
 	IBOutlet NSWindow *licenseInfoDialog;
 	IBOutlet NSTextView *textView_licenseInfo;
+	IBOutlet NSTextView *textView_aboutBox;
 }
+
+- (id) init;
 
 #pragma mark -
 #pragma mark Leftover Test Code
 - (IBAction) showRssFeed:(id)sender;
+- (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
 
 #pragma mark -
 #pragma mark About Tab
 - (IBAction) visitWebsite:(id)sender;
 - (IBAction) showLicenseInfo:(id)sender;
 - (IBAction) closeLicenseInfoDialog:(id)sender;
+- (void) drawAboutBox;
 
 @end
