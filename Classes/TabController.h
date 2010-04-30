@@ -25,7 +25,6 @@
 	IBOutlet NSTextView *textView_aboutBox;
 }
 
-- (id) init;
 
 #pragma mark -
 #pragma mark Leftover Test Code

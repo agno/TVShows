@@ -21,12 +21,6 @@
 
 @implementation TabController
 
-- (id) init
-{
-	[self drawAboutBox];
-	return self;
-}
-
 - (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem {
 	NSRect  tabFrame;
     int    newWinHeight;
@@ -38,6 +32,10 @@
 		
     } else if ([[tabViewItem identifier] isEqualTo:@"tabItemSubscriptions"]) {
         newWinHeight = 512;
+		
+    }  else if ([[tabViewItem identifier] isEqualTo:@"tabItemAbout"]) {
+		[self drawAboutBox];
+        newWinHeight = 422;
 		
     } else {
         newWinHeight = 422;
@@ -97,7 +95,8 @@
 		  contextInfo: nil];
 
 	licenseInfoText = [NSString stringWithContentsOfURL:
-					   [NSURL fileURLWithPath: [[NSBundle bundleWithIdentifier:TVSHOWS_IDENTIFIER]
+					   [NSURL fileURLWithPath:
+						[[NSBundle bundleWithIdentifier: TVSHOWS_IDENTIFIER]
 										pathForResource: @"LICENSE" ofType:@"txt"]]
 											   encoding: NSUTF8StringEncoding
 												  error: NULL];
@@ -115,18 +114,20 @@
     [licenseInfoDialog orderOut: self];
 }
 
-- (void) drawAboutBox {
-	NSString *pathToAboutBoxText = [[NSBundle bundleWithIdentifier: TVSHOWS_IDENTIFIER]
-									pathForResource: @"Credits"
-									ofType: @"rtfd"];
+- (void) drawAboutBox
+{
+	NSString *pathToAboutBoxText = [[NSBundle bundleWithIdentifier: TVSHOWS_IDENTIFIER] 
+									pathForResource: @"Credits" 
+									ofType: @"rtf"];
 	
 	NSAttributedString *aboutBoxText = [[NSAttributedString alloc]
 										initWithPath: pathToAboutBoxText
-										documentAttributes: NULL];
+										documentAttributes: nil];
 
-	[textView_aboutBox setString: @"TEST"];
-	NSLog(@"Test");
 	[[textView_aboutBox textStorage] setAttributedString:aboutBoxText];
+	
+	[pathToAboutBoxText release];
+	[aboutBoxText release];
 }
 
 @end
