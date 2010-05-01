@@ -32,30 +32,35 @@ CFBooleanRef checkBoxValue;
 	
 	// Register download preferences
 	// -----------------------------
-	if (CFPreferencesGetAppBooleanValue(CFSTR("AutoOpenDownloadedFiles"), prefAppDomain, NULL) == 0)
-		[autoOpenDownloadedFiles setState: 0];
+	if (CFPreferencesGetAppBooleanValue(CFSTR("isEnabled"), prefAppDomain, NULL)) {
+		[isEnabledControl setSelectedSegment: 1];
+		[TVShowsAppImage setImage: [[NSImage alloc] initWithContentsOfFile:
+									[[NSBundle bundleWithIdentifier: TVShowsAppDomain]
+									 pathForResource: @"TVShows-Beta-Large" ofType: @"icns"]]];
+	} else {
+		[isEnabledControl setSelectedSegment: 0];
+		[TVShowsAppImage setImage: [[NSImage alloc] initWithContentsOfFile:
+									[[NSBundle bundleWithIdentifier: TVShowsAppDomain]
+									 pathForResource: @"TVShows-Off-Large" ofType: @"icns"]]];
+	}
+		[autoOpenDownloadedFiles	setState: CFPreferencesGetAppBooleanValue(CFSTR("AutoOpenDownloadedFiles"), prefAppDomain, NULL)];
 	
 	// Register Growl notification preferences
 	// ---------------------------------------
-	if (CFPreferencesGetAppBooleanValue(CFSTR("GrowlOnNewEpisode"), prefAppDomain, NULL) == 0)
-		[growlNotifyEpisode setState: 0];
-	if (CFPreferencesGetAppBooleanValue(CFSTR("GrowlOnAppUpdate"), prefAppDomain, NULL) == 0)
-		[growlNotifyApplication setState: 0];
+		[growlNotifyEpisode			setState: CFPreferencesGetAppBooleanValue(CFSTR("GrowlOnNewEpisode"), prefAppDomain, NULL)];
+		[growlNotifyApplication		setState: CFPreferencesGetAppBooleanValue(CFSTR("GrowlOnAppUpdate"), prefAppDomain, NULL)];
 	
 	// Register application update preferences
 	// ---------------------------------------
 	if (CFPreferencesGetAppBooleanValue(CFSTR("SUEnableAutomaticChecks"), prefAppDomain, NULL) == 0) {
-		[checkForUpdates setState: 0];
-		[autoInstallNewUpdates setEnabled: NO];
-		[includeSystemInformation setEnabled: NO];
-		[downloadBetaVersions setEnabled: NO];
+		[checkForUpdates			setState: 0];
+		[autoInstallNewUpdates		setEnabled: NO];
+		[includeSystemInformation	setEnabled: NO];
+		[downloadBetaVersions		setEnabled: NO];
 	}
-	if (CFPreferencesGetAppBooleanValue(CFSTR("SUDownloadBetaVersions"), prefAppDomain, NULL) == 0)
-		[downloadBetaVersions setState: 0];
-	if (CFPreferencesGetAppBooleanValue(CFSTR("SUAutomaticallyUpdate"), prefAppDomain, NULL) == 0)
-		[autoInstallNewUpdates setState: 0];
-	if (CFPreferencesGetAppBooleanValue(CFSTR("SUSendProfileInfo"), prefAppDomain, NULL) == 0)
-		[includeSystemInformation setState: 0];
+		[downloadBetaVersions		setState: CFPreferencesGetAppBooleanValue(CFSTR("SUDownloadBetaVersions"), prefAppDomain, NULL)];
+		[autoInstallNewUpdates		setState: CFPreferencesGetAppBooleanValue(CFSTR("SUAutomaticallyUpdate"), prefAppDomain, NULL)];
+		[includeSystemInformation	setState: CFPreferencesGetAppBooleanValue(CFSTR("SUSendProfileInfo"), prefAppDomain, NULL)];
 }
 
 - (void) syncPreferences
@@ -65,6 +70,32 @@ CFBooleanRef checkBoxValue;
 
 #pragma mark -
 #pragma mark Download Preferences
+- (IBAction) isEnabledControlDidChange:(id)sender
+{
+	NSString *appIconPath;
+	
+	if ([isEnabledControl selectedSegment]) {
+		checkBoxValue = kCFBooleanTrue;
+		
+		appIconPath = [[NSBundle bundleWithIdentifier: TVShowsAppDomain] pathForResource: @"TVShows-Beta-Large" ofType: @"icns"];
+		
+		
+		[TVShowsAppImage setImage: [[NSImage alloc] initWithContentsOfFile: appIconPath]];
+	} else {
+		checkBoxValue = kCFBooleanFalse;
+		
+		appIconPath = [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
+					   pathForResource: @"TVShows-Off-Large" ofType: @"icns"];
+		
+		[TVShowsAppImage setImage: [[NSImage alloc] initWithContentsOfFile: appIconPath]];
+	}
+	
+	CFPreferencesSetValue(CFSTR("isEnabled"), checkBoxValue, prefAppDomain,
+						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+	
+	[self syncPreferences];
+}
+
 - (IBAction) autoOpenDownloadedFilesDidChange:(id)sender
 {
 	if ([autoOpenDownloadedFiles state])

@@ -1425,7 +1425,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="793947287">
 								<int key="NSCellFlags">68288064</int>
 								<int key="NSCellFlags2">138413056</int>
-								<string key="NSContents">2.0a (018)</string>
+								<string key="NSContents">2.0a (019)</string>
 								<reference key="NSSupport" ref="374874368"/>
 								<reference key="NSControlView" ref="342222663"/>
 								<reference key="NSBackgroundColor" ref="525668472"/>
@@ -1899,6 +1899,30 @@
 						<reference key="destination" ref="617769615"/>
 					</object>
 					<int key="connectionID">578</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">isEnabledControlDidChange:</string>
+						<reference key="source" ref="330339090"/>
+						<reference key="destination" ref="26806079"/>
+					</object>
+					<int key="connectionID">581</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">isEnabledControl</string>
+						<reference key="source" ref="330339090"/>
+						<reference key="destination" ref="26806079"/>
+					</object>
+					<int key="connectionID">582</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">TVShowsAppImage</string>
+						<reference key="source" ref="330339090"/>
+						<reference key="destination" ref="162633867"/>
+					</object>
+					<int key="connectionID">583</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2968,6 +2992,7 @@
 					<string>105.IBSegmentedControlTracker.RoundRobinState</string>
 					<string>105.IBSegmentedControlTracker.WasGrowing</string>
 					<string>106.IBPluginDependency</string>
+					<string>106.IBSegmentedControlInspectorSelectedSegmentMetadataKey</string>
 					<string>107.IBPluginDependency</string>
 					<string>108.IBPluginDependency</string>
 					<string>109.IBPluginDependency</string>
@@ -3122,6 +3147,7 @@
 					<integer value="0"/>
 					<integer value="0"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<integer value="0"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3295,7 +3321,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">578</int>
+			<int key="maxID">583</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3337,9 +3363,11 @@
 							<string>growlNotifyApplicationDidChange:</string>
 							<string>growlNotifyEpisodeDidChange:</string>
 							<string>includeSystemInformationDidChange:</string>
+							<string>isEnabledControlDidChange:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -3353,6 +3381,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>TVShowsAppImage</string>
 							<string>autoInstallNewUpdates</string>
 							<string>autoOpenDownloadedFiles</string>
 							<string>checkForUpdates</string>
@@ -3360,9 +3389,11 @@
 							<string>growlNotifyApplication</string>
 							<string>growlNotifyEpisode</string>
 							<string>includeSystemInformation</string>
+							<string>isEnabledControl</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>NSImageView</string>
 							<string>NSButton</string>
 							<string>NSButton</string>
 							<string>NSButton</string>
@@ -3370,6 +3401,7 @@
 							<string>NSButton</string>
 							<string>NSButton</string>
 							<string>NSButton</string>
+							<string>NSSegmentedControl</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

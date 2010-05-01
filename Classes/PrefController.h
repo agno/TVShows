@@ -19,6 +19,9 @@
 @interface PrefController : NSPreferencePane
 {
 	// Download Preferences
+	Boolean *isEnabled;
+	IBOutlet NSSegmentedControl *isEnabledControl;
+	IBOutlet NSImageView *TVShowsAppImage;
 	IBOutlet NSButton *autoOpenDownloadedFiles;
 
 	// Growl Settings
@@ -39,6 +42,7 @@
 
 #pragma mark -
 #pragma mark Download Preferences
+- (IBAction) isEnabledControlDidChange:(id)sender;
 - (IBAction) autoOpenDownloadedFilesDidChange:(id)sender;
 
 #pragma mark -
