@@ -31,6 +31,14 @@ CFBooleanRef checkBoxValue;
 	// Saved for reference. Not everything is a BOOL.
 	// CFPreferencesCopyAppValue();
 	
+	// Register Growl notification preferences
+	if (CFPreferencesGetAppBooleanValue(CFSTR("GrowlOnNewEpisode"), prefAppDomain, NULL) == 0)
+		[growlNotifyEpisode setState: 0];
+
+	if (CFPreferencesGetAppBooleanValue(CFSTR("GrowlOnAppUpdate"), prefAppDomain, NULL) == 0)
+		[growlNotifyApplication setState: 0];
+	
+	// Register application update preferences
 	if (CFPreferencesGetAppBooleanValue(CFSTR("SUEnableAutomaticChecks"), prefAppDomain, NULL) == 0) {
 		[checkForUpdates setState: 0];
 		[autoInstallNewUpdates setEnabled: NO];
@@ -38,22 +46,51 @@ CFBooleanRef checkBoxValue;
 		[downloadBetaVersions setEnabled: NO];
 	}
 	
-	if (CFPreferencesGetAppBooleanValue(CFSTR("SUDownloadBetaVersions"), prefAppDomain, NULL) == 0) {
+	if (CFPreferencesGetAppBooleanValue(CFSTR("SUDownloadBetaVersions"), prefAppDomain, NULL) == 0)
 		[downloadBetaVersions setState: 0];
-	}
 	
-	if (CFPreferencesGetAppBooleanValue(CFSTR("SUAutomaticallyUpdate"), prefAppDomain, NULL) == 0) {
+	if (CFPreferencesGetAppBooleanValue(CFSTR("SUAutomaticallyUpdate"), prefAppDomain, NULL) == 0)
 		[autoInstallNewUpdates setState: 0];
-	}
 	
-	if (CFPreferencesGetAppBooleanValue(CFSTR("SUSendProfileInfo"), prefAppDomain, NULL) == 0) {
+	if (CFPreferencesGetAppBooleanValue(CFSTR("SUSendProfileInfo"), prefAppDomain, NULL) == 0)
 		[includeSystemInformation setState: 0];
-	}
 }
 
 - (void) syncPreferences
 {
 	CFPreferencesSynchronize(prefAppDomain, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+}
+
+#pragma mark -
+#pragma mark Growl Notification Preferences
+- (IBAction) growlNotifyEpisodeDidChange:(id)sender
+{
+	prefKeyToSave = CFSTR("GrowlOnNewEpisode");
+	
+	if ([growlNotifyEpisode state])
+		checkBoxValue = kCFBooleanTrue;
+	else
+		checkBoxValue = kCFBooleanFalse;
+	
+	CFPreferencesSetValue(prefKeyToSave, checkBoxValue, prefAppDomain,
+						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+	
+	[self syncPreferences];
+}
+
+- (IBAction) growlNotifyApplicationDidChange:(id)sender
+{
+	prefKeyToSave = CFSTR("GrowlOnAppUpdate");
+	
+	if ([growlNotifyApplication state])
+		checkBoxValue = kCFBooleanTrue;
+	else
+		checkBoxValue = kCFBooleanFalse;
+	
+	CFPreferencesSetValue(prefKeyToSave, checkBoxValue, prefAppDomain,
+						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+	
+	[self syncPreferences];
 }
 
 #pragma mark -
@@ -82,7 +119,7 @@ CFBooleanRef checkBoxValue;
 
 - (IBAction) autoInstallNewUpdatesDidChange:(id)sender
 {
-		prefKeyToSave = CFSTR("SUAutomaticallyUpdate");
+	prefKeyToSave = CFSTR("SUAutomaticallyUpdate");
 	
 	if ([autoInstallNewUpdates state])
 		checkBoxValue = kCFBooleanTrue;

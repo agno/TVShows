@@ -21,6 +21,8 @@
 	// Download Preferences
 
 	// Growl Settings
+	IBOutlet NSButton *growlNotifyEpisode;
+	IBOutlet NSButton *growlNotifyApplication;
 
 	// Application Update Preferences
 	IBOutlet NSButton *checkForUpdates;
@@ -33,6 +35,11 @@
 #pragma mark General
 - (void) awakeFromNib;
 - (void) syncPreferences;
+
+#pragma mark -
+#pragma mark Growl Notification Preferences
+- (IBAction) growlNotifyEpisodeDidChange:(id)sender;
+- (IBAction) growlNotifyApplicationDidChange:(id)sender;
 
 #pragma mark -
 #pragma mark Application Update Preferences
