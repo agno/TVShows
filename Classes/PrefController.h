@@ -12,10 +12,11 @@
  *
  */
 
+#import <PreferencePanes/PreferencePanes.h>
 #import <Cocoa/Cocoa.h>
 
 
-@interface PrefController : NSObject
+@interface PrefController : NSPreferencePane
 {
 	// Download Preferences
 
@@ -30,7 +31,7 @@
 
 #pragma mark -
 #pragma mark General
-- (id) init;
+- (void) awakeFromNib;
 - (void) syncPreferences;
 
 #pragma mark -

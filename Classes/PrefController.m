@@ -26,9 +26,20 @@ CFBooleanRef checkBoxValue;
 
 #pragma mark -
 #pragma mark General
-- (id) init
+- (void) awakeFromNib
 {
-	// Read preferences here.
+	Boolean isEnabled;
+	
+	// CFPreferencesCopyAppValue();
+	isEnabled = CFPreferencesGetAppBooleanValue(CFSTR("SUEnableAutomaticChecks"), prefAppDomain, NULL);
+	
+	if (isEnabled == 0) {
+		[checkForUpdates setState: 0];
+		[autoInstallNewUpdates setEnabled: NO];
+		[includeSystemInformation setEnabled: NO];
+		[downloadBetaVersions setEnabled: NO];
+	}
+
 }
 
 - (void) syncPreferences
@@ -42,10 +53,17 @@ CFBooleanRef checkBoxValue;
 {
 	prefKeyToSave = CFSTR("SUEnableAutomaticChecks");
 	
-	if ([checkForUpdates state])
+	if ([checkForUpdates state]) {
 		checkBoxValue = kCFBooleanTrue;
-	else
+		[autoInstallNewUpdates setEnabled: YES];
+		[includeSystemInformation setEnabled: YES];
+		[downloadBetaVersions setEnabled: YES];
+	} else {
 		checkBoxValue = kCFBooleanFalse;
+		[autoInstallNewUpdates setEnabled: NO];
+		[includeSystemInformation setEnabled: NO];
+		[downloadBetaVersions setEnabled: NO];
+	}
 	
 	CFPreferencesSetValue(prefKeyToSave, checkBoxValue, prefAppDomain,
 						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
