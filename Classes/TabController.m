@@ -14,14 +14,12 @@
 
 #import "TabController.h"
 #import "FeedParser.h"
-
-#define TVSHOWS_IDENTIFIER		@"com.github.TVShows2"
-#define TVSHOWS_WEBSITE			@"http://deathtobunnies.com/tvshows/"
+#import "Constants.h"
 
 
 @implementation TabController
 
-- (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem {
+- (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem {
 	NSRect  tabFrame;
     int    newWinHeight;
 	
@@ -81,7 +79,7 @@
 #pragma mark About Tab
 - (IBAction) visitWebsite:(id)sender
 {
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:TVSHOWS_WEBSITE]];
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString: TVShowsWebsite]];
 }
 
 - (IBAction) showLicenseInfo:(id)sender
@@ -96,7 +94,7 @@
 
 	licenseInfoText = [NSString stringWithContentsOfURL:
 					   [NSURL fileURLWithPath:
-						[[NSBundle bundleWithIdentifier: TVSHOWS_IDENTIFIER]
+						[[NSBundle bundleWithIdentifier: TVShowsAppDomain]
 										pathForResource: @"LICENSE" ofType:@"txt"]]
 											   encoding: NSUTF8StringEncoding
 												  error: NULL];
@@ -116,7 +114,7 @@
 
 - (void) drawAboutBox
 {
-	NSString *pathToAboutBoxText = [[NSBundle bundleWithIdentifier: TVSHOWS_IDENTIFIER] 
+	NSString *pathToAboutBoxText = [[NSBundle bundleWithIdentifier: TVShowsAppDomain] 
 									pathForResource: @"Credits" 
 									ofType: @"rtf"];
 	

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3422ECD4118B3C130061E2E2 /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 3422ECD3118B3C130061E2E2 /* Constants.h */; };
+		3422ECE9118B3D7D0061E2E2 /* PrefController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3422ECE7118B3D7D0061E2E2 /* PrefController.h */; };
+		3422ECEA118B3D7D0061E2E2 /* PrefController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3422ECE8118B3D7D0061E2E2 /* PrefController.m */; };
 		343BF4CE1183DB3C008CE71D /* RSS-Large.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB966F118384DB005825C1 /* RSS-Large.png */; };
 		349D2AE911836AD3007269E4 /* NSDate_FeedParserExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2ACB11836AD3007269E4 /* NSDate_FeedParserExtensions.h */; };
 		349D2AEA11836AD3007269E4 /* NSDate_FeedParserExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2ACC11836AD3007269E4 /* NSDate_FeedParserExtensions.m */; };
@@ -75,6 +78,9 @@
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCFA20370C41700C91783 /* TVShows_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShows_Prefix.pch; sourceTree = "<group>"; };
+		3422ECD3118B3C130061E2E2 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		3422ECE7118B3D7D0061E2E2 /* PrefController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefController.h; sourceTree = "<group>"; };
+		3422ECE8118B3D7D0061E2E2 /* PrefController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefController.m; sourceTree = "<group>"; };
 		349D2ACB11836AD3007269E4 /* NSDate_FeedParserExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDate_FeedParserExtensions.h; sourceTree = "<group>"; };
 		349D2ACC11836AD3007269E4 /* NSDate_FeedParserExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDate_FeedParserExtensions.m; sourceTree = "<group>"; };
 		349D2ACD11836AD3007269E4 /* NSString_extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_extensions.h; sourceTree = "<group>"; };
@@ -287,6 +293,9 @@
 			isa = PBXGroup;
 			children = (
 				349D2AC911836AD3007269E4 /* FeedParser */,
+				3422ECD3118B3C130061E2E2 /* Constants.h */,
+				3422ECE7118B3D7D0061E2E2 /* PrefController.h */,
+				3422ECE8118B3D7D0061E2E2 /* PrefController.m */,
 				349FEEBF11835A1C00D24FC9 /* TabController.h */,
 				349FEEC011835A1C00D24FC9 /* TabController.m */,
 				349FEE151183597500D24FC9 /* TVShowsPref.h */,
@@ -321,6 +330,8 @@
 				349D2AFF11836AD3007269E4 /* FPExtensionElementNode.h in Headers */,
 				349D2B0111836AD3007269E4 /* FPExtensionNode.h in Headers */,
 				349D2B0311836AD3007269E4 /* FPExtensionTextNode.h in Headers */,
+				3422ECD4118B3C130061E2E2 /* Constants.h in Headers */,
+				3422ECE9118B3D7D0061E2E2 /* PrefController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,6 +431,7 @@
 				349D2B0011836AD3007269E4 /* FPExtensionElementNode.m in Sources */,
 				349D2B0211836AD3007269E4 /* FPExtensionNode.m in Sources */,
 				349D2B0411836AD3007269E4 /* FPExtensionTextNode.m in Sources */,
+				3422ECEA118B3D7D0061E2E2 /* PrefController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

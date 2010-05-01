@@ -16,7 +16,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface TabController : NSObject
+@interface TabController : NSPreferencePane
 {
 	IBOutlet NSTextView *mainTextView;
 	
@@ -29,7 +29,7 @@
 #pragma mark -
 #pragma mark Leftover Test Code
 - (IBAction) showRssFeed:(id)sender;
-- (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
+- (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
 
 #pragma mark -
 #pragma mark About Tab
