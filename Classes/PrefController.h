@@ -19,6 +19,7 @@
 @interface PrefController : NSPreferencePane
 {
 	// Download Preferences
+	IBOutlet NSButton *autoOpenDownloadedFiles;
 
 	// Growl Settings
 	IBOutlet NSButton *growlNotifyEpisode;
@@ -35,6 +36,10 @@
 #pragma mark General
 - (void) awakeFromNib;
 - (void) syncPreferences;
+
+#pragma mark -
+#pragma mark Download Preferences
+- (IBAction) autoOpenDownloadedFilesDidChange:(id)sender;
 
 #pragma mark -
 #pragma mark Growl Notification Preferences

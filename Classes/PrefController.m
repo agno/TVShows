@@ -18,7 +18,6 @@
 
 // Setup CFPreference variables
 CFStringRef prefAppDomain = (CFStringRef)TVShowsAppDomain;
-CFStringRef prefKeyToSave;
 CFStringRef prefValueToSave;
 CFBooleanRef checkBoxValue;
 
@@ -31,27 +30,30 @@ CFBooleanRef checkBoxValue;
 	// Saved for reference. Not everything is a BOOL.
 	// CFPreferencesCopyAppValue();
 	
+	// Register download preferences
+	// -----------------------------
+	if (CFPreferencesGetAppBooleanValue(CFSTR("AutoOpenDownloadedFiles"), prefAppDomain, NULL) == 0)
+		[autoOpenDownloadedFiles setState: 0];
+	
 	// Register Growl notification preferences
+	// ---------------------------------------
 	if (CFPreferencesGetAppBooleanValue(CFSTR("GrowlOnNewEpisode"), prefAppDomain, NULL) == 0)
 		[growlNotifyEpisode setState: 0];
-
 	if (CFPreferencesGetAppBooleanValue(CFSTR("GrowlOnAppUpdate"), prefAppDomain, NULL) == 0)
 		[growlNotifyApplication setState: 0];
 	
 	// Register application update preferences
+	// ---------------------------------------
 	if (CFPreferencesGetAppBooleanValue(CFSTR("SUEnableAutomaticChecks"), prefAppDomain, NULL) == 0) {
 		[checkForUpdates setState: 0];
 		[autoInstallNewUpdates setEnabled: NO];
 		[includeSystemInformation setEnabled: NO];
 		[downloadBetaVersions setEnabled: NO];
 	}
-	
 	if (CFPreferencesGetAppBooleanValue(CFSTR("SUDownloadBetaVersions"), prefAppDomain, NULL) == 0)
 		[downloadBetaVersions setState: 0];
-	
 	if (CFPreferencesGetAppBooleanValue(CFSTR("SUAutomaticallyUpdate"), prefAppDomain, NULL) == 0)
 		[autoInstallNewUpdates setState: 0];
-	
 	if (CFPreferencesGetAppBooleanValue(CFSTR("SUSendProfileInfo"), prefAppDomain, NULL) == 0)
 		[includeSystemInformation setState: 0];
 }
@@ -62,17 +64,30 @@ CFBooleanRef checkBoxValue;
 }
 
 #pragma mark -
+#pragma mark Download Preferences
+- (IBAction) autoOpenDownloadedFilesDidChange:(id)sender
+{
+	if ([autoOpenDownloadedFiles state])
+		checkBoxValue = kCFBooleanTrue;
+	else
+		checkBoxValue = kCFBooleanFalse;
+	
+	CFPreferencesSetValue(CFSTR("AutoOpenDownloadedFiles"), checkBoxValue, prefAppDomain,
+						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+	
+	[self syncPreferences];
+}
+
+#pragma mark -
 #pragma mark Growl Notification Preferences
 - (IBAction) growlNotifyEpisodeDidChange:(id)sender
 {
-	prefKeyToSave = CFSTR("GrowlOnNewEpisode");
-	
 	if ([growlNotifyEpisode state])
 		checkBoxValue = kCFBooleanTrue;
 	else
 		checkBoxValue = kCFBooleanFalse;
 	
-	CFPreferencesSetValue(prefKeyToSave, checkBoxValue, prefAppDomain,
+	CFPreferencesSetValue(CFSTR("GrowlOnNewEpisode"), checkBoxValue, prefAppDomain,
 						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
 	
 	[self syncPreferences];
@@ -80,14 +95,12 @@ CFBooleanRef checkBoxValue;
 
 - (IBAction) growlNotifyApplicationDidChange:(id)sender
 {
-	prefKeyToSave = CFSTR("GrowlOnAppUpdate");
-	
 	if ([growlNotifyApplication state])
 		checkBoxValue = kCFBooleanTrue;
 	else
 		checkBoxValue = kCFBooleanFalse;
 	
-	CFPreferencesSetValue(prefKeyToSave, checkBoxValue, prefAppDomain,
+	CFPreferencesSetValue(CFSTR("GrowlOnAppUpdate"), checkBoxValue, prefAppDomain,
 						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
 	
 	[self syncPreferences];
@@ -97,21 +110,21 @@ CFBooleanRef checkBoxValue;
 #pragma mark Application Update Preferences
 - (IBAction) checkForUpdatesDidChange:(id)sender
 {
-	prefKeyToSave = CFSTR("SUEnableAutomaticChecks");
-	
 	if ([checkForUpdates state]) {
 		checkBoxValue = kCFBooleanTrue;
+		
 		[autoInstallNewUpdates setEnabled: YES];
 		[includeSystemInformation setEnabled: YES];
 		[downloadBetaVersions setEnabled: YES];
 	} else {
 		checkBoxValue = kCFBooleanFalse;
+		
 		[autoInstallNewUpdates setEnabled: NO];
 		[includeSystemInformation setEnabled: NO];
 		[downloadBetaVersions setEnabled: NO];
 	}
 	
-	CFPreferencesSetValue(prefKeyToSave, checkBoxValue, prefAppDomain,
+	CFPreferencesSetValue(CFSTR("SUEnableAutomaticChecks"), checkBoxValue, prefAppDomain,
 						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
 	
 	[self syncPreferences];
@@ -119,14 +132,12 @@ CFBooleanRef checkBoxValue;
 
 - (IBAction) autoInstallNewUpdatesDidChange:(id)sender
 {
-	prefKeyToSave = CFSTR("SUAutomaticallyUpdate");
-	
 	if ([autoInstallNewUpdates state])
 		checkBoxValue = kCFBooleanTrue;
 	else
 		checkBoxValue = kCFBooleanFalse;
 	
-	CFPreferencesSetValue(prefKeyToSave, checkBoxValue, prefAppDomain,
+	CFPreferencesSetValue(CFSTR("SUAutomaticallyUpdate"), checkBoxValue, prefAppDomain,
 						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
 	
 	[self syncPreferences];
@@ -134,8 +145,6 @@ CFBooleanRef checkBoxValue;
 
 - (IBAction) downloadBetaVersionsDidChange:(id)sender
 {
-	prefKeyToSave = CFSTR("SUDownloadBetaVersions");
-	
 	if ([downloadBetaVersions state]) {
 		checkBoxValue = kCFBooleanTrue;
 		CFPreferencesSetValue(CFSTR("SUFeedURL"), (CFStringRef)TVShowsBetaAppcastURL, prefAppDomain,
@@ -146,7 +155,7 @@ CFBooleanRef checkBoxValue;
 							  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
 	}
 	
-	CFPreferencesSetValue(prefKeyToSave, checkBoxValue, prefAppDomain,
+	CFPreferencesSetValue(CFSTR("SUDownloadBetaVersions"), checkBoxValue, prefAppDomain,
 						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
 
 	
@@ -155,14 +164,12 @@ CFBooleanRef checkBoxValue;
 
 - (IBAction) includeSystemInformationDidChange:(id)sender
 {
-	prefKeyToSave = CFSTR("SUSendProfileInfo");
-	
 	if ([includeSystemInformation state])
 		checkBoxValue = kCFBooleanTrue;
 	else
 		checkBoxValue = kCFBooleanFalse;
 	
-	CFPreferencesSetValue(prefKeyToSave, checkBoxValue, prefAppDomain,
+	CFPreferencesSetValue(CFSTR("SUSendProfileInfo"), checkBoxValue, prefAppDomain,
 						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
 	
 	[self syncPreferences];
