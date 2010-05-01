@@ -12,5 +12,7 @@
  *
  */
 
-#define TVShowsAppDomain		@"com.github.TVShows2"
-#define TVShowsWebsite			@"http://deathtobunnies.com/tvshows/"
+#define TVShowsAppDomain			@"com.github.TVShows2"
+#define TVShowsWebsite				@"http://deathtobunnies.com/tvshows/"
+#define TVShowsAppcastURL			@"http://deathtobunnies.com/tvshows/appcast.xml"
+#define TVShowsBetaAppcastURL		@"http://deathtobunnies.com/tvshows/appcast-beta.xml"

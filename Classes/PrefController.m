@@ -28,18 +28,27 @@ CFBooleanRef checkBoxValue;
 #pragma mark General
 - (void) awakeFromNib
 {
-	Boolean isEnabled;
-	
+	// Saved for reference. Not everything is a BOOL.
 	// CFPreferencesCopyAppValue();
-	isEnabled = CFPreferencesGetAppBooleanValue(CFSTR("SUEnableAutomaticChecks"), prefAppDomain, NULL);
 	
-	if (isEnabled == 0) {
+	if (CFPreferencesGetAppBooleanValue(CFSTR("SUEnableAutomaticChecks"), prefAppDomain, NULL) == 0) {
 		[checkForUpdates setState: 0];
 		[autoInstallNewUpdates setEnabled: NO];
 		[includeSystemInformation setEnabled: NO];
 		[downloadBetaVersions setEnabled: NO];
 	}
-
+	
+	if (CFPreferencesGetAppBooleanValue(CFSTR("SUDownloadBetaVersions"), prefAppDomain, NULL) == 0) {
+		[downloadBetaVersions setState: 0];
+	}
+	
+	if (CFPreferencesGetAppBooleanValue(CFSTR("SUAutomaticallyUpdate"), prefAppDomain, NULL) == 0) {
+		[autoInstallNewUpdates setState: 0];
+	}
+	
+	if (CFPreferencesGetAppBooleanValue(CFSTR("SUSendProfileInfo"), prefAppDomain, NULL) == 0) {
+		[includeSystemInformation setState: 0];
+	}
 }
 
 - (void) syncPreferences
@@ -88,7 +97,23 @@ CFBooleanRef checkBoxValue;
 
 - (IBAction) downloadBetaVersionsDidChange:(id)sender
 {
-	NSLog(@"No actions set for downloadBetaVersionsDidChange:");
+	prefKeyToSave = CFSTR("SUDownloadBetaVersions");
+	
+	if ([downloadBetaVersions state]) {
+		checkBoxValue = kCFBooleanTrue;
+		CFPreferencesSetValue(CFSTR("SUFeedURL"), (CFStringRef)TVShowsBetaAppcastURL, prefAppDomain,
+							  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+	} else {
+		checkBoxValue = kCFBooleanFalse;
+		CFPreferencesSetValue(CFSTR("SUFeedURL"), (CFStringRef)TVShowsAppcastURL, prefAppDomain, 
+							  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+	}
+	
+	CFPreferencesSetValue(prefKeyToSave, checkBoxValue, prefAppDomain,
+						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+
+	
+	[self syncPreferences];
 }
 
 - (IBAction) includeSystemInformationDidChange:(id)sender
