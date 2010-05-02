@@ -18,17 +18,12 @@
 
 @interface TabController : NSPreferencePane
 {
-	IBOutlet NSTextView *mainTextView;
-	
 	IBOutlet NSWindow *licenseInfoDialog;
 	IBOutlet NSTextView *textView_licenseInfo;
 	IBOutlet NSTextView *textView_aboutBox;
 }
 
 
-#pragma mark -
-#pragma mark Leftover Test Code
-- (IBAction) showRssFeed:(id)sender;
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
 
 #pragma mark -

@@ -10,35 +10,30 @@
 		3422ECD4118B3C130061E2E2 /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 3422ECD3118B3C130061E2E2 /* Constants.h */; };
 		3422ECE9118B3D7D0061E2E2 /* PrefController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3422ECE7118B3D7D0061E2E2 /* PrefController.h */; };
 		3422ECEA118B3D7D0061E2E2 /* PrefController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3422ECE8118B3D7D0061E2E2 /* PrefController.m */; };
+		3423D5CB118E16DC007B55C8 /* TVShows_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA20370C41700C91783 /* TVShows_Prefix.pch */; };
+		3423D5CC118E16DC007B55C8 /* TVShowsPref.h in Headers */ = {isa = PBXBuildFile; fileRef = 349FEE151183597500D24FC9 /* TVShowsPref.h */; };
+		3423D5CD118E16DC007B55C8 /* TabController.h in Headers */ = {isa = PBXBuildFile; fileRef = 349FEEBF11835A1C00D24FC9 /* TabController.h */; };
+		3423D5CE118E16DC007B55C8 /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 3422ECD3118B3C130061E2E2 /* Constants.h */; };
+		3423D5CF118E16DC007B55C8 /* PrefController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3422ECE7118B3D7D0061E2E2 /* PrefController.h */; };
+		3423D5D1118E16DC007B55C8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 349FEDFC118358CF00D24FC9 /* InfoPlist.strings */; };
+		3423D5D2118E16DC007B55C8 /* TVShowsPref.xib in Resources */ = {isa = PBXBuildFile; fileRef = 349FEDFE118358CF00D24FC9 /* TVShowsPref.xib */; };
+		3423D5D3118E16DC007B55C8 /* TVShows-Beta-Large.icns in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE031183590500D24FC9 /* TVShows-Beta-Large.icns */; };
+		3423D5D4118E16DC007B55C8 /* TVShows-Beta.png in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE041183590500D24FC9 /* TVShows-Beta.png */; };
+		3423D5D5118E16DC007B55C8 /* TVShows-Off-Large.icns in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE051183590500D24FC9 /* TVShows-Off-Large.icns */; };
+		3423D5D6118E16DC007B55C8 /* TVShows-Off.png in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE061183590500D24FC9 /* TVShows-Off.png */; };
+		3423D5D7118E16DC007B55C8 /* TVShows-On-Large.icns in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE071183590500D24FC9 /* TVShows-On-Large.icns */; };
+		3423D5D8118E16DC007B55C8 /* TVShows-On.png in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE081183590500D24FC9 /* TVShows-On.png */; };
+		3423D5D9118E16DC007B55C8 /* showRSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB966D11838131005825C1 /* showRSS.png */; };
+		3423D5DA118E16DC007B55C8 /* NZB.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB967E118389FC005825C1 /* NZB.png */; };
+		3423D5DB118E16DC007B55C8 /* RSS-Large.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB966F118384DB005825C1 /* RSS-Large.png */; };
+		3423D5DC118E16DC007B55C8 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 34A8FF9C1187C17000DDD3DE /* LICENSE.txt */; };
+		3423D5DD118E16DC007B55C8 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 34D09636118A958300088E88 /* Credits.rtf */; };
+		3423D5E0118E16DC007B55C8 /* TVShowsPref.m in Sources */ = {isa = PBXBuildFile; fileRef = 349FEE161183597500D24FC9 /* TVShowsPref.m */; };
+		3423D5E1118E16DC007B55C8 /* TabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 349FEEC011835A1C00D24FC9 /* TabController.m */; };
+		3423D5E2118E16DC007B55C8 /* PrefController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3422ECE8118B3D7D0061E2E2 /* PrefController.m */; };
+		3423D5E4118E16DC007B55C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
+		3423D5E5118E16DC007B55C8 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F506C035013D953901CA16C8 /* PreferencePanes.framework */; };
 		343BF4CE1183DB3C008CE71D /* RSS-Large.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB966F118384DB005825C1 /* RSS-Large.png */; };
-		349D2AE911836AD3007269E4 /* NSDate_FeedParserExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2ACB11836AD3007269E4 /* NSDate_FeedParserExtensions.h */; };
-		349D2AEA11836AD3007269E4 /* NSDate_FeedParserExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2ACC11836AD3007269E4 /* NSDate_FeedParserExtensions.m */; };
-		349D2AEB11836AD3007269E4 /* NSString_extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2ACD11836AD3007269E4 /* NSString_extensions.h */; };
-		349D2AEC11836AD3007269E4 /* NSString_extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2ACE11836AD3007269E4 /* NSString_extensions.m */; };
-		349D2AED11836AD3007269E4 /* FeedParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2ACF11836AD3007269E4 /* FeedParser.h */; };
-		349D2AEE11836AD3007269E4 /* FPEnclosure.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2AD011836AD3007269E4 /* FPEnclosure.h */; };
-		349D2AEF11836AD3007269E4 /* FPEnclosure.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2AD111836AD3007269E4 /* FPEnclosure.m */; };
-		349D2AF011836AD3007269E4 /* FPErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2AD211836AD3007269E4 /* FPErrors.h */; };
-		349D2AF111836AD3007269E4 /* FPFeed.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2AD311836AD3007269E4 /* FPFeed.h */; };
-		349D2AF211836AD3007269E4 /* FPFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2AD411836AD3007269E4 /* FPFeed.m */; };
-		349D2AF311836AD3007269E4 /* FPItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2AD511836AD3007269E4 /* FPItem.h */; };
-		349D2AF411836AD3007269E4 /* FPItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2AD611836AD3007269E4 /* FPItem.m */; };
-		349D2AF511836AD3007269E4 /* FPLink.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2AD711836AD3007269E4 /* FPLink.h */; };
-		349D2AF611836AD3007269E4 /* FPLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2AD811836AD3007269E4 /* FPLink.m */; };
-		349D2AF711836AD3007269E4 /* FPParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2AD911836AD3007269E4 /* FPParser.h */; };
-		349D2AF811836AD3007269E4 /* FPParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2ADA11836AD3007269E4 /* FPParser.m */; };
-		349D2AF911836AD3007269E4 /* FPExtensionElementNode_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2ADC11836AD3007269E4 /* FPExtensionElementNode_Private.h */; };
-		349D2AFA11836AD3007269E4 /* FPXMLPair.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2ADD11836AD3007269E4 /* FPXMLPair.h */; };
-		349D2AFB11836AD3007269E4 /* FPXMLPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2ADE11836AD3007269E4 /* FPXMLPair.m */; };
-		349D2AFC11836AD3007269E4 /* FPXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2ADF11836AD3007269E4 /* FPXMLParser.h */; };
-		349D2AFD11836AD3007269E4 /* FPXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2AE011836AD3007269E4 /* FPXMLParser.m */; };
-		349D2AFE11836AD3007269E4 /* FPXMLParserProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2AE111836AD3007269E4 /* FPXMLParserProtocol.h */; };
-		349D2AFF11836AD3007269E4 /* FPExtensionElementNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2AE311836AD3007269E4 /* FPExtensionElementNode.h */; };
-		349D2B0011836AD3007269E4 /* FPExtensionElementNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2AE411836AD3007269E4 /* FPExtensionElementNode.m */; };
-		349D2B0111836AD3007269E4 /* FPExtensionNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2AE511836AD3007269E4 /* FPExtensionNode.h */; };
-		349D2B0211836AD3007269E4 /* FPExtensionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2AE611836AD3007269E4 /* FPExtensionNode.m */; };
-		349D2B0311836AD3007269E4 /* FPExtensionTextNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 349D2AE711836AD3007269E4 /* FPExtensionTextNode.h */; };
-		349D2B0411836AD3007269E4 /* FPExtensionTextNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 349D2AE811836AD3007269E4 /* FPExtensionTextNode.m */; };
 		349FEE00118358CF00D24FC9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 349FEDFC118358CF00D24FC9 /* InfoPlist.strings */; };
 		349FEE01118358CF00D24FC9 /* TVShowsPref.xib in Resources */ = {isa = PBXBuildFile; fileRef = 349FEDFE118358CF00D24FC9 /* TVShowsPref.xib */; };
 		349FEE091183590500D24FC9 /* TVShows-Beta-Large.icns in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE031183590500D24FC9 /* TVShows-Beta-Large.icns */; };
@@ -71,6 +66,16 @@
 			name = "Copy Linked Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3423D5DE118E16DC007B55C8 /* Copy Linked Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Copy Linked Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -81,34 +86,8 @@
 		3422ECD3118B3C130061E2E2 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		3422ECE7118B3D7D0061E2E2 /* PrefController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefController.h; sourceTree = "<group>"; };
 		3422ECE8118B3D7D0061E2E2 /* PrefController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefController.m; sourceTree = "<group>"; };
-		349D2ACB11836AD3007269E4 /* NSDate_FeedParserExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDate_FeedParserExtensions.h; sourceTree = "<group>"; };
-		349D2ACC11836AD3007269E4 /* NSDate_FeedParserExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDate_FeedParserExtensions.m; sourceTree = "<group>"; };
-		349D2ACD11836AD3007269E4 /* NSString_extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_extensions.h; sourceTree = "<group>"; };
-		349D2ACE11836AD3007269E4 /* NSString_extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_extensions.m; sourceTree = "<group>"; };
-		349D2ACF11836AD3007269E4 /* FeedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedParser.h; sourceTree = "<group>"; };
-		349D2AD011836AD3007269E4 /* FPEnclosure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPEnclosure.h; sourceTree = "<group>"; };
-		349D2AD111836AD3007269E4 /* FPEnclosure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPEnclosure.m; sourceTree = "<group>"; };
-		349D2AD211836AD3007269E4 /* FPErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPErrors.h; sourceTree = "<group>"; };
-		349D2AD311836AD3007269E4 /* FPFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPFeed.h; sourceTree = "<group>"; };
-		349D2AD411836AD3007269E4 /* FPFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPFeed.m; sourceTree = "<group>"; };
-		349D2AD511836AD3007269E4 /* FPItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPItem.h; sourceTree = "<group>"; };
-		349D2AD611836AD3007269E4 /* FPItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPItem.m; sourceTree = "<group>"; };
-		349D2AD711836AD3007269E4 /* FPLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPLink.h; sourceTree = "<group>"; };
-		349D2AD811836AD3007269E4 /* FPLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPLink.m; sourceTree = "<group>"; };
-		349D2AD911836AD3007269E4 /* FPParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPParser.h; sourceTree = "<group>"; };
-		349D2ADA11836AD3007269E4 /* FPParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPParser.m; sourceTree = "<group>"; };
-		349D2ADC11836AD3007269E4 /* FPExtensionElementNode_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPExtensionElementNode_Private.h; sourceTree = "<group>"; };
-		349D2ADD11836AD3007269E4 /* FPXMLPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPXMLPair.h; sourceTree = "<group>"; };
-		349D2ADE11836AD3007269E4 /* FPXMLPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPXMLPair.m; sourceTree = "<group>"; };
-		349D2ADF11836AD3007269E4 /* FPXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPXMLParser.h; sourceTree = "<group>"; };
-		349D2AE011836AD3007269E4 /* FPXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPXMLParser.m; sourceTree = "<group>"; };
-		349D2AE111836AD3007269E4 /* FPXMLParserProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPXMLParserProtocol.h; sourceTree = "<group>"; };
-		349D2AE311836AD3007269E4 /* FPExtensionElementNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPExtensionElementNode.h; sourceTree = "<group>"; };
-		349D2AE411836AD3007269E4 /* FPExtensionElementNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPExtensionElementNode.m; sourceTree = "<group>"; };
-		349D2AE511836AD3007269E4 /* FPExtensionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPExtensionNode.h; sourceTree = "<group>"; };
-		349D2AE611836AD3007269E4 /* FPExtensionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPExtensionNode.m; sourceTree = "<group>"; };
-		349D2AE711836AD3007269E4 /* FPExtensionTextNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPExtensionTextNode.h; sourceTree = "<group>"; };
-		349D2AE811836AD3007269E4 /* FPExtensionTextNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPExtensionTextNode.m; sourceTree = "<group>"; };
+		3423D5EA118E16DC007B55C8 /* TVShows-Tiger.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TVShows-Tiger.prefPane"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3423D5EB118E16DC007B55C8 /* Info_Tiger.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info_Tiger.plist; sourceTree = "<group>"; };
 		349FEDFD118358CF00D24FC9 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = InfoPlist.strings; sourceTree = "<group>"; };
 		349FEDFF118358CF00D24FC9 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = TVShowsPref.xib; sourceTree = "<group>"; };
 		349FEE031183590500D24FC9 /* TVShows-Beta-Large.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "TVShows-Beta-Large.icns"; sourceTree = "<group>"; };
@@ -132,6 +111,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3423D5E3118E16DC007B55C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3423D5E4118E16DC007B55C8 /* Cocoa.framework in Frameworks */,
+				3423D5E5118E16DC007B55C8 /* PreferencePanes.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D202CF20486D31800D8A456 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -174,6 +162,7 @@
 				349FEDFC118358CF00D24FC9 /* InfoPlist.strings */,
 				349FEDFE118358CF00D24FC9 /* TVShowsPref.xib */,
 				8D202CF70486D31800D8A456 /* Info.plist */,
+				3423D5EB118E16DC007B55C8 /* Info_Tiger.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -200,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				8D202CF80486D31800D8A456 /* TVShows.prefPane */,
+				3423D5EA118E16DC007B55C8 /* TVShows-Tiger.prefPane */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -210,66 +200,6 @@
 				32DBCFA20370C41700C91783 /* TVShows_Prefix.pch */,
 			);
 			name = "Other Sources";
-			sourceTree = "<group>";
-		};
-		349D2AC911836AD3007269E4 /* FeedParser */ = {
-			isa = PBXGroup;
-			children = (
-				349D2ACA11836AD3007269E4 /* Extensions */,
-				349D2ACF11836AD3007269E4 /* FeedParser.h */,
-				349D2AD011836AD3007269E4 /* FPEnclosure.h */,
-				349D2AD111836AD3007269E4 /* FPEnclosure.m */,
-				349D2AD211836AD3007269E4 /* FPErrors.h */,
-				349D2AD311836AD3007269E4 /* FPFeed.h */,
-				349D2AD411836AD3007269E4 /* FPFeed.m */,
-				349D2AD511836AD3007269E4 /* FPItem.h */,
-				349D2AD611836AD3007269E4 /* FPItem.m */,
-				349D2AD711836AD3007269E4 /* FPLink.h */,
-				349D2AD811836AD3007269E4 /* FPLink.m */,
-				349D2AD911836AD3007269E4 /* FPParser.h */,
-				349D2ADA11836AD3007269E4 /* FPParser.m */,
-				349D2ADB11836AD3007269E4 /* Internal */,
-				349D2AE211836AD3007269E4 /* XML Extensions */,
-			);
-			name = FeedParser;
-			path = FeedParser/FeedParser;
-			sourceTree = "<group>";
-		};
-		349D2ACA11836AD3007269E4 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				349D2ACB11836AD3007269E4 /* NSDate_FeedParserExtensions.h */,
-				349D2ACC11836AD3007269E4 /* NSDate_FeedParserExtensions.m */,
-				349D2ACD11836AD3007269E4 /* NSString_extensions.h */,
-				349D2ACE11836AD3007269E4 /* NSString_extensions.m */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		349D2ADB11836AD3007269E4 /* Internal */ = {
-			isa = PBXGroup;
-			children = (
-				349D2ADC11836AD3007269E4 /* FPExtensionElementNode_Private.h */,
-				349D2ADD11836AD3007269E4 /* FPXMLPair.h */,
-				349D2ADE11836AD3007269E4 /* FPXMLPair.m */,
-				349D2ADF11836AD3007269E4 /* FPXMLParser.h */,
-				349D2AE011836AD3007269E4 /* FPXMLParser.m */,
-				349D2AE111836AD3007269E4 /* FPXMLParserProtocol.h */,
-			);
-			path = Internal;
-			sourceTree = "<group>";
-		};
-		349D2AE211836AD3007269E4 /* XML Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				349D2AE311836AD3007269E4 /* FPExtensionElementNode.h */,
-				349D2AE411836AD3007269E4 /* FPExtensionElementNode.m */,
-				349D2AE511836AD3007269E4 /* FPExtensionNode.h */,
-				349D2AE611836AD3007269E4 /* FPExtensionNode.m */,
-				349D2AE711836AD3007269E4 /* FPExtensionTextNode.h */,
-				349D2AE811836AD3007269E4 /* FPExtensionTextNode.m */,
-			);
-			path = "XML Extensions";
 			sourceTree = "<group>";
 		};
 		349FEE021183590500D24FC9 /* Images */ = {
@@ -292,7 +222,6 @@
 		349FEE141183597500D24FC9 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				349D2AC911836AD3007269E4 /* FeedParser */,
 				3422ECD3118B3C130061E2E2 /* Constants.h */,
 				3422ECE7118B3D7D0061E2E2 /* PrefController.h */,
 				3422ECE8118B3D7D0061E2E2 /* PrefController.m */,
@@ -307,6 +236,18 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		3423D5CA118E16DC007B55C8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3423D5CB118E16DC007B55C8 /* TVShows_Prefix.pch in Headers */,
+				3423D5CC118E16DC007B55C8 /* TVShowsPref.h in Headers */,
+				3423D5CD118E16DC007B55C8 /* TabController.h in Headers */,
+				3423D5CE118E16DC007B55C8 /* Constants.h in Headers */,
+				3423D5CF118E16DC007B55C8 /* PrefController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D202CE90486D31800D8A456 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -314,22 +255,6 @@
 				8D202CEA0486D31800D8A456 /* TVShows_Prefix.pch in Headers */,
 				349FEE171183597500D24FC9 /* TVShowsPref.h in Headers */,
 				349FEEC111835A1C00D24FC9 /* TabController.h in Headers */,
-				349D2AE911836AD3007269E4 /* NSDate_FeedParserExtensions.h in Headers */,
-				349D2AEB11836AD3007269E4 /* NSString_extensions.h in Headers */,
-				349D2AED11836AD3007269E4 /* FeedParser.h in Headers */,
-				349D2AEE11836AD3007269E4 /* FPEnclosure.h in Headers */,
-				349D2AF011836AD3007269E4 /* FPErrors.h in Headers */,
-				349D2AF111836AD3007269E4 /* FPFeed.h in Headers */,
-				349D2AF311836AD3007269E4 /* FPItem.h in Headers */,
-				349D2AF511836AD3007269E4 /* FPLink.h in Headers */,
-				349D2AF711836AD3007269E4 /* FPParser.h in Headers */,
-				349D2AF911836AD3007269E4 /* FPExtensionElementNode_Private.h in Headers */,
-				349D2AFA11836AD3007269E4 /* FPXMLPair.h in Headers */,
-				349D2AFC11836AD3007269E4 /* FPXMLParser.h in Headers */,
-				349D2AFE11836AD3007269E4 /* FPXMLParserProtocol.h in Headers */,
-				349D2AFF11836AD3007269E4 /* FPExtensionElementNode.h in Headers */,
-				349D2B0111836AD3007269E4 /* FPExtensionNode.h in Headers */,
-				349D2B0311836AD3007269E4 /* FPExtensionTextNode.h in Headers */,
 				3422ECD4118B3C130061E2E2 /* Constants.h in Headers */,
 				3422ECE9118B3D7D0061E2E2 /* PrefController.h in Headers */,
 			);
@@ -338,6 +263,27 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		3423D5C9118E16DC007B55C8 /* TVShows (Tiger) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3423D5E7118E16DC007B55C8 /* Build configuration list for PBXNativeTarget "TVShows (Tiger)" */;
+			buildPhases = (
+				3423D5CA118E16DC007B55C8 /* Headers */,
+				3423D5D0118E16DC007B55C8 /* Resources */,
+				3423D5DE118E16DC007B55C8 /* Copy Linked Libraries */,
+				3423D5DF118E16DC007B55C8 /* Sources */,
+				3423D5E3118E16DC007B55C8 /* Frameworks */,
+				3423D5E6118E16DC007B55C8 /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "TVShows (Tiger)";
+			productInstallPath = "$(HOME)/Library/PreferencePanes";
+			productName = TVShows;
+			productReference = 3423D5EA118E16DC007B55C8 /* TVShows-Tiger.prefPane */;
+			productType = "com.apple.product-type.bundle";
+		};
 		8D202CE80486D31800D8A456 /* TVShows */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DBD214808BA80EA00186707 /* Build configuration list for PBXNativeTarget "TVShows" */;
@@ -375,11 +321,32 @@
 			projectRoot = "";
 			targets = (
 				8D202CE80486D31800D8A456 /* TVShows */,
+				3423D5C9118E16DC007B55C8 /* TVShows (Tiger) */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3423D5D0118E16DC007B55C8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3423D5D1118E16DC007B55C8 /* InfoPlist.strings in Resources */,
+				3423D5D2118E16DC007B55C8 /* TVShowsPref.xib in Resources */,
+				3423D5D3118E16DC007B55C8 /* TVShows-Beta-Large.icns in Resources */,
+				3423D5D4118E16DC007B55C8 /* TVShows-Beta.png in Resources */,
+				3423D5D5118E16DC007B55C8 /* TVShows-Off-Large.icns in Resources */,
+				3423D5D6118E16DC007B55C8 /* TVShows-Off.png in Resources */,
+				3423D5D7118E16DC007B55C8 /* TVShows-On-Large.icns in Resources */,
+				3423D5D8118E16DC007B55C8 /* TVShows-On.png in Resources */,
+				3423D5D9118E16DC007B55C8 /* showRSS.png in Resources */,
+				3423D5DA118E16DC007B55C8 /* NZB.png in Resources */,
+				3423D5DB118E16DC007B55C8 /* RSS-Large.png in Resources */,
+				3423D5DC118E16DC007B55C8 /* LICENSE.txt in Resources */,
+				3423D5DD118E16DC007B55C8 /* Credits.rtf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D202CEC0486D31800D8A456 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -403,6 +370,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXRezBuildPhase section */
+		3423D5E6118E16DC007B55C8 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D202CF50486D31800D8A456 /* Rez */ = {
 			isa = PBXRezBuildPhase;
 			buildActionMask = 2147483647;
@@ -413,24 +387,22 @@
 /* End PBXRezBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3423D5DF118E16DC007B55C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3423D5E0118E16DC007B55C8 /* TVShowsPref.m in Sources */,
+				3423D5E1118E16DC007B55C8 /* TabController.m in Sources */,
+				3423D5E2118E16DC007B55C8 /* PrefController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D202CF00486D31800D8A456 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				349FEE181183597500D24FC9 /* TVShowsPref.m in Sources */,
 				349FEEC211835A1C00D24FC9 /* TabController.m in Sources */,
-				349D2AEA11836AD3007269E4 /* NSDate_FeedParserExtensions.m in Sources */,
-				349D2AEC11836AD3007269E4 /* NSString_extensions.m in Sources */,
-				349D2AEF11836AD3007269E4 /* FPEnclosure.m in Sources */,
-				349D2AF211836AD3007269E4 /* FPFeed.m in Sources */,
-				349D2AF411836AD3007269E4 /* FPItem.m in Sources */,
-				349D2AF611836AD3007269E4 /* FPLink.m in Sources */,
-				349D2AF811836AD3007269E4 /* FPParser.m in Sources */,
-				349D2AFB11836AD3007269E4 /* FPXMLPair.m in Sources */,
-				349D2AFD11836AD3007269E4 /* FPXMLParser.m in Sources */,
-				349D2B0011836AD3007269E4 /* FPExtensionElementNode.m in Sources */,
-				349D2B0211836AD3007269E4 /* FPExtensionNode.m in Sources */,
-				349D2B0411836AD3007269E4 /* FPExtensionTextNode.m in Sources */,
 				3422ECEA118B3D7D0061E2E2 /* PrefController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -536,6 +508,54 @@
 			};
 			name = Release;
 		};
+		3423D5E8118E16DC007B55C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DEPLOYMENT_LOCATION = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(SRCROOT)/Frameworks\\\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TVShows_Prefix.pch;
+				GCC_VERSION = 4.0;
+				INFOPLIST_FILE = Info_Tiger.plist;
+				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
+				PRODUCT_NAME = "TVShows-Tiger";
+				SDKROOT = macosx10.4;
+				WRAPPER_EXTENSION = prefPane;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		3423D5E9118E16DC007B55C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEPLOYMENT_LOCATION = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(SRCROOT)/Frameworks\\\"",
+				);
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TVShows_Prefix.pch;
+				GCC_VERSION = 4.0;
+				INFOPLIST_FILE = Info_Tiger.plist;
+				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
+				PRODUCT_NAME = "TVShows-Tiger";
+				SDKROOT = macosx10.4;
+				WRAPPER_EXTENSION = prefPane;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -553,6 +573,15 @@
 			buildConfigurations = (
 				1DBD214D08BA80EA00186707 /* Debug */,
 				1DBD214E08BA80EA00186707 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3423D5E7118E16DC007B55C8 /* Build configuration list for PBXNativeTarget "TVShows (Tiger)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3423D5E8118E16DC007B55C8 /* Debug */,
+				3423D5E9118E16DC007B55C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
