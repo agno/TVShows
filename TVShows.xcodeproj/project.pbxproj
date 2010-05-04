@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		340F15FA118FEBDE00A1BD00 /* SUUpdaterSubclass.h in Headers */ = {isa = PBXBuildFile; fileRef = 340F15F8118FEBDE00A1BD00 /* SUUpdaterSubclass.h */; };
+		340F15FB118FEBDE00A1BD00 /* SUUpdaterSubclass.m in Sources */ = {isa = PBXBuildFile; fileRef = 340F15F9118FEBDE00A1BD00 /* SUUpdaterSubclass.m */; };
+		340F15FC118FEBDE00A1BD00 /* SUUpdaterSubclass.h in Headers */ = {isa = PBXBuildFile; fileRef = 340F15F8118FEBDE00A1BD00 /* SUUpdaterSubclass.h */; };
+		340F15FD118FEBDE00A1BD00 /* SUUpdaterSubclass.m in Sources */ = {isa = PBXBuildFile; fileRef = 340F15F9118FEBDE00A1BD00 /* SUUpdaterSubclass.m */; };
+		340F16A3118FF46600A1BD00 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 340F16A2118FF46600A1BD00 /* Sparkle.framework */; };
+		340F16AE118FF47200A1BD00 /* Sparkle.framework in Copy Linked Libraries */ = {isa = PBXBuildFile; fileRef = 340F16A2118FF46600A1BD00 /* Sparkle.framework */; };
 		3422ECD4118B3C130061E2E2 /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 3422ECD3118B3C130061E2E2 /* Constants.h */; };
 		3422ECE9118B3D7D0061E2E2 /* PrefController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3422ECE7118B3D7D0061E2E2 /* PrefController.h */; };
 		3422ECEA118B3D7D0061E2E2 /* PrefController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3422ECE8118B3D7D0061E2E2 /* PrefController.m */; };
@@ -34,6 +40,10 @@
 		3423D5E4118E16DC007B55C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		3423D5E5118E16DC007B55C8 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F506C035013D953901CA16C8 /* PreferencePanes.framework */; };
 		343BF4CE1183DB3C008CE71D /* RSS-Large.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB966F118384DB005825C1 /* RSS-Large.png */; };
+		3473849E11907678003DFFA0 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3473845E119074C8003DFFA0 /* Sparkle.framework */; };
+		3473849F1190767A003DFFA0 /* Sparkle.framework in Copy Linked Libraries */ = {isa = PBXBuildFile; fileRef = 3473845E119074C8003DFFA0 /* Sparkle.framework */; };
+		347384DC119079C0003DFFA0 /* SUPublicDSAKey.pem in Resources */ = {isa = PBXBuildFile; fileRef = 347384DB119079C0003DFFA0 /* SUPublicDSAKey.pem */; };
+		347384DD119079C0003DFFA0 /* SUPublicDSAKey.pem in Resources */ = {isa = PBXBuildFile; fileRef = 347384DB119079C0003DFFA0 /* SUPublicDSAKey.pem */; };
 		349FEE00118358CF00D24FC9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 349FEDFC118358CF00D24FC9 /* InfoPlist.strings */; };
 		349FEE01118358CF00D24FC9 /* TVShowsPref.xib in Resources */ = {isa = PBXBuildFile; fileRef = 349FEDFE118358CF00D24FC9 /* TVShowsPref.xib */; };
 		349FEE091183590500D24FC9 /* TVShows-Beta-Large.icns in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE031183590500D24FC9 /* TVShows-Beta-Large.icns */; };
@@ -62,6 +72,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				3473849F1190767A003DFFA0 /* Sparkle.framework in Copy Linked Libraries */,
 			);
 			name = "Copy Linked Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -72,6 +83,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				340F16AE118FF47200A1BD00 /* Sparkle.framework in Copy Linked Libraries */,
 			);
 			name = "Copy Linked Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,11 +95,16 @@
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCFA20370C41700C91783 /* TVShows_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShows_Prefix.pch; sourceTree = "<group>"; };
+		340F15F8118FEBDE00A1BD00 /* SUUpdaterSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUUpdaterSubclass.h; sourceTree = "<group>"; };
+		340F15F9118FEBDE00A1BD00 /* SUUpdaterSubclass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUUpdaterSubclass.m; sourceTree = "<group>"; };
+		340F16A2118FF46600A1BD00 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = "Frameworks (Tiger)/Sparkle.framework"; sourceTree = "<group>"; };
+		340F16C1118FF54100A1BD00 /* Info (Tiger).plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info (Tiger).plist"; sourceTree = "<group>"; };
 		3422ECD3118B3C130061E2E2 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		3422ECE7118B3D7D0061E2E2 /* PrefController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefController.h; sourceTree = "<group>"; };
 		3422ECE8118B3D7D0061E2E2 /* PrefController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefController.m; sourceTree = "<group>"; };
-		3423D5EA118E16DC007B55C8 /* TVShows-Tiger.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TVShows-Tiger.prefPane"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3423D5EB118E16DC007B55C8 /* Info_Tiger.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info_Tiger.plist; sourceTree = "<group>"; };
+		3423D5EA118E16DC007B55C8 /* TVShows (Tiger).prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TVShows (Tiger).prefPane"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3473845E119074C8003DFFA0 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Frameworks/Sparkle.framework; sourceTree = "<group>"; };
+		347384DB119079C0003DFFA0 /* SUPublicDSAKey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SUPublicDSAKey.pem; sourceTree = "<group>"; };
 		349FEDFD118358CF00D24FC9 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = InfoPlist.strings; sourceTree = "<group>"; };
 		349FEDFF118358CF00D24FC9 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = TVShowsPref.xib; sourceTree = "<group>"; };
 		349FEE031183590500D24FC9 /* TVShows-Beta-Large.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "TVShows-Beta-Large.icns"; sourceTree = "<group>"; };
@@ -117,6 +134,7 @@
 			files = (
 				3423D5E4118E16DC007B55C8 /* Cocoa.framework in Frameworks */,
 				3423D5E5118E16DC007B55C8 /* PreferencePanes.framework in Frameworks */,
+				340F16A3118FF46600A1BD00 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,6 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3473849E11907678003DFFA0 /* Sparkle.framework in Frameworks */,
 				8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */,
 				8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */,
 			);
@@ -147,6 +166,7 @@
 		089C1671FE841209C02AAC07 /* Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				340F16A0118FF44400A1BD00 /* Linked Frameworks (Tiger) */,
 				1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */,
 				1058C7AEFEA557BF11CA2CBB /* Other Frameworks */,
 			);
@@ -156,13 +176,14 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				347384DB119079C0003DFFA0 /* SUPublicDSAKey.pem */,
 				34A8FF9C1187C17000DDD3DE /* LICENSE.txt */,
 				34D09636118A958300088E88 /* Credits.rtf */,
 				349FEE021183590500D24FC9 /* Images */,
 				349FEDFC118358CF00D24FC9 /* InfoPlist.strings */,
 				349FEDFE118358CF00D24FC9 /* TVShowsPref.xib */,
 				8D202CF70486D31800D8A456 /* Info.plist */,
-				3423D5EB118E16DC007B55C8 /* Info_Tiger.plist */,
+				340F16C1118FF54100A1BD00 /* Info (Tiger).plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -170,6 +191,7 @@
 		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3473845E119074C8003DFFA0 /* Sparkle.framework */,
 				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
 				F506C035013D953901CA16C8 /* PreferencePanes.framework */,
 			);
@@ -189,7 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				8D202CF80486D31800D8A456 /* TVShows.prefPane */,
-				3423D5EA118E16DC007B55C8 /* TVShows-Tiger.prefPane */,
+				3423D5EA118E16DC007B55C8 /* TVShows (Tiger).prefPane */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -200,6 +222,14 @@
 				32DBCFA20370C41700C91783 /* TVShows_Prefix.pch */,
 			);
 			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		340F16A0118FF44400A1BD00 /* Linked Frameworks (Tiger) */ = {
+			isa = PBXGroup;
+			children = (
+				340F16A2118FF46600A1BD00 /* Sparkle.framework */,
+			);
+			name = "Linked Frameworks (Tiger)";
 			sourceTree = "<group>";
 		};
 		349FEE021183590500D24FC9 /* Images */ = {
@@ -223,6 +253,8 @@
 			isa = PBXGroup;
 			children = (
 				3422ECD3118B3C130061E2E2 /* Constants.h */,
+				340F15F8118FEBDE00A1BD00 /* SUUpdaterSubclass.h */,
+				340F15F9118FEBDE00A1BD00 /* SUUpdaterSubclass.m */,
 				3422ECE7118B3D7D0061E2E2 /* PrefController.h */,
 				3422ECE8118B3D7D0061E2E2 /* PrefController.m */,
 				349FEEBF11835A1C00D24FC9 /* TabController.h */,
@@ -245,6 +277,7 @@
 				3423D5CD118E16DC007B55C8 /* TabController.h in Headers */,
 				3423D5CE118E16DC007B55C8 /* Constants.h in Headers */,
 				3423D5CF118E16DC007B55C8 /* PrefController.h in Headers */,
+				340F15FC118FEBDE00A1BD00 /* SUUpdaterSubclass.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +290,7 @@
 				349FEEC111835A1C00D24FC9 /* TabController.h in Headers */,
 				3422ECD4118B3C130061E2E2 /* Constants.h in Headers */,
 				3422ECE9118B3D7D0061E2E2 /* PrefController.h in Headers */,
+				340F15FA118FEBDE00A1BD00 /* SUUpdaterSubclass.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,7 +315,7 @@
 			name = "TVShows (Tiger)";
 			productInstallPath = "$(HOME)/Library/PreferencePanes";
 			productName = TVShows;
-			productReference = 3423D5EA118E16DC007B55C8 /* TVShows-Tiger.prefPane */;
+			productReference = 3423D5EA118E16DC007B55C8 /* TVShows (Tiger).prefPane */;
 			productType = "com.apple.product-type.bundle";
 		};
 		8D202CE80486D31800D8A456 /* TVShows */ = {
@@ -344,6 +378,7 @@
 				3423D5DB118E16DC007B55C8 /* RSS-Large.png in Resources */,
 				3423D5DC118E16DC007B55C8 /* LICENSE.txt in Resources */,
 				3423D5DD118E16DC007B55C8 /* Credits.rtf in Resources */,
+				347384DD119079C0003DFFA0 /* SUPublicDSAKey.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +399,7 @@
 				343BF4CE1183DB3C008CE71D /* RSS-Large.png in Resources */,
 				34A8FF9D1187C17000DDD3DE /* LICENSE.txt in Resources */,
 				34D09637118A958300088E88 /* Credits.rtf in Resources */,
+				347384DC119079C0003DFFA0 /* SUPublicDSAKey.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +430,7 @@
 				3423D5E0118E16DC007B55C8 /* TVShowsPref.m in Sources */,
 				3423D5E1118E16DC007B55C8 /* TabController.m in Sources */,
 				3423D5E2118E16DC007B55C8 /* PrefController.m in Sources */,
+				340F15FD118FEBDE00A1BD00 /* SUUpdaterSubclass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,6 +441,7 @@
 				349FEE181183597500D24FC9 /* TVShowsPref.m in Sources */,
 				349FEEC211835A1C00D24FC9 /* TabController.m in Sources */,
 				3422ECEA118B3D7D0061E2E2 /* PrefController.m in Sources */,
+				340F15FB118FEBDE00A1BD00 /* SUUpdaterSubclass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +476,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
+					"\"$(SRCROOT)/Frameworks (Tiger)\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -460,6 +499,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
+					"\"$(SRCROOT)/Frameworks (Tiger)\"",
 				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -479,14 +519,15 @@
 				DSTROOT = /;
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch *.xcode* (*) CVS .svn .git";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_GC = supported;
-				GCC_VERSION = 4.2;
+				GCC_ENABLE_OBJC_GC = required;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INSTALL_PATH = $HOME/Library/PreferencePanes;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				PRODUCT_NAME = "";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = macosx10.5;
 				VALID_ARCHS = "i386 ppc x86_64";
 			};
@@ -497,8 +538,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_GC = supported;
-				GCC_VERSION = 4.2;
+				GCC_ENABLE_OBJC_GC = required;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
@@ -517,17 +558,20 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/Frameworks\\\"",
+					"\"$(SRCROOT)/Frameworks\"",
+					"\"$(SRCROOT)/Frameworks (Tiger)\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TVShows_Prefix.pch;
 				GCC_VERSION = 4.0;
-				INFOPLIST_FILE = Info_Tiger.plist;
+				INFOPLIST_FILE = "Info (Tiger).plist";
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
-				PRODUCT_NAME = "TVShows-Tiger";
+				PRODUCT_NAME = "TVShows (Tiger)";
 				SDKROOT = macosx10.4;
 				WRAPPER_EXTENSION = prefPane;
 				ZERO_LINK = YES;
@@ -543,14 +587,17 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/Frameworks\\\"",
+					"\"$(SRCROOT)/Frameworks\"",
+					"\"$(SRCROOT)/Frameworks (Tiger)\"",
 				);
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TVShows_Prefix.pch;
 				GCC_VERSION = 4.0;
-				INFOPLIST_FILE = Info_Tiger.plist;
+				INFOPLIST_FILE = "Info (Tiger).plist";
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
-				PRODUCT_NAME = "TVShows-Tiger";
+				PRODUCT_NAME = "TVShows (Tiger)";
 				SDKROOT = macosx10.4;
 				WRAPPER_EXTENSION = prefPane;
 			};
