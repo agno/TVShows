@@ -73,8 +73,6 @@
 	
     [NSApp runModalForWindow: licenseInfoDialog];
 	[NSApp endSheet: licenseInfoDialog];
-	
-	[licenseInfoText release];
 }
 
 - (IBAction) closeLicenseInfoDialog:(id)sender
@@ -85,19 +83,15 @@
 
 - (void) drawAboutBox
 {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	
 	NSString *pathToAboutBoxText = [[NSBundle bundleWithIdentifier: TVShowsAppDomain] 
 									pathForResource: @"Credits" 
 									ofType: @"rtf"];
 	
-	NSAttributedString *aboutBoxText = [[NSAttributedString alloc]
+	NSAttributedString *aboutBoxText = [[[NSAttributedString alloc]
 										initWithPath: pathToAboutBoxText
-										documentAttributes: nil];
+										documentAttributes: nil] autorelease];
 
 	[[textView_aboutBox textStorage] setAttributedString:aboutBoxText];
-	
-	[pool drain];
 }
 
 @end
