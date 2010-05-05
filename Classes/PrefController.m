@@ -34,14 +34,14 @@ CFBooleanRef checkBoxValue;
 	// -----------------------------
 	if (CFPreferencesGetAppBooleanValue(CFSTR("isEnabled"), prefAppDomain, NULL)) {
 		[isEnabledControl setSelectedSegment: 1];
-		[TVShowsAppImage setImage: [[NSImage alloc] initWithContentsOfFile:
+		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
 									[[NSBundle bundleWithIdentifier: TVShowsAppDomain]
-									 pathForResource: @"TVShows-Beta-Large" ofType: @"icns"]]];
+									 pathForResource: @"TVShows-Beta-Large" ofType: @"icns"]] autorelease]];
 	} else {
 		[isEnabledControl setSelectedSegment: 0];
-		[TVShowsAppImage setImage: [[NSImage alloc] initWithContentsOfFile:
+		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
 									[[NSBundle bundleWithIdentifier: TVShowsAppDomain]
-									 pathForResource: @"TVShows-Off-Large" ofType: @"icns"]]];
+									 pathForResource: @"TVShows-Off-Large" ofType: @"icns"]] autorelease]];
 	}
 		[autoOpenDownloadedFiles	setState: CFPreferencesGetAppBooleanValue(CFSTR("AutoOpenDownloadedFiles"), prefAppDomain, NULL)];
 	
@@ -80,14 +80,14 @@ CFBooleanRef checkBoxValue;
 		appIconPath = [[NSBundle bundleWithIdentifier: TVShowsAppDomain] pathForResource: @"TVShows-Beta-Large" ofType: @"icns"];
 		
 		
-		[TVShowsAppImage setImage: [[NSImage alloc] initWithContentsOfFile: appIconPath]];
+		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile: appIconPath] autorelease]];
 	} else {
 		checkBoxValue = kCFBooleanFalse;
 		
 		appIconPath = [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
 					   pathForResource: @"TVShows-Off-Large" ofType: @"icns"];
 		
-		[TVShowsAppImage setImage: [[NSImage alloc] initWithContentsOfFile: appIconPath]];
+		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile: appIconPath] autorelease]];
 	}
 	
 	CFPreferencesSetValue(CFSTR("isEnabled"), checkBoxValue, prefAppDomain,
