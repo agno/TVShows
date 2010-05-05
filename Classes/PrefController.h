@@ -18,6 +18,14 @@
 
 @interface PrefController : NSPreferencePane
 {
+	// Version information
+	IBOutlet NSTextField *sidebarHeader;
+	IBOutlet NSTextField *sidebarHeaderShadow;
+	IBOutlet NSTextField *sidebarVersionText;
+	IBOutlet NSTextField *sidebarDateText;
+	IBOutlet NSTextField *aboutTabVersionText;
+	IBOutlet NSTextField *aboutTabVersionTextShadow;
+	
 	// Download Preferences
 	Boolean *isEnabled;
 	IBOutlet NSSegmentedControl *isEnabledControl;
