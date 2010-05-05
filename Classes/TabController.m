@@ -44,6 +44,10 @@
     [[tabView window] setFrame:tabFrame display:YES animate:YES];
 }
 
+- (IBAction) showFeedbackWindow:(id)sender {
+	[JRFeedbackController showFeedback];
+}
+
 #pragma mark -
 #pragma mark About Tab
 - (IBAction) visitWebsite:(id)sender

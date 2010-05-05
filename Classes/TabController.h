@@ -14,6 +14,7 @@
 
 #import <PreferencePanes/PreferencePanes.h>
 #import <Cocoa/Cocoa.h>
+#import "JRFeedbackController.h"
 
 
 @interface TabController : NSPreferencePane
@@ -25,6 +26,7 @@
 
 
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
+- (IBAction) showFeedbackWindow:(id)sender;
 
 #pragma mark -
 #pragma mark About Tab
