@@ -23,6 +23,113 @@ CFBooleanRef checkBoxValue;
 @implementation PrefController
 
 #pragma mark -
+#pragma mark Preferences Functions
+
+// Modified from the Perian prefPane source code
+// Original version: http://svn.perian.org/trunk/CPFPerianPrefPaneController.m
+
+- (BOOL) getBoolFromKey:(NSString *)key withDefault:(BOOL)defaultValue
+{
+	Boolean ret, exists = FALSE;
+	
+	ret = CFPreferencesGetAppBooleanValue((CFStringRef)key, prefAppDomain, &exists);
+	
+	return exists ? ret : defaultValue;
+}
+
+- (void) setKey:(NSString *)key fromBool:(BOOL)value
+{
+	CFPreferencesSetAppValue((CFStringRef)key, value ? kCFBooleanTrue : kCFBooleanFalse, prefAppDomain);
+	CFPreferencesSynchronize(prefAppDomain, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+}
+
+- (float) getFloatFromKey:(NSString *)key withDefault:(float)defaultValue
+{
+	CFPropertyListRef value;
+	float ret = defaultValue;
+	
+	value = CFPreferencesCopyAppValue((CFStringRef)key, prefAppDomain);
+	if(value && CFGetTypeID(value) == CFNumberGetTypeID())
+		CFNumberGetValue(value, kCFNumberFloatType, &ret);
+	
+	if(value)
+		CFRelease(value);
+	
+	return ret;
+}
+
+- (void) setKey:(NSString *)key fromFloat:(float)value
+{
+	CFNumberRef numRef = CFNumberCreate(NULL, kCFNumberFloatType, &value);
+	CFPreferencesSetAppValue((CFStringRef)key, numRef, prefAppDomain);
+	CFRelease(numRef);
+	
+	CFPreferencesSynchronize(prefAppDomain, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+}
+
+- (unsigned int) getUnsignedIntFromKey:(NSString *)key withDefault:(int)defaultValue
+{
+	int ret; Boolean exists = FALSE;
+	
+	ret = CFPreferencesGetAppIntegerValue((CFStringRef)key, prefAppDomain, &exists);
+	
+	return exists ? ret : defaultValue;
+}
+
+- (void) setKey:(NSString *)key fromInt:(int)value
+{
+	CFNumberRef numRef = CFNumberCreate(NULL, kCFNumberIntType, &value);
+	CFPreferencesSetAppValue((CFStringRef)key, numRef, prefAppDomain);
+	CFRelease(numRef);
+	
+	CFPreferencesSynchronize(prefAppDomain, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+}
+
+- (NSString *) getStringFromKey:(NSString *)key
+{
+	CFPropertyListRef value;
+	
+	value = CFPreferencesCopyAppValue((CFStringRef)key, prefAppDomain);
+	
+	if(value) {
+		CFMakeCollectable(value);
+		[(id)value autorelease];
+		
+		if (CFGetTypeID(value) != CFStringGetTypeID())
+			return nil;
+	}
+	
+	return (NSString*)value;
+}
+
+- (void) setKey:(NSString *)key fromString:(NSString *)value
+{
+	CFPreferencesSetAppValue((CFStringRef)key, value, prefAppDomain);
+	CFPreferencesSynchronize(prefAppDomain, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+}
+
+- (NSDate *) getDateFromKey:(NSString *)key
+{
+	CFPropertyListRef value;
+	NSDate *ret = nil;
+	
+	value = CFPreferencesCopyAppValue((CFStringRef)key, prefAppDomain);
+	if(value && CFGetTypeID(value) == CFDateGetTypeID())
+		ret = [[(NSDate *)value retain] autorelease];
+	
+	if(value)
+		CFRelease(value);
+	
+	return ret;
+}
+
+- (void) setKey:(NSString *)key fromDate:(NSDate *)value
+{
+	CFPreferencesSetAppValue((CFStringRef)key, value, prefAppDomain);
+	CFPreferencesSynchronize(prefAppDomain, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+}
+
+#pragma mark -
 #pragma mark General
 - (void) awakeFromNib
 {
@@ -49,7 +156,7 @@ CFBooleanRef checkBoxValue;
 	
 	// Register download preferences
 	// -----------------------------
-	if (CFPreferencesGetAppBooleanValue(CFSTR("isEnabled"), prefAppDomain, NULL)) {
+	if ([self getBoolFromKey:@"isEnabled" withDefault:1]) {
 		[isEnabledControl setSelectedSegment: 1];
 		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
 									[[NSBundle bundleWithIdentifier: TVShowsAppDomain]
@@ -63,44 +170,31 @@ CFBooleanRef checkBoxValue;
 		isEnabled = 0;
 	}
 	
-	[autoOpenDownloadedFiles setState: CFPreferencesGetAppBooleanValue(CFSTR("AutoOpenDownloadedFiles"), prefAppDomain, NULL)];
-	
-	CFNumberRef tempCheckDelay = CFPreferencesCopyAppValue(CFSTR("checkDelay"), prefAppDomain);
-	checkDelay = CFNumberGetValue(tempCheckDelay, kCFNumberIntType, NULL);
-	
-	[episodeCheckDelay selectItemAtIndex: checkDelay];
-	NSLog(@"%d",checkDelay);
-	CFRelease(tempCheckDelay);
+	[autoOpenDownloadedFiles setState: [self getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]];
+	[episodeCheckDelay selectItemAtIndex: [self getFloatFromKey:@"checkDelay" withDefault:0]];
 		
-	CFNumberRef tempDefaultQuality = CFPreferencesCopyAppValue(CFSTR("defaultQuality"), prefAppDomain);
-	defaultQuality = CFNumberGetValue(tempDefaultQuality, kCFNumberIntType, NULL);
+	defaultQuality = [self getFloatFromKey:@"defaultQuality" withDefault:0];
 
 	[defaultVideoQuality setState: 1
 							atRow: defaultQuality
 						   column: 0];
-	CFRelease(tempDefaultQuality);
 	
 	// Register Growl notification preferences
 	// ---------------------------------------
-	[growlNotifyEpisode			setState: CFPreferencesGetAppBooleanValue(CFSTR("GrowlOnNewEpisode"), prefAppDomain, NULL)];
-	[growlNotifyApplication		setState: CFPreferencesGetAppBooleanValue(CFSTR("GrowlOnAppUpdate"), prefAppDomain, NULL)];
+	[growlNotifyEpisode			setState: [self getBoolFromKey:@"GrowlOnNewEpisode" withDefault:1]];
+	[growlNotifyApplication		setState: [self getBoolFromKey:@"GrowlOnAppUpdate" withDefault:1]];
 	
 	// Register application update preferences
 	// ---------------------------------------
-	if (CFPreferencesGetAppBooleanValue(CFSTR("SUEnableAutomaticChecks"), prefAppDomain, NULL) == 0) {
+	if ([self getBoolFromKey:@"SUEnableAutomaticChecks" withDefault:1] == 0) {
 		[checkForUpdates			setState: 0];
 		[autoInstallNewUpdates		setEnabled: NO];
 		[includeSystemInformation	setEnabled: NO];
 		[downloadBetaVersions		setEnabled: NO];
 	}
-		[downloadBetaVersions		setState: CFPreferencesGetAppBooleanValue(CFSTR("SUDownloadBetaVersions"), prefAppDomain, NULL)];
-		[autoInstallNewUpdates		setState: CFPreferencesGetAppBooleanValue(CFSTR("SUAutomaticallyUpdate"), prefAppDomain, NULL)];
-		[includeSystemInformation	setState: CFPreferencesGetAppBooleanValue(CFSTR("SUSendProfileInfo"), prefAppDomain, NULL)];
-}
-
-- (void) syncPreferences
-{
-	CFPreferencesSynchronize(prefAppDomain, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+		[downloadBetaVersions		setState: [self getBoolFromKey:@"SUDownloadBetaVersions" withDefault:1]];
+		[autoInstallNewUpdates		setState: [self getBoolFromKey:@"SUAutomaticallyUpdate" withDefault:1]];
+		[includeSystemInformation	setState: [self getBoolFromKey:@"SUSendProfileInfo" withDefault:1]];
 }
 
 #pragma mark -
@@ -110,15 +204,15 @@ CFBooleanRef checkBoxValue;
 	NSString *appIconPath;
 	
 	if ([isEnabledControl selectedSegment]) {
-		checkBoxValue = kCFBooleanTrue;
 		isEnabled = 1;
+		[self setKey:@"isEnabled" fromBool: 1];
 		
 		appIconPath = [[NSBundle bundleWithIdentifier: TVShowsAppDomain] pathForResource: @"TVShows-Beta-Large" ofType: @"icns"];
 		
 		
 		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile: appIconPath] autorelease]];
 	} else {
-		checkBoxValue = kCFBooleanFalse;
+		[self setKey:@"isEnabled" fromBool: 0];
 		isEnabled = 0;
 		
 		appIconPath = [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
@@ -126,76 +220,33 @@ CFBooleanRef checkBoxValue;
 		
 		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile: appIconPath] autorelease]];
 	}
-	
-	CFPreferencesSetValue(CFSTR("isEnabled"), checkBoxValue, prefAppDomain,
-						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
-	
-	[self syncPreferences];
 }
 
 - (IBAction) episodeCheckDelayDidChange:(id)sender
 {
-	int selectedItem = [episodeCheckDelay indexOfSelectedItem];
-	CFNumberRef prefValueToSave = CFNumberCreate(NULL, kCFNumberIntType, &selectedItem);
-	
-	CFPreferencesSetValue(CFSTR("checkDelay"), prefValueToSave, prefAppDomain,
-						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
-	
-	CFRelease(prefValueToSave);
-	[self syncPreferences];
+	[self setKey:@"checkDelay" fromFloat: [episodeCheckDelay indexOfSelectedItem]];
 }
 
 - (IBAction) defaultVideoQualityDidChange:(id)sender
 {
-	int selectedRow = [defaultVideoQuality selectedRow];
-	CFNumberRef prefValueToSave = CFNumberCreate(NULL, kCFNumberIntType, &selectedRow);
-	
-	CFPreferencesSetValue(CFSTR("defaultQuality"), prefValueToSave, prefAppDomain,
-						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
-	
-	CFRelease(prefValueToSave);
-	[self syncPreferences];
+	[self setKey:@"defaultQuality" fromFloat: [defaultVideoQuality selectedRow]];
 }
 
 - (IBAction) autoOpenDownloadedFilesDidChange:(id)sender
 {
-	if ([autoOpenDownloadedFiles state])
-		checkBoxValue = kCFBooleanTrue;
-	else
-		checkBoxValue = kCFBooleanFalse;
-	
-	CFPreferencesSetValue(CFSTR("AutoOpenDownloadedFiles"), checkBoxValue, prefAppDomain,
-						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
-	
-	[self syncPreferences];
+	[self setKey:@"AutoOpenDownloadedFiles" fromBool: [autoOpenDownloadedFiles state]];
 }
 
 #pragma mark -
 #pragma mark Growl Notification Preferences
 - (IBAction) growlNotifyEpisodeDidChange:(id)sender
 {
-	if ([growlNotifyEpisode state])
-		checkBoxValue = kCFBooleanTrue;
-	else
-		checkBoxValue = kCFBooleanFalse;
-	
-	CFPreferencesSetValue(CFSTR("GrowlOnNewEpisode"), checkBoxValue, prefAppDomain,
-						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
-	
-	[self syncPreferences];
+	[self setKey:@"GrowlOnNewEpisode" fromBool: [growlNotifyEpisode state]];
 }
 
 - (IBAction) growlNotifyApplicationDidChange:(id)sender
 {
-	if ([growlNotifyApplication state])
-		checkBoxValue = kCFBooleanTrue;
-	else
-		checkBoxValue = kCFBooleanFalse;
-	
-	CFPreferencesSetValue(CFSTR("GrowlOnAppUpdate"), checkBoxValue, prefAppDomain,
-						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
-	
-	[self syncPreferences];
+	[self setKey:@"GrowlOnAppUpdate" fromBool: [growlNotifyApplication state]];
 }
 
 #pragma mark -
@@ -203,68 +254,39 @@ CFBooleanRef checkBoxValue;
 - (IBAction) checkForUpdatesDidChange:(id)sender
 {
 	if ([checkForUpdates state]) {
-		checkBoxValue = kCFBooleanTrue;
+		[self setKey:@"SUEnableAutomaticChecks" fromBool: 1];
 		
 		[autoInstallNewUpdates setEnabled: YES];
 		[includeSystemInformation setEnabled: YES];
 		[downloadBetaVersions setEnabled: YES];
 	} else {
-		checkBoxValue = kCFBooleanFalse;
+		[self setKey:@"SUEnableAutomaticChecks" fromBool: 0];
 		
 		[autoInstallNewUpdates setEnabled: NO];
 		[includeSystemInformation setEnabled: NO];
 		[downloadBetaVersions setEnabled: NO];
 	}
-	
-	CFPreferencesSetValue(CFSTR("SUEnableAutomaticChecks"), checkBoxValue, prefAppDomain,
-						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
-	
-	[self syncPreferences];
 }
 
 - (IBAction) autoInstallNewUpdatesDidChange:(id)sender
 {
-	if ([autoInstallNewUpdates state])
-		checkBoxValue = kCFBooleanTrue;
-	else
-		checkBoxValue = kCFBooleanFalse;
-	
-	CFPreferencesSetValue(CFSTR("SUAutomaticallyUpdate"), checkBoxValue, prefAppDomain,
-						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
-	
-	[self syncPreferences];
+	[self setKey:@"SUAutomaticallyUpdate" fromBool: [autoInstallNewUpdates state]];
 }
 
 - (IBAction) downloadBetaVersionsDidChange:(id)sender
 {
 	if ([downloadBetaVersions state]) {
-		checkBoxValue = kCFBooleanTrue;
-		CFPreferencesSetValue(CFSTR("SUFeedURL"), (CFStringRef)TVShowsBetaAppcastURL, prefAppDomain,
-							  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+		[self setKey:@"SUDownloadBetaVersions" fromBool:1];
+		[self setKey:@"SUFeedURL" fromString:TVShowsBetaAppcastURL];
 	} else {
-		checkBoxValue = kCFBooleanFalse;
-		CFPreferencesSetValue(CFSTR("SUFeedURL"), (CFStringRef)TVShowsAppcastURL, prefAppDomain, 
-							  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+		[self setKey:@"SUDownloadBetaVersions" fromBool:0];
+		[self setKey:@"SUFeedURL" fromString:TVShowsAppcastURL];
 	}
-	
-	CFPreferencesSetValue(CFSTR("SUDownloadBetaVersions"), checkBoxValue, prefAppDomain,
-						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
-
-	
-	[self syncPreferences];
 }
 
 - (IBAction) includeSystemInformationDidChange:(id)sender
 {
-	if ([includeSystemInformation state])
-		checkBoxValue = kCFBooleanTrue;
-	else
-		checkBoxValue = kCFBooleanFalse;
-	
-	CFPreferencesSetValue(CFSTR("SUSendProfileInfo"), checkBoxValue, prefAppDomain,
-						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
-	
-	[self syncPreferences];
+	[self setKey:@"SUSendProfileInfo" fromBool: [includeSystemInformation state]];
 }
 
 @end
