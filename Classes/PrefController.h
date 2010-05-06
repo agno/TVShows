@@ -27,9 +27,13 @@
 	IBOutlet NSTextField *aboutTabVersionTextShadow;
 	
 	// Download Preferences
-	Boolean *isEnabled;
+	Boolean isEnabled;
+	int defaultQuality;
+	int checkDelay;
 	IBOutlet NSSegmentedControl *isEnabledControl;
 	IBOutlet NSImageView *TVShowsAppImage;
+	IBOutlet NSPopUpButton *episodeCheckDelay;
+	IBOutlet NSMatrix *defaultVideoQuality;
 	IBOutlet NSButton *autoOpenDownloadedFiles;
 
 	// Growl Settings
@@ -51,6 +55,8 @@
 #pragma mark -
 #pragma mark Download Preferences
 - (IBAction) isEnabledControlDidChange:(id)sender;
+- (IBAction) episodeCheckDelayDidChange:(id)sender;
+- (IBAction) defaultVideoQualityDidChange:(id)sender;
 - (IBAction) autoOpenDownloadedFilesDidChange:(id)sender;
 
 #pragma mark -

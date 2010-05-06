@@ -18,7 +18,6 @@
 
 // Setup CFPreference variables
 CFStringRef prefAppDomain = (CFStringRef)TVShowsAppDomain;
-CFStringRef prefValueToSave;
 CFBooleanRef checkBoxValue;
 
 @implementation PrefController
@@ -55,18 +54,36 @@ CFBooleanRef checkBoxValue;
 		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
 									[[NSBundle bundleWithIdentifier: TVShowsAppDomain]
 									 pathForResource: @"TVShows-Beta-Large" ofType: @"icns"]] autorelease]];
+		isEnabled = 1;
 	} else {
 		[isEnabledControl setSelectedSegment: 0];
 		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
 									[[NSBundle bundleWithIdentifier: TVShowsAppDomain]
 									 pathForResource: @"TVShows-Off-Large" ofType: @"icns"]] autorelease]];
+		isEnabled = 0;
 	}
-		[autoOpenDownloadedFiles	setState: CFPreferencesGetAppBooleanValue(CFSTR("AutoOpenDownloadedFiles"), prefAppDomain, NULL)];
+	
+	[autoOpenDownloadedFiles setState: CFPreferencesGetAppBooleanValue(CFSTR("AutoOpenDownloadedFiles"), prefAppDomain, NULL)];
+	
+	CFNumberRef tempCheckDelay = CFPreferencesCopyAppValue(CFSTR("checkDelay"), prefAppDomain);
+	checkDelay = CFNumberGetValue(tempCheckDelay, kCFNumberIntType, NULL);
+	
+	[episodeCheckDelay selectItemAtIndex: checkDelay];
+	NSLog(@"%d",checkDelay);
+	CFRelease(tempCheckDelay);
+		
+	CFNumberRef tempDefaultQuality = CFPreferencesCopyAppValue(CFSTR("defaultQuality"), prefAppDomain);
+	defaultQuality = CFNumberGetValue(tempDefaultQuality, kCFNumberIntType, NULL);
+
+	[defaultVideoQuality setState: 1
+							atRow: defaultQuality
+						   column: 0];
+	CFRelease(tempDefaultQuality);
 	
 	// Register Growl notification preferences
 	// ---------------------------------------
-		[growlNotifyEpisode			setState: CFPreferencesGetAppBooleanValue(CFSTR("GrowlOnNewEpisode"), prefAppDomain, NULL)];
-		[growlNotifyApplication		setState: CFPreferencesGetAppBooleanValue(CFSTR("GrowlOnAppUpdate"), prefAppDomain, NULL)];
+	[growlNotifyEpisode			setState: CFPreferencesGetAppBooleanValue(CFSTR("GrowlOnNewEpisode"), prefAppDomain, NULL)];
+	[growlNotifyApplication		setState: CFPreferencesGetAppBooleanValue(CFSTR("GrowlOnAppUpdate"), prefAppDomain, NULL)];
 	
 	// Register application update preferences
 	// ---------------------------------------
@@ -94,6 +111,7 @@ CFBooleanRef checkBoxValue;
 	
 	if ([isEnabledControl selectedSegment]) {
 		checkBoxValue = kCFBooleanTrue;
+		isEnabled = 1;
 		
 		appIconPath = [[NSBundle bundleWithIdentifier: TVShowsAppDomain] pathForResource: @"TVShows-Beta-Large" ofType: @"icns"];
 		
@@ -101,6 +119,7 @@ CFBooleanRef checkBoxValue;
 		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile: appIconPath] autorelease]];
 	} else {
 		checkBoxValue = kCFBooleanFalse;
+		isEnabled = 0;
 		
 		appIconPath = [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
 					   pathForResource: @"TVShows-Off-Large" ofType: @"icns"];
@@ -111,6 +130,30 @@ CFBooleanRef checkBoxValue;
 	CFPreferencesSetValue(CFSTR("isEnabled"), checkBoxValue, prefAppDomain,
 						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
 	
+	[self syncPreferences];
+}
+
+- (IBAction) episodeCheckDelayDidChange:(id)sender
+{
+	int selectedItem = [episodeCheckDelay indexOfSelectedItem];
+	CFNumberRef prefValueToSave = CFNumberCreate(NULL, kCFNumberIntType, &selectedItem);
+	
+	CFPreferencesSetValue(CFSTR("checkDelay"), prefValueToSave, prefAppDomain,
+						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+	
+	CFRelease(prefValueToSave);
+	[self syncPreferences];
+}
+
+- (IBAction) defaultVideoQualityDidChange:(id)sender
+{
+	int selectedRow = [defaultVideoQuality selectedRow];
+	CFNumberRef prefValueToSave = CFNumberCreate(NULL, kCFNumberIntType, &selectedRow);
+	
+	CFPreferencesSetValue(CFSTR("defaultQuality"), prefValueToSave, prefAppDomain,
+						  kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+	
+	CFRelease(prefValueToSave);
 	[self syncPreferences];
 }
 

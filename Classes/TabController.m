@@ -22,13 +22,15 @@
 	NSRect  tabFrame;
     int    newWinHeight;
 	
+	// Difference between actualy window size and newWinHeight is 54
+	
 	tabFrame = [[tabView window] frame];
 	
     if ([[tabViewItem identifier] isEqualTo:@"tabItemPreferences"]) {
-        newWinHeight = 512;
+        newWinHeight = 526;
 		
     } else if ([[tabViewItem identifier] isEqualTo:@"tabItemSubscriptions"]) {
-        newWinHeight = 512;
+        newWinHeight = 526;
 		
     }  else if ([[tabViewItem identifier] isEqualTo:@"tabItemAbout"]) {
 		[self drawAboutBox];
