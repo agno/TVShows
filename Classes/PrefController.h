@@ -29,10 +29,10 @@
 	// Download Preferences
 	Boolean isEnabled;
 	int defaultQuality;
-	int checkDelay;
 	IBOutlet NSSegmentedControl *isEnabledControl;
 	IBOutlet NSImageView *TVShowsAppImage;
 	IBOutlet NSPopUpButton *episodeCheckDelay;
+	IBOutlet NSPopUpButton *downloadLocationMenu;
 	IBOutlet NSMatrix *defaultVideoQuality;
 	IBOutlet NSButton *autoOpenDownloadedFiles;
 
@@ -72,6 +72,10 @@
 #pragma mark Download Preferences
 - (IBAction) isEnabledControlDidChange:(id)sender;
 - (IBAction) episodeCheckDelayDidChange:(id)sender;
+- (void) buildDownloadLocationMenu;
+- (NSMenu *) downloadLocationMenu;
+- (void) selectOtherDownloadFolder:(id)sender;
+- (void) openPanelDidEnd:(NSOpenPanel *)openPanel returnCode:(int)returnCode contextInfo:(void *)contextInfo;
 - (IBAction) defaultVideoQualityDidChange:(id)sender;
 - (IBAction) autoOpenDownloadedFilesDidChange:(id)sender;
 

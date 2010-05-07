@@ -873,7 +873,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 																	<int key="NSPeriodicInterval">75</int>
 																	<object class="NSMenuItem" key="NSMenuItem" id="332733347">
 																		<reference key="NSMenu" ref="521193874"/>
-																		<string key="NSTitle">Item 1</string>
+																		<string key="NSTitle">Download Location</string>
 																		<string key="NSKeyEquiv"/>
 																		<int key="NSKeyEquivModMask">1048576</int>
 																		<int key="NSMnemonicLoc">2147483647</int>
@@ -889,29 +889,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 																		<object class="NSMutableArray" key="NSMenuItems">
 																			<bool key="EncodedWithXMLCoder">YES</bool>
 																			<reference ref="332733347"/>
-																			<object class="NSMenuItem" id="138623458">
-																				<reference key="NSMenu" ref="521193874"/>
-																				<bool key="NSIsDisabled">YES</bool>
-																				<bool key="NSIsSeparator">YES</bool>
-																				<string key="NSTitle"/>
-																				<string key="NSKeyEquiv"/>
-																				<int key="NSMnemonicLoc">2147483647</int>
-																				<reference key="NSOnImage" ref="486478013"/>
-																				<reference key="NSMixedImage" ref="655150988"/>
-																				<string key="NSAction">_popUpItemAction:</string>
-																				<reference key="NSTarget" ref="495213205"/>
-																			</object>
-																			<object class="NSMenuItem" id="336019533">
-																				<reference key="NSMenu" ref="521193874"/>
-																				<string key="NSTitle">Other...</string>
-																				<string key="NSKeyEquiv"/>
-																				<int key="NSKeyEquivModMask">1048576</int>
-																				<int key="NSMnemonicLoc">2147483647</int>
-																				<reference key="NSOnImage" ref="486478013"/>
-																				<reference key="NSMixedImage" ref="655150988"/>
-																				<string key="NSAction">_popUpItemAction:</string>
-																				<reference key="NSTarget" ref="495213205"/>
-																			</object>
 																		</object>
 																		<reference key="NSMenuFont" ref="534512890"/>
 																	</object>
@@ -2137,6 +2114,14 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<int key="connectionID">646</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">downloadLocationMenu</string>
+						<reference key="source" ref="330339090"/>
+						<reference key="destination" ref="812273912"/>
+					</object>
+					<int key="connectionID">663</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -3143,24 +3128,12 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="332733347"/>
-							<reference ref="336019533"/>
-							<reference ref="138623458"/>
 						</object>
 						<reference key="parent" ref="495213205"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">621</int>
 						<reference key="object" ref="332733347"/>
-						<reference key="parent" ref="521193874"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">619</int>
-						<reference key="object" ref="336019533"/>
-						<reference key="parent" ref="521193874"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">654</int>
-						<reference key="object" ref="138623458"/>
 						<reference key="parent" ref="521193874"/>
 					</object>
 				</object>
@@ -3309,7 +3282,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>617.IBPluginDependency</string>
 					<string>618.IBEditorWindowLastContentRect</string>
 					<string>618.IBPluginDependency</string>
-					<string>619.IBPluginDependency</string>
 					<string>621.IBPluginDependency</string>
 					<string>641.IBPluginDependency</string>
 					<string>642.IBPluginDependency</string>
@@ -3317,8 +3289,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>643.IBPluginDependency</string>
 					<string>644.IBAttributePlaceholdersKey</string>
 					<string>644.IBPluginDependency</string>
-					<string>654.IBPluginDependency</string>
-					<string>654.ImportedFromIB2</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -3474,8 +3444,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{640, 431}, {157, 53}}</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>{{640, 461}, {196, 23}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3496,8 +3465,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<boolean value="YES"/>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -3516,7 +3483,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">662</int>
+			<int key="maxID">663</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3554,9 +3521,11 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>growlNotifyEpisodeDidChange:</string>
 							<string>includeSystemInformationDidChange:</string>
 							<string>isEnabledControlDidChange:</string>
+							<string>selectOtherDownloadFolder:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -3581,6 +3550,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>checkForUpdates</string>
 							<string>defaultVideoQuality</string>
 							<string>downloadBetaVersions</string>
+							<string>downloadLocationMenu</string>
 							<string>episodeCheckDelay</string>
 							<string>growlNotifyApplication</string>
 							<string>growlNotifyEpisode</string>
@@ -3601,6 +3571,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>NSButton</string>
 							<string>NSMatrix</string>
 							<string>NSButton</string>
+							<string>NSPopUpButton</string>
 							<string>NSPopUpButton</string>
 							<string>NSButton</string>
 							<string>NSButton</string>

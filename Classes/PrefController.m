@@ -174,10 +174,11 @@ CFBooleanRef checkBoxValue;
 	[episodeCheckDelay selectItemAtIndex: [self getFloatFromKey:@"checkDelay" withDefault:0]];
 		
 	defaultQuality = [self getFloatFromKey:@"defaultQuality" withDefault:0];
-
 	[defaultVideoQuality setState: 1
 							atRow: defaultQuality
 						   column: 0];
+
+	[self buildDownloadLocationMenu];
 	
 	// Register Growl notification preferences
 	// ---------------------------------------
@@ -225,6 +226,76 @@ CFBooleanRef checkBoxValue;
 - (IBAction) episodeCheckDelayDidChange:(id)sender
 {
 	[self setKey:@"checkDelay" fromFloat: [episodeCheckDelay indexOfSelectedItem]];
+}
+
+// Modified from the Adium prefence window source code
+// Original version: http://hg.adium.im/adium/file/tip/Source/ESFileTransferPreferences.m
+- (void) buildDownloadLocationMenu
+{
+	[downloadLocationMenu setMenu: [self downloadLocationMenu]];
+	[downloadLocationMenu selectItem: [downloadLocationMenu itemAtIndex:0]];
+}
+
+- (NSMenu *) downloadLocationMenu
+{
+	NSMenu		*menu;
+	NSMenuItem	*menuItem;
+	NSString	*userPreferredDownloadFolder;
+	NSImage		*iconForDownloadFolder;
+	
+	menu = [[[NSMenu allocWithZone:[NSMenu menuZone]] init] autorelease];
+	[menu setAutoenablesItems:NO];
+	
+	//Create the menu item for the current download folder
+	userPreferredDownloadFolder = [self getStringFromKey:@"downloadFolder"];
+	menuItem = [[[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle: [[NSFileManager defaultManager] displayNameAtPath:userPreferredDownloadFolder]
+																	 action: nil
+															  keyEquivalent: @""] autorelease];
+
+	iconForDownloadFolder = [[NSWorkspace sharedWorkspace] iconForFile:userPreferredDownloadFolder];
+	[iconForDownloadFolder setSize:NSMakeSize(16, 16)];
+	
+	[menuItem setRepresentedObject:userPreferredDownloadFolder];
+	[menuItem setImage:iconForDownloadFolder];
+	[menu addItem:menuItem];
+	
+	[menu addItem:[NSMenuItem separatorItem]];
+	
+	//Create the menu item for changing the current download folder
+	menuItem = [[[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle:@"Other..."
+																	 action:@selector(selectOtherDownloadFolder:)
+															  keyEquivalent:@""] autorelease];
+	[menuItem setTarget:self];
+	[menuItem setRepresentedObject:userPreferredDownloadFolder];
+	[menu addItem:menuItem];
+	
+	return menu;
+}
+
+- (void) selectOtherDownloadFolder:(id)sender
+{
+	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+	NSString	*userPreferredDownloadFolder = [sender representedObject];
+	
+	[openPanel setCanChooseFiles:NO];
+	[openPanel setCanChooseDirectories:YES];
+	
+	[openPanel beginSheetForDirectory:userPreferredDownloadFolder
+								 file:nil
+								types:nil
+					   modalForWindow:[[NSApplication sharedApplication] mainWindow]
+						modalDelegate:self
+					   didEndSelector:@selector(openPanelDidEnd:returnCode:contextInfo:)
+						  contextInfo:nil];
+}
+
+- (void) openPanelDidEnd:(NSOpenPanel *)openPanel returnCode:(int)returnCode contextInfo:(void *)contextInfo
+{
+	if (returnCode == NSOKButton) {
+		[self setKey:@"downloadFolder" fromString:[openPanel filename]];
+	}
+	
+	[self buildDownloadLocationMenu];
 }
 
 - (IBAction) defaultVideoQualityDidChange:(id)sender
