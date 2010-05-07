@@ -59,12 +59,8 @@
 		347AFB24119115A800393565 /* JRFeedbackProvider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 347AFB1F119115A800393565 /* JRFeedbackProvider.xib */; };
 		347AFBD51191206700393565 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 347AFBD41191206700393565 /* AddressBook.framework */; };
 		347AFBD91191207300393565 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 347AFBD81191207300393565 /* SystemConfiguration.framework */; };
-		347AFBFF1191208900393565 /* AddressBook.framework in Copy Linked Libraries */ = {isa = PBXBuildFile; fileRef = 347AFBD41191206700393565 /* AddressBook.framework */; };
-		347AFC001191208900393565 /* SystemConfiguration.framework in Copy Linked Libraries */ = {isa = PBXBuildFile; fileRef = 347AFBD81191207300393565 /* SystemConfiguration.framework */; };
 		347AFC021191209400393565 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 347AFC011191209400393565 /* AddressBook.framework */; };
 		347AFC041191209E00393565 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 347AFC031191209E00393565 /* SystemConfiguration.framework */; };
-		347AFC05119120A400393565 /* AddressBook.framework in Copy Linked Libraries */ = {isa = PBXBuildFile; fileRef = 347AFC011191209400393565 /* AddressBook.framework */; };
-		347AFC06119120A400393565 /* SystemConfiguration.framework in Copy Linked Libraries */ = {isa = PBXBuildFile; fileRef = 347AFC031191209E00393565 /* SystemConfiguration.framework */; };
 		349FEE01118358CF00D24FC9 /* TVShowsPref.xib in Resources */ = {isa = PBXBuildFile; fileRef = 349FEDFE118358CF00D24FC9 /* TVShowsPref.xib */; };
 		349FEE091183590500D24FC9 /* TVShows-Beta-Large.icns in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE031183590500D24FC9 /* TVShows-Beta-Large.icns */; };
 		349FEE0A1183590500D24FC9 /* TVShows-Beta.png in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE041183590500D24FC9 /* TVShows-Beta.png */; };
@@ -92,8 +88,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				347AFBFF1191208900393565 /* AddressBook.framework in Copy Linked Libraries */,
-				347AFC001191208900393565 /* SystemConfiguration.framework in Copy Linked Libraries */,
 				3473849F1190767A003DFFA0 /* Sparkle.framework in Copy Linked Libraries */,
 			);
 			name = "Copy Linked Libraries";
@@ -105,8 +99,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				347AFC05119120A400393565 /* AddressBook.framework in Copy Linked Libraries */,
-				347AFC06119120A400393565 /* SystemConfiguration.framework in Copy Linked Libraries */,
 				340F16AE118FF47200A1BD00 /* Sparkle.framework in Copy Linked Libraries */,
 			);
 			name = "Copy Linked Libraries";
