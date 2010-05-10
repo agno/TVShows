@@ -131,13 +131,27 @@ CFBooleanRef checkBoxValue;
 
 #pragma mark -
 #pragma mark General
+- init
+{
+	if((self = [super init])) {
+		// Set default user preferences if TVShows has never launched
+		// In a perfect world this would check for any keys that don't
+		// exist, regardless of whether we've launched before or not.
+		if ([self getBoolFromKey:@"hasLaunched" withDefault:0] == 0) {
+			[self setDefaultUserDefaults];
+		}
+	}
+	
+    return self;
+	
+}
+
 - (void) awakeFromNib
 {
-	// Saved for reference. Not everything is a BOOL.
-	// CFPreferencesCopyAppValue();
+	// Load the user's preferences
+	[self loadSavedDefaults];
 	
 	// Set displayed version information
-	// ---------------------------------
 	NSString *bundleVersion = [[[NSBundle bundleWithIdentifier: TVShowsAppDomain] infoDictionary] 
 							   valueForKey: @"CFBundleShortVersionString"];
 	NSString *buildVersion = [[[NSBundle bundleWithIdentifier: TVShowsAppDomain] infoDictionary]
@@ -153,49 +167,75 @@ CFBooleanRef checkBoxValue;
 	
 	[aboutTabVersionText setStringValue: [NSString stringWithFormat: @"TVShows %@ (%@)", bundleVersion, buildVersion]];
 	[aboutTabVersionTextShadow setStringValue: [aboutTabVersionText stringValue]];
-	
-	// Register download preferences
-	// -----------------------------
+		
+	// Update the application build number in installedBuild
+	// (Allows us to run build specific update sequences)
+	[self setKey:@"installedBuild" fromString:buildVersion];
+
+}
+
+- (void) setDefaultUserDefaults
+{
+	// Set the user defaults
+	[self setKey:@"AutoOpenDownloadedFiles" fromBool:YES];
+	[self setKey:@"checkDelay"				fromFloat:0];
+	[self setKey:@"defaultQuality"			fromFloat:0];
+	[self setKey:@"downloadFolder"			fromString:[NSHomeDirectory() stringByAppendingPathComponent:@"Downloads"]];
+	[self setKey:@"GrowlOnAppUpdate"		fromBool:YES];
+	[self setKey:@"GrowlOnNewEpisode"		fromBool:YES];
+	[self setKey:@"hasLaunched"				fromBool:YES];
+	[self setKey:@"isEnabled"				fromBool:YES];
+	[self setKey:@"SUAutomaticallyUpdate"	fromBool:YES];
+	[self setKey:@"SUDownloadBetaVersions"	fromBool:YES];
+	[self setKey:@"SUEnableAutomaticChecks" fromBool:YES];
+	[self setKey:@"SUFeedURL"				fromString:TVShowsAppcastURL];
+	[self setKey:@"SUSendProfileInfo"		fromBool:YES];
+}
+
+- (void) loadSavedDefaults
+{
+	// Load download preferences
+	// -------------------------
 	if ([self getBoolFromKey:@"isEnabled" withDefault:1]) {
 		[isEnabledControl setSelectedSegment: 1];
 		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
-									[[NSBundle bundleWithIdentifier: TVShowsAppDomain]
-									 pathForResource: @"TVShows-Beta-Large" ofType: @"icns"]] autorelease]];
+									 [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
+									  pathForResource: @"TVShows-Beta-Large" ofType: @"icns"]] autorelease]];
 		isEnabled = 1;
 	} else {
 		[isEnabledControl setSelectedSegment: 0];
 		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
-									[[NSBundle bundleWithIdentifier: TVShowsAppDomain]
-									 pathForResource: @"TVShows-Off-Large" ofType: @"icns"]] autorelease]];
+									 [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
+									  pathForResource: @"TVShows-Off-Large" ofType: @"icns"]] autorelease]];
 		isEnabled = 0;
 	}
 	
 	[autoOpenDownloadedFiles setState: [self getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]];
 	[episodeCheckDelay selectItemAtIndex: [self getFloatFromKey:@"checkDelay" withDefault:0]];
-		
+	
 	defaultQuality = [self getFloatFromKey:@"defaultQuality" withDefault:0];
 	[defaultVideoQuality setState: 1
 							atRow: defaultQuality
 						   column: 0];
-
+	
 	[self buildDownloadLocationMenu];
 	
-	// Register Growl notification preferences
-	// ---------------------------------------
+	// Load Growl notification preferences
+	// -----------------------------------
 	[growlNotifyEpisode			setState: [self getBoolFromKey:@"GrowlOnNewEpisode" withDefault:1]];
 	[growlNotifyApplication		setState: [self getBoolFromKey:@"GrowlOnAppUpdate" withDefault:1]];
 	
-	// Register application update preferences
-	// ---------------------------------------
+	// Load Sparkle preferences
+	// ------------------------
 	if ([self getBoolFromKey:@"SUEnableAutomaticChecks" withDefault:1] == 0) {
 		[checkForUpdates			setState: 0];
 		[autoInstallNewUpdates		setEnabled: NO];
 		[includeSystemInformation	setEnabled: NO];
 		[downloadBetaVersions		setEnabled: NO];
 	}
-		[downloadBetaVersions		setState: [self getBoolFromKey:@"SUDownloadBetaVersions" withDefault:1]];
-		[autoInstallNewUpdates		setState: [self getBoolFromKey:@"SUAutomaticallyUpdate" withDefault:1]];
-		[includeSystemInformation	setState: [self getBoolFromKey:@"SUSendProfileInfo" withDefault:1]];
+	[downloadBetaVersions		setState: [self getBoolFromKey:@"SUDownloadBetaVersions" withDefault:1]];
+	[autoInstallNewUpdates		setState: [self getBoolFromKey:@"SUAutomaticallyUpdate" withDefault:1]];
+	[includeSystemInformation	setState: [self getBoolFromKey:@"SUSendProfileInfo" withDefault:1]];
 }
 
 #pragma mark -
@@ -246,12 +286,13 @@ CFBooleanRef checkBoxValue;
 	menu = [[[NSMenu allocWithZone:[NSMenu menuZone]] init] autorelease];
 	[menu setAutoenablesItems:NO];
 	
-	//Create the menu item for the current download folder
+	// Create the menu item for the current download folder
 	userPreferredDownloadFolder = [self getStringFromKey:@"downloadFolder"];
 	menuItem = [[[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle: [[NSFileManager defaultManager] displayNameAtPath:userPreferredDownloadFolder]
 																	 action: nil
 															  keyEquivalent: @""] autorelease];
 
+	// Get the download folder's icon and resize it
 	iconForDownloadFolder = [[NSWorkspace sharedWorkspace] iconForFile:userPreferredDownloadFolder];
 	[iconForDownloadFolder setSize:NSMakeSize(16, 16)];
 	
@@ -261,7 +302,7 @@ CFBooleanRef checkBoxValue;
 	
 	[menu addItem:[NSMenuItem separatorItem]];
 	
-	//Create the menu item for changing the current download folder
+	// Create the menu item for changing the current download folder
 	menuItem = [[[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle:@"Other..."
 																	 action:@selector(selectOtherDownloadFolder:)
 															  keyEquivalent:@""] autorelease];
@@ -274,6 +315,7 @@ CFBooleanRef checkBoxValue;
 
 - (void) selectOtherDownloadFolder:(id)sender
 {
+	// Displays a dialog box to select the download location
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
 	NSString	*userPreferredDownloadFolder = [sender representedObject];
 	

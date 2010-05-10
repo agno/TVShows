@@ -66,7 +66,10 @@
 
 #pragma mark -
 #pragma mark General
+- init;
 - (void) awakeFromNib;
+- (void) setDefaultUserDefaults;
+- (void) loadSavedDefaults;
 
 #pragma mark -
 #pragma mark Download Preferences
