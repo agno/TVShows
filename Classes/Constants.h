@@ -12,7 +12,7 @@
  *
  */
 
-#define TVShowsAppDomain			@"com.github.TVShows2"
-#define TVShowsWebsite				@"http://deathtobunnies.com/tvshows/"
-#define TVShowsAppcastURL			@"http://deathtobunnies.com/tvshows/appcast.xml"
-#define TVShowsBetaAppcastURL		@"http://deathtobunnies.com/tvshows/appcast-beta.xml"
+#define TVShowsAppDomain			@"com.embercode.TVShows2"
+#define TVShowsWebsite				@"http://embercode.com/tvshows/"
+#define TVShowsAppcastURL			@"http://embercode.com/updates/tvshows.xml"
+#define TVShowsBetaAppcastURL		@"http://embercode.com/updates/tvshows-beta.xml"
