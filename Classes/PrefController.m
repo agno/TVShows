@@ -186,7 +186,7 @@ CFBooleanRef checkBoxValue;
 	[self setKey:@"hasLaunched"				fromBool:YES];
 	[self setKey:@"isEnabled"				fromBool:YES];
 	[self setKey:@"SUAutomaticallyUpdate"	fromBool:YES];
-	[self setKey:@"SUDownloadBetaVersions"	fromBool:YES];
+	[self setKey:@"SUDownloadBetaVersions"	fromBool:NO];
 	[self setKey:@"SUEnableAutomaticChecks" fromBool:YES];
 	[self setKey:@"SUFeedURL"				fromString:TVShowsAppcastURL];
 	[self setKey:@"SUSendProfileInfo"		fromBool:YES];
