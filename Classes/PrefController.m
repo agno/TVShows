@@ -27,7 +27,6 @@ CFBooleanRef checkBoxValue;
 
 // Modified from the Perian prefPane source code
 // Original version: http://svn.perian.org/trunk/CPFPerianPrefPaneController.m
-
 - (BOOL) getBoolFromKey:(NSString *)key withDefault:(BOOL)defaultValue
 {
 	Boolean ret, exists = FALSE;
@@ -137,6 +136,7 @@ CFBooleanRef checkBoxValue;
 		// Set default user preferences if TVShows has never launched
 		// In a perfect world this would check for any keys that don't
 		// exist, regardless of whether we've launched before or not.
+		
 		if ([self getBoolFromKey:@"hasLaunched" withDefault:0] == 0) {
 			[self setDefaultUserDefaults];
 		}
@@ -176,7 +176,6 @@ CFBooleanRef checkBoxValue;
 
 - (void) setDefaultUserDefaults
 {
-	// Set the user defaults
 	[self setKey:@"AutoOpenDownloadedFiles" fromBool:YES];
 	[self setKey:@"checkDelay"				fromFloat:0];
 	[self setKey:@"defaultQuality"			fromFloat:0];
@@ -315,7 +314,6 @@ CFBooleanRef checkBoxValue;
 
 - (void) selectOtherDownloadFolder:(id)sender
 {
-	// Displays a dialog box to select the download location
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
 	NSString	*userPreferredDownloadFolder = [sender representedObject];
 	
