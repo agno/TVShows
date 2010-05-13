@@ -58,13 +58,7 @@
 		3473849E11907678003DFFA0 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3473845E119074C8003DFFA0 /* Sparkle.framework */; };
 		3473849F1190767A003DFFA0 /* Sparkle.framework in Copy Linked Libraries */ = {isa = PBXBuildFile; fileRef = 3473845E119074C8003DFFA0 /* Sparkle.framework */; };
 		34785D07119B9CE200A28449 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 34785D04119B9CE200A28449 /* Credits.rtf */; };
-		34785D08119B9CE200A28449 /* Info (Tiger).plist in Resources */ = {isa = PBXBuildFile; fileRef = 34785D05119B9CE200A28449 /* Info (Tiger).plist */; };
-		34785D09119B9CE200A28449 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 34785D06119B9CE200A28449 /* Info.plist */; };
 		34785D0A119B9CE200A28449 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 34785D04119B9CE200A28449 /* Credits.rtf */; };
-		34785D0B119B9CE200A28449 /* Info (Tiger).plist in Resources */ = {isa = PBXBuildFile; fileRef = 34785D05119B9CE200A28449 /* Info (Tiger).plist */; };
-		34785D0C119B9CE200A28449 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 34785D06119B9CE200A28449 /* Info.plist */; };
-		34785D13119B9EC200A28449 /* TVShows_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 34785D12119B9EC200A28449 /* TVShows_Prefix.pch */; };
-		34785D14119B9EC200A28449 /* TVShows_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 34785D12119B9EC200A28449 /* TVShows_Prefix.pch */; };
 		347AFB151191157700393565 /* JRFeedbackController.h in Headers */ = {isa = PBXBuildFile; fileRef = 347AFB111191157700393565 /* JRFeedbackController.h */; };
 		347AFB161191157700393565 /* JRFeedbackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 347AFB121191157700393565 /* JRFeedbackController.m */; };
 		347AFB171191157700393565 /* NSURLRequestPostForm.h in Headers */ = {isa = PBXBuildFile; fileRef = 347AFB131191157700393565 /* NSURLRequestPostForm.h */; };
@@ -95,6 +89,12 @@
 		34A8FF9D1187C17000DDD3DE /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 34A8FF9C1187C17000DDD3DE /* LICENSE.txt */; };
 		34EB966E11838131005825C1 /* showRSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB966D11838131005825C1 /* showRSS.png */; };
 		34EB967F118389FC005825C1 /* NZB.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB967E118389FC005825C1 /* NZB.png */; };
+		34F6EA3A119BCAD100F8AD4C /* TVShows_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 34F6EA39119BCAD100F8AD4C /* TVShows_Prefix.pch */; };
+		34F6EA3B119BCAD100F8AD4C /* TVShows_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 34F6EA39119BCAD100F8AD4C /* TVShows_Prefix.pch */; };
+		34F6EA65119BCBA200F8AD4C /* Info (Tiger).plist in Resources */ = {isa = PBXBuildFile; fileRef = 34F6EA63119BCBA200F8AD4C /* Info (Tiger).plist */; };
+		34F6EA66119BCBA200F8AD4C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 34F6EA64119BCBA200F8AD4C /* Info.plist */; };
+		34F6EA67119BCBA200F8AD4C /* Info (Tiger).plist in Resources */ = {isa = PBXBuildFile; fileRef = 34F6EA63119BCBA200F8AD4C /* Info (Tiger).plist */; };
+		34F6EA68119BCBA200F8AD4C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 34F6EA64119BCBA200F8AD4C /* Info.plist */; };
 		8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F506C035013D953901CA16C8 /* PreferencePanes.framework */; };
 /* End PBXBuildFile section */
@@ -146,9 +146,6 @@
 		345BE418119344F10016EA2D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = Resources/English.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; };
 		3473845E119074C8003DFFA0 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		34785D04119B9CE200A28449 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Credits.rtf; path = Resources/Credits.rtf; sourceTree = "<group>"; };
-		34785D05119B9CE200A28449 /* Info (Tiger).plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Info (Tiger).plist"; path = "Resources/Info (Tiger).plist"; sourceTree = "<group>"; };
-		34785D06119B9CE200A28449 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
-		34785D12119B9EC200A28449 /* TVShows_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TVShows_Prefix.pch; path = "Other Sources/TVShows_Prefix.pch"; sourceTree = "<group>"; };
 		347AFB111191157700393565 /* JRFeedbackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRFeedbackController.h; path = JRFeedbackProvider/JRFeedbackController.h; sourceTree = "<group>"; };
 		347AFB121191157700393565 /* JRFeedbackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRFeedbackController.m; path = JRFeedbackProvider/JRFeedbackController.m; sourceTree = "<group>"; };
 		347AFB131191157700393565 /* NSURLRequestPostForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSURLRequestPostForm.h; path = JRFeedbackProvider/NSURLRequestPostForm.h; sourceTree = "<group>"; };
@@ -174,6 +171,9 @@
 		34EB966D11838131005825C1 /* showRSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showRSS.png; sourceTree = "<group>"; };
 		34EB966F118384DB005825C1 /* RSS-Large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RSS-Large.png"; sourceTree = "<group>"; };
 		34EB967E118389FC005825C1 /* NZB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NZB.png; sourceTree = "<group>"; };
+		34F6EA39119BCAD100F8AD4C /* TVShows_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShows_Prefix.pch; sourceTree = "<group>"; };
+		34F6EA63119BCBA200F8AD4C /* Info (Tiger).plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info (Tiger).plist"; sourceTree = "<group>"; };
+		34F6EA64119BCBA200F8AD4C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D202CF80486D31800D8A456 /* TVShows.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVShows.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
 		F506C035013D953901CA16C8 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = /System/Library/Frameworks/PreferencePanes.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -234,8 +234,8 @@
 			children = (
 				349FEE021183590500D24FC9 /* Images */,
 				347AFB25119115AC00393565 /* English.lproj */,
-				34785D06119B9CE200A28449 /* Info.plist */,
-				34785D05119B9CE200A28449 /* Info (Tiger).plist */,
+				34F6EA63119BCBA200F8AD4C /* Info (Tiger).plist */,
+				34F6EA64119BCBA200F8AD4C /* Info.plist */,
 				34908BD0119B9C1C00BDFC01 /* SUPublicDSAKey.pem */,
 				34A8FF9C1187C17000DDD3DE /* LICENSE.txt */,
 				34785D04119B9CE200A28449 /* Credits.rtf */,
@@ -276,7 +276,7 @@
 		32DBCFA10370C40200C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				34785D12119B9EC200A28449 /* TVShows_Prefix.pch */,
+				34F6EA39119BCAD100F8AD4C /* TVShows_Prefix.pch */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -377,7 +377,7 @@
 				347AFB1B1191157700393565 /* NSURLRequestPostForm.h in Headers */,
 				3401810F11950C6E00FB0E39 /* PresetShowsController.h in Headers */,
 				3401817511951F1800FB0E39 /* ShowListDelegate.h in Headers */,
-				34785D14119B9EC200A28449 /* TVShows_Prefix.pch in Headers */,
+				34F6EA3B119BCAD100F8AD4C /* TVShows_Prefix.pch in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,7 +394,7 @@
 				347AFB171191157700393565 /* NSURLRequestPostForm.h in Headers */,
 				3401810D11950C6E00FB0E39 /* PresetShowsController.h in Headers */,
 				3401817311951F1800FB0E39 /* ShowListDelegate.h in Headers */,
-				34785D13119B9EC200A28449 /* TVShows_Prefix.pch in Headers */,
+				34F6EA3A119BCAD100F8AD4C /* TVShows_Prefix.pch in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,8 +486,8 @@
 				340181011194BF5800FB0E39 /* bannerArtPlaceholder.jpg in Resources */,
 				34908BD2119B9C1C00BDFC01 /* SUPublicDSAKey.pem in Resources */,
 				34785D0A119B9CE200A28449 /* Credits.rtf in Resources */,
-				34785D0B119B9CE200A28449 /* Info (Tiger).plist in Resources */,
-				34785D0C119B9CE200A28449 /* Info.plist in Resources */,
+				34F6EA67119BCBA200F8AD4C /* Info (Tiger).plist in Resources */,
+				34F6EA68119BCBA200F8AD4C /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,8 +512,8 @@
 				340181001194BF5800FB0E39 /* bannerArtPlaceholder.jpg in Resources */,
 				34908BD1119B9C1C00BDFC01 /* SUPublicDSAKey.pem in Resources */,
 				34785D07119B9CE200A28449 /* Credits.rtf in Resources */,
-				34785D08119B9CE200A28449 /* Info (Tiger).plist in Resources */,
-				34785D09119B9CE200A28449 /* Info.plist in Resources */,
+				34F6EA65119BCBA200F8AD4C /* Info (Tiger).plist in Resources */,
+				34F6EA66119BCBA200F8AD4C /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -618,6 +618,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
 					"\"$(SRCROOT)/Frameworks (Tiger)\"",
+					"\"$(DEVELOPER_DIR)/Local/Frameworks\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -641,6 +642,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
 					"\"$(SRCROOT)/Frameworks (Tiger)\"",
+					"\"$(DEVELOPER_DIR)/Local/Frameworks\"",
 				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
