@@ -13,12 +13,16 @@
  */
 
 #import "PresetShowsController.h"
+#import "ShowListDelegate.h"
 
 
 @implementation PresetShowsController
 
 - (IBAction) displayPresetShowsWindow:(id)sender
 {
+	id showList = [[[ShowListDelegate class] alloc] init];
+	[showList downloadShowList];
+	
     [NSApp beginSheet: presetShowsWindow
 	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
 		modalDelegate: nil
@@ -27,6 +31,8 @@
 	
     [NSApp runModalForWindow: presetShowsWindow];
 	[NSApp endSheet: presetShowsWindow];
+	
+	[showList release];
 }
 
 - (IBAction) closePresetShowsWindow:(id)sender

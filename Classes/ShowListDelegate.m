@@ -21,7 +21,7 @@
 
 #pragma mark -
 #pragma mark Custom Functions
-- (IBAction) downloadShowList:(id)sender {
+- (void) downloadShowList {
 	NSManagedObjectContext *context = [self managedObjectContext];
 	NSManagedObject *show = [NSEntityDescription insertNewObjectForEntityForName: @"Show"
 							 inManagedObjectContext: context];
@@ -34,6 +34,7 @@
 	[show2 setValue: @"Psych 2" forKey: @"displayName"];
 	[show2 setValue: [NSNumber numberWithInt:112] forKey: @"showrssID"];
 	
+	[self saveAction];	
 }
 
 #pragma mark -
@@ -128,7 +129,7 @@
 
 // Send the save: message to the application's managed object context.
 // Any encountered errors are presented to the user.
-- (IBAction) saveAction:(id)sender {
+- (void) saveAction {
 
     NSError *error = nil;
     
