@@ -184,7 +184,7 @@
         [alert addButtonWithTitle:quitButton];
         [alert addButtonWithTitle:cancelButton];
 
-        NSInteger answer = [alert runModal];
+        int answer = [alert runModal];
         [alert release];
         alert = nil;
         
