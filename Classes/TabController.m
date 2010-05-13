@@ -13,7 +13,6 @@
  */
 
 #import "TabController.h"
-#import "Constants.h"
 
 
 @implementation TabController
