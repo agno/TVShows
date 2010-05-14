@@ -22,5 +22,6 @@
 
 - (IBAction) displayPresetShowsWindow:(id)sender;
 - (IBAction) closePresetShowsWindow:(id)sender;
+- (void) downloadShowList;
 
 @end

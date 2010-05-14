@@ -19,24 +19,6 @@
 @synthesize window;
 
 #pragma mark -
-#pragma mark Custom Functions
-- (void) downloadShowList {
-	NSManagedObjectContext *context = [self managedObjectContext];
-	NSManagedObject *show = [NSEntityDescription insertNewObjectForEntityForName: @"Show"
-							 inManagedObjectContext: context];
-	NSManagedObject *show2 = [NSEntityDescription insertNewObjectForEntityForName: @"Show"
-														  inManagedObjectContext: context];
-	
-	[show setValue: @"Psych" forKey: @"displayName"];
-	[show setValue: [NSNumber numberWithInt:111] forKey: @"showrssID"];
-	
-	[show2 setValue: @"Psych 2" forKey: @"displayName"];
-	[show2 setValue: [NSNumber numberWithInt:112] forKey: @"showrssID"];
-	
-	[self saveAction];	
-}
-
-#pragma mark -
 #pragma mark Xcode Example Functions
 // Returns the Application Support directory for TVShows 2
 - (NSString *) applicationSupportDirectory {
@@ -141,65 +123,7 @@
     }
 }
 
-
-/**
-    Implementation of the applicationShouldTerminate: method, used here to
-    handle the saving of changes in the application managed object context
-    before the application terminates.
- */
-
-- (NSApplicationTerminateReply) applicationShouldTerminate:(NSApplication *)sender {
-
-    if (!managedObjectContext) return NSTerminateNow;
-
-    if (![managedObjectContext commitEditing]) {
-        NSLog(@"%@:%s unable to commit editing to terminate", [self class], _cmd);
-        return NSTerminateCancel;
-    }
-
-    if (![managedObjectContext hasChanges]) return NSTerminateNow;
-
-    NSError *error = nil;
-    if (![managedObjectContext save:&error]) {
-    
-        // This error handling simply presents error information in a panel with an 
-        // "Ok" button, which does not include any attempt at error recovery (meaning, 
-        // attempting to fix the error.)  As a result, this implementation will 
-        // present the information to the user and then follow up with a panel asking 
-        // if the user wishes to "Quit Anyway", without saving the changes.
-
-        // Typically, this process should be altered to include application-specific 
-        // recovery steps.  
-                
-        BOOL result = [sender presentError:error];
-        if (result) return NSTerminateCancel;
-
-        NSString *question = NSLocalizedString(@"Could not save changes while quitting.  Quit anyway?", @"Quit without saves error question message");
-        NSString *info = NSLocalizedString(@"Quitting now will lose any changes you have made since the last successful save", @"Quit without saves error question info");
-        NSString *quitButton = NSLocalizedString(@"Quit anyway", @"Quit anyway button title");
-        NSString *cancelButton = NSLocalizedString(@"Cancel", @"Cancel button title");
-        NSAlert *alert = [[NSAlert alloc] init];
-        [alert setMessageText:question];
-        [alert setInformativeText:info];
-        [alert addButtonWithTitle:quitButton];
-        [alert addButtonWithTitle:cancelButton];
-
-        int answer = [alert runModal];
-        [alert release];
-        alert = nil;
-        
-        if (answer == NSAlertAlternateReturn) return NSTerminateCancel;
-
-    }
-
-    return NSTerminateNow;
-}
-
-
-/**
-    Implementation of dealloc, to release the retained variables.
- */
- 
+// Implementation of dealloc, to release the retained variables.
 - (void) dealloc {
 
     [window release];

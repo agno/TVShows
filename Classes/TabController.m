@@ -21,7 +21,7 @@
 	NSRect  tabFrame;
     int    newWinHeight;
 	
-	// Difference between actualy window size and newWinHeight is 54
+	// newWinHeight should be equal to the wanted window size (in Interface Builder) + 54 (title bar height)
 	
 	tabFrame = [[tabView window] frame];
 	

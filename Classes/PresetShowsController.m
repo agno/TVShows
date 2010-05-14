@@ -20,8 +20,7 @@
 
 - (IBAction) displayPresetShowsWindow:(id)sender
 {
-	id showList = [[[ShowListDelegate class] alloc] init];
-	[showList downloadShowList];
+	[self downloadShowList];
 	
     [NSApp beginSheet: presetShowsWindow
 	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
@@ -31,14 +30,32 @@
 	
     [NSApp runModalForWindow: presetShowsWindow];
 	[NSApp endSheet: presetShowsWindow];
-	
-	[showList release];
 }
 
 - (IBAction) closePresetShowsWindow:(id)sender
 {	
     [NSApp stopModal];
     [presetShowsWindow orderOut: self];
+}
+
+- (void) downloadShowList {
+	// There's probably a better way to do this.
+	id delegateClass = [[[ShowListDelegate class] alloc] init];
+	
+	NSManagedObjectContext *context = [delegateClass managedObjectContext];
+	NSManagedObject *show = [NSEntityDescription insertNewObjectForEntityForName: @"Show"
+														  inManagedObjectContext: context];
+	NSManagedObject *show2 = [NSEntityDescription insertNewObjectForEntityForName: @"Show"
+														   inManagedObjectContext: context];
+	
+	[show setValue: @"Psych" forKey: @"displayName"];
+	[show setValue: [NSNumber numberWithInt:111] forKey: @"showrssID"];
+	
+	[show2 setValue: @"Psych 2" forKey: @"displayName"];
+	[show2 setValue: [NSNumber numberWithInt:112] forKey: @"showrssID"];
+	
+	[delegateClass saveAction];
+	[delegateClass release];
 }
 
 @end
