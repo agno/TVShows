@@ -14,13 +14,14 @@
 
 #import "PresetShowsController.h"
 #import "ShowListDelegate.h"
+#import "RegexKitLite.h"
 
 
 @implementation PresetShowsController
 
 - (IBAction) displayPresetShowsWindow:(id)sender
 {
-	[self downloadShowList];
+	//[self downloadShowList];
 	
     [NSApp beginSheet: presetShowsWindow
 	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
@@ -42,19 +43,39 @@
 	// There's probably a better way to do this.
 	id delegateClass = [[[ShowListDelegate class] alloc] init];
 	
+	NSString *displayName;
+	int showrssID;
+	
 	NSManagedObjectContext *context = [delegateClass managedObjectContext];
-	NSManagedObject *show = [NSEntityDescription insertNewObjectForEntityForName: @"Show"
-														  inManagedObjectContext: context];
-	NSManagedObject *show2 = [NSEntityDescription insertNewObjectForEntityForName: @"Show"
-														   inManagedObjectContext: context];
 	
-	[show setValue: @"Psych" forKey: @"displayName"];
-	[show setValue: [NSNumber numberWithInt:111] forKey: @"showrssID"];
+	// This section is extremely messy but it works for the time being
+	// If anyone feels like improving it, though, feel free
+	NSURL *showRSSList = [NSURL URLWithString:@"http://showrss.karmorra.info/?cs=feeds"];
+	NSString *searchString = [[[NSString alloc] initWithContentsOfURL:showRSSList
+															 encoding:NSUTF8StringEncoding
+																error:NULL] autorelease];
 	
-	[show2 setValue: @"Psych 2" forKey: @"displayName"];
-	[show2 setValue: [NSNumber numberWithInt:112] forKey: @"showrssID"];
+	NSArray *matchArray = [searchString componentsMatchedByRegex:@"<select name=\"show\">(.+?)</select>"];
+	searchString = [matchArray objectAtIndex:0];
 	
-	[delegateClass saveAction];
+	for(NSString *matchedString in [searchString componentsMatchedByRegex:@"(?!<option value=\")([[:digit:]]+)(.*?)(?=</option>)"]) {
+		NSManagedObject *show = [NSEntityDescription insertNewObjectForEntityForName: @"Show"
+															  inManagedObjectContext: context];
+		
+		// I hate having to search for each valute separately but I can't seem to figure out any other way
+		displayName = [[[matchedString componentsMatchedByRegex:@"\">(.+)"] objectAtIndex:0]
+					   stringByReplacingOccurrencesOfRegex:@"\">" withString:@""];
+		showrssID = [[[matchedString componentsMatchedByRegex:@"([[:digit:]]+)(?![[:alnum:]]|[[:space:]])"] objectAtIndex:0]
+					 intValue];
+		
+		[show setValue:displayName forKey: @"displayName"];
+		[show setValue:[NSNumber numberWithInt:showrssID] forKey: @"showrssID"];
+		
+		[delegateClass saveAction];
+		//	[[delegateClass managedObjectContext] processPendingChanges];
+	} 
+	
+	//	[delegateClass saveAction];
 	[delegateClass release];
 }
 
