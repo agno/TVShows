@@ -17,7 +17,8 @@
 
 @implementation TabController
 
-- (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem {
+- (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
+{
 	NSRect  tabFrame;
     int    newWinHeight;
 	
@@ -45,7 +46,8 @@
     [[tabView window] setFrame:tabFrame display:YES animate:YES];
 }
 
-- (IBAction) showFeedbackWindow:(id)sender {
+- (IBAction) showFeedbackWindow:(id)sender
+{
 	[JRFeedbackController showFeedback];
 }
 

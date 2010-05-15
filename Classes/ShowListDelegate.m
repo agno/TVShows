@@ -21,7 +21,8 @@
 #pragma mark -
 #pragma mark Xcode Example Functions
 // Returns the Application Support directory for TVShows 2
-- (NSString *) applicationSupportDirectory {
+- (NSString *) applicationSupportDirectory
+{
 
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
     NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
@@ -29,7 +30,8 @@
 }
 
 // Creates, retains, and returns the managed object model for the application
-- (NSManagedObjectModel *) managedObjectModel {
+- (NSManagedObjectModel *) managedObjectModel
+{
 
     if (managedObjectModel) return managedObjectModel;
 	
@@ -43,8 +45,8 @@
 // implementation will create and return a coordinator, having added the 
 // store for the application to it.  (The directory for the store is created, 
 // if necessary.)
-- (NSPersistentStoreCoordinator *) persistentStoreCoordinator {
-
+- (NSPersistentStoreCoordinator *) persistentStoreCoordinator
+{
     if (persistentStoreCoordinator) return persistentStoreCoordinator;
 
     NSManagedObjectModel *mom = [self managedObjectModel];
@@ -82,7 +84,8 @@
 }
 
 // Returns the managed object context for the application 
-- (NSManagedObjectContext *) managedObjectContext {
+- (NSManagedObjectContext *) managedObjectContext
+{
 
     if (managedObjectContext) return managedObjectContext;
 
@@ -103,14 +106,16 @@
 
 // Returns the NSUndoManager for the application.  In this case, the manager
 // returned is that of the managed object context for the application.
-- (NSUndoManager *) windowWillReturnUndoManager:(NSWindow *)window {
+- (NSUndoManager *) windowWillReturnUndoManager:(NSWindow *)window
+{
     return [[self managedObjectContext] undoManager];
 }
 
 
 // Send the save: message to the application's managed object context.
 // Any encountered errors are presented to the user.
-- (void) saveAction {
+- (void) saveAction
+{
 
     NSError *error = nil;
     
@@ -124,7 +129,8 @@
 }
 
 // Implementation of dealloc, to release the retained variables.
-- (void) dealloc {
+- (void) dealloc
+{
 
     [window release];
     [managedObjectContext release];

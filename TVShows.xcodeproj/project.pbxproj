@@ -33,8 +33,6 @@
 		347AFBD51191206700393565 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 347AFBD41191206700393565 /* AddressBook.framework */; };
 		347AFBD91191207300393565 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 347AFBD81191207300393565 /* SystemConfiguration.framework */; };
 		34908BD1119B9C1C00BDFC01 /* SUPublicDSAKey.pem in Resources */ = {isa = PBXBuildFile; fileRef = 34908BD0119B9C1C00BDFC01 /* SUPublicDSAKey.pem */; };
-		34966E08119CEA8A003712BE /* RegexKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34966E07119CEA8A003712BE /* RegexKit.framework */; };
-		34966E1A119CEA90003712BE /* RegexKit.framework in Copy Linked Libraries */ = {isa = PBXBuildFile; fileRef = 34966E07119CEA8A003712BE /* RegexKit.framework */; };
 		349FEE01118358CF00D24FC9 /* TVShowsPref.xib in Resources */ = {isa = PBXBuildFile; fileRef = 349FEDFE118358CF00D24FC9 /* TVShowsPref.xib */; };
 		349FEE091183590500D24FC9 /* TVShows-Beta-Large.icns in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE031183590500D24FC9 /* TVShows-Beta-Large.icns */; };
 		349FEE0A1183590500D24FC9 /* TVShows-Beta.png in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE041183590500D24FC9 /* TVShows-Beta.png */; };
@@ -47,6 +45,11 @@
 		349FEEC111835A1C00D24FC9 /* TabController.h in Headers */ = {isa = PBXBuildFile; fileRef = 349FEEBF11835A1C00D24FC9 /* TabController.h */; };
 		349FEEC211835A1C00D24FC9 /* TabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 349FEEC011835A1C00D24FC9 /* TabController.m */; };
 		34A8FF9D1187C17000DDD3DE /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 34A8FF9C1187C17000DDD3DE /* LICENSE.txt */; };
+		34A9183C119E09AF004B339D /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34A9183B119E09AF004B339D /* BWToolkitFramework.framework */; };
+		34A9186D119E09B6004B339D /* BWToolkitFramework.framework in Copy Linked Libraries */ = {isa = PBXBuildFile; fileRef = 34A9183B119E09AF004B339D /* BWToolkitFramework.framework */; };
+		34A91884119E2C85004B339D /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 34A91883119E2C85004B339D /* libicucore.dylib */; };
+		34A91894119E2F83004B339D /* RegexKitLite.h in Headers */ = {isa = PBXBuildFile; fileRef = 34A91892119E2F83004B339D /* RegexKitLite.h */; };
+		34A91895119E2F83004B339D /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A91893119E2F83004B339D /* RegexKitLite.m */; };
 		34EB966E11838131005825C1 /* showRSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB966D11838131005825C1 /* showRSS.png */; };
 		34EB967F118389FC005825C1 /* NZB.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB967E118389FC005825C1 /* NZB.png */; };
 		34F6EA3A119BCAD100F8AD4C /* TVShows_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 34F6EA39119BCAD100F8AD4C /* TVShows_Prefix.pch */; };
@@ -61,7 +64,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				34966E1A119CEA90003712BE /* RegexKit.framework in Copy Linked Libraries */,
+				34A9186D119E09B6004B339D /* BWToolkitFramework.framework in Copy Linked Libraries */,
 				3473849F1190767A003DFFA0 /* Sparkle.framework in Copy Linked Libraries */,
 			);
 			name = "Copy Linked Libraries";
@@ -97,7 +100,6 @@
 		347AFBD41191206700393565 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		347AFBD81191207300393565 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		34908BD0119B9C1C00BDFC01 /* SUPublicDSAKey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SUPublicDSAKey.pem; path = Resources/SUPublicDSAKey.pem; sourceTree = "<group>"; };
-		34966E07119CEA8A003712BE /* RegexKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RegexKit.framework; path = Frameworks/RegexKit.framework; sourceTree = "<group>"; };
 		349FEDFF118358CF00D24FC9 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = TVShowsPref.xib; sourceTree = "<group>"; };
 		349FEE031183590500D24FC9 /* TVShows-Beta-Large.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "TVShows-Beta-Large.icns"; sourceTree = "<group>"; };
 		349FEE041183590500D24FC9 /* TVShows-Beta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TVShows-Beta.png"; sourceTree = "<group>"; };
@@ -110,6 +112,10 @@
 		349FEEBF11835A1C00D24FC9 /* TabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabController.h; sourceTree = "<group>"; };
 		349FEEC011835A1C00D24FC9 /* TabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabController.m; sourceTree = "<group>"; };
 		34A8FF9C1187C17000DDD3DE /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		34A9183B119E09AF004B339D /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BWToolkitFramework.framework; path = Frameworks/BWToolkitFramework.framework; sourceTree = "<group>"; };
+		34A91883119E2C85004B339D /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		34A91892119E2F83004B339D /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		34A91893119E2F83004B339D /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		34EB966D11838131005825C1 /* showRSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showRSS.png; sourceTree = "<group>"; };
 		34EB966F118384DB005825C1 /* RSS-Large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RSS-Large.png"; sourceTree = "<group>"; };
 		34EB967E118389FC005825C1 /* NZB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NZB.png; sourceTree = "<group>"; };
@@ -129,7 +135,8 @@
 				8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */,
 				347AFBD51191206700393565 /* AddressBook.framework in Frameworks */,
 				347AFBD91191207300393565 /* SystemConfiguration.framework in Frameworks */,
-				34966E08119CEA8A003712BE /* RegexKit.framework in Frameworks */,
+				34A9183C119E09AF004B339D /* BWToolkitFramework.framework in Frameworks */,
+				34A91884119E2C85004B339D /* libicucore.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,8 +181,9 @@
 		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				34966E07119CEA8A003712BE /* RegexKit.framework */,
+				34A9183B119E09AF004B339D /* BWToolkitFramework.framework */,
 				3473845E119074C8003DFFA0 /* Sparkle.framework */,
+				34A91883119E2C85004B339D /* libicucore.dylib */,
 				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
 				F506C035013D953901CA16C8 /* PreferencePanes.framework */,
 				347AFBD41191206700393565 /* AddressBook.framework */,
@@ -261,6 +269,7 @@
 		349FEE141183597500D24FC9 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				34A91891119E2F83004B339D /* RegexKitLite */,
 				347AFB0E1191153B00393565 /* JRFeedbackProvider */,
 				3422ECD3118B3C130061E2E2 /* Constants.h */,
 				340F15F8118FEBDE00A1BD00 /* SUUpdaterSubclass.h */,
@@ -277,6 +286,15 @@
 				349FEE161183597500D24FC9 /* TVShowsPref.m */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		34A91891119E2F83004B339D /* RegexKitLite */ = {
+			isa = PBXGroup;
+			children = (
+				34A91892119E2F83004B339D /* RegexKitLite.h */,
+				34A91893119E2F83004B339D /* RegexKitLite.m */,
+			);
+			path = RegexKitLite;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,6 +314,7 @@
 				3401810D11950C6E00FB0E39 /* PresetShowsController.h in Headers */,
 				3401817311951F1800FB0E39 /* ShowListDelegate.h in Headers */,
 				34F6EA3A119BCAD100F8AD4C /* TVShows_Prefix.pch in Headers */,
+				34A91894119E2F83004B339D /* RegexKitLite.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +414,7 @@
 				3401817411951F1800FB0E39 /* ShowListDelegate.m in Sources */,
 				3401817911951FAA00FB0E39 /* ShowListModel.xcdatamodel in Sources */,
 				3420BD6E1197AA32005DE217 /* SubscriptionsModel.xcdatamodel in Sources */,
+				34A91895119E2F83004B339D /* RegexKitLite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
