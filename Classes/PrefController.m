@@ -150,23 +150,9 @@ CFBooleanRef checkBoxValue;
 	// Load the user's preferences
 	[self loadSavedDefaults];
 	
-	// Set displayed version information
-	NSString *bundleVersion = [[[NSBundle bundleWithIdentifier: TVShowsAppDomain] infoDictionary] 
-							   valueForKey: @"CFBundleShortVersionString"];
 	NSString *buildVersion = [[[NSBundle bundleWithIdentifier: TVShowsAppDomain] infoDictionary]
-								valueForKey:@"CFBundleVersion"];
-	NSString *buildDate = [[[NSBundle bundleWithIdentifier: TVShowsAppDomain] infoDictionary]
-							  valueForKey:@"TSBundleBuildDate"];
+							  valueForKey:@"CFBundleVersion"];
 	
-	[sidebarVersionText setStringValue: [NSString stringWithFormat:@"%@ (%@)", bundleVersion, buildVersion]];
-	[sidebarDateText setStringValue: buildDate];
-	
-	[sidebarHeader setStringValue: [NSString stringWithFormat: @"TVShows %@", bundleVersion]];
-	[sidebarHeaderShadow setStringValue: [sidebarHeader stringValue]];
-	
-	[aboutTabVersionText setStringValue: [NSString stringWithFormat: @"TVShows %@ (%@)", bundleVersion, buildVersion]];
-	[aboutTabVersionTextShadow setStringValue: [aboutTabVersionText stringValue]];
-		
 	// Update the application build number in installedBuild
 	// (Allows us to run build specific update sequences)
 	[self setKey:@"installedBuild" fromString:buildVersion];

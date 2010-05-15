@@ -17,6 +17,24 @@
 
 @implementation TabController
 
+- (void) awakeFromNib
+{
+	// Set displayed version information
+	NSString *bundleVersion = [[[NSBundle bundleWithIdentifier: TVShowsAppDomain] infoDictionary] 
+							   valueForKey: @"CFBundleShortVersionString"];
+	NSString *buildVersion = [[[NSBundle bundleWithIdentifier: TVShowsAppDomain] infoDictionary]
+							  valueForKey:@"CFBundleVersion"];
+	NSString *buildDate = [[[NSBundle bundleWithIdentifier: TVShowsAppDomain] infoDictionary]
+						   valueForKey:@"TSBundleBuildDate"];
+	
+	[sidebarVersionText setStringValue: [NSString stringWithFormat:@"%@ (%@)", bundleVersion, buildVersion]];
+	[sidebarDateText setStringValue: buildDate];
+	
+	[sidebarHeader setStringValue: [NSString stringWithFormat: @"TVShows %@", bundleVersion]];
+	
+	[aboutTabVersionText setStringValue: [NSString stringWithFormat: @"TVShows %@ (%@)", bundleVersion, buildVersion]];
+}
+
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {
 	NSRect  tabFrame;

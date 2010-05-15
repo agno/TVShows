@@ -19,12 +19,18 @@
 
 @interface TabController : NSPreferencePane
 {
+	// Version information
+	IBOutlet NSTextField *sidebarHeader;
+	IBOutlet NSTextField *sidebarVersionText;
+	IBOutlet NSTextField *sidebarDateText;
+	IBOutlet NSTextField *aboutTabVersionText;
+	
 	IBOutlet NSWindow *licenseInfoDialog;
 	IBOutlet NSTextView *textView_licenseInfo;
 	IBOutlet NSTextView *textView_aboutBox;
 }
 
-
+- (void) awakeFromNib;
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
 - (IBAction) showFeedbackWindow:(id)sender;
 
