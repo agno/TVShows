@@ -21,7 +21,7 @@
 
 - (IBAction) displayPresetShowsWindow:(id)sender
 {
-	//[self downloadShowList];
+	[self downloadShowList];
 	
     [NSApp beginSheet: presetShowsWindow
 	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
