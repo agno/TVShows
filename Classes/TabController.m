@@ -13,6 +13,7 @@
  */
 
 #import "TabController.h"
+#import "AppInfoConstants.h"
 
 
 @implementation TabController

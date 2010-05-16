@@ -13,6 +13,7 @@
  */
 
 #import "ShowListDelegate.h"
+#import "AppInfoConstants.h"
 
 @implementation ShowListDelegate
 

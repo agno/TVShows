@@ -15,13 +15,13 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface PresetShowsController : NSWindowController
+@interface PresetTorrentsController : NSWindowController
 {
-	IBOutlet NSWindow *presetShowsWindow;
+	IBOutlet NSWindow *presetTorrentsWindow;
 }
 
-- (IBAction) displayPresetShowsWindow:(id)sender;
-- (IBAction) closePresetShowsWindow:(id)sender;
-- (void) downloadShowList;
+- (IBAction) displayPresetTorrentsWindow:(id)sender;
+- (IBAction) closePresetTorrentsWindow:(id)sender;
+- (void) downloadTorrentShowList;
 
 @end

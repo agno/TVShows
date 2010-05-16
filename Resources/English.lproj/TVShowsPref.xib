@@ -21,8 +21,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="12"/>
-			<integer value="665"/>
+			<integer value="671"/>
+			<integer value="114"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1707,7 +1707,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{131, 158}, {625, 450}}</string>
 				<int key="NSWTFlags">611844096</int>
-				<string key="NSWindowTitle">Show List</string>
+				<string key="NSWindowTitle">Preset Torrents</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<nil key="NSViewClass"/>
 				<string key="NSWindowContentMaxSize">{3.40282e+38, 3.40282e+38}</string>
@@ -1776,6 +1776,11 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 													<int key="NSResizingMask">1</int>
 													<bool key="NSIsResizeable">YES</bool>
 													<reference key="NSTableView" ref="432545239"/>
+													<object class="NSSortDescriptor" key="NSSortDescriptorPrototype">
+														<string key="NSKey">value</string>
+														<bool key="NSAscending">NO</bool>
+														<string key="NSSelector">compare:</string>
+													</object>
 												</object>
 											</object>
 											<double key="NSIntercellSpacingWidth">3</double>
@@ -1803,7 +1808,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 									</object>
 									<string key="NSFrame">{{1, 1}, {173, 356}}</string>
 									<reference key="NSSuperview" ref="456449400"/>
-									<reference key="NSNextKeyView" ref="432545239"/>
 									<reference key="NSDocView" ref="432545239"/>
 									<reference key="NSBGColor" ref="502507810"/>
 									<int key="NScvFlags">4</int>
@@ -1830,7 +1834,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							</object>
 							<string key="NSFrame">{{-1, 53}, {175, 358}}</string>
 							<reference key="NSSuperview" ref="241592026"/>
-							<reference key="NSNextKeyView" ref="465963800"/>
 							<int key="NSsFlags">562</int>
 							<reference key="NSVScroller" ref="802547701"/>
 							<reference key="NSHScroller" ref="922269148"/>
@@ -2038,7 +2041,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 									</object>
 									<string key="NSFrame">{{1, 17}, {453, 144}}</string>
 									<reference key="NSSuperview" ref="900080676"/>
-									<reference key="NSNextKeyView" ref="881577092"/>
 									<reference key="NSDocView" ref="881577092"/>
 									<reference key="NSBGColor" ref="502507810"/>
 									<int key="NScvFlags">4</int>
@@ -2073,7 +2075,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 									</object>
 									<string key="NSFrame">{{1, 0}, {453, 17}}</string>
 									<reference key="NSSuperview" ref="900080676"/>
-									<reference key="NSNextKeyView" ref="778812733"/>
 									<reference key="NSDocView" ref="778812733"/>
 									<reference key="NSBGColor" ref="502507810"/>
 									<int key="NScvFlags">4</int>
@@ -2082,7 +2083,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							</object>
 							<string key="NSFrame">{{173, 53}, {455, 162}}</string>
 							<reference key="NSSuperview" ref="241592026"/>
-							<reference key="NSNextKeyView" ref="296058340"/>
 							<int key="NSsFlags">562</int>
 							<reference key="NSVScroller" ref="121941490"/>
 							<reference key="NSHScroller" ref="556880159"/>
@@ -2291,7 +2291,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<string key="NSMaxSize">{3.40282e+38, 3.40282e+38}</string>
 			</object>
 			<object class="NSCustomObject" id="748098755">
-				<string key="NSClassName">PresetShowsController</string>
+				<string key="NSClassName">PresetTorrentsController</string>
 			</object>
 			<object class="NSCustomObject" id="321551853">
 				<string key="NSClassName">ShowListDelegate</string>
@@ -2573,30 +2573,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<int key="connectionID">663</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">displayPresetShowsWindow:</string>
-						<reference key="source" ref="748098755"/>
-						<reference key="destination" ref="545009203"/>
-					</object>
-					<int key="connectionID">731</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">closePresetShowsWindow:</string>
-						<reference key="source" ref="748098755"/>
-						<reference key="destination" ref="521108455"/>
-					</object>
-					<int key="connectionID">732</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">presetShowsWindow</string>
-						<reference key="source" ref="748098755"/>
-						<reference key="destination" ref="354169544"/>
-					</object>
-					<int key="connectionID">733</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: arrangedObjects.displayName</string>
 						<reference key="source" ref="1032732663"/>
@@ -2688,6 +2664,30 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<reference key="destination" ref="556330200"/>
 					</object>
 					<int key="connectionID">878</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">closePresetTorrentsWindow:</string>
+						<reference key="source" ref="748098755"/>
+						<reference key="destination" ref="521108455"/>
+					</object>
+					<int key="connectionID">904</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">displayPresetTorrentsWindow:</string>
+						<reference key="source" ref="748098755"/>
+						<reference key="destination" ref="545009203"/>
+					</object>
+					<int key="connectionID">905</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">presetTorrentsWindow</string>
+						<reference key="source" ref="748098755"/>
+						<reference key="destination" ref="354169544"/>
+					</object>
+					<int key="connectionID">906</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3508,7 +3508,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<reference ref="241592026"/>
 						</object>
 						<reference key="parent" ref="0"/>
-						<string key="objectName">Show List</string>
+						<string key="objectName">Preset Torrents</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">665</int>
@@ -4101,9 +4101,9 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{299, 113}, {668, 368}}</string>
+					<string>{{317, 217}, {668, 368}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{299, 113}, {668, 368}}</string>
+					<string>{{317, 217}, {668, 368}}</string>
 					<integer value="1"/>
 					<integer value="1"/>
 					<string>{224.664, 10}</string>
@@ -4214,9 +4214,9 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{329, 81}, {625, 450}}</string>
+					<string>{{326, 187}, {625, 450}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{329, 81}, {625, 450}}</string>
+					<string>{{326, 187}, {625, 450}}</string>
 					<boolean value="NO"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4286,7 +4286,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">903</int>
+			<int key="maxID">906</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4380,14 +4380,14 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">PresetShowsController</string>
+					<string key="className">PresetTorrentsController</string>
 					<string key="superclassName">NSWindowController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>closePresetShowsWindow:</string>
-							<string>displayPresetShowsWindow:</string>
+							<string>closePresetTorrentsWindow:</string>
+							<string>displayPresetTorrentsWindow:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -4396,12 +4396,12 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">presetShowsWindow</string>
+						<string key="NS.key.0">presetTorrentsWindow</string>
 						<string key="NS.object.0">NSWindow</string>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/PresetShowsController.h</string>
+						<string key="minorKey">Classes/PresetTorrentsController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

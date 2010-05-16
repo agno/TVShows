@@ -13,6 +13,7 @@
  */
 
 #import "PrefController.h"
+#import "AppInfoConstants.h"
 
 
 // Setup CFPreference variables

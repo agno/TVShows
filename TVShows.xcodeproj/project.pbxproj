@@ -8,15 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		340181001194BF5800FB0E39 /* bannerArtPlaceholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 340180FF1194BF5800FB0E39 /* bannerArtPlaceholder.jpg */; };
-		3401810D11950C6E00FB0E39 /* PresetShowsController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3401810B11950C6E00FB0E39 /* PresetShowsController.h */; };
-		3401810E11950C6E00FB0E39 /* PresetShowsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3401810C11950C6E00FB0E39 /* PresetShowsController.m */; };
+		3401810D11950C6E00FB0E39 /* PresetTorrentsController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3401810B11950C6E00FB0E39 /* PresetTorrentsController.h */; };
+		3401810E11950C6E00FB0E39 /* PresetTorrentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3401810C11950C6E00FB0E39 /* PresetTorrentsController.m */; };
 		3401817311951F1800FB0E39 /* ShowListDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 3401817111951F1800FB0E39 /* ShowListDelegate.h */; };
 		3401817411951F1800FB0E39 /* ShowListDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3401817211951F1800FB0E39 /* ShowListDelegate.m */; };
 		3401817911951FAA00FB0E39 /* ShowListModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 3401817811951FAA00FB0E39 /* ShowListModel.xcdatamodel */; };
 		340F15FA118FEBDE00A1BD00 /* SUUpdaterSubclass.h in Headers */ = {isa = PBXBuildFile; fileRef = 340F15F8118FEBDE00A1BD00 /* SUUpdaterSubclass.h */; };
 		340F15FB118FEBDE00A1BD00 /* SUUpdaterSubclass.m in Sources */ = {isa = PBXBuildFile; fileRef = 340F15F9118FEBDE00A1BD00 /* SUUpdaterSubclass.m */; };
+		3419982811A07913003768D5 /* WebsiteFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3419982611A07913003768D5 /* WebsiteFunctions.h */; };
+		3419982911A07913003768D5 /* WebsiteFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3419982711A07913003768D5 /* WebsiteFunctions.m */; };
 		3420BD6E1197AA32005DE217 /* SubscriptionsModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 3420BD6D1197AA32005DE217 /* SubscriptionsModel.xcdatamodel */; };
-		3422ECD4118B3C130061E2E2 /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 3422ECD3118B3C130061E2E2 /* Constants.h */; };
+		3422ECD4118B3C130061E2E2 /* AppInfoConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 3422ECD3118B3C130061E2E2 /* AppInfoConstants.h */; };
 		3422ECE9118B3D7D0061E2E2 /* PrefController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3422ECE7118B3D7D0061E2E2 /* PrefController.h */; };
 		3422ECEA118B3D7D0061E2E2 /* PrefController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3422ECE8118B3D7D0061E2E2 /* PrefController.m */; };
 		343BF4CE1183DB3C008CE71D /* RSS-Large.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB966F118384DB005825C1 /* RSS-Large.png */; };
@@ -77,15 +79,17 @@
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		340180FF1194BF5800FB0E39 /* bannerArtPlaceholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bannerArtPlaceholder.jpg; sourceTree = "<group>"; };
-		3401810B11950C6E00FB0E39 /* PresetShowsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresetShowsController.h; sourceTree = "<group>"; };
-		3401810C11950C6E00FB0E39 /* PresetShowsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresetShowsController.m; sourceTree = "<group>"; };
+		3401810B11950C6E00FB0E39 /* PresetTorrentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresetTorrentsController.h; sourceTree = "<group>"; };
+		3401810C11950C6E00FB0E39 /* PresetTorrentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresetTorrentsController.m; sourceTree = "<group>"; };
 		3401817111951F1800FB0E39 /* ShowListDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowListDelegate.h; sourceTree = "<group>"; };
 		3401817211951F1800FB0E39 /* ShowListDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowListDelegate.m; sourceTree = "<group>"; };
 		3401817811951FAA00FB0E39 /* ShowListModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; name = ShowListModel.xcdatamodel; path = Models/ShowListModel.xcdatamodel; sourceTree = "<group>"; };
 		340F15F8118FEBDE00A1BD00 /* SUUpdaterSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUUpdaterSubclass.h; sourceTree = "<group>"; };
 		340F15F9118FEBDE00A1BD00 /* SUUpdaterSubclass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUUpdaterSubclass.m; sourceTree = "<group>"; };
+		3419982611A07913003768D5 /* WebsiteFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebsiteFunctions.h; sourceTree = "<group>"; };
+		3419982711A07913003768D5 /* WebsiteFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebsiteFunctions.m; sourceTree = "<group>"; };
 		3420BD6D1197AA32005DE217 /* SubscriptionsModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; name = SubscriptionsModel.xcdatamodel; path = Models/SubscriptionsModel.xcdatamodel; sourceTree = "<group>"; };
-		3422ECD3118B3C130061E2E2 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		3422ECD3118B3C130061E2E2 /* AppInfoConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppInfoConstants.h; sourceTree = "<group>"; };
 		3422ECE7118B3D7D0061E2E2 /* PrefController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefController.h; sourceTree = "<group>"; };
 		3422ECE8118B3D7D0061E2E2 /* PrefController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefController.m; sourceTree = "<group>"; };
 		345BE412119344E10016EA2D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = Resources/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -271,19 +275,21 @@
 			children = (
 				34A91891119E2F83004B339D /* RegexKitLite */,
 				347AFB0E1191153B00393565 /* JRFeedbackProvider */,
-				3422ECD3118B3C130061E2E2 /* Constants.h */,
-				340F15F8118FEBDE00A1BD00 /* SUUpdaterSubclass.h */,
-				340F15F9118FEBDE00A1BD00 /* SUUpdaterSubclass.m */,
+				3422ECD3118B3C130061E2E2 /* AppInfoConstants.h */,
 				3422ECE7118B3D7D0061E2E2 /* PrefController.h */,
 				3422ECE8118B3D7D0061E2E2 /* PrefController.m */,
-				349FEEBF11835A1C00D24FC9 /* TabController.h */,
-				349FEEC011835A1C00D24FC9 /* TabController.m */,
+				3401810B11950C6E00FB0E39 /* PresetTorrentsController.h */,
+				3401810C11950C6E00FB0E39 /* PresetTorrentsController.m */,
 				3401817111951F1800FB0E39 /* ShowListDelegate.h */,
 				3401817211951F1800FB0E39 /* ShowListDelegate.m */,
-				3401810B11950C6E00FB0E39 /* PresetShowsController.h */,
-				3401810C11950C6E00FB0E39 /* PresetShowsController.m */,
+				340F15F8118FEBDE00A1BD00 /* SUUpdaterSubclass.h */,
+				340F15F9118FEBDE00A1BD00 /* SUUpdaterSubclass.m */,
+				349FEEBF11835A1C00D24FC9 /* TabController.h */,
+				349FEEC011835A1C00D24FC9 /* TabController.m */,
 				349FEE151183597500D24FC9 /* TVShowsPref.h */,
 				349FEE161183597500D24FC9 /* TVShowsPref.m */,
+				3419982611A07913003768D5 /* WebsiteFunctions.h */,
+				3419982711A07913003768D5 /* WebsiteFunctions.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -306,15 +312,16 @@
 			files = (
 				349FEE171183597500D24FC9 /* TVShowsPref.h in Headers */,
 				349FEEC111835A1C00D24FC9 /* TabController.h in Headers */,
-				3422ECD4118B3C130061E2E2 /* Constants.h in Headers */,
+				3422ECD4118B3C130061E2E2 /* AppInfoConstants.h in Headers */,
 				3422ECE9118B3D7D0061E2E2 /* PrefController.h in Headers */,
 				340F15FA118FEBDE00A1BD00 /* SUUpdaterSubclass.h in Headers */,
 				347AFB151191157700393565 /* JRFeedbackController.h in Headers */,
 				347AFB171191157700393565 /* NSURLRequestPostForm.h in Headers */,
-				3401810D11950C6E00FB0E39 /* PresetShowsController.h in Headers */,
+				3401810D11950C6E00FB0E39 /* PresetTorrentsController.h in Headers */,
 				3401817311951F1800FB0E39 /* ShowListDelegate.h in Headers */,
 				34F6EA3A119BCAD100F8AD4C /* TVShows_Prefix.pch in Headers */,
 				34A91894119E2F83004B339D /* RegexKitLite.h in Headers */,
+				3419982811A07913003768D5 /* WebsiteFunctions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,11 +417,12 @@
 				340F15FB118FEBDE00A1BD00 /* SUUpdaterSubclass.m in Sources */,
 				347AFB161191157700393565 /* JRFeedbackController.m in Sources */,
 				347AFB181191157700393565 /* NSURLRequestPostForm.m in Sources */,
-				3401810E11950C6E00FB0E39 /* PresetShowsController.m in Sources */,
+				3401810E11950C6E00FB0E39 /* PresetTorrentsController.m in Sources */,
 				3401817411951F1800FB0E39 /* ShowListDelegate.m in Sources */,
 				3401817911951FAA00FB0E39 /* ShowListModel.xcdatamodel in Sources */,
 				3420BD6E1197AA32005DE217 /* SubscriptionsModel.xcdatamodel in Sources */,
 				34A91895119E2F83004B339D /* RegexKitLite.m in Sources */,
+				3419982911A07913003768D5 /* WebsiteFunctions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
