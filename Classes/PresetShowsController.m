@@ -40,25 +40,30 @@
 }
 
 - (void) downloadShowList {
-	// There's probably a better way to do this.
+	// There's probably a better way to do this:
 	id delegateClass = [[[ShowListDelegate class] alloc] init];
 	
+	NSManagedObjectContext *context = [delegateClass managedObjectContext];
 	NSString *displayName;
 	int showrssID;
 	
-	NSManagedObjectContext *context = [delegateClass managedObjectContext];
+	// This rest of this method is extremely messy but it works for the time being
+	// Feel free to improve it if you find any ways
 	
-	// This section is extremely messy but it works for the time being
-	// If anyone feels like improving it, though, feel free
+	// Download the show list from showRSS
 	NSURL *showRSSList = [NSURL URLWithString:@"http://showrss.karmorra.info/?cs=feeds"];
 	NSString *searchString = [[[NSString alloc] initWithContentsOfURL:showRSSList
 															 encoding:NSUTF8StringEncoding
 																error:NULL] autorelease];
-	
+
+	// Only search for shows between the <select> tag
 	NSArray *matchArray = [searchString componentsMatchedByRegex:@"<select name=\"show\">(.+?)</select>"];
 	searchString = [matchArray objectAtIndex:0];
 	
-	for(NSString *matchedString in [searchString componentsMatchedByRegex:@"(?!<option value=\")([[:digit:]]+)(.*?)(?=</option>)"]) {
+	// Extract the show name and number from the <option> tag
+	NSArray *optionTags = [searchString componentsMatchedByRegex:@"(?!<option value=\")([[:digit:]]+)(.*?)(?=</option>)"];
+	
+	for(NSString *matchedString in optionTags) {
 		NSManagedObject *show = [NSEntityDescription insertNewObjectForEntityForName: @"Show"
 															  inManagedObjectContext: context];
 		
@@ -70,12 +75,9 @@
 		
 		[show setValue:displayName forKey: @"displayName"];
 		[show setValue:[NSNumber numberWithInt:showrssID] forKey: @"showrssID"];
-		
-		[delegateClass saveAction];
-		//	[[delegateClass managedObjectContext] processPendingChanges];
 	} 
-	
-	//	[delegateClass saveAction];
+
+	[delegateClass saveAction];
 	[delegateClass release];
 }
 
