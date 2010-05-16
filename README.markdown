@@ -4,7 +4,7 @@ TVShows 2 "_Phoenix_" is the next version of [TVShows][1], the easiest way to do
 ## Compiling Notes
 * Modifying the interface will require the [BWToolkit][2] IB plugin.
 * By default, the Debug configuration automatically installs TVShows into `~/Library/PreferencePanes/` each time it's built.
-* TVShows 2 does not officially be supporting Tiger.
+* TVShows 2 will not officially be supporting Tiger.
 
 ## Planned Features
 * Custom RSS feeds
