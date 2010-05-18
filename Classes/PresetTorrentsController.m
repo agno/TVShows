@@ -32,8 +32,16 @@
 
 - (IBAction) displayPresetTorrentsWindow:(id)sender
 {
+	// Show list downloads but the NSTableView doesn't seem to refresh like it should.
+	// Maybe we need to refresh the NSArrayController instead?
 	[self downloadTorrentShowList];
+	[PTTableView reloadData];
 	
+	NSSortDescriptor *PTSortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"sortName"
+																	 ascending: YES 
+																	  selector: @selector(caseInsensitiveCompare:)];
+	[PTArrayController setSortDescriptors:[NSArray arrayWithObject:PTSortDescriptor]];
+
     [NSApp beginSheet: presetTorrentsWindow
 	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
 		modalDelegate: nil
@@ -42,6 +50,8 @@
 	
     [NSApp runModalForWindow: presetTorrentsWindow];
 	[NSApp endSheet: presetTorrentsWindow];
+	
+	[PTSortDescriptor release];
 }
 
 - (IBAction) closePresetTorrentsWindow:(id)sender
@@ -55,7 +65,7 @@
 	id delegateClass = [[[ShowListDelegate class] alloc] init];
 	
 	NSManagedObjectContext *context = [delegateClass managedObjectContext];
-	NSString *displayName;
+	NSString *displayName, *sortName;
 	int showrssID;
 	
 	// This rest of this method is extremely messy but it works for the time being
@@ -90,11 +100,13 @@
 			// I hate having to search for each valute separately but I can't seem to figure out any other way
 			displayName = [[[showInformation componentsMatchedByRegex:DisplayNameRegex] objectAtIndex:0]
 						   stringByReplacingOccurrencesOfRegex:SeparatorBetweenNameAndID withString:@""];
+			sortName = [displayName stringByReplacingOccurrencesOfRegex:@"^The[[:space:]]" withString:@""];
 			showrssID = [[[showInformation componentsMatchedByRegex:RSSIDRegex] objectAtIndex:0]
 						 intValue];
 
 			[newShow setValue:displayName forKey:@"displayName"];
 			[newShow setValue:displayName forKey:@"rssName"];
+			[newShow setValue:sortName forKey:@"sortName"];
 			[newShow setValue:[NSNumber numberWithInt:showrssID] forKey:@"showrssID"];
 			[newShow setValue:[NSDate date] forKey:@"dateAdded"];
 		} 
@@ -103,7 +115,6 @@
 	}
 
 	[delegateClass release];
-
 }
 
 @end
