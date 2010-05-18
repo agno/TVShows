@@ -19,7 +19,6 @@
 {
 	IBOutlet NSWindow *presetTorrentsWindow;
 	IBOutlet NSArrayController *PTArrayController;
-	IBOutlet NSTableView *PTTableView;
 }
 
 - (IBAction) displayPresetTorrentsWindow:(id)sender;

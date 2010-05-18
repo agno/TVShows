@@ -35,7 +35,6 @@
 		347AFBD51191206700393565 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 347AFBD41191206700393565 /* AddressBook.framework */; };
 		347AFBD91191207300393565 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 347AFBD81191207300393565 /* SystemConfiguration.framework */; };
 		34908BD1119B9C1C00BDFC01 /* SUPublicDSAKey.pem in Resources */ = {isa = PBXBuildFile; fileRef = 34908BD0119B9C1C00BDFC01 /* SUPublicDSAKey.pem */; };
-		349FEE01118358CF00D24FC9 /* TVShowsPref.xib in Resources */ = {isa = PBXBuildFile; fileRef = 349FEDFE118358CF00D24FC9 /* TVShowsPref.xib */; };
 		349FEE091183590500D24FC9 /* TVShows-Beta-Large.icns in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE031183590500D24FC9 /* TVShows-Beta-Large.icns */; };
 		349FEE0A1183590500D24FC9 /* TVShows-Beta.png in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE041183590500D24FC9 /* TVShows-Beta.png */; };
 		349FEE0B1183590500D24FC9 /* TVShows-Off-Large.icns in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE051183590500D24FC9 /* TVShows-Off-Large.icns */; };
@@ -54,6 +53,7 @@
 		34A91895119E2F83004B339D /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A91893119E2F83004B339D /* RegexKitLite.m */; };
 		34EB966E11838131005825C1 /* showRSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB966D11838131005825C1 /* showRSS.png */; };
 		34EB967F118389FC005825C1 /* NZB.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB967E118389FC005825C1 /* NZB.png */; };
+		34EC6ABC11A312AD00BD660A /* TVShowsPref.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EC6AB811A312AD00BD660A /* TVShowsPref.xib */; };
 		34F6EA3A119BCAD100F8AD4C /* TVShows_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 34F6EA39119BCAD100F8AD4C /* TVShows_Prefix.pch */; };
 		8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F506C035013D953901CA16C8 /* PreferencePanes.framework */; };
@@ -104,7 +104,6 @@
 		347AFBD41191206700393565 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		347AFBD81191207300393565 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		34908BD0119B9C1C00BDFC01 /* SUPublicDSAKey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SUPublicDSAKey.pem; path = Resources/SUPublicDSAKey.pem; sourceTree = "<group>"; };
-		349FEDFF118358CF00D24FC9 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = TVShowsPref.xib; sourceTree = "<group>"; };
 		349FEE031183590500D24FC9 /* TVShows-Beta-Large.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "TVShows-Beta-Large.icns"; sourceTree = "<group>"; };
 		349FEE041183590500D24FC9 /* TVShows-Beta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TVShows-Beta.png"; sourceTree = "<group>"; };
 		349FEE051183590500D24FC9 /* TVShows-Off-Large.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "TVShows-Off-Large.icns"; sourceTree = "<group>"; };
@@ -123,6 +122,7 @@
 		34EB966D11838131005825C1 /* showRSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showRSS.png; sourceTree = "<group>"; };
 		34EB966F118384DB005825C1 /* RSS-Large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RSS-Large.png"; sourceTree = "<group>"; };
 		34EB967E118389FC005825C1 /* NZB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NZB.png; sourceTree = "<group>"; };
+		34EC6AB911A312AD00BD660A /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Resources/English.lproj/TVShowsPref.xib; sourceTree = "<group>"; };
 		34F6EA39119BCAD100F8AD4C /* TVShows_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShows_Prefix.pch; sourceTree = "<group>"; };
 		34F6EA64119BCBA200F8AD4C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D202CF80486D31800D8A456 /* TVShows.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVShows.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -244,7 +244,7 @@
 		347AFB25119115AC00393565 /* English.lproj */ = {
 			isa = PBXGroup;
 			children = (
-				349FEDFE118358CF00D24FC9 /* TVShowsPref.xib */,
+				34EC6AB811A312AD00BD660A /* TVShowsPref.xib */,
 				347AFB1F119115A800393565 /* JRFeedbackProvider.xib */,
 				345BE411119344E10016EA2D /* InfoPlist.strings */,
 				345BE417119344F10016EA2D /* JRFeedbackProvider.strings */,
@@ -374,7 +374,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				349FEE01118358CF00D24FC9 /* TVShowsPref.xib in Resources */,
 				349FEE091183590500D24FC9 /* TVShows-Beta-Large.icns in Resources */,
 				349FEE0A1183590500D24FC9 /* TVShows-Beta.png in Resources */,
 				349FEE0B1183590500D24FC9 /* TVShows-Off-Large.icns in Resources */,
@@ -391,6 +390,7 @@
 				340181001194BF5800FB0E39 /* bannerArtPlaceholder.jpg in Resources */,
 				34908BD1119B9C1C00BDFC01 /* SUPublicDSAKey.pem in Resources */,
 				34785D07119B9CE200A28449 /* Credits.rtf in Resources */,
+				34EC6ABC11A312AD00BD660A /* TVShowsPref.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,13 +453,12 @@
 			name = JRFeedbackProvider.xib;
 			sourceTree = "<group>";
 		};
-		349FEDFE118358CF00D24FC9 /* TVShowsPref.xib */ = {
+		34EC6AB811A312AD00BD660A /* TVShowsPref.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				349FEDFF118358CF00D24FC9 /* English */,
+				34EC6AB911A312AD00BD660A /* English */,
 			);
 			name = TVShowsPref.xib;
-			path = Resources/English.lproj;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

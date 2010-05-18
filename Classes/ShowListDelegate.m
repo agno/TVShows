@@ -113,6 +113,20 @@
 }
 
 
+// Deletes each object in the Show entity of the managed object context.
+- (void) resetShowList {
+	NSManagedObjectContext *context = [self managedObjectContext];
+	NSFetchRequest *fetchRequest = [[[NSFetchRequest alloc] init] autorelease];
+	
+	[fetchRequest setEntity:[NSEntityDescription entityForName:@"Show" inManagedObjectContext:context]];
+	
+	NSArray *allShows = [context executeFetchRequest:fetchRequest error:nil];
+
+	for (id currentShow in allShows) {
+		[context deleteObject:currentShow];
+	}
+}
+
 // Send the save: message to the application's managed object context.
 // Any encountered errors are presented to the user.
 - (void) saveAction

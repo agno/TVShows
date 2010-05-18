@@ -35,8 +35,7 @@
 	// Show list downloads but the NSTableView doesn't seem to refresh like it should.
 	// Maybe we need to refresh the NSArrayController instead?
 	[self downloadTorrentShowList];
-	[PTTableView reloadData];
-	
+
 	NSSortDescriptor *PTSortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"sortName"
 																	 ascending: YES 
 																	  selector: @selector(caseInsensitiveCompare:)];
@@ -90,6 +89,9 @@
 	} else {
 		showListContents = [selectTags objectAtIndex:0];
 		
+		// Reset the existing show list before continuing
+		[delegateClass resetShowList];
+		
 		// Extract the show name and number from the <option> tags
 		NSArray *optionTags = [showListContents componentsMatchedByRegex:OptionTagsRegex];
 		
@@ -101,17 +103,17 @@
 			displayName = [[[showInformation componentsMatchedByRegex:DisplayNameRegex] objectAtIndex:0]
 						   stringByReplacingOccurrencesOfRegex:SeparatorBetweenNameAndID withString:@""];
 			sortName = [displayName stringByReplacingOccurrencesOfRegex:@"^The[[:space:]]" withString:@""];
-			showrssID = [[[showInformation componentsMatchedByRegex:RSSIDRegex] objectAtIndex:0]
-						 intValue];
+			showrssID = [[[showInformation componentsMatchedByRegex:RSSIDRegex] objectAtIndex:0] intValue];
 
 			[newShow setValue:displayName forKey:@"displayName"];
 			[newShow setValue:displayName forKey:@"rssName"];
 			[newShow setValue:sortName forKey:@"sortName"];
 			[newShow setValue:[NSNumber numberWithInt:showrssID] forKey:@"showrssID"];
-			[newShow setValue:[NSDate date] forKey:@"dateAdded"];
+			[newShow setValue:[NSDate date] forKey:@"dateAdded"];	
 		} 
 
 		[delegateClass saveAction];
+
 	}
 
 	[delegateClass release];
