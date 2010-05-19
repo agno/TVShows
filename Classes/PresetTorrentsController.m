@@ -63,7 +63,6 @@
 	// There's probably a better way to do this:
 	id delegateClass = [[[ShowListDelegate class] alloc] init];
 	
-	NSManagedObjectContext *context = [delegateClass managedObjectContext];
 	NSString *displayName, *sortName;
 	int showrssID;
 	
@@ -91,6 +90,7 @@
 		
 		// Reset the existing show list before continuing
 		[delegateClass resetShowList];
+		NSManagedObjectContext *context = [delegateClass managedObjectContext];
 		
 		// Extract the show name and number from the <option> tags
 		NSArray *optionTags = [showListContents componentsMatchedByRegex:OptionTagsRegex];
@@ -115,7 +115,7 @@
 		[delegateClass saveAction];
 
 	}
-
+	
 	[delegateClass release];
 }
 

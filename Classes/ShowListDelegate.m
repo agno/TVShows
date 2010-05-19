@@ -115,23 +115,21 @@
 
 // Deletes each object in the Show entity of the managed object context.
 - (void) resetShowList {
-	NSManagedObjectContext *context = [self managedObjectContext];
-	NSFetchRequest *fetchRequest = [[[NSFetchRequest alloc] init] autorelease];
+    NSString *applicationSupportDirectory = [self applicationSupportDirectory];
+    NSError *error = nil;
 	
-	[fetchRequest setEntity:[NSEntityDescription entityForName:@"Show" inManagedObjectContext:context]];
+	[[NSFileManager defaultManager] removeItemAtPath:[applicationSupportDirectory stringByAppendingPathComponent: @"ShowList.xml"]
+											   error:nil];
 	
-	NSArray *allShows = [context executeFetchRequest:fetchRequest error:nil];
-
-	for (id currentShow in allShows) {
-		[context deleteObject:currentShow];
-	}
+	[persistentStoreCoordinator release], persistentStoreCoordinator = nil;
+	[managedObjectContext release], managedObjectContext = nil;
+	[self managedObjectContext];
 }
 
 // Send the save: message to the application's managed object context.
 // Any encountered errors are presented to the user.
 - (void) saveAction
 {
-
     NSError *error = nil;
     
     if (![[self managedObjectContext] commitEditing]) {
