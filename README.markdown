@@ -2,7 +2,7 @@
 TVShows 2 "_Phoenix_" is the next version of [TVShows][1], the easiest way to download torrents of your favorite shows automatically. It includes a completely rewritten codebase as well as a major overhaul of the UI and a move to System Preferences. _Phoenix_ is currently in the beginning stages of development but I am always open to any feature suggestions.
 
 ## Compiling Notes
-* Modifying the interface will require the [BWToolkit][2] and [CocoaMondo][3] IB plugin. These can be found in the `IB Plugins` folder.
+* Modifying the interface will require the [BWToolkit][2] and [CocoaMondo][3] IB plugins. These can be found in the `IB Plugins` folder.
 * By default, the Debug configuration automatically installs TVShows into `~/Library/PreferencePanes/` each time it's built.
 * TVShows 2 will not officially be supporting Tiger.
 
