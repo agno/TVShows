@@ -22,6 +22,12 @@
 		3422ECE9118B3D7D0061E2E2 /* PrefController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3422ECE7118B3D7D0061E2E2 /* PrefController.h */; };
 		3422ECEA118B3D7D0061E2E2 /* PrefController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3422ECE8118B3D7D0061E2E2 /* PrefController.m */; };
 		343BF4CE1183DB3C008CE71D /* RSS-Large.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB966F118384DB005825C1 /* RSS-Large.png */; };
+		344AFA2F11A4C58D00D9C4E9 /* ESiTunesScroller.h in Headers */ = {isa = PBXBuildFile; fileRef = 344AFA2B11A4C58D00D9C4E9 /* ESiTunesScroller.h */; };
+		344AFA3011A4C58D00D9C4E9 /* ESiTunesScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 344AFA2C11A4C58D00D9C4E9 /* ESiTunesScroller.m */; };
+		344AFA3111A4C58D00D9C4E9 /* ESScroller.h in Headers */ = {isa = PBXBuildFile; fileRef = 344AFA2D11A4C58D00D9C4E9 /* ESScroller.h */; };
+		344AFA3211A4C58D00D9C4E9 /* ESScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 344AFA2E11A4C58D00D9C4E9 /* ESScroller.m */; };
+		344AFA8511A4D19C00D9C4E9 /* ESScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 344AFA8311A4D19C00D9C4E9 /* ESScrollView.h */; };
+		344AFA8611A4D19C00D9C4E9 /* ESScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 344AFA8411A4D19C00D9C4E9 /* ESScrollView.m */; };
 		345BE414119344E10016EA2D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 345BE411119344E10016EA2D /* InfoPlist.strings */; };
 		345BE41A119344F10016EA2D /* JRFeedbackProvider.strings in Resources */ = {isa = PBXBuildFile; fileRef = 345BE417119344F10016EA2D /* JRFeedbackProvider.strings */; };
 		3473849E11907678003DFFA0 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3473845E119074C8003DFFA0 /* Sparkle.framework */; };
@@ -92,6 +98,12 @@
 		3422ECD3118B3C130061E2E2 /* AppInfoConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppInfoConstants.h; sourceTree = "<group>"; };
 		3422ECE7118B3D7D0061E2E2 /* PrefController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefController.h; sourceTree = "<group>"; };
 		3422ECE8118B3D7D0061E2E2 /* PrefController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefController.m; sourceTree = "<group>"; };
+		344AFA2B11A4C58D00D9C4E9 /* ESiTunesScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESiTunesScroller.h; sourceTree = "<group>"; };
+		344AFA2C11A4C58D00D9C4E9 /* ESiTunesScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESiTunesScroller.m; sourceTree = "<group>"; };
+		344AFA2D11A4C58D00D9C4E9 /* ESScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESScroller.h; sourceTree = "<group>"; };
+		344AFA2E11A4C58D00D9C4E9 /* ESScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESScroller.m; sourceTree = "<group>"; };
+		344AFA8311A4D19C00D9C4E9 /* ESScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESScrollView.h; sourceTree = "<group>"; };
+		344AFA8411A4D19C00D9C4E9 /* ESScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESScrollView.m; sourceTree = "<group>"; };
 		345BE412119344E10016EA2D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = Resources/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		345BE418119344F10016EA2D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = Resources/English.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; };
 		3473845E119074C8003DFFA0 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Frameworks/Sparkle.framework; sourceTree = "<group>"; };
@@ -230,6 +242,19 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		344AFA2A11A4C58D00D9C4E9 /* iTunesScroller */ = {
+			isa = PBXGroup;
+			children = (
+				344AFA2B11A4C58D00D9C4E9 /* ESiTunesScroller.h */,
+				344AFA2C11A4C58D00D9C4E9 /* ESiTunesScroller.m */,
+				344AFA2D11A4C58D00D9C4E9 /* ESScroller.h */,
+				344AFA2E11A4C58D00D9C4E9 /* ESScroller.m */,
+				344AFA8311A4D19C00D9C4E9 /* ESScrollView.h */,
+				344AFA8411A4D19C00D9C4E9 /* ESScrollView.m */,
+			);
+			path = iTunesScroller;
+			sourceTree = "<group>";
+		};
 		347AFB0E1191153B00393565 /* JRFeedbackProvider */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,8 +298,9 @@
 		349FEE141183597500D24FC9 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				34A91891119E2F83004B339D /* RegexKitLite */,
+				344AFA2A11A4C58D00D9C4E9 /* iTunesScroller */,
 				347AFB0E1191153B00393565 /* JRFeedbackProvider */,
+				34A91891119E2F83004B339D /* RegexKitLite */,
 				3422ECD3118B3C130061E2E2 /* AppInfoConstants.h */,
 				3422ECE7118B3D7D0061E2E2 /* PrefController.h */,
 				3422ECE8118B3D7D0061E2E2 /* PrefController.m */,
@@ -322,6 +348,9 @@
 				34F6EA3A119BCAD100F8AD4C /* TVShows_Prefix.pch in Headers */,
 				34A91894119E2F83004B339D /* RegexKitLite.h in Headers */,
 				3419982811A07913003768D5 /* WebsiteFunctions.h in Headers */,
+				344AFA2F11A4C58D00D9C4E9 /* ESiTunesScroller.h in Headers */,
+				344AFA3111A4C58D00D9C4E9 /* ESScroller.h in Headers */,
+				344AFA8511A4D19C00D9C4E9 /* ESScrollView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +452,9 @@
 				3420BD6E1197AA32005DE217 /* SubscriptionsModel.xcdatamodel in Sources */,
 				34A91895119E2F83004B339D /* RegexKitLite.m in Sources */,
 				3419982911A07913003768D5 /* WebsiteFunctions.m in Sources */,
+				344AFA3011A4C58D00D9C4E9 /* ESiTunesScroller.m in Sources */,
+				344AFA3211A4C58D00D9C4E9 /* ESScroller.m in Sources */,
+				344AFA8611A4D19C00D9C4E9 /* ESScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
