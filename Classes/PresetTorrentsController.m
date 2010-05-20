@@ -40,7 +40,8 @@
 																	 ascending: YES 
 																	  selector: @selector(caseInsensitiveCompare:)];
 	[PTArrayController setSortDescriptors:[NSArray arrayWithObject:PTSortDescriptor]];
-
+	[PTArrayController setSelectionIndex:0];
+	
     [NSApp beginSheet: presetTorrentsWindow
 	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
 		modalDelegate: nil
@@ -111,9 +112,8 @@
 			[newShow setValue:[NSNumber numberWithInt:showrssID] forKey:@"showrssID"];
 			[newShow setValue:[NSDate date] forKey:@"dateAdded"];	
 		} 
-
+		
 		[delegateClass saveAction];
-
 	}
 	
 	[delegateClass release];
