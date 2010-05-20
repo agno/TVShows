@@ -157,7 +157,6 @@ CFBooleanRef checkBoxValue;
 	// Update the application build number in installedBuild
 	// (Allows us to run build specific update sequences)
 	[self setKey:@"installedBuild" fromString:buildVersion];
-
 }
 
 - (void) setDefaultUserDefaults
@@ -182,17 +181,17 @@ CFBooleanRef checkBoxValue;
 	// Load download preferences
 	// -------------------------
 	if ([self getBoolFromKey:@"isEnabled" withDefault:1]) {
-		[isEnabledControl setOn: 1];
+		[isEnabledControl setOn:YES performSelector:NO];
 		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
 									 [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
 									  pathForResource: @"TVShows-Beta-Large" ofType: @"icns"]] autorelease]];
 		
-		[isEnabledTextOn setTextColor:  [self colorFromHexRGB:@"0080FF"]];
+		[isEnabledTextOn setTextColor: [self colorFromHexRGB:@"0080FF"]];
 		[isEnabledTextOff setTextColor: [self colorFromHexRGB:@"464646"]];
 		
 		isEnabled = 1;
 	} else {
-		[isEnabledControl setOn: 0];
+		[isEnabledControl setOn:NO performSelector:NO];
 		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
 									 [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
 									  pathForResource: @"TVShows-Off-Large" ofType: @"icns"]] autorelease]];
@@ -248,8 +247,8 @@ CFBooleanRef checkBoxValue;
 		[isEnabledTextOn setTextColor: [self colorFromHexRGB:@"0080FF"]];
 		[isEnabledTextOff setTextColor:  [self colorFromHexRGB:@"464646"]];
 	} else {
-		[self setKey:@"isEnabled" fromBool: 0];
 		isEnabled = 0;
+		[self setKey:@"isEnabled" fromBool: 0];
 		
 		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
 									 [[NSBundle bundleWithIdentifier: TVShowsAppDomain]

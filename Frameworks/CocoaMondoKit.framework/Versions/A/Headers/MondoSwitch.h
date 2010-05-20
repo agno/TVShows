@@ -44,6 +44,7 @@
 @property(nonatomic, getter=isOn) BOOL on;
 
 -(void)setOn:(BOOL)on animated:(BOOL)animated;
+-(void)setOn:(BOOL)newState performSelector:(BOOL)performSelector;
 
 // FIXME: If an NSControl was extended instead of an NSView these definitions
 // wouldn't be required.
