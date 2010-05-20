@@ -14,6 +14,7 @@
 
 #import <PreferencePanes/PreferencePanes.h>
 #import <Cocoa/Cocoa.h>
+#import <CocoaMondoKit/MondoSwitch.h>
 
 
 @interface PrefController : NSPreferencePane
@@ -21,7 +22,10 @@
 	// Download Preferences
 	Boolean isEnabled;
 	int defaultQuality;
-	IBOutlet NSSegmentedControl *isEnabledControl;
+	IBOutlet MondoSwitch *isEnabledControl;
+	IBOutlet NSTextField *isEnabledTextOn;
+	IBOutlet NSTextField *isEnabledTextOff;
+	
 	IBOutlet NSImageView *TVShowsAppImage;
 	IBOutlet NSPopUpButton *episodeCheckDelay;
 	IBOutlet NSPopUpButton *downloadLocationMenu;
@@ -66,6 +70,7 @@
 #pragma mark -
 #pragma mark Download Preferences
 - (IBAction) isEnabledControlDidChange:(id)sender;
+- (NSColor *) colorFromHexRGB:(NSString *)inColorString;
 - (IBAction) episodeCheckDelayDidChange:(id)sender;
 - (void) buildDownloadLocationMenu;
 - (NSMenu *) downloadLocationMenu;
