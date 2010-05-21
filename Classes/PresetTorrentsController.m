@@ -118,6 +118,7 @@
 		
 		// Reset the existing show list before continuing
 		[delegateClass resetShowList];
+		[PTArrayController removeObjects:[PTArrayController arrangedObjects]];
 		NSManagedObjectContext *context = [delegateClass managedObjectContext];
 		
 		// Extract the show name and number from the <option> tags
@@ -132,12 +133,14 @@
 						   stringByReplacingOccurrencesOfRegex:SeparatorBetweenNameAndID withString:@""];
 			sortName = [displayName stringByReplacingOccurrencesOfRegex:@"^The[[:space:]]" withString:@""];
 			showrssID = [[[showInformation componentsMatchedByRegex:RSSIDRegex] objectAtIndex:0] intValue];
-
+			
 			[newShow setValue:displayName forKey:@"displayName"];
 			[newShow setValue:displayName forKey:@"actualName"];
 			[newShow setValue:sortName forKey:@"sortName"];
 			[newShow setValue:[NSNumber numberWithInt:showrssID] forKey:@"showrssID"];
 			[newShow setValue:[NSDate date] forKey:@"dateAdded"];
+			
+			[PTArrayController addObject:newShow];
 		} 
 		
 		[delegateClass saveAction];
