@@ -28,8 +28,6 @@
 		344AFA3211A4C58D00D9C4E9 /* ESScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 344AFA2E11A4C58D00D9C4E9 /* ESScroller.m */; };
 		344AFA8511A4D19C00D9C4E9 /* ESScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 344AFA8311A4D19C00D9C4E9 /* ESScrollView.h */; };
 		344AFA8611A4D19C00D9C4E9 /* ESScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 344AFA8411A4D19C00D9C4E9 /* ESScrollView.m */; };
-		344AFB0E11A4DB3100D9C4E9 /* CocoaMondoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 344AFB0D11A4DB3100D9C4E9 /* CocoaMondoKit.framework */; };
-		344AFB1711A4DB3400D9C4E9 /* CocoaMondoKit.framework in Copy Linked Libraries */ = {isa = PBXBuildFile; fileRef = 344AFB0D11A4DB3100D9C4E9 /* CocoaMondoKit.framework */; };
 		345BE414119344E10016EA2D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 345BE411119344E10016EA2D /* InfoPlist.strings */; };
 		345BE41A119344F10016EA2D /* JRFeedbackProvider.strings in Resources */ = {isa = PBXBuildFile; fileRef = 345BE417119344F10016EA2D /* JRFeedbackProvider.strings */; };
 		3473849E11907678003DFFA0 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3473845E119074C8003DFFA0 /* Sparkle.framework */; };
@@ -74,7 +72,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				344AFB1711A4DB3400D9C4E9 /* CocoaMondoKit.framework in Copy Linked Libraries */,
 				34A9186D119E09B6004B339D /* BWToolkitFramework.framework in Copy Linked Libraries */,
 				3473849F1190767A003DFFA0 /* Sparkle.framework in Copy Linked Libraries */,
 			);
@@ -107,7 +104,6 @@
 		344AFA2E11A4C58D00D9C4E9 /* ESScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESScroller.m; sourceTree = "<group>"; };
 		344AFA8311A4D19C00D9C4E9 /* ESScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESScrollView.h; sourceTree = "<group>"; };
 		344AFA8411A4D19C00D9C4E9 /* ESScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESScrollView.m; sourceTree = "<group>"; };
-		344AFB0D11A4DB3100D9C4E9 /* CocoaMondoKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaMondoKit.framework; path = Frameworks/CocoaMondoKit.framework; sourceTree = "<group>"; };
 		345BE412119344E10016EA2D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = Resources/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		345BE418119344F10016EA2D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = Resources/English.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; };
 		3473845E119074C8003DFFA0 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Frameworks/Sparkle.framework; sourceTree = "<group>"; };
@@ -157,7 +153,6 @@
 				347AFBD91191207300393565 /* SystemConfiguration.framework in Frameworks */,
 				34A9183C119E09AF004B339D /* BWToolkitFramework.framework in Frameworks */,
 				34A91884119E2C85004B339D /* libicucore.dylib in Frameworks */,
-				344AFB0E11A4DB3100D9C4E9 /* CocoaMondoKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,7 +197,6 @@
 		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				344AFB0D11A4DB3100D9C4E9 /* CocoaMondoKit.framework */,
 				34A9183B119E09AF004B339D /* BWToolkitFramework.framework */,
 				3473845E119074C8003DFFA0 /* Sparkle.framework */,
 				34A91883119E2C85004B339D /* libicucore.dylib */,
