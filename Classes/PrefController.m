@@ -18,7 +18,6 @@
 
 // Setup CFPreference variables
 CFStringRef prefAppDomain = (CFStringRef)TVShowsAppDomain;
-CFBooleanRef checkBoxValue;
 
 @implementation PrefController
 
