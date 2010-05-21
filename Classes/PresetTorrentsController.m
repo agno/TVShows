@@ -116,9 +116,12 @@
 	} else {
 		showListContents = [selectTags objectAtIndex:0];
 		
-		// Reset the existing show list before continuing
+		// Reset the existing show list before continuing. In a perfect world we'd
+		// only be adding shows that didn't already exist, instead of deleting
+		// everything and starting from scratch.
 		[delegateClass resetShowList];
 		[PTArrayController removeObjects:[PTArrayController arrangedObjects]];
+		
 		NSManagedObjectContext *context = [delegateClass managedObjectContext];
 		
 		// Extract the show name and number from the <option> tags
