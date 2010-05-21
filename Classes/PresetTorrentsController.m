@@ -32,32 +32,57 @@
 
 - (IBAction) displayPresetTorrentsWindow:(id)sender
 {
-	// Show list downloads but the NSTableView doesn't seem to refresh like it should.
-	// Maybe we need to refresh the NSArrayController instead?
+	errorHasOccurred = NO;
 	[self downloadTorrentShowList];
-
-	NSSortDescriptor *PTSortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"sortName"
-																	 ascending: YES 
-																	  selector: @selector(caseInsensitiveCompare:)];
-	[PTArrayController setSortDescriptors:[NSArray arrayWithObject:PTSortDescriptor]];
-	[PTArrayController setSelectionIndex:0];
 	
-    [NSApp beginSheet: presetTorrentsWindow
+	if(errorHasOccurred == NO) {
+		NSSortDescriptor *PTSortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"sortName"
+																		 ascending: YES 
+																		  selector: @selector(caseInsensitiveCompare:)];
+		[PTArrayController setSortDescriptors:[NSArray arrayWithObject:PTSortDescriptor]];
+		[PTArrayController setSelectionIndex:0];
+		
+		[NSApp beginSheet: PTShowList
+		   modalForWindow: [[NSApplication sharedApplication] mainWindow]
+			modalDelegate: nil
+		   didEndSelector: nil
+			  contextInfo: nil];
+		
+		[NSApp endSheet: PTShowList];
+		[NSApp runModalForWindow: PTShowList];
+		
+		[PTSortDescriptor release];
+	}
+}
+
+- (void) displayErrorWindowWithMessage:(NSString *)message
+{
+	[PTErrorHeader setStringValue:@"An Error Has Occurred:"];
+	[PTErrorText setStringValue:message];
+	
+    [NSApp beginSheet: PTErrorWindow
 	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
 		modalDelegate: nil
 	   didEndSelector: nil
 		  contextInfo: nil];
 	
-    [NSApp runModalForWindow: presetTorrentsWindow];
-	[NSApp endSheet: presetTorrentsWindow];
+	TVLog(@"%@",message);
+	errorHasOccurred = YES;
 	
-	[PTSortDescriptor release];
+	[NSApp endSheet: PTErrorWindow];
+	[NSApp runModalForWindow: PTErrorWindow];
+}
+
+- (IBAction) closeErrorWindow:(id)sender
+{	
+    [NSApp stopModal];
+    [PTErrorWindow orderOut:self];
 }
 
 - (IBAction) closePresetTorrentsWindow:(id)sender
 {	
     [NSApp stopModal];
-    [presetTorrentsWindow orderOut:self];
+    [PTShowList orderOut:self];
 }
 
 - (void) downloadTorrentShowList {
@@ -82,10 +107,12 @@
 	
 	// Check to make sure the website is loading and that selectTags isn't NULL
 	if ([WebsiteFunctions canConnectToHostname:ShowListHostname] && [selectTags count] == 0) {
-		TVLog(@"The website '%@' seems to have loaded successfully but there were no shows found.", ShowListHostname);
+		[self displayErrorWindowWithMessage:
+		 [NSString stringWithFormat:@"The website '%@' seems to have loaded successfully but there were no shows found.", ShowListHostname]];
 	}
 	else if (![WebsiteFunctions canConnectToHostname:ShowListHostname]) {
-		TVLog(@"Cannot connect to '%@'. Please try again later or check your internet connection.", ShowListHostname);
+		[self displayErrorWindowWithMessage:
+		 [NSString stringWithFormat:@"Cannot connect to '%@'. Please try again later or check your internet connection.", ShowListHostname]];
 	} else {
 		showListContents = [selectTags objectAtIndex:0];
 		
@@ -107,10 +134,10 @@
 			showrssID = [[[showInformation componentsMatchedByRegex:RSSIDRegex] objectAtIndex:0] intValue];
 
 			[newShow setValue:displayName forKey:@"displayName"];
-			[newShow setValue:displayName forKey:@"rssName"];
+			[newShow setValue:displayName forKey:@"actualName"];
 			[newShow setValue:sortName forKey:@"sortName"];
 			[newShow setValue:[NSNumber numberWithInt:showrssID] forKey:@"showrssID"];
-			[newShow setValue:[NSDate date] forKey:@"dateAdded"];	
+			[newShow setValue:[NSDate date] forKey:@"dateAdded"];
 		} 
 		
 		[delegateClass saveAction];

@@ -17,12 +17,19 @@
 
 @interface PresetTorrentsController : NSWindowController
 {
-	IBOutlet NSWindow *presetTorrentsWindow;
+	Boolean errorHasOccurred;
+	IBOutlet NSWindow *PTShowList;
 	IBOutlet NSArrayController *PTArrayController;
+	
+	IBOutlet NSWindow *PTErrorWindow;
+	IBOutlet NSTextField *PTErrorText;
+	IBOutlet NSTextField *PTErrorHeader;
 }
 
+- (void) downloadTorrentShowList;
 - (IBAction) displayPresetTorrentsWindow:(id)sender;
 - (IBAction) closePresetTorrentsWindow:(id)sender;
-- (void) downloadTorrentShowList;
+- (void) displayErrorWindowWithMessage:(NSString *)message;
+- (IBAction) closeErrorWindow:(id)sender;
 
 @end
