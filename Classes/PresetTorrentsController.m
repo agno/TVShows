@@ -138,7 +138,7 @@
 			showrssID = [[[showInformation componentsMatchedByRegex:RSSIDRegex] objectAtIndex:0] intValue];
 			
 			[newShow setValue:displayName forKey:@"displayName"];
-			[newShow setValue:displayName forKey:@"actualName"];
+			[newShow setValue:displayName forKey:@"name"];
 			[newShow setValue:sortName forKey:@"sortName"];
 			[newShow setValue:[NSNumber numberWithInt:showrssID] forKey:@"showrssID"];
 			[newShow setValue:[NSDate date] forKey:@"dateAdded"];

@@ -12,10 +12,10 @@
  *
  */
 
-#import "SubscriptionsDelegate.h"
+#import "CacheDelegate.h"
 #import "AppInfoConstants.h"
 
-@implementation SubscriptionsDelegate
+@implementation CacheDelegate
 
 @synthesize window;
 
@@ -69,7 +69,7 @@
 		}
     }
     
-    NSURL *url = [NSURL fileURLWithPath: [applicationSupportDirectory stringByAppendingPathComponent: @"Subscriptions"]];
+    NSURL *url = [NSURL fileURLWithPath: [applicationSupportDirectory stringByAppendingPathComponent: @"Cache"]];
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: mom];
     if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
 												  configuration:nil
