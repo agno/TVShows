@@ -12,10 +12,10 @@
  *
  */
 
-#import "ShowListDelegate.h"
+#import "SubscriptionsDelegate.h"
 #import "AppInfoConstants.h"
 
-@implementation ShowListDelegate
+@implementation SubscriptionsDelegate
 
 @synthesize window;
 
@@ -69,7 +69,7 @@
 		}
     }
     
-    NSURL *url = [NSURL fileURLWithPath: [applicationSupportDirectory stringByAppendingPathComponent: @"ShowList.xml"]];
+    NSURL *url = [NSURL fileURLWithPath: [applicationSupportDirectory stringByAppendingPathComponent: @"Subscriptions.xml"]];
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: mom];
     if (![persistentStoreCoordinator addPersistentStoreWithType:NSXMLStoreType
 												  configuration:nil
@@ -110,20 +110,6 @@
 - (NSUndoManager *) windowWillReturnUndoManager:(NSWindow *)window
 {
     return [[self managedObjectContext] undoManager];
-}
-
-
-// Deletes each object in the Show entity of the managed object context.
-- (void) resetShowList {
-    NSString *applicationSupportDirectory = [self applicationSupportDirectory];
-    NSError *error = nil;
-	
-	[[NSFileManager defaultManager] removeItemAtPath:[applicationSupportDirectory stringByAppendingPathComponent: @"ShowList.xml"]
-											   error:nil];
-	
-	[persistentStoreCoordinator release], persistentStoreCoordinator = nil;
-	[managedObjectContext release], managedObjectContext = nil;
-	[self managedObjectContext];
 }
 
 // Send the save: message to the application's managed object context.

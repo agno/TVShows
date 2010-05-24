@@ -13,7 +13,7 @@
  */
 
 #import "PresetTorrentsController.h"
-#import "ShowListDelegate.h"
+#import "PresetShowsDelegate.h"
 #import "RegexKitLite.h"
 #import "WebsiteFunctions.h"
 
@@ -87,7 +87,7 @@
 
 - (void) downloadTorrentShowList {
 	// There's probably a better way to do this:
-	id delegateClass = [[[ShowListDelegate class] alloc] init];
+	id delegateClass = [[[PresetShowsDelegate class] alloc] init];
 	
 	NSString *displayName, *sortName;
 	int showrssID;
@@ -119,7 +119,7 @@
 		// Reset the existing show list before continuing. In a perfect world we'd
 		// only be adding shows that didn't already exist, instead of deleting
 		// everything and starting from scratch.
-		[delegateClass resetShowList];
+		[delegateClass resetPresetShows];
 		[PTArrayController removeObjects:[PTArrayController arrangedObjects]];
 		
 		NSManagedObjectContext *context = [delegateClass managedObjectContext];

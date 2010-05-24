@@ -16,7 +16,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface PrefController : NSPreferencePane
+@interface PreferencesController : NSPreferencePane
 {
 	// Download Preferences
 	Boolean isEnabled;

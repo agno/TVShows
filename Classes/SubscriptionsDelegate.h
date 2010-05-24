@@ -14,7 +14,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ShowListDelegate : NSObject 
+@interface SubscriptionsDelegate : NSObject 
 {
     NSWindow *window;
     
@@ -29,7 +29,6 @@
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 
-- (void) resetShowList;
 - (void) saveAction;
 
 @end

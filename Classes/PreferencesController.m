@@ -12,14 +12,14 @@
  *
  */
 
-#import "PrefController.h"
+#import "PreferencesController.h"
 #import "AppInfoConstants.h"
 
 
 // Setup CFPreference variables
 CFStringRef prefAppDomain = (CFStringRef)TVShowsAppDomain;
 
-@implementation PrefController
+@implementation PreferencesController
 
 #pragma mark -
 #pragma mark Preferences Functions

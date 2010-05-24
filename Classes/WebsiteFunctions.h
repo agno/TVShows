@@ -15,8 +15,9 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface WebsiteFunctions : NSObject {
-//	Class *WebsiteFun;
+@interface WebsiteFunctions : NSObject
+{
+
 }
 
 + (BOOL) canConnectToHostname:(NSString *)hostName;
