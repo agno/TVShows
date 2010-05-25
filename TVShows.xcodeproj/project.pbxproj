@@ -60,6 +60,8 @@
 		34A91884119E2C85004B339D /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 34A91883119E2C85004B339D /* libicucore.dylib */; };
 		34A91894119E2F83004B339D /* RegexKitLite.h in Headers */ = {isa = PBXBuildFile; fileRef = 34A91892119E2F83004B339D /* RegexKitLite.h */; };
 		34A91895119E2F83004B339D /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A91893119E2F83004B339D /* RegexKitLite.m */; };
+		34D8D1C211AB5C63006382C3 /* CustomRSSController.h in Headers */ = {isa = PBXBuildFile; fileRef = 34D8D1C011AB5C63006382C3 /* CustomRSSController.h */; };
+		34D8D1C311AB5C63006382C3 /* CustomRSSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D8D1C111AB5C63006382C3 /* CustomRSSController.m */; };
 		34EB966E11838131005825C1 /* showRSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB966D11838131005825C1 /* showRSS.png */; };
 		34EB967F118389FC005825C1 /* NZB.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB967E118389FC005825C1 /* NZB.png */; };
 		34EBF4F111A8501A00962FE5 /* SubscriptionsDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 34EBF4EF11A8501A00962FE5 /* SubscriptionsDelegate.h */; };
@@ -139,6 +141,8 @@
 		34A91883119E2C85004B339D /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		34A91892119E2F83004B339D /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		34A91893119E2F83004B339D /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
+		34D8D1C011AB5C63006382C3 /* CustomRSSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRSSController.h; sourceTree = "<group>"; };
+		34D8D1C111AB5C63006382C3 /* CustomRSSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRSSController.m; sourceTree = "<group>"; };
 		34EB966D11838131005825C1 /* showRSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showRSS.png; sourceTree = "<group>"; };
 		34EB966F118384DB005825C1 /* RSS-Large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RSS-Large.png"; sourceTree = "<group>"; };
 		34EB967E118389FC005825C1 /* NZB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NZB.png; sourceTree = "<group>"; };
@@ -310,6 +314,8 @@
 				3422ECE8118B3D7D0061E2E2 /* PreferencesController.m */,
 				347F1E6A11AA093C005A40AA /* PresetTorrentsController.h */,
 				347F1E6B11AA093C005A40AA /* PresetTorrentsController.m */,
+				34D8D1C011AB5C63006382C3 /* CustomRSSController.h */,
+				34D8D1C111AB5C63006382C3 /* CustomRSSController.m */,
 				349FEEBF11835A1C00D24FC9 /* TabController.h */,
 				349FEEC011835A1C00D24FC9 /* TabController.m */,
 			);
@@ -394,6 +400,7 @@
 				347F1E6811AA090D005A40AA /* PresetShowsDelegate.h in Headers */,
 				347F1E6C11AA093C005A40AA /* PresetTorrentsController.h in Headers */,
 				342A32FA11AA4C8C00C433CD /* CacheDelegate.h in Headers */,
+				34D8D1C211AB5C63006382C3 /* CustomRSSController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,6 +508,7 @@
 				347F1E6D11AA093C005A40AA /* PresetTorrentsController.m in Sources */,
 				342A32F711AA4C6200C433CD /* Cache.xcdatamodel in Sources */,
 				342A32FB11AA4C8C00C433CD /* CacheDelegate.m in Sources */,
+				34D8D1C311AB5C63006382C3 /* CustomRSSController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
