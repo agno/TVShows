@@ -14,6 +14,7 @@
 
 #import "PresetTorrentsController.h"
 #import "PresetShowsDelegate.h"
+#import "SubscriptionsDelegate.h"
 #import "RegexKitLite.h"
 #import "WebsiteFunctions.h"
 
@@ -55,6 +56,12 @@
 	}
 }
 
+- (IBAction) closePresetTorrentsWindow:(id)sender
+{
+    [NSApp stopModal];
+    [PTShowList orderOut:self];
+}
+
 - (void) displayErrorWindowWithMessage:(NSString *)message
 {
 	[PTErrorHeader setStringValue:@"An Error Has Occurred:"];
@@ -74,15 +81,9 @@
 }
 
 - (IBAction) closeErrorWindow:(id)sender
-{	
+{
     [NSApp stopModal];
     [PTErrorWindow orderOut:self];
-}
-
-- (IBAction) closePresetTorrentsWindow:(id)sender
-{	
-    [NSApp stopModal];
-    [PTShowList orderOut:self];
 }
 
 - (void) downloadTorrentShowList {
@@ -150,6 +151,32 @@
 	}
 	
 	[delegateClass release];
+}
+
+- (IBAction) subscribeToShow:(id)sender {
+	// There's probably a better way to do this:
+	id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
+	
+	NSManagedObjectContext *context = [delegateClass managedObjectContext];
+	NSManagedObject *newSubscription = [NSEntityDescription insertNewObjectForEntityForName: @"Subscription"
+																 inManagedObjectContext: context];
+	
+	NSArray *selectedShow = [PTArrayController selectedObjects];
+	
+	// Set the information about the new show
+	[newSubscription setValue:[[selectedShow valueForKey:@"displayName"] objectAtIndex:0] forKey:@"name"];
+	[newSubscription setValue:[[selectedShow valueForKey:@"sortName"] objectAtIndex:0] forKey:@"sortName"];
+	[newSubscription setValue:[NSString stringWithFormat:@"http://showrss.karmorra.info/feeds/%@.rss",
+							   [[selectedShow valueForKey:@"showrssID"] objectAtIndex:0]]
+					   forKey:@"url"];
+	
+	[delegateClass saveAction];
+	[delegateClass release];
+	
+	// Close the modal dialog box
+	[self closePresetTorrentsWindow:(id)sender];
+	
+	// TODO: Swap to the Subscriptions tab and update subscriptions
 }
 
 @end

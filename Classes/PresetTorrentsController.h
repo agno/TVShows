@@ -26,10 +26,13 @@
 	IBOutlet NSTextField *PTErrorHeader;
 }
 
-- (void) downloadTorrentShowList;
 - (IBAction) displayPresetTorrentsWindow:(id)sender;
 - (IBAction) closePresetTorrentsWindow:(id)sender;
+- (void) downloadTorrentShowList;
+
 - (void) displayErrorWindowWithMessage:(NSString *)message;
 - (IBAction) closeErrorWindow:(id)sender;
+
+- (IBAction) subscribeToShow:(id)sender;
 
 @end
