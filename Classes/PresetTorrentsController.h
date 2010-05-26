@@ -20,6 +20,7 @@
 	Boolean errorHasOccurred;
 	IBOutlet NSWindow *PTShowList;
 	IBOutlet NSArrayController *PTArrayController;
+	IBOutlet NSButton *showQuality;
 	
 	IBOutlet NSWindow *PTErrorWindow;
 	IBOutlet NSTextField *PTErrorText;

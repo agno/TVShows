@@ -65,6 +65,10 @@
     [[tabView window] setFrame:tabFrame display:YES animate:YES];
 }
 
+- (void) selectTab:(id)tabViewIdentifier {
+	[prefTabView selectTabViewItemWithIdentifier:tabViewIdentifier];
+}
+
 - (IBAction) showFeedbackWindow:(id)sender
 {
 	[JRFeedbackController showFeedback];

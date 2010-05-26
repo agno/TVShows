@@ -16,15 +16,17 @@
 #import <Cocoa/Cocoa.h>
 #import "JRFeedbackController.h"
 
-
 @interface TabController : NSPreferencePane
 {
+	IBOutlet NSTabView *prefTabView;
+	
 	// Version information
 	IBOutlet NSTextField *sidebarHeader;
 	IBOutlet NSTextField *sidebarVersionText;
 	IBOutlet NSTextField *sidebarDateText;
 	IBOutlet NSTextField *aboutTabVersionText;
 	
+	// About tab
 	IBOutlet NSWindow *licenseInfoDialog;
 	IBOutlet NSTextView *textView_licenseInfo;
 	IBOutlet NSTextView *textView_aboutBox;
@@ -32,6 +34,7 @@
 
 - (void) awakeFromNib;
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
+- (void) selectTab:(id)tabViewIdentifier;
 - (IBAction) showFeedbackWindow:(id)sender;
 
 #pragma mark -

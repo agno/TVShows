@@ -71,7 +71,7 @@
     
     NSURL *url = [NSURL fileURLWithPath: [applicationSupportDirectory stringByAppendingPathComponent: @"Subscriptions"]];
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: mom];
-    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSXMLStoreType
 												  configuration:nil
 															URL:url
 														options:nil

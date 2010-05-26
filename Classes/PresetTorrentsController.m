@@ -13,22 +13,26 @@
  */
 
 #import "PresetTorrentsController.h"
+#import "TabController.h"
+#import "TSUserDefaults.h"
 #import "PresetShowsDelegate.h"
 #import "SubscriptionsDelegate.h"
 #import "RegexKitLite.h"
 #import "WebsiteFunctions.h"
 
-#pragma mark Constants
-	#define ShowListHostname			@"showrss.karmorra.info"
-	#define ShowListURL					@"http://showrss.karmorra.info/?cs=feeds"
-	#define SelectTagsRegex				@"<select name=\"show\">(.+?)</select>"
-	#define OptionTagsRegex				@"(?!<option value=\")([[:digit:]]+)(.*?)(?=</option>)"
-	#define RSSIDRegex					@"([[:digit:]]+)(?![[:alnum:]]|[[:space:]])"
-	#define DisplayNameRegex			@"\">(.+)"
-	#define SeparatorBetweenNameAndID	@"\">"
+#pragma mark Define Macros
+
+#define ShowListHostname			@"showrss.karmorra.info"
+#define ShowListURL					@"http://showrss.karmorra.info/?cs=feeds"
+#define SelectTagsRegex				@"<select name=\"show\">(.+?)</select>"
+#define OptionTagsRegex				@"(?!<option value=\")([[:digit:]]+)(.*?)(?=</option>)"
+#define RSSIDRegex					@"([[:digit:]]+)(?![[:alnum:]]|[[:space:]])"
+#define DisplayNameRegex			@"\">(.+)"
+#define SeparatorBetweenNameAndID	@"\">"
 
 #pragma mark -
 #pragma mark Preset Torrents Controller
+
 @implementation PresetTorrentsController
 
 - (IBAction) displayPresetTorrentsWindow:(id)sender
@@ -37,6 +41,8 @@
 	[self downloadTorrentShowList];
 	
 	if(errorHasOccurred == NO) {
+		[showQuality setState:[TSUserDefaults getFloatFromKey:@"defaultQuality" withDefault:0]];
+		
 		NSSortDescriptor *PTSortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"sortName"
 																		 ascending: YES 
 																		  selector: @selector(caseInsensitiveCompare:)];
@@ -156,27 +162,31 @@
 - (IBAction) subscribeToShow:(id)sender {
 	// There's probably a better way to do this:
 	id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
+	id tabController = [[[TabController class] alloc] init];
 	
 	NSManagedObjectContext *context = [delegateClass managedObjectContext];
 	NSManagedObject *newSubscription = [NSEntityDescription insertNewObjectForEntityForName: @"Subscription"
 																 inManagedObjectContext: context];
 	
 	NSArray *selectedShow = [PTArrayController selectedObjects];
-	
+
 	// Set the information about the new show
 	[newSubscription setValue:[[selectedShow valueForKey:@"displayName"] objectAtIndex:0] forKey:@"name"];
 	[newSubscription setValue:[[selectedShow valueForKey:@"sortName"] objectAtIndex:0] forKey:@"sortName"];
 	[newSubscription setValue:[NSString stringWithFormat:@"http://showrss.karmorra.info/feeds/%@.rss",
 							   [[selectedShow valueForKey:@"showrssID"] objectAtIndex:0]]
 					   forKey:@"url"];
+		[newSubscription setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
+		[newSubscription setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
 	
 	[delegateClass saveAction];
-	[delegateClass release];
 	
 	// Close the modal dialog box
 	[self closePresetTorrentsWindow:(id)sender];
-	
-	// TODO: Swap to the Subscriptions tab and update subscriptions
+	[tabController selectTab:@"tabItemSubscriptions"];
+
+	[delegateClass release];
+	[tabController release];
 }
 
 @end
