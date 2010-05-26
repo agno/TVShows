@@ -41,23 +41,6 @@
 }
 
 #pragma mark -
-#pragma mark Preferences Functions
-- (BOOL) getBoolFromKey:(NSString *)key withDefault:(BOOL)defaultValue;
-- (void) setKey:(NSString *)key fromBool:(BOOL)value;
-
-- (float) getFloatFromKey:(NSString *)key withDefault:(float)defaultValue;
-- (void) setKey:(NSString *)key fromFloat:(float)value;
-
-- (unsigned int) getUnsignedIntFromKey:(NSString *)key withDefault:(int)defaultValue;
-- (void) setKey:(NSString *)key fromInt:(int)value;
-
-- (NSString *) getStringFromKey:(NSString *)key;
-- (void) setKey:(NSString *)key fromString:(NSString *)value;
-
-- (NSDate *) getDateFromKey:(NSString *)key;
-- (void) setKey:(NSString *)key fromDate:(NSDate *)value;
-
-#pragma mark -
 #pragma mark General
 - init;
 - (void) awakeFromNib;
