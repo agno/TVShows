@@ -18,6 +18,7 @@
 @interface PresetTorrentsController : NSWindowController
 {
 	Boolean errorHasOccurred;
+	Boolean hasDownloadedList;
 	IBOutlet NSWindow *PTShowList;
 	IBOutlet NSArrayController *PTArrayController;
 	IBOutlet NSButton *showQuality;
@@ -31,7 +32,7 @@
 - (IBAction) closePresetTorrentsWindow:(id)sender;
 - (void) downloadTorrentShowList;
 
-- (void) displayErrorWindowWithMessage:(NSString *)message;
+- (void) errorWindowWithStatusCode:(int)code;
 - (IBAction) closeErrorWindow:(id)sender;
 
 - (IBAction) subscribeToShow:(id)sender;

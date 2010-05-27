@@ -21,7 +21,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="6"/>
+			<integer value="12"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2428,7 +2428,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<nil key="NSViewClass"/>
 				<string key="NSWindowContentMaxSize">{3.40282e+38, 3.40282e+38}</string>
 				<object class="NSView" key="NSWindowView" id="782962959">
-					<nil key="NSNextResponder"/>
+					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2442,6 +2442,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 									<int key="NSvFlags">268</int>
 									<string key="NSFrame">{{17, 10}, {427, 17}}</string>
 									<reference key="NSSuperview" ref="297359315"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="248830036">
 										<int key="NSCellFlags">67239424</int>
@@ -2460,6 +2461,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							</object>
 							<string key="NSFrame">{{0, 128}, {461, 36}}</string>
 							<reference key="NSSuperview" ref="782962959"/>
+							<reference key="NSWindow"/>
 							<object class="NSColor" key="BWGBFillStartingColor">
 								<int key="NSColorSpace">1</int>
 								<bytes key="NSRGB">MC44ODIzNTI5NDgyIDAuODgyMzUyOTQ4MiAwLjg4MjM1Mjk0ODIAA</bytes>
@@ -2492,6 +2494,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{340, 18}, {101, 25}}</string>
 							<reference key="NSSuperview" ref="782962959"/>
+							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="396442703">
 								<int key="NSCellFlags">-2080244224</int>
@@ -2512,10 +2515,11 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{105, 50}, {339, 65}}</string>
 							<reference key="NSSuperview" ref="782962959"/>
+							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="94621013">
 								<int key="NSCellFlags">67239424</int>
-								<int key="NSCellFlags2">205520896</int>
+								<int key="NSCellFlags2">4194304</int>
 								<string key="NSContents">PTErrorText</string>
 								<reference key="NSSupport" ref="120841075"/>
 								<reference key="NSControlView" ref="829281804"/>
@@ -2540,6 +2544,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							</object>
 							<string key="NSFrame">{{20, 40}, {80, 80}}</string>
 							<reference key="NSSuperview" ref="782962959"/>
+							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSImageCell" key="NSCell" id="414453948">
 								<int key="NSCellFlags">130560</int>
@@ -2554,6 +2559,8 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						</object>
 					</object>
 					<string key="NSFrameSize">{461, 164}</string>
+					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
 					<int key="NSViewLayerContentsRedrawPolicy">2</int>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1280, 778}}</string>
@@ -6757,9 +6764,9 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>com.brandonwalkin.BWToolkit</string>
 					<string>com.brandonwalkin.BWToolkit</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{439, 310}, {461, 164}}</string>
+					<string>{{426, 441}, {461, 164}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{439, 310}, {461, 164}}</string>
+					<string>{{426, 441}, {461, 164}}</string>
 					<boolean value="NO"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>

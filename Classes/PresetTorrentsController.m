@@ -38,16 +38,25 @@
 - (IBAction) displayPresetTorrentsWindow:(id)sender
 {
 	errorHasOccurred = NO;
-	[self downloadTorrentShowList];
+	hasDownloadedList = NO;
 	
-	if(errorHasOccurred == NO) {
-		[showQuality setState:[TSUserDefaults getFloatFromKey:@"defaultQuality" withDefault:0]];
+	// Only download the show list once per session
+	if(hasDownloadedList == NO) {
+		[self downloadTorrentShowList];
 		
+		// Sort the shows alphabetically
 		NSSortDescriptor *PTSortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"sortName"
 																		 ascending: YES 
 																		  selector: @selector(caseInsensitiveCompare:)];
 		[PTArrayController setSortDescriptors:[NSArray arrayWithObject:PTSortDescriptor]];
 		[PTArrayController setSelectionIndex:0];
+		
+		[PTSortDescriptor release];
+	}
+	
+	// Continue if no error occurred when downloading the show list
+	if(errorHasOccurred == NO) {
+		[showQuality setState:[TSUserDefaults getFloatFromKey:@"defaultQuality" withDefault:0]];
 		
 		[NSApp beginSheet: PTShowList
 		   modalForWindow: [[NSApplication sharedApplication] mainWindow]
@@ -57,8 +66,6 @@
 		
 		[NSApp endSheet: PTShowList];
 		[NSApp runModalForWindow: PTShowList];
-		
-		[PTSortDescriptor release];
 	}
 }
 
@@ -68,10 +75,51 @@
     [PTShowList orderOut:self];
 }
 
-- (void) displayErrorWindowWithMessage:(NSString *)message
+- (void) errorWindowWithStatusCode:(int)code
 {
-	[PTErrorHeader setStringValue:@"An Error Has Occurred:"];
-	[PTErrorText setStringValue:message];
+	NSString *message, *title;
+	
+	DLog(@"%@",[PTArrayController arrangedObjects]);
+	
+	// Add 100 to any error codes if an older show list was found
+	if([[PTArrayController arrangedObjects] count] >= 1)
+		code = code + 100;
+	
+	// Switch between each error code:
+	// x01 = Website loaded but we couldn't parse a show list from it 
+	// x02 = The website did not load or the user is having connection issues
+	switch(code) {
+		case 101:
+			title	= @"An Error Has Occurred";
+			message = @"A show list cannot be found. Please try again later or check your internet connection.";
+			break;
+		
+		case 201:
+			title	= @"Unable to Update the Show List";
+			message = @"A newer show list cannot be found. Using an old show list temporarily.";
+			break;
+			
+		case 102:
+			title	= @"An Error Has Occurred";
+			message = @"Cannot connect. Please try again later or check your internet connection.";
+			break;
+		
+		case 202:
+			title	= @"Unable to Update the Show List";
+			message = @"Cannot connect. Using an old show list temporarily.";
+			break;
+			
+		default:
+			title	= @"An Error Has Occurred";
+			message = @"An unknown error has occurred. Please try again later.";
+			break;
+	}
+	
+	if (code < 200)
+		errorHasOccurred = YES;
+	
+	[PTErrorHeader setStringValue:title];
+	[PTErrorText setStringValue:message];	
 	
     [NSApp beginSheet: PTErrorWindow
 	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
@@ -80,7 +128,6 @@
 		  contextInfo: nil];
 	
 	TVLog(@"%@",message);
-	errorHasOccurred = YES;
 	
 	[NSApp endSheet: PTErrorWindow];
 	[NSApp runModalForWindow: PTErrorWindow];
@@ -114,12 +161,10 @@
 	
 	// Check to make sure the website is loading and that selectTags isn't NULL
 	if ([WebsiteFunctions canConnectToHostname:ShowListHostname] && [selectTags count] == 0) {
-		[self displayErrorWindowWithMessage:
-		 [NSString stringWithFormat:@"The website '%@' seems to have loaded successfully but there were no shows found.", ShowListHostname]];
+		[self errorWindowWithStatusCode:101];
 	}
 	else if (![WebsiteFunctions canConnectToHostname:ShowListHostname]) {
-		[self displayErrorWindowWithMessage:
-		 [NSString stringWithFormat:@"Cannot connect to '%@'. Please try again later or check your internet connection.", ShowListHostname]];
+		[self errorWindowWithStatusCode:102];
 	} else {
 		showListContents = [selectTags objectAtIndex:0];
 		
@@ -153,6 +198,7 @@
 			[PTArrayController addObject:newShow];
 		} 
 		
+		hasDownloadedList = YES;
 		[delegateClass saveAction];
 	}
 	
