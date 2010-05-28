@@ -1,10 +1,12 @@
 # About
-TVShows 2 "_Phoenix_" is the next version of [TVShows][1], the easiest way to download torrents of your favorite shows automatically. It includes a completely rewritten codebase as well as a major overhaul of the UI and a move to System Preferences. _Phoenix_ is currently in the beginning stages of development but I am always open to any feature suggestions.
+TVShows 2 "_Phoenix_" is the next version of [TVShows][1], the easiest way to download your favorite shows automatically. It includes a completely rewritten codebase as well as a major overhaul of the UI and a move to System Preferences. _Phoenix_ is currently in the late stages of development but I am always open to any feature suggestions.
 
-## Compiling Notes
-* Modifying the interface will require the [BWToolkit][2] IB plugin. It can be found in the `IB Plugins` folder.
+## Important Notes
+* The current TVShows Roadmap can be found [here][2].
+	* All issue numbers in commits will refer to those in the Roadmap.
+* Modifying the interface will require the [BWToolkit][3] IB plugin. It can be found in the `IB Plugins` folder.
 * By default, the Debug configuration automatically installs TVShows into `~/Library/PreferencePanes/` each time it's built.
-* TVShows 2 will not officially be supporting Tiger.
+* TVShows 2 will not run on Tiger.
 
 ## Planned Features
 * Custom RSS feeds
@@ -21,6 +23,7 @@ TVShows is free software: you can redistribute it and/or modify it under the ter
 
 For a copy of the GNU General Public License see &lt;[http://www.gnu.org/licenses/][4]&gt;.
 
-[1]:http://embercode.com/tvshows/ "TVShows.app « Ember Code"
-[2]:http://www.brandonwalkin.com/bwtoolkit/ "BWToolkit Information"
+[1]:http://embercode.com/tvshows/ "TVShows « Ember Code"
+[2]:http://labs.embercode.com/projects/tvshows/roadmap "TVShows Roadmap"
+[3]:http://www.brandonwalkin.com/bwtoolkit/ "BWToolkit Information"
 [4]:http://www.gnu.org/licenses/ "GNU General Public License"
