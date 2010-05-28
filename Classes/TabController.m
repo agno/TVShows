@@ -22,18 +22,19 @@
 {
 	// Set displayed version information
 	NSString *bundleVersion = [[[NSBundle bundleWithIdentifier: TVShowsAppDomain] infoDictionary] 
-							   valueForKey: @"CFBundleShortVersionString"];
+							   valueForKey:@"CFBundleShortVersionString"];
 	NSString *buildVersion = [[[NSBundle bundleWithIdentifier: TVShowsAppDomain] infoDictionary]
 							  valueForKey:@"CFBundleVersion"];
 	NSString *buildDate = [[[NSBundle bundleWithIdentifier: TVShowsAppDomain] infoDictionary]
 						   valueForKey:@"TSBundleBuildDate"];
-	
+
+	[sidebarHeader setStringValue: [NSString stringWithFormat:@"TVShows 2", bundleVersion]];
 	[sidebarVersionText setStringValue: [NSString stringWithFormat:@"%@ (r%@)", bundleVersion, buildVersion]];
 	[sidebarDateText setStringValue: buildDate];
 	
-	[sidebarHeader setStringValue: [NSString stringWithFormat: @"TVShows %@", bundleVersion]];
+	[aboutTabVersionText setStringValue: [NSString stringWithFormat:@"TVShows %@ (%@)", bundleVersion, buildVersion]];
 	
-	[aboutTabVersionText setStringValue: [NSString stringWithFormat: @"TVShows %@ (%@)", bundleVersion, buildVersion]];
+	[self sortSubscriptionList];
 }
 
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
@@ -122,6 +123,41 @@
 										documentAttributes: nil] autorelease];
 
 	[[textView_aboutBox textStorage] setAttributedString:aboutBoxText];
+}
+
+#pragma mark -
+#pragma mark Subscriptions Tab
+- (IBAction) displayShowInfoWindow:(id)sender
+{
+	NSArray *selectedShow = [[sender cell] representedObject];
+	DLog(@"%@",selectedShow);
+	
+	//[showName setStringValue: [selectedShow valueForKey:@"name"]];
+	
+	[NSApp beginSheet: showInfoWindow
+	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
+		modalDelegate: nil
+	   didEndSelector: nil
+		  contextInfo: nil];
+	
+    [NSApp runModalForWindow: showInfoWindow];
+	[NSApp endSheet: showInfoWindow];
+}
+
+- (IBAction) closeShowInfoWindow:(id)sender
+{	
+    [NSApp stopModal];
+    [showInfoWindow orderOut: self];
+}
+
+- (void) sortSubscriptionList
+{
+	NSSortDescriptor *SBSortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"sortName"
+																	 ascending: YES 
+																	  selector: @selector(caseInsensitiveCompare:)];
+	[SBArrayController setSortDescriptors:[NSArray arrayWithObject:SBSortDescriptor]];
+	
+	[SBSortDescriptor release];
 }
 
 @end

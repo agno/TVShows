@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		340181001194BF5800FB0E39 /* bannerArtPlaceholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 340180FF1194BF5800FB0E39 /* bannerArtPlaceholder.jpg */; };
+		340A20B111AF0E15004351EB /* posterArtPlaceholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 340A20B011AF0E15004351EB /* posterArtPlaceholder.jpg */; };
 		340F15FA118FEBDE00A1BD00 /* SUUpdaterSubclass.h in Headers */ = {isa = PBXBuildFile; fileRef = 340F15F8118FEBDE00A1BD00 /* SUUpdaterSubclass.h */; };
 		340F15FB118FEBDE00A1BD00 /* SUUpdaterSubclass.m in Sources */ = {isa = PBXBuildFile; fileRef = 340F15F9118FEBDE00A1BD00 /* SUUpdaterSubclass.m */; };
 		3419982811A07913003768D5 /* WebsiteFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3419982611A07913003768D5 /* WebsiteFunctions.h */; };
@@ -94,6 +95,7 @@
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		340180FF1194BF5800FB0E39 /* bannerArtPlaceholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bannerArtPlaceholder.jpg; sourceTree = "<group>"; };
+		340A20B011AF0E15004351EB /* posterArtPlaceholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = posterArtPlaceholder.jpg; sourceTree = "<group>"; };
 		340F15F8118FEBDE00A1BD00 /* SUUpdaterSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUUpdaterSubclass.h; sourceTree = "<group>"; };
 		340F15F9118FEBDE00A1BD00 /* SUUpdaterSubclass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUUpdaterSubclass.m; sourceTree = "<group>"; };
 		3419982611A07913003768D5 /* WebsiteFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebsiteFunctions.h; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 		349FEE021183590500D24FC9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				340A20B011AF0E15004351EB /* posterArtPlaceholder.jpg */,
 				340180FF1194BF5800FB0E39 /* bannerArtPlaceholder.jpg */,
 				34EB967E118389FC005825C1 /* NZB.png */,
 				34EB966F118384DB005825C1 /* RSS-Large.png */,
@@ -477,6 +480,7 @@
 				34908BD1119B9C1C00BDFC01 /* SUPublicDSAKey.pem in Resources */,
 				34785D07119B9CE200A28449 /* Credits.rtf in Resources */,
 				34EC6ABC11A312AD00BD660A /* TVShowsPref.xib in Resources */,
+				340A20B111AF0E15004351EB /* posterArtPlaceholder.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

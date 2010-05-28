@@ -30,6 +30,11 @@
 	IBOutlet NSWindow *licenseInfoDialog;
 	IBOutlet NSTextView *textView_licenseInfo;
 	IBOutlet NSTextView *textView_aboutBox;
+	
+	// Subscriptions tab
+	IBOutlet NSArrayController *SBArrayController;
+	IBOutlet NSWindow *showInfoWindow;
+	IBOutlet NSTextField *showName;
 }
 
 - (void) awakeFromNib;
@@ -43,5 +48,11 @@
 - (IBAction) showLicenseInfo:(id)sender;
 - (IBAction) closeLicenseInfoDialog:(id)sender;
 - (void) drawAboutBox;
+
+#pragma mark -
+#pragma mark Subscriptions TabController
+- (IBAction) displayShowInfoWindow:(id)sender;
+- (IBAction) closeShowInfoWindow:(id)sender;
+- (void) sortSubscriptionList;
 
 @end
