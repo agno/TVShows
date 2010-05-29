@@ -129,10 +129,11 @@
 #pragma mark Subscriptions Tab
 - (IBAction) displayShowInfoWindow:(id)sender
 {
-	NSArray *selectedShow = [[sender cell] representedObject];
+	// Not sure why I have to call representedObject twice, but it works
+	NSArray *selectedShow = [[[sender cell] representedObject] representedObject];
 	DLog(@"%@",selectedShow);
 	
-	//[showName setStringValue: [selectedShow valueForKey:@"name"]];
+	[showName setStringValue: [selectedShow valueForKey:@"name"]];
 	
 	[NSApp beginSheet: showInfoWindow
 	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
