@@ -35,7 +35,11 @@
 	IBOutlet NSArrayController *SBArrayController;
 	IBOutlet NSWindow *showInfoWindow;
 	IBOutlet NSTextField *showName;
+	IBOutlet NSButton *showQuality;
+	IBOutlet NSButton *showIsEnabled;
 }
+
+@property (retain) NSArray *selectedShow;
 
 - (void) awakeFromNib;
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
@@ -54,5 +58,6 @@
 - (IBAction) displayShowInfoWindow:(id)sender;
 - (IBAction) closeShowInfoWindow:(id)sender;
 - (void) sortSubscriptionList;
+- (IBAction) unsubscribeFromShow:(id)sender;
 
 @end

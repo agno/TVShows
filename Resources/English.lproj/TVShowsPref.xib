@@ -5440,6 +5440,30 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<int key="connectionID">1685</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">showQuality</string>
+						<reference key="source" ref="202797967"/>
+						<reference key="destination" ref="31377591"/>
+					</object>
+					<int key="connectionID">1765</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">showIsEnabled</string>
+						<reference key="source" ref="202797967"/>
+						<reference key="destination" ref="587314381"/>
+					</object>
+					<int key="connectionID">1766</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">unsubscribeFromShow:</string>
+						<reference key="source" ref="202797967"/>
+						<reference key="destination" ref="488915437"/>
+					</object>
+					<int key="connectionID">1767</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -8222,9 +8246,9 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{345, 259}, {571, 426}}</string>
+					<string>{{390, 239}, {571, 426}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{345, 259}, {571, 426}}</string>
+					<string>{{390, 239}, {571, 426}}</string>
 					<boolean value="NO"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<object class="NSMutableArray">
@@ -8473,7 +8497,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1764</int>
+			<int key="maxID">1767</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -8697,10 +8721,12 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>displayShowInfoWindow:</string>
 							<string>showFeedbackWindow:</string>
 							<string>showLicenseInfo:</string>
+							<string>unsubscribeFromShow:</string>
 							<string>visitWebsite:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -8718,7 +8744,9 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>licenseInfoDialog</string>
 							<string>prefTabView</string>
 							<string>showInfoWindow</string>
+							<string>showIsEnabled</string>
 							<string>showName</string>
+							<string>showQuality</string>
 							<string>sidebarDateText</string>
 							<string>sidebarHeader</string>
 							<string>sidebarVersionText</string>
@@ -8732,7 +8760,9 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>NSWindow</string>
 							<string>NSTabView</string>
 							<string>NSWindow</string>
+							<string>NSButton</string>
 							<string>NSTextField</string>
+							<string>NSButton</string>
 							<string>NSTextField</string>
 							<string>NSTextField</string>
 							<string>NSTextField</string>

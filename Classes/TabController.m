@@ -14,9 +14,12 @@
 
 #import "TabController.h"
 #import "AppInfoConstants.h"
+#import "SubscriptionsDelegate.h"
 
 
 @implementation TabController
+
+@synthesize selectedShow;
 
 - (void) awakeFromNib
 {
@@ -130,10 +133,11 @@
 - (IBAction) displayShowInfoWindow:(id)sender
 {
 	// Not sure why I have to call representedObject twice, but it works
-	NSArray *selectedShow = [[[sender cell] representedObject] representedObject];
-	DLog(@"%@",selectedShow);
+	selectedShow = [[[sender cell] representedObject] representedObject];
 	
 	[showName setStringValue: [selectedShow valueForKey:@"name"]];
+	[showQuality setState: [[selectedShow valueForKey:@"quality"] intValue]];
+	[showIsEnabled setState: [[selectedShow valueForKey:@"isEnabled"] intValue]];
 	
 	[NSApp beginSheet: showInfoWindow
 	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
@@ -147,6 +151,8 @@
 
 - (IBAction) closeShowInfoWindow:(id)sender
 {	
+	selectedShow = nil;
+	
     [NSApp stopModal];
     [showInfoWindow orderOut: self];
 }
@@ -159,6 +165,26 @@
 	[SBArrayController setSortDescriptors:[NSArray arrayWithObject:SBSortDescriptor]];
 	
 	[SBSortDescriptor release];
+}
+
+- (IBAction) unsubscribeFromShow:(id)sender
+{
+	//	id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
+	//	NSManagedObjectContext *context = [delegateClass managedObjectContext];
+	
+	[SBArrayController removeObject:selectedShow];
+	
+	//	[delegateClass saveAction];
+	
+	[self closeShowInfoWindow:(id)sender];
+	
+	//	[delegateClass release];
+}
+
+- (void) dealloc
+{
+	[selectedShow release];
+    [super dealloc];
 }
 
 @end
