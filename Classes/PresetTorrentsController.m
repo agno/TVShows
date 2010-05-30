@@ -208,7 +208,6 @@
 - (IBAction) subscribeToShow:(id)sender {
 	// There's probably a better way to do this:
 	id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
-	id tabController = [[[TabController class] alloc] init];
 	
 	NSManagedObjectContext *context = [delegateClass managedObjectContext];
 	NSManagedObject *newSubscription = [NSEntityDescription insertNewObjectForEntityForName: @"Subscription"
@@ -225,14 +224,14 @@
 		[newSubscription setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
 		[newSubscription setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
 	
+	[SBArrayController addObject:newSubscription];
 	[delegateClass saveAction];
 	
 	// Close the modal dialog box
+	[prefTabView selectTabViewItemWithIdentifier:@"tabItemSubscriptions"];
 	[self closePresetTorrentsWindow:(id)sender];
-	[tabController selectTab:@"tabItemSubscriptions"];
 
 	[delegateClass release];
-	[tabController release];
 }
 
 @end

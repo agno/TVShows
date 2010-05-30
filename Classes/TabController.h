@@ -43,7 +43,6 @@
 
 - (void) awakeFromNib;
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
-- (void) selectTab:(id)tabViewIdentifier;
 - (IBAction) showFeedbackWindow:(id)sender;
 
 #pragma mark -

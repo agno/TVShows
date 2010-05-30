@@ -26,6 +26,9 @@
 	IBOutlet NSWindow *PTErrorWindow;
 	IBOutlet NSTextField *PTErrorText;
 	IBOutlet NSTextField *PTErrorHeader;
+	
+	IBOutlet NSArrayController *SBArrayController;
+	IBOutlet NSTabView *prefTabView;
 }
 
 - (IBAction) displayPresetTorrentsWindow:(id)sender;

@@ -61,16 +61,11 @@
 		
     } else {
         newWinHeight = 422;
-		
     }
 	
 	tabFrame = NSMakeRect(tabFrame.origin.x, tabFrame.origin.y - (newWinHeight - (int)(NSHeight(tabFrame))), (int)(NSWidth(tabFrame)), newWinHeight);
 	
     [[tabView window] setFrame:tabFrame display:YES animate:YES];
-}
-
-- (void) selectTab:(id)tabViewIdentifier {
-	[prefTabView selectTabViewItemWithIdentifier:tabViewIdentifier];
 }
 
 - (IBAction) showFeedbackWindow:(id)sender
