@@ -1,12 +1,13 @@
 # About
 TVShows 2 "_Phoenix_" is the next version of [TVShows][1], the easiest way to download your favorite shows automatically. It includes a completely rewritten codebase as well as a major overhaul of the UI and a move to System Preferences. _Phoenix_ is currently in the late stages of development but I am always open to any feature suggestions.
 
-## Important Notes
-* The current TVShows Roadmap can be found [here][2].
-	* All issue numbers in commits will refer to those in the Roadmap.
+## Collaboration Notes
+* The current TVShows Roadmap can be found [here][2] -- all issue numbers in commits refer to those in the Roadmap.
+* Compiling TVShows will require you to download all submodules:
+    * `$ git submodule init`
+    * `$ git submodule update`
 * Modifying the interface will require the [BWToolkit][3] IB plugin. It can be found in the `IB Plugins` folder.
 * By default, the Debug configuration automatically installs TVShows into `~/Library/PreferencePanes/` each time it's built.
-* TVShows 2 will not run on Tiger.
 
 ## Planned Features
 * Custom RSS feeds
@@ -15,8 +16,6 @@ TVShows 2 "_Phoenix_" is the next version of [TVShows][1], the easiest way to do
 * Display show and episode information
 * Localized languages for non-English users
 * Growl notifications for new downloads
-* (?) <del>Multiple sources for each RSS feed</del>
-* (?) <del>Feed categories: shows, music, podcasts, etc</del>
 
 ## License
 TVShows is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
