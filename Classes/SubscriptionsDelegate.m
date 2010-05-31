@@ -130,7 +130,6 @@
 // Implementation of dealloc, to release the retained variables.
 - (void) dealloc
 {
-
     [window release];
     [managedObjectContext release];
     [persistentStoreCoordinator release];
