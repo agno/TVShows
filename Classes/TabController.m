@@ -146,10 +146,19 @@
 
 - (IBAction) closeShowInfoWindow:(id)sender
 {	
-	selectedShow = nil;
+	id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
+
+	// Update the per-show preferences
+	[selectedShow setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
+	[selectedShow setValue:[NSNumber numberWithInt:[showIsEnabled state]] forKey:@"isEnabled"];
 	
-    [NSApp stopModal];
+	// Reset the selected show and close the window
+	selectedShow = nil;
+	[NSApp stopModal];
     [showInfoWindow orderOut: self];
+	
+	[delegateClass saveAction];
+	[delegateClass release];
 }
 
 - (void) sortSubscriptionList
