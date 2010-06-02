@@ -171,7 +171,6 @@
 		// Reset the existing show list before continuing. In a perfect world we'd
 		// only be adding shows that didn't already exist, instead of deleting
 		// everything and starting from scratch.
-		[delegateClass resetPresetShows];
 		[PTArrayController removeObjects:[PTArrayController arrangedObjects]];
 		
 		NSManagedObjectContext *context = [delegateClass managedObjectContext];

@@ -112,20 +112,6 @@
     return [[self managedObjectContext] undoManager];
 }
 
-
-// Deletes each object in the Show entity of the managed object context.
-- (void) resetPresetShows {
-    NSString *applicationSupportDirectory = [self applicationSupportDirectory];
-    NSError *error = nil;
-	
-	[[NSFileManager defaultManager] removeItemAtPath:[applicationSupportDirectory stringByAppendingPathComponent: @"Preset Shows"]
-											   error:nil];
-	
-	[persistentStoreCoordinator release], persistentStoreCoordinator = nil;
-	[managedObjectContext release], managedObjectContext = nil;
-	[self managedObjectContext];
-}
-
 // Send the save: message to the application's managed object context.
 // Any encountered errors are presented to the user.
 - (void) saveAction

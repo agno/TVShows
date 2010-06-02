@@ -39,7 +39,7 @@
 	IBOutlet NSButton *showIsEnabled;
 }
 
-@property (retain) NSArray *selectedShow;
+@property (retain) NSManagedObject *selectedShow;
 
 - (void) awakeFromNib;
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
