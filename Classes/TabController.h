@@ -34,9 +34,12 @@
 	// Subscriptions tab
 	IBOutlet NSArrayController *SBArrayController;
 	IBOutlet NSWindow *showInfoWindow;
+	
+	// Show info window
 	IBOutlet NSTextField *showName;
 	IBOutlet NSButton *showQuality;
 	IBOutlet NSButton *showIsEnabled;
+	IBOutlet NSArrayController *showEpisodeArray;
 }
 
 @property (retain) NSManagedObject *selectedShow;

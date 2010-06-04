@@ -15,6 +15,7 @@
 #import "TabController.h"
 #import "AppInfoConstants.h"
 #import "SubscriptionsDelegate.h"
+#import "FeedParser.h"
 
 
 @implementation TabController
@@ -127,12 +128,35 @@
 #pragma mark Subscriptions Tab
 - (IBAction) displayShowInfoWindow:(id)sender
 {
-	// Not sure why I have to call representedObject twice, but it works
 	selectedShow = [[[sender cell] representedObject] representedObject];
 	
 	[showName setStringValue: [selectedShow valueForKey:@"name"]];
 	[showQuality setState: [[selectedShow valueForKey:@"quality"] intValue]];
 	[showIsEnabled setState: [[selectedShow valueForKey:@"isEnabled"] intValue]];
+	
+	// Begin parsing RSS feed
+	NSError *error;
+	NSData *feedData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[selectedShow valueForKey:@"url"]]];
+	FPFeed *parsedData = [FPParser parsedFeedWithData:feedData error:&error];
+	
+	// Reset the array controller incase they've opened more than one window
+	[showEpisodeArray removeObjects:[showEpisodeArray arrangedObjects]];
+	NSArray *newEpisode = [[NSArray alloc] init];
+	int i = 0;
+
+	while (i <= 15) {
+		for (FPItem *item in parsedData.items) {
+
+			[newEpisode setValue:[item title] forKey:@"episodeName"];
+			[newEpisode setValue:[item pubDate] forKey:@"pubDate"];
+			[newEpisode setValue:0 forKey:@"episodeSeason"];
+			[newEpisode setValue:0 forKey:@"episodeNumber"];
+
+			[showEpisodeArray addObject:newEpisode];
+			
+			i++;
+		}
+	}
 	
 	[NSApp beginSheet: showInfoWindow
 	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
@@ -142,23 +166,25 @@
 	
     [NSApp runModalForWindow: showInfoWindow];
 	[NSApp endSheet: showInfoWindow];
+	
+	[newEpisode release];
 }
 
 - (IBAction) closeShowInfoWindow:(id)sender
 {	
 	id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
-
+	
 	// Update the per-show preferences
 	[selectedShow setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
 	[selectedShow setValue:[NSNumber numberWithInt:[showIsEnabled state]] forKey:@"isEnabled"];
+	
+	[delegateClass saveAction];
+	[delegateClass release];
 	
 	// Reset the selected show and close the window
 	selectedShow = nil;
 	[NSApp stopModal];
     [showInfoWindow orderOut: self];
-	
-	[delegateClass saveAction];
-	[delegateClass release];
 }
 
 - (void) sortSubscriptionList
