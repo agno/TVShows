@@ -131,6 +131,7 @@
 	selectedShow = [[[sender cell] representedObject] representedObject];
 	
 	[showName setStringValue: [selectedShow valueForKey:@"name"]];
+//	[showLastDownloaded setStringValue: [selectedShow valueForKey:@"lastDownloaded"]];	
 	[showQuality setState: [[selectedShow valueForKey:@"quality"] intValue]];
 	[showIsEnabled setState: [[selectedShow valueForKey:@"isEnabled"] intValue]];
 	
@@ -141,21 +142,22 @@
 	
 	// Reset the array controller incase they've opened more than one window
 	[showEpisodeArray removeObjects:[showEpisodeArray arrangedObjects]];
-	NSArray *newEpisode = [[NSArray alloc] init];
-	int i = 0;
+	int i=0;
 
-	while (i <= 15) {
-		for (FPItem *item in parsedData.items) {
+	for (FPItem *item in parsedData.items) {
+		if (i <= 10) {
+			NSMutableDictionary *newEpisode = [[NSMutableDictionary alloc] init];
 
 			[newEpisode setValue:[item title] forKey:@"episodeName"];
 			[newEpisode setValue:[item pubDate] forKey:@"pubDate"];
 			[newEpisode setValue:0 forKey:@"episodeSeason"];
 			[newEpisode setValue:0 forKey:@"episodeNumber"];
-
-			[showEpisodeArray addObject:newEpisode];
 			
-			i++;
+			[showEpisodeArray addObject:newEpisode];
+			[newEpisode release];
 		}
+		
+		i++;
 	}
 	
 	[NSApp beginSheet: showInfoWindow
@@ -166,8 +168,6 @@
 	
     [NSApp runModalForWindow: showInfoWindow];
 	[NSApp endSheet: showInfoWindow];
-	
-	[newEpisode release];
 }
 
 - (IBAction) closeShowInfoWindow:(id)sender

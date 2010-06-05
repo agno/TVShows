@@ -37,6 +37,7 @@
 	
 	// Show info window
 	IBOutlet NSTextField *showName;
+	IBOutlet NSTextField *showLastDownloaded;
 	IBOutlet NSButton *showQuality;
 	IBOutlet NSButton *showIsEnabled;
 	IBOutlet NSArrayController *showEpisodeArray;
