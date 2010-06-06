@@ -15,7 +15,7 @@
 #import "TabController.h"
 #import "AppInfoConstants.h"
 #import "SubscriptionsDelegate.h"
-#import "FeedParser.h"
+#import "TSParseXMLFeeds.h"
 
 
 @implementation TabController
@@ -135,31 +135,11 @@
 	[showQuality setState: [[selectedShow valueForKey:@"quality"] intValue]];
 	[showIsEnabled setState: [[selectedShow valueForKey:@"isEnabled"] intValue]];
 	
-	// Begin parsing RSS feed
-	NSError *error;
-	NSData *feedData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[selectedShow valueForKey:@"url"]]];
-	FPFeed *parsedData = [FPParser parsedFeedWithData:feedData error:&error];
-	
-	// Reset the array controller incase they've opened more than one window
-	[showEpisodeArray removeObjects:[showEpisodeArray arrangedObjects]];
-	int i=0;
-
-	for (FPItem *item in parsedData.items) {
-		if (i <= 10) {
-			NSMutableDictionary *newEpisode = [[NSMutableDictionary alloc] init];
-
-			[newEpisode setValue:[item title] forKey:@"episodeName"];
-			[newEpisode setValue:[item pubDate] forKey:@"pubDate"];
-			[newEpisode setValue:0 forKey:@"episodeSeason"];
-			[newEpisode setValue:0 forKey:@"episodeNumber"];
-			
-			[showEpisodeArray addObject:newEpisode];
-			[newEpisode release];
-		}
+	// Reset the Episode Array Controller and grab the new list of episodes
+	[episodeArrayController removeObjects:[episodeArrayController arrangedObjects]];
+	[episodeArrayController addObjects:[[TSParseXMLFeeds copyEpisodesFromFeed:[selectedShow valueForKey:@"url"]
+																	 maxItems:10] autorelease]];
 		
-		i++;
-	}
-	
 	[NSApp beginSheet: showInfoWindow
 	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
 		modalDelegate: nil

@@ -91,6 +91,8 @@
 		34A91884119E2C85004B339D /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 34A91883119E2C85004B339D /* libicucore.dylib */; };
 		34A91894119E2F83004B339D /* RegexKitLite.h in Headers */ = {isa = PBXBuildFile; fileRef = 34A91892119E2F83004B339D /* RegexKitLite.h */; };
 		34A91895119E2F83004B339D /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A91893119E2F83004B339D /* RegexKitLite.m */; };
+		34C5B59011BB3C1500AAE681 /* TSParseXMLFeeds.h in Headers */ = {isa = PBXBuildFile; fileRef = 34C5B58E11BB3C1500AAE681 /* TSParseXMLFeeds.h */; };
+		34C5B59111BB3C1500AAE681 /* TSParseXMLFeeds.m in Sources */ = {isa = PBXBuildFile; fileRef = 34C5B58F11BB3C1500AAE681 /* TSParseXMLFeeds.m */; };
 		34D8D1C211AB5C63006382C3 /* CustomRSSController.h in Headers */ = {isa = PBXBuildFile; fileRef = 34D8D1C011AB5C63006382C3 /* CustomRSSController.h */; };
 		34D8D1C311AB5C63006382C3 /* CustomRSSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D8D1C111AB5C63006382C3 /* CustomRSSController.m */; };
 		34EB966E11838131005825C1 /* showRSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB966D11838131005825C1 /* showRSS.png */; };
@@ -203,6 +205,8 @@
 		34A91883119E2C85004B339D /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		34A91892119E2F83004B339D /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		34A91893119E2F83004B339D /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
+		34C5B58E11BB3C1500AAE681 /* TSParseXMLFeeds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSParseXMLFeeds.h; sourceTree = "<group>"; };
+		34C5B58F11BB3C1500AAE681 /* TSParseXMLFeeds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSParseXMLFeeds.m; sourceTree = "<group>"; };
 		34D8D1C011AB5C63006382C3 /* CustomRSSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRSSController.h; sourceTree = "<group>"; };
 		34D8D1C111AB5C63006382C3 /* CustomRSSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRSSController.m; sourceTree = "<group>"; };
 		34EB966D11838131005825C1 /* showRSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showRSS.png; sourceTree = "<group>"; };
@@ -483,6 +487,8 @@
 				3422ECD3118B3C130061E2E2 /* AppInfoConstants.h */,
 				340F15F8118FEBDE00A1BD00 /* SUUpdaterSubclass.h */,
 				340F15F9118FEBDE00A1BD00 /* SUUpdaterSubclass.m */,
+				34C5B58E11BB3C1500AAE681 /* TSParseXMLFeeds.h */,
+				34C5B58F11BB3C1500AAE681 /* TSParseXMLFeeds.m */,
 				3471BB8611ACDF8700A65728 /* TSUserDefaults.h */,
 				3471BB8711ACDF8700A65728 /* TSUserDefaults.m */,
 				349FEE151183597500D24FC9 /* TVShowsPref.h */,
@@ -544,6 +550,7 @@
 				349F2F9811B2E7DB00D10D96 /* FPExtensionElementNode.h in Headers */,
 				349F2F9A11B2E7DB00D10D96 /* FPExtensionNode.h in Headers */,
 				349F2F9C11B2E7DB00D10D96 /* FPExtensionTextNode.h in Headers */,
+				34C5B59011BB3C1500AAE681 /* TSParseXMLFeeds.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -666,6 +673,7 @@
 				349F2F9911B2E7DB00D10D96 /* FPExtensionElementNode.m in Sources */,
 				349F2F9B11B2E7DB00D10D96 /* FPExtensionNode.m in Sources */,
 				349F2F9D11B2E7DB00D10D96 /* FPExtensionTextNode.m in Sources */,
+				34C5B59111BB3C1500AAE681 /* TSParseXMLFeeds.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

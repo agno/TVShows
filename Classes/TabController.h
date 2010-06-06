@@ -40,7 +40,7 @@
 	IBOutlet NSTextField *showLastDownloaded;
 	IBOutlet NSButton *showQuality;
 	IBOutlet NSButton *showIsEnabled;
-	IBOutlet NSArrayController *showEpisodeArray;
+	IBOutlet NSArrayController *episodeArrayController;
 }
 
 @property (retain) NSManagedObject *selectedShow;
