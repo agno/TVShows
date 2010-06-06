@@ -32,11 +32,13 @@
 	for (FPItem *item in parsedData.items) {
 		if (i <= maxItems) {
 			NSMutableDictionary *Episode = [[NSMutableDictionary alloc] init];
+			NSArray *seasonAndEpisode = [TSRegexFun parseSeasonAndEpisode:[item title]];
+			DLog(@"%@",seasonAndEpisode);
 			
 			[Episode setValue:[item title] forKey:@"episodeName"];
 			[Episode setValue:[item pubDate] forKey:@"pubDate"];
-			[Episode setValue:0 forKey:@"episodeSeason"];
-			[Episode setValue:0 forKey:@"episodeNumber"];
+			[Episode setValue:[seasonAndEpisode objectAtIndex:1] forKey:@"episodeSeason"];
+			[Episode setValue:[seasonAndEpisode objectAtIndex:2] forKey:@"episodeNumber"];
 			
 			[episodeArray addObject:Episode];
 			
