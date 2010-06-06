@@ -20,23 +20,31 @@
 
 + (NSArray *) parseSeasonAndEpisode:(NSString *)title
 {
-	// This needs to be improved, especially as things become more advanced
-	NSArray *attemptOne = [title arrayOfCaptureComponentsMatchedByRegex:@"S([0-9]+)E([0-9]+)"];
-	NSArray *attemptTwo = [title arrayOfCaptureComponentsMatchedByRegex:@"([0-9]+)x([0-9]+)"];
+	// These patterns are better but still need work before I trust them.
+	// They need to ignore the space, not count it as another capture.
+	// ([0-9]+)([[:space:]]*)x((\s)*)([0-9]+)
+	// S([0-9]+)([[:space:]]*)E([0-9]+)
 	
-	if(attemptOne) {
+	// This method also needs to parse dates for shows like Colber Report
+	// and The Daily Show.
+	
+	NSArray *matchedRegex, *returnThis = [NSArray array];
+	NSArray *parseTypes = [NSArray arrayWithObjects:@"S([0-9]+)E([0-9]+)", 
+													@"([0-9]+)x([0-9]+)",nil];
+	
+	for (NSString *regex in parseTypes) {
+		matchedRegex = [title arrayOfCaptureComponentsMatchedByRegex:regex];
 		
-		return [attemptOne objectAtIndex:0];
-
-	} else if (attemptTwo) {
-		
-		return [attemptTwo objectAtIndex:0];
-		
-	} else {
-		
-		return nil;
+		if([matchedRegex count] != 0) {
+			returnThis = [matchedRegex objectAtIndex:0];
+		}
 	}
 
+	if (returnThis) {
+		return returnThis;
+	} else {
+		return nil;
+	}
 }
 
 @end
