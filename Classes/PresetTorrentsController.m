@@ -16,6 +16,7 @@
 #import "TabController.h"
 #import "TSUserDefaults.h"
 #import "PresetShowsDelegate.h"
+#import "TSParseXMLFeeds.h"
 #import "SubscriptionsDelegate.h"
 #import "RegexKitLite.h"
 #import "WebsiteFunctions.h"
@@ -31,7 +32,7 @@
 #define SeparatorBetweenNameAndID	@"\">"
 
 #pragma mark -
-#pragma mark Preset Torrents Controller
+#pragma mark Preset Torrents Window
 
 @implementation PresetTorrentsController
 
@@ -43,103 +44,47 @@
 	// Only download the show list once per session
 	if(hasDownloadedList == NO) {
 		[self downloadTorrentShowList];
-		
+				
 		// Sort the shows alphabetically
 		NSSortDescriptor *PTSortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"sortName"
 																		 ascending: YES 
 																		  selector: @selector(caseInsensitiveCompare:)];
 		[PTArrayController setSortDescriptors:[NSArray arrayWithObject:PTSortDescriptor]];
-		[PTArrayController setSelectionIndex:0];
 		
 		[PTSortDescriptor release];
 	}
 	
 	// Continue if no error occurred when downloading the show list
 	if(errorHasOccurred == NO) {
+		// Set up notifications for when the table selection changes
+		[[NSNotificationCenter defaultCenter] addObserver: self
+												 selector: @selector(tableViewSelectionDidChange:)
+													 name: NSTableViewSelectionDidChangeNotification
+												   object: PTTableView];
+		[PTArrayController setSelectionIndex:0];
+		
+		// Setup the default video quality
 		[showQuality setState:[TSUserDefaults getFloatFromKey:@"defaultQuality" withDefault:0]];
 		
-		[NSApp beginSheet: PTShowList
+		[NSApp beginSheet: PTWindow
 		   modalForWindow: [[NSApplication sharedApplication] mainWindow]
 			modalDelegate: nil
 		   didEndSelector: nil
 			  contextInfo: nil];
 		
-		[NSApp endSheet: PTShowList];
-		[NSApp runModalForWindow: PTShowList];
+		[NSApp endSheet: PTWindow];
+		[NSApp runModalForWindow: PTWindow];
 	}
 }
 
 - (IBAction) closePresetTorrentsWindow:(id)sender
 {
     [NSApp stopModal];
-    [PTShowList orderOut:self];
+    [PTWindow orderOut:self];
 }
 
-- (void) errorWindowWithStatusCode:(int)code
+- (void) downloadTorrentShowList
 {
-	NSString *message, *title;
-	
-	DLog(@"%@",[PTArrayController arrangedObjects]);
-	
-	// Add 100 to any error codes if an older show list was found
-	if([[PTArrayController arrangedObjects] count] >= 1)
-		code = code + 100;
-	
-	// Switch between each error code:
-	// x01 = Website loaded but we couldn't parse a show list from it 
-	// x02 = The website did not load or the user is having connection issues
-	switch(code) {
-		case 101:
-			title	= @"An Error Has Occurred";
-			message = @"A show list cannot be found. Please try again later or check your internet connection.";
-			break;
-		
-		case 201:
-			title	= @"Unable to Update the Show List";
-			message = @"A newer show list cannot be found. Using an old show list temporarily.";
-			break;
-			
-		case 102:
-			title	= @"An Error Has Occurred";
-			message = @"Cannot connect. Please try again later or check your internet connection.";
-			break;
-		
-		case 202:
-			title	= @"Unable to Update the Show List";
-			message = @"Cannot connect. Using an old show list temporarily.";
-			break;
-			
-		default:
-			title	= @"An Error Has Occurred";
-			message = @"An unknown error has occurred. Please try again later.";
-			break;
-	}
-	
-	if (code < 200)
-		errorHasOccurred = YES;
-	
-	[PTErrorHeader setStringValue:title];
-	[PTErrorText setStringValue:message];	
-	
-    [NSApp beginSheet: PTErrorWindow
-	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
-		modalDelegate: nil
-	   didEndSelector: nil
-		  contextInfo: nil];
-	
-	TVLog(@"%@",message);
-	
-	[NSApp endSheet: PTErrorWindow];
-	[NSApp runModalForWindow: PTErrorWindow];
-}
-
-- (IBAction) closeErrorWindow:(id)sender
-{
-    [NSApp stopModal];
-    [PTErrorWindow orderOut:self];
-}
-
-- (void) downloadTorrentShowList {
 	// There's probably a better way to do this:
 	id delegateClass = [[[PresetShowsDelegate class] alloc] init];
 	
@@ -204,7 +149,86 @@
 	[delegateClass release];
 }
 
-- (IBAction) subscribeToShow:(id)sender {
+- (void)tableViewSelectionDidChange:(NSNotification *)notification
+{
+	// Reset the Episode Array Controller and grab the new list of episodes
+	[episodeArrayController removeObjects:[episodeArrayController arrangedObjects]];
+//	[PTArrayController setSelectionIndex: [PTTableView selectedRow]];
+//	DLog(@"%@",[PTArrayController selectedObjects]);
+	NSString *selectedShowURL = [NSString stringWithFormat:@"http://showrss.karmorra.info/feeds/%@.rss",
+								 [[[PTArrayController selectedObjects] valueForKey:@"showrssID"] objectAtIndex:0]];
+	[episodeArrayController addObjects:[TSParseXMLFeeds parseEpisodesFromFeed:selectedShowURL
+																	 maxItems:10]];
+}
+
+#pragma mark -
+#pragma mark Error Window Methods
+- (void) errorWindowWithStatusCode:(int)code
+{
+	NSString *message, *title;
+	
+	// Add 100 to any error codes if an older show list was found
+	if([[PTArrayController arrangedObjects] count] >= 1)
+		code = code + 100;
+	
+	// Switch between each error code:
+	// x01 = Website loaded but we couldn't parse a show list from it 
+	// x02 = The website did not load or the user is having connection issues
+	switch(code) {
+		case 101:
+			title	= @"An Error Has Occurred";
+			message = @"A show list cannot be found. Please try again later or check your internet connection.";
+			break;
+			
+		case 201:
+			title	= @"Unable to Update the Show List";
+			message = @"A newer show list cannot be found. Using an old show list temporarily.";
+			break;
+			
+		case 102:
+			title	= @"An Error Has Occurred";
+			message = @"Cannot connect. Please try again later or check your internet connection.";
+			break;
+			
+		case 202:
+			title	= @"Unable to Update the Show List";
+			message = @"Cannot connect. Using an old show list temporarily.";
+			break;
+			
+		default:
+			title	= @"An Error Has Occurred";
+			message = @"An unknown error has occurred. Please try again later.";
+			break;
+	}
+	
+	if (code < 200)
+		errorHasOccurred = YES;
+	
+	[PTErrorHeader setStringValue:title];
+	[PTErrorText setStringValue:message];	
+	
+    [NSApp beginSheet: PTErrorWindow
+	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
+		modalDelegate: nil
+	   didEndSelector: nil
+		  contextInfo: nil];
+	
+	TVLog(@"%@",message);
+	
+	[NSApp endSheet: PTErrorWindow];
+	[NSApp runModalForWindow: PTErrorWindow];
+}
+
+- (IBAction) closeErrorWindow:(id)sender
+{
+    [NSApp stopModal];
+    [PTErrorWindow orderOut:self];
+}
+
+#pragma mark -
+#pragma mark Subscription Methods
+- (IBAction) subscribeToShow:(id)sender
+{
 	// There's probably a better way to do this:
 	id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
 	

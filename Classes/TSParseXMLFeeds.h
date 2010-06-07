@@ -19,6 +19,6 @@
 
 }
 
-+ (NSArray *) copyEpisodesFromFeed:(NSString *)url maxItems:(int)maxItems;
++ (NSArray *) parseEpisodesFromFeed:(NSString *)url maxItems:(int)maxItems;
 
 @end

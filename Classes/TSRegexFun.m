@@ -29,12 +29,11 @@
 	// and The Daily Show.
 	
 	NSArray *matchedRegex, *returnThis = [NSArray array];
-	NSArray *parseTypes = [NSArray arrayWithObjects:@"S([0-9]+)E([0-9]+)", 
-													@"([0-9]+)x([0-9]+)",nil];
-	
+	NSArray *parseTypes = [NSArray arrayWithObjects:@"S([0-9]+)(?:[[:space:]]*)E([0-9]+)", 
+													@"([0-9]+)(?:[[:space:]]*x[[:space:]]*)([0-9]+)",nil];
 	for (NSString *regex in parseTypes) {
 		matchedRegex = [title arrayOfCaptureComponentsMatchedByRegex:regex];
-		
+	
 		if([matchedRegex count] != 0) {
 			returnThis = [matchedRegex objectAtIndex:0];
 		}
@@ -45,6 +44,19 @@
 	} else {
 		return nil;
 	}
+}
+
++ (NSString *) removeLeadingZero:(NSString *)string
+{
+	return [string stringByReplacingOccurrencesOfRegex:@"^ *0+" withString:@""];
+}
+
++ (NSString *) parseTitleFromString:(NSString *)title withIdentifier:(NSArray* )identifier
+{
+	// This is a temporary method until theTVDB support is added
+	NSString *showTitle = [title stringByReplacingOccurrencesOfRegex:@"showRSS: feed for " withString:@""];
+	
+	return [NSString stringWithFormat:@"%@ - %@x%@",showTitle,[self removeLeadingZero:[identifier objectAtIndex:1]],[self removeLeadingZero:[identifier objectAtIndex:2]]];		
 }
 
 @end

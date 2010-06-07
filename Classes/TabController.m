@@ -137,8 +137,8 @@
 	
 	// Reset the Episode Array Controller and grab the new list of episodes
 	[episodeArrayController removeObjects:[episodeArrayController arrangedObjects]];
-	[episodeArrayController addObjects:[[TSParseXMLFeeds copyEpisodesFromFeed:[selectedShow valueForKey:@"url"]
-																	 maxItems:10] autorelease]];
+	[episodeArrayController addObjects:[TSParseXMLFeeds parseEpisodesFromFeed:[selectedShow valueForKey:@"url"]
+																	 maxItems:10]];
 		
 	[NSApp beginSheet: showInfoWindow
 	   modalForWindow: [[NSApplication sharedApplication] mainWindow]

@@ -19,7 +19,8 @@
 {
 	Boolean errorHasOccurred;
 	Boolean hasDownloadedList;
-	IBOutlet NSWindow *PTShowList;
+	IBOutlet NSWindow *PTWindow;
+	IBOutlet NSTableView *PTTableView;
 	IBOutlet NSArrayController *PTArrayController;
 	IBOutlet NSButton *showQuality;
 	
@@ -28,16 +29,24 @@
 	IBOutlet NSTextField *PTErrorHeader;
 	
 	IBOutlet NSArrayController *SBArrayController;
+	IBOutlet NSArrayController *episodeArrayController;
 	IBOutlet NSTabView *prefTabView;
 }
 
+#pragma mark -
+#pragma mark Preset Torrents Window
 - (IBAction) displayPresetTorrentsWindow:(id)sender;
 - (IBAction) closePresetTorrentsWindow:(id)sender;
 - (void) downloadTorrentShowList;
+- (void)tableViewSelectionDidChange:(NSNotification *)notification;
 
+#pragma mark -
+#pragma mark Error Window Methors
 - (void) errorWindowWithStatusCode:(int)code;
 - (IBAction) closeErrorWindow:(id)sender;
 
+#pragma mark -
+#pragma mark Subscription Methods
 - (IBAction) subscribeToShow:(id)sender;
 
 @end

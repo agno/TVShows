@@ -19,11 +19,11 @@
 
 @implementation TSParseXMLFeeds
 
-+ (NSArray *) copyEpisodesFromFeed:(NSString *)url maxItems:(int)maxItems
++ (NSArray *) parseEpisodesFromFeed:(NSString *)url maxItems:(int)maxItems
 {
 	// Begin parsing the feed
 	NSError *error;
-	NSMutableArray *episodeArray = [[NSMutableArray alloc] init];
+	NSMutableArray *episodeArray = [NSMutableArray array];
 	NSData *feedData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
 	FPFeed *parsedData = [FPParser parsedFeedWithData:feedData error:&error];
 	
@@ -33,12 +33,13 @@
 		if (i <= maxItems) {
 			NSMutableDictionary *Episode = [[NSMutableDictionary alloc] init];
 			NSArray *seasonAndEpisode = [TSRegexFun parseSeasonAndEpisode:[item title]];
-			DLog(@"%@",seasonAndEpisode);
 			
-			[Episode setValue:[item title] forKey:@"episodeName"];
+			[Episode setValue:[TSRegexFun parseTitleFromString:[parsedData title]
+												withIdentifier:seasonAndEpisode] 
+					   forKey:@"episodeName"];
 			[Episode setValue:[item pubDate] forKey:@"pubDate"];
-			[Episode setValue:[seasonAndEpisode objectAtIndex:1] forKey:@"episodeSeason"];
-			[Episode setValue:[seasonAndEpisode objectAtIndex:2] forKey:@"episodeNumber"];
+			[Episode setValue:[TSRegexFun removeLeadingZero:[seasonAndEpisode objectAtIndex:1]] forKey:@"episodeSeason"];
+			[Episode setValue:[TSRegexFun removeLeadingZero:[seasonAndEpisode objectAtIndex:2]] forKey:@"episodeNumber"];
 			
 			[episodeArray addObject:Episode];
 			

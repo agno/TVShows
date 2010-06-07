@@ -20,5 +20,7 @@
 }
 
 + (NSArray *) parseSeasonAndEpisode:(NSString *)title;
++ (NSString *) removeLeadingZero:(NSString *)string;
++ (NSString *) parseTitleFromString:(NSString *)title withIdentifier:(NSArray* )identifier;
 
 @end
