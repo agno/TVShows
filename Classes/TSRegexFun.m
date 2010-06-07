@@ -30,7 +30,9 @@
 	
 	NSArray *matchedRegex, *returnThis = [NSArray array];
 	NSArray *parseTypes = [NSArray arrayWithObjects:@"S([0-9]+)(?:[[:space:]]*)E([0-9]+)", 
-													@"([0-9]+)(?:[[:space:]]*x[[:space:]]*)([0-9]+)",nil];
+													@"([0-9]+)(?:[[:space:]]*x[[:space:]]*)([0-9]+)",
+													@"([0-9]{4})(?:[[:space:]]|[.])([0-9]{2})(?:[[:space:]]|[.])([0-9]{2})",
+													@"([0-9]{2})(?:[[:space:]]|[.])([0-9]{2})(?:[[:space:]]|[.])([0-9]{4})",nil];
 	for (NSString *regex in parseTypes) {
 		matchedRegex = [title arrayOfCaptureComponentsMatchedByRegex:regex];
 	
@@ -51,12 +53,34 @@
 	return [string stringByReplacingOccurrencesOfRegex:@"^ *0+" withString:@""];
 }
 
-+ (NSString *) parseTitleFromString:(NSString *)title withIdentifier:(NSArray* )identifier
++ (NSString *) parseTitleFromString:(NSString *)title withIdentifier:(NSArray* )identifier withType:(NSString *)type
 {
 	// This is a temporary method until theTVDB support is added
 	NSString *showTitle = [title stringByReplacingOccurrencesOfRegex:@"showRSS: feed for " withString:@""];
 	
-	return [NSString stringWithFormat:@"%@ - %@x%@",showTitle,[self removeLeadingZero:[identifier objectAtIndex:1]],[self removeLeadingZero:[identifier objectAtIndex:2]]];		
+	if (type == @"episode") {
+		
+		// TVShow is in a Season x Episode format
+		return [NSString stringWithFormat:@"%@ - %@x%@",showTitle,[self removeLeadingZero:[identifier objectAtIndex:1]],[self removeLeadingZero:[identifier objectAtIndex:2]]];				
+		
+	} else if (type == @"date") {
+		
+		if ([[identifier objectAtIndex:1] length] == 4) {
+			
+			// TVShows is in a YYYY MM DD format
+			return [NSString stringWithFormat:@"%@ - %@/%@/%@",showTitle,
+					[self removeLeadingZero:[identifier objectAtIndex:2]],
+					[self removeLeadingZero:[identifier objectAtIndex:3]],
+					[self removeLeadingZero:[identifier objectAtIndex:1]]];				
+		} else {
+			
+			// TVShow is in a MM DD YYYY format
+			return [NSString stringWithFormat:@"%@ - %@/%@/%@",showTitle,
+					[self removeLeadingZero:[identifier objectAtIndex:1]],
+					[self removeLeadingZero:[identifier objectAtIndex:2]],
+					[self removeLeadingZero:[identifier objectAtIndex:3]]];	
+		}
+	}
 }
 
 @end

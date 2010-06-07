@@ -22,6 +22,7 @@
 + (NSArray *) parseEpisodesFromFeed:(NSString *)url maxItems:(int)maxItems
 {
 	// Begin parsing the feed
+	NSString *episodeTitle, *episodeSeason, *episodeNumber;
 	NSError *error;
 	NSMutableArray *episodeArray = [NSMutableArray array];
 	NSData *feedData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
@@ -34,12 +35,26 @@
 			NSMutableDictionary *Episode = [[NSMutableDictionary alloc] init];
 			NSArray *seasonAndEpisode = [TSRegexFun parseSeasonAndEpisode:[item title]];
 			
-			[Episode setValue:[TSRegexFun parseTitleFromString:[parsedData title]
-												withIdentifier:seasonAndEpisode] 
-					   forKey:@"episodeName"];
+			if ([seasonAndEpisode count] == 3) {
+				episodeTitle = [TSRegexFun parseTitleFromString:[parsedData title]
+												 withIdentifier:seasonAndEpisode
+													   withType:@"episode"];
+				episodeSeason = [TSRegexFun removeLeadingZero:[seasonAndEpisode objectAtIndex:1]];
+				episodeNumber = [TSRegexFun removeLeadingZero:[seasonAndEpisode objectAtIndex:2]];
+				
+			} else if ([seasonAndEpisode count] == 4) {
+				episodeTitle = [TSRegexFun parseTitleFromString:[parsedData title]
+												 withIdentifier:seasonAndEpisode
+													   withType:@"date"];
+				episodeSeason = @"-";
+				episodeNumber = @"-";
+				
+			}
+			
+			[Episode setValue:episodeTitle forKey:@"episodeName"];
 			[Episode setValue:[item pubDate] forKey:@"pubDate"];
-			[Episode setValue:[TSRegexFun removeLeadingZero:[seasonAndEpisode objectAtIndex:1]] forKey:@"episodeSeason"];
-			[Episode setValue:[TSRegexFun removeLeadingZero:[seasonAndEpisode objectAtIndex:2]] forKey:@"episodeNumber"];
+			[Episode setValue:episodeSeason forKey:@"episodeSeason"];
+			[Episode setValue:episodeNumber forKey:@"episodeNumber"];
 			
 			[episodeArray addObject:Episode];
 			
