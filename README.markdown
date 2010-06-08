@@ -1,12 +1,15 @@
 # About
-TVShows 2 "_Phoenix_" is the next version of [TVShows][1], the easiest way to download your favorite shows automatically. It includes a completely rewritten codebase as well as a major overhaul of the UI and a move to System Preferences. _Phoenix_ is currently in the late stages of development but I am always open to any feature suggestions.
+TVShows 2 "_Phoenix_" is the next version of [TVShows][tvshows], the easiest way to download your favorite shows automatically. It includes a completely rewritten codebase as well as a major overhaul of the UI and a move to System Preferences. _Phoenix_ is currently in the late stages of development but I am always open to any feature suggestions.
+
+## Screenshots
+![[Getting Started][preview-1]][news] ![[About][preview-2]][news] ![[Preferences][preview-3]][news]
 
 ## Collaboration Notes
-* The current TVShows Roadmap can be found [here][2] -- all issue numbers in commits refer to those in the Roadmap.
+* The current TVShows Roadmap can be found [here][roadmap] -- all issue numbers in commits refer to those in the Roadmap.
 * Compiling TVShows will require you to download all submodules:
     * `$ git submodule init`
     * `$ git submodule update`
-* Modifying the interface will require the [BWToolkit][3] IB plugin. It can be found in the `IB Plugins` folder.
+* Modifying the interface will require the [BWToolkit][bwtoolkit] IB plugin. It can be found in the `IB Plugins` folder.
 * By default, the Debug configuration automatically installs TVShows into `~/Library/PreferencePanes/` each time it's built.
 
 ## Planned Features
@@ -14,15 +17,22 @@ TVShows 2 "_Phoenix_" is the next version of [TVShows][1], the easiest way to do
 * Support for NZB files
 * Better support for non-standard naming conventions
 * Display show and episode information
-* Localized languages for non-English users
+* Localized languages for non-English users ([read more][translate])
 * Growl notifications for new downloads
 
 ## License
 TVShows is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
-For a copy of the GNU General Public License see &lt;[http://www.gnu.org/licenses/][4]&gt;.
+For a copy of the GNU General Public License see &lt;[http://www.gnu.org/licenses/][license]&gt;.
 
-[1]:http://embercode.com/tvshows/ "TVShows « Ember Code"
-[2]:http://labs.embercode.com/projects/tvshows/roadmap "TVShows Roadmap"
-[3]:http://www.brandonwalkin.com/bwtoolkit/ "BWToolkit Information"
-[4]:http://www.gnu.org/licenses/ "GNU General Public License"
+[news]:http://embercode.com/blog/category/tvshows-news/ "TVShows News"
+[tvshows]:http://embercode.com/tvshows/ "TVShows Website"
+[translate]:http://embercode.com/blog/2010/help-translate-tvshows-2/ "Help Translate TVShows 2"
+[roadmap]:http://labs.embercode.com/projects/tvshows/roadmap "TVShows Roadmap"
+
+[preview-1]:http://embercode.com/blog/wp-content/uploads/2010/05/TVShows2_r191_PrefTeaser-300x243.png "TVShows 2 Teaser: Preferences"
+[preview-2]:http://embercode.com/blog/wp-content/uploads/2010/05/TVShows2_r191_AboutTeaser-300x201.png "TVShows 2 Teaser: About Tab"
+[preview-3]:http://embercode.com/blog/wp-content/uploads/2010/05/TVShows2_r175_Preview-300x201.png "TVShows 2 (r175) Preview"
+
+[bwtoolkit]:http://www.brandonwalkin.com/bwtoolkit/ "BWToolkit Information"
+[license]:http://www.gnu.org/licenses/ "GNU General Public License"
