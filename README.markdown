@@ -29,9 +29,9 @@ For a copy of the GNU General Public License see &lt;[http://www.gnu.org/license
 [translate]:http://embercode.com/blog/2010/help-translate-tvshows-2/ "Help Translate TVShows 2"
 [roadmap]:http://labs.embercode.com/projects/tvshows/roadmap "TVShows Roadmap"
 
-[preview-1]:http://embercode.com/blog/wp-content/uploads/2010/05/TVShows2_r191_PrefTeaser-300x243.png "TVShows 2 Teaser: Preferences"
+[preview-1]:http://embercode.com/blog/wp-content/uploads/2010/05/TVShows2_r175_Preview-300x201.png "TVShows 2 (r175) Preview"
 [preview-2]:http://embercode.com/blog/wp-content/uploads/2010/05/TVShows2_r191_AboutTeaser-300x201.png "TVShows 2 Teaser: About Tab"
-[preview-3]:http://embercode.com/blog/wp-content/uploads/2010/05/TVShows2_r175_Preview-300x201.png "TVShows 2 (r175) Preview"
+[preview-3]:http://embercode.com/blog/wp-content/uploads/2010/05/TVShows2_r191_PrefTeaser-300x243.png "TVShows 2 Teaser: Preferences"
 
 [bwtoolkit]:http://www.brandonwalkin.com/bwtoolkit/ "BWToolkit Information"
 [license]:http://www.gnu.org/licenses/ "GNU General Public License"
