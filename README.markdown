@@ -2,7 +2,7 @@
 TVShows 2 "_Phoenix_" is the next version of [TVShows][tvshows], the easiest way to download your favorite shows automatically. It includes a completely rewritten codebase as well as a major overhaul of the UI and a move to System Preferences. _Phoenix_ is currently in the late stages of development but I am always open to any feature suggestions.
 
 ## Screenshots
-![[Getting Started][preview-1]][news] ![[About][preview-2]][news] ![[Preferences][preview-3]][news]
+<a href="http://embercode.com/blog/category/tvshows-news/" title="TVShows News">![Getting Started][preview-1] ![About][preview-2] ![Preferences][preview-3]</a>
 
 ## Collaboration Notes
 * The current TVShows Roadmap can be found [here][roadmap] -- all issue numbers in commits refer to those in the Roadmap.
@@ -25,7 +25,6 @@ TVShows is free software: you can redistribute it and/or modify it under the ter
 
 For a copy of the GNU General Public License see &lt;[http://www.gnu.org/licenses/][license]&gt;.
 
-[news]:http://embercode.com/blog/category/tvshows-news/ "TVShows News"
 [tvshows]:http://embercode.com/tvshows/ "TVShows Website"
 [translate]:http://embercode.com/blog/2010/help-translate-tvshows-2/ "Help Translate TVShows 2"
 [roadmap]:http://labs.embercode.com/projects/tvshows/roadmap "TVShows Roadmap"
