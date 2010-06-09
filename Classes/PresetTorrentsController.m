@@ -24,7 +24,8 @@
 #pragma mark Define Macros
 
 #define ShowListHostname			@"showrss.karmorra.info"
-#define ShowListURL					@"http://showrss.karmorra.info/?cs=feeds"
+// #define ShowListURL					@"http://showrss.karmorra.info/?cs=feeds"
+#define ShowListURL					@"http://embercode.com/temp/showlist.html"
 #define SelectTagsRegex				@"<select name=\"show\">(.+?)</select>"
 #define OptionTagsRegex				@"(?!<option value=\")([[:digit:]]+)(.*?)(?=</option>)"
 #define RSSIDRegex					@"([[:digit:]]+)(?![[:alnum:]]|[[:space:]])"
