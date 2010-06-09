@@ -116,6 +116,7 @@
 		// Reset the existing show list before continuing. In a perfect world we'd
 		// only be adding shows that didn't already exist, instead of deleting
 		// everything and starting from scratch.
+		// This is currently extremely inefficient and takes ~10s to execute.
 		[PTArrayController removeObjects:[PTArrayController arrangedObjects]];
 		
 		NSManagedObjectContext *context = [delegateClass managedObjectContext];
@@ -153,8 +154,6 @@
 {
 	// Reset the Episode Array Controller and grab the new list of episodes
 	[episodeArrayController removeObjects:[episodeArrayController arrangedObjects]];
-//	[PTArrayController setSelectionIndex: [PTTableView selectedRow]];
-//	DLog(@"%@",[PTArrayController selectedObjects]);
 	NSString *selectedShowURL = [NSString stringWithFormat:@"http://showrss.karmorra.info/feeds/%@.rss",
 								 [[[PTArrayController selectedObjects] valueForKey:@"showrssID"] objectAtIndex:0]];
 	[episodeArrayController addObjects:[TSParseXMLFeeds parseEpisodesFromFeed:selectedShowURL

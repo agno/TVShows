@@ -38,7 +38,7 @@
 - (IBAction) displayPresetTorrentsWindow:(id)sender;
 - (IBAction) closePresetTorrentsWindow:(id)sender;
 - (void) downloadTorrentShowList;
-- (void)tableViewSelectionDidChange:(NSNotification *)notification;
+- (void) tableViewSelectionDidChange:(NSNotification *)notification;
 
 #pragma mark -
 #pragma mark Error Window Methors
