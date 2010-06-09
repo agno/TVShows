@@ -116,8 +116,7 @@
 		// Reset the existing show list before continuing. In a perfect world we'd
 		// only be adding shows that didn't already exist, instead of deleting
 		// everything and starting from scratch.
-		// This is currently extremely inefficient and takes ~10s to execute.
-		[PTArrayController removeObjects:[PTArrayController arrangedObjects]];
+		[[PTArrayController content] removeAllObjects];
 		
 		NSManagedObjectContext *context = [delegateClass managedObjectContext];
 		
