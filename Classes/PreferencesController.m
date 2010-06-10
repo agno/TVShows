@@ -117,8 +117,6 @@
 #pragma mark Download Preferences
 - (IBAction) isEnabledControlDidChange:(id)sender
 {
-	NSString *appIconPath;
-	
 	if ([isEnabledControl selectedSegment]) {
 		isEnabled = 1;
 		[TSUserDefaults setKey:@"isEnabled" fromBool: 1];

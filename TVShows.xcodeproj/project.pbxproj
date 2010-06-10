@@ -103,6 +103,38 @@
 		34EBF4F211A8501A00962FE5 /* SubscriptionsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBF4F011A8501A00962FE5 /* SubscriptionsDelegate.m */; };
 		34EC6ABC11A312AD00BD660A /* TVShowsPref.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EC6AB811A312AD00BD660A /* TVShowsPref.xib */; };
 		34F6EA3A119BCAD100F8AD4C /* TVShows_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 34F6EA39119BCAD100F8AD4C /* TVShows_Prefix.pch */; };
+		34FBC5F411C0B451005D290B /* TVShowsHelper.app in Resources */ = {isa = PBXBuildFile; fileRef = 34FBC5E111C0B3C2005D290B /* TVShowsHelper.app */; };
+		34FBC5F611C0B47F005D290B /* Cache.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 342A32F611AA4C6200C433CD /* Cache.xcdatamodel */; };
+		34FBC5F711C0B480005D290B /* CacheDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 342A32F911AA4C8C00C433CD /* CacheDelegate.m */; };
+		34FBC5F811C0B495005D290B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
+		34FBC5F911C0B49B005D290B /* FPEnclosure.m in Sources */ = {isa = PBXBuildFile; fileRef = 349F2F6A11B2E7DB00D10D96 /* FPEnclosure.m */; };
+		34FBC5FA11C0B49C005D290B /* FPExtensionElementNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 349F2F7D11B2E7DB00D10D96 /* FPExtensionElementNode.m */; };
+		34FBC5FB11C0B49D005D290B /* FPExtensionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 349F2F7F11B2E7DB00D10D96 /* FPExtensionNode.m */; };
+		34FBC5FC11C0B49D005D290B /* FPExtensionTextNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 349F2F8111B2E7DB00D10D96 /* FPExtensionTextNode.m */; };
+		34FBC5FD11C0B4A4005D290B /* FPFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 349F2F6D11B2E7DB00D10D96 /* FPFeed.m */; };
+		34FBC5FE11C0B4A5005D290B /* FPItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 349F2F6F11B2E7DB00D10D96 /* FPItem.m */; };
+		34FBC5FF11C0B4A6005D290B /* FPLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 349F2F7111B2E7DB00D10D96 /* FPLink.m */; };
+		34FBC60011C0B4A7005D290B /* FPParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 349F2F7311B2E7DB00D10D96 /* FPParser.m */; };
+		34FBC60111C0B4A8005D290B /* FPXMLPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 349F2F7711B2E7DB00D10D96 /* FPXMLPair.m */; };
+		34FBC60211C0B4A9005D290B /* FPXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 349F2F7911B2E7DB00D10D96 /* FPXMLParser.m */; };
+		34FBC60411C0B4B5005D290B /* NSDate_FeedParserExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 349F2F6511B2E7DB00D10D96 /* NSDate_FeedParserExtensions.m */; };
+		34FBC60511C0B4B7005D290B /* NSString_extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 349F2F6711B2E7DB00D10D96 /* NSString_extensions.m */; };
+		34FBC60611C0B4B9005D290B /* NSURLRequestPostForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 347AFB141191157700393565 /* NSURLRequestPostForm.m */; };
+		34FBC60711C0B4BD005D290B /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3422ECE8118B3D7D0061E2E2 /* PreferencesController.m */; };
+		34FBC60811C0B4C1005D290B /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A91893119E2F83004B339D /* RegexKitLite.m */; };
+		34FBC60911C0B4C6005D290B /* Subscriptions.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 347F1E6111A9FA6C005A40AA /* Subscriptions.xcdatamodel */; };
+		34FBC60A11C0B4D0005D290B /* SubscriptionsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBF4F011A8501A00962FE5 /* SubscriptionsDelegate.m */; };
+		34FBC60B11C0B4D0005D290B /* SUPublicDSAKey.pem in Resources */ = {isa = PBXBuildFile; fileRef = 34908BD0119B9C1C00BDFC01 /* SUPublicDSAKey.pem */; };
+		34FBC60D11C0B4D6005D290B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 347AFBD81191207300393565 /* SystemConfiguration.framework */; };
+		34FBC60E11C0B4DA005D290B /* TSParseXMLFeeds.m in Sources */ = {isa = PBXBuildFile; fileRef = 34C5B58F11BB3C1500AAE681 /* TSParseXMLFeeds.m */; };
+		34FBC60F11C0B4DB005D290B /* TSRegexFun.m in Sources */ = {isa = PBXBuildFile; fileRef = 34C5B58911BB3BFE00AAE681 /* TSRegexFun.m */; };
+		34FBC61011C0B4DD005D290B /* TSUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 3471BB8711ACDF8700A65728 /* TSUserDefaults.m */; };
+		34FBC61111C0B4EF005D290B /* WebsiteFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3419982711A07913003768D5 /* WebsiteFunctions.m */; };
+		34FBC61F11C0B526005D290B /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 34A91883119E2C85004B339D /* libicucore.dylib */; };
+		34FBC62E11C0B567005D290B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FBC62D11C0B567005D290B /* main.m */; };
+		34FBC64211C0B601005D290B /* Sparkle.framework in Copy Linked Libraries */ = {isa = PBXBuildFile; fileRef = 3473845E119074C8003DFFA0 /* Sparkle.framework */; };
+		34FBC69511C0B7CE005D290B /* SUUpdaterSubclass.m in Sources */ = {isa = PBXBuildFile; fileRef = 340F15F9118FEBDE00A1BD00 /* SUUpdaterSubclass.m */; };
+		34FBC69B11C0B804005D290B /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3473845E119074C8003DFFA0 /* Sparkle.framework */; };
 		8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F506C035013D953901CA16C8 /* PreferencePanes.framework */; };
 /* End PBXBuildFile section */
@@ -116,6 +148,17 @@
 			files = (
 				34A9186D119E09B6004B339D /* BWToolkitFramework.framework in Copy Linked Libraries */,
 				3473849F1190767A003DFFA0 /* Sparkle.framework in Copy Linked Libraries */,
+			);
+			name = "Copy Linked Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34FBC61411C0B50D005D290B /* Copy Linked Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				34FBC64211C0B601005D290B /* Sparkle.framework in Copy Linked Libraries */,
 			);
 			name = "Copy Linked Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -221,11 +264,25 @@
 		34EC6AB911A312AD00BD660A /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Resources/English.lproj/TVShowsPref.xib; sourceTree = "<group>"; };
 		34F6EA39119BCAD100F8AD4C /* TVShows_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShows_Prefix.pch; sourceTree = "<group>"; };
 		34F6EA64119BCBA200F8AD4C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		34FBC5E111C0B3C2005D290B /* TVShowsHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShowsHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		34FBC5E311C0B3C2005D290B /* TVShowsHelper-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TVShowsHelper-Info.plist"; sourceTree = "<group>"; };
+		34FBC62D11C0B567005D290B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D202CF80486D31800D8A456 /* TVShows.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVShows.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
 		F506C035013D953901CA16C8 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = /System/Library/Frameworks/PreferencePanes.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		34FBC5DF11C0B3C2005D290B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34FBC69B11C0B804005D290B /* Sparkle.framework in Frameworks */,
+				34FBC5F811C0B495005D290B /* Cocoa.framework in Frameworks */,
+				34FBC60D11C0B4D6005D290B /* SystemConfiguration.framework in Frameworks */,
+				34FBC61F11C0B526005D290B /* libicucore.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D202CF20486D31800D8A456 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -253,6 +310,7 @@
 				089C167CFE841241C02AAC07 /* Resources */,
 				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
+				34FBC5E311C0B3C2005D290B /* TVShowsHelper-Info.plist */,
 			);
 			name = TVShows;
 			sourceTree = "<group>";
@@ -306,6 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				8D202CF80486D31800D8A456 /* TVShows.prefPane */,
+				34FBC5E111C0B3C2005D290B /* TVShowsHelper.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -313,6 +372,7 @@
 		32DBCFA10370C40200C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				34FBC62D11C0B567005D290B /* main.m */,
 				34F6EA39119BCAD100F8AD4C /* TVShows_Prefix.pch */,
 			);
 			name = "Other Sources";
@@ -564,6 +624,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		34FBC5E011C0B3C2005D290B /* TVShowsHelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 34FBC5E611C0B3C3005D290B /* Build configuration list for PBXNativeTarget "TVShowsHelper" */;
+			buildPhases = (
+				34FBC5DD11C0B3C2005D290B /* Resources */,
+				34FBC61411C0B50D005D290B /* Copy Linked Libraries */,
+				34FBC5DE11C0B3C2005D290B /* Sources */,
+				34FBC5DF11C0B3C2005D290B /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TVShowsHelper;
+			productName = TVShowsHelper;
+			productReference = 34FBC5E111C0B3C2005D290B /* TVShowsHelper.app */;
+			productType = "com.apple.product-type.application";
+		};
 		8D202CE80486D31800D8A456 /* TVShows */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DBD214808BA80EA00186707 /* Build configuration list for PBXNativeTarget "TVShows" */;
@@ -600,12 +678,21 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				34FBC5E011C0B3C2005D290B /* TVShowsHelper */,
 				8D202CE80486D31800D8A456 /* TVShows */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		34FBC5DD11C0B3C2005D290B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34FBC60B11C0B4D0005D290B /* SUPublicDSAKey.pem in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D202CEC0486D31800D8A456 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -628,6 +715,7 @@
 				34785D07119B9CE200A28449 /* Credits.rtf in Resources */,
 				34EC6ABC11A312AD00BD660A /* TVShowsPref.xib in Resources */,
 				340A20B111AF0E15004351EB /* posterArtPlaceholder.jpg in Resources */,
+				34FBC5F411C0B451005D290B /* TVShowsHelper.app in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,6 +732,38 @@
 /* End PBXRezBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		34FBC5DE11C0B3C2005D290B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34FBC5F611C0B47F005D290B /* Cache.xcdatamodel in Sources */,
+				34FBC5F711C0B480005D290B /* CacheDelegate.m in Sources */,
+				34FBC5F911C0B49B005D290B /* FPEnclosure.m in Sources */,
+				34FBC5FA11C0B49C005D290B /* FPExtensionElementNode.m in Sources */,
+				34FBC5FB11C0B49D005D290B /* FPExtensionNode.m in Sources */,
+				34FBC5FC11C0B49D005D290B /* FPExtensionTextNode.m in Sources */,
+				34FBC5FD11C0B4A4005D290B /* FPFeed.m in Sources */,
+				34FBC5FE11C0B4A5005D290B /* FPItem.m in Sources */,
+				34FBC5FF11C0B4A6005D290B /* FPLink.m in Sources */,
+				34FBC60011C0B4A7005D290B /* FPParser.m in Sources */,
+				34FBC60111C0B4A8005D290B /* FPXMLPair.m in Sources */,
+				34FBC60211C0B4A9005D290B /* FPXMLParser.m in Sources */,
+				34FBC60411C0B4B5005D290B /* NSDate_FeedParserExtensions.m in Sources */,
+				34FBC60511C0B4B7005D290B /* NSString_extensions.m in Sources */,
+				34FBC60611C0B4B9005D290B /* NSURLRequestPostForm.m in Sources */,
+				34FBC60711C0B4BD005D290B /* PreferencesController.m in Sources */,
+				34FBC60811C0B4C1005D290B /* RegexKitLite.m in Sources */,
+				34FBC60911C0B4C6005D290B /* Subscriptions.xcdatamodel in Sources */,
+				34FBC60A11C0B4D0005D290B /* SubscriptionsDelegate.m in Sources */,
+				34FBC60E11C0B4DA005D290B /* TSParseXMLFeeds.m in Sources */,
+				34FBC60F11C0B4DB005D290B /* TSRegexFun.m in Sources */,
+				34FBC61011C0B4DD005D290B /* TSUserDefaults.m in Sources */,
+				34FBC61111C0B4EF005D290B /* WebsiteFunctions.m in Sources */,
+				34FBC62E11C0B567005D290B /* main.m in Sources */,
+				34FBC69511C0B7CE005D290B /* SUUpdaterSubclass.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D202CF00486D31800D8A456 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -806,6 +926,63 @@
 			};
 			name = Release;
 		};
+		34FBC5E411C0B3C3005D290B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DEPLOYMENT_LOCATION = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "TVShowsHelper-Info.plist";
+				INSTALL_PATH = "$(BUILD_DIR)/$(CONFIGURATION)";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = TVShowsHelper;
+			};
+			name = Debug;
+		};
+		34FBC5E511C0B3C3005D290B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "TVShowsHelper-Info.plist";
+				INSTALL_PATH = "$(BUILD_DIR)/$(CONFIGURATION)";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = TVShowsHelper;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -823,6 +1000,15 @@
 			buildConfigurations = (
 				1DBD214D08BA80EA00186707 /* Debug */,
 				1DBD214E08BA80EA00186707 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		34FBC5E611C0B3C3005D290B /* Build configuration list for PBXNativeTarget "TVShowsHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34FBC5E411C0B3C3005D290B /* Debug */,
+				34FBC5E511C0B3C3005D290B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

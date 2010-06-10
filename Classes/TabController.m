@@ -136,7 +136,7 @@
 	[showIsEnabled setState: [[selectedShow valueForKey:@"isEnabled"] intValue]];
 	
 	// Reset the Episode Array Controller and grab the new list of episodes
-	[episodeArrayController removeObjects:[episodeArrayController arrangedObjects]];
+	[[episodeArrayController content] removeAllObjects];
 	[episodeArrayController addObjects:[TSParseXMLFeeds parseEpisodesFromFeed:[selectedShow valueForKey:@"url"]
 																	 maxItems:10]];
 		

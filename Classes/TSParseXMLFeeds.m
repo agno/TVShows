@@ -22,7 +22,7 @@
 + (NSArray *) parseEpisodesFromFeed:(NSString *)url maxItems:(int)maxItems
 {
 	// Begin parsing the feed
-	NSString *episodeTitle, *episodeSeason, *episodeNumber;
+	NSString *episodeTitle = @"", *episodeSeason = @"", *episodeNumber = @"";
 	NSError *error;
 	NSMutableArray *episodeArray = [NSMutableArray array];
 	NSData *feedData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];

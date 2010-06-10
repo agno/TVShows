@@ -150,10 +150,12 @@
 	[delegateClass release];
 }
 
-- (void)tableViewSelectionDidChange:(NSNotification *)notification
+- (void) tableViewSelectionDidChange:(NSNotification *)notification
 {
 	// Reset the Episode Array Controller and grab the new list of episodes
-	[episodeArrayController removeObjects:[episodeArrayController arrangedObjects]];
+	[[episodeArrayController content] removeAllObjects];
+	
+	// This next line seems to break filtering shows.
 	NSString *selectedShowURL = [NSString stringWithFormat:@"http://showrss.karmorra.info/feeds/%@.rss",
 								 [[[PTArrayController selectedObjects] valueForKey:@"showrssID"] objectAtIndex:0]];
 	[episodeArrayController addObjects:[TSParseXMLFeeds parseEpisodesFromFeed:selectedShowURL
