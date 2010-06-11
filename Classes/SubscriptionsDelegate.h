@@ -16,11 +16,11 @@
 
 @interface SubscriptionsDelegate : NSObject 
 {
-    NSWindow *window;
-    
-    NSPersistentStoreCoordinator *persistentStoreCoordinator;
-    NSManagedObjectModel *managedObjectModel;
-    NSManagedObjectContext *managedObjectContext;
+	NSWindow *window;
+	
+	NSPersistentStoreCoordinator *persistentStoreCoordinator;
+	NSManagedObjectModel *managedObjectModel;
+	NSManagedObjectContext *managedObjectContext;
 }
 
 @property (nonatomic, retain) IBOutlet NSWindow *window;
