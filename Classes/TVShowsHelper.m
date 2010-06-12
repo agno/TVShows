@@ -13,12 +13,33 @@
  */
 
 #import "TVShowsHelper.h"
+#import "SubscriptionsDelegate.h"
 
 
 @implementation TVShowsHelper
 
 - (void) applicationDidFinishLaunching:(NSNotification *)notification {
-	NSLog(@"TVShowsHelper finished launching.");
+	id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
+	
+	NSManagedObjectContext *context = [delegateClass managedObjectContext];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Subscription" inManagedObjectContext:context];
+	NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+    [request setEntity:entity];
+    
+	NSError *error = nil;
+    NSArray *results = [context executeFetchRequest:request error:&error];
+	
+	if (error != nil) {
+		TVLog(@"%@",[error description]);
+	} else {
+		
+		for (NSArray *show in results) {
+			TVLog(@"%@",show);
+		}
+
+	}
+	
+	[delegateClass release];
 }
 
 @end

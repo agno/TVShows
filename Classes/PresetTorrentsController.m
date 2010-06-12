@@ -235,7 +235,7 @@
 	
 	NSManagedObjectContext *context = [delegateClass managedObjectContext];
 	NSManagedObject *newSubscription = [NSEntityDescription insertNewObjectForEntityForName: @"Subscription"
-																 inManagedObjectContext: context];
+																	 inManagedObjectContext: context];
 	
 	NSArray *selectedShow = [PTArrayController selectedObjects];
 
@@ -245,8 +245,9 @@
 	[newSubscription setValue:[NSString stringWithFormat:@"http://showrss.karmorra.info/feeds/%@.rss",
 							   [[selectedShow valueForKey:@"showrssID"] objectAtIndex:0]]
 					   forKey:@"url"];
-		[newSubscription setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
-		[newSubscription setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
+	[newSubscription setValue:[NSDate date] forKey:@"lastDownloaded"];
+	[newSubscription setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
+	[newSubscription setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
 	
 	[SBArrayController addObject:newSubscription];
 	[delegateClass saveAction];
