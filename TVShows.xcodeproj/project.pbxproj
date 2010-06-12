@@ -925,8 +925,13 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TVShows_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					PREFPANE,
+					DEBUG,
+				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = TVShows;
 				WRAPPER_EXTENSION = prefPane;
 				ZERO_LINK = YES;
@@ -946,8 +951,10 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TVShows_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = PREFPANE;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = TVShows;
 				WRAPPER_EXTENSION = prefPane;
 			};
@@ -968,6 +975,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INSTALL_PATH = $HOME/Library/PreferencePanes;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "";
 				PREBINDING = NO;
 				PRODUCT_NAME = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
@@ -985,6 +993,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_CFLAGS = "";
 				PREBINDING = NO;
 				PRODUCT_NAME = "";
 				SDKROOT = macosx10.5;
@@ -1028,9 +1037,14 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GCC_PREFIX_HEADER = TVShows_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					HELPER_APP,
+					DEBUG,
+				);
 				INFOPLIST_FILE = "TVShowsHelper-Info.plist";
 				INSTALL_PATH = "$(BUILD_DIR)/$(CONFIGURATION)";
+				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -1055,9 +1069,11 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GCC_PREFIX_HEADER = TVShows_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = HELPER_APP;
 				INFOPLIST_FILE = "TVShowsHelper-Info.plist";
 				INSTALL_PATH = "$(BUILD_DIR)/$(CONFIGURATION)";
+				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,

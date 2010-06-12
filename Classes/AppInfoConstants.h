@@ -12,7 +12,12 @@
  *
  */
 
-#define TVShowsAppDomain			@"com.embercode.TVShows2"
+#if PREFPANE
+	#define TVShowsAppDomain			@"com.embercode.TVShows2"
+#elif HELPER_APP
+	#define TVShowsAppDomain			@"com.embercode.TVShowsHelper"
+#endif
+
 #define TVShowsWebsite				@"http://embercode.com/tvshows/"
 #define TVShowsAppcastURL			@"http://embercode.com/updates/tvshows.xml"
 #define TVShowsBetaAppcastURL		@"http://embercode.com/updates/tvshows-beta.xml"
