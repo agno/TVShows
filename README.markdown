@@ -14,9 +14,10 @@ TVShows 2 "_Phoenix_" is the next version of [TVShows][tvshows], the easiest way
 
 ## Planned Features
 * Custom RSS feeds
-* Support for NZB files
+* Support for NZBs.org
 * Better support for non-standard naming conventions
 * Display show and episode information
+* The ability to download subtitles for new episodes
 * Localized languages for non-English users ([read more][translate])
 * Growl notifications for new downloads
 
