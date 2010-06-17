@@ -37,10 +37,18 @@
 
 @implementation PresetTorrentsController
 
+- init
+{
+	if((self = [super init])) {
+		hasDownloadedList = NO;
+	}
+	
+	return self;
+}
+
 - (IBAction) displayPresetTorrentsWindow:(id)sender
 {
 	errorHasOccurred = NO;
-	hasDownloadedList = NO;
 	
 	// Only download the show list once per session
 	if(hasDownloadedList == NO) {
@@ -112,6 +120,7 @@
 	else if (![WebsiteFunctions canConnectToHostname:ShowListHostname]) {
 		[self errorWindowWithStatusCode:102];
 	} else {
+		DLog(@"TEST");
 		showListContents = [selectTags objectAtIndex:0];
 		
 		// Reset the existing show list before continuing. In a perfect world we'd

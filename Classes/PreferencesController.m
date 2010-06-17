@@ -33,8 +33,7 @@
 		}
 	}
 	
-    return self;
-	
+	return self;
 }
 
 - (void) awakeFromNib

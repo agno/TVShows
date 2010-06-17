@@ -35,6 +35,7 @@
 
 #pragma mark -
 #pragma mark Preset Torrents Window
+- init;
 - (IBAction) displayPresetTorrentsWindow:(id)sender;
 - (IBAction) closePresetTorrentsWindow:(id)sender;
 - (void) downloadTorrentShowList;
