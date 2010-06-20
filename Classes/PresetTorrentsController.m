@@ -120,7 +120,6 @@
 	else if (![WebsiteFunctions canConnectToHostname:ShowListHostname]) {
 		[self errorWindowWithStatusCode:102];
 	} else {
-		DLog(@"TEST");
 		showListContents = [selectTags objectAtIndex:0];
 		
 		// Reset the existing show list before continuing. In a perfect world we'd

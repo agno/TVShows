@@ -34,7 +34,7 @@
 	} else {
 		
 		for (NSArray *show in results) {
-			TVLog(@"%@",show);
+			TVLog(@"%@",[show valueForKey:@"name"]);
 		}
 
 	}
