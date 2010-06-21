@@ -35,6 +35,7 @@
 		TVLog(@"%@",[error description]);
 	} else {
 		
+		// No error occurred so check for new episodes
 		for (NSArray *show in results) {
 			[self checkForNewEpisodes:show];
 		}
@@ -46,17 +47,17 @@
 
 - (void) checkForNewEpisodes:(NSArray *)show
 {
+	NSDate *pubDate, *lastDownloaded;
 	NSArray *episodes = [TSParseXMLFeeds parseEpisodesFromFeed:[show valueForKey:@"url"] maxItems:10];
 	
+	// For each episode that was parsed...
 	for (NSArray *episode in episodes) {
+		pubDate = [episode valueForKey:@"pubDate"];
+		lastDownloaded = [show valueForKey:@"lastDownloaded"];
 		
-		// This check is a little buggy at the moment, probably
-		// because lastDownloaded isn't required or always set.
-		
-		if ([episode valueForKey:@"pubDate"] > [show valueForKey:@"lastDownloaded"]) {
-			// TVLog(@"%@:%@",[episode valueForKey:@"link"], @"NEW");
-		} else {
-			// TVLog(@"%@:%@",[episode valueForKey:@"link"], @"OLD");
+		if ([lastDownloaded compare:pubDate] == NSOrderedAscending) {
+			// The date we lastDownloaded episodes is before this torrent was
+			// published. This means we should probably download the episode.
 		}
 		
 	}
