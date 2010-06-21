@@ -20,5 +20,6 @@
 }
 
 - (void) applicationDidFinishLaunching:(NSNotification *)notification;
+- (void) checkForNewEpisodes:(NSArray *)show;
 
 @end

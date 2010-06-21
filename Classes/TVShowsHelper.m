@@ -14,11 +14,13 @@
 
 #import "TVShowsHelper.h"
 #import "SubscriptionsDelegate.h"
+#import "TSParseXMLFeeds.h"
 
 
 @implementation TVShowsHelper
 
-- (void) applicationDidFinishLaunching:(NSNotification *)notification {
+- (void) applicationDidFinishLaunching:(NSNotification *)notification
+{
 	id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
 	
 	NSManagedObjectContext *context = [delegateClass managedObjectContext];
@@ -34,12 +36,30 @@
 	} else {
 		
 		for (NSArray *show in results) {
-			TVLog(@"%@",[show valueForKey:@"name"]);
+			[self checkForNewEpisodes:show];
 		}
 
 	}
 	
 	[delegateClass release];
+}
+
+- (void) checkForNewEpisodes:(NSArray *)show
+{
+	NSArray *episodes = [TSParseXMLFeeds parseEpisodesFromFeed:[show valueForKey:@"url"] maxItems:10];
+	
+	for (NSArray *episode in episodes) {
+		
+		// This check is a little buggy at the moment, probably
+		// because lastDownloaded isn't required or always set.
+		
+		if ([episode valueForKey:@"pubDate"] > [show valueForKey:@"lastDownloaded"]) {
+			// TVLog(@"%@:%@",[episode valueForKey:@"link"], @"NEW");
+		} else {
+			// TVLog(@"%@:%@",[episode valueForKey:@"link"], @"OLD");
+		}
+		
+	}
 }
 
 @end

@@ -51,10 +51,11 @@
 				
 			}
 			
-			[Episode setValue:episodeTitle forKey:@"episodeName"];
+			[Episode setValue:episodeTitle	 forKey:@"episodeName"];
 			[Episode setValue:[item pubDate] forKey:@"pubDate"];
-			[Episode setValue:episodeSeason forKey:@"episodeSeason"];
-			[Episode setValue:episodeNumber forKey:@"episodeNumber"];
+			[Episode setValue:[item link]	 forKey:@"link"];
+			[Episode setValue:episodeSeason  forKey:@"episodeSeason"];
+			[Episode setValue:episodeNumber  forKey:@"episodeNumber"];
 			
 			[episodeArray addObject:Episode];
 			
