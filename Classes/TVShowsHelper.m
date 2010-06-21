@@ -15,34 +15,52 @@
 #import "TVShowsHelper.h"
 #import "SubscriptionsDelegate.h"
 #import "TSParseXMLFeeds.h"
+#import "TSUserDefaults.h"
 
 
 @implementation TVShowsHelper
 
 - (void) applicationDidFinishLaunching:(NSNotification *)notification
 {
-	id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
-	
-	NSManagedObjectContext *context = [delegateClass managedObjectContext];
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Subscription" inManagedObjectContext:context];
-	NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
-    [request setEntity:entity];
-    
-	NSError *error = nil;
-    NSArray *results = [context executeFetchRequest:request error:&error];
-	
-	if (error != nil) {
-		TVLog(@"%@",[error description]);
-	} else {
-		
-		// No error occurred so check for new episodes
-		for (NSArray *show in results) {
-			[self checkForNewEpisodes:show];
-		}
+	// This should never happen, but let's make sure TVShows is enabled before continuing.
+	if ([TSUserDefaults getBoolFromKey:@"isEnabled" withDefault:1]) {
 
+		// TVShows is enabled, continuing...
+		id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
+		
+		NSManagedObjectContext *context = [delegateClass managedObjectContext];
+		NSEntityDescription *entity = [NSEntityDescription entityForName:@"Subscription" inManagedObjectContext:context];
+		NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+		[request setEntity:entity];
+		
+		NSError *error = nil;
+		NSArray *results = [context executeFetchRequest:request error:&error];
+		
+		if (error != nil) {
+			TVLog(@"%@",[error description]);
+		} else {
+			
+			// No error occurred so check for new episodes
+			for (NSArray *show in results) {
+				
+				// Only check for new episodes if we're supposed to
+				if ([show valueForKey:@"isEnabled"]) {
+					[self checkForNewEpisodes:show];
+				} else {
+					DLog(@"Downloading for the show %@ is disabled.", [show valueForKey:@"name"]);
+				}
+				
+			}
+			
+		}
+		
+		[delegateClass release];
+		
+	} else {
+		// TVShows is not enabled.
+		TVLog(@"The TVShowsHelper was run even though TVShows is not enabled. Quitting.");
 	}
 	
-	[delegateClass release];
 }
 
 - (void) checkForNewEpisodes:(NSArray *)show
