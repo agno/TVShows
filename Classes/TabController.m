@@ -76,39 +76,14 @@
 
 #pragma mark -
 #pragma mark About Tab
-- (IBAction) visitWebsite:(id)sender
+- (IBAction) openWebsite:(id)sender
 {
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString: TVShowsWebsite]];
 }
 
-- (IBAction) showLicenseInfo:(id)sender
+- (IBAction) openTwitter:(id)sender
 {
-	NSString *licenseInfoText;
-	
-    [NSApp beginSheet: licenseInfoDialog
-	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
-		modalDelegate: nil
-	   didEndSelector: nil
-		  contextInfo: nil];
-
-	licenseInfoText = [NSString stringWithContentsOfURL:
-					   [NSURL fileURLWithPath:
-						[[NSBundle bundleWithIdentifier: TVShowsAppDomain]
-										pathForResource: @"LICENSE" ofType:@"txt"]]
-											   encoding: NSUTF8StringEncoding
-												  error: NULL];
-	
-	[textView_licenseInfo setFont:[NSFont fontWithName:@"Monaco" size:10.0]];
-	[textView_licenseInfo setString:licenseInfoText];
-	
-    [NSApp runModalForWindow: licenseInfoDialog];
-	[NSApp endSheet: licenseInfoDialog];
-}
-
-- (IBAction) closeLicenseInfoDialog:(id)sender
-{	
-    [NSApp stopModal];
-    [licenseInfoDialog orderOut: self];
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString: TVShowsTwitter]];
 }
 
 - (void) drawAboutBox

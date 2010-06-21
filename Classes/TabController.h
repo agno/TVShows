@@ -27,8 +27,6 @@
 	IBOutlet NSTextField *aboutTabVersionText;
 	
 	// About tab
-	IBOutlet NSWindow *licenseInfoDialog;
-	IBOutlet NSTextView *textView_licenseInfo;
 	IBOutlet NSTextView *textView_aboutBox;
 	
 	// Subscriptions tab
@@ -51,9 +49,8 @@
 
 #pragma mark -
 #pragma mark About Tab
-- (IBAction) visitWebsite:(id)sender;
-- (IBAction) showLicenseInfo:(id)sender;
-- (IBAction) closeLicenseInfoDialog:(id)sender;
+- (IBAction) openWebsite:(id)sender;
+- (IBAction) openTwitter:(id)sender;
 - (void) drawAboutBox;
 
 #pragma mark -

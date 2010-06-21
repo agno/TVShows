@@ -19,5 +19,6 @@
 #endif
 
 #define TVShowsWebsite				@"http://embercode.com/tvshows/"
+#define TVShowsTwitter				@"http://twitter.com/embercode/"
 #define TVShowsAppcastURL			@"http://embercode.com/updates/tvshows.xml"
 #define TVShowsBetaAppcastURL		@"http://embercode.com/updates/tvshows-beta.xml"
