@@ -105,8 +105,14 @@
 {
 	selectedShow = [[[sender cell] representedObject] representedObject];
 	
+	// Set up the date formatter
+	NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+	[dateFormatter setDateStyle:NSDateFormatterLongStyle];
+	[dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+	
+	// Set the displayed values
 	[showName setStringValue: [selectedShow valueForKey:@"name"]];
-//	[showLastDownloaded setStringValue: [selectedShow valueForKey:@"lastDownloaded"]];	
+	[showLastDownloaded setStringValue: [dateFormatter stringFromDate:[selectedShow valueForKey:@"lastDownloaded"]]];
 	[showQuality setState: [[selectedShow valueForKey:@"quality"] intValue]];
 	[showIsEnabled setState: [[selectedShow valueForKey:@"isEnabled"] intValue]];
 	
