@@ -13,6 +13,7 @@
  */
 
 #import "SUUpdaterSubclass.h"
+#import "AppInfoConstants.h"
 
 @implementation SUUpdaterSubclass
 
@@ -21,12 +22,12 @@
 
 + (id) sharedUpdater
 {
-    return [self updaterForBundle:[NSBundle bundleForClass:[self class]]];
+    return [self updaterForBundle:[NSBundle bundleWithIdentifier:TVShowsAppDomain]];
 }
 
 - (id) init
 {
-	return [self initForBundle:[NSBundle bundleForClass:[self class]]];
+	return [self initForBundle:[NSBundle bundleWithIdentifier:TVShowsAppDomain]];
 }
 
 

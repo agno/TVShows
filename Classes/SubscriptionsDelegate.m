@@ -38,7 +38,7 @@
 	
 	managedObjectModel = [[NSManagedObjectModel mergedModelFromBundles:
 						   [NSArray arrayWithObject:
-							[NSBundle bundleWithIdentifier: TVShowsAppDomain]] ] retain];
+							[NSBundle bundleWithIdentifier: CurrentBundleDomain]] ] retain];
 	
 	return managedObjectModel;
 }

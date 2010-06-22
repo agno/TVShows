@@ -12,13 +12,16 @@
  *
  */
 
-#if PREFPANE
-	#define TVShowsAppDomain			@"com.embercode.TVShows2"
-#elif HELPER_APP
-	#define TVShowsAppDomain			@"com.embercode.TVShowsHelper"
-#endif
-
+#define TVShowsAppDomain			@"com.embercode.TVShows2"
 #define TVShowsWebsite				@"http://embercode.com/tvshows/"
 #define TVShowsTwitter				@"http://twitter.com/embercode/"
 #define TVShowsAppcastURL			@"http://embercode.com/updates/tvshows.xml"
 #define TVShowsBetaAppcastURL		@"http://embercode.com/updates/tvshows-beta.xml"
+
+
+// Used in the Delegate methods so that we don't have to duplicate files.
+#if PREFPANE
+	#define CurrentBundleDomain			@"com.embercode.TVShows2"
+#elif HELPER_APP
+	#define CurrentBundleDomain			@"com.embercode.TVShowsHelper"
+#endif
