@@ -20,15 +20,49 @@
 // This subclass is required in order for Sparkle to update bundles correctly.
 // For more information see: http://wiki.github.com/andymatuschak/Sparkle/bundles
 
+// Support for getting the prefPane path is slightly hacked together.
+// Feel free to improve this if you know how.
+
 + (id) sharedUpdater
 {
-    return [self updaterForBundle:[NSBundle bundleWithIdentifier:TVShowsAppDomain]];
+	// Get the path of the TVShowsHelper
+	NSString *appPath = [[NSBundle bundleForClass:[self class]] bundlePath];
+	
+	// Get the path of the bundle TVShowsHelper is currently within.
+	NSMutableString *prefPanePath = [NSMutableString stringWithString:appPath];
+	[prefPanePath replaceOccurrencesOfString:@"/Content/Resources/TVShowsHelper.app"
+								  withString:@""
+									 options:0
+									   range:NSMakeRange(0, [prefPanePath length])];
+	
+	// If we're running in DEBUG mode then TVShowsHelper won't be in a bundle
+	// so we should just return a static path to the  prefPane instead.
+	#if DEBUG
+		prefPanePath = [NSMutableString stringWithString:@"~/Library/PreferencePanes/TVShows.prefPane"];
+	#endif
+	
+    return [self updaterForBundle:[NSBundle bundleWithPath:prefPanePath]];
 }
 
 - (id) init
 {
-	return [self initForBundle:[NSBundle bundleWithIdentifier:TVShowsAppDomain]];
+	// Get the path of the TVShowsHelper
+	NSString *appPath = [[NSBundle bundleForClass:[self class]] bundlePath];
+	
+	// Get the path of the bundle TVShowsHelper is currently within.
+	NSMutableString *prefPanePath = [NSMutableString stringWithString:appPath];
+	[prefPanePath replaceOccurrencesOfString:@"/Content/Resources/TVShowsHelper.app"
+								  withString:@""
+									 options:0
+									   range:NSMakeRange(0, [prefPanePath length])];
+	
+	// If we're running in DEBUG mode then TVShowsHelper won't be in a bundle
+	// so we should just return a static path to the  prefPane instead.
+	#if DEBUG
+		prefPanePath = [NSMutableString stringWithString:@"~/Library/PreferencePanes/TVShows.prefPane"];
+	#endif
+	
+	return [self initForBundle:[NSBundle bundleWithPath:prefPanePath]];
 }
-
 
 @end
