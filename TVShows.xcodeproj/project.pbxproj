@@ -818,8 +818,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
-					"\"$(SRCROOT)/Frameworks (Tiger)\"",
-					"\"$(DEVELOPER_DIR)/Local/Frameworks\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -847,8 +845,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
-					"\"$(SRCROOT)/Frameworks (Tiger)\"",
-					"\"$(DEVELOPER_DIR)/Local/Frameworks\"",
 				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -878,6 +874,7 @@
 				INSTALL_PATH = $HOME/Library/PreferencePanes;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-lstdc++";
 				PREBINDING = NO;
 				PRODUCT_NAME = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
@@ -896,6 +893,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-lstdc++";
 				PREBINDING = NO;
 				PRODUCT_NAME = "";
 				SDKROOT = macosx10.5;
@@ -948,6 +946,7 @@
 				INSTALL_PATH = "$(BUILD_DIR)/$(CONFIGURATION)";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
+					"-lstdc++",
 					"-framework",
 					Foundation,
 					"-framework",
@@ -977,6 +976,7 @@
 				INSTALL_PATH = "$(BUILD_DIR)/$(CONFIGURATION)";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
+					"-lstdc++",
 					"-framework",
 					Foundation,
 					"-framework",
