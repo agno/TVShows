@@ -17,11 +17,10 @@
 
 @implementation SUUpdaterSubclass
 
+@synthesize didFindValidUpdate;
+
 // This subclass is required in order for Sparkle to update bundles correctly.
 // For more information see: http://wiki.github.com/andymatuschak/Sparkle/bundles
-
-// Support for getting the prefPane path is slightly hacked together.
-// Feel free to improve this if you know how.
 
 + (id) sharedUpdater
 {
@@ -46,6 +45,8 @@
 
 - (id) init
 {
+	didFindValidUpdate = NO;
+	
 	// Get the path of the TVShowsHelper
 	NSString *appPath = [[NSBundle bundleForClass:[self class]] bundlePath];
 	
@@ -63,6 +64,19 @@
 	#endif
 	
 	return [self initForBundle:[NSBundle bundleWithPath:prefPanePath]];
+}
+
+- (void)updater:(SUUpdater *)updater didFindValidUpdate:(SUAppcastItem *)update
+{
+	// We use this to help no whether or not the TVShowsHelper should close after
+	// downloading new episodes or whether it should wait for Sparkle to finish
+	// installing new updates.
+	didFindValidUpdate = YES;
+}
+
+- (Boolean) didFindValidUpdate
+{
+	return didFindValidUpdate;
 }
 
 @end

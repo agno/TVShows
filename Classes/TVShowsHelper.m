@@ -16,6 +16,7 @@
 #import "SubscriptionsDelegate.h"
 #import "TSParseXMLFeeds.h"
 #import "TSUserDefaults.h"
+#import "SUUpdaterSubclass.h"
 
 
 @implementation TVShowsHelper
@@ -60,6 +61,19 @@
 		// TVShows is not enabled.
 		TVLog(@"The TVShowsHelper was run even though TVShows is not enabled. Quitting.");
 	}
+	
+	// Make sure that Sparkle isn't downloading any updates before we quit
+	id updaterSubclass = [[SUUpdaterSubclass class] alloc];
+//	[updaterSubclass checkForUpdateInformation];
+	
+	if(![updaterSubclass didFindValidUpdate]) {
+		DLog(@"%d",[updaterSubclass didFindValidUpdate]);
+		DLog(@"Sparkle did not find a valid update.");
+	} else {
+		DLog(@"Sparkle found a valid update.");
+	}
+	
+	[updaterSubclass release];
 	
 }
 

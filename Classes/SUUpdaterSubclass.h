@@ -19,7 +19,12 @@
 
 }
 
+@property (nonatomic) Boolean didFindValidUpdate;
+
 + (id) sharedUpdater;
 - (id) init;
+- (void)updater:(SUUpdater *)updater didFindValidUpdate:(SUAppcastItem *)update;
+
+- (Boolean) didFindValidUpdate;
 
 @end
