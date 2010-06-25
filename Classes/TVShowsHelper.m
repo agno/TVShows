@@ -21,6 +21,8 @@
 
 @implementation TVShowsHelper
 
+@synthesize didFindValidUpdate;
+
 - (void) applicationDidFinishLaunching:(NSNotification *)notification
 {
 	// This should never happen, but let's make sure TVShows is enabled before continuing.
@@ -61,20 +63,7 @@
 		// TVShows is not enabled.
 		TVLog(@"The TVShowsHelper was run even though TVShows is not enabled. Quitting.");
 	}
-	
-	// Make sure that Sparkle isn't downloading any updates before we quit
-	id updaterSubclass = [[SUUpdaterSubclass class] alloc];
-//	[updaterSubclass checkForUpdateInformation];
-	
-	if(![updaterSubclass didFindValidUpdate]) {
-		DLog(@"%d",[updaterSubclass didFindValidUpdate]);
-		DLog(@"Sparkle did not find a valid update.");
-	} else {
-		DLog(@"Sparkle found a valid update.");
-	}
-	
-	[updaterSubclass release];
-	
+
 }
 
 - (void) checkForNewEpisodes:(NSArray *)show
@@ -93,6 +82,26 @@
 		}
 		
 	}
+}
+
+#pragma mark -
+#pragma mark Sparkle Delegate Methods
+- (void) updater:(SUUpdater *)updater didFindValidUpdate:(SUAppcastItem *)update
+{
+	// We use this to help no whether or not the TVShowsHelper should close after
+	// downloading new episodes or whether it should wait for Sparkle to finish
+	// installing new updates.
+	didFindValidUpdate = YES;
+	DLog(@"Sparkle found a valid update.");
+}
+
+- (void) updaterDidNotFindUpdate:(SUUpdater *)update
+{
+	// We use this to help no whether or not the TVShowsHelper should close after
+	// downloading new episodes or whether it should wait for Sparkle to finish
+	// installing new updates.
+	didFindValidUpdate = NO;
+	DLog(@"Sparkle did not find a valid update.");
 }
 
 @end

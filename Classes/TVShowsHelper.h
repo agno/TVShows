@@ -13,13 +13,21 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import <Sparkle/SUUpdater.h>
 
 
 @interface TVShowsHelper : NSObject {
 
 }
 
+@property (nonatomic) Boolean didFindValidUpdate;
+
 - (void) applicationDidFinishLaunching:(NSNotification *)notification;
 - (void) checkForNewEpisodes:(NSArray *)show;
+
+#pragma mark -
+#pragma mark Sparkle Delegate Methods
+- (void) updater:(SUUpdater *)updater didFindValidUpdate:(SUAppcastItem *)update;
+- (void) updaterDidNotFindUpdate:(SUUpdater *)update;
 
 @end
