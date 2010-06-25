@@ -80,7 +80,10 @@
 					[self removeLeadingZero:[identifier objectAtIndex:2]],
 					[self removeLeadingZero:[identifier objectAtIndex:3]]];	
 		}
+	} else {
+		return nil;
 	}
+
 }
 
 @end

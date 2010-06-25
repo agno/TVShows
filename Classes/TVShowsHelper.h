@@ -26,6 +26,12 @@
 - (void) checkForNewEpisodes:(NSArray *)show;
 
 #pragma mark -
+#pragma mark Download Methods
+- (void) startDownloadingURL:(NSString *)url;
+- (void) download:(NSURLDownload *)download didFailWithError:(NSError *)error;
+- (void) downloadDidFinish:(NSURLDownload *)download;
+
+#pragma mark -
 #pragma mark Sparkle Delegate Methods
 - (void) updater:(SUUpdater *)updater didFindValidUpdate:(SUAppcastItem *)update;
 - (void) updaterDidNotFindUpdate:(SUUpdater *)update;

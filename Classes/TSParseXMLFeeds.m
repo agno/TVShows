@@ -53,7 +53,7 @@
 			
 			[Episode setValue:episodeTitle	 forKey:@"episodeName"];
 			[Episode setValue:[item pubDate] forKey:@"pubDate"];
-			[Episode setValue:[item link]	 forKey:@"link"];
+			[Episode setValue:[[item link] href]	 forKey:@"link"];
 			[Episode setValue:episodeSeason  forKey:@"episodeSeason"];
 			[Episode setValue:episodeNumber  forKey:@"episodeNumber"];
 			

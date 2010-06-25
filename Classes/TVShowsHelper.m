@@ -79,7 +79,50 @@
 		if ([lastDownloaded compare:pubDate] == NSOrderedAscending) {
 			// The date we lastDownloaded episodes is before this torrent was
 			// published. This means we should probably download the episode.
+			DLog(@"%@",[episode valueForKey:@"link"]);
+			[self startDownloadingURL:[episode valueForKey:@"link"]];
 		}
+		
+	}
+}
+
+#pragma mark -
+#pragma mark Download Methods
+- (void) startDownloadingURL:(NSString *)url
+{
+	// Create the request.
+	NSURLRequest *theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
+												cachePolicy:NSURLRequestUseProtocolCachePolicy
+											timeoutInterval:60.0];
+	
+	// Create the connection with the request and start loading the data.
+	NSURLDownload  *theDownload = [[NSURLDownload alloc] initWithRequest:theRequest
+											 					delegate:self];
+	if (theDownload) {
+		// Set the destination file.
+		[theDownload setDestination:[TSUserDefaults getStringFromKey:@"downloadFolder"] allowOverwrite:YES];
+	}
+}
+
+
+- (void) download:(NSURLDownload *)download didFailWithError:(NSError *)error
+{
+	// Release the connection.
+	[download release];
+	
+	// Inform the user.
+	TVLog(@"Download failed! Error - %@ %@",
+		  [error localizedDescription],
+		  [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
+}
+
+- (void) downloadDidFinish:(NSURLDownload *)download
+{
+	// Release the connection.
+	[download release];
+	
+	// Check to see if the user wants to automatically open new downloads
+	if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
 		
 	}
 }
