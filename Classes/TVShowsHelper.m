@@ -90,42 +90,21 @@
 #pragma mark Download Methods
 - (void) startDownloadingURL:(NSString *)url
 {
-	// Create the request.
-	NSURLRequest *theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
-												cachePolicy:NSURLRequestUseProtocolCachePolicy
-											timeoutInterval:60.0];
+	NSData *fileContents = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
+	[fileContents writeToFile:[[TSUserDefaults getStringFromKey:@"downloadFolder"]
+							   stringByAppendingPathComponent:@"Test.torrent"] atomically:YES];
 	
-	// Create the connection with the request and start loading the data.
-	NSURLDownload  *theDownload = [[NSURLDownload alloc] initWithRequest:theRequest
-											 					delegate:self];
-	if (theDownload) {
-		// Set the destination file.
-		[theDownload setDestination:[TSUserDefaults getStringFromKey:@"downloadFolder"] allowOverwrite:YES];
+	if (!fileContents) {
+		TVLog(@"Unable to download file: %@",url);
 	}
-}
-
-
-- (void) download:(NSURLDownload *)download didFailWithError:(NSError *)error
-{
-	// Release the connection.
-	[download release];
-	
-	// Inform the user.
-	TVLog(@"Download failed! Error - %@ %@",
-		  [error localizedDescription],
-		  [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
-}
-
-- (void) downloadDidFinish:(NSURLDownload *)download
-{
-	// Release the connection.
-	[download release];
 	
 	// Check to see if the user wants to automatically open new downloads
 	if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
-		
+		// Open file here.
 	}
+
 }
+
 
 #pragma mark -
 #pragma mark Sparkle Delegate Methods
