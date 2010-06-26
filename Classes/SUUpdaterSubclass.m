@@ -14,6 +14,7 @@
 
 #import "SUUpdaterSubclass.h"
 #import "AppInfoConstants.h"
+#import "TSUserDefaults.h"
 
 @implementation SUUpdaterSubclass
 
@@ -73,11 +74,13 @@
 	#elif HELPER_APP
 	
 		// If the SUAllowsAutomaticUpdatesKey exists and is set to NO, return NO.
-		if ([host objectForInfoDictionaryKey:SUAllowsAutomaticUpdatesKey] && [host boolForInfoDictionaryKey:SUAllowsAutomaticUpdatesKey] == NO)
+		if ( [TSUserDefaults getBoolFromKey:@"SUAllowsAutomaticUpdates" withDefault:YES] &&
+			 [TSUserDefaults getBoolFromKey:@"SUAllowsAutomaticUpdates" withDefault:YES] == NO ) {
 			return NO;
-	
-		// Otherwise, automatically downloading updates is allowed. Does the user want it?
-		return [host boolForUserDefaultsKey:SUAutomaticallyUpdateKey];
+		} else {
+			// Otherwise, automatically downloading updates is allowed. Does the user want it?
+			return [TSUserDefaults getBoolFromKey:@"SUAutomaticallyUpdate" withDefault:YES];
+		}
 	
 	#endif
 }
