@@ -19,6 +19,7 @@
 @interface TabController : NSPreferencePane
 {
 	IBOutlet NSTabView *prefTabView;
+	NSManagedObject *selectedShow;
 	
 	// Version information
 	IBOutlet NSTextField *sidebarHeader;
