@@ -75,6 +75,7 @@
 - (NSString *) launchAgentPath;
 - (void) unloadLaunchAgent;
 - (void) loadLaunchAgent;
+- (void) updateLaunchAgent;
 - (void) saveLaunchAgentPlist;
 
 @end
