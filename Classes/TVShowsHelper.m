@@ -75,12 +75,15 @@
 	for (NSArray *episode in episodes) {
 		pubDate = [episode valueForKey:@"pubDate"];
 		lastDownloaded = [show valueForKey:@"lastDownloaded"];
-		
+
+		// If the date we lastDownloaded episodes is before this torrent
+		// was published then we should probably download the episode.
 		if ([lastDownloaded compare:pubDate] == NSOrderedAscending) {
-			// The date we lastDownloaded episodes is before this torrent was
-			// published. This means we should probably download the episode.
-			DLog(@"%@",[episode valueForKey:@"link"]);
-			[self startDownloadingURL:[episode valueForKey:@"link"]];
+			
+			// This currently only returns a Torrent file and should eventually regex
+			// out the actual file extension of the item we're downloading.
+			[self startDownloadingURL:[episode valueForKey:@"link"]
+						 withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"] ];
 		}
 		
 	}
@@ -88,11 +91,12 @@
 
 #pragma mark -
 #pragma mark Download Methods
-- (void) startDownloadingURL:(NSString *)url
+- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName
 {
-	NSData *fileContents = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
-	[fileContents writeToFile:[[TSUserDefaults getStringFromKey:@"downloadFolder"]
-							   stringByAppendingPathComponent:@"Test.torrent"] atomically:YES];
+	NSData *contents = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
+	NSString *location = [[TSUserDefaults getStringFromKey:@"downloadFolder"] stringByAppendingPathComponent:fileName];
+	
+	[contents writeToFile:location atomically:YES];
 	
 	if (!fileContents) {
 		TVLog(@"Unable to download file: %@",url);

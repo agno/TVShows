@@ -27,7 +27,7 @@
 
 #pragma mark -
 #pragma mark Download Methods
-- (void) startDownloadingURL:(NSString *)url;
+- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName;
 
 #pragma mark -
 #pragma mark Sparkle Delegate Methods
