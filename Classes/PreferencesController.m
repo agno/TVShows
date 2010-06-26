@@ -360,7 +360,7 @@
 	
 	[launchAgent setObject:[[[NSBundle bundleWithIdentifier: TVShowsAppDomain] 
 							pathForResource: @"TVShowsHelper" ofType: @"app"]
-							stringByAppendingPathComponent:@"Content/MacOS/TVShowsHelper"]
+							stringByAppendingPathComponent:@"Contents/MacOS/TVShowsHelper"]
 					forKey:@"Program"];
 	
 	[launchAgent setObject:[NSNumber numberWithBool:YES]
