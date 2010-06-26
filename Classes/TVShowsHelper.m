@@ -21,8 +21,6 @@
 
 @implementation TVShowsHelper
 
-@synthesize didFindValidUpdate;
-
 - (void) applicationDidFinishLaunching:(NSNotification *)notification
 {
 	// This should never happen, but let's make sure TVShows is enabled before continuing.
@@ -48,6 +46,7 @@
 				
 				// Only check for new episodes if we're supposed to
 				if ([show valueForKey:@"isEnabled"]) {
+					DLog(@"Checking for new episodes for: %@",[show valueForKey:@"name"]);
 					[self checkForNewEpisodes:show];
 				} else {
 					DLog(@"Downloading for the show %@ is disabled.", [show valueForKey:@"name"]);
@@ -122,7 +121,6 @@
 	// We use this to help no whether or not the TVShowsHelper should close after
 	// downloading new episodes or whether it should wait for Sparkle to finish
 	// installing new updates.
-	didFindValidUpdate = YES;
 	DLog(@"Sparkle found a valid update.");
 }
 
@@ -131,8 +129,8 @@
 	// We use this to help no whether or not the TVShowsHelper should close after
 	// downloading new episodes or whether it should wait for Sparkle to finish
 	// installing new updates.
-	didFindValidUpdate = NO;
-	DLog(@"Sparkle did not find a valid update.");
+	DLog(@"Sparkle did not find valid update. Closing TVShows.");
+	[NSApp terminate:nil];
 }
 
 @end

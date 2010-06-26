@@ -62,4 +62,21 @@
 	return [self initForBundle:[NSBundle bundleWithPath:prefPanePath]];
 }
 
+- (void) delayUntilCheck:(NSTimeInterval)delayUntilCheck
+{
+	// This is a custom subclass added in the custom Sparkle framework for TVShows.
+	// For more information see: http://github.com/mattprice/Sparkle/
+	
+	if(delayUntilCheck) {
+		// Unless delayUntilCheck returns 0, Sparkle did not check for an update
+		// so we should go ahead and terminate the TVShowsHelper.
+		
+		// Leave this #if in or else we'll close the prefPane each time Sparkle
+		// doesn't check for an update!
+		#if HELPER_APP
+			[NSApp terminate:nil];
+		#endif
+	}
+}
+
 @end

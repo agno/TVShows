@@ -27,6 +27,8 @@
 + (SUUpdater *)updaterForBundle:(NSBundle *)bundle;
 - initForBundle:(NSBundle *)bundle;
 
+- (void)delayUntilCheck:(NSTimeInterval)delayUntilCheck;
+
 - (NSBundle *)hostBundle;
 
 - (void)setDelegate:(id)delegate;
