@@ -24,12 +24,16 @@
 - init
 {
 	if((self = [super init])) {
+		// Update or create the Launch Agent
+		[self saveLaunchAgentPlist];
+		
 		// Set default user preferences if TVShows has never launched
 		// In a perfect world this would check for any keys that don't
 		// exist, regardless of whether we've launched before or not.
 		
 		if ([TSUserDefaults getBoolFromKey:@"hasLaunched" withDefault:0] == 0) {
 			[self setDefaultUserDefaults];
+			[self loadLaunchAgent];
 		}
 	}
 	
@@ -123,6 +127,8 @@
 		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
 									 [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
 									  pathForResource: @"TVShows-Beta-Large" ofType: @"icns"]] autorelease]];
+		[self loadLaunchAgent];
+		
 	} else {
 		isEnabled = 0;
 		[TSUserDefaults setKey:@"isEnabled" fromBool: 0];
@@ -130,6 +136,7 @@
 		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
 									 [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
 									  pathForResource: @"TVShows-Off-Large" ofType: @"icns"]] autorelease]];
+		[self unloadLaunchAgent];
 	}
 }
 
@@ -271,4 +278,85 @@
 	[TSUserDefaults setKey:@"SUSendProfileInfo" fromBool: [includeSystemInformation state]];
 }
 
+#pragma mark -
+#pragma mark Launch Agent Methods
+- (NSString *) launchAgentPath
+{
+	return [[[[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask,YES) objectAtIndex:0]
+			  stringByAppendingPathComponent:@"LaunchAgents"]
+			 stringByAppendingPathComponent:TVShowsHelperDomain]
+			stringByAppendingString:@".plist"];
+}
+
+- (void) unloadLaunchAgent
+{
+	NSTask *aTask = [[NSTask alloc] init];
+	[aTask setLaunchPath:@"/bin/launchctl"];
+	[aTask setArguments:[NSArray arrayWithObjects:@"unload",[self launchAgentPath],nil]];
+	[aTask launch];
+	[aTask waitUntilExit];
+	[aTask release];
+}
+
+- (void) loadLaunchAgent
+{
+	NSTask *aTask = [[NSTask alloc] init];
+	[aTask setLaunchPath:@"/bin/launchctl"];
+	[aTask setArguments:[NSArray arrayWithObjects:@"load",[self launchAgentPath],nil]];
+	[aTask launch];
+	[aTask waitUntilExit];
+	[aTask release];
+}
+
+- (void) saveLaunchAgentPlist
+{
+	NSMutableDictionary *launchAgent = [NSMutableDictionary dictionary];
+	
+	// Delete the old Launch Agent
+	[[NSFileManager defaultManager] removeFileAtPath:[self launchAgentPath] handler:nil];
+	
+	NSInteger checkDelay = [TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:0];
+	switch (checkDelay) {
+		case 0:
+			// 15 minutes
+			[launchAgent setObject:[NSNumber numberWithInt:60] forKey:@"StartInterval"];
+			break;
+		case 1:
+			// 30 minutes
+			[launchAgent setObject:[NSNumber numberWithInt:30*60] forKey:@"StartInterval"];
+			break;
+		case 2:
+			// 1 hour
+			[launchAgent setObject:[NSNumber numberWithInt:1*60*60] forKey:@"StartInterval"];
+			break;
+		case 3:
+			// 3 hours
+			[launchAgent setObject:[NSNumber numberWithInt:3*60*60] forKey:@"StartInterval"];
+			break;
+		case 4:
+			// 6 hours
+			[launchAgent setObject:[NSNumber numberWithInt:6*60*60] forKey:@"StartInterval"];
+			break;
+		case 5:
+			// 12 hours
+			[launchAgent setObject:[NSNumber numberWithInt:12*60*60] forKey:@"StartInterval"];
+			break;
+		case 6:
+			// 1 day
+			[launchAgent setObject:[NSNumber numberWithInt:24*60*60] forKey:@"StartInterval"];
+			break;
+	}
+	
+	[launchAgent setObject:TVShowsHelperDomain forKey:@"Label"];
+	
+	[launchAgent setObject:[NSArray arrayWithObjects:[[NSBundle bundleWithIdentifier: TVShowsAppDomain]
+													  pathForResource: @"TVShowsHelper" ofType: @"app"] ,nil]
+					forKey:@"ProgramArguments"];
+	
+	[launchAgent setObject:[NSNumber numberWithBool:YES]
+					forKey:@"RunAtLoad"];
+	
+	if (![launchAgent writeToFile:[self launchAgentPath] atomically:YES])
+		TVLog(@"Could not write to ~/Library/LaunchAgents/%@",TVShowsHelperDomain);
+}
 @end

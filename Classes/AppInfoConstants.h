@@ -13,6 +13,7 @@
  */
 
 #define TVShowsAppDomain			@"com.embercode.TVShows2"
+#define TVShowsHelperDomain			@"com.embercode.TVShowsHelper"
 #define TVShowsWebsite				@"http://embercode.com/tvshows/"
 #define TVShowsTwitter				@"http://twitter.com/embercode/"
 #define TVShowsAppcastURL			@"http://embercode.com/updates/tvshows.xml"

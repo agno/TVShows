@@ -70,4 +70,11 @@
 - (IBAction) downloadBetaVersionsDidChange:(id)sender;
 - (IBAction) includeSystemInformationDidChange:(id)sender;
 
+#pragma mark -
+#pragma mark Launch Agent Methods
+- (NSString *) launchAgentPath;
+- (void) unloadLaunchAgent;
+- (void) loadLaunchAgent;
+- (void) saveLaunchAgentPlist;
+
 @end
