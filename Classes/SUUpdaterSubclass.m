@@ -28,7 +28,7 @@
 	
 	// Get the path of the bundle TVShowsHelper is currently within.
 	NSMutableString *prefPanePath = [NSMutableString stringWithString:appPath];
-	[prefPanePath replaceOccurrencesOfString:@"/Content/Resources/TVShowsHelper.app"
+	[prefPanePath replaceOccurrencesOfString:@"/Contents/Resources/TVShowsHelper.app"
 								  withString:@""
 									 options:0
 									   range:NSMakeRange(0, [prefPanePath length])];
@@ -49,7 +49,7 @@
 	
 	// Get the path of the bundle TVShowsHelper is currently within.
 	NSMutableString *prefPanePath = [NSMutableString stringWithString:appPath];
-	[prefPanePath replaceOccurrencesOfString:@"/Content/Resources/TVShowsHelper.app"
+	[prefPanePath replaceOccurrencesOfString:@"/Contents/Resources/TVShowsHelper.app"
 								  withString:@""
 									 options:0
 									   range:NSMakeRange(0, [prefPanePath length])];
