@@ -53,10 +53,15 @@
 					DLog(@"Downloading for the show %@ is disabled.", [show valueForKey:@"name"]);
 				}
 				
+				// Update when the show was last downloaded. We do this for disabled
+				// shows too so that if it's renabled the user isn't bombarded with
+				// tens or hundreds of old episodes they probably don't want.
+				[show setValue:[NSDate date] forKey:@"lastDownloaded"];
 			}
 			
 		}
 		
+		[delegateClass saveAction];
 		[delegateClass release];
 		
 	} else {
@@ -93,10 +98,10 @@
 #pragma mark Download Methods
 - (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName
 {
-	NSData *contents = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
-	NSString *location = [[TSUserDefaults getStringFromKey:@"downloadFolder"] stringByAppendingPathComponent:fileName];
+	NSData *fileContents = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
+	NSString *saveLocation = [[TSUserDefaults getStringFromKey:@"downloadFolder"] stringByAppendingPathComponent:fileName];
 	
-	[contents writeToFile:location atomically:YES];
+	[fileContents writeToFile:saveLocation atomically:YES];
 	
 	if (!fileContents) {
 		TVLog(@"Unable to download file: %@",url);
@@ -104,7 +109,7 @@
 	
 	// Check to see if the user wants to automatically open new downloads
 	if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
-		// Open file here.
+		[[NSWorkspace sharedWorkspace] openFile:saveLocation];
 	}
 
 }
