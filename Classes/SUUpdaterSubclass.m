@@ -62,6 +62,26 @@
 	return [self initForBundle:[NSBundle bundleWithPath:prefPanePath]];
 }
 
+- (BOOL)automaticallyDownloadsUpdates
+{
+	// If we're running from the preference pane, do not allow it to automatically
+	// download updates without prompting the user.
+	#if PREFPANE
+	
+		return NO;
+	
+	#elif HELPER_APP
+	
+		// If the SUAllowsAutomaticUpdatesKey exists and is set to NO, return NO.
+		if ([host objectForInfoDictionaryKey:SUAllowsAutomaticUpdatesKey] && [host boolForInfoDictionaryKey:SUAllowsAutomaticUpdatesKey] == NO)
+			return NO;
+	
+		// Otherwise, automatically downloading updates is allowed. Does the user want it?
+		return [host boolForUserDefaultsKey:SUAutomaticallyUpdateKey];
+	
+	#endif
+}
+
 - (void) delayUntilCheck:(NSTimeInterval)delayUntilCheck
 {
 	// This is a custom subclass added in the custom Sparkle framework for TVShows.
