@@ -4,13 +4,20 @@ TVShows 2 "_Phoenix_" is the next version of [TVShows][tvshows], the easiest way
 ## Screenshots
 <a href="http://embercode.com/blog/category/tvshows-news/" title="TVShows News">![Getting Started][preview-1] ![About][preview-2] ![Preferences][preview-3]</a>
 
-## Collaboration Notes
-* The current TVShows Roadmap can be found [here][roadmap] -- all issue numbers in commits refer to those in the Roadmap.
-* Compiling TVShows will require you to download all submodules:
+## Collaboration Instructions
+1. Checkout the repository:
+    * `$ git clone http://github.com/mattprice/TVShows.git`
+1. Download all the required submodules:
+    * `$ cd TVShows`
     * `$ git submodule init`
     * `$ git submodule update`
-* Modifying the interface will require the [BWToolkit][bwtoolkit] IB plugin. It can be found in the `IB Plugins` folder.
+1. Install the [BWToolkit][bwtoolkit] IB plugin if you haven't before. It can be found in the `IB Plugins` folder.
+1. Build the TVShowsHelper at least one time before you build the TVShows prefPane. You can also select `Preference Pane + Helper` to build them both at the same time.
+
+## Collaboration Notes
+* You can also use GitHub's forking feature to make changes and then send me a pull request.
 * By default, the Debug configuration automatically installs TVShows into `~/Library/PreferencePanes/` each time it's built.
+* The current TVShows Roadmap can be found [here][roadmap] -- all issue numbers in commits refer to those in the Roadmap.
 
 ## Planned Features
 * Custom RSS feeds
