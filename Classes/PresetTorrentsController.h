@@ -23,6 +23,7 @@
 	IBOutlet NSTableView *PTTableView;
 	IBOutlet NSArrayController *PTArrayController;
 	IBOutlet NSButton *showQuality;
+	IBOutlet NSSearchField *PTSearchField;
 	
 	IBOutlet NSWindow *PTErrorWindow;
 	IBOutlet NSTextField *PTErrorText;

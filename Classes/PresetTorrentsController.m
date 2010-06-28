@@ -65,11 +65,8 @@
 	
 	// Continue if no error occurred when downloading the show list
 	if(errorHasOccurred == NO) {
-		// Set up notifications for when the table selection changes
-		[[NSNotificationCenter defaultCenter] addObserver: self
-												 selector: @selector(tableViewSelectionDidChange:)
-													 name: NSTableViewSelectionDidChangeNotification
-												   object: PTTableView];
+		// Rese the selection and search bar each time they open the window
+		[[[PTSearchField cell] cancelButtonCell] performClick:self];
 		[PTArrayController setSelectionIndex:0];
 		
 		// Setup the default video quality
@@ -148,9 +145,10 @@
 			[newShow setValue:sortName forKey:@"sortName"];
 			[newShow setValue:[NSNumber numberWithInt:showrssID] forKey:@"showrssID"];
 			[newShow setValue:[NSDate date] forKey:@"dateAdded"];
-			
-			[PTArrayController addObject:newShow];
-		} 
+		}
+		
+		[PTArrayController fetch:nil];
+		[PTArrayController prepareContent];
 		
 		hasDownloadedList = YES;
 		[delegateClass saveAction];
@@ -161,14 +159,23 @@
 
 - (void) tableViewSelectionDidChange:(NSNotification *)notification
 {
-	// Reset the Episode Array Controller and grab the new list of episodes
+	// If the selectedRow is -1 (no selection) or null, try to set a selection.
+	if ([PTTableView selectedRow] == -1 || ![PTTableView selectedRow]) {
+		[PTArrayController setSelectionIndex:0];
+	}
+	
+	// No matter what, reset the Episode Array Controller.
 	[[episodeArrayController content] removeAllObjects];
 	
-	// This next line seems to break filtering shows.
-	NSString *selectedShowURL = [NSString stringWithFormat:@"http://showrss.karmorra.info/feeds/%@.rss",
-								 [[[PTArrayController selectedObjects] valueForKey:@"showrssID"] objectAtIndex:0]];
-	[episodeArrayController addObjects:[TSParseXMLFeeds parseEpisodesFromFeed:selectedShowURL
-																	 maxItems:10]];
+	// Make sure we were able to correctly set a selection before continuing,
+	// or else searching and the scrollbar will fail.
+	if ( ([PTTableView selectedRow] > -1) || ([PTTableView selectedRow] == 0) && ([PTTableView selectedRow]) ) {
+		// Grab the list of episodes
+		NSString *selectedShowURL = [NSString stringWithFormat:@"http://showrss.karmorra.info/feeds/%@.rss",
+									 [[[PTArrayController selectedObjects] valueForKey:@"showrssID"] objectAtIndex:0]];
+		[episodeArrayController addObjects:[TSParseXMLFeeds parseEpisodesFromFeed:selectedShowURL
+																		 maxItems:10]];
+	}
 }
 
 #pragma mark -
