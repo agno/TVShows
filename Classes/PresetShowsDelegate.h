@@ -29,6 +29,7 @@
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 
+- (void) resetPresetShows;
 - (void) saveAction;
 
 @end

@@ -71,7 +71,7 @@
 	
 	NSURL *url = [NSURL fileURLWithPath: [applicationSupportDirectory stringByAppendingPathComponent: @"Preset Shows"]];
 	persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: mom];
-	if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+	if (![persistentStoreCoordinator addPersistentStoreWithType:NSXMLStoreType
 												  configuration:nil
 															URL:url
 														options:nil
@@ -110,6 +110,19 @@
 - (NSUndoManager *) windowWillReturnUndoManager:(NSWindow *)window
 {
 	return [[self managedObjectContext] undoManager];
+}
+
+// Deletes each object in the Show entity of the managed object context.
+- (void) resetPresetShows
+{
+    NSString *applicationSupportDirectory = [self applicationSupportDirectory];
+	
+	[[NSFileManager defaultManager] removeItemAtPath:[applicationSupportDirectory stringByAppendingPathComponent: @"Preset Shows"]
+											   error:nil];
+	
+	[persistentStoreCoordinator release], persistentStoreCoordinator = nil;
+	[managedObjectContext release], managedObjectContext = nil;
+	[self managedObjectContext];
 }
 
 // Send the save: message to the application's managed object context.
