@@ -13,13 +13,17 @@
  */
 
 #import <PreferencePanes/PreferencePanes.h>
+#import <WebKit/WebKit.h>
 
 
 @interface TVShowsPref : NSPreferencePane 
 {
-
+	IBOutlet NSWindow *updateWindow;
+	IBOutlet WebView *updateWebView;
 }
 
-- (void) mainViewDidLoad;
+- (void) didSelect;
+- (void) displayUpdateWindowForVersion:(NSString *)oldBuild;
+- (IBAction) closeUpdateWindow:(id)sender;
 
 @end

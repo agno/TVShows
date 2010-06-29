@@ -32,7 +32,7 @@
 	NSString *buildDate = [[[NSBundle bundleWithIdentifier: TVShowsAppDomain] infoDictionary]
 						   valueForKey:@"TSBundleBuildDate"];
 
-	[sidebarHeader setStringValue: [NSString stringWithFormat:@"TVShows 2", bundleVersion]];
+	[sidebarHeader setStringValue:@"TVShows 2"];
 	[sidebarVersionText setStringValue: [NSString stringWithFormat:@"%@ (r%@)", bundleVersion, buildVersion]];
 	[sidebarDateText setStringValue: buildDate];
 	

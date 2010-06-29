@@ -37,6 +37,7 @@
 		344AFA8611A4D19C00D9C4E9 /* ESScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 344AFA8411A4D19C00D9C4E9 /* ESScrollView.m */; };
 		345BE414119344E10016EA2D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 345BE411119344E10016EA2D /* InfoPlist.strings */; };
 		345BE41A119344F10016EA2D /* JRFeedbackProvider.strings in Resources */ = {isa = PBXBuildFile; fileRef = 345BE417119344F10016EA2D /* JRFeedbackProvider.strings */; };
+		345CE34F11D9712200C03A9F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 345CE34E11D9712200C03A9F /* WebKit.framework */; };
 		3471BB8911ACDF8700A65728 /* TSUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 3471BB8711ACDF8700A65728 /* TSUserDefaults.m */; };
 		3473849E11907678003DFFA0 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3473845E119074C8003DFFA0 /* Sparkle.framework */; };
 		3473849F1190767A003DFFA0 /* Sparkle.framework in Copy Linked Libraries */ = {isa = PBXBuildFile; fileRef = 3473845E119074C8003DFFA0 /* Sparkle.framework */; };
@@ -189,6 +190,7 @@
 		344AFA8411A4D19C00D9C4E9 /* ESScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESScrollView.m; sourceTree = "<group>"; };
 		345BE412119344E10016EA2D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = Resources/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		345BE418119344F10016EA2D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = Resources/English.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; };
+		345CE34E11D9712200C03A9F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3471BB8611ACDF8700A65728 /* TSUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSUserDefaults.h; sourceTree = "<group>"; };
 		3471BB8711ACDF8700A65728 /* TSUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSUserDefaults.m; sourceTree = "<group>"; };
 		3473845E119074C8003DFFA0 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Frameworks/Sparkle.framework; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				347AFBD91191207300393565 /* SystemConfiguration.framework in Frameworks */,
 				34A9183C119E09AF004B339D /* BWToolkitFramework.framework in Frameworks */,
 				34A91884119E2C85004B339D /* libicucore.dylib in Frameworks */,
+				345CE34F11D9712200C03A9F /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +351,7 @@
 				F506C035013D953901CA16C8 /* PreferencePanes.framework */,
 				347AFBD41191206700393565 /* AddressBook.framework */,
 				347AFBD81191207300393565 /* SystemConfiguration.framework */,
+				345CE34E11D9712200C03A9F /* WebKit.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";

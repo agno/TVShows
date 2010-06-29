@@ -45,13 +45,6 @@
 {
 	// Load the user's preferences
 	[self loadSavedDefaults];
-	
-	NSString *buildVersion = [[[NSBundle bundleWithIdentifier: TVShowsAppDomain] infoDictionary]
-							  valueForKey:@"CFBundleVersion"];
-	
-	// Update the application build number in installedBuild
-	// (Allows us to run build specific update sequences)
-	[TSUserDefaults setKey:@"installedBuild" fromString:buildVersion];
 }
 
 - (void) setDefaultUserDefaults

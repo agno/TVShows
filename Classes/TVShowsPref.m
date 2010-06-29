@@ -13,12 +13,53 @@
  */
 
 #import "TVShowsPref.h"
+#import "TSUserDefaults.h"
+#import "AppInfoConstants.h"
 
 
 @implementation TVShowsPref
 
-- (void) mainViewDidLoad
+- (void) didSelect
 {
+	NSString *buildVersion = [[[NSBundle bundleWithIdentifier: TVShowsAppDomain] infoDictionary]
+							  valueForKey:@"CFBundleVersion"];
+//	NSString *installedBuild = [TSUserDefaults getStringFromKey:@"installedBuild"];
+	
+	// Check to see if we installed a new version automatically.
+//	if ( ([buildVersion intValue] > [installedBuild intValue]) &&
+//		[TSUserDefaults getBoolFromKey:@"AutomaticallyInstalledLastUpdate" withDefault:NO]) {
+//		
+//		// Reset the key for next time.
+//		[TSUserDefaults setKey:@"AutomaticallyInstalledLastUpdate" fromBool:NO];
+//		
+//		[self displayUpdateWindowForVersion:installedBuild];
+//	}
+	
+	// Update the application build number in installedBuild
+	[TSUserDefaults setKey:@"installedBuild" fromString:buildVersion];	
+}
+
+- (void) displayUpdateWindowForVersion:(NSString *)oldBuild
+{
+	// Display a window showing the release notes.
+//	NSString *urlString = [NSString stringWithFormat:@"http://embercode.com/tvshows/notes/beta-%@",installedBuild];
+//	NSURL *releaseNotes = [NSURL URLWithString:urlString];
+//	[[updateWebView mainFrame] loadRequest:[NSURLRequest requestWithURL:releaseNotes]];
+//	
+//	[NSApp beginSheet: updateWindow
+//	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
+//		modalDelegate: nil
+//	   didEndSelector: nil
+//		  contextInfo: nil];
+//	
+//	[NSApp endSheet: updateWindow];
+//	[NSApp runModalForWindow: updateWindow];
+}
+
+- (IBAction) closeUpdateWindow:(id)sender
+{
+//	[NSApp stopModal];
+//	[updateWindow orderOut:self];
 }
 
 @end

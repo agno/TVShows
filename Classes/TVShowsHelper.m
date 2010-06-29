@@ -122,6 +122,12 @@
 	// downloading new episodes or whether it should wait for Sparkle to finish
 	// installing new updates.
 	DLog(@"Sparkle found a valid update.");
+	
+	// If the user has automatic updates turned on, set a value saying that we installed
+	// an update in the background.
+//	if ([TSUserDefaults getBoolFromKey:@"SUAutomaticallyUpdate" withDefault:YES]) {
+//		[TSUserDefaults setKey:@"AutomaticallyInstalledLastUpdate" fromBool:YES];
+//	}
 }
 
 - (void) updaterDidNotFindUpdate:(SUUpdater *)update

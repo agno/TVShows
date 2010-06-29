@@ -85,8 +85,8 @@
 
 - (IBAction) closePresetTorrentsWindow:(id)sender
 {
-    [NSApp stopModal];
-    [PTWindow orderOut:self];
+	[NSApp stopModal];
+	[PTWindow orderOut:self];
 }
 
 - (void) downloadTorrentShowList
