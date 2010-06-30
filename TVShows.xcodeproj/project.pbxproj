@@ -34,6 +34,9 @@
 		344AFA3011A4C58D00D9C4E9 /* ESiTunesScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 344AFA2C11A4C58D00D9C4E9 /* ESiTunesScroller.m */; };
 		344AFA3211A4C58D00D9C4E9 /* ESScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 344AFA2E11A4C58D00D9C4E9 /* ESScroller.m */; };
 		344AFA8611A4D19C00D9C4E9 /* ESScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 344AFA8411A4D19C00D9C4E9 /* ESScrollView.m */; };
+		3452AB2911DADEFB000C3AA7 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3452AB2711DADEFB000C3AA7 /* Growl.framework */; };
+		3452ABE111DADF0F000C3AA7 /* Growl.framework in Copy Linked Libraries */ = {isa = PBXBuildFile; fileRef = 3452AB2711DADEFB000C3AA7 /* Growl.framework */; };
+		3452ABE211DADF22000C3AA7 /* Growl.framework in Copy Linked Libraries */ = {isa = PBXBuildFile; fileRef = 3452AB2711DADEFB000C3AA7 /* Growl.framework */; };
 		345BE414119344E10016EA2D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 345BE411119344E10016EA2D /* InfoPlist.strings */; };
 		345BE41A119344F10016EA2D /* JRFeedbackProvider.strings in Resources */ = {isa = PBXBuildFile; fileRef = 345BE417119344F10016EA2D /* JRFeedbackProvider.strings */; };
 		345CE34F11D9712200C03A9F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 345CE34E11D9712200C03A9F /* WebKit.framework */; };
@@ -143,6 +146,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				3452ABE211DADF22000C3AA7 /* Growl.framework in Copy Linked Libraries */,
 				34A9186D119E09B6004B339D /* BWToolkitFramework.framework in Copy Linked Libraries */,
 				3473849F1190767A003DFFA0 /* Sparkle.framework in Copy Linked Libraries */,
 			);
@@ -155,6 +159,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				3452ABE111DADF0F000C3AA7 /* Growl.framework in Copy Linked Libraries */,
 				34FBC64211C0B601005D290B /* Sparkle.framework in Copy Linked Libraries */,
 			);
 			name = "Copy Linked Libraries";
@@ -187,6 +192,7 @@
 		344AFA2E11A4C58D00D9C4E9 /* ESScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESScroller.m; sourceTree = "<group>"; };
 		344AFA8311A4D19C00D9C4E9 /* ESScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESScrollView.h; sourceTree = "<group>"; };
 		344AFA8411A4D19C00D9C4E9 /* ESScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESScrollView.m; sourceTree = "<group>"; };
+		3452AB2711DADEFB000C3AA7 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = Frameworks/Growl.framework; sourceTree = "<group>"; };
 		345BE412119344E10016EA2D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = Resources/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		345BE418119344F10016EA2D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = Resources/English.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; };
 		345CE34E11D9712200C03A9F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -282,6 +288,7 @@
 				34FBC5F811C0B495005D290B /* Cocoa.framework in Frameworks */,
 				34FBC60D11C0B4D6005D290B /* SystemConfiguration.framework in Frameworks */,
 				34FBC61F11C0B526005D290B /* libicucore.dylib in Frameworks */,
+				3452AB2911DADEFB000C3AA7 /* Growl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +351,7 @@
 		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3452AB2711DADEFB000C3AA7 /* Growl.framework */,
 				34A9183B119E09AF004B339D /* BWToolkitFramework.framework */,
 				3473845E119074C8003DFFA0 /* Sparkle.framework */,
 				34A91883119E2C85004B339D /* libicucore.dylib */,
