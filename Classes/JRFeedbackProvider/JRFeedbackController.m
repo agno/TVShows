@@ -237,9 +237,9 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
 - (void)connectionDidFinishLoading:(NSURLConnection*)connection {
 #if USE_GROWL
 	[GrowlApplicationBridge setGrowlDelegate:@""];
-	[GrowlApplicationBridge notifyWithTitle:@"Thank you!"
-								description:@"Your feedback has been sent."
-						   notificationName:@"Feedback Sent"
+	[GrowlApplicationBridge notifyWithTitle:NSLocalizedStringFromTable(@"Thank you!", @"JRFeedbackProvider", nil)
+								description:NSLocalizedStringFromTable(@"Your feedback has been sent.", @"JRFeedbackProvider", nil)
+						   notificationName:NSLocalizedStringFromTable(@"Feedback Sent", @"JRFeedbackProvider", nil)
 								   iconData:nil
 								   priority:0
 								   isSticky:NO
@@ -247,8 +247,8 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
 	[self closeFeedback];
 #else
 	//	drop thank you sheet
-	[self displayAlertMessage:@"Thank you for your feedback!"
-		  withInformativeText:@"Your feedback has been sent."
+	[self displayAlertMessage:NSLocalizedStringFromTable(@"Thank you for your feedback!", @"JRFeedbackProvider", nil)
+		  withInformativeText:NSLocalizedStringFromTable(@"Your feedback has been sent.", @"JRFeedbackProvider", nil)
 				andAlertStyle:NSInformationalAlertStyle];
 #endif
 }
@@ -263,7 +263,8 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
 			  andAlertStyle:(NSAlertStyle)alertStyle
 {
 	NSAlert *thankYouAlert = [[[NSAlert alloc] init] autorelease];
-	[thankYouAlert addButtonWithTitle:@"OK"];
+	//	in some countries, the "OK" is different
+	[thankYouAlert addButtonWithTitle:NSLocalizedStringFromTable(@"OK", @"JRFeedbackProvider", nil)];
 	[thankYouAlert setMessageText:message];
 	[thankYouAlert setInformativeText:text];
 	[thankYouAlert setAlertStyle:alertStyle];
@@ -283,8 +284,8 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
     NSLog(@"-[JRFeedback connection:didFailWithError:%@]", error);
 	
 	//	drop fail sheet
-	[self displayAlertMessage:@"An Error Occured"
-		  withInformativeText:@"There was a problem sending your feedback. Please try again at another time."
+	[self displayAlertMessage:NSLocalizedStringFromTable(@"An Error Occured", @"JRFeedbackProvider", nil)
+		  withInformativeText:NSLocalizedStringFromTable(@"There was a problem sending your feedback. Please try again at another time.", @"JRFeedbackProvider", nil)
 				andAlertStyle:NSInformationalAlertStyle];
 
 }
