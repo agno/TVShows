@@ -264,6 +264,8 @@
 		34FBC5E311C0B3C2005D290B /* TVShowsHelper-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TVShowsHelper-Info.plist"; sourceTree = "<group>"; };
 		34FBC62D11C0B567005D290B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D202CF80486D31800D8A456 /* TVShows.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVShows.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
+		92B0029111DAEBD200E7B083 /* Portuguese */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Portuguese; path = Resources/Portuguese.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; };
+		92B0029211DAEBD200E7B083 /* Portuguese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Portuguese; path = Resources/Portuguese.lproj/JRFeedbackProvider.xib; sourceTree = "<group>"; };
 		F506C035013D953901CA16C8 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = /System/Library/Frameworks/PreferencePanes.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -672,6 +674,13 @@
 			buildConfigurationList = 1DBD214C08BA80EA00186707 /* Build configuration list for PBXProject "TVShows" */;
 			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				Portuguese,
+			);
 			mainGroup = 089C166AFE841209C02AAC07 /* TVShows */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -839,6 +848,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				345BE418119344F10016EA2D /* English */,
+				92B0029111DAEBD200E7B083 /* Portuguese */,
 			);
 			name = JRFeedbackProvider.strings;
 			sourceTree = "<group>";
@@ -847,6 +857,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				347AFB20119115A800393565 /* English */,
+				92B0029211DAEBD200E7B083 /* Portuguese */,
 			);
 			name = JRFeedbackProvider.xib;
 			sourceTree = "<group>";
