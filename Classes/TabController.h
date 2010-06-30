@@ -40,6 +40,7 @@
 	IBOutlet NSButton *showQuality;
 	IBOutlet NSButton *showIsEnabled;
 	IBOutlet NSArrayController *episodeArrayController;
+	IBOutlet NSTableView *episodeTableView;
 }
 
 @property (retain) NSManagedObject *selectedShow;
@@ -58,6 +59,7 @@
 #pragma mark Subscriptions TabController
 - (IBAction) displayShowInfoWindow:(id)sender;
 - (IBAction) closeShowInfoWindow:(id)sender;
+- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName;
 - (void) sortSubscriptionList;
 - (IBAction) unsubscribeFromShow:(id)sender;
 

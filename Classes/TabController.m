@@ -16,6 +16,7 @@
 #import "AppInfoConstants.h"
 #import "SubscriptionsDelegate.h"
 #import "TSParseXMLFeeds.h"
+#import "TSUserDefaults.h"
 
 
 @implementation TabController
@@ -44,29 +45,29 @@
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {
 	NSRect  tabFrame;
-    int    newWinHeight;
+	int	newWinHeight;
 	
 	// newWinHeight should be equal to the wanted window size (in Interface Builder) + 54 (title bar height)
 	
 	tabFrame = [[tabView window] frame];
 	
-    if ([[tabViewItem identifier] isEqualTo:@"tabItemPreferences"]) {
-        newWinHeight = 526;
+	if ([[tabViewItem identifier] isEqualTo:@"tabItemPreferences"]) {
+		newWinHeight = 526;
 		
-    } else if ([[tabViewItem identifier] isEqualTo:@"tabItemSubscriptions"]) {
-        newWinHeight = 526;
+	} else if ([[tabViewItem identifier] isEqualTo:@"tabItemSubscriptions"]) {
+		newWinHeight = 526;
 		
-    }  else if ([[tabViewItem identifier] isEqualTo:@"tabItemAbout"]) {
+	}  else if ([[tabViewItem identifier] isEqualTo:@"tabItemAbout"]) {
 		[self drawAboutBox];
-        newWinHeight = 422;
+		newWinHeight = 422;
 		
-    } else {
-        newWinHeight = 422;
-    }
+	} else {
+		newWinHeight = 422;
+	}
 	
 	tabFrame = NSMakeRect(tabFrame.origin.x, tabFrame.origin.y - (newWinHeight - (int)(NSHeight(tabFrame))), (int)(NSWidth(tabFrame)), newWinHeight);
 	
-    [[tabView window] setFrame:tabFrame display:YES animate:YES];
+	[[tabView window] setFrame:tabFrame display:YES animate:YES];
 }
 
 - (IBAction) showFeedbackWindow:(id)sender
@@ -120,14 +121,14 @@
 	[[episodeArrayController content] removeAllObjects];
 	[episodeArrayController addObjects:[TSParseXMLFeeds parseEpisodesFromFeed:[selectedShow valueForKey:@"url"]
 																	 maxItems:10]];
-		
+	
 	[NSApp beginSheet: showInfoWindow
 	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
 		modalDelegate: nil
 	   didEndSelector: nil
 		  contextInfo: nil];
 	
-    [NSApp runModalForWindow: showInfoWindow];
+	[NSApp runModalForWindow: showInfoWindow];
 	[NSApp endSheet: showInfoWindow];
 }
 
@@ -145,7 +146,55 @@
 	// Reset the selected show and close the window
 	selectedShow = nil;
 	[NSApp stopModal];
-    [showInfoWindow orderOut: self];
+	[showInfoWindow orderOut: self];
+}
+
+- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName
+{
+	// Method copied from TVShowsHelper.m
+	NSData *fileContents = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
+	NSString *saveLocation = [[TSUserDefaults getStringFromKey:@"downloadFolder"] stringByAppendingPathComponent:fileName];
+	
+	[fileContents writeToFile:saveLocation atomically:YES];
+	
+	if (!fileContents) {
+		TVLog(@"Unable to download file: %@",url);
+	}
+	
+	// Check to see if the user wants to automatically open new downloads
+	if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
+		[[NSWorkspace sharedWorkspace] openFile:saveLocation];
+	}
+}
+
+-(BOOL) tableView:(NSTableView *)aTableView shouldSelectRow:(NSInteger)rowIndex
+{
+	// Check to see whether or not this is the GET button or not.
+	// If it's not, then return YES for shouldSelectRow.
+	BOOL result = YES;
+	
+	// Which column and row was clicked?
+	NSInteger clickedCol = [episodeTableView clickedColumn];
+	NSInteger clickedRow = [episodeTableView clickedRow];
+	
+	if (clickedRow >= 0 && clickedCol >= 0) {
+		// Grab information about the clicked cell.
+		NSCell *cell = [episodeTableView preparedCellAtColumn:clickedCol row:clickedRow];
+		
+		// If the cell is an NSButtonCell and it's enabled...
+		if ([cell isKindOfClass:[NSButtonCell class]] && [cell isEnabled]) {
+			// Don't select the row
+			result = NO;
+			
+			// This currently only returns a Torrent file and should eventually regex
+			// out the actual file extension of the item we're downloading.
+			NSObject *episode = [[episodeArrayController content] objectAtIndex:clickedRow];
+			[self startDownloadingURL:[episode valueForKey:@"link"]
+						 withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"] ];
+		}			
+	}
+	
+	return result;
 }
 
 - (void) sortSubscriptionList
@@ -177,7 +226,7 @@
 - (void) dealloc
 {
 	[selectedShow release];
-    [super dealloc];
+	[super dealloc];
 }
 
 @end
