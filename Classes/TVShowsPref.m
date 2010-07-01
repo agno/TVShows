@@ -15,6 +15,7 @@
 #import "TVShowsPref.h"
 #import "TSUserDefaults.h"
 #import "AppInfoConstants.h"
+#import "NSApplication+Relaunch.h"
 
 
 @implementation TVShowsPref
@@ -23,20 +24,28 @@
 {
 	NSString *buildVersion = [[[NSBundle bundleWithIdentifier: TVShowsAppDomain] infoDictionary]
 							  valueForKey:@"CFBundleVersion"];
-//	NSString *installedBuild = [TSUserDefaults getStringFromKey:@"installedBuild"];
-	
-	// Check to see if we installed a new version automatically.
-//	if ( ([buildVersion intValue] > [installedBuild intValue]) &&
-//		[TSUserDefaults getBoolFromKey:@"AutomaticallyInstalledLastUpdate" withDefault:NO]) {
-//		
-//		// Reset the key for next time.
-//		[TSUserDefaults setKey:@"AutomaticallyInstalledLastUpdate" fromBool:NO];
-//		
-//		[self displayUpdateWindowForVersion:installedBuild];
-//	}
-	
-	// Update the application build number in installedBuild
-	[TSUserDefaults setKey:@"installedBuild" fromString:buildVersion];	
+	NSString *installedBuild = [TSUserDefaults getStringFromKey:@"installedBuild"];
+
+	// Check to see if we installed a different version, both updates and rollbacks.
+	if ([buildVersion intValue] > [installedBuild intValue]) {
+		
+		// Update the application build number in installedBuild
+		[TSUserDefaults setKey:@"installedBuild" fromString:buildVersion];
+		
+		// Did we install the update automatically? Display a dialog box with changes.
+//		if ([TSUserDefaults getBoolFromKey:@"AutomaticallyInstalledLastUpdate" withDefault:NO]) {
+//			
+//			// Reset the key for next time.
+//			[TSUserDefaults setKey:@"AutomaticallyInstalledLastUpdate" fromBool:NO];
+//			
+//			[self displayUpdateWindowForVersion:installedBuild];
+//		}
+		
+		// Relaunch System Preferences so that we know all the resources have been reloaded
+		// correctly. This is due to a bug in how it handles updating bundles.
+		[NSApp relaunch:nil];
+		
+	}
 }
 
 - (void) displayUpdateWindowForVersion:(NSString *)oldBuild
