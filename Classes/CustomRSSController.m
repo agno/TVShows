@@ -16,6 +16,7 @@
 #import "SubscriptionsDelegate.h"
 #import "RegexKitLite.h"
 
+
 @implementation CustomRSSController
 
 - (IBAction) displayCustomRSSWindow:(id)sender
