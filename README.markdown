@@ -12,7 +12,6 @@ TVShows 2 "_Phoenix_" is the next version of [TVShows][tvshows], the easiest way
     * `$ git submodule init`
     * `$ git submodule update`
 1. Install the [BWToolkit][bwtoolkit] IB plugin if you haven't before. It can be found in the `IB Plugins` folder.
-1. Build the TVShowsHelper at least one time before you build the TVShows prefPane. You can also select `Preference Pane + Helper` to build them both at the same time.
 
 ## Collaboration Notes
 * You can also use GitHub's forking feature to make changes and then send me a pull request.

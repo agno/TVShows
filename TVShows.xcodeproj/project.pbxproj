@@ -6,21 +6,6 @@
 	objectVersion = 45;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		344672C211C173D40014C522 /* Preference Pane + Helper */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 344672CF11C1742F0014C522 /* Build configuration list for PBXAggregateTarget "Preference Pane + Helper" */;
-			buildPhases = (
-			);
-			dependencies = (
-				344672CE11C173F50014C522 /* PBXTargetDependency */,
-				344672CC11C173F50014C522 /* PBXTargetDependency */,
-			);
-			name = "Preference Pane + Helper";
-			productName = "Preference Pane + Helper";
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
 		340A20B111AF0E15004351EB /* posterArtPlaceholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 340A20B011AF0E15004351EB /* posterArtPlaceholder.jpg */; };
 		340F15FB118FEBDE00A1BD00 /* SUUpdaterSubclass.m in Sources */ = {isa = PBXBuildFile; fileRef = 340F15F9118FEBDE00A1BD00 /* SUUpdaterSubclass.m */; };
@@ -124,18 +109,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		344672CB11C173F50014C522 /* PBXContainerItemProxy */ = {
+		3444F28611DD0D5B00BF3724 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8D202CE80486D31800D8A456;
-			remoteInfo = TVShows;
-		};
-		344672CD11C173F50014C522 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 34FBC5E011C0B3C2005D290B;
+			remoteGlobalIDString = 34FBC5E011C0B3C2005D290B /* TVShowsHelper */;
 			remoteInfo = TVShowsHelper;
 		};
 /* End PBXContainerItemProxy section */
@@ -634,6 +612,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				3444F28711DD0D5B00BF3724 /* PBXTargetDependency */,
 			);
 			name = TVShows;
 			productInstallPath = "$(HOME)/Library/PreferencePanes";
@@ -658,7 +637,6 @@
 			targets = (
 				8D202CE80486D31800D8A456 /* TVShows */,
 				34FBC5E011C0B3C2005D290B /* TVShowsHelper */,
-				344672C211C173D40014C522 /* Preference Pane + Helper */,
 			);
 		};
 /* End PBXProject section */
@@ -779,15 +757,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		344672CC11C173F50014C522 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8D202CE80486D31800D8A456 /* TVShows */;
-			targetProxy = 344672CB11C173F50014C522 /* PBXContainerItemProxy */;
-		};
-		344672CE11C173F50014C522 /* PBXTargetDependency */ = {
+		3444F28711DD0D5B00BF3724 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 34FBC5E011C0B3C2005D290B /* TVShowsHelper */;
-			targetProxy = 344672CD11C173F50014C522 /* PBXContainerItemProxy */;
+			targetProxy = 3444F28611DD0D5B00BF3724 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -925,27 +898,6 @@
 			};
 			name = Release;
 		};
-		344672C311C173D50014C522 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				PRODUCT_NAME = "Preference Pane + Helper";
-			};
-			name = Debug;
-		};
-		344672C411C173D50014C522 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				PRODUCT_NAME = "Preference Pane + Helper";
-				ZERO_LINK = NO;
-			};
-			name = Release;
-		};
 		34FBC5E411C0B3C3005D290B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1029,15 +981,6 @@
 			buildConfigurations = (
 				1DBD214D08BA80EA00186707 /* Debug */,
 				1DBD214E08BA80EA00186707 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		344672CF11C1742F0014C522 /* Build configuration list for PBXAggregateTarget "Preference Pane + Helper" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				344672C311C173D50014C522 /* Debug */,
-				344672C411C173D50014C522 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
