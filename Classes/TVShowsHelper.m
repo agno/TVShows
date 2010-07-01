@@ -130,7 +130,7 @@
 	} else {
 		// Check to see if the user wants to automatically open new downloads
 		if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
-			[[NSWorkspace sharedWorkspace] openFile:saveLocation];
+			[[NSWorkspace sharedWorkspace] openFile:saveLocation withApplication:nil andDeactivate:NO];
 		}
 		
 		if([TSUserDefaults getBoolFromKey:@"GrowlOnNewEpisode" withDefault:1]) {
