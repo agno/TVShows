@@ -13,18 +13,42 @@
  */
 
 #import "TVShowsHelper.h"
-#import "SubscriptionsDelegate.h"
 #import "TSParseXMLFeeds.h"
 #import "TSUserDefaults.h"
+#import "SubscriptionsDelegate.h"
 #import "SUUpdaterSubclass.h"
+#import <Growl/GrowlApplicationBridge.h>
 
 
 @implementation TVShowsHelper
+
+@synthesize TVShowsHelperIcon;
+
+- init
+{
+	if((self = [super init])) {
+		NSMutableString *appPath = [NSMutableString stringWithString:[[NSBundle bundleForClass:[self class]] bundlePath] ];
+		[appPath replaceOccurrencesOfString:@"TVShowsHelper.app"
+								 withString:@""
+									options:0
+									  range:NSMakeRange(0, [appPath length])];
+		
+		TVShowsHelperIcon =	[[NSData alloc] initWithContentsOfFile:
+							 [appPath stringByAppendingPathComponent:@"TVShows-On-Large.icns"]];
+		
+		DLog(@"%@",[appPath stringByAppendingPathComponent:@"TVShows-On-Large.icns"]);
+	}
+	
+	return self;
+}
 
 - (void) applicationDidFinishLaunching:(NSNotification *)notification
 {
 	// This should never happen, but let's make sure TVShows is enabled before continuing.
 	if ([TSUserDefaults getBoolFromKey:@"isEnabled" withDefault:1]) {
+		
+		// Set up Growl notifications
+		[GrowlApplicationBridge setGrowlDelegate:@""];
 
 		// TVShows is enabled, continuing...
 		id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
@@ -87,7 +111,8 @@
 			// This currently only returns a Torrent file and should eventually regex
 			// out the actual file extension of the item we're downloading.
 			[self startDownloadingURL:[episode valueForKey:@"link"]
-						 withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"] ];
+						 withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
+							 showName:[show valueForKey:@"name"] ];
 		}
 		
 	}
@@ -95,7 +120,7 @@
 
 #pragma mark -
 #pragma mark Download Methods
-- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName
+- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName showName:(NSString *)showName
 {
 	NSData *fileContents = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
 	NSString *saveLocation = [[TSUserDefaults getStringFromKey:@"downloadFolder"] stringByAppendingPathComponent:fileName];
@@ -104,13 +129,21 @@
 	
 	if (!fileContents) {
 		TVLog(@"Unable to download file: %@",url);
+	} else {
+		// Check to see if the user wants to automatically open new downloads
+		if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
+			[[NSWorkspace sharedWorkspace] openFile:saveLocation];
+		}
+		
+		// In the future this may display the show's poster instead of our app icon.
+		[GrowlApplicationBridge notifyWithTitle:[NSString stringWithFormat:@"%@", showName]
+									description:[NSString stringWithFormat:@"A new episode of %@ is being downloaded.", showName]
+							   notificationName:@"newEpisodeDownloaded"
+									   iconData:TVShowsHelperIcon
+									   priority:0
+									   isSticky:0
+								   clickContext:nil];
 	}
-	
-	// Check to see if the user wants to automatically open new downloads
-	if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
-		[[NSWorkspace sharedWorkspace] openFile:saveLocation];
-	}
-
 }
 
 
@@ -124,10 +157,27 @@
 	DLog(@"Sparkle found a valid update.");
 	
 	// If the user has automatic updates turned on, set a value saying that we installed
-	// an update in the background.
-//	if ([TSUserDefaults getBoolFromKey:@"SUAutomaticallyUpdate" withDefault:YES]) {
+	// an update in the background and send a Growl notification.
+	if ([TSUserDefaults getBoolFromKey:@"SUAutomaticallyUpdate" withDefault:YES]) {
 //		[TSUserDefaults setKey:@"AutomaticallyInstalledLastUpdate" fromBool:YES];
-//	}
+		
+		[GrowlApplicationBridge notifyWithTitle:@"TVShows Update Downloading"
+									description:@"A new version of TVShows is being downloaded and installed."
+							   notificationName:@"TVShows Update Downloaded"
+									   iconData:TVShowsHelperIcon
+									   priority:0
+									   isSticky:0
+								   clickContext:nil];
+	} else {
+		[GrowlApplicationBridge notifyWithTitle:@"TVShows Update Available"
+									description:@"A new version of TVShows is available for download."
+// 									description:@"A new version of TVShows is available for download. Click here for information."
+							   notificationName:@"TVShows Update Available"
+									   iconData:TVShowsHelperIcon
+									   priority:0
+									   isSticky:0
+								   clickContext:nil];
+	}
 }
 
 - (void) updaterDidNotFindUpdate:(SUUpdater *)update
@@ -137,6 +187,12 @@
 	// installing new updates.
 	DLog(@"Sparkle did not find valid update. Closing TVShows.");
 	[NSApp terminate:nil];
+}
+
+- (void) dealloc
+{
+	[TVShowsHelperIcon release];
+	[super dealloc];
 }
 
 @end
