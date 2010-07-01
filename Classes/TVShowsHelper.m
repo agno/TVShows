@@ -35,8 +35,6 @@
 		
 		TVShowsHelperIcon =	[[NSData alloc] initWithContentsOfFile:
 							 [appPath stringByAppendingPathComponent:@"TVShows-On-Large.icns"]];
-		
-		DLog(@"%@",[appPath stringByAppendingPathComponent:@"TVShows-On-Large.icns"]);
 	}
 	
 	return self;
@@ -135,6 +133,7 @@
 			[[NSWorkspace sharedWorkspace] openFile:saveLocation];
 		}
 		
+		if([TSUserDefaults getBoolFromKey:@"GrowlOnNewEpisode" withDefault:1]) {
 		// In the future this may display the show's poster instead of our app icon.
 		[GrowlApplicationBridge notifyWithTitle:[NSString stringWithFormat:@"%@", showName]
 									description:[NSString stringWithFormat:@"A new episode of %@ is being downloaded.", showName]
@@ -143,6 +142,7 @@
 									   priority:0
 									   isSticky:0
 								   clickContext:nil];
+		}
 	}
 }
 
@@ -161,17 +161,19 @@
 	if ([TSUserDefaults getBoolFromKey:@"SUAutomaticallyUpdate" withDefault:YES]) {
 //		[TSUserDefaults setKey:@"AutomaticallyInstalledLastUpdate" fromBool:YES];
 		
-		[GrowlApplicationBridge notifyWithTitle:@"TVShows Update Downloading"
-									description:@"A new version of TVShows is being downloaded and installed."
-							   notificationName:@"TVShows Update Downloaded"
-									   iconData:TVShowsHelperIcon
-									   priority:0
-									   isSticky:0
-								   clickContext:nil];
-	} else {
+		if([TSUserDefaults getBoolFromKey:@"GrowlOnAppUpdate" withDefault:1]) {
+			[GrowlApplicationBridge notifyWithTitle:@"TVShows Update Downloading"
+										description:@"A new version of TVShows is being downloaded and installed."
+								   notificationName:@"TVShows Update Downloaded"
+										   iconData:TVShowsHelperIcon
+										   priority:0
+										   isSticky:0
+									   clickContext:nil];
+		}
+	} else if([TSUserDefaults getBoolFromKey:@"GrowlOnAppUpdate" withDefault:1]) {
 		[GrowlApplicationBridge notifyWithTitle:@"TVShows Update Available"
 									description:@"A new version of TVShows is available for download."
-// 									description:@"A new version of TVShows is available for download. Click here for information."
+//	 									description:@"A new version of TVShows is available for download. Click here for information."
 							   notificationName:@"TVShows Update Available"
 									   iconData:TVShowsHelperIcon
 									   priority:0
