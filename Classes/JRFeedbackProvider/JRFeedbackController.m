@@ -239,7 +239,7 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
 	[GrowlApplicationBridge setGrowlDelegate:@""];
 	[GrowlApplicationBridge notifyWithTitle:NSLocalizedStringFromTable(@"Thank you!", @"JRFeedbackProvider", nil)
 								description:NSLocalizedStringFromTable(@"Your feedback has been sent.", @"JRFeedbackProvider", nil)
-						   notificationName:NSLocalizedStringFromTable(@"Feedback Sent", @"JRFeedbackProvider", nil)
+						   notificationName:@"Feedback Sent"
 								   iconData:nil
 								   priority:0
 								   isSticky:NO
