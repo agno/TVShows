@@ -122,6 +122,9 @@
 	[episodeArrayController addObjects:[TSParseXMLFeeds parseEpisodesFromFeed:[selectedShow valueForKey:@"url"]
 																	 maxItems:10]];
 	
+	// Update the filter predicate to only display the correct quality.
+	[self showQualityDidChange:nil];
+	
 	[NSApp beginSheet: showInfoWindow
 	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
 		modalDelegate: nil
@@ -137,8 +140,8 @@
 	id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
 	
 	// Update the per-show preferences
-	[selectedShow setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
-	[selectedShow setValue:[NSNumber numberWithInt:[showIsEnabled state]] forKey:@"isEnabled"];
+//		[selectedShow setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
+//		[selectedShow setValue:[NSNumber numberWithInt:[showIsEnabled state]] forKey:@"isEnabled"];
 	
 	[delegateClass saveAction];
 	[delegateClass release];
@@ -147,6 +150,17 @@
 	selectedShow = nil;
 	[NSApp stopModal];
 	[showInfoWindow orderOut: self];
+}
+
+- (IBAction) showQualityDidChange:(id)sender
+{
+	if ([showQuality state]) {
+		// Is HD and HD is enabled.
+		[episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '1'"]];
+	} else if (![showQuality state]) {
+		// Is not HD and HD is not enabled.
+		[episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '0'"]];
+	}
 }
 
 - (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName

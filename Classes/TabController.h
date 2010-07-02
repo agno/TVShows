@@ -59,6 +59,7 @@
 #pragma mark Subscriptions TabController
 - (IBAction) displayShowInfoWindow:(id)sender;
 - (IBAction) closeShowInfoWindow:(id)sender;
+- (IBAction) showQualityDidChange:(id)sender;
 - (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName;
 - (void) sortSubscriptionList;
 - (IBAction) unsubscribeFromShow:(id)sender;

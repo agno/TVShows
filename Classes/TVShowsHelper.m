@@ -106,11 +106,17 @@
 		// was published then we should probably download the episode.
 		if ([lastDownloaded compare:pubDate] == NSOrderedAscending) {
 			
-			// This currently only returns a Torrent file and should eventually regex
-			// out the actual file extension of the item we're downloading.
-			[self startDownloadingURL:[episode valueForKey:@"link"]
-						 withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
-							 showName:[show valueForKey:@"name"] ];
+			if ([show valueForKey:@"quality"] && [episode valueForKey:@"isHD"]) {
+				// Is HD and HD is enabled.
+				[self startDownloadingURL:[episode valueForKey:@"link"]
+							 withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
+								 showName:[show valueForKey:@"name"] ];
+			} else if (![show valueForKey:@"quality"] && ![episode valueForKey:@"isHD"]) {
+				// Is not HD and HD is not enabled.
+				[self startDownloadingURL:[episode valueForKey:@"link"]
+							 withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
+								 showName:[show valueForKey:@"name"] ];	
+			}
 		}
 		
 	}

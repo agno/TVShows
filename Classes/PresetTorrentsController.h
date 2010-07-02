@@ -38,6 +38,7 @@
 #pragma mark Preset Torrents Window
 - (IBAction) displayPresetTorrentsWindow:(id)sender;
 - (IBAction) closePresetTorrentsWindow:(id)sender;
+- (IBAction) showQualityDidChange:(id)sender;
 - (void) downloadTorrentShowList;
 - (void) tableViewSelectionDidChange:(NSNotification *)notification;
 

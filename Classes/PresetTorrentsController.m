@@ -90,6 +90,17 @@
 	[PTWindow orderOut:self];
 }
 
+- (IBAction) showQualityDidChange:(id)sender
+{
+	if ([showQuality state]) {
+		// Is HD and HD is enabled.
+		[episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '1'"]];
+	} else if (![showQuality state]) {
+		// Is not HD and HD is not enabled.
+		[episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '0'"]];
+	}
+}
+
 - (void) downloadTorrentShowList
 {
 	// There's probably a better way to do this:
@@ -176,6 +187,9 @@
 									 [[[PTArrayController selectedObjects] valueForKey:@"showrssID"] objectAtIndex:0]];
 		[episodeArrayController addObjects:[TSParseXMLFeeds parseEpisodesFromFeed:selectedShowURL
 																		 maxItems:10]];
+		
+		// Update the filter predicate to only display the correct quality.
+		[self showQualityDidChange:nil];
 	}
 }
 

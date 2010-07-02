@@ -22,7 +22,7 @@
 + (NSArray *) parseEpisodesFromFeed:(NSString *)url maxItems:(int)maxItems
 {
 	// Begin parsing the feed
-	NSString *episodeTitle = @"", *episodeSeason = @"", *episodeNumber = @"";
+	NSString *episodeTitle = @"", *episodeSeason = @"", *episodeNumber = @"", *episodeQuality = @"";
 	NSError *error;
 	NSMutableArray *episodeArray = [NSMutableArray array];
 	NSData *feedData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
@@ -51,11 +51,14 @@
 				
 			}
 			
-			[Episode setValue:episodeTitle	 forKey:@"episodeName"];
-			[Episode setValue:[item pubDate] forKey:@"pubDate"];
-			[Episode setValue:[[item link] href]	 forKey:@"link"];
-			[Episode setValue:episodeSeason  forKey:@"episodeSeason"];
-			[Episode setValue:episodeNumber  forKey:@"episodeNumber"];
+			episodeQuality = [NSString stringWithFormat:@"%d",[TSRegexFun isEpisodeHD:[item title]]];
+			
+			[Episode setValue:episodeTitle			forKey:@"episodeName"];
+			[Episode setValue:[item pubDate]		forKey:@"pubDate"];
+			[Episode setValue:[[item link] href]	forKey:@"link"];
+			[Episode setValue:episodeSeason			forKey:@"episodeSeason"];
+			[Episode setValue:episodeNumber			forKey:@"episodeNumber"];
+			[Episode setValue:episodeQuality		forKey:@"isHD"];
 			
 			[episodeArray addObject:Episode];
 			

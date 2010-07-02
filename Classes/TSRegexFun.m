@@ -20,30 +20,28 @@
 
 + (NSArray *) parseSeasonAndEpisode:(NSString *)title
 {
-	// These patterns are better but still need work before I trust them.
-	// They need to ignore the space, not count it as another capture.
-	// ([0-9]+)([[:space:]]*)x((\s)*)([0-9]+)
-	// S([0-9]+)([[:space:]]*)E([0-9]+)
-	
-	// This method also needs to parse dates for shows like Colber Report
-	// and The Daily Show.
-	
+	// Set up our regex strings.
 	NSArray *matchedRegex, *returnThis = [NSArray array];
-	NSArray *parseTypes = [NSArray arrayWithObjects:@"S([0-9]+)(?:[[:space:]]*)E([0-9]+)", 
-													@"([0-9]+)(?:[[:space:]]*x[[:space:]]*)([0-9]+)",
-													@"([0-9]{4})(?:[[:space:]]|[.])([0-9]{2})(?:[[:space:]]|[.])([0-9]{2})",
-													@"([0-9]{2})(?:[[:space:]]|[.])([0-9]{2})(?:[[:space:]]|[.])([0-9]{4})",nil];
+	NSArray *parseTypes = [NSArray arrayWithObjects:@"S([0-9]+)(?:[[:space:]]*)E([0-9]+)",  // S01E01
+													@"([0-9]+)(?:[[:space:]]*x[[:space:]]*)([0-9]+)", // 01x01
+													@"([0-9]{4})(?:[[:space:]]|[.])([0-9]{2})(?:[[:space:]]|[.])([0-9]{2})", // YYYY MM DD
+													@"([0-9]{2})(?:[[:space:]]|[.])([0-9]{2})(?:[[:space:]]|[.])([0-9]{4})",nil]; // MM DD YYYY
+	
+	// Run through each of the regex strings we've listed above.
 	for (NSString *regex in parseTypes) {
 		matchedRegex = [title arrayOfCaptureComponentsMatchedByRegex:regex];
 	
+		// If there's a match then return it, otherwise do nothing.
 		if([matchedRegex count] != 0) {
 			returnThis = [matchedRegex objectAtIndex:0];
 		}
 	}
 
+	// If at least one of the strings matched, return it.
 	if (returnThis) {
 		return returnThis;
 	} else {
+		// No strings matched? Return nothing.
 		return nil;
 	}
 }
@@ -51,6 +49,11 @@
 + (NSString *) removeLeadingZero:(NSString *)string
 {
 	return [string stringByReplacingOccurrencesOfRegex:@"^ *0+" withString:@""];
+}
+
++ (BOOL) isEpisodeHD:(NSString *)title
+{
+	return [title isMatchedByRegex:@"(720|1080|HR|x264|mkv)"];
 }
 
 + (NSString *) parseTitleFromString:(NSString *)title withIdentifier:(NSArray* )identifier withType:(NSString *)type

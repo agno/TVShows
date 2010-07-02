@@ -21,6 +21,7 @@
 
 + (NSArray *) parseSeasonAndEpisode:(NSString *)title;
 + (NSString *) removeLeadingZero:(NSString *)string;
++ (BOOL) isEpisodeHD:(NSString *)title;
 + (NSString *) parseTitleFromString:(NSString *)title withIdentifier:(NSArray* )identifier withType:(NSString *)type;
 
 @end
