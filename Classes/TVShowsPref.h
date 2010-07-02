@@ -25,5 +25,6 @@
 - (void) didSelect;
 - (void) displayUpdateWindowForVersion:(NSString *)oldBuild;
 - (IBAction) closeUpdateWindow:(id)sender;
+- (void) relaunch:(id)sender;
 
 @end

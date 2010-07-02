@@ -17,7 +17,7 @@
 
 
 @interface TVShowsHelper : NSObject {
-
+	NSData *TVShowsHelperIcon;
 }
 
 @property (retain) NSData *TVShowsHelperIcon;

@@ -15,7 +15,6 @@
 #import "TVShowsPref.h"
 #import "TSUserDefaults.h"
 #import "AppInfoConstants.h"
-#import "NSApplication+Relaunch.h"
 
 
 @implementation TVShowsPref
@@ -43,7 +42,7 @@
 		
 		// Relaunch System Preferences so that we know all the resources have been reloaded
 		// correctly. This is due to a bug in how it handles updating bundles.
-		[NSApp relaunch:nil];
+		[self relaunch:nil];
 		
 	}
 }
@@ -69,6 +68,20 @@
 {
 //	[NSApp stopModal];
 //	[updateWindow orderOut:self];
+}
+
+- (void) relaunch:(id)sender
+{
+	NSString *daemonPath = [[NSBundle bundleWithIdentifier: TVShowsAppDomain] pathForResource:@"relaunch" ofType:nil];
+	NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
+	NSString *prefPath = [[NSBundle bundleWithIdentifier: TVShowsAppDomain] bundlePath];
+	
+	[NSTask launchedTaskWithLaunchPath:daemonPath
+							 arguments:[NSArray arrayWithObjects: bundlePath, prefPath, 
+										[NSString stringWithFormat:@"%d", [[NSProcessInfo processInfo] processIdentifier]], nil] ];
+	
+	TVLog(@"Relaunching TVShows to fix the System Preferences update bug.");
+	[NSApp terminate:sender];
 }
 
 @end

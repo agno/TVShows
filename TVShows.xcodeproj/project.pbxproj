@@ -15,7 +15,6 @@
 		342A32F711AA4C6200C433CD /* Cache.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 342A32F611AA4C6200C433CD /* Cache.xcdatamodel */; };
 		342A32FB11AA4C8C00C433CD /* CacheDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 342A32F911AA4C8C00C433CD /* CacheDelegate.m */; };
 		343BF4CE1183DB3C008CE71D /* RSS-Large.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB966F118384DB005825C1 /* RSS-Large.png */; };
-		3444F28D11DD13F100BF3724 /* NSApplication+Relaunch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3444F28C11DD13F100BF3724 /* NSApplication+Relaunch.m */; };
 		3444F2CC11DD186500BF3724 /* Relaunch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3444F2CB11DD186500BF3724 /* Relaunch.m */; };
 		3444F2CD11DD189600BF3724 /* relaunch in Resources */ = {isa = PBXBuildFile; fileRef = 3444F2C311DD182000BF3724 /* relaunch */; };
 		3446722911C155690014C522 /* TVShowsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3446722811C155690014C522 /* TVShowsHelper.m */; };
@@ -169,8 +168,6 @@
 		342A32F611AA4C6200C433CD /* Cache.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; name = Cache.xcdatamodel; path = Models/Cache.xcdatamodel; sourceTree = "<group>"; };
 		342A32F811AA4C8C00C433CD /* CacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CacheDelegate.h; path = Classes/CacheDelegate.h; sourceTree = "<group>"; };
 		342A32F911AA4C8C00C433CD /* CacheDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CacheDelegate.m; path = Classes/CacheDelegate.m; sourceTree = "<group>"; };
-		3444F28B11DD13F100BF3724 /* NSApplication+Relaunch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+Relaunch.h"; sourceTree = "<group>"; };
-		3444F28C11DD13F100BF3724 /* NSApplication+Relaunch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+Relaunch.m"; sourceTree = "<group>"; };
 		3444F2C311DD182000BF3724 /* relaunch */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = relaunch; sourceTree = BUILT_PRODUCTS_DIR; };
 		3444F2CB11DD186500BF3724 /* Relaunch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Relaunch.m; path = ../Relaunch.m; sourceTree = "<group>"; };
 		3446722711C155690014C522 /* TVShowsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShowsHelper.h; sourceTree = "<group>"; };
@@ -405,8 +402,6 @@
 			children = (
 				340F15F8118FEBDE00A1BD00 /* SUUpdaterSubclass.h */,
 				340F15F9118FEBDE00A1BD00 /* SUUpdaterSubclass.m */,
-				3444F28B11DD13F100BF3724 /* NSApplication+Relaunch.h */,
-				3444F28C11DD13F100BF3724 /* NSApplication+Relaunch.m */,
 				3444F2CB11DD186500BF3724 /* Relaunch.m */,
 			);
 			name = Subclasses;
@@ -808,7 +803,6 @@
 				349F2F9D11B2E7DB00D10D96 /* FPExtensionTextNode.m in Sources */,
 				34C5B58B11BB3BFE00AAE681 /* TSRegexFun.m in Sources */,
 				34C5B59111BB3C1500AAE681 /* TSParseXMLFeeds.m in Sources */,
-				3444F28D11DD13F100BF3724 /* NSApplication+Relaunch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
