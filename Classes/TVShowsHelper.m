@@ -97,21 +97,30 @@
 	NSDate *pubDate, *lastDownloaded;
 	NSArray *episodes = [TSParseXMLFeeds parseEpisodesFromFeed:[show valueForKey:@"url"] maxItems:10];
 	
+	BOOL feedHasHDEpisodes = [TSParseXMLFeeds feedHasHDEpisodes:episodes];
+	BOOL feedHasSDEpisodes = [TSParseXMLFeeds feedHasSDEpisodes:episodes];
+
 	// For each episode that was parsed...
 	for (NSArray *episode in episodes) {
 		pubDate = [episode valueForKey:@"pubDate"];
 		lastDownloaded = [show valueForKey:@"lastDownloaded"];
-
+		
 		// If the date we lastDownloaded episodes is before this torrent
 		// was published then we should probably download the episode.
 		if ([lastDownloaded compare:pubDate] == NSOrderedAscending) {
 			
-			if ([show valueForKey:@"quality"] && [episode valueForKey:@"isHD"]) {
+			if ([[show valueForKey:@"quality"] intValue] == 1 &&
+				[[episode valueForKey:@"isHD"] intValue] == 1 ||
+				feedHasSDEpisodes == NO) {
+				
 				// Is HD and HD is enabled.
 				[self startDownloadingURL:[episode valueForKey:@"link"]
 							 withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
 								 showName:[show valueForKey:@"name"] ];
-			} else if (![show valueForKey:@"quality"] && ![episode valueForKey:@"isHD"]) {
+			} else if ([[show valueForKey:@"quality"] intValue] == 0 &&
+					   [[episode valueForKey:@"isHD"] intValue] == 0 ||
+					   feedHasHDEpisodes == NO) {
+				
 				// Is not HD and HD is not enabled.
 				[self startDownloadingURL:[episode valueForKey:@"link"]
 							 withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]

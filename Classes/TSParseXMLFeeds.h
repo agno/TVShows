@@ -20,5 +20,7 @@
 }
 
 + (NSArray *) parseEpisodesFromFeed:(NSString *)url maxItems:(int)maxItems;
++ (BOOL) feedHasHDEpisodes:(NSArray *)parsedFeed;
++ (BOOL) feedHasSDEpisodes:(NSArray *)parsedFeed;
 
 @end
