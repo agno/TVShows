@@ -94,10 +94,10 @@
 {
 	if ([showQuality state]) {
 		// Is HD and HD is enabled.
-		[episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '1'"]];
+//		[episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '1'"]];
 	} else if (![showQuality state]) {
 		// Is not HD and HD is not enabled.
-		[episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '0'"]];
+//		[episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '0'"]];
 	}
 }
 
@@ -189,7 +189,7 @@
 																		 maxItems:10]];
 		
 		// Update the filter predicate to only display the correct quality.
-		[self showQualityDidChange:nil];
+		// [self showQualityDidChange:nil];
 	}
 }
 

@@ -123,7 +123,7 @@
 																	 maxItems:10]];
 	
 	// Update the filter predicate to only display the correct quality.
-	[self showQualityDidChange:nil];
+	// [self showQualityDidChange:nil];
 	
 	[NSApp beginSheet: showInfoWindow
 	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
@@ -156,10 +156,10 @@
 {
 	if ([showQuality state]) {
 		// Is HD and HD is enabled.
-		[episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '1'"]];
+//		[episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '1'"]];
 	} else if (![showQuality state]) {
 		// Is not HD and HD is not enabled.
-		[episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '0'"]];
+//		[episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '0'"]];
 	}
 }
 
@@ -181,7 +181,7 @@
 	}
 }
 
--(BOOL) tableView:(NSTableView *)aTableView shouldSelectRow:(NSInteger)rowIndex
+- (BOOL) tableView:(NSTableView *)aTableView shouldSelectRow:(NSInteger)rowIndex
 {
 	// Check to see whether or not this is the GET button or not.
 	// If it's not, then return YES for shouldSelectRow.
