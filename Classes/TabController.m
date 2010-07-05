@@ -115,7 +115,7 @@
 	[showName setStringValue: [selectedShow valueForKey:@"name"]];
 	[showLastDownloaded setStringValue: [dateFormatter stringFromDate:[selectedShow valueForKey:@"lastDownloaded"]]];
 	[showQuality setState: [[selectedShow valueForKey:@"quality"] intValue]];
-	[showIsEnabled setState: [[selectedShow valueForKey:@"isEnabled"] intValue]];
+	[showIsEnabled setState: [[selectedShow valueForKey:@"isEnabled"] boolValue]];
 	
 	// Reset the Episode Array Controller and grab the new list of episodes
 	[[episodeArrayController content] removeAllObjects];
@@ -137,12 +137,20 @@
 
 - (IBAction) closeShowInfoWindow:(id)sender
 {	
+	// NSManagedContext objectWithID is required for it to save changes to the disk.
+	// We also need to update the original selectedShow NSManagedObject so that the
+	// interface displays any changes when the window is opened multiple times a session.
 	id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
-	
+	NSManagedObject *selectedShowObj = [[delegateClass managedObjectContext] objectWithID:[selectedShow objectID]];
+		
 	// Update the per-show preferences
-//		[selectedShow setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
-//		[selectedShow setValue:[NSNumber numberWithInt:[showIsEnabled state]] forKey:@"isEnabled"];
+	[selectedShow setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
+	[selectedShow setValue:[NSNumber numberWithBool:[showIsEnabled state]] forKey:@"isEnabled"];
+	[selectedShowObj setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
+	[selectedShowObj setValue:[NSNumber numberWithBool:[showIsEnabled state]] forKey:@"isEnabled"];
 	
+	// Be sure to process pending changes before saving or it won't save correctly.
+	[[delegateClass managedObjectContext] processPendingChanges];
 	[delegateClass saveAction];
 	[delegateClass release];
 	
@@ -226,7 +234,7 @@
 	id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
 	
 	// I don't understand why I have to remove the object from both locations
-	// but this should work for the time being.
+	// but it works so I won't question it.
 	[SBArrayController removeObject:selectedShow];
 	[[delegateClass managedObjectContext] deleteObject:selectedShow];
 		
