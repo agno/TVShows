@@ -19,12 +19,14 @@
 
 @implementation TVShowsPref
 
+@synthesize releaseNotesURL;
+
 - (void) didSelect
 {
 	NSString *buildVersion = [[[NSBundle bundleWithIdentifier: TVShowsAppDomain] infoDictionary]
 							  valueForKey:@"CFBundleVersion"];
 	NSString *installedBuild = [TSUserDefaults getStringFromKey:@"installedBuild"];
-
+	
 	// Check to see if we installed a different version, both updates and rollbacks.
 	if ([buildVersion intValue] > [installedBuild intValue]) {
 		
@@ -32,13 +34,13 @@
 		[TSUserDefaults setKey:@"installedBuild" fromString:buildVersion];
 		
 		// Did we install the update automatically? Display a dialog box with changes.
-//		if ([TSUserDefaults getBoolFromKey:@"AutomaticallyInstalledLastUpdate" withDefault:NO]) {
-//			
-//			// Reset the key for next time.
-//			[TSUserDefaults setKey:@"AutomaticallyInstalledLastUpdate" fromBool:NO];
-//			
-//			[self displayUpdateWindowForVersion:installedBuild];
-//		}
+		if ([TSUserDefaults getBoolFromKey:@"AutomaticallyInstalledLastUpdate" withDefault:NO]) {
+			
+			// Reset the key for next time.
+			[TSUserDefaults setKey:@"AutomaticallyInstalledLastUpdate" fromBool:NO];
+			
+			[self displayUpdateWindowForVersion:installedBuild];
+		}
 		
 		// Relaunch System Preferences so that we know all the resources have been reloaded
 		// correctly. This is due to a bug in how it handles updating bundles.
@@ -47,27 +49,34 @@
 	}
 }
 
-- (void) displayUpdateWindowForVersion:(NSString *)oldBuild
+- (void) displayUpdateWindowForVersion:(NSString *)installedBuild
 {
 	// Display a window showing the release notes.
-//	NSString *urlString = [NSString stringWithFormat:@"http://embercode.com/tvshows/notes/beta-%@",installedBuild];
-//	NSURL *releaseNotes = [NSURL URLWithString:urlString];
-//	[[updateWebView mainFrame] loadRequest:[NSURLRequest requestWithURL:releaseNotes]];
-//	
-//	[NSApp beginSheet: updateWindow
-//	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
-//		modalDelegate: nil
-//	   didEndSelector: nil
-//		  contextInfo: nil];
-//	
-//	[NSApp endSheet: updateWindow];
-//	[NSApp runModalForWindow: updateWindow];
+	releaseNotesURL = [NSString stringWithFormat:@"http://embercode.com/tvshows/notes/beta-%@",installedBuild];
+	
+	[NSApp beginSheet: updateWindow
+	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
+		modalDelegate: nil
+	   didEndSelector: nil
+		  contextInfo: nil];
+	
+	[NSApp endSheet: updateWindow];
+	[NSApp runModalForWindow: updateWindow];
+}
+
+- (IBAction) openMoreInfoURL:(id)sender
+{
+	// Open the release notes page.
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString: releaseNotesURL]];
+	
+	// Close the modal window.
+	[self closeUpdateWindow:nil];
 }
 
 - (IBAction) closeUpdateWindow:(id)sender
 {
-//	[NSApp stopModal];
-//	[updateWindow orderOut:self];
+	[NSApp stopModal];
+	[updateWindow orderOut:self];
 }
 
 - (void) relaunch:(id)sender
@@ -82,6 +91,12 @@
 	
 	TVLog(@"Relaunching TVShows to fix the System Preferences update bug.");
 	[NSApp terminate:sender];
+}
+
+- (void) dealloc
+{
+	[releaseNotesURL release];
+	[super dealloc];
 }
 
 @end

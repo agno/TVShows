@@ -174,7 +174,7 @@
 	// If the user has automatic updates turned on, set a value saying that we installed
 	// an update in the background and send a Growl notification.
 	if ([TSUserDefaults getBoolFromKey:@"SUAutomaticallyUpdate" withDefault:YES]) {
-//		[TSUserDefaults setKey:@"AutomaticallyInstalledLastUpdate" fromBool:YES];
+		[TSUserDefaults setKey:@"AutomaticallyInstalledLastUpdate" fromBool:YES];
 		
 		if([TSUserDefaults getBoolFromKey:@"GrowlOnAppUpdate" withDefault:1]) {
 			[GrowlApplicationBridge notifyWithTitle:@"TVShows Update Downloading"

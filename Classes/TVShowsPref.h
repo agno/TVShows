@@ -19,12 +19,15 @@
 @interface TVShowsPref : NSPreferencePane 
 {
 	IBOutlet NSWindow *updateWindow;
-	IBOutlet WebView *updateWebView;
+	NSString *releaseNotesURL;
 }
+
+@property (retain) NSString *releaseNotesURL;
 
 - (void) didSelect;
 - (void) displayUpdateWindowForVersion:(NSString *)oldBuild;
 - (IBAction) closeUpdateWindow:(id)sender;
 - (void) relaunch:(id)sender;
+- (IBAction) openMoreInfoURL:(id)sender;
 
 @end
