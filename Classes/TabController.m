@@ -32,7 +32,7 @@
 							  valueForKey:@"CFBundleVersion"];
 	NSString *buildDate = [[[NSBundle bundleWithIdentifier: TVShowsAppDomain] infoDictionary]
 						   valueForKey:@"TSBundleBuildDate"];
-
+	
 	[sidebarHeader setStringValue:@"TVShows 2"];
 	[sidebarVersionText setStringValue: [NSString stringWithFormat:@"%@ (r%@)", bundleVersion, buildVersion]];
 	[sidebarDateText setStringValue: buildDate];
@@ -94,9 +94,9 @@
 									ofType: @"rtf"];
 	
 	NSAttributedString *aboutBoxText = [[[NSAttributedString alloc]
-										initWithPath: pathToAboutBoxText
-										documentAttributes: nil] autorelease];
-
+										 initWithPath: pathToAboutBoxText
+										 documentAttributes: nil] autorelease];
+	
 	[[textView_aboutBox textStorage] setAttributedString:aboutBoxText];
 }
 
@@ -142,7 +142,7 @@
 	// interface displays any changes when the window is opened multiple times a session.
 	id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
 	NSManagedObject *selectedShowObj = [[delegateClass managedObjectContext] objectWithID:[selectedShow objectID]];
-		
+	
 	// Update the per-show preferences
 	[selectedShow setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
 	[selectedShow setValue:[NSNumber numberWithBool:[showIsEnabled state]] forKey:@"isEnabled"];
@@ -237,9 +237,9 @@
 	// but it works so I won't question it.
 	[SBArrayController removeObject:selectedShow];
 	[[delegateClass managedObjectContext] deleteObject:selectedShow];
-		
+	
 	[self closeShowInfoWindow:(id)sender];
-
+	
 	[delegateClass saveAction];
 	[delegateClass release];
 }
