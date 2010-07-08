@@ -68,6 +68,7 @@
 		34C717D411E422EA00A58B34 /* JRFeedbackProvider.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34C717D211E422EA00A58B34 /* JRFeedbackProvider.strings */; };
 		34C717D811E4233700A58B34 /* JRFeedbackProvider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34C717D711E4233700A58B34 /* JRFeedbackProvider.xib */; };
 		34D8D1C311AB5C63006382C3 /* CustomRSSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D8D1C111AB5C63006382C3 /* CustomRSSController.m */; };
+		34EA89D211E6434E005C031A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34EA89D011E6434E005C031A /* Localizable.strings */; };
 		34EB966E11838131005825C1 /* showRSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB966D11838131005825C1 /* showRSS.png */; };
 		34EB967F118389FC005825C1 /* NZB.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB967E118389FC005825C1 /* NZB.png */; };
 		34EBF4F211A8501A00962FE5 /* SubscriptionsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBF4F011A8501A00962FE5 /* SubscriptionsDelegate.m */; };
@@ -253,6 +254,7 @@
 		34C717D911E4233B00A58B34 /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt; path = Resources/pt.lproj/JRFeedbackProvider.xib; sourceTree = "<group>"; };
 		34D8D1C011AB5C63006382C3 /* CustomRSSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRSSController.h; sourceTree = "<group>"; };
 		34D8D1C111AB5C63006382C3 /* CustomRSSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRSSController.m; sourceTree = "<group>"; };
+		34EA89D111E6434E005C031A /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = Resources/en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		34EB966D11838131005825C1 /* showRSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showRSS.png; sourceTree = "<group>"; };
 		34EB966F118384DB005825C1 /* RSS-Large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RSS-Large.png"; sourceTree = "<group>"; };
 		34EB967E118389FC005825C1 /* NZB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NZB.png; sourceTree = "<group>"; };
@@ -334,8 +336,8 @@
 			isa = PBXGroup;
 			children = (
 				349FEE021183590500D24FC9 /* Images */,
-				347AFB25119115AC00393565 /* en.lproj */,
-				34C717D211E422EA00A58B34 /* JRFeedbackProvider.strings */,
+				347AFB25119115AC00393565 /* Interface Files */,
+				34EA89D411E64370005C031A /* String Files */,
 				34F6EA64119BCBA200F8AD4C /* Info.plist */,
 				3446726511C157B60014C522 /* TVShowsHelper-Info.plist */,
 				3424120C11DC023600BC0742 /* Growl Registration Ticket.growlRegDict */,
@@ -434,15 +436,14 @@
 			name = JRFeedbackProvider;
 			sourceTree = "<group>";
 		};
-		347AFB25119115AC00393565 /* en.lproj */ = {
+		347AFB25119115AC00393565 /* Interface Files */ = {
 			isa = PBXGroup;
 			children = (
 				34EC6AB811A312AD00BD660A /* TVShowsPref.xib */,
 				3446726811C167560014C522 /* TVShowsHelper.xib */,
 				34C717D711E4233700A58B34 /* JRFeedbackProvider.xib */,
-				345BE411119344E10016EA2D /* InfoPlist.strings */,
 			);
-			name = en.lproj;
+			name = "Interface Files";
 			sourceTree = "<group>";
 		};
 		347F1E6F11AA0D9E005A40AA /* Core Data */ = {
@@ -603,6 +604,16 @@
 			name = "Helper Classes";
 			sourceTree = "<group>";
 		};
+		34EA89D411E64370005C031A /* String Files */ = {
+			isa = PBXGroup;
+			children = (
+				34EA89D011E6434E005C031A /* Localizable.strings */,
+				34C717D211E422EA00A58B34 /* JRFeedbackProvider.strings */,
+				345BE411119344E10016EA2D /* InfoPlist.strings */,
+			);
+			name = "String Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -725,6 +736,7 @@
 				34B6914111D9F1A9001E2518 /* get.png in Resources */,
 				342FEC8511E1864000E21FC0 /* hd.png in Resources */,
 				34C717D411E422EA00A58B34 /* JRFeedbackProvider.strings in Resources */,
+				34EA89D211E6434E005C031A /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -861,6 +873,14 @@
 				34C717D911E4233B00A58B34 /* pt */,
 			);
 			name = JRFeedbackProvider.xib;
+			sourceTree = "<group>";
+		};
+		34EA89D011E6434E005C031A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				34EA89D111E6434E005C031A /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		34EC6AB811A312AD00BD660A /* TVShowsPref.xib */ = {

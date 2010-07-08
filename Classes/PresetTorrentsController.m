@@ -208,28 +208,28 @@
 	// x02 = The website did not load or the user is having connection issues
 	switch(code) {
 		case 101:
-			title	= @"An Error Has Occurred";
-			message = @"A show list cannot be found. Please try again later or check your internet connection.";
+			title	= NSLocalizedStringFromTableInBundle(@"An Error Has Occurred", @"Localizable", [NSBundle bundleForClass:[self class]], nil);
+			message = NSLocalizedStringFromTableInBundle(@"A show list cannot be found. Please try again later or check your internet connection.", @"Localizable", [NSBundle bundleForClass:[self class]], nil);
 			break;
 			
 		case 201:
-			title	= @"Unable to Update the Show List";
-			message = @"A newer show list cannot be found. Using an old show list temporarily.";
+			title	= NSLocalizedStringFromTableInBundle(@"Unable to Update the Show List", @"Localizable", [NSBundle bundleForClass:[self class]], nil);
+			message = NSLocalizedStringFromTableInBundle(@"A newer show list cannot be found. Using an old show list temporarily.", @"Localizable", [NSBundle bundleForClass:[self class]], nil);
 			break;
 			
 		case 102:
-			title	= @"An Error Has Occurred";
-			message = @"Cannot connect. Please try again later or check your internet connection.";
+			title	= NSLocalizedStringFromTableInBundle(@"An Error Has Occurred", @"Localizable", [NSBundle bundleForClass:[self class]], nil);
+			message = NSLocalizedStringFromTableInBundle(@"Cannot connect. Please try again later or check your internet connection.", @"Localizable", [NSBundle bundleForClass:[self class]], nil);
 			break;
 			
 		case 202:
-			title	= @"Unable to Update the Show List";
-			message = @"Cannot connect. Using an old show list temporarily.";
+			title	= NSLocalizedStringFromTableInBundle(@"Unable to Update the Show List", @"Localizable", [NSBundle bundleForClass:[self class]], nil);
+			message = NSLocalizedStringFromTableInBundle(@"Cannot connect. Using an old show list temporarily.", @"Localizable", [NSBundle bundleForClass:[self class]], nil);
 			break;
 			
 		default:
-			title	= @"An Error Has Occurred";
-			message = @"An unknown error has occurred. Please try again later.";
+			title	= NSLocalizedStringFromTableInBundle(@"An Error Has Occurred", @"Localizable", [NSBundle bundleForClass:[self class]], nil);
+			message = NSLocalizedStringFromTableInBundle(@"An unknown error has occurred. Please try again later.", @"Localizable", [NSBundle bundleForClass:[self class]], nil);
 			break;
 	}
 	
