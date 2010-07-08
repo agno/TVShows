@@ -32,3 +32,7 @@
 
 #define TVLog(...) NSLog(@"TVShows 2: %@", [NSString stringWithFormat:__VA_ARGS__])
 #define ZAssert(condition, ...) do { if (!(condition)) { ALog(__VA_ARGS__); }} while(0)
+
+// I'm sure that this is entirely unorthodox, but let's make a custom
+// localiztion macro to save us from having to type all this crap in.
+#define TSLocalizeString(...) NSLocalizedStringFromTableInBundle(__VA_ARGS__, @"Localizable", [NSBundle bundleForClass:[self class]], nil)

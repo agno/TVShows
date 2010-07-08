@@ -336,8 +336,8 @@
 			isa = PBXGroup;
 			children = (
 				349FEE021183590500D24FC9 /* Images */,
-				347AFB25119115AC00393565 /* Interface Files */,
-				34EA89D411E64370005C031A /* String Files */,
+				347AFB25119115AC00393565 /* Interface Builder */,
+				34EA89D411E64370005C031A /* Localizations */,
 				34F6EA64119BCBA200F8AD4C /* Info.plist */,
 				3446726511C157B60014C522 /* TVShowsHelper-Info.plist */,
 				3424120C11DC023600BC0742 /* Growl Registration Ticket.growlRegDict */,
@@ -436,14 +436,14 @@
 			name = JRFeedbackProvider;
 			sourceTree = "<group>";
 		};
-		347AFB25119115AC00393565 /* Interface Files */ = {
+		347AFB25119115AC00393565 /* Interface Builder */ = {
 			isa = PBXGroup;
 			children = (
 				34EC6AB811A312AD00BD660A /* TVShowsPref.xib */,
 				3446726811C167560014C522 /* TVShowsHelper.xib */,
 				34C717D711E4233700A58B34 /* JRFeedbackProvider.xib */,
 			);
-			name = "Interface Files";
+			name = "Interface Builder";
 			sourceTree = "<group>";
 		};
 		347F1E6F11AA0D9E005A40AA /* Core Data */ = {
@@ -604,14 +604,14 @@
 			name = "Helper Classes";
 			sourceTree = "<group>";
 		};
-		34EA89D411E64370005C031A /* String Files */ = {
+		34EA89D411E64370005C031A /* Localizations */ = {
 			isa = PBXGroup;
 			children = (
 				34EA89D011E6434E005C031A /* Localizable.strings */,
 				34C717D211E422EA00A58B34 /* JRFeedbackProvider.strings */,
 				345BE411119344E10016EA2D /* InfoPlist.strings */,
 			);
-			name = "String Files";
+			name = Localizations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

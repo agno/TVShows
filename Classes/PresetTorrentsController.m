@@ -208,28 +208,28 @@
 	// x02 = The website did not load or the user is having connection issues
 	switch(code) {
 		case 101:
-			title	= NSLocalizedStringFromTableInBundle(@"An Error Has Occurred", @"Localizable", [NSBundle bundleForClass:[self class]], nil);
-			message = NSLocalizedStringFromTableInBundle(@"A show list cannot be found. Please try again later or check your internet connection.", @"Localizable", [NSBundle bundleForClass:[self class]], nil);
+			title	= TSLocalizeString(@"An Error Has Occurred");
+			message = TSLocalizeString(@"A show list cannot be found. Please try again later or check your internet connection.");
 			break;
 			
 		case 201:
-			title	= NSLocalizedStringFromTableInBundle(@"Unable to Update the Show List", @"Localizable", [NSBundle bundleForClass:[self class]], nil);
-			message = NSLocalizedStringFromTableInBundle(@"A newer show list cannot be found. Using an old show list temporarily.", @"Localizable", [NSBundle bundleForClass:[self class]], nil);
+			title	= TSLocalizeString(@"Unable to Update the Show List");
+			message = TSLocalizeString(@"A newer show list cannot be found. Using an old show list temporarily.");
 			break;
 			
 		case 102:
-			title	= NSLocalizedStringFromTableInBundle(@"An Error Has Occurred", @"Localizable", [NSBundle bundleForClass:[self class]], nil);
-			message = NSLocalizedStringFromTableInBundle(@"Cannot connect. Please try again later or check your internet connection.", @"Localizable", [NSBundle bundleForClass:[self class]], nil);
+			title	= TSLocalizeString(@"An Error Has Occurred");
+			message = TSLocalizeString(@"Cannot connect. Please try again later or check your internet connection.");
 			break;
 			
 		case 202:
-			title	= NSLocalizedStringFromTableInBundle(@"Unable to Update the Show List", @"Localizable", [NSBundle bundleForClass:[self class]], nil);
-			message = NSLocalizedStringFromTableInBundle(@"Cannot connect. Using an old show list temporarily.", @"Localizable", [NSBundle bundleForClass:[self class]], nil);
+			title	= TSLocalizeString(@"Unable to Update the Show List");
+			message = TSLocalizeString(@"Cannot connect. Using an old show list temporarily.");
 			break;
 			
 		default:
-			title	= NSLocalizedStringFromTableInBundle(@"An Error Has Occurred", @"Localizable", [NSBundle bundleForClass:[self class]], nil);
-			message = NSLocalizedStringFromTableInBundle(@"An unknown error has occurred. Please try again later.", @"Localizable", [NSBundle bundleForClass:[self class]], nil);
+			title	= TSLocalizeString(@"An Error Has Occurred");
+			message = TSLocalizeString(@"An unknown error has occurred. Please try again later.");
 			break;
 	}
 	
