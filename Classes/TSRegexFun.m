@@ -64,21 +64,21 @@
 	if (type == @"episode") {
 		
 		// TVShow is in a Season x Episode format
-		return [NSString stringWithFormat:@"%@ - %@x%@",showTitle,[self removeLeadingZero:[identifier objectAtIndex:1]],[self removeLeadingZero:[identifier objectAtIndex:2]]];				
+		return [NSString stringWithFormat:@"%@ — %@x%@",showTitle,[self removeLeadingZero:[identifier objectAtIndex:1]],[self removeLeadingZero:[identifier objectAtIndex:2]]];				
 		
 	} else if (type == @"date") {
 		
 		if ([[identifier objectAtIndex:1] length] == 4) {
 			
 			// TVShows is in a YYYY MM DD format
-			return [NSString stringWithFormat:@"%@ - %@/%@/%@",showTitle,
+			return [NSString stringWithFormat:@"%@ — %@-%@-%@",showTitle,
 					[self removeLeadingZero:[identifier objectAtIndex:2]],
 					[self removeLeadingZero:[identifier objectAtIndex:3]],
 					[self removeLeadingZero:[identifier objectAtIndex:1]]];				
 		} else {
 			
 			// TVShow is in a MM DD YYYY format
-			return [NSString stringWithFormat:@"%@ - %@/%@/%@",showTitle,
+			return [NSString stringWithFormat:@"%@ — %@-%@-%@",showTitle,
 					[self removeLeadingZero:[identifier objectAtIndex:1]],
 					[self removeLeadingZero:[identifier objectAtIndex:2]],
 					[self removeLeadingZero:[identifier objectAtIndex:3]]];	
