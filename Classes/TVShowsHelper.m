@@ -152,7 +152,7 @@
 		// In the future this may display the show's poster instead of our app icon.
 		[GrowlApplicationBridge notifyWithTitle:[NSString stringWithFormat:@"%@", showName]
 									description:[NSString stringWithFormat:@"A new episode of %@ is being downloaded.", showName]
-							   notificationName:@"newEpisodeDownloaded"
+							   notificationName:@"New Episode Downloaded"
 									   iconData:TVShowsHelperIcon
 									   priority:0
 									   isSticky:0
