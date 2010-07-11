@@ -66,12 +66,13 @@
 			// No error occurred so check for new episodes
 			for (NSArray *show in results) {
 				
-				// Only check for new episodes if we're supposed to
-				if ([show valueForKey:@"isEnabled"]) {
-					DLog(@"Checking for new episodes for: %@",[show valueForKey:@"name"]);
+				NSNumber *lastDownloaded = [NSNumber numberWithDouble:[[show valueForKey:@"lastDownloaded"] timeIntervalSinceNow]];
+				NSNumber *timeLimit = [NSNumber numberWithInt:-15*60];
+				
+				// Only check for new episodes if it's enabled and the last download
+				// time is less that timeLimit (15 minutes)
+				if ([show valueForKey:@"isEnabled"] && [lastDownloaded compare:timeLimit] == NSOrderedAscending) {
 					[self checkForNewEpisodes:show];
-				} else {
-					DLog(@"Downloading for the show %@ is disabled.", [show valueForKey:@"name"]);
 				}
 				
 				// Update when the show was last downloaded. We do this for disabled
