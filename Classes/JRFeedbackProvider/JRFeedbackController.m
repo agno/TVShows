@@ -52,11 +52,11 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
         && !(reachabilityFlags & kSCNetworkFlagsInterventionRequired);
     
     if (!showFeedbackWindow) {
-        int alertResult = [[NSAlert alertWithMessageText:NSLocalizedStringFromTable(@"Feedback Host Not Reachable", @"JRFeedbackProvider", nil)
+        int alertResult = [[NSAlert alertWithMessageText:NSLocalizedStringFromTable(@"Feedback Server Unavailable", @"JRFeedbackProvider", nil)
                                            defaultButton:NSLocalizedStringFromTable(@"Proceed Anyway", @"JRFeedbackProvider", nil)
                                          alternateButton:NSLocalizedStringFromTable(@"Cancel", @"JRFeedbackProvider", nil)
                                              otherButton:nil
-                               informativeTextWithFormat:NSLocalizedStringFromTable(@"Unreachable Explaination", @"JRFeedbackProvider", nil), [[JRFeedbackController postURL] host]
+                               informativeTextWithFormat:NSLocalizedStringFromTable(@"TVShows was unable to connect to the Ember Code website. Please check your connection or try again later.", @"JRFeedbackProvider", nil), [[JRFeedbackController postURL] host]
                             ] runModal];
         if (NSAlertDefaultReturn == alertResult) {
             showFeedbackWindow = YES;
