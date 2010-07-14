@@ -4,6 +4,9 @@ TVShows 2 "_Phoenix_" is the next version of [TVShows][tvshows], the easiest way
 ## Screenshots
 <a href="http://embercode.com/blog/category/tvshows-news/" title="TVShows News">![Getting Started][preview-1] ![About][preview-2] ![Preferences][preview-3]</a>
 
+## Translations
+* Help localize TVShows 2 into your native language! [Click here][translate] to be added to the translation team.
+
 ## Collaboration Instructions
 1. Checkout the repository:
     * `$ git clone http://github.com/mattprice/TVShows.git`
@@ -24,7 +27,7 @@ TVShows 2 "_Phoenix_" is the next version of [TVShows][tvshows], the easiest way
 * Better support for non-standard naming conventions
 * Display show and episode information
 * The ability to download subtitles for new episodes
-* Localized languages for non-English users ([read more][translate])
+* Localized languages for non-English users ([read more][translate-info])
 * Growl notifications for new downloads
 
 ## License
@@ -33,8 +36,9 @@ TVShows is free software: you can redistribute it and/or modify it under the ter
 For a copy of the GNU General Public License see &lt;[http://www.gnu.org/licenses/][license]&gt;.
 
 [tvshows]:http://embercode.com/tvshows/ "TVShows Website"
-[translate]:http://embercode.com/blog/2010/help-translate-tvshows-2/ "Help Translate TVShows 2"
 [roadmap]:http://labs.embercode.com/projects/tvshows/roadmap "TVShows Roadmap"
+[translate]:https://webtranslateit.com/en/projects/874-TVShows-2/invitation_request "Help Translate TVShows 2"
+[translate-info]:http://embercode.com/blog/2010/help-translate-tvshows-2/ "Help Translate TVShows 2"
 
 [preview-1]:http://embercode.com/blog/wp-content/uploads/2010/05/TVShows2_r175_Preview-300x201.png "TVShows 2 (r175) Preview"
 [preview-2]:http://embercode.com/blog/wp-content/uploads/2010/05/TVShows2_r191_AboutTeaser-300x201.png "TVShows 2 Teaser: About Tab"
