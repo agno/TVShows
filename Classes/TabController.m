@@ -39,7 +39,22 @@
 	
 	[aboutTabVersionText setStringValue: [NSString stringWithFormat:@"TVShows %@ (%@)", bundleVersion, buildVersion]];
 	
+	// Localize everything
+	[feedbackButton setTitle: TSLocalizeString(@"Submit Feedback")];
+	[gettingStartedText setStringValue: TSLocalizeString(@"Please choose one of the following actions:")];
+	
+	[optionOneTitle setStringValue: TSLocalizeString(@"Select a preset show from showRSS")];
+	[optionOneDesc setStringValue: TSLocalizeString(@"Choose this to download torrent files from a list of preset shows.")];
+	
+	[optionTwoTitle setStringValue: TSLocalizeString(@"Add a show from NZBs.org")];
+	[optionTwoDesc setStringValue: TSLocalizeString(@"Choose this to download Usenet files using your NZBs.org account.")];
+	
+	[optionThreeTitle setStringValue: TSLocalizeString(@"Add a custom RSS source")];
+	[optionThreeDesc setStringValue: TSLocalizeString(@"Choose this to input your own RSS feed.")];
+	
+	// Sort the subscription list and draw the About box
 	[self sortSubscriptionList];
+	[self drawAboutBox];
 }
 
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
@@ -58,7 +73,6 @@
 		newWinHeight = 526;
 		
 	}  else if ([[tabViewItem identifier] isEqualTo:@"tabItemAbout"]) {
-		[self drawAboutBox];
 		newWinHeight = 422;
 		
 	} else {

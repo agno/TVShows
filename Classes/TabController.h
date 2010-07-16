@@ -19,7 +19,17 @@
 @interface TabController : NSPreferencePane
 {
 	IBOutlet NSTabView *prefTabView;
+	IBOutlet NSButton *feedbackButton;
 	NSManagedObject *selectedShow;
+	
+	// Getting started
+	IBOutlet NSTextField *gettingStartedText;
+	IBOutlet NSTextField *optionOneTitle;
+	IBOutlet NSTextField *optionOneDesc;
+	IBOutlet NSTextField *optionTwoTitle;
+	IBOutlet NSTextField *optionTwoDesc;
+	IBOutlet NSTextField *optionThreeTitle;
+	IBOutlet NSTextField *optionThreeDesc;
 	
 	// Version information
 	IBOutlet NSTextField *sidebarHeader;

@@ -116,7 +116,7 @@
 											<object class="NSButton" id="545009203">
 												<reference key="NSNextResponder" ref="208803879"/>
 												<int key="NSvFlags">268</int>
-												<string key="NSFrame">{{83, 188}, {86, 85}}</string>
+												<string key="NSFrame">{{68, 188}, {86, 85}}</string>
 												<reference key="NSSuperview" ref="208803879"/>
 												<int key="NSViewLayerContentsRedrawPolicy">2</int>
 												<bool key="NSEnabled">YES</bool>
@@ -145,7 +145,7 @@
 											<object class="NSButton" id="338023863">
 												<reference key="NSNextResponder" ref="208803879"/>
 												<int key="NSvFlags">268</int>
-												<string key="NSFrame">{{83, 101}, {86, 85}}</string>
+												<string key="NSFrame">{{68, 101}, {86, 85}}</string>
 												<reference key="NSSuperview" ref="208803879"/>
 												<int key="NSViewLayerContentsRedrawPolicy">2</int>
 												<bool key="NSEnabled">YES</bool>
@@ -170,7 +170,7 @@
 											<object class="NSButton" id="300851188">
 												<reference key="NSNextResponder" ref="208803879"/>
 												<int key="NSvFlags">268</int>
-												<string key="NSFrame">{{83, 14}, {86, 85}}</string>
+												<string key="NSFrame">{{68, 14}, {86, 85}}</string>
 												<reference key="NSSuperview" ref="208803879"/>
 												<int key="NSViewLayerContentsRedrawPolicy">2</int>
 												<bool key="NSEnabled">YES</bool>
@@ -195,7 +195,7 @@
 											<object class="NSTextField" id="707925264">
 												<reference key="NSNextResponder" ref="208803879"/>
 												<int key="NSvFlags">268</int>
-												<string key="NSFrame">{{172, 130}, {298, 11}}</string>
+												<string key="NSFrame">{{157, 130}, {318, 11}}</string>
 												<reference key="NSSuperview" ref="208803879"/>
 												<int key="NSViewLayerContentsRedrawPolicy">2</int>
 												<bool key="NSEnabled">YES</bool>
@@ -227,7 +227,7 @@
 											<object class="NSTextField" id="410605126">
 												<reference key="NSNextResponder" ref="208803879"/>
 												<int key="NSvFlags">268</int>
-												<string key="NSFrame">{{172, 43}, {180, 11}}</string>
+												<string key="NSFrame">{{157, 43}, {318, 11}}</string>
 												<reference key="NSSuperview" ref="208803879"/>
 												<int key="NSViewLayerContentsRedrawPolicy">2</int>
 												<bool key="NSEnabled">YES</bool>
@@ -247,7 +247,7 @@
 											<object class="NSTextField" id="446750934">
 												<reference key="NSNextResponder" ref="208803879"/>
 												<int key="NSvFlags">268</int>
-												<string key="NSFrame">{{172, 217}, {289, 11}}</string>
+												<string key="NSFrame">{{157, 217}, {318, 11}}</string>
 												<reference key="NSSuperview" ref="208803879"/>
 												<int key="NSViewLayerContentsRedrawPolicy">2</int>
 												<bool key="NSEnabled">YES</bool>
@@ -267,7 +267,7 @@
 											<object class="BWInsetTextField" id="691262451">
 												<reference key="NSNextResponder" ref="208803879"/>
 												<int key="NSvFlags">268</int>
-												<string key="NSFrame">{{172, 228}, {260, 18}}</string>
+												<string key="NSFrame">{{157, 228}, {318, 18}}</string>
 												<reference key="NSSuperview" ref="208803879"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="136181106">
@@ -295,7 +295,7 @@
 											<object class="BWInsetTextField" id="711672243">
 												<reference key="NSNextResponder" ref="208803879"/>
 												<int key="NSvFlags">268</int>
-												<string key="NSFrame">{{172, 141}, {197, 18}}</string>
+												<string key="NSFrame">{{157, 141}, {318, 18}}</string>
 												<reference key="NSSuperview" ref="208803879"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="1057278669">
@@ -311,7 +311,7 @@
 											<object class="BWInsetTextField" id="733714910">
 												<reference key="NSNextResponder" ref="208803879"/>
 												<int key="NSvFlags">268</int>
-												<string key="NSFrame">{{172, 54}, {187, 18}}</string>
+												<string key="NSFrame">{{157, 54}, {318, 18}}</string>
 												<reference key="NSSuperview" ref="208803879"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="603552769">
@@ -327,7 +327,7 @@
 											<object class="BWInsetTextField" id="978830091">
 												<reference key="NSNextResponder" ref="208803879"/>
 												<int key="NSvFlags">268</int>
-												<string key="NSFrame">{{14, 286}, {316, 18}}</string>
+												<string key="NSFrame">{{14, 286}, {461, 18}}</string>
 												<reference key="NSSuperview" ref="208803879"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="527077154">
@@ -5897,6 +5897,70 @@ bW1vZG8gY29uc2VxdWF0Lg</string>
 					</object>
 					<int key="connectionID">1944</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">feedbackButton</string>
+						<reference key="source" ref="202797967"/>
+						<reference key="destination" ref="876508855"/>
+					</object>
+					<int key="connectionID">1945</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">gettingStartedText</string>
+						<reference key="source" ref="202797967"/>
+						<reference key="destination" ref="978830091"/>
+					</object>
+					<int key="connectionID">1946</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">optionOneTitle</string>
+						<reference key="source" ref="202797967"/>
+						<reference key="destination" ref="691262451"/>
+					</object>
+					<int key="connectionID">1947</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">optionOneDesc</string>
+						<reference key="source" ref="202797967"/>
+						<reference key="destination" ref="446750934"/>
+					</object>
+					<int key="connectionID">1948</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">optionTwoTitle</string>
+						<reference key="source" ref="202797967"/>
+						<reference key="destination" ref="711672243"/>
+					</object>
+					<int key="connectionID">1949</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">optionTwoDesc</string>
+						<reference key="source" ref="202797967"/>
+						<reference key="destination" ref="707925264"/>
+					</object>
+					<int key="connectionID">1950</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">optionThreeTitle</string>
+						<reference key="source" ref="202797967"/>
+						<reference key="destination" ref="733714910"/>
+					</object>
+					<int key="connectionID">1951</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">optionThreeDesc</string>
+						<reference key="source" ref="202797967"/>
+						<reference key="destination" ref="410605126"/>
+					</object>
+					<int key="connectionID">1952</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -9047,7 +9111,7 @@ bW1vZG8gY29uc2VxdWF0Lg</string>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1944</int>
+			<int key="maxID">1952</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -9741,6 +9805,14 @@ bW1vZG8gY29uc2VxdWF0Lg</string>
 							<string>aboutTabVersionText</string>
 							<string>episodeArrayController</string>
 							<string>episodeTableView</string>
+							<string>feedbackButton</string>
+							<string>gettingStartedText</string>
+							<string>optionOneDesc</string>
+							<string>optionOneTitle</string>
+							<string>optionThreeDesc</string>
+							<string>optionThreeTitle</string>
+							<string>optionTwoDesc</string>
+							<string>optionTwoTitle</string>
 							<string>prefTabView</string>
 							<string>showInfoWindow</string>
 							<string>showIsEnabled</string>
@@ -9758,6 +9830,14 @@ bW1vZG8gY29uc2VxdWF0Lg</string>
 							<string>NSTextField</string>
 							<string>NSArrayController</string>
 							<string>NSTableView</string>
+							<string>NSButton</string>
+							<string>NSTextField</string>
+							<string>NSTextField</string>
+							<string>NSTextField</string>
+							<string>NSTextField</string>
+							<string>NSTextField</string>
+							<string>NSTextField</string>
+							<string>NSTextField</string>
 							<string>NSTabView</string>
 							<string>NSWindow</string>
 							<string>NSButton</string>
@@ -9778,6 +9858,14 @@ bW1vZG8gY29uc2VxdWF0Lg</string>
 							<string>aboutTabVersionText</string>
 							<string>episodeArrayController</string>
 							<string>episodeTableView</string>
+							<string>feedbackButton</string>
+							<string>gettingStartedText</string>
+							<string>optionOneDesc</string>
+							<string>optionOneTitle</string>
+							<string>optionThreeDesc</string>
+							<string>optionThreeTitle</string>
+							<string>optionTwoDesc</string>
+							<string>optionTwoTitle</string>
 							<string>prefTabView</string>
 							<string>showInfoWindow</string>
 							<string>showIsEnabled</string>
@@ -9806,6 +9894,38 @@ bW1vZG8gY29uc2VxdWF0Lg</string>
 							<object class="IBToOneOutletInfo">
 								<string key="name">episodeTableView</string>
 								<string key="candidateClassName">NSTableView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">feedbackButton</string>
+								<string key="candidateClassName">NSButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">gettingStartedText</string>
+								<string key="candidateClassName">NSTextField</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">optionOneDesc</string>
+								<string key="candidateClassName">NSTextField</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">optionOneTitle</string>
+								<string key="candidateClassName">NSTextField</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">optionThreeDesc</string>
+								<string key="candidateClassName">NSTextField</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">optionThreeTitle</string>
+								<string key="candidateClassName">NSTextField</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">optionTwoDesc</string>
+								<string key="candidateClassName">NSTextField</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">optionTwoTitle</string>
+								<string key="candidateClassName">NSTextField</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">prefTabView</string>
