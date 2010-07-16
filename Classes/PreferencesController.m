@@ -66,6 +66,11 @@
 
 - (void) loadSavedDefaults
 {
+	// Localize section headings
+	[downloadBoxTitle	setTitle: TSLocalizeString(@"Download Preferences")];
+	[growlBoxTitle		setTitle: TSLocalizeString(@"Growl Settings")];
+	[updateBoxTitle		setTitle: TSLocalizeString(@"Application Update Preferences")];
+	
 	if ([TSUserDefaults getBoolFromKey:@"isEnabled" withDefault:1]) {
 		isEnabled = 1;
 		[isEnabledControl setSelectedSegment: 1];
@@ -83,16 +88,24 @@
 	// Automatically open downloaded files
 	[autoOpenDownloadedFiles setTitle: TSLocalizeString(@"Automatically open each file after download")];
 	[autoOpenDownloadedFiles setState: [TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]];
+	
+	// Check for new episodes every...
+	[episodeCheckText setStringValue: TSLocalizeString(@"Check for episodes every:")];
 	[episodeCheckDelay selectItemAtIndex: [TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:0]];
 	
+	// Default video quality
+	[videoQualityText setStringValue: TSLocalizeString(@"Default video quality:")]; 
 	defaultQuality = [TSUserDefaults getFloatFromKey:@"defaultQuality" withDefault:0];
 	[defaultVideoQuality setState: 1
 							atRow: defaultQuality
 						   column: 0];
 	
+	// Default save location
+	[downloadLocationText setStringValue: TSLocalizeString(@"Episode save location:")];
 	[self buildDownloadLocationMenu];
 	
 	// Notify when a new episode is downloaded
+	[growlNotifyText setStringValue: TSLocalizeString(@"Send Growl notifications when…")];
 	[growlNotifyEpisode setTitle: TSLocalizeString(@"… a new episode is downloaded.")];
 	[growlNotifyEpisode setState: [TSUserDefaults getBoolFromKey:@"GrowlOnNewEpisode" withDefault:1]];
 	
@@ -119,6 +132,9 @@
 	// Include anonymous system information
 	[includeSystemInformation setTitle: TSLocalizeString(@"Include anonymous system information")];
 	[includeSystemInformation setState: [TSUserDefaults getBoolFromKey:@"SUSendProfileInfo" withDefault:1]];
+	
+	// Check Now button
+	[checkNowButton setTitle: TSLocalizeString(@"Check Now")];
 }
 
 #pragma mark -

@@ -449,7 +449,7 @@
 															<object class="NSTextField" id="334215133">
 																<reference key="NSNextResponder" ref="796495072"/>
 																<int key="NSvFlags">268</int>
-																<string key="NSFrame">{{15, 124}, {182, 17}}</string>
+																<string key="NSFrame">{{15, 124}, {207, 17}}</string>
 																<reference key="NSSuperview" ref="796495072"/>
 																<bool key="NSEnabled">YES</bool>
 																<object class="NSTextFieldCell" key="NSCell" id="759611726">
@@ -469,7 +469,7 @@
 															<object class="NSTextField" id="832563999">
 																<reference key="NSNextResponder" ref="796495072"/>
 																<int key="NSvFlags">268</int>
-																<string key="NSFrame">{{15, 62}, {182, 17}}</string>
+																<string key="NSFrame">{{15, 62}, {207, 17}}</string>
 																<reference key="NSSuperview" ref="796495072"/>
 																<bool key="NSEnabled">YES</bool>
 																<object class="NSTextFieldCell" key="NSCell" id="76612165">
@@ -485,7 +485,7 @@
 															<object class="NSTextField" id="698428121">
 																<reference key="NSNextResponder" ref="796495072"/>
 																<int key="NSvFlags">268</int>
-																<string key="NSFrame">{{15, 93}, {182, 17}}</string>
+																<string key="NSFrame">{{15, 93}, {207, 17}}</string>
 																<reference key="NSSuperview" ref="796495072"/>
 																<bool key="NSEnabled">YES</bool>
 																<object class="NSTextFieldCell" key="NSCell" id="189813414">
@@ -501,7 +501,7 @@
 															<object class="NSPopUpButton" id="976007781">
 																<reference key="NSNextResponder" ref="796495072"/>
 																<int key="NSvFlags">268</int>
-																<string key="NSFrame">{{199, 118}, {157, 26}}</string>
+																<string key="NSFrame">{{224, 118}, {157, 26}}</string>
 																<reference key="NSSuperview" ref="796495072"/>
 																<bool key="NSEnabled">YES</bool>
 																<object class="NSPopUpButtonCell" key="NSCell" id="433684551">
@@ -645,7 +645,7 @@
 															<object class="NSMatrix" id="449853381">
 																<reference key="NSNextResponder" ref="796495072"/>
 																<int key="NSvFlags">268</int>
-																<string key="NSFrame">{{202, 41}, {186, 38}}</string>
+																<string key="NSFrame">{{227, 41}, {186, 38}}</string>
 																<reference key="NSSuperview" ref="796495072"/>
 																<bool key="NSEnabled">YES</bool>
 																<int key="NSNumRows">2</int>
@@ -849,7 +849,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<object class="NSPopUpButton" id="812273912">
 																<reference key="NSNextResponder" ref="796495072"/>
 																<int key="NSvFlags">268</int>
-																<string key="NSFrame">{{199, 87}, {157, 26}}</string>
+																<string key="NSFrame">{{224, 87}, {157, 26}}</string>
 																<reference key="NSSuperview" ref="796495072"/>
 																<bool key="NSEnabled">YES</bool>
 																<object class="NSPopUpButtonCell" key="NSCell" id="495213205">
@@ -5833,6 +5833,70 @@ bW1vZG8gY29uc2VxdWF0Lg</string>
 					</object>
 					<int key="connectionID">1936</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">downloadBoxTitle</string>
+						<reference key="source" ref="330339090"/>
+						<reference key="destination" ref="824894808"/>
+					</object>
+					<int key="connectionID">1937</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">growlBoxTitle</string>
+						<reference key="source" ref="330339090"/>
+						<reference key="destination" ref="898141511"/>
+					</object>
+					<int key="connectionID">1938</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">updateBoxTitle</string>
+						<reference key="source" ref="330339090"/>
+						<reference key="destination" ref="920829845"/>
+					</object>
+					<int key="connectionID">1939</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">episodeCheckText</string>
+						<reference key="source" ref="330339090"/>
+						<reference key="destination" ref="334215133"/>
+					</object>
+					<int key="connectionID">1940</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">downloadLocationText</string>
+						<reference key="source" ref="330339090"/>
+						<reference key="destination" ref="698428121"/>
+					</object>
+					<int key="connectionID">1941</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">videoQualityText</string>
+						<reference key="source" ref="330339090"/>
+						<reference key="destination" ref="832563999"/>
+					</object>
+					<int key="connectionID">1942</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">growlNotifyText</string>
+						<reference key="source" ref="330339090"/>
+						<reference key="destination" ref="111530616"/>
+					</object>
+					<int key="connectionID">1943</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">checkNowButton</string>
+						<reference key="source" ref="330339090"/>
+						<reference key="destination" ref="779042884"/>
+					</object>
+					<int key="connectionID">1944</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -8596,9 +8660,9 @@ bW1vZG8gY29uc2VxdWF0Lg</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{297, 336}, {668, 368}}</string>
+					<string>{{296, 388}, {668, 368}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{297, 336}, {668, 368}}</string>
+					<string>{{296, 388}, {668, 368}}</string>
 					<integer value="1"/>
 					<integer value="1"/>
 					<string>{224.664, 10}</string>
@@ -8983,7 +9047,7 @@ bW1vZG8gY29uc2VxdWF0Lg</string>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1936</int>
+			<int key="maxID">1944</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -9176,14 +9240,22 @@ bW1vZG8gY29uc2VxdWF0Lg</string>
 							<string>autoInstallNewUpdates</string>
 							<string>autoOpenDownloadedFiles</string>
 							<string>checkForUpdates</string>
+							<string>checkNowButton</string>
 							<string>defaultVideoQuality</string>
 							<string>downloadBetaVersions</string>
+							<string>downloadBoxTitle</string>
 							<string>downloadLocationMenu</string>
+							<string>downloadLocationText</string>
 							<string>episodeCheckDelay</string>
+							<string>episodeCheckText</string>
+							<string>growlBoxTitle</string>
 							<string>growlNotifyApplication</string>
 							<string>growlNotifyEpisode</string>
+							<string>growlNotifyText</string>
 							<string>includeSystemInformation</string>
 							<string>isEnabledControl</string>
+							<string>updateBoxTitle</string>
+							<string>videoQualityText</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -9191,14 +9263,22 @@ bW1vZG8gY29uc2VxdWF0Lg</string>
 							<string>NSButton</string>
 							<string>NSButton</string>
 							<string>NSButton</string>
+							<string>NSButton</string>
 							<string>NSMatrix</string>
 							<string>NSButton</string>
+							<string>NSBox</string>
 							<string>NSPopUpButton</string>
+							<string>NSTextField</string>
 							<string>NSPopUpButton</string>
+							<string>NSTextField</string>
+							<string>NSBox</string>
 							<string>NSButton</string>
 							<string>NSButton</string>
+							<string>NSTextField</string>
 							<string>NSButton</string>
 							<string>NSSegmentedControl</string>
+							<string>NSBox</string>
+							<string>NSTextField</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -9209,14 +9289,22 @@ bW1vZG8gY29uc2VxdWF0Lg</string>
 							<string>autoInstallNewUpdates</string>
 							<string>autoOpenDownloadedFiles</string>
 							<string>checkForUpdates</string>
+							<string>checkNowButton</string>
 							<string>defaultVideoQuality</string>
 							<string>downloadBetaVersions</string>
+							<string>downloadBoxTitle</string>
 							<string>downloadLocationMenu</string>
+							<string>downloadLocationText</string>
 							<string>episodeCheckDelay</string>
+							<string>episodeCheckText</string>
+							<string>growlBoxTitle</string>
 							<string>growlNotifyApplication</string>
 							<string>growlNotifyEpisode</string>
+							<string>growlNotifyText</string>
 							<string>includeSystemInformation</string>
 							<string>isEnabledControl</string>
+							<string>updateBoxTitle</string>
+							<string>videoQualityText</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -9237,6 +9325,10 @@ bW1vZG8gY29uc2VxdWF0Lg</string>
 								<string key="candidateClassName">NSButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">checkNowButton</string>
+								<string key="candidateClassName">NSButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">defaultVideoQuality</string>
 								<string key="candidateClassName">NSMatrix</string>
 							</object>
@@ -9245,12 +9337,28 @@ bW1vZG8gY29uc2VxdWF0Lg</string>
 								<string key="candidateClassName">NSButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">downloadBoxTitle</string>
+								<string key="candidateClassName">NSBox</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">downloadLocationMenu</string>
 								<string key="candidateClassName">NSPopUpButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">downloadLocationText</string>
+								<string key="candidateClassName">NSTextField</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">episodeCheckDelay</string>
 								<string key="candidateClassName">NSPopUpButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">episodeCheckText</string>
+								<string key="candidateClassName">NSTextField</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">growlBoxTitle</string>
+								<string key="candidateClassName">NSBox</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">growlNotifyApplication</string>
@@ -9261,12 +9369,24 @@ bW1vZG8gY29uc2VxdWF0Lg</string>
 								<string key="candidateClassName">NSButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">growlNotifyText</string>
+								<string key="candidateClassName">NSTextField</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">includeSystemInformation</string>
 								<string key="candidateClassName">NSButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">isEnabledControl</string>
 								<string key="candidateClassName">NSSegmentedControl</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">updateBoxTitle</string>
+								<string key="candidateClassName">NSBox</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">videoQualityText</string>
+								<string key="candidateClassName">NSTextField</string>
 							</object>
 						</object>
 					</object>

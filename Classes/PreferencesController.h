@@ -18,22 +18,35 @@
 
 @interface PreferencesController : NSObject
 {
+	// Section headings
+	IBOutlet NSBox *downloadBoxTitle;
+	IBOutlet NSBox *growlBoxTitle;
+	IBOutlet NSBox *updateBoxTitle;
+	
 	// Download Preferences
 	Boolean isEnabled;
-	int defaultQuality;
 	IBOutlet NSSegmentedControl *isEnabledControl;
-	
 	IBOutlet NSImageView *TVShowsAppImage;
+	
+	IBOutlet NSTextField *episodeCheckText;
 	IBOutlet NSPopUpButton *episodeCheckDelay;
+	
+	IBOutlet NSTextField *downloadLocationText;
 	IBOutlet NSPopUpButton *downloadLocationMenu;
+
+	IBOutlet NSTextField *videoQualityText;
 	IBOutlet NSMatrix *defaultVideoQuality;
+	int defaultQuality;
+	
 	IBOutlet NSButton *autoOpenDownloadedFiles;
 
 	// Growl Settings
+	IBOutlet NSTextField *growlNotifyText;
 	IBOutlet NSButton *growlNotifyEpisode;
 	IBOutlet NSButton *growlNotifyApplication;
 
 	// Application Update Preferences
+	IBOutlet NSButton *checkNowButton;
 	IBOutlet NSButton *checkForUpdates;
 	IBOutlet NSButton *autoInstallNewUpdates;
 	IBOutlet NSButton *downloadBetaVersions;
