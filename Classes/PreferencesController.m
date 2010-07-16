@@ -66,8 +66,6 @@
 
 - (void) loadSavedDefaults
 {
-	// Load download preferences
-	// -------------------------
 	if ([TSUserDefaults getBoolFromKey:@"isEnabled" withDefault:1]) {
 		isEnabled = 1;
 		[isEnabledControl setSelectedSegment: 1];
@@ -82,6 +80,8 @@
 									  pathForResource: @"TVShows-Off-Large" ofType: @"icns"]] autorelease]];
 	}
 	
+	// Automatically open downloaded files
+	[autoOpenDownloadedFiles setTitle: TSLocalizeString(@"Automatically open each file after download")];
 	[autoOpenDownloadedFiles setState: [TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]];
 	[episodeCheckDelay selectItemAtIndex: [TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:0]];
 	
@@ -92,22 +92,33 @@
 	
 	[self buildDownloadLocationMenu];
 	
-	// Load Growl notification preferences
-	// -----------------------------------
-	[growlNotifyEpisode			setState: [TSUserDefaults getBoolFromKey:@"GrowlOnNewEpisode" withDefault:1]];
-	[growlNotifyApplication		setState: [TSUserDefaults getBoolFromKey:@"GrowlOnAppUpdate" withDefault:1]];
+	// Notify when a new episode is downloaded
+	[growlNotifyEpisode setTitle: TSLocalizeString(@"… a new episode is downloaded.")];
+	[growlNotifyEpisode setState: [TSUserDefaults getBoolFromKey:@"GrowlOnNewEpisode" withDefault:1]];
 	
-	// Load Sparkle preferences
-	// ------------------------
+	// Notify when a TVShows update is released
+	[growlNotifyApplication setTitle: TSLocalizeString(@"… a new version of TVShows is released.")];
+	[growlNotifyApplication setState: [TSUserDefaults getBoolFromKey:@"GrowlOnAppUpdate" withDefault:1]];
+	
+	// Automatically check for new updates
+	[checkForUpdates setTitle: TSLocalizeString(@"Automatically check for updates")];
 	if ([TSUserDefaults getBoolFromKey:@"SUEnableAutomaticChecks" withDefault:1] == 0) {
 		[checkForUpdates			setState: 0];
 		[autoInstallNewUpdates		setEnabled: NO];
 		[includeSystemInformation	setEnabled: NO];
 		[downloadBetaVersions		setEnabled: NO];
 	}
-	[downloadBetaVersions		setState: [TSUserDefaults getBoolFromKey:@"SUDownloadBetaVersions" withDefault:1]];
-	[autoInstallNewUpdates		setState: [TSUserDefaults getBoolFromKey:@"SUAutomaticallyUpdate" withDefault:1]];
-	[includeSystemInformation	setState: [TSUserDefaults getBoolFromKey:@"SUSendProfileInfo" withDefault:1]];
+	// Automatically install new updates
+	[autoInstallNewUpdates setTitle: TSLocalizeString(@"Automatically install new updates")];
+	[autoInstallNewUpdates setState: [TSUserDefaults getBoolFromKey:@"SUAutomaticallyUpdate" withDefault:1]];
+	
+	// Download beta versions of TVShows
+	[downloadBetaVersions setTitle: TSLocalizeString(@"Download beta versions when available")];
+	[downloadBetaVersions setState: [TSUserDefaults getBoolFromKey:@"SUDownloadBetaVersions" withDefault:1]];
+	
+	// Include anonymous system information
+	[includeSystemInformation setTitle: TSLocalizeString(@"Include anonymous system information")];
+	[includeSystemInformation setState: [TSUserDefaults getBoolFromKey:@"SUSendProfileInfo" withDefault:1]];
 }
 
 #pragma mark -
