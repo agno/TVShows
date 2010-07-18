@@ -66,12 +66,26 @@
 	
 	// Continue if no error occurred when downloading the show list
 	if(errorHasOccurred == NO) {
-		// Rese the selection and search bar each time they open the window
+		// Reset the selection and search bar each time they open the window
 		[[[PTSearchField cell] cancelButtonCell] performClick:self];
 		[PTArrayController setSelectionIndex:0];
 		
 		// Setup the default video quality
-		[showQuality setState:[TSUserDefaults getFloatFromKey:@"defaultQuality" withDefault:0]];
+		[showQuality setTitle: TSLocalizeString(@"Download in HD")];
+		[showQuality setState: [TSUserDefaults getFloatFromKey:@"defaultQuality" withDefault:0]];
+		
+		// Localize the other buttons
+		[cancelButton setTitle: TSLocalizeString(@"Cancel")];
+		[subscribeButton setTitle: TSLocalizeString(@"Subscribe")];
+		[tvcomButton setTitle: TSLocalizeString(@"View on TV.com")];
+//		[ratingsTitle setStringValue: TSLocalizeString(@"Rating:")];
+		
+		// Localize the headings of the table columns
+		[[colHD headerCell] setStringValue: TSLocalizeString(@"HD")];
+		[[colName headerCell] setStringValue: TSLocalizeString(@"Episode Name")];
+//		[[colSeason headerCell] setStringValue: TSLocalizeString(@"Season")];
+//		[[colEpisode headerCell] setStringValue: TSLocalizeString(@"Episode")];
+//		[[colDate headerCell] setStringValue: TSLocalizeString(@"Published Date")];
 		
 		[NSApp beginSheet: PTWindow
 		   modalForWindow: [[NSApplication sharedApplication] mainWindow]
@@ -236,8 +250,9 @@
 	if (code < 200)
 		errorHasOccurred = YES;
 	
-	[PTErrorHeader setStringValue:title];
-	[PTErrorText setStringValue:message];	
+	[PTErrorHeader setStringValue: title];
+	[PTErrorText setStringValue: message];
+	[okayButton setTitle: TSLocalizeString(@"Ok")];
 	
     [NSApp beginSheet: PTErrorWindow
 	   modalForWindow: [[NSApplication sharedApplication] mainWindow]

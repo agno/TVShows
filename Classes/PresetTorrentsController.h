@@ -17,18 +17,31 @@
 
 @interface PresetTorrentsController : NSWindowController
 {
+	// Preset Torrents window
 	Boolean errorHasOccurred;
 	Boolean hasDownloadedList;
 	IBOutlet NSWindow *PTWindow;
 	IBOutlet NSTableView *PTTableView;
 	IBOutlet NSArrayController *PTArrayController;
-	IBOutlet NSButton *showQuality;
 	IBOutlet NSSearchField *PTSearchField;
+	IBOutlet NSButton *showQuality;
+	IBOutlet NSButton *cancelButton;
+	IBOutlet NSButton *subscribeButton;
+	IBOutlet NSButton *tvcomButton;
+	IBOutlet NSTextField *ratingsTitle;
+	IBOutlet NSTableColumn *colHD;
+	IBOutlet NSTableColumn *colName;
+	IBOutlet NSTableColumn *colSeason;
+	IBOutlet NSTableColumn *colEpisode;
+	IBOutlet NSTableColumn *colDate;
 	
+	// Error window
 	IBOutlet NSWindow *PTErrorWindow;
 	IBOutlet NSTextField *PTErrorText;
 	IBOutlet NSTextField *PTErrorHeader;
+	IBOutlet NSButton *okayButton;
 	
+	// Selected show arrays
 	IBOutlet NSArrayController *SBArrayController;
 	IBOutlet NSArrayController *episodeArrayController;
 	IBOutlet NSTabView *prefTabView;
