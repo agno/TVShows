@@ -128,8 +128,19 @@
 	// Set the displayed values
 	[showName setStringValue: [selectedShow valueForKey:@"name"]];
 	[showLastDownloaded setStringValue: [dateFormatter stringFromDate:[selectedShow valueForKey:@"lastDownloaded"]]];
+	[showQuality setTitle: TSLocalizeString(@"Download in HD")];
 	[showQuality setState: [[selectedShow valueForKey:@"quality"] intValue]];
+	[showIsEnabled setTitle: TSLocalizeString(@"Enable downloading new episodes")];
 	[showIsEnabled setState: [[selectedShow valueForKey:@"isEnabled"] boolValue]];
+	
+	// Localize everything else
+	[statusTitle setStringValue: TSLocalizeString(@"Status")];
+	[lastAiredTitle setStringValue: TSLocalizeString(@"Last Aired")];
+	[lastDownloadedTitle setStringValue: TSLocalizeString(@"Last Downloaded")];
+	[infoBoxTitle setTitle: TSLocalizeString(@"Info")];
+	[prefBoxTitle setTitle: TSLocalizeString(@"Preferences")];
+	[closeButton setTitle: TSLocalizeString(@"Close")];
+//	[unsubscribeButton setTitle: TSLocalizeString(@"Unsubscribe")];
 	
 	// Reset the Episode Array Controller and grab the new list of episodes
 	[[episodeArrayController content] removeAllObjects];

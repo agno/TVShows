@@ -51,6 +51,13 @@
 	IBOutlet NSButton *showIsEnabled;
 	IBOutlet NSArrayController *episodeArrayController;
 	IBOutlet NSTableView *episodeTableView;
+	IBOutlet NSTextField *statusTitle;
+	IBOutlet NSTextField *lastAiredTitle;
+	IBOutlet NSTextField *lastDownloadedTitle;
+	IBOutlet NSBox *infoBoxTitle;
+	IBOutlet NSBox *prefBoxTitle;
+	IBOutlet NSButton *closeButton;
+	IBOutlet NSButton *unsubscribeButton;
 }
 
 @property (retain) NSManagedObject *selectedShow;
