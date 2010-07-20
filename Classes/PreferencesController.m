@@ -72,14 +72,12 @@
 	[updateBoxTitle		setTitle: TSLocalizeString(@"Application Update Preferences")];
 	
 	if ([TSUserDefaults getBoolFromKey:@"isEnabled" withDefault:1]) {
-		isEnabled = 1;
-		[isEnabledControl setSelectedSegment: 1];
+		[isEnabledControl setState: NSOnState];
 		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
 									 [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
 									  pathForResource: @"TVShows-Beta-Large" ofType: @"icns"]] autorelease]];
 	} else {
-		isEnabled = 0;
-		[isEnabledControl setSelectedSegment: 0];
+		[isEnabledControl setState: NSOffState];
 		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
 									 [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
 									  pathForResource: @"TVShows-Off-Large" ofType: @"icns"]] autorelease]];
@@ -139,19 +137,16 @@
 
 #pragma mark -
 #pragma mark Download Preferences
-- (IBAction) isEnabledControlDidChange:(id)sender
+- (void) enabledControlDidChangeTo:(BOOL)isEnabled
 {
-	if ([isEnabledControl selectedSegment]) {
-		isEnabled = 1;
+	if (isEnabled) {
 		[TSUserDefaults setKey:@"isEnabled" fromBool: 1];
 		
 		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
 									 [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
 									  pathForResource: @"TVShows-Beta-Large" ofType: @"icns"]] autorelease]];
 		[self loadLaunchAgent];
-		
 	} else {
-		isEnabled = 0;
 		[TSUserDefaults setKey:@"isEnabled" fromBool: 0];
 		
 		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:

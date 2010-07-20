@@ -14,6 +14,7 @@
 
 #import <PreferencePanes/PreferencePanes.h>
 #import <Cocoa/Cocoa.h>
+#import "MBSliderButton.h"
 
 
 @interface PreferencesController : NSObject
@@ -24,8 +25,7 @@
 	IBOutlet NSBox *updateBoxTitle;
 	
 	// Download Preferences
-	Boolean isEnabled;
-	IBOutlet NSSegmentedControl *isEnabledControl;
+	IBOutlet MBSliderButton *isEnabledControl;
 	IBOutlet NSImageView *TVShowsAppImage;
 	
 	IBOutlet NSTextField *episodeCheckText;
@@ -62,7 +62,7 @@
 
 #pragma mark -
 #pragma mark Download Preferences
-- (IBAction) isEnabledControlDidChange:(id)sender;
+- (void) enabledControlDidChangeTo:(BOOL)isEnabled;
 - (IBAction) episodeCheckDelayDidChange:(id)sender;
 - (void) buildDownloadLocationMenu;
 - (NSMenu *) downloadLocationMenu;
