@@ -73,14 +73,14 @@
 	
 	if ([TSUserDefaults getBoolFromKey:@"isEnabled" withDefault:1]) {
 		[isEnabledControl setState: NSOnState];
-		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
-									 [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
-									  pathForResource: @"TVShows-Beta-Large" ofType: @"icns"]] autorelease]];
+//		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
+//									 [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
+//									  pathForResource: @"TVShows-Beta-Large" ofType: @"icns"]] autorelease]];
 	} else {
 		[isEnabledControl setState: NSOffState];
-		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
-									 [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
-									  pathForResource: @"TVShows-Off-Large" ofType: @"icns"]] autorelease]];
+//		[TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
+//									 [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
+//									  pathForResource: @"TVShows-Off-Large" ofType: @"icns"]] autorelease]];
 	}
 	
 	// Automatically open downloaded files
@@ -137,7 +137,7 @@
 
 #pragma mark -
 #pragma mark Download Preferences
-- (void) enabledControlDidChangeTo:(BOOL)isEnabled
+- (void) enabledControlDidChange:(BOOL)isEnabled
 {
 	if (isEnabled) {
 		[TSUserDefaults setKey:@"isEnabled" fromBool: 1];

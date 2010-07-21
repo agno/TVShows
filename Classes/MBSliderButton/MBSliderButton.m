@@ -56,8 +56,8 @@
 
 -(void)awakeFromNib
 {
-    surround = [[NSImage alloc] initByReferencingFile:[[prefpane bundle] pathForResource:@"Toggle-Slider" ofType:@"png"]];
-    knob = [[NSImage alloc] initByReferencingFile:[[prefpane bundle] pathForResource:@"Toggle-Knob" ofType:@"png"]];
+    surround = [[NSImage alloc] initByReferencingFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"Toggle-Slider" ofType:@"png"]];
+    knob = [[NSImage alloc] initByReferencingFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"Toggle-Knob" ofType:@"png"]];
     
     state = false;
 }
@@ -230,7 +230,7 @@
                         // wanted to use self.action and self.target but both are null
                         // even though I set them up in IB! :(
 						id prefController = [PreferencesController alloc];
-                        [prefController enabledControlDidChangeTo:state];
+                        [prefController enabledControlDidChange:state];
 						[prefController release];
                     }
                     

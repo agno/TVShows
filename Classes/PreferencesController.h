@@ -62,7 +62,7 @@
 
 #pragma mark -
 #pragma mark Download Preferences
-- (void) enabledControlDidChangeTo:(BOOL)isEnabled;
+- (void) enabledControlDidChange:(BOOL)isEnabled;
 - (IBAction) episodeCheckDelayDidChange:(id)sender;
 - (void) buildDownloadLocationMenu;
 - (NSMenu *) downloadLocationMenu;
