@@ -92,7 +92,9 @@
 	[episodeCheckDelay selectItemAtIndex: [TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:0]];
 	
 	// Default video quality
-	[videoQualityText setStringValue: TSLocalizeString(@"Default video quality:")]; 
+	[videoQualityText setStringValue: TSLocalizeString(@"Default video quality:")];
+	[[defaultVideoQuality cellAtRow:0 column:0] setTitle: [TSLocalizeString(@"Standard") stringByAppendingString:@" (420p)"]];
+	[[defaultVideoQuality cellAtRow:1 column:0] setTitle: [TSLocalizeString(@"High Definition") stringByAppendingString:@" (720p)"]];
 	defaultQuality = [TSUserDefaults getFloatFromKey:@"defaultQuality" withDefault:0];
 	[defaultVideoQuality setState: 1
 							atRow: defaultQuality

@@ -225,6 +225,8 @@
 		347F1E6711AA090D005A40AA /* PresetShowsDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PresetShowsDelegate.m; path = Classes/PresetShowsDelegate.m; sourceTree = "<group>"; };
 		347F1E6A11AA093C005A40AA /* PresetTorrentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresetTorrentsController.h; sourceTree = "<group>"; };
 		347F1E6B11AA093C005A40AA /* PresetTorrentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresetTorrentsController.m; sourceTree = "<group>"; };
+		347FC7AB11F6AE1E00E5B353 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = Resources/it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		347FC7AC11F6AE2400E5B353 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = Resources/it.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; };
 		34908BD0119B9C1C00BDFC01 /* SUPublicDSAKey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SUPublicDSAKey.pem; path = Resources/SUPublicDSAKey.pem; sourceTree = "<group>"; };
 		349F2F6411B2E7DB00D10D96 /* NSDate_FeedParserExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDate_FeedParserExtensions.h; sourceTree = "<group>"; };
 		349F2F6511B2E7DB00D10D96 /* NSDate_FeedParserExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDate_FeedParserExtensions.m; sourceTree = "<group>"; };
@@ -733,6 +735,7 @@
 				ja,
 				nb,
 				sv,
+				it,
 			);
 			mainGroup = 089C166AFE841209C02AAC07 /* TVShows */;
 			projectDirPath = "";
@@ -897,6 +900,7 @@
 				3424AF2611EF644D009C49DD /* nb */,
 				3424AF2711EF6451009C49DD /* pt */,
 				3424AF2811EF6453009C49DD /* sv */,
+				347FC7AB11F6AE1E00E5B353 /* it */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -929,6 +933,7 @@
 				3424AF2E11EF647D009C49DD /* nb */,
 				34C717D511E4230600A58B34 /* pt */,
 				3424AF2F11EF6482009C49DD /* sv */,
+				347FC7AC11F6AE2400E5B353 /* it */,
 			);
 			name = JRFeedbackProvider.strings;
 			sourceTree = "<group>";
