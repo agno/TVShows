@@ -54,7 +54,7 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
     if (!showFeedbackWindow) {
         int alertResult = [[NSAlert alertWithMessageText:NSLocalizedStringFromTable(@"Feedback Server Unavailable", @"JRFeedbackProvider", nil)
                                            defaultButton:NSLocalizedStringFromTable(@"Proceed Anyway", @"JRFeedbackProvider", nil)
-                                         alternateButton:NSLocalizedStringFromTable(@"Cancel", @"JRFeedbackProvider", nil)
+                                         alternateButton:TSLocalizeString(@"Cancel")
                                              otherButton:nil
                                informativeTextWithFormat:NSLocalizedStringFromTable(@"TVShows was unable to connect to the Ember Code website. Please check your connection or try again later.", @"JRFeedbackProvider", nil), [[JRFeedbackController postURL] host]
                             ] runModal];
@@ -264,7 +264,7 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
 {
 	NSAlert *thankYouAlert = [[[NSAlert alloc] init] autorelease];
 	//	in some countries, the "OK" is different
-	[thankYouAlert addButtonWithTitle:NSLocalizedStringFromTable(@"OK", @"JRFeedbackProvider", nil)];
+	[thankYouAlert addButtonWithTitle:TSLocalizeString(@"Ok")];
 	[thankYouAlert setMessageText:message];
 	[thankYouAlert setInformativeText:text];
 	[thankYouAlert setAlertStyle:alertStyle];
