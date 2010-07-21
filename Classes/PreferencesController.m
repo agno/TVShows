@@ -90,6 +90,13 @@
 	// Check for new episodes every...
 	[episodeCheckText setStringValue: TSLocalizeString(@"Check for episodes every:")];
 	[episodeCheckDelay selectItemAtIndex: [TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:0]];
+	[[episodeCheckDelay itemAtIndex: 0] setTitle: TSLocalizeString(@"15 minutes")];
+	[[episodeCheckDelay itemAtIndex: 1] setTitle: TSLocalizeString(@"30 minutes")];
+	[[episodeCheckDelay itemAtIndex: 2] setTitle: TSLocalizeString(@"1 hour")];
+	[[episodeCheckDelay itemAtIndex: 3] setTitle: TSLocalizeString(@"3 hours")];
+	[[episodeCheckDelay itemAtIndex: 4] setTitle: TSLocalizeString(@"6 hours")];
+	[[episodeCheckDelay itemAtIndex: 5] setTitle: TSLocalizeString(@"12 hours")];
+	[[episodeCheckDelay itemAtIndex: 6] setTitle: TSLocalizeString(@"1 day")];
 	
 	// Default video quality
 	[videoQualityText setStringValue: TSLocalizeString(@"Default video quality:")];
