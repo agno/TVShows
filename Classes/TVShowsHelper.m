@@ -47,7 +47,7 @@
 		
 		// Set up Growl notifications
 		[GrowlApplicationBridge setGrowlDelegate:@""];
-
+		
 		// TVShows is enabled, continuing...
 		id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
 		
@@ -66,19 +66,23 @@
 			// No error occurred so check for new episodes
 			for (NSArray *show in results) {
 				
+				// Don't download unless it's been at least 15minutes (or close to it)
 				NSNumber *lastDownloaded = [NSNumber numberWithDouble:[[show valueForKey:@"lastDownloaded"] timeIntervalSinceNow]];
-				NSNumber *timeLimit = [NSNumber numberWithInt:-15*60];
+				NSNumber *timeLimit = [NSNumber numberWithInt:-15*60+10];
 				
-				// Only check for new episodes if it's enabled and the last download
-				// time is less that timeLimit (15 minutes)
-				if ([show valueForKey:@"isEnabled"] && [lastDownloaded compare:timeLimit] == NSOrderedAscending) {
-					[self checkForNewEpisodes:show];
+				if ([lastDownloaded compare:timeLimit] == NSOrderedAscending) {
+					
+					// Only check for new episodes if it's enabled.
+					if ([show valueForKey:@"isEnabled"]) {
+						[self checkForNewEpisodes:show];
+					}
+					
+					// Update when the show was last downloaded. We do this for disabled
+					// shows too so that if it's renabled the user isn't bombarded with
+					// tens or hundreds of old episodes they probably don't want.
+					[show setValue:[NSDate date] forKey:@"lastDownloaded"];
 				}
 				
-				// Update when the show was last downloaded. We do this for disabled
-				// shows too so that if it's renabled the user isn't bombarded with
-				// tens or hundreds of old episodes they probably don't want.
-				[show setValue:[NSDate date] forKey:@"lastDownloaded"];
 			}
 			
 		}
