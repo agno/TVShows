@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		340A20B111AF0E15004351EB /* posterArtPlaceholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 340A20B011AF0E15004351EB /* posterArtPlaceholder.jpg */; };
 		340F15FB118FEBDE00A1BD00 /* SUUpdaterSubclass.m in Sources */ = {isa = PBXBuildFile; fileRef = 340F15F9118FEBDE00A1BD00 /* SUUpdaterSubclass.m */; };
+		34184AF911F88F6A00AA1DC2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3424AF1F11EF6432009C49DD /* Localizable.strings */; };
+		34184AFE11F88F7700AA1DC2 /* TVShowsHelper.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34184AFD11F88F7700AA1DC2 /* TVShowsHelper.xib */; };
 		3419982911A07913003768D5 /* WebsiteFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3419982711A07913003768D5 /* WebsiteFunctions.m */; };
 		3422ECEA118B3D7D0061E2E2 /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3422ECE8118B3D7D0061E2E2 /* PreferencesController.m */; };
 		3424120D11DC023600BC0742 /* Growl Registration Ticket.growlRegDict in Resources */ = {isa = PBXBuildFile; fileRef = 3424120C11DC023600BC0742 /* Growl Registration Ticket.growlRegDict */; };
@@ -20,7 +22,6 @@
 		3444F2CC11DD186500BF3724 /* Relaunch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3444F2CB11DD186500BF3724 /* Relaunch.m */; };
 		3444F2CD11DD189600BF3724 /* relaunch in Resources */ = {isa = PBXBuildFile; fileRef = 3444F2C311DD182000BF3724 /* relaunch */; };
 		3446722911C155690014C522 /* TVShowsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3446722811C155690014C522 /* TVShowsHelper.m */; };
-		3446726A11C167560014C522 /* TVShowsHelper.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3446726811C167560014C522 /* TVShowsHelper.xib */; };
 		344A204211F5470B00026735 /* MBSliderButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 344A204111F5470B00026735 /* MBSliderButton.m */; };
 		344A205A11F5485900026735 /* Toggle-Knob.png in Resources */ = {isa = PBXBuildFile; fileRef = 344A205811F5485900026735 /* Toggle-Knob.png */; };
 		344A205B11F5485900026735 /* Toggle-Slider.png in Resources */ = {isa = PBXBuildFile; fileRef = 344A205911F5485900026735 /* Toggle-Slider.png */; };
@@ -473,7 +474,7 @@
 			isa = PBXGroup;
 			children = (
 				34EC6AB811A312AD00BD660A /* TVShowsPref.xib */,
-				3446726811C167560014C522 /* TVShowsHelper.xib */,
+				34184AFD11F88F7700AA1DC2 /* TVShowsHelper.xib */,
 				34C717D711E4233700A58B34 /* JRFeedbackProvider.xib */,
 			);
 			name = "Interface Builder";
@@ -754,8 +755,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				34FBC60B11C0B4D0005D290B /* SUPublicDSAKey.pem in Resources */,
-				3446726A11C167560014C522 /* TVShowsHelper.xib in Resources */,
+				34184AFE11F88F7700AA1DC2 /* TVShowsHelper.xib in Resources */,
 				3424120D11DC023600BC0742 /* Growl Registration Ticket.growlRegDict in Resources */,
+				34184AF911F88F6A00AA1DC2 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -888,6 +890,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		34184AFD11F88F7700AA1DC2 /* TVShowsHelper.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3446726911C167560014C522 /* en */,
+			);
+			name = TVShowsHelper.xib;
+			sourceTree = "<group>";
+		};
 		3424AF1F11EF6432009C49DD /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -903,14 +913,6 @@
 				347FC7AB11F6AE1E00E5B353 /* it */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		3446726811C167560014C522 /* TVShowsHelper.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3446726911C167560014C522 /* en */,
-			);
-			name = TVShowsHelper.xib;
 			sourceTree = "<group>";
 		};
 		345BE411119344E10016EA2D /* InfoPlist.strings */ = {

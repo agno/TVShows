@@ -21,6 +21,12 @@
 
 - (IBAction) displayCustomRSSWindow:(id)sender
 {
+	// Localize everything
+	[rssSectionTitle setStringValue: TSLocalizeString(@"RSS Feed Information:")];
+	[filterSectionTitle setStringValue: TSLocalizeString(@"Only download items matching the following rules:")];
+	[nameText setStringValue: TSLocalizeString(@"Name:")];
+	[feedText setStringValue: TSLocalizeString(@"Feed:")];
+	
 	[NSApp beginSheet: CustomRSSWindow
 	   modalForWindow: [[NSApplication sharedApplication] mainWindow]
 		modalDelegate: nil

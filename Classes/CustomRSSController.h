@@ -18,6 +18,11 @@
 @interface CustomRSSController : NSWindowController
 {
 	IBOutlet NSWindow *CustomRSSWindow;
+	
+	IBOutlet NSTextField *rssSectionTitle;
+	IBOutlet NSTextField *filterSectionTitle;
+	IBOutlet NSTextField *nameText;
+	IBOutlet NSTextField *feedText;
 }
 
 - (IBAction) displayCustomRSSWindow:(id)sender;
