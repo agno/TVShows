@@ -25,7 +25,6 @@
 
 #define ShowListHostname			@"showrss.karmorra.info"
 #define ShowListURL					@"http://showrss.karmorra.info/?cs=feeds"
-//#define ShowListURL					@"http://embercode.com/temp/showlist.html"
 #define SelectTagsRegex				@"<select name=\"show\">(.+?)</select>"
 #define OptionTagsRegex				@"(?!<option value=\")([[:digit:]]+)(.*?)(?=</option>)"
 #define RSSIDRegex					@"([[:digit:]]+)(?![[:alnum:]]|[[:space:]])"
@@ -81,8 +80,8 @@
 //		[ratingsTitle setStringValue: TSLocalizeString(@"Rating:")];
 		
 		// Localize the headings of the table columns
-		[[colHD headerCell] setStringValue: TSLocalizeString(@"HD")];
-		[[colName headerCell] setStringValue: TSLocalizeString(@"Episode Name")];
+//		[[colHD headerCell] setStringValue: TSLocalizeString(@"HD")];
+//		[[colName headerCell] setStringValue: TSLocalizeString(@"Episode Name")];
 //		[[colSeason headerCell] setStringValue: TSLocalizeString(@"Season")];
 //		[[colEpisode headerCell] setStringValue: TSLocalizeString(@"Episode")];
 //		[[colDate headerCell] setStringValue: TSLocalizeString(@"Published Date")];
