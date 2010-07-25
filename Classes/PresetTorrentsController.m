@@ -225,7 +225,7 @@
 	NSString *message, *title;
 	
 	// Add 100 to any error codes if an older show list was found
-	if([[PTArrayController arrangedObjects] count] >= 1)
+	if([[PTArrayController content] count] >= 1)
 		code = code + 100;
 	
 	// Switch between each error code:
