@@ -157,8 +157,11 @@
 		NSArray *optionTags = [showListContents componentsMatchedByRegex:OptionTagsRegex];
 		
 		for(NSString *showInformation in optionTags) {
-			NSManagedObject *newShow = [NSEntityDescription insertNewObjectForEntityForName: @"Show"
+			// Yes, it's extremely messy to be adding it to the array controller and to
+			// the MOC separately but I don't have time to debug the issue with 32bit.
+			NSManagedObject *showObj = [NSEntityDescription insertNewObjectForEntityForName: @"Show"
 																	 inManagedObjectContext: context];
+			NSMutableDictionary *showDict = [NSMutableDictionary dictionary];
 			
 			// I hate having to search for each valute separately but I can't seem to figure out any other way
 			displayName = [[[showInformation componentsMatchedByRegex:DisplayNameRegex] objectAtIndex:0]
@@ -166,17 +169,25 @@
 			sortName = [displayName stringByReplacingOccurrencesOfRegex:@"^The[[:space:]]" withString:@""];
 			showrssID = [[[showInformation componentsMatchedByRegex:RSSIDRegex] objectAtIndex:0] intValue];
 			
-			[newShow setValue:displayName forKey:@"displayName"];
-			[newShow setValue:displayName forKey:@"name"];
-			[newShow setValue:sortName forKey:@"sortName"];
-			[newShow setValue:[NSNumber numberWithInt:showrssID] forKey:@"showrssID"];
-			[newShow setValue:[NSDate date] forKey:@"dateAdded"];
+			[showObj setValue:displayName forKey:@"displayName"];
+			[showObj setValue:displayName forKey:@"name"];
+			[showObj setValue:sortName forKey:@"sortName"];
+			[showObj setValue:[NSNumber numberWithInt:showrssID] forKey:@"showrssID"];
+			[showObj setValue:[NSDate date] forKey:@"dateAdded"];
+			
+			[showDict setValue:displayName forKey:@"displayName"];
+			[showDict setValue:displayName forKey:@"name"];
+			[showDict setValue:sortName forKey:@"sortName"];
+			[showDict setValue:[NSNumber numberWithInt:showrssID] forKey:@"showrssID"];
+			[showDict setValue:[NSDate date] forKey:@"dateAdded"];
+			
+			[PTArrayController addObject:showDict];
+			[context insertObject:showObj];
 		}
 		
-		[PTArrayController fetch:nil];
-		[PTArrayController prepareContent];
-		
 		hasDownloadedList = YES;
+		
+		[context processPendingChanges];
 		[delegateClass saveAction];
 	}
 	
