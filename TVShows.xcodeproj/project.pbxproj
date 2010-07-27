@@ -209,6 +209,8 @@
 		3452AB2711DADEFB000C3AA7 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = Frameworks/Growl.framework; sourceTree = "<group>"; };
 		345BE412119344E10016EA2D /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = Resources/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		345CE34E11D9712200C03A9F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		346C5BDF11FF6056003830CC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Resources/de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		346C5BE011FF605A003830CC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Resources/de.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; };
 		3471BB8611ACDF8700A65728 /* TSUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSUserDefaults.h; sourceTree = "<group>"; };
 		3471BB8711ACDF8700A65728 /* TSUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSUserDefaults.m; sourceTree = "<group>"; };
 		3473845E119074C8003DFFA0 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Frameworks/Sparkle.framework; sourceTree = "<group>"; };
@@ -737,6 +739,7 @@
 				nb,
 				sv,
 				it,
+				de,
 			);
 			mainGroup = 089C166AFE841209C02AAC07 /* TVShows */;
 			projectDirPath = "";
@@ -904,6 +907,7 @@
 				34EA89D111E6434E005C031A /* en */,
 				3424AF2111EF643A009C49DD /* ca */,
 				3424AF2211EF643C009C49DD /* da */,
+				346C5BDF11FF6056003830CC /* de */,
 				3424AF2311EF6442009C49DD /* es */,
 				3424AF2411EF6445009C49DD /* fr */,
 				3424AF2511EF644C009C49DD /* ja */,
@@ -929,6 +933,7 @@
 				34C717D311E422EA00A58B34 /* en */,
 				3424AF2911EF646E009C49DD /* ca */,
 				3424AF2A11EF6470009C49DD /* da */,
+				346C5BE011FF605A003830CC /* de */,
 				3424AF2B11EF6475009C49DD /* es */,
 				3424AF2C11EF6476009C49DD /* fr */,
 				3424AF2D11EF647B009C49DD /* ja */,
