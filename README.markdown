@@ -5,7 +5,7 @@ TVShows 2 "_Phoenix_" is the next version of [TVShows][tvshows], the easiest way
 <a href="http://embercode.com/blog/category/tvshows-news/" title="TVShows News">![Getting Started][preview-1] ![About][preview-2] ![Preferences][preview-3]</a>
 
 ## Translations
-* Help localize TVShows 2 into your native language! [Click here][translate] to be added to the translation team.
+* Help localize TVShows 2 into your native language! [Click here][translate] ([more info][translate-info])to be added to the translation team.
 
 ## Collaboration Instructions
 1. Checkout the repository:
