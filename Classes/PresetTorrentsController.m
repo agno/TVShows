@@ -20,6 +20,7 @@
 #import "SubscriptionsDelegate.h"
 #import "RegexKitLite.h"
 #import "WebsiteFunctions.h"
+#import "TheTVDB.h"
 
 #pragma mark Define Macros
 
@@ -212,8 +213,15 @@
 		[episodeArrayController addObjects:[TSParseXMLFeeds parseEpisodesFromFeed:selectedShowURL
 																		 maxItems:10]];
 		
+		// Grab the show description
+		id showAPI = [[[TheTVDB class] alloc] init];
+		[showDescription setStringValue:[showAPI getValueForKey:@"Overview" andShow:
+										 [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]] ];
+		
 		// Update the filter predicate to only display the correct quality.
 		// [self showQualityDidChange:nil];
+		
+		[showAPI release];
 	}
 }
 

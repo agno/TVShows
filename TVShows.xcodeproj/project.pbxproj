@@ -40,6 +40,7 @@
 		347AFB181191157700393565 /* NSURLRequestPostForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 347AFB141191157700393565 /* NSURLRequestPostForm.m */; };
 		347AFBD51191206700393565 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 347AFBD41191206700393565 /* AddressBook.framework */; };
 		347AFBD91191207300393565 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 347AFBD81191207300393565 /* SystemConfiguration.framework */; };
+		347B35D61210DB6000F4BFF0 /* TheTVDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 347B35D51210DB6000F4BFF0 /* TheTVDB.m */; };
 		347F1E6311A9FA6C005A40AA /* Subscriptions.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 347F1E6111A9FA6C005A40AA /* Subscriptions.xcdatamodel */; };
 		347F1E6511A9FA96005A40AA /* PresetShows.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 347F1E6411A9FA96005A40AA /* PresetShows.xcdatamodel */; };
 		347F1E6911AA090D005A40AA /* PresetShowsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 347F1E6711AA090D005A40AA /* PresetShowsDelegate.m */; };
@@ -221,6 +222,8 @@
 		347AFB20119115A800393565 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Resources/en.lproj/JRFeedbackProvider.xib; sourceTree = "<group>"; };
 		347AFBD41191206700393565 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		347AFBD81191207300393565 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		347B35D41210DB6000F4BFF0 /* TheTVDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheTVDB.h; sourceTree = "<group>"; };
+		347B35D51210DB6000F4BFF0 /* TheTVDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheTVDB.m; sourceTree = "<group>"; };
 		347F1E6111A9FA6C005A40AA /* Subscriptions.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; name = Subscriptions.xcdatamodel; path = Models/Subscriptions.xcdatamodel; sourceTree = "<group>"; };
 		347F1E6411A9FA96005A40AA /* PresetShows.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; name = PresetShows.xcdatamodel; path = Models/PresetShows.xcdatamodel; sourceTree = "<group>"; };
 		347F1E6611AA090D005A40AA /* PresetShowsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PresetShowsDelegate.h; path = Classes/PresetShowsDelegate.h; sourceTree = "<group>"; };
@@ -483,6 +486,15 @@
 			name = "Interface Builder";
 			sourceTree = "<group>";
 		};
+		347B35CC1210D80400F4BFF0 /* The TVDB */ = {
+			isa = PBXGroup;
+			children = (
+				347B35D41210DB6000F4BFF0 /* TheTVDB.h */,
+				347B35D51210DB6000F4BFF0 /* TheTVDB.m */,
+			);
+			name = "The TVDB";
+			sourceTree = "<group>";
+		};
 		347F1E6F11AA0D9E005A40AA /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -515,6 +527,7 @@
 		347F1E7911AA0E54005A40AA /* External Classes */ = {
 			isa = PBXGroup;
 			children = (
+				347B35CC1210D80400F4BFF0 /* The TVDB */,
 				349F2F6211B2E7DB00D10D96 /* FeedParser */,
 				344AFA2A11A4C58D00D9C4E9 /* iTunesScroller */,
 				347AFB0E1191153B00393565 /* JRFeedbackProvider */,
@@ -875,6 +888,7 @@
 				34C5B58B11BB3BFE00AAE681 /* TSRegexFun.m in Sources */,
 				34C5B59111BB3C1500AAE681 /* TSParseXMLFeeds.m in Sources */,
 				344A204211F5470B00026735 /* MBSliderButton.m in Sources */,
+				347B35D61210DB6000F4BFF0 /* TheTVDB.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

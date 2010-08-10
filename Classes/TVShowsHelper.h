@@ -16,7 +16,8 @@
 #import <Sparkle/SUUpdater.h>
 
 
-@interface TVShowsHelper : NSObject {
+@interface TVShowsHelper : NSObject
+{
 	NSData *TVShowsHelperIcon;
 }
 
