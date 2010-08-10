@@ -207,6 +207,8 @@
 	// Make sure we were able to correctly set a selection before continuing,
 	// or else searching and the scrollbar will fail.
 	if ( ([PTTableView selectedRow] > -1) || ([PTTableView selectedRow] == 0) && ([PTTableView selectedRow]) ) {
+		id showAPI = [[[TheTVDB class] alloc] init];
+		
 		// Grab the list of episodes
 		NSString *selectedShowURL = [NSString stringWithFormat:@"http://showrss.karmorra.info/feeds/%@.rss",
 									 [[[PTArrayController selectedObjects] valueForKey:@"showrssID"] objectAtIndex:0]];
@@ -214,9 +216,17 @@
 																		 maxItems:10]];
 		
 		// Grab the show description
-		id showAPI = [[[TheTVDB class] alloc] init];
-		[showDescription setStringValue:[showAPI getValueForKey:@"Overview" andShow:
-										 [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]] ];
+		// TODO: Fix displaying HTML codes (&mdash; etc)
+//		[showDescription setStringValue:[showAPI getValueForKey:@"Overview" andShow:
+//										 [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]] ];
+		
+		// Grab the show poster
+		// TODO: Cache the images
+		// TODO: Display placeholder if no image is found.
+//		NSString *posterURL = [showAPI getValueForKey:@"poster" andShow:
+//							   [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]];
+//		[showPoster setImage: [[[NSImage alloc] initWithContentsOfURL:
+//							   [NSURL URLWithString: [NSString stringWithFormat:@"http://www.thetvdb.com/banners/%@",posterURL]]] autorelease]];
 		
 		// Update the filter predicate to only display the correct quality.
 		// [self showQualityDidChange:nil];

@@ -28,6 +28,7 @@
 	IBOutlet NSButton *cancelButton;
 	IBOutlet NSButton *subscribeButton;
 	IBOutlet NSButton *tvcomButton;
+	IBOutlet NSImageView *showPoster;
 	IBOutlet NSTextField *showDescription;
 	IBOutlet NSTextField *ratingsTitle;
 	IBOutlet NSTableColumn *colHD;

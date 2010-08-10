@@ -6118,6 +6118,14 @@ bW1vZG8gY29uc2VxdWF0Lg</string>
 					</object>
 					<int key="connectionID">1984</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">showPoster</string>
+						<reference key="source" ref="748098755"/>
+						<reference key="destination" ref="1056219518"/>
+					</object>
+					<int key="connectionID">1986</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -9176,9 +9184,9 @@ bW1vZG8gY29uc2VxdWF0Lg</string>
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{299, 233}, {669, 450}}</string>
+					<string>{{329, 191}, {669, 450}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{299, 233}, {669, 450}}</string>
+					<string>{{329, 191}, {669, 450}}</string>
 					<boolean value="NO"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>ESScrollView</string>
@@ -9257,7 +9265,7 @@ bW1vZG8gY29uc2VxdWF0Lg</string>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1984</int>
+			<int key="maxID">1986</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -9789,6 +9797,7 @@ bW1vZG8gY29uc2VxdWF0Lg</string>
 							<string>prefTabView</string>
 							<string>ratingsTitle</string>
 							<string>showDescription</string>
+							<string>showPoster</string>
 							<string>showQuality</string>
 							<string>subscribeButton</string>
 							<string>tvcomButton</string>
@@ -9814,6 +9823,7 @@ bW1vZG8gY29uc2VxdWF0Lg</string>
 							<string>NSTabView</string>
 							<string>NSTextField</string>
 							<string>NSTextField</string>
+							<string>NSImageView</string>
 							<string>NSButton</string>
 							<string>NSButton</string>
 							<string>NSButton</string>
@@ -9842,6 +9852,7 @@ bW1vZG8gY29uc2VxdWF0Lg</string>
 							<string>prefTabView</string>
 							<string>ratingsTitle</string>
 							<string>showDescription</string>
+							<string>showPoster</string>
 							<string>showQuality</string>
 							<string>subscribeButton</string>
 							<string>tvcomButton</string>
@@ -9923,6 +9934,10 @@ bW1vZG8gY29uc2VxdWF0Lg</string>
 							<object class="IBToOneOutletInfo">
 								<string key="name">showDescription</string>
 								<string key="candidateClassName">NSTextField</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">showPoster</string>
+								<string key="candidateClassName">NSImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">showQuality</string>
