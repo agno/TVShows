@@ -29,7 +29,7 @@
 	IBOutlet NSButton *subscribeButton;
 	IBOutlet NSButton *tvcomButton;
 	IBOutlet NSImageView *showPoster;
-	IBOutlet NSTextField *showDescription;
+	IBOutlet NSTextView *showDescription;
 	IBOutlet NSTextField *ratingsTitle;
 	IBOutlet NSTableColumn *colHD;
 	IBOutlet NSTableColumn *colName;

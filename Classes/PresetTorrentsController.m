@@ -217,16 +217,16 @@
 		
 		// Grab the show description
 		// TODO: Fix displaying HTML codes (&mdash; etc)
-//		[showDescription setStringValue:[showAPI getValueForKey:@"Overview" andShow:
-//										 [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]] ];
+		[showDescription setString:[showAPI getValueForKey:@"Overview" andShow:
+									[[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]] ];
 		
 		// Grab the show poster
 		// TODO: Cache the images
 		// TODO: Display placeholder if no image is found.
-//		NSString *posterURL = [showAPI getValueForKey:@"poster" andShow:
-//							   [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]];
-//		[showPoster setImage: [[[NSImage alloc] initWithContentsOfURL:
-//							   [NSURL URLWithString: [NSString stringWithFormat:@"http://www.thetvdb.com/banners/%@",posterURL]]] autorelease]];
+		NSString *posterURL = [showAPI getValueForKey:@"poster" andShow:
+							   [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]];
+		[showPoster setImage: [[[NSImage alloc] initWithContentsOfURL:
+							   [NSURL URLWithString: [NSString stringWithFormat:@"http://www.thetvdb.com/banners/%@",posterURL]]] autorelease]];
 		
 		// Update the filter predicate to only display the correct quality.
 		// [self showQualityDidChange:nil];
