@@ -76,11 +76,6 @@
 					if ([show valueForKey:@"isEnabled"]) {
 						[self checkForNewEpisodes:show];
 					}
-					
-					// Update when the show was last downloaded. We do this for disabled
-					// shows too so that if it's renabled the user isn't bombarded with
-					// tens or hundreds of old episodes they probably don't want.
-					[show setValue:[NSDate date] forKey:@"lastDownloaded"];
 				}
 				
 			}
@@ -121,7 +116,8 @@
 				// Is HD and HD is enabled.
 				[self startDownloadingURL:[episode valueForKey:@"link"]
 							 withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
-								 showName:[show valueForKey:@"name"] ];
+								 showInfo:show ];
+				
 			} else if ([[show valueForKey:@"quality"] intValue] == 0 &&
 					   [[episode valueForKey:@"isHD"] intValue] == 0 ||
 					   feedHasHDEpisodes == NO) {
@@ -129,7 +125,7 @@
 				// Is not HD and HD is not enabled.
 				[self startDownloadingURL:[episode valueForKey:@"link"]
 							 withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
-								 showName:[show valueForKey:@"name"] ];	
+								 showInfo:show ];	
 			}
 		}
 		
@@ -138,7 +134,7 @@
 
 #pragma mark -
 #pragma mark Download Methods
-- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName showName:(NSString *)showName
+- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName showInfo:(NSArray *)show
 {
 	NSData *fileContents = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
 	NSString *saveLocation = [[TSUserDefaults getStringFromKey:@"downloadFolder"] stringByAppendingPathComponent:fileName];
@@ -148,6 +144,9 @@
 	if (!fileContents) {
 		TVLog(@"Unable to download file: %@",url);
 	} else {
+		// The file downloaded successfully, continuing...
+		id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
+		
 		// Check to see if the user wants to automatically open new downloads
 		if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
 			[[NSWorkspace sharedWorkspace] openFile:saveLocation withApplication:nil andDeactivate:NO];
@@ -155,14 +154,20 @@
 		
 		if([TSUserDefaults getBoolFromKey:@"GrowlOnNewEpisode" withDefault:1]) {
 		// In the future this may display the show's poster instead of our app icon.
-		[GrowlApplicationBridge notifyWithTitle:[NSString stringWithFormat:@"%@", showName]
-									description:[NSString stringWithFormat:@"A new episode of %@ is being downloaded.", showName]
+		[GrowlApplicationBridge notifyWithTitle:[NSString stringWithFormat:@"%@", [show valueForKey:@"name"]]
+									description:[NSString stringWithFormat:@"A new episode of %@ is being downloaded.", [show valueForKey:@"name"]]
 							   notificationName:@"New Episode Downloaded"
 									   iconData:TVShowsHelperIcon
 									   priority:0
 									   isSticky:0
 								   clickContext:nil];
 		}
+		
+		// Update when the show was last downloaded.
+		[show setValue:[NSDate date] forKey:@"lastDownloaded"];
+		
+		[delegateClass saveAction];
+		[delegateClass release];
 	}
 }
 
