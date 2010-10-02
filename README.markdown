@@ -5,7 +5,7 @@ TVShows 2 "_Phoenix_" is the next version of [TVShows][tvshows], the easiest way
 <a href="http://embercode.com/blog/category/tvshows-news/" title="TVShows News">![Getting Started][preview-1] ![About][preview-2] ![Preferences][preview-3]</a>
 
 ## Translations
-* Help localize TVShows 2 into your native language! [Click here][translate] ([more info][translate-info])to be added to the translation team.
+* Help localize TVShows 2 into your native language! [Click here][translate] ([more info][translate-info]) to be added to the translation team.
 
 ## Collaboration Instructions
 1. Checkout the repository:
@@ -19,16 +19,17 @@ TVShows 2 "_Phoenix_" is the next version of [TVShows][tvshows], the easiest way
 ## Collaboration Notes
 * You can also use GitHub's forking feature to make changes and then send me a pull request.
 * By default, the Debug configuration automatically installs TVShows into `~/Library/PreferencePanes/` each time it's built.
-* The current TVShows Roadmap can be found [here][roadmap] -- all issue numbers in commits refer to those in the Roadmap.
 
 ## Planned Features
 * Custom RSS feeds
 * Support for NZBs.org
-* Better support for non-standard naming conventions
-* Display show and episode information
 * The ability to download subtitles for new episodes
-* Localized languages for non-English users ([read more][translate-info])
-* Growl notifications for new downloads
+
+* In Progress: <s>Display show and episode information</s>
+
+* Complete: <s>Better support for non-standard naming conventions</s>
+* Complete: <s>Localized languages for non-English users ([read more][translate-info])</s>
+* Complete: <s>Growl notifications for new downloads</s>
 
 ## License
 TVShows is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
@@ -36,7 +37,6 @@ TVShows is free software: you can redistribute it and/or modify it under the ter
 For a copy of the GNU General Public License see &lt;[http://www.gnu.org/licenses/][license]&gt;.
 
 [tvshows]:http://embercode.com/tvshows/ "TVShows Website"
-[roadmap]:http://labs.embercode.com/projects/tvshows/roadmap "TVShows Roadmap"
 [translate]:https://webtranslateit.com/en/projects/874-TVShows-2/invitation_request "Help Translate TVShows 2"
 [translate-info]:http://embercode.com/blog/2010/help-translate-tvshows-2/ "Help Translate TVShows 2"
 
