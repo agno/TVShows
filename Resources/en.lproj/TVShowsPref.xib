@@ -840,7 +840,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 																</object>
 																<reference key="NSSelectedCell" ref="965160027"/>
 																<reference key="NSBackgroundColor" ref="525668472"/>
-																<object class="NSColor" key="NSCellBackgroundColor" id="981138921">
+																<object class="NSColor" key="NSCellBackgroundColor" id="889596145">
 																	<int key="NSColorSpace">3</int>
 																	<bytes key="NSWhite">MQA</bytes>
 																</object>
@@ -911,7 +911,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 														<int key="NSColorSpace">6</int>
 														<string key="NSCatalogName">System</string>
 														<string key="NSColorName">textBackgroundColor</string>
-														<reference key="NSColor" ref="981138921"/>
+														<reference key="NSColor" ref="889596145"/>
 													</object>
 													<object class="NSColor" key="NSTextColor">
 														<int key="NSColorSpace">3</int>
@@ -1355,7 +1355,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 																	<int key="NSFlags">12133</int>
 																	<int key="NSTextCheckingTypes">0</int>
 																	<nil key="NSMarkedAttributes"/>
-																	<reference key="NSBackgroundColor" ref="981138921"/>
+																	<reference key="NSBackgroundColor" ref="889596145"/>
 																	<object class="NSDictionary" key="NSSelectedAttributes">
 																		<bool key="EncodedWithXMLCoder">YES</bool>
 																		<object class="NSArray" key="dict.sortedKeys">
@@ -1413,7 +1413,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 														<reference key="NSSuperview" ref="786896441"/>
 														<reference key="NSNextKeyView" ref="1037992502"/>
 														<reference key="NSDocView" ref="1037992502"/>
-														<reference key="NSBGColor" ref="981138921"/>
+														<reference key="NSBGColor" ref="889596145"/>
 														<object class="NSCursor" key="NSCursor" id="392415497">
 															<string key="NSHotSpot">{4, -5}</string>
 															<int key="NSCursorType">1</int>
@@ -1786,7 +1786,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<int key="NSColorSpace">6</int>
 															<string key="NSCatalogName">System</string>
 															<string key="NSColorName">headerColor</string>
-															<reference key="NSColor" ref="981138921"/>
+															<reference key="NSColor" ref="889596145"/>
 														</object>
 														<reference key="NSTextColor" ref="984361167"/>
 													</object>
@@ -1931,7 +1931,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 											</object>
 											<double key="NSIntercellSpacingWidth">3</double>
 											<double key="NSIntercellSpacingHeight">2</double>
-											<reference key="NSBackgroundColor" ref="981138921"/>
+											<reference key="NSBackgroundColor" ref="889596145"/>
 											<reference key="NSGridColor" ref="994143233"/>
 											<double key="NSRowHeight">14</double>
 											<int key="NSTvFlags">1377828864</int>
@@ -2240,6 +2240,16 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							</object>
 							<string key="NSFrame">{{190, 207}, {135, 194}}</string>
 							<reference key="NSSuperview" ref="241592026"/>
+							<bool key="NSViewIsLayerTreeHost">YES</bool>
+							<object class="NSShadow" key="NSViewShadow">
+								<double key="NSShadowHoriz">1</double>
+								<double key="NSShadowVert">-1</double>
+								<double key="NSShadowBlurRadius">1</double>
+								<object class="NSColor" key="NSShadowColor" id="2539">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MC4zNjg2MTMxMjM5AA</bytes>
+								</object>
+							</object>
 							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSImageCell" key="NSCell" id="79062818">
@@ -2250,8 +2260,8 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 									<string key="NSResourceName">posterArtPlaceholder</string>
 								</object>
 								<reference key="NSSupport" ref="26"/>
-								<int key="NSAlign">0</int>
-								<int key="NSScale">3</int>
+								<int key="NSAlign">2</int>
+								<int key="NSScale">0</int>
 								<int key="NSStyle">0</int>
 								<bool key="NSAnimates">NO</bool>
 							</object>
@@ -2272,6 +2282,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 											<int key="NSvFlags">2322</int>
 											<string key="NSFrameSize">{316, 112}</string>
 											<reference key="NSSuperview" ref="560160419"/>
+											<int key="NSViewLayerContentsRedrawPolicy">2</int>
 											<object class="NSTextContainer" key="NSTextContainer" id="1006128716">
 												<object class="NSLayoutManager" key="NSLayoutManager">
 													<object class="NSTextStorage" key="NSTextStorage">
@@ -2320,10 +2331,7 @@ bW1vZG8gY29uc2VxdWF0Lg</bytes>
 												<int key="NSFlags">17172997</int>
 												<int key="NSTextCheckingTypes">0</int>
 												<nil key="NSMarkedAttributes"/>
-												<object class="NSColor" key="NSBackgroundColor" id="889596145">
-													<int key="NSColorSpace">3</int>
-													<bytes key="NSWhite">MQA</bytes>
-												</object>
+												<reference key="NSBackgroundColor" ref="889596145"/>
 												<object class="NSDictionary" key="NSSelectedAttributes">
 													<bool key="EncodedWithXMLCoder">YES</bool>
 													<object class="NSArray" key="dict.sortedKeys">
@@ -2364,6 +2372,7 @@ bW1vZG8gY29uc2VxdWF0Lg</bytes>
 									<string key="NSFrameSize">{316, 168}</string>
 									<reference key="NSSuperview" ref="868051296"/>
 									<reference key="NSNextKeyView" ref="993814608"/>
+									<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									<reference key="NSDocView" ref="993814608"/>
 									<reference key="NSBGColor" ref="889596145"/>
 									<reference key="NSCursor" ref="392415497"/>
@@ -2374,6 +2383,7 @@ bW1vZG8gY29uc2VxdWF0Lg</bytes>
 									<int key="NSvFlags">-2147483392</int>
 									<string key="NSFrame">{{300, 1}, {15, 166}}</string>
 									<reference key="NSSuperview" ref="868051296"/>
+									<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									<reference key="NSTarget" ref="868051296"/>
 									<string key="NSAction">_doScroller:</string>
 									<double key="NSCurValue">1</double>
@@ -2384,6 +2394,7 @@ bW1vZG8gY29uc2VxdWF0Lg</bytes>
 									<int key="NSvFlags">-2147483392</int>
 									<string key="NSFrame">{{-100, -100}, {87, 18}}</string>
 									<reference key="NSSuperview" ref="868051296"/>
+									<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									<int key="NSsFlags">1</int>
 									<reference key="NSTarget" ref="868051296"/>
 									<string key="NSAction">_doScroller:</string>
@@ -2394,6 +2405,7 @@ bW1vZG8gY29uc2VxdWF0Lg</bytes>
 							<string key="NSFrame">{{333, 233}, {316, 168}}</string>
 							<reference key="NSSuperview" ref="241592026"/>
 							<reference key="NSNextKeyView" ref="560160419"/>
+							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<int key="NSsFlags">528</int>
 							<reference key="NSVScroller" ref="725280749"/>
 							<reference key="NSHScroller" ref="475865670"/>
@@ -3496,7 +3508,7 @@ bW1vZG8gY29uc2VxdWF0Lg</bytes>
 													<int key="NSColorSpace">3</int>
 													<bytes key="NSWhite">MC4zMzMzMzI5ODU2AA</bytes>
 												</object>
-												<reference key="NSTextColor" ref="981138921"/>
+												<reference key="NSTextColor" ref="889596145"/>
 											</object>
 											<object class="NSTextFieldCell" key="NSDataCell">
 												<int key="NSCellFlags">338820672</int>
@@ -3571,7 +3583,7 @@ bW1vZG8gY29uc2VxdWF0Lg</bytes>
 													<int key="NSColorSpace">3</int>
 													<bytes key="NSWhite">MC4zMzMzMzI5ODU2AA</bytes>
 												</object>
-												<reference key="NSTextColor" ref="981138921"/>
+												<reference key="NSTextColor" ref="889596145"/>
 											</object>
 											<object class="NSTextFieldCell" key="NSDataCell">
 												<int key="NSCellFlags">338820672</int>
@@ -3899,7 +3911,7 @@ bW1vZG8gY29uc2VxdWF0Lg</bytes>
 											</object>
 											<double key="NSIntercellSpacingWidth">3</double>
 											<double key="NSIntercellSpacingHeight">2</double>
-											<reference key="NSBackgroundColor" ref="981138921"/>
+											<reference key="NSBackgroundColor" ref="889596145"/>
 											<reference key="NSGridColor" ref="994143233"/>
 											<double key="NSRowHeight">14</double>
 											<int key="NSTvFlags">-769654784</int>
@@ -9076,10 +9088,7 @@ bW1vZG8gY29uc2VxdWF0Lg</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<real value="1"/>
-					<object class="NSColor">
-						<int key="NSColorSpace">3</int>
-						<bytes key="NSWhite">MC4zNjg2MTMxMjM5AA</bytes>
-					</object>
+					<reference ref="2539"/>
 					<real value="-1"/>
 					<real value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -9282,9 +9291,9 @@ bW1vZG8gY29uc2VxdWF0Lg</bytes>
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{210, 161}, {669, 450}}</string>
+					<string>{{589, 168}, {669, 450}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{210, 161}, {669, 450}}</string>
+					<string>{{589, 168}, {669, 450}}</string>
 					<boolean value="NO"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>ESScrollView</string>

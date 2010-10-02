@@ -220,18 +220,36 @@
 		[showDescription setString:[showAPI getValueForKey:@"Overview" andShow:
 									[[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]] ];
 		
-		// Grab the show poster
+		// Grab the URL of the show poster
 		// TODO: Cache the images
 		// TODO: Display placeholder if no image is found.
 		NSString *posterURL = [showAPI getValueForKey:@"poster" andShow:
 							   [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]];
-		[showPoster setImage: [[[NSImage alloc] initWithContentsOfURL:
-							   [NSURL URLWithString: [NSString stringWithFormat:@"http://www.thetvdb.com/banners/%@",posterURL]]] autorelease]];
+		
+		// Resize the show poster so that it scales smoothly and still fits the box.
+		NSImage *sourceImage = [[NSImage alloc] initWithContentsOfURL:
+								[NSURL URLWithString: [NSString stringWithFormat:@"http://www.thetvdb.com/banners/%@",posterURL]]];
+		NSImage *resizedImage = [[NSImage alloc] initWithSize: NSMakeSize(129, 187)];
+		
+		NSSize originalSize = [sourceImage size];
+		
+		[resizedImage lockFocus];
+		[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
+		[sourceImage drawInRect: NSMakeRect(0, 0, 129, 187) fromRect: NSMakeRect(0, 0, originalSize.width, originalSize.height) operation: NSCompositeSourceOver fraction: 1.0];
+		[resizedImage unlockFocus];
+		
+		NSData *resizedData = [resizedImage TIFFRepresentation];
+		
+		// Display the show poster now that it's been resized.
+		[showPoster setImage: [[[NSImage alloc] initWithData: resizedData] autorelease]];
 		
 		// Update the filter predicate to only display the correct quality.
 		// [self showQualityDidChange:nil];
 		
+		// Release the API and show images.
 		[showAPI release];
+		[sourceImage release];
+		[resizedImage release];
 	}
 }
 
