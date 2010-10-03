@@ -14,10 +14,14 @@
 
 #import "PresetTorrentsController.h"
 #import "TabController.h"
-#import "TSUserDefaults.h"
+
 #import "PresetShowsDelegate.h"
-#import "TSParseXMLFeeds.h"
 #import "SubscriptionsDelegate.h"
+
+#import "TSUserDefaults.h"
+#import "TSParseXMLFeeds.h"
+#import "TSRegexFun.h"
+
 #import "RegexKitLite.h"
 #import "WebsiteFunctions.h"
 #import "TheTVDB.h"
@@ -217,8 +221,9 @@
 		
 		// Grab the show description
 		// TODO: Fix displaying HTML codes (&mdash; etc)
-		[showDescription setString:[showAPI getValueForKey:@"Overview" andShow:
-									[[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]] ];
+		NSString *description = [showAPI getValueForKey:@"Overview" andShow:
+								 [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]];
+		[showDescription setString: [TSRegexFun replaceHTMLEntitiesInString:description]];
 		
 		// Grab the URL of the show poster
 		// TODO: Cache the images

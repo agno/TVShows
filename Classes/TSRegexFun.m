@@ -89,4 +89,9 @@
 
 }
 
++ (NSString *) replaceHTMLEntitiesInString:(NSString *)string
+{
+	return [string stringByReplacingOccurrencesOfRegex:@"&quot;" withString:@"\""];
+}
+
 @end
