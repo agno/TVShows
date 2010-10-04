@@ -81,7 +81,7 @@
 	return value;
 }
 
-+ (NSImage *) getPosterForShow:(NSString *)showName
++ (NSImage *) getPosterForShow:(NSString *)showName withHeight:(float)height withWidth:(float)width
 {
 	// If the TVShows cache directory doesn't exist then create it.
 	NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -99,16 +99,29 @@
 	NSString *imagePath = [[[self applicationCacheDirectory] stringByAppendingPathComponent:showName] stringByAppendingFormat:@".tiff"];
 	
 	if ( [fileManager fileExistsAtPath:imagePath] ) {
-		DLog(@"Using cached image");
-		return [[[NSImage alloc] initWithContentsOfFile:imagePath] autorelease];
+		NSImage *sourceImage = [[[NSImage alloc] initWithContentsOfFile:imagePath] autorelease];
+		NSImage *finalImage = [[[NSImage alloc] initWithSize: NSMakeSize(width, height)] autorelease];
+		
+		NSSize originalSize = [sourceImage size];
+		
+		// Resize the cached image so that it fits the actual situation.
+		[finalImage lockFocus];
+		[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
+		[sourceImage drawInRect: NSMakeRect(0, 0, width, height)
+					   fromRect: NSMakeRect(0, 0, originalSize.width, originalSize.height)
+					  operation: NSCompositeSourceOver fraction: 1.0];
+		[finalImage unlockFocus];
+		
+		return finalImage;
 	} else {
 		// Grab the URL of the show poster
 		NSString *posterURL = [self getValueForKey:@"poster" andShow: showName];
 		
 		// Resize the show poster so that it scales smoothly and still fits the box.
-		NSImage *sourceImage = [[NSImage alloc] initWithContentsOfURL:
-								[NSURL URLWithString: [NSString stringWithFormat:@"http://www.thetvdb.com/banners/%@",posterURL]]];
-		NSImage *resizedImage = [[NSImage alloc] initWithSize: NSMakeSize(129, 187)];
+		NSImage *sourceImage = [[[NSImage alloc] initWithContentsOfURL:
+								[NSURL URLWithString: [NSString stringWithFormat:@"http://www.thetvdb.com/banners/%@",posterURL]]] autorelease];
+		NSImage *resizedImage = [[[NSImage alloc] initWithSize: NSMakeSize(129, 187)] autorelease];
+		NSImage *finalImage = [[[NSImage alloc] initWithSize: NSMakeSize(width, height)] autorelease];
 		
 		NSSize originalSize = [sourceImage size];
 		
@@ -123,10 +136,15 @@
 		NSData *resizedData = [resizedImage TIFFRepresentation];
 		[resizedData writeToFile:imagePath atomically:YES];
 		
-		[sourceImage release];
-		[resizedImage release];
+		// Now we need to resize the image one last time so that it fits the actual situation.
+		[finalImage lockFocus];
+		[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
+		[sourceImage drawInRect: NSMakeRect(0, 0, width, height)
+					   fromRect: NSMakeRect(0, 0, originalSize.width, originalSize.height)
+					  operation: NSCompositeSourceOver fraction: 1.0];
+		[finalImage unlockFocus];
 		
-		return resizedImage;
+		return finalImage;
 	}
 }
 

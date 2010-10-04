@@ -225,8 +225,9 @@
 
 		
 		// Display the show poster now that it's been resized.
-		[showPoster setImage: [TheTVDB getPosterForShow:
-							   [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]] ];
+		[showPoster setImage: [TheTVDB getPosterForShow:[[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]
+											 withHeight:187
+											  withWidth:129] ];
 		
 		// Update the filter predicate to only display the correct quality.
 		// [self showQualityDidChange:nil];

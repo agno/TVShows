@@ -12,11 +12,15 @@
  *
  */
 
-#import "TabController.h"
 #import "AppInfoConstants.h"
+#import "TabController.h"
+
 #import "SubscriptionsDelegate.h"
+
 #import "TSParseXMLFeeds.h"
 #import "TSUserDefaults.h"
+
+#import "TheTVDB.h"
 
 
 @implementation TabController
@@ -151,6 +155,11 @@
 	[[episodeArrayController content] removeAllObjects];
 	[episodeArrayController addObjects:[TSParseXMLFeeds parseEpisodesFromFeed:[selectedShow valueForKey:@"url"]
 																	 maxItems:10]];
+	
+	// Display the show poster now that it's been resized.
+	[showPoster setImage: [TheTVDB getPosterForShow:[selectedShow valueForKey:@"name"]
+										 withHeight:184
+										  withWidth:127] ];
 	
 	// Update the filter predicate to only display the correct quality.
 	// [self showQualityDidChange:nil];

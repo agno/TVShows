@@ -58,6 +58,7 @@
 	IBOutlet NSBox *prefBoxTitle;
 	IBOutlet NSButton *closeButton;
 	IBOutlet NSButton *unsubscribeButton;
+	IBOutlet NSImageView *showPoster;
 }
 
 @property (retain) NSManagedObject *selectedShow;
