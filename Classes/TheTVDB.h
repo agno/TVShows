@@ -22,6 +22,8 @@
 @property (retain) NSURL *mirrorURL;
 @property (retain) NSString *serverTime;
 
-- (NSString *) getValueForKey:(NSString *)key andShow:(NSString *)show;
++ (NSString *) applicationCacheDirectory;
++ (NSString *) getValueForKey:(NSString *)key andShow:(NSString *)show;
++ (NSImage *) getPosterForShow:(NSString *)showName;
 
 @end

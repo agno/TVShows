@@ -1571,6 +1571,50 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSImageView" id="1056219518">
+							<reference key="NSNextResponder" ref="241592026"/>
+							<int key="NSvFlags">268</int>
+							<object class="NSMutableSet" key="NSDragTypes">
+								<bool key="EncodedWithXMLCoder">YES</bool>
+								<object class="NSArray" key="set.sortedObjects">
+									<bool key="EncodedWithXMLCoder">YES</bool>
+									<string>Apple PDF pasteboard type</string>
+									<string>Apple PICT pasteboard type</string>
+									<string>Apple PNG pasteboard type</string>
+									<string>NSFilenamesPboardType</string>
+									<string>NeXT Encapsulated PostScript v1.2 pasteboard type</string>
+									<string>NeXT TIFF v4.0 pasteboard type</string>
+								</object>
+							</object>
+							<string key="NSFrame">{{190, 207}, {135, 194}}</string>
+							<reference key="NSSuperview" ref="241592026"/>
+							<bool key="NSViewIsLayerTreeHost">YES</bool>
+							<object class="NSShadow" key="NSViewShadow">
+								<double key="NSShadowHoriz">1</double>
+								<double key="NSShadowVert">-1</double>
+								<double key="NSShadowBlurRadius">1</double>
+								<object class="NSColor" key="NSShadowColor" id="2539">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MC4zNjg2MTMxMjM5AA</bytes>
+								</object>
+							</object>
+							<int key="NSViewLayerContentsRedrawPolicy">2</int>
+							<bool key="NSEnabled">YES</bool>
+							<object class="NSImageCell" key="NSCell" id="79062818">
+								<int key="NSCellFlags">67239424</int>
+								<int key="NSCellFlags2">33685504</int>
+								<object class="NSCustomResource" key="NSContents" id="412595049">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">posterArtPlaceholder</string>
+								</object>
+								<reference key="NSSupport" ref="26"/>
+								<int key="NSAlign">2</int>
+								<int key="NSScale">0</int>
+								<int key="NSStyle">0</int>
+								<bool key="NSAnimates">NO</bool>
+							</object>
+							<bool key="NSEditable">YES</bool>
+						</object>
 						<object class="NSScrollView" id="456449400">
 							<reference key="NSNextResponder" ref="241592026"/>
 							<int key="NSvFlags">4364</int>
@@ -2222,50 +2266,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 								<reference key="NSBackgroundColor" ref="525668472"/>
 								<reference key="NSTextColor" ref="73395071"/>
 							</object>
-						</object>
-						<object class="NSImageView" id="1056219518">
-							<reference key="NSNextResponder" ref="241592026"/>
-							<int key="NSvFlags">268</int>
-							<object class="NSMutableSet" key="NSDragTypes">
-								<bool key="EncodedWithXMLCoder">YES</bool>
-								<object class="NSArray" key="set.sortedObjects">
-									<bool key="EncodedWithXMLCoder">YES</bool>
-									<string>Apple PDF pasteboard type</string>
-									<string>Apple PICT pasteboard type</string>
-									<string>Apple PNG pasteboard type</string>
-									<string>NSFilenamesPboardType</string>
-									<string>NeXT Encapsulated PostScript v1.2 pasteboard type</string>
-									<string>NeXT TIFF v4.0 pasteboard type</string>
-								</object>
-							</object>
-							<string key="NSFrame">{{190, 207}, {135, 194}}</string>
-							<reference key="NSSuperview" ref="241592026"/>
-							<bool key="NSViewIsLayerTreeHost">YES</bool>
-							<object class="NSShadow" key="NSViewShadow">
-								<double key="NSShadowHoriz">1</double>
-								<double key="NSShadowVert">-1</double>
-								<double key="NSShadowBlurRadius">1</double>
-								<object class="NSColor" key="NSShadowColor" id="2539">
-									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MC4zNjg2MTMxMjM5AA</bytes>
-								</object>
-							</object>
-							<int key="NSViewLayerContentsRedrawPolicy">2</int>
-							<bool key="NSEnabled">YES</bool>
-							<object class="NSImageCell" key="NSCell" id="79062818">
-								<int key="NSCellFlags">67239424</int>
-								<int key="NSCellFlags2">33685504</int>
-								<object class="NSCustomResource" key="NSContents" id="412595049">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">posterArtPlaceholder</string>
-								</object>
-								<reference key="NSSupport" ref="26"/>
-								<int key="NSAlign">2</int>
-								<int key="NSScale">0</int>
-								<int key="NSStyle">0</int>
-								<bool key="NSAnimates">NO</bool>
-							</object>
-							<bool key="NSEditable">YES</bool>
 						</object>
 						<object class="NSScrollView" id="868051296">
 							<reference key="NSNextResponder" ref="241592026"/>
@@ -9291,9 +9291,9 @@ bW1vZG8gY29uc2VxdWF0Lg</bytes>
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{589, 168}, {669, 450}}</string>
+					<string>{{312, 166}, {669, 450}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{589, 168}, {669, 450}}</string>
+					<string>{{312, 166}, {669, 450}}</string>
 					<boolean value="NO"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>ESScrollView</string>
@@ -9370,7 +9370,7 @@ bW1vZG8gY29uc2VxdWF0Lg</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1999</int>
+			<int key="maxID">2007</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

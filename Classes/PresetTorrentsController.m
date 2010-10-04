@@ -211,7 +211,6 @@
 	// Make sure we were able to correctly set a selection before continuing,
 	// or else searching and the scrollbar will fail.
 	if ( ([PTTableView selectedRow] > -1) || ([PTTableView selectedRow] == 0) && ([PTTableView selectedRow]) ) {
-		id showAPI = [[[TheTVDB class] alloc] init];
 		
 		// Grab the list of episodes
 		NSString *selectedShowURL = [NSString stringWithFormat:@"http://showrss.karmorra.info/feeds/%@.rss",
@@ -220,41 +219,17 @@
 																		 maxItems:10]];
 		
 		// Grab the show description
-		// TODO: Fix displaying HTML codes (&mdash; etc)
-		NSString *description = [showAPI getValueForKey:@"Overview" andShow:
+		NSString *description = [TheTVDB getValueForKey:@"Overview" andShow:
 								 [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]];
 		[showDescription setString: [TSRegexFun replaceHTMLEntitiesInString:description]];
-		
-		// Grab the URL of the show poster
-		// TODO: Cache the images
-		// TODO: Display placeholder if no image is found.
-		NSString *posterURL = [showAPI getValueForKey:@"poster" andShow:
-							   [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]];
-		
-		// Resize the show poster so that it scales smoothly and still fits the box.
-		NSImage *sourceImage = [[NSImage alloc] initWithContentsOfURL:
-								[NSURL URLWithString: [NSString stringWithFormat:@"http://www.thetvdb.com/banners/%@",posterURL]]];
-		NSImage *resizedImage = [[NSImage alloc] initWithSize: NSMakeSize(129, 187)];
-		
-		NSSize originalSize = [sourceImage size];
-		
-		[resizedImage lockFocus];
-		[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
-		[sourceImage drawInRect: NSMakeRect(0, 0, 129, 187) fromRect: NSMakeRect(0, 0, originalSize.width, originalSize.height) operation: NSCompositeSourceOver fraction: 1.0];
-		[resizedImage unlockFocus];
-		
-		NSData *resizedData = [resizedImage TIFFRepresentation];
+
 		
 		// Display the show poster now that it's been resized.
-		[showPoster setImage: [[[NSImage alloc] initWithData: resizedData] autorelease]];
+		[showPoster setImage: [TheTVDB getPosterForShow:
+							   [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]] ];
 		
 		// Update the filter predicate to only display the correct quality.
 		// [self showQualityDidChange:nil];
-		
-		// Release the API and show images.
-		[showAPI release];
-		[sourceImage release];
-		[resizedImage release];
 	}
 }
 
