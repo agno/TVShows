@@ -67,16 +67,16 @@
 			for (NSArray *show in results) {
 				
 				// Don't download unless it's been at least 15minutes (or close to it)
-				NSNumber *lastDownloaded = [NSNumber numberWithDouble:[[show valueForKey:@"lastDownloaded"] timeIntervalSinceNow]];
-				NSNumber *timeLimit = [NSNumber numberWithInt:-15*60+10];
+//				NSNumber *lastDownloaded = [NSNumber numberWithDouble:[[show valueForKey:@"lastDownloaded"] timeIntervalSinceNow]];
+//				NSNumber *timeLimit = [NSNumber numberWithInt:-15*60+10];
 				
-				if ([lastDownloaded compare:timeLimit] == NSOrderedAscending) {
+//				if ([lastDownloaded compare:timeLimit] == NSOrderedAscending) {
 					
 					// Only check for new episodes if it's enabled.
 					if ([show valueForKey:@"isEnabled"]) {
 						[self checkForNewEpisodes:show];
 					}
-				}
+//				}
 				
 			}
 			
