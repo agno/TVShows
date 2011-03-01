@@ -221,7 +221,12 @@
 		// Grab the show description
 		NSString *description = [TheTVDB getValueForKey:@"Overview" andShow:
 								 [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]];
-		[showDescription setString: [TSRegexFun replaceHTMLEntitiesInString:description]];
+		if (description != NULL) {
+			[showDescription setString: [TSRegexFun replaceHTMLEntitiesInString:description]];
+		} else {
+			[showDescription setString: @"No description was found for this show."];
+		}
+
 
 		
 		// Display the show poster now that it's been resized.

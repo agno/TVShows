@@ -84,11 +84,11 @@
 			
 			return value;
 		} else {
-			return @"";
+			return NULL;
 		}
 
 	} else {
-		return @"";
+		return NULL;
 	}
 }
 
