@@ -63,22 +63,33 @@
 	
 	// For now select the first show in the list that's returned
 	// TODO: Get the TVDB ID from the Subscriptions file.
-	NSString *seriesID = [[seriesInfo componentsMatchedByRegex:@"(?!<seriesid>)([[:digit:]]+)(?=</seriesid>)"] objectAtIndex:0];
+	NSArray *tempSeriesID = [seriesInfo componentsMatchedByRegex:@"(?!<seriesid>)([[:digit:]]+)(?=</seriesid>)"];
+	if ( [tempSeriesID count] >= 1 ) {
+		NSString *seriesID = [tempSeriesID objectAtIndex:0];
 	
-	// Now let's grab complete info for the show using the API key.
-	// Since we don't need the other list anymore we'll reuse variables.
-	// TODO: Grab the correct localization.
-	seriesURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.thetvdb.com/api/%@/series/%@/en.xml",API_KEY,seriesID]];
-	seriesInfo = [[[NSString alloc] initWithContentsOfURL: seriesURL
-												 encoding: NSUTF8StringEncoding
-													error: NULL] autorelease];
-	
-	// Regex fun...
-	key = [NSString stringWithFormat:@"<%@>(.+)</%@>",key,key];
-	NSString *value = [[seriesInfo componentsMatchedByRegex:key] objectAtIndex:0];
-	value = [value stringByReplacingOccurrencesOfRegex:@"<(.+?)>" withString:@""];
-	
-	return value;
+		// Now let's grab complete info for the show using the API key.
+		// Since we don't need the other list anymore we'll reuse variables.
+		// TODO: Grab the correct localization.
+		seriesURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.thetvdb.com/api/%@/series/%@/en.xml",API_KEY,seriesID]];
+		seriesInfo = [[[NSString alloc] initWithContentsOfURL: seriesURL
+													 encoding: NSUTF8StringEncoding
+														error: NULL] autorelease];
+		
+		// Regex fun...
+		key = [NSString stringWithFormat:@"<%@>(.+)</%@>",key,key];
+		NSArray *tempValue = [seriesInfo componentsMatchedByRegex:key];
+		if ( [tempValue count] >= 1 ) {
+			NSString *value = [tempValue objectAtIndex:0];
+			value = [value stringByReplacingOccurrencesOfRegex:@"<(.+?)>" withString:@""];
+			
+			return value;
+		} else {
+			return @"";
+		}
+
+	} else {
+		return @"";
+	}
 }
 
 + (NSImage *) getPosterForShow:(NSString *)showName withHeight:(float)height withWidth:(float)width
