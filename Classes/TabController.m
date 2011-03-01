@@ -71,15 +71,14 @@
 	NSRect  tabFrame;
 	int	newWinHeight;
 	
-	// newWinHeight should be equal to the wanted window size (in Interface Builder) + 54 (title bar height)
-	
 	tabFrame = [[tabView window] frame];
 	
+	// newWinHeight should be equal to the wanted window size (in Interface Builder) + 54 (title bar height)
 	if ([[tabViewItem identifier] isEqualTo:@"tabItemPreferences"]) {
-		newWinHeight = 526;
+		newWinHeight = 506;
 		
 	} else if ([[tabViewItem identifier] isEqualTo:@"tabItemSubscriptions"]) {
-		newWinHeight = 526;
+		newWinHeight = 506;
 		
 	}  else if ([[tabViewItem identifier] isEqualTo:@"tabItemAbout"]) {
 		newWinHeight = 422;
