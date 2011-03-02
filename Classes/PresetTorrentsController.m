@@ -200,42 +200,46 @@
 
 - (void) tableViewSelectionDidChange:(NSNotification *)notification
 {
-	// If the selectedRow is -1 (no selection) or null, try to set a selection.
-	if ([PTTableView selectedRow] == -1 || ![PTTableView selectedRow]) {
-		[PTArrayController setSelectionIndex:0];
-	}
-	
-	// No matter what, reset the Episode Array Controller.
-	[[episodeArrayController content] removeAllObjects];
-	
-	// Make sure we were able to correctly set a selection before continuing,
-	// or else searching and the scrollbar will fail.
-	if ( ([PTTableView selectedRow] > -1) || ([PTTableView selectedRow] == 0) && ([PTTableView selectedRow]) ) {
-		
-		// Grab the list of episodes
-		NSString *selectedShowURL = [NSString stringWithFormat:@"http://showrss.karmorra.info/feeds/%@.rss",
-									 [[[PTArrayController selectedObjects] valueForKey:@"showrssID"] objectAtIndex:0]];
-		[episodeArrayController addObjects:[TSParseXMLFeeds parseEpisodesFromFeed:selectedShowURL
-																		 maxItems:10]];
-		
-		// Grab the show description
-		NSString *description = [TheTVDB getValueForKey:@"Overview" andShow:
-								 [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]];
-		if (description != NULL) {
-			[showDescription setString: [TSRegexFun replaceHTMLEntitiesInString:description]];
-		} else {
-			[showDescription setString: @"No description was found for this show."];
+	// Don't prematurely download show information;
+	// tableViewSelectionDidChange is called when the app first starts
+	if (hasDownloadedList) {
+		// If the selectedRow is -1 (no selection) or null, try to set a selection.
+		if ([PTTableView selectedRow] == -1 || ![PTTableView selectedRow]) {
+			[PTArrayController setSelectionIndex:0];
 		}
+		
+		// No matter what, reset the Episode Array Controller.
+		[[episodeArrayController content] removeAllObjects];
+		
+		// Make sure we were able to correctly set a selection before continuing,
+		// or else searching and the scrollbar will fail.
+		if ( ([PTTableView selectedRow] > -1) || ([PTTableView selectedRow] == 0) && ([PTTableView selectedRow]) ) {
+			
+			// Grab the list of episodes
+			NSString *selectedShowURL = [NSString stringWithFormat:@"http://showrss.karmorra.info/feeds/%@.rss",
+										 [[[PTArrayController selectedObjects] valueForKey:@"showrssID"] objectAtIndex:0]];
+			[episodeArrayController addObjects:[TSParseXMLFeeds parseEpisodesFromFeed:selectedShowURL
+																			 maxItems:10]];
+			
+			// Grab the show description
+			NSString *description = [TheTVDB getValueForKey:@"Overview" andShow:
+									 [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]];
+			if (description != NULL) {
+				[showDescription setString: [TSRegexFun replaceHTMLEntitiesInString:description]];
+			} else {
+				[showDescription setString: @"No description was found for this show."];
+			}
 
 
-		
-		// Display the show poster now that it's been resized.
-		[showPoster setImage: [TheTVDB getPosterForShow:[[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]
-											 withHeight:187
-											  withWidth:129] ];
-		
-		// Update the filter predicate to only display the correct quality.
-		// [self showQualityDidChange:nil];
+			
+			// Display the show poster now that it's been resized.
+			[showPoster setImage: [TheTVDB getPosterForShow:[[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]
+												 withHeight:187
+												  withWidth:129] ];
+			
+			// Update the filter predicate to only display the correct quality.
+			// [self showQualityDidChange:nil];
+		}
 	}
 }
 
