@@ -33,10 +33,6 @@
 	
 	IBOutlet NSTextField *downloadLocationText;
 	IBOutlet NSPopUpButton *downloadLocationMenu;
-
-	IBOutlet NSTextField *videoQualityText;
-	IBOutlet NSMatrix *defaultVideoQuality;
-	int defaultQuality;
 	
 	IBOutlet NSButton *autoOpenDownloadedFiles;
 
@@ -68,7 +64,6 @@
 - (NSMenu *) downloadLocationMenu;
 - (void) selectOtherDownloadFolder:(id)sender;
 - (void) openPanelDidEnd:(NSOpenPanel *)openPanel returnCode:(int)returnCode contextInfo:(void *)contextInfo;
-- (IBAction) defaultVideoQualityDidChange:(id)sender;
 - (IBAction) autoOpenDownloadedFilesDidChange:(id)sender;
 
 #pragma mark -

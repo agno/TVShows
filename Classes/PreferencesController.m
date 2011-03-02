@@ -51,7 +51,6 @@
 {
 	[TSUserDefaults setKey:@"AutoOpenDownloadedFiles"	fromBool:YES];
 	[TSUserDefaults setKey:@"checkDelay"				fromFloat:0];
-	[TSUserDefaults setKey:@"defaultQuality"			fromFloat:0];
 	[TSUserDefaults setKey:@"downloadFolder"			fromString:[NSHomeDirectory() stringByAppendingPathComponent:@"Downloads"]];
 	[TSUserDefaults setKey:@"GrowlOnAppUpdate"			fromBool:YES];
 	[TSUserDefaults setKey:@"GrowlOnNewEpisode"			fromBool:YES];
@@ -97,15 +96,6 @@
 	[[episodeCheckDelay itemAtIndex: 4] setTitle: TSLocalizeString(@"6 hours")];
 	[[episodeCheckDelay itemAtIndex: 5] setTitle: TSLocalizeString(@"12 hours")];
 	[[episodeCheckDelay itemAtIndex: 6] setTitle: TSLocalizeString(@"1 day")];
-	
-	// Default video quality
-	[videoQualityText setStringValue: TSLocalizeString(@"Default video quality:")];
-	[[defaultVideoQuality cellAtRow:0 column:0] setTitle: [TSLocalizeString(@"Standard") stringByAppendingString:@" (420p)"]];
-	[[defaultVideoQuality cellAtRow:1 column:0] setTitle: [TSLocalizeString(@"High Definition") stringByAppendingString:@" (720p)"]];
-	defaultQuality = [TSUserDefaults getFloatFromKey:@"defaultQuality" withDefault:0];
-	[defaultVideoQuality setState: 1
-							atRow: defaultQuality
-						   column: 0];
 	
 	// Default save location
 	[downloadLocationText setStringValue: TSLocalizeString(@"Episode save location:")];
@@ -240,11 +230,6 @@
 	}
 	
 	[self buildDownloadLocationMenu];
-}
-
-- (IBAction) defaultVideoQualityDidChange:(id)sender
-{
-	[TSUserDefaults setKey:@"defaultQuality" fromFloat: [defaultVideoQuality selectedRow]];
 }
 
 - (IBAction) autoOpenDownloadedFilesDidChange:(id)sender
