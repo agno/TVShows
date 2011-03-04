@@ -12,6 +12,8 @@
  *
  */
 
+#import "AppInfoConstants.h"
+
 #import "TheTVDB.h"
 #import "RegexKitLite.h"
 
@@ -126,11 +128,20 @@
 		return finalImage;
 	} else {
 		// Grab the URL of the show poster
+		NSImage *sourceImage;
 		NSString *posterURL = [self getValueForKey:@"poster" andShow: showName];
 		
+		// If a poster URL was returned, download the image.
+		if (posterURL != NULL) {
+			sourceImage = [[[NSImage alloc] initWithContentsOfURL:
+							[NSURL URLWithString: [NSString stringWithFormat:@"http://www.thetvdb.com/banners/%@",posterURL]]] autorelease];
+		} else {
+			sourceImage = [[[NSImage alloc] initWithContentsOfFile:
+							[[NSBundle bundleWithIdentifier: TVShowsAppDomain] pathForResource: @"posterArtPlaceholder"
+																						ofType: @"jpg"]] autorelease];
+		}
+		
 		// Resize the show poster so that it scales smoothly and still fits the box.
-		NSImage *sourceImage = [[[NSImage alloc] initWithContentsOfURL:
-								[NSURL URLWithString: [NSString stringWithFormat:@"http://www.thetvdb.com/banners/%@",posterURL]]] autorelease];
 		NSImage *resizedImage = [[[NSImage alloc] initWithSize: NSMakeSize(129, 187)] autorelease];
 		NSImage *finalImage = [[[NSImage alloc] initWithSize: NSMakeSize(width, height)] autorelease];
 		
@@ -143,9 +154,11 @@
 					  operation: NSCompositeSourceOver fraction: 1.0];
 		[resizedImage unlockFocus];
 		
-		// Save the image so that we don't have to download it again.
-		NSData *resizedData = [resizedImage TIFFRepresentation];
-		[resizedData writeToFile:imagePath atomically:YES];
+		// If a poster URL was returned, save the image so that it's now downloaded again.
+		if (posterURL != NULL) {
+			NSData *resizedData = [resizedImage TIFFRepresentation];
+			[resizedData writeToFile:imagePath atomically:YES];
+		}
 		
 		// Now we need to resize the image one last time so that it fits the actual situation.
 		[finalImage lockFocus];
