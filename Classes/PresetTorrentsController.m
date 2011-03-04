@@ -76,7 +76,7 @@
 		
 		// Setup the default video quality
 		[showQuality setTitle: TSLocalizeString(@"Download in HD")];
-		[showQuality setState: [TSUserDefaults getFloatFromKey:@"defaultQuality" withDefault:0]];
+		[showQuality setState: 1];
 		
 		// Localize the other buttons
 		[cancelButton setTitle: TSLocalizeString(@"Cancel")];

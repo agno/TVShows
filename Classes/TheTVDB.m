@@ -18,10 +18,6 @@
 #import "RegexKitLite.h"
 
 
-// This is a TVShow's specific API key. Do NOT reuse it.
-// You can get your own at http://thetvdb.com/?tab=apiregister
-#define API_KEY			@"E455EEEEFF5E6E2B"
-
 @implementation TheTVDB
 
 @synthesize mirrorURL, serverTime;

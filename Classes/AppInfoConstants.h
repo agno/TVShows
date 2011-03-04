@@ -19,10 +19,13 @@
 #define TVShowsAppcastURL			@"http://embercode.com/updates/tvshows.xml"
 #define TVShowsBetaAppcastURL		@"http://embercode.com/updates/tvshows-beta.xml"
 
+// This is a TVShows specific API key. Please DO NOT reuse it.
+// You can get your own at http://thetvdb.com/?tab=apiregister
+#define API_KEY						@"E455EEEEFF5E6E2B"
 
 // Used in the Delegate methods so that we don't have to duplicate files.
 #if PREFPANE
-	#define CurrentBundleDomain			@"com.embercode.TVShows2"
+	#define CurrentBundleDomain		@"com.embercode.TVShows2"
 #elif HELPER_APP
-	#define CurrentBundleDomain			@"com.embercode.TVShowsHelper"
+	#define CurrentBundleDomain		@"com.embercode.TVShowsHelper"
 #endif
