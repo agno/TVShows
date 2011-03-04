@@ -1,11 +1,11 @@
 # About
-TVShows 2 "_Phoenix_" is the next version of [TVShows][tvshows], the easiest way to download your favorite shows automatically. It includes a completely rewritten codebase as well as a major overhaul of the UI and a move to System Preferences. _Phoenix_ is currently in the late stages of development but I am always open to any feature suggestions.
+TVShows 2 is the next version of [TVShows][tvshows], the easiest way to download your favorite shows automatically. It includes a completely rewritten codebase as well as a major overhaul of the UI and a move to System Preferences.
 
 ## Screenshots
 <a href="http://embercode.com/blog/category/tvshows-news/" title="TVShows News">![Getting Started][preview-1] ![About][preview-2] ![Preferences][preview-3]</a>
 
-## Translations
-* Help localize TVShows 2 into your native language! [Click here][translate] ([more info][translate-info]) to be added to the translation team.
+<!-- ## Translations
+* Help localize TVShows 2 into your native language! [Click here][translate] ([more info][translate-info]) to be added to the translation team. -->
 
 ## Collaboration Instructions
 1. Checkout the repository:
@@ -19,17 +19,6 @@ TVShows 2 "_Phoenix_" is the next version of [TVShows][tvshows], the easiest way
 ## Collaboration Notes
 * You can also use GitHub's forking feature to make changes and then send me a pull request.
 * By default, the Debug configuration automatically installs TVShows into `~/Library/PreferencePanes/` each time it's built.
-
-## Planned Features
-* Custom RSS feeds
-* Support for NZBs.org
-* The ability to download subtitles for new episodes
-
-* In Progress: <s>Display show and episode information</s>
-
-* Complete: <s>Better support for non-standard naming conventions</s>
-* Complete: <s>Localized languages for non-English users ([read more][translate-info])</s>
-* Complete: <s>Growl notifications for new downloads</s>
 
 ## License
 TVShows is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
