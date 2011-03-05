@@ -135,6 +135,7 @@
 	
 	// Set the displayed values
 	[showName setStringValue: [selectedShow valueForKey:@"name"]];
+	[showStatus setStringValue: [TheTVDB getShowStatus:[selectedShow valueForKey:@"name"]]];
 	[showLastDownloaded setStringValue: [dateFormatter stringFromDate:[selectedShow valueForKey:@"lastDownloaded"]]];
 	[showQuality setTitle: TSLocalizeString(@"Download in HD")];
 	[showQuality setState: [[selectedShow valueForKey:@"quality"] intValue]];

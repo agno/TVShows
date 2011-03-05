@@ -24,6 +24,8 @@
 
 + (NSString *) applicationCacheDirectory;
 + (NSString *) getValueForKey:(NSString *)key andShow:(NSString *)show;
+
++ (NSString *) getShowStatus:(NSString *)showName;
 + (NSImage *) getPosterForShow:(NSString *)showName withHeight:(float)height withWidth:(float)width;
 
 @end

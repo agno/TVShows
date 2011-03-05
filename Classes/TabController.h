@@ -46,6 +46,7 @@
 	
 	// Show info window
 	IBOutlet NSTextField *showName;
+	IBOutlet NSTextField *showStatus;
 	IBOutlet NSTextField *showLastDownloaded;
 	IBOutlet NSButton *showQuality;
 	IBOutlet NSButton *showIsEnabled;

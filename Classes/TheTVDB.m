@@ -90,6 +90,20 @@
 	}
 }
 
++ (NSString *) getShowStatus:(NSString *)showName
+{
+	// Grab the show's status.
+	NSString *status = [self getValueForKey:@"Status" andShow: showName];
+	
+	// If no known status was returned...
+	if (!status) {
+		status = @"Unknown";
+	}
+	
+	return status;
+	
+}
+
 + (NSImage *) getPosterForShow:(NSString *)showName withHeight:(float)height withWidth:(float)width
 {
 	// If the TVShows cache directory doesn't exist then create it.
