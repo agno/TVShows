@@ -21,8 +21,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="6"/>
 			<integer value="1545"/>
+			<integer value="6"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -6011,6 +6011,26 @@ bW1vZG8gY29uc2VxdWF0Lg</bytes>
 					</object>
 					<int key="connectionID">2023</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: representedObject.showPoster</string>
+						<reference key="source" ref="126047570"/>
+						<reference key="destination" ref="465742794"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="126047570"/>
+							<reference key="NSDestination" ref="465742794"/>
+							<string key="NSLabel">value: representedObject.showPoster</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">representedObject.showPoster</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSConditionallySetsEnabled</string>
+								<boolean value="NO" key="NS.object.0"/>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">2027</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -7564,20 +7584,6 @@ bW1vZG8gY29uc2VxdWF0Lg</bytes>
 						<reference key="parent" ref="773782199"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">1889</int>
-						<reference key="object" ref="126047570"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="592580356"/>
-						</object>
-						<reference key="parent" ref="1073573348"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">1890</int>
-						<reference key="object" ref="592580356"/>
-						<reference key="parent" ref="126047570"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">2009</int>
 						<reference key="object" ref="433475855"/>
 						<reference key="parent" ref="0"/>
@@ -8250,6 +8256,20 @@ bW1vZG8gY29uc2VxdWF0Lg</bytes>
 						<reference key="object" ref="503259520"/>
 						<reference key="parent" ref="876508855"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1889</int>
+						<reference key="object" ref="126047570"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="592580356"/>
+						</object>
+						<reference key="parent" ref="1073573348"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1890</int>
+						<reference key="object" ref="592580356"/>
+						<reference key="parent" ref="126047570"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -8377,6 +8397,7 @@ bW1vZG8gY29uc2VxdWF0Lg</bytes>
 					<string>1540.IBPluginDependency</string>
 					<string>1541.IBPluginDependency</string>
 					<string>1542.IBPluginDependency</string>
+					<string>1543.CustomClassName</string>
 					<string>1543.IBCollectionViewIntegration.primaryColor</string>
 					<string>1543.IBPluginDependency</string>
 					<string>1544.IBPluginDependency</string>
@@ -8739,6 +8760,7 @@ bW1vZG8gY29uc2VxdWF0Lg</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>TSCollectionView</string>
 					<reference ref="439357951"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -9009,7 +9031,7 @@ bW1vZG8gY29uc2VxdWF0Lg</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">2023</int>
+			<int key="maxID">2027</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -9719,17 +9741,6 @@ bW1vZG8gY29uc2VxdWF0Lg</bytes>
 				<object class="IBPartialClassDescription">
 					<string key="className">TSCollectionView</string>
 					<string key="superclassName">NSCollectionView</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">showPoster</string>
-						<string key="NS.object.0">NSImageView</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">showPoster</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">showPoster</string>
-							<string key="candidateClassName">NSImageView</string>
-						</object>
-					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">Classes/TSCollectionView.h</string>

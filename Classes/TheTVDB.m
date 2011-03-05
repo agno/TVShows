@@ -96,7 +96,7 @@
 	NSString *status = [self getValueForKey:@"Status" andShow: showName];
 	
 	// If no known status was returned...
-	if (!status) {
+	if (status == NULL) {
 		status = @"Unknown";
 	}
 	
