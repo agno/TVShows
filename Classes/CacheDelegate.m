@@ -69,18 +69,12 @@
 		}
 	}
 	
-	// Ignoring persistent versioning is bad. We should change this later...
-	NSMutableDictionary *options = [NSMutableDictionary dictionary];
-	[options setObject:[NSNumber numberWithBool:YES] forKey:NSMigratePersistentStoresAutomaticallyOption];
-	[options setObject:[NSNumber numberWithBool:YES] forKey:NSIgnorePersistentStoreVersioningOption];
-//	[options setObject:[NSNumber numberWithBool:YES] forKey:NSInferMappingModelAutomaticallyOption];
-	
 	NSURL *url = [NSURL fileURLWithPath: [applicationSupportDirectory stringByAppendingPathComponent: @"Cache"]];
 	persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: mom];
 	if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
 												  configuration:nil
 															URL:url
-														options:options
+														options:nil
 														  error:&error]){
 		[[NSApplication sharedApplication] presentError:error];
 		[persistentStoreCoordinator release], persistentStoreCoordinator = nil;

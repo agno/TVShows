@@ -195,15 +195,10 @@
 	}
 }
 
-+ (NSString *) getPosterPathForShow:(id)showName
+- (NSImage *) getPosterForShow:(NSString *)showName withHeight:(float)height withWidth:(float)width
 {
-	// Tell the app to download a poster (if needed) like normal...
-	[self getPosterForShow:showName withHeight:96 withWidth:66];
-	
-	// But return the path to the poster instead of an NSImage.
-	return [[[self applicationCacheDirectory] stringByAppendingPathComponent:showName] stringByAppendingFormat:@".jpg"];
+	return [[TheTVDB class] getPosterForShow:showName withHeight:height withWidth:width];
 }
-
 
 - (void) dealloc
 {

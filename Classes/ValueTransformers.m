@@ -12,13 +12,30 @@
  *
  */
 
+#import "ValueTransformers.h"
+#import "TheTVDB.h"
 
-#import <Cocoa/Cocoa.h>
 
+@implementation ShowPosterValueTransformer
 
-@interface TSCollectionView : NSCollectionView
++ (Class) transformedValueClass;
 {
+	return [NSImage class];
+}
 
++ (BOOL) allowsReverseTransformation
+{
+    return NO;
+}
+
+- (id) transformedValue:(id)value
+{
+	// For some reason, we sometimes receive nil values.
+	// Those will crash the program if we aren't careful.
+	if (value == nil) return nil;
+	
+	NSImage *showPoster = [[TheTVDB class] getPosterForShow:value withHeight:96 withWidth:66];
+	return showPoster;
 }
 
 @end

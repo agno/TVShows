@@ -15,18 +15,12 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface TheTVDB : NSObject {
-	NSURL *mirrorURL;
+@interface ShowPosterValueTransformer : NSValueTransformer {
+	
 }
 
-@property (retain) NSURL *mirrorURL;
-@property (retain) NSString *serverTime;
-
-+ (NSString *) applicationCacheDirectory;
-+ (NSString *) getValueForKey:(NSString *)key andShow:(NSString *)show;
-
-+ (NSString *) getShowStatus:(NSString *)showName;
-+ (NSImage *) getPosterForShow:(NSString *)showName withHeight:(float)height withWidth:(float)width;
-- (NSImage *) getPosterForShow:(NSString *)showName withHeight:(float)height withWidth:(float)width;
++ (Class) transformedValueClass;
++ (BOOL) allowsReverseTransformation;
+- (id) transformedValue:(id)value;
 
 @end

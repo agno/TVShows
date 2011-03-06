@@ -15,11 +15,24 @@
 #import "TVShowsPref.h"
 #import "TSUserDefaults.h"
 #import "AppInfoConstants.h"
+#import "ValueTransformers.h"
 
 
 @implementation TVShowsPref
 
 @synthesize releaseNotesURL;
+
+- init
+{
+	if((self = [super init])) {
+		// Initialize any transformers we need to use in Interface Builder.
+		ShowPosterValueTransformer *trOne = [[[ShowPosterValueTransformer alloc] init] autorelease];
+		[NSValueTransformer setValueTransformer:trOne
+										forName:@"ShowPosterValueTransformer"];
+	}
+	
+	return self;
+}
 
 - (void) didSelect
 {

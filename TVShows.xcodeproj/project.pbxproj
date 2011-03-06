@@ -18,8 +18,6 @@
 		342A32FB11AA4C8C00C433CD /* CacheDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 342A32F911AA4C8C00C433CD /* CacheDelegate.m */; };
 		342FEC8511E1864000E21FC0 /* hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 342FEC8411E1864000E21FC0 /* hd.png */; };
 		343BF4CE1183DB3C008CE71D /* RSS-Large.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB966F118384DB005825C1 /* RSS-Large.png */; };
-		343D1BED1321C8D6001D9043 /* Subscriptions.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 343D1BEC1321C8D6001D9043 /* Subscriptions.xcdatamodeld */; };
-		343D1BEE1321C8D6001D9043 /* Subscriptions.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 343D1BEC1321C8D6001D9043 /* Subscriptions.xcdatamodeld */; };
 		3444F2CC11DD186500BF3724 /* Relaunch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3444F2CB11DD186500BF3724 /* Relaunch.m */; };
 		3444F2CD11DD189600BF3724 /* relaunch in Resources */ = {isa = PBXBuildFile; fileRef = 3444F2C311DD182000BF3724 /* relaunch */; };
 		3446722911C155690014C522 /* TVShowsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3446722811C155690014C522 /* TVShowsHelper.m */; };
@@ -34,6 +32,9 @@
 		3452ABE211DADF22000C3AA7 /* Growl.framework in Copy Linked Libraries */ = {isa = PBXBuildFile; fileRef = 3452AB2711DADEFB000C3AA7 /* Growl.framework */; };
 		345BE414119344E10016EA2D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 345BE411119344E10016EA2D /* InfoPlist.strings */; };
 		345CE34F11D9712200C03A9F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 345CE34E11D9712200C03A9F /* WebKit.framework */; };
+		345EC8DA13235DA400F36BFF /* Subscriptions.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 345EC8D913235DA400F36BFF /* Subscriptions.xcdatamodel */; };
+		345EC8DB13235DA400F36BFF /* Subscriptions.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 345EC8D913235DA400F36BFF /* Subscriptions.xcdatamodel */; };
+		345EC8EE13235E4800F36BFF /* ValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = 345EC8ED13235E4800F36BFF /* ValueTransformers.m */; };
 		3471BB8911ACDF8700A65728 /* TSUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 3471BB8711ACDF8700A65728 /* TSUserDefaults.m */; };
 		3473849E11907678003DFFA0 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3473845E119074C8003DFFA0 /* Sparkle.framework */; };
 		3473849F1190767A003DFFA0 /* Sparkle.framework in Copy Linked Libraries */ = {isa = PBXBuildFile; fileRef = 3473845E119074C8003DFFA0 /* Sparkle.framework */; };
@@ -47,7 +48,6 @@
 		347F1E6911AA090D005A40AA /* PresetShowsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 347F1E6711AA090D005A40AA /* PresetShowsDelegate.m */; };
 		347F1E6D11AA093C005A40AA /* PresetTorrentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 347F1E6B11AA093C005A40AA /* PresetTorrentsController.m */; };
 		34908BD1119B9C1C00BDFC01 /* SUPublicDSAKey.pem in Resources */ = {isa = PBXBuildFile; fileRef = 34908BD0119B9C1C00BDFC01 /* SUPublicDSAKey.pem */; };
-		349732F312596B0D00417CF0 /* TSCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 349732F212596B0D00417CF0 /* TSCollectionView.m */; };
 		349F2F8311B2E7DB00D10D96 /* NSDate_FeedParserExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 349F2F6511B2E7DB00D10D96 /* NSDate_FeedParserExtensions.m */; };
 		349F2F8511B2E7DB00D10D96 /* NSString_extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 349F2F6711B2E7DB00D10D96 /* NSString_extensions.m */; };
 		349F2F8811B2E7DB00D10D96 /* FPEnclosure.m in Sources */ = {isa = PBXBuildFile; fileRef = 349F2F6A11B2E7DB00D10D96 /* FPEnclosure.m */; };
@@ -191,7 +191,6 @@
 		342A32F811AA4C8C00C433CD /* CacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CacheDelegate.h; path = Classes/CacheDelegate.h; sourceTree = "<group>"; };
 		342A32F911AA4C8C00C433CD /* CacheDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CacheDelegate.m; path = Classes/CacheDelegate.m; sourceTree = "<group>"; };
 		342FEC8411E1864000E21FC0 /* hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hd.png; sourceTree = "<group>"; };
-		343D1DA41321E8B5001D9043 /* Subscriptions 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Subscriptions 2.xcdatamodel"; sourceTree = "<group>"; };
 		3444F2C311DD182000BF3724 /* relaunch */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = relaunch; sourceTree = BUILT_PRODUCTS_DIR; };
 		3444F2CB11DD186500BF3724 /* Relaunch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Relaunch.m; path = ../Relaunch.m; sourceTree = "<group>"; };
 		3446722711C155690014C522 /* TVShowsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShowsHelper.h; sourceTree = "<group>"; };
@@ -211,6 +210,9 @@
 		3452AB2711DADEFB000C3AA7 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = Frameworks/Growl.framework; sourceTree = "<group>"; };
 		345BE412119344E10016EA2D /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = Resources/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		345CE34E11D9712200C03A9F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		345EC8D913235DA400F36BFF /* Subscriptions.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; name = Subscriptions.xcdatamodel; path = Models/Subscriptions.xcdatamodel; sourceTree = "<group>"; };
+		345EC8EC13235E4800F36BFF /* ValueTransformers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueTransformers.h; sourceTree = "<group>"; };
+		345EC8ED13235E4800F36BFF /* ValueTransformers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValueTransformers.m; sourceTree = "<group>"; };
 		346C5BDF11FF6056003830CC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Resources/de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		346C5BE011FF605A003830CC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Resources/de.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; };
 		3471BB8611ACDF8700A65728 /* TSUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSUserDefaults.h; sourceTree = "<group>"; };
@@ -226,7 +228,6 @@
 		347AFBD81191207300393565 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		347B35D41210DB6000F4BFF0 /* TheTVDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheTVDB.h; sourceTree = "<group>"; };
 		347B35D51210DB6000F4BFF0 /* TheTVDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheTVDB.m; sourceTree = "<group>"; };
-		347F1E6111A9FA6C005A40AA /* Subscriptions.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Subscriptions.xcdatamodel; sourceTree = "<group>"; };
 		347F1E6411A9FA96005A40AA /* PresetShows.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; name = PresetShows.xcdatamodel; path = Models/PresetShows.xcdatamodel; sourceTree = "<group>"; };
 		347F1E6611AA090D005A40AA /* PresetShowsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PresetShowsDelegate.h; path = Classes/PresetShowsDelegate.h; sourceTree = "<group>"; };
 		347F1E6711AA090D005A40AA /* PresetShowsDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PresetShowsDelegate.m; path = Classes/PresetShowsDelegate.m; sourceTree = "<group>"; };
@@ -235,8 +236,6 @@
 		347FC7AB11F6AE1E00E5B353 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = Resources/it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		347FC7AC11F6AE2400E5B353 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = Resources/it.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; };
 		34908BD0119B9C1C00BDFC01 /* SUPublicDSAKey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SUPublicDSAKey.pem; path = Resources/SUPublicDSAKey.pem; sourceTree = "<group>"; };
-		349732F112596B0D00417CF0 /* TSCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCollectionView.h; sourceTree = "<group>"; };
-		349732F212596B0D00417CF0 /* TSCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCollectionView.m; sourceTree = "<group>"; };
 		349F2F6411B2E7DB00D10D96 /* NSDate_FeedParserExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDate_FeedParserExtensions.h; sourceTree = "<group>"; };
 		349F2F6511B2E7DB00D10D96 /* NSDate_FeedParserExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDate_FeedParserExtensions.m; sourceTree = "<group>"; };
 		349F2F6611B2E7DB00D10D96 /* NSString_extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_extensions.h; sourceTree = "<group>"; };
@@ -432,7 +431,7 @@
 			children = (
 				342A32F611AA4C6200C433CD /* Cache.xcdatamodel */,
 				347F1E6411A9FA96005A40AA /* PresetShows.xcdatamodel */,
-				343D1BEC1321C8D6001D9043 /* Subscriptions.xcdatamodeld */,
+				345EC8D913235DA400F36BFF /* Subscriptions.xcdatamodel */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -440,8 +439,6 @@
 		3444F29011DD13F700BF3724 /* Subclasses */ = {
 			isa = PBXGroup;
 			children = (
-				349732F112596B0D00417CF0 /* TSCollectionView.h */,
-				349732F212596B0D00417CF0 /* TSCollectionView.m */,
 				340F15F8118FEBDE00A1BD00 /* SUUpdaterSubclass.h */,
 				340F15F9118FEBDE00A1BD00 /* SUUpdaterSubclass.m */,
 				3444F2CB11DD186500BF3724 /* Relaunch.m */,
@@ -659,6 +656,8 @@
 				3471BB8711ACDF8700A65728 /* TSUserDefaults.m */,
 				3419982611A07913003768D5 /* WebsiteFunctions.h */,
 				3419982711A07913003768D5 /* WebsiteFunctions.m */,
+				345EC8EC13235E4800F36BFF /* ValueTransformers.h */,
+				345EC8ED13235E4800F36BFF /* ValueTransformers.m */,
 			);
 			name = "Helper Classes";
 			sourceTree = "<group>";
@@ -842,7 +841,6 @@
 				34FBC60511C0B4B7005D290B /* NSString_extensions.m in Sources */,
 				34FBC60711C0B4BD005D290B /* PreferencesController.m in Sources */,
 				34FBC60811C0B4C1005D290B /* RegexKitLite.m in Sources */,
-				343D1BEE1321C8D6001D9043 /* Subscriptions.xcdatamodeld in Sources */,
 				34FBC60A11C0B4D0005D290B /* SubscriptionsDelegate.m in Sources */,
 				34FBC60E11C0B4DA005D290B /* TSParseXMLFeeds.m in Sources */,
 				34FBC60F11C0B4DB005D290B /* TSRegexFun.m in Sources */,
@@ -852,6 +850,7 @@
 				34FBC69511C0B7CE005D290B /* SUUpdaterSubclass.m in Sources */,
 				3446722911C155690014C522 /* TVShowsHelper.m in Sources */,
 				34EC6DCD11CDA4F8001AEF04 /* PresetShows.xcdatamodel in Sources */,
+				345EC8DB13235DA400F36BFF /* Subscriptions.xcdatamodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -871,7 +870,6 @@
 				344AFA3211A4C58D00D9C4E9 /* ESScroller.m in Sources */,
 				344AFA8611A4D19C00D9C4E9 /* ESScrollView.m in Sources */,
 				34EBF4F211A8501A00962FE5 /* SubscriptionsDelegate.m in Sources */,
-				343D1BED1321C8D6001D9043 /* Subscriptions.xcdatamodeld in Sources */,
 				347F1E6511A9FA96005A40AA /* PresetShows.xcdatamodel in Sources */,
 				347F1E6911AA090D005A40AA /* PresetShowsDelegate.m in Sources */,
 				347F1E6D11AA093C005A40AA /* PresetTorrentsController.m in Sources */,
@@ -895,7 +893,8 @@
 				34C5B59111BB3C1500AAE681 /* TSParseXMLFeeds.m in Sources */,
 				344A204211F5470B00026735 /* MBSliderButton.m in Sources */,
 				347B35D61210DB6000F4BFF0 /* TheTVDB.m in Sources */,
-				349732F312596B0D00417CF0 /* TSCollectionView.m in Sources */,
+				345EC8DA13235DA400F36BFF /* Subscriptions.xcdatamodel in Sources */,
+				345EC8EE13235E4800F36BFF /* ValueTransformers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1233,21 +1232,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		343D1BEC1321C8D6001D9043 /* Subscriptions.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				347F1E6111A9FA6C005A40AA /* Subscriptions.xcdatamodel */,
-				343D1DA41321E8B5001D9043 /* Subscriptions 2.xcdatamodel */,
-			);
-			currentVersion = 343D1DA41321E8B5001D9043 /* Subscriptions 2.xcdatamodel */;
-			name = Subscriptions.xcdatamodeld;
-			path = Models/Subscriptions.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
 }
