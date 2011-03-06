@@ -119,7 +119,7 @@
 	}
 	
 	// If the image already exists then return the data, otherwise we need to download it.
-	NSString *imagePath = [[[self applicationCacheDirectory] stringByAppendingPathComponent:showName] stringByAppendingFormat:@".tiff"];
+	NSString *imagePath = [[[self applicationCacheDirectory] stringByAppendingPathComponent:showName] stringByAppendingFormat:@".jpg"];
 	
 	if ( [fileManager fileExistsAtPath:imagePath] ) {
 		NSImage *sourceImage = [[[NSImage alloc] initWithContentsOfFile:imagePath] autorelease];
@@ -164,13 +164,26 @@
 					  operation: NSCompositeSourceOver fraction: 1.0];
 		[resizedImage unlockFocus];
 		
-		// If a poster URL was returned, save the image so that it's now downloaded again.
+		// If a poster URL was returned, save the image so that it's not downloaded again.
 		if (posterURL != NULL) {
-			NSData *resizedData = [resizedImage TIFFRepresentation];
+			// Turn the NSImage into an NSData TIFFRepresentation. We do this since
+			// it will always work, no matter what the source image's type is.
+			NSData *imageData = [resizedImage TIFFRepresentation];
+
+			// Now it's safe to turn the NSData into an NSBitmapImageRep...
+			NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
+			
+			// From BitmapImageRep we can turn it into anything we want. Here, we're using a JPEG.
+			NSDictionary *imageProps = [NSDictionary dictionaryWithObject: [NSNumber numberWithFloat:0.8]
+																   forKey: NSImageCompressionFactor];
+			NSData *resizedData = [imageRep representationUsingType: NSJPEGFileType
+														 properties: imageProps];
+			
+			// The conversion is done, so save it to the disk.
 			[resizedData writeToFile:imagePath atomically:YES];
 		}
 		
-		// Now we need to resize the image one last time so that it fits the actual situation.
+		// Now we need to resize the image in memory one last time so that it fits the actual situation.
 		[finalImage lockFocus];
 		[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
 		[sourceImage drawInRect: NSMakeRect(0, 0, width, height)
@@ -180,6 +193,15 @@
 		
 		return finalImage;
 	}
+}
+
++ (NSString *) getPosterPathForShow:(id)showName
+{
+	// Tell the app to download a poster (if needed) like normal...
+	[self getPosterForShow:showName withHeight:96 withWidth:66];
+	
+	// But return the path to the poster instead of an NSImage.
+	return [[[self applicationCacheDirectory] stringByAppendingPathComponent:showName] stringByAppendingFormat:@".jpg"];
 }
 
 

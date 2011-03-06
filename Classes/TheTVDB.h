@@ -27,5 +27,6 @@
 
 + (NSString *) getShowStatus:(NSString *)showName;
 + (NSImage *) getPosterForShow:(NSString *)showName withHeight:(float)height withWidth:(float)width;
++ (NSString *) getPosterPathForShow:(NSString *)showName;
 
 @end
