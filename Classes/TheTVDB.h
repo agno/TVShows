@@ -28,5 +28,6 @@
 + (NSString *) getShowStatus:(NSString *)showName;
 + (NSImage *) getPosterForShow:(NSString *)showName withHeight:(float)height withWidth:(float)width;
 - (NSImage *) getPosterForShow:(NSString *)showName withHeight:(float)height withWidth:(float)width;
++ (NSString *) getIDForShow:(NSString *)showName withPossibleID:(NSString *)oldID;
 
 @end
