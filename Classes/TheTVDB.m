@@ -52,29 +52,36 @@
 
 + (NSString *) getValueForKey:(NSString *)key andShow:(NSString *)show
 {
-	// TODO: Save the information returned for each series into the Cache
-	NSURL *seriesURL = [NSURL URLWithString:[[NSString stringWithString: @"http://www.thetvdb.com/api/GetSeries.php?seriesname="]
-											 stringByAppendingString: [show stringByReplacingOccurrencesOfRegex:@" " withString:@"+"]]];
-	NSString *seriesInfo = [[[NSString alloc] initWithContentsOfURL: seriesURL
-														   encoding: NSUTF8StringEncoding
-															  error: NULL] autorelease];
-	
-	// For now select the first show in the list that's returned
+	// TODO: Save the information returned for each series into the Cache.
 	// TODO: Get the TVDB ID from the Subscriptions file.
-	NSArray *tempSeriesID = [seriesInfo componentsMatchedByRegex:@"(?!<seriesid>)([[:digit:]]+)(?=</seriesid>)"];
-	if ( [tempSeriesID count] >= 1 ) {
-		NSString *seriesID = [self getIDForShow:show withPossibleID:[tempSeriesID objectAtIndex:0]];
-		
-		// Now let's grab complete info for the show using the API key.
-		// Since we don't need the other list anymore we'll reuse variables.
+	
+	// Check to see if we already know the show's ID. If we don't then we need to search for it.
+	NSString *seriesID = [self getIDForShow:show];
+	if ( [seriesID isEqualToString:@"0"] ) {
+		NSURL *seriesURL = [NSURL URLWithString:[[NSString stringWithString: @"http://www.thetvdb.com/api/GetSeries.php?seriesname="]
+												 stringByAppendingString: [show stringByReplacingOccurrencesOfRegex:@" " withString:@"+"]]];
+		NSString *seriesInfo = [[[NSString alloc] initWithContentsOfURL: seriesURL
+															   encoding: NSUTF8StringEncoding
+																  error: NULL] autorelease];
+
+		// For now select the first show in the list that's returned.
+		NSArray *tempArray = [seriesInfo componentsMatchedByRegex:@"(?!<seriesid>)(\\d|\n|\r)*?(?=</seriesid>)"];
+		if ( [tempArray count] >= 1 ) {
+			seriesID = [tempArray objectAtIndex:0];
+		}
+	}
+	
+	// Only proceed if we received a series ID from somewhere above...
+	if ( [seriesID isNotEqualTo:@"0"] ) {
+		// Now let's grab complete info for the show using our API key.
 		// TODO: Grab the correct localization.
-		seriesURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.thetvdb.com/api/%@/series/%@/en.xml",API_KEY,seriesID]];
-		seriesInfo = [[[NSString alloc] initWithContentsOfURL: seriesURL
+		NSURL *seriesURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.thetvdb.com/api/%@/series/%@/en.xml",API_KEY,seriesID]];
+		NSString *seriesInfo = [[[NSString alloc] initWithContentsOfURL: seriesURL
 													 encoding: NSUTF8StringEncoding
 														error: NULL] autorelease];
 		
 		// Regex fun...
-		key = [NSString stringWithFormat:@"<%@>(.+)</%@>",key,key];
+		key = [NSString stringWithFormat:@"<%@>(.|\n|\r)*?</%@>",key,key];
 		NSArray *tempValue = [seriesInfo componentsMatchedByRegex:key];
 		if ( [tempValue count] >= 1 ) {
 			NSString *value = [tempValue objectAtIndex:0];
@@ -200,17 +207,16 @@
 	return [[TheTVDB class] getPosterForShow:showName withHeight:height withWidth:width];
 }
 
-+ (NSString *) getIDForShow:(NSString *)showName withPossibleID:(NSString *)oldID
++ (NSString *) getIDForShow:(NSString *)showName
 {
 	DLog(showName);
-	DLog(oldID);
 	
 	// TODO: Use an NSDictionary instead.
 	// * Means a show never made it to this method.
-	if ([showName isEqualToString:@"30 Seconds AU"])		return @"114461";	// Broken *
+	if ([showName isEqualToString:@"30 Seconds AU"])		return @"114461";
 	if ([showName isEqualToString:@"Archer"])				return @"110381";
-	if ([showName isEqualToString:@"Big Brother US"])		return @"76706";	// Broken *
-	if ([showName isEqualToString:@"Bob's Burger"])			return @"194031";	// Broken *
+	if ([showName isEqualToString:@"Big Brother US"])		return @"76706";
+	if ([showName isEqualToString:@"Bob's Burger"])			return @"194031";
 	if ([showName isEqualToString:@"Brothers and Sisters"])	return @"79506";
 	if ([showName isEqualToString:@"The Cape"])				return @"160671";
 	if ([showName isEqualToString:@"Castle"])				return @"83462";
@@ -223,20 +229,20 @@
 	if ([showName isEqualToString:@"David Letterman"])		return @"75088";
 	if ([showName isEqualToString:@"The Defenders"])		return @"164521";
 	if ([showName isEqualToString:@"Doctor Who"])			return @"112671";	// Broken
-	if ([showName isEqualToString:@"Eastbound and Down"])	return @"82467";	// Broken *
+	if ([showName isEqualToString:@"Eastbound and Down"])	return @"82467";
 	if ([showName isEqualToString:@"The Good Guys"])		return @"140101";
 	if ([showName isEqualToString:@"Human Target"])			return @"94801";
-	if ([showName isEqualToString:@"Law & Order: Special Victims Unit"])	return @"75692";	// Broken *
+	if ([showName isEqualToString:@"Law & Order: Special Victims Unit"])	return @"75692";	// Broken
 	if ([showName isEqualToString:@"Law & Order: Los Angeles"])				return @"168161";	// Broken
 	if ([showName isEqualToString:@"Law and Order"])		return @"72368";
-	if ([showName isEqualToString:@"Law & Order: UK"])		return @"85228";	// Broken *
-	if ([showName isEqualToString:@"The Life and Times of Tim"])			return @"83130";	// Broken *
+	if ([showName isEqualToString:@"Law & Order: UK"])		return @"85228";	// Broken
+	if ([showName isEqualToString:@"The Life and Times of Tim"])			return @"83130";
 	if ([showName isEqualToString:@"Lights Out"])			return @"194051";
 	if ([showName isEqualToString:@"Louie"])				return @"155201";	// Broken
-	if ([showName isEqualToString:@"Melissa and Joey"])		return @"168621";	// Broken *
+	if ([showName isEqualToString:@"Melissa and Joey"])		return @"168621";
 	if ([showName isEqualToString:@"Merlin"])				return @"83123";
 	
-	else return oldID;
+	else return @"0";
 }
 
 - (void) dealloc
