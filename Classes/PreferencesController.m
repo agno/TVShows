@@ -331,7 +331,9 @@
 	NSMutableDictionary *launchAgent = [NSMutableDictionary dictionary];
 	
 	// Unload and delete the old Launch Agent
-	[[NSFileManager defaultManager] removeFileAtPath:[self launchAgentPath] handler:nil];
+    if ( [[NSFileManager defaultManager] fileExistsAtPath:[self launchAgentPath]] ) {
+        [[NSFileManager defaultManager] removeItemAtPath:[self launchAgentPath] error:nil];
+    }
 	
 	NSInteger checkDelay = [TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:0];
 	switch (checkDelay) {

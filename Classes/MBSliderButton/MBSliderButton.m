@@ -101,6 +101,9 @@
     pt = location;
     pt.x -= 2;
     [knob drawAtPoint:pt fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+    
+    [green_gradient release];
+    [gray_gradient release];
 }
 
 -(BOOL)isOpaque
