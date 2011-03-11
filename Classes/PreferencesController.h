@@ -1,14 +1,14 @@
 /*
- *	This file is part of the TVShows 2 ("Phoenix") source code.
- *	http://github.com/mattprice/TVShows/
+ *  This file is part of the TVShows 2 ("Phoenix") source code.
+ *  http://github.com/mattprice/TVShows/
  *
- *	TVShows is free software: you can redistribute it and/or modify
- *	it under the terms of the GNU General Public License as published by
- *	the Free Software Foundation, either version 3 of the License, or
- *	(at your option) any later version.
+ *  TVShows is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
  *
- *	You should have received a copy of the GNU General Public License
- *	along with TVShows. If not, see <http://www.gnu.org/licenses/>.
+ *  You should have received a copy of the GNU General Public License
+ *  along with TVShows. If not, see <http://www.gnu.org/licenses/>.
  *
  */
 
@@ -19,34 +19,34 @@
 
 @interface PreferencesController : NSObject
 {
-	// Section headings
-	IBOutlet NSBox *downloadBoxTitle;
-	IBOutlet NSBox *growlBoxTitle;
-	IBOutlet NSBox *updateBoxTitle;
-	
-	// Download Preferences
-	IBOutlet MBSliderButton *isEnabledControl;
-	IBOutlet NSImageView *TVShowsAppImage;
-	
-	IBOutlet NSTextField *episodeCheckText;
-	IBOutlet NSPopUpButton *episodeCheckDelay;
-	
-	IBOutlet NSTextField *downloadLocationText;
-	IBOutlet NSPopUpButton *downloadLocationMenu;
-	
-	IBOutlet NSButton *autoOpenDownloadedFiles;
+    // Section headings
+    IBOutlet NSBox *downloadBoxTitle;
+    IBOutlet NSBox *growlBoxTitle;
+    IBOutlet NSBox *updateBoxTitle;
+    
+    // Download Preferences
+    IBOutlet MBSliderButton *isEnabledControl;
+    IBOutlet NSImageView *TVShowsAppImage;
+    
+    IBOutlet NSTextField *episodeCheckText;
+    IBOutlet NSPopUpButton *episodeCheckDelay;
+    
+    IBOutlet NSTextField *downloadLocationText;
+    IBOutlet NSPopUpButton *downloadLocationMenu;
+    
+    IBOutlet NSButton *autoOpenDownloadedFiles;
 
-	// Growl Settings
-	IBOutlet NSTextField *growlNotifyText;
-	IBOutlet NSButton *growlNotifyEpisode;
-	IBOutlet NSButton *growlNotifyApplication;
+    // Growl Settings
+    IBOutlet NSTextField *growlNotifyText;
+    IBOutlet NSButton *growlNotifyEpisode;
+    IBOutlet NSButton *growlNotifyApplication;
 
-	// Application Update Preferences
-	IBOutlet NSButton *checkNowButton;
-	IBOutlet NSButton *checkForUpdates;
-	IBOutlet NSButton *autoInstallNewUpdates;
-	IBOutlet NSButton *downloadBetaVersions;
-	IBOutlet NSButton *includeSystemInformation;
+    // Application Update Preferences
+    IBOutlet NSButton *checkNowButton;
+    IBOutlet NSButton *checkForUpdates;
+    IBOutlet NSButton *autoInstallNewUpdates;
+    IBOutlet NSButton *downloadBetaVersions;
+    IBOutlet NSButton *includeSystemInformation;
 }
 
 #pragma mark -
