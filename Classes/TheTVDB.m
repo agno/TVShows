@@ -209,10 +209,7 @@
 
 + (NSString *) getIDForShow:(NSString *)showName
 {
-	DLog(showName);
-	
-	// TODO: Use an NSDictionary instead.
-	// * Means a show never made it to this method.
+	// TODO: Use an NSDictionary instead (?).
 	if ([showName isEqualToString:@"30 Seconds AU"])		return @"114461";
 	if ([showName isEqualToString:@"Archer"])				return @"110381";
 	if ([showName isEqualToString:@"Big Brother US"])		return @"76706";
@@ -223,24 +220,36 @@
 	if ([showName isEqualToString:@"Chase"])				return @"163541";
 	if ([showName isEqualToString:@"Conan"])				return @"194751";
 	if ([showName isEqualToString:@"Cops"])					return @"74709";
-	if ([showName isEqualToString:@"CSI"])					return @"72546";	// Broken
-	if ([showName isEqualToString:@"Cupid"])				return @"83615";	// Broken
+	if ([showName isEqualToString:@"CSI"])					return @"72546";
+	if ([showName isEqualToString:@"Cupid"])				return @"83615";
 	if ([showName isEqualToString:@"The Daily Show"])		return @"71256";
 	if ([showName isEqualToString:@"David Letterman"])		return @"75088";
 	if ([showName isEqualToString:@"The Defenders"])		return @"164521";
-	if ([showName isEqualToString:@"Doctor Who"])			return @"112671";	// Broken
+	if ([showName isEqualToString:@"Doctor Who"])			return @"112671";
 	if ([showName isEqualToString:@"Eastbound and Down"])	return @"82467";
 	if ([showName isEqualToString:@"The Good Guys"])		return @"140101";
 	if ([showName isEqualToString:@"Human Target"])			return @"94801";
-	if ([showName isEqualToString:@"Law & Order: Special Victims Unit"])	return @"75692";	// Broken
-	if ([showName isEqualToString:@"Law & Order: Los Angeles"])				return @"168161";	// Broken
+	if ([showName isEqualToString:@"Law and Order: Special Victims Unit"])
+                                                            return @"75692";
+	if ([showName isEqualToString:@"Law & Order: Los Angeles"])
+                                                            return @"168161";
 	if ([showName isEqualToString:@"Law and Order"])		return @"72368";
-	if ([showName isEqualToString:@"Law & Order: UK"])		return @"85228";	// Broken
-	if ([showName isEqualToString:@"The Life and Times of Tim"])			return @"83130";
+	if ([showName isEqualToString:@"Law and Order: UK"])	return @"85228";
+	if ([showName isEqualToString:@"The Life and Times of Tim"])
+                                                            return @"83130";
 	if ([showName isEqualToString:@"Lights Out"])			return @"194051";
-	if ([showName isEqualToString:@"Louie"])				return @"155201";	// Broken
+	if ([showName isEqualToString:@"Louie"])				return @"155201";
 	if ([showName isEqualToString:@"Melissa and Joey"])		return @"168621";
 	if ([showName isEqualToString:@"Merlin"])				return @"83123";
+	if ([showName isEqualToString:@"Mike and Molly"])		return @"164501";
+	if ([showName isEqualToString:@"Mr. Sunshine"])			return @"164481";
+	if ([showName isEqualToString:@"The Office"])			return @"73244";
+	if ([showName isEqualToString:@"Parenthood"])			return @"94551";
+	if ([showName isEqualToString:@"Shit My Dad Says"])		return @"164951";
+	if ([showName isEqualToString:@"V"])                    return @"94971";
+
+    // Run's House (no poster)
+    // Spicks and Specks (no poster)
 	
 	else return @"0";
 }
