@@ -77,7 +77,7 @@
         newWinHeight = 475;
         
     } else if ([[tabViewItem identifier] isEqualTo:@"tabItemSubscriptions"]) {
-        newWinHeight = 429;
+        newWinHeight = 570;
         
     }  else if ([[tabViewItem identifier] isEqualTo:@"tabItemAbout"]) {
         newWinHeight = 422;
