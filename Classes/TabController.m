@@ -108,6 +108,11 @@
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString: TVShowsTwitter]];
 }
 
+- (IBAction) openPaypal:(id)sender
+{
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString: TVShowsDonations]];
+}
+
 - (void) drawAboutBox
 {
     NSString *pathToAboutBoxText = [[NSBundle bundleWithIdentifier: TVShowsAppDomain] 

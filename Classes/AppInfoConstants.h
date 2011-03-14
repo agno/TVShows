@@ -14,8 +14,11 @@
 
 #define TVShowsAppDomain            @"com.embercode.TVShows2"
 #define TVShowsHelperDomain         @"com.embercode.TVShowsHelper"
+
 #define TVShowsWebsite              @"http://embercode.com/tvshows/"
 #define TVShowsTwitter              @"http://twitter.com/embercode/"
+#define TVShowsDonations            @"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RFJZBTH9WNAXY"
+
 #define TVShowsAppcastURL           @"http://embercode.com/updates/tvshows.xml"
 #define TVShowsBetaAppcastURL       @"http://embercode.com/updates/tvshows-beta.xml"
 
