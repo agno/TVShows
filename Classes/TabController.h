@@ -26,7 +26,6 @@
     IBOutlet NSTextField *sidebarHeader;
     IBOutlet NSTextField *sidebarVersionText;
     IBOutlet NSTextField *sidebarDateText;
-    IBOutlet NSTextField *aboutTabVersionText;
     
     // About tab
     IBOutlet NSTextView *textView_aboutBox;

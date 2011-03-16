@@ -41,8 +41,6 @@
     [sidebarVersionText setStringValue: [NSString stringWithFormat:@"%@ (r%@)", bundleVersion, buildVersion]];
     [sidebarDateText setStringValue: buildDate];
     
-    [aboutTabVersionText setStringValue: [NSString stringWithFormat:@"TVShows %@ (%@)", bundleVersion, buildVersion]];
-    
     // Localize everything
     [[prefTabView tabViewItemAtIndex:0] setLabel: TSLocalizeString(@"Subscriptions")];
     [[prefTabView tabViewItemAtIndex:1] setLabel: TSLocalizeString(@"Preferences")];
