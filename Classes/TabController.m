@@ -103,6 +103,34 @@
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString: TVShowsDonations]];
 }
 
+- (IBAction) openUninstaller:(id)sender
+{
+    // Create an alert box.
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle:@"Yes"];
+    [alert addButtonWithTitle:@"No"];
+    [alert setMessageText:@"Uninstall TVShows"];
+    [alert setInformativeText:@"Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions."];
+    [alert setAlertStyle:NSWarningAlertStyle];
+    
+    // Run the alert and then wait for user input.
+    if ([alert runModal] == NSAlertFirstButtonReturn) {
+        // Drat! They really do want to uninstall. Find the path to the uninstaller.
+        NSString *launchPath = [[NSBundle bundleWithIdentifier: TVShowsAppDomain] pathForResource:@"Uninstaller"
+                                                                                           ofType:@"app"];
+        launchPath = [launchPath stringByAppendingPathComponent:@"Contents/MacOS/applet"];
+        
+        // Start up an NSTask to run the uninstaller.
+        NSTask *uninstaller = [[NSTask alloc] init];
+        [uninstaller setLaunchPath:launchPath];
+        [uninstaller launch];
+        
+        [uninstaller release];
+    }
+    
+    [alert release];
+}
+
 - (void) drawAboutBox
 {
     NSString *pathToAboutBoxText = [[NSBundle bundleWithIdentifier: TVShowsAppDomain] 

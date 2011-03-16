@@ -64,6 +64,7 @@
 - (IBAction) openWebsite:(id)sender;
 - (IBAction) openTwitter:(id)sender;
 - (IBAction) openPaypal:(id)sender;
+- (IBAction) openUninstaller:(id)sender;
 - (void) drawAboutBox;
 
 #pragma mark -

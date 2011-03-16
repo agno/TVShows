@@ -22,6 +22,7 @@
 		3444F2CC11DD186500BF3724 /* Relaunch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3444F2CB11DD186500BF3724 /* Relaunch.m */; };
 		3444F2CD11DD189600BF3724 /* relaunch in Resources */ = {isa = PBXBuildFile; fileRef = 3444F2C311DD182000BF3724 /* relaunch */; };
 		3446722911C155690014C522 /* TVShowsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3446722811C155690014C522 /* TVShowsHelper.m */; };
+		344971571330671700D24D68 /* Uninstaller.app in Resources */ = {isa = PBXBuildFile; fileRef = 344971561330671700D24D68 /* Uninstaller.app */; };
 		344A204211F5470B00026735 /* MBSliderButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 344A204111F5470B00026735 /* MBSliderButton.m */; };
 		344A205A11F5485900026735 /* Toggle-Knob.png in Resources */ = {isa = PBXBuildFile; fileRef = 344A205811F5485900026735 /* Toggle-Knob.png */; };
 		344A205B11F5485900026735 /* Toggle-Slider.png in Resources */ = {isa = PBXBuildFile; fileRef = 344A205911F5485900026735 /* Toggle-Slider.png */; };
@@ -197,6 +198,7 @@
 		3446722811C155690014C522 /* TVShowsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVShowsHelper.m; sourceTree = "<group>"; };
 		3446726511C157B60014C522 /* TVShowsHelper-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TVShowsHelper-Info.plist"; sourceTree = "<group>"; };
 		3446726911C167560014C522 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Resources/en.lproj/TVShowsHelper.xib; sourceTree = "<group>"; };
+		344971561330671700D24D68 /* Uninstaller.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Uninstaller.app; path = Resources/Uninstaller.app; sourceTree = "<group>"; };
 		344A204011F5470B00026735 /* MBSliderButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSliderButton.h; sourceTree = "<group>"; };
 		344A204111F5470B00026735 /* MBSliderButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSliderButton.m; sourceTree = "<group>"; };
 		344A205811F5485900026735 /* Toggle-Knob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Toggle-Knob.png"; sourceTree = "<group>"; };
@@ -372,10 +374,11 @@
 				34EA89D411E64370005C031A /* Localizations */,
 				34F6EA64119BCBA200F8AD4C /* Info.plist */,
 				3446726511C157B60014C522 /* TVShowsHelper-Info.plist */,
+				344971561330671700D24D68 /* Uninstaller.app */,
+				34785D04119B9CE200A28449 /* Credits.rtf */,
 				3424120C11DC023600BC0742 /* Growl Registration Ticket.growlRegDict */,
 				34908BD0119B9C1C00BDFC01 /* SUPublicDSAKey.pem */,
 				34A8FF9C1187C17000DDD3DE /* LICENSE.txt */,
-				34785D04119B9CE200A28449 /* Credits.rtf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -814,6 +817,7 @@
 				3424AF2011EF6432009C49DD /* Localizable.strings in Resources */,
 				344A205A11F5485900026735 /* Toggle-Knob.png in Resources */,
 				344A205B11F5485900026735 /* Toggle-Slider.png in Resources */,
+				344971571330671700D24D68 /* Uninstaller.app in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
