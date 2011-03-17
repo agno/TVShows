@@ -16,7 +16,6 @@ No actual videos are downloaded by TVShows, only torrents which require other pr
     * `$ cd TVShows`
     * `$ git submodule init`
     * `$ git submodule update`
-1. Install the [BWToolkit][bwtoolkit] IB plugin if you haven't before. It can be found in the `IB Plugins` folder.
 
 ## Collaboration Notes
 * You can also use GitHub's forking feature to make changes and then send me a pull request.
@@ -35,5 +34,4 @@ For a copy of the GNU General Public License see &lt;[http://www.gnu.org/license
 [preview-2]:http://embercode.com/blog/wp-content/uploads/2010/05/TVShows2_r191_AboutTeaser-300x201.png "TVShows 2 Teaser: About Tab"
 [preview-3]:http://embercode.com/blog/wp-content/uploads/2010/05/TVShows2_r191_PrefTeaser-300x243.png "TVShows 2 Teaser: Preferences"
 
-[bwtoolkit]:http://www.brandonwalkin.com/bwtoolkit/ "BWToolkit Information"
 [license]:http://www.gnu.org/licenses/ "GNU General Public License"
