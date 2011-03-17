@@ -21,6 +21,10 @@
 		343BF4CE1183DB3C008CE71D /* RSS-Large.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EB966F118384DB005825C1 /* RSS-Large.png */; };
 		3444F2CC11DD186500BF3724 /* Relaunch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3444F2CB11DD186500BF3724 /* Relaunch.m */; };
 		3444F2CD11DD189600BF3724 /* relaunch in Resources */ = {isa = PBXBuildFile; fileRef = 3444F2C311DD182000BF3724 /* relaunch */; };
+		34463CCD1331AD34001453EB /* PTViewSubclass.m in Sources */ = {isa = PBXBuildFile; fileRef = 34463CCC1331AD34001453EB /* PTViewSubclass.m */; };
+		34463CD01331B424001453EB /* NSColor+BWAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 34463CCF1331B424001453EB /* NSColor+BWAdditions.m */; };
+		34463CD51331B90D001453EB /* InfoViewSubclass.m in Sources */ = {isa = PBXBuildFile; fileRef = 34463CD41331B90D001453EB /* InfoViewSubclass.m */; };
+		34463CD81331BC40001453EB /* CRViewSubclass.m in Sources */ = {isa = PBXBuildFile; fileRef = 34463CD71331BC40001453EB /* CRViewSubclass.m */; };
 		3446722911C155690014C522 /* TVShowsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3446722811C155690014C522 /* TVShowsHelper.m */; };
 		344971571330671700D24D68 /* Uninstaller.app in Resources */ = {isa = PBXBuildFile; fileRef = 344971561330671700D24D68 /* Uninstaller.app */; };
 		344A204211F5470B00026735 /* MBSliderButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 344A204111F5470B00026735 /* MBSliderButton.m */; };
@@ -194,6 +198,14 @@
 		342FEC8411E1864000E21FC0 /* hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hd.png; sourceTree = "<group>"; };
 		3444F2C311DD182000BF3724 /* relaunch */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = relaunch; sourceTree = BUILT_PRODUCTS_DIR; };
 		3444F2CB11DD186500BF3724 /* Relaunch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Relaunch.m; path = ../Relaunch.m; sourceTree = "<group>"; };
+		34463CCB1331AD34001453EB /* PTViewSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTViewSubclass.h; sourceTree = "<group>"; };
+		34463CCC1331AD34001453EB /* PTViewSubclass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTViewSubclass.m; sourceTree = "<group>"; };
+		34463CCE1331B424001453EB /* NSColor+BWAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSColor+BWAdditions.h"; path = "BWToolkit/NSColor+BWAdditions.h"; sourceTree = "<group>"; };
+		34463CCF1331B424001453EB /* NSColor+BWAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSColor+BWAdditions.m"; path = "BWToolkit/NSColor+BWAdditions.m"; sourceTree = "<group>"; };
+		34463CD11331B887001453EB /* InfoViewSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewSubclass.h; sourceTree = "<group>"; };
+		34463CD41331B90D001453EB /* InfoViewSubclass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewSubclass.m; sourceTree = "<group>"; };
+		34463CD61331BC3F001453EB /* CRViewSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRViewSubclass.h; sourceTree = "<group>"; };
+		34463CD71331BC40001453EB /* CRViewSubclass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRViewSubclass.m; sourceTree = "<group>"; };
 		3446722711C155690014C522 /* TVShowsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShowsHelper.h; sourceTree = "<group>"; };
 		3446722811C155690014C522 /* TVShowsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVShowsHelper.m; sourceTree = "<group>"; };
 		3446726511C157B60014C522 /* TVShowsHelper-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TVShowsHelper-Info.plist"; sourceTree = "<group>"; };
@@ -439,6 +451,8 @@
 		342A5427132D4C9500FB526F /* BWToolkit */ = {
 			isa = PBXGroup;
 			children = (
+				34463CCE1331B424001453EB /* NSColor+BWAdditions.h */,
+				34463CCF1331B424001453EB /* NSColor+BWAdditions.m */,
 				342A5428132D4CB800FB526F /* BWInsetTextField.h */,
 				342A5429132D4CB800FB526F /* BWInsetTextField.m */,
 			);
@@ -448,8 +462,14 @@
 		3444F29011DD13F700BF3724 /* Subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				34463CD61331BC3F001453EB /* CRViewSubclass.h */,
+				34463CD71331BC40001453EB /* CRViewSubclass.m */,
+				34463CD11331B887001453EB /* InfoViewSubclass.h */,
+				34463CD41331B90D001453EB /* InfoViewSubclass.m */,
 				340F15F8118FEBDE00A1BD00 /* SUUpdaterSubclass.h */,
 				340F15F9118FEBDE00A1BD00 /* SUUpdaterSubclass.m */,
+				34463CCB1331AD34001453EB /* PTViewSubclass.h */,
+				34463CCC1331AD34001453EB /* PTViewSubclass.m */,
 				3444F2CB11DD186500BF3724 /* Relaunch.m */,
 			);
 			name = Subclasses;
@@ -907,6 +927,10 @@
 				345EC8DA13235DA400F36BFF /* Subscriptions.xcdatamodel in Sources */,
 				345EC8EE13235E4800F36BFF /* ValueTransformers.m in Sources */,
 				342A542A132D4CB800FB526F /* BWInsetTextField.m in Sources */,
+				34463CCD1331AD34001453EB /* PTViewSubclass.m in Sources */,
+				34463CD01331B424001453EB /* NSColor+BWAdditions.m in Sources */,
+				34463CD51331B90D001453EB /* InfoViewSubclass.m in Sources */,
+				34463CD81331BC40001453EB /* CRViewSubclass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
