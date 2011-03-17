@@ -33,6 +33,7 @@
     // Subscriptions tab
     IBOutlet NSArrayController *SBArrayController;
     IBOutlet NSWindow *showInfoWindow;
+    IBOutlet NSTextField *lastCheckedDate;
     
     // Show info window
     IBOutlet NSTextField *showName;
@@ -43,7 +44,6 @@
     IBOutlet NSArrayController *episodeArrayController;
     IBOutlet NSTableView *episodeTableView;
     IBOutlet NSTextField *statusTitle;
-    IBOutlet NSTextField *lastAiredTitle;
     IBOutlet NSTextField *lastDownloadedTitle;
     IBOutlet NSBox *infoBoxTitle;
     IBOutlet NSBox *prefBoxTitle;

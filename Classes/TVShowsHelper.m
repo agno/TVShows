@@ -82,6 +82,9 @@
             
         }
         
+        // Now that everything is done, update the time our last check was made.
+        [TSUserDefaults setKey:@"lastCheckedForEpisodes" fromDate:[NSDate date]];
+        
         [delegateClass saveAction];
         [delegateClass release];
         

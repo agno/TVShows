@@ -41,6 +41,23 @@
     [sidebarVersionText setStringValue: [NSString stringWithFormat:@"%@ (r%@)", bundleVersion, buildVersion]];
     [sidebarDateText setStringValue: buildDate];
     
+    NSDate *date = [TSUserDefaults getDateFromKey:@"lastCheckedForEpisodes"];
+    if (date) {
+        // Set the last date/time episodes were checked for.
+        NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+        [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+        
+        NSDateFormatter *timeFormatter = [[[NSDateFormatter alloc] init] autorelease];
+        [timeFormatter setDateStyle:NSDateFormatterNoStyle];
+        [timeFormatter setTimeStyle:NSDateFormatterShortStyle];
+        
+        [lastCheckedDate setStringValue: [[[dateFormatter stringFromDate: date] stringByAppendingString:@" at "]
+                                          stringByAppendingString: [timeFormatter stringFromDate: date]]];
+    } else {
+        [lastCheckedDate setStringValue:@"Never"];
+    }
+    
     // Localize everything
     [[prefTabView tabViewItemAtIndex:0] setLabel: TSLocalizeString(@"Subscriptions")];
     [[prefTabView tabViewItemAtIndex:1] setLabel: TSLocalizeString(@"Preferences")];
@@ -164,7 +181,6 @@
     
     // Localize everything else
     [statusTitle setStringValue: TSLocalizeString(@"Status")];
-    [lastAiredTitle setStringValue: TSLocalizeString(@"Last Aired")];
     [lastDownloadedTitle setStringValue: TSLocalizeString(@"Last Downloaded")];
     [infoBoxTitle setTitle: TSLocalizeString(@"Info")];
     [prefBoxTitle setTitle: TSLocalizeString(@"Preferences")];
