@@ -301,12 +301,15 @@
 
 - (void) unloadLaunchAgent
 {
-    NSTask *aTask = [[NSTask alloc] init];
-    [aTask setLaunchPath:@"/bin/launchctl"];
-    [aTask setArguments:[NSArray arrayWithObjects:@"unload",[self launchAgentPath],nil]];
-    [aTask launch];
-    [aTask waitUntilExit];
-    [aTask release];
+    // Unload the old LaunchAgent if it exists.
+    if ( [[NSFileManager defaultManager] fileExistsAtPath:[self launchAgentPath]] ) {
+        NSTask *aTask = [[NSTask alloc] init];
+        [aTask setLaunchPath:@"/bin/launchctl"];
+        [aTask setArguments:[NSArray arrayWithObjects:@"unload",[self launchAgentPath],nil]];
+        [aTask launch];
+        [aTask waitUntilExit];
+        [aTask release];
+    }
 }
 
 - (void) loadLaunchAgent
@@ -330,7 +333,7 @@
 {
     NSMutableDictionary *launchAgent = [NSMutableDictionary dictionary];
     
-    // Unload and delete the old Launch Agent
+    // Delete the old LaunchAgent if it exists.
     if ( [[NSFileManager defaultManager] fileExistsAtPath:[self launchAgentPath]] ) {
         [[NSFileManager defaultManager] removeItemAtPath:[self launchAgentPath] error:nil];
     }
