@@ -30,6 +30,8 @@
 		344A204211F5470B00026735 /* MBSliderButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 344A204111F5470B00026735 /* MBSliderButton.m */; };
 		344A205A11F5485900026735 /* Toggle-Knob.png in Resources */ = {isa = PBXBuildFile; fileRef = 344A205811F5485900026735 /* Toggle-Knob.png */; };
 		344A205B11F5485900026735 /* Toggle-Slider.png in Resources */ = {isa = PBXBuildFile; fileRef = 344A205911F5485900026735 /* Toggle-Slider.png */; };
+		344A637513330EAA0076FC2F /* LCLLogFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 344A637413330EAA0076FC2F /* LCLLogFile.m */; };
+		344A637613330EAA0076FC2F /* LCLLogFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 344A637413330EAA0076FC2F /* LCLLogFile.m */; };
 		344AFA3011A4C58D00D9C4E9 /* ESiTunesScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 344AFA2C11A4C58D00D9C4E9 /* ESiTunesScroller.m */; };
 		344AFA3211A4C58D00D9C4E9 /* ESScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 344AFA2E11A4C58D00D9C4E9 /* ESScroller.m */; };
 		344AFA8611A4D19C00D9C4E9 /* ESScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 344AFA8411A4D19C00D9C4E9 /* ESScrollView.m */; };
@@ -215,6 +217,9 @@
 		344A204111F5470B00026735 /* MBSliderButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSliderButton.m; sourceTree = "<group>"; };
 		344A205811F5485900026735 /* Toggle-Knob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Toggle-Knob.png"; sourceTree = "<group>"; };
 		344A205911F5485900026735 /* Toggle-Slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Toggle-Slider.png"; sourceTree = "<group>"; };
+		344A637213330E960076FC2F /* LCLLogFileConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLLogFileConfig.h; path = LCLLogFile/LCLLogFileConfig.h; sourceTree = "<group>"; };
+		344A637313330EAA0076FC2F /* LCLLogFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLLogFile.h; path = "LCLLogFile/LibComponentLogging-LogFile/LCLLogFile.h"; sourceTree = "<group>"; };
+		344A637413330EAA0076FC2F /* LCLLogFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCLLogFile.m; path = "LCLLogFile/LibComponentLogging-LogFile/LCLLogFile.m"; sourceTree = "<group>"; };
 		344AFA2B11A4C58D00D9C4E9 /* ESiTunesScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESiTunesScroller.h; sourceTree = "<group>"; };
 		344AFA2C11A4C58D00D9C4E9 /* ESiTunesScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESiTunesScroller.m; sourceTree = "<group>"; };
 		344AFA2D11A4C58D00D9C4E9 /* ESScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESScroller.h; sourceTree = "<group>"; };
@@ -484,6 +489,16 @@
 			path = MBSliderButton;
 			sourceTree = "<group>";
 		};
+		344A6367133307970076FC2F /* LCLLogFile */ = {
+			isa = PBXGroup;
+			children = (
+				344A637313330EAA0076FC2F /* LCLLogFile.h */,
+				344A637413330EAA0076FC2F /* LCLLogFile.m */,
+				344A637213330E960076FC2F /* LCLLogFileConfig.h */,
+			);
+			name = LCLLogFile;
+			sourceTree = "<group>";
+		};
 		344AFA2A11A4C58D00D9C4E9 /* iTunesScroller */ = {
 			isa = PBXGroup;
 			children = (
@@ -559,11 +574,12 @@
 		347F1E7911AA0E54005A40AA /* External Classes */ = {
 			isa = PBXGroup;
 			children = (
-				342A5427132D4C9500FB526F /* BWToolkit */,
 				347B35CC1210D80400F4BFF0 /* The TVDB */,
+				342A5427132D4C9500FB526F /* BWToolkit */,
 				349F2F6211B2E7DB00D10D96 /* FeedParser */,
 				344AFA2A11A4C58D00D9C4E9 /* iTunesScroller */,
 				347AFB0E1191153B00393565 /* JRFeedbackProvider */,
+				344A6367133307970076FC2F /* LCLLogFile */,
 				344A203F11F5470B00026735 /* MBSliderButton */,
 				34A91891119E2F83004B339D /* RegexKitLite */,
 			);
@@ -882,6 +898,7 @@
 				3446722911C155690014C522 /* TVShowsHelper.m in Sources */,
 				34EC6DCD11CDA4F8001AEF04 /* PresetShows.xcdatamodel in Sources */,
 				345EC8DB13235DA400F36BFF /* Subscriptions.xcdatamodel in Sources */,
+				344A637613330EAA0076FC2F /* LCLLogFile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -931,6 +948,7 @@
 				34463CD01331B424001453EB /* NSColor+BWAdditions.m in Sources */,
 				34463CD51331B90D001453EB /* InfoViewSubclass.m in Sources */,
 				34463CD81331BC40001453EB /* CRViewSubclass.m in Sources */,
+				344A637513330EAA0076FC2F /* LCLLogFile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
