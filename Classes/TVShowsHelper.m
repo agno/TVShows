@@ -64,6 +64,7 @@
         } else {
             
             // No error occurred so check for new episodes
+            LogInfo(@"Checking for new episodes.");
             for (NSArray *show in results) {
                 
                 // Don't download unless it's been at least 15minutes (or close to it)
@@ -74,7 +75,7 @@
                     
                     // Only check for new episodes if it's enabled.
                     if ([show valueForKey:@"isEnabled"]) {
-                        LogDebug(@"Checking for new episodes of %@", [show valueForKey:@"name"]);
+                        LogDebug(@"Checking for new episodes of %@.", [show valueForKey:@"name"]);
                         [self checkForNewEpisodes:show];
                     }
 //              }
@@ -140,6 +141,7 @@
 #pragma mark Download Methods
 - (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName showInfo:(NSArray *)show
 {
+    LogInfo(@"Attempting to download new episode: %@", fileName);
     NSData *fileContents = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
     NSString *saveLocation = [[TSUserDefaults getStringFromKey:@"downloadFolder"] stringByAppendingPathComponent:fileName];
     
@@ -149,6 +151,7 @@
         LogError(@"Unable to download file: %@",url);
     } else {
         // The file downloaded successfully, continuing...
+        LogInfo(@"Episode downloaded successfully.");
         id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
         
         // Check to see if the user wants to automatically open new downloads
@@ -202,7 +205,7 @@
     } else if([TSUserDefaults getBoolFromKey:@"GrowlOnAppUpdate" withDefault:1]) {
         [GrowlApplicationBridge notifyWithTitle:@"TVShows Update Available"
                                     description:@"A new version of TVShows is available for download."
-//                                      description:@"A new version of TVShows is available for download. Click here for information."
+//                                  description:@"A new version of TVShows is available for download. Click here for information."
                                notificationName:@"TVShows Update Available"
                                        iconData:TVShowsHelperIcon
                                        priority:0
