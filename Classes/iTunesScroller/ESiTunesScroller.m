@@ -141,12 +141,21 @@ typedef NSUInteger ESScrollerArrowsSetting;
 	else if ([defaultsSetting isEqualToString:@"DoubleMax"])
 		return ESScrollerArrowsTogether;
 
-	ESScrollerArrowsSetting setting;
-	if (NSMaxY([self rectForPart:NSScrollerDecrementLine]) == NSMinY([self rectForPart:NSScrollerIncrementLine]))
-		setting = ESScrollerArrowsTogether;
-	else
-		setting = ESScrollerArrowsApart;
-	return setting;
+    ESScrollerArrowsSetting setting;
+    if (self.isVertical) {
+        if (NSMaxY([self rectForPart:NSScrollerDecrementLine]) == NSMinY([self rectForPart:NSScrollerIncrementLine]))
+            setting = ESScrollerArrowsTogether;
+        else
+            setting = ESScrollerArrowsApart;
+    }
+    else {
+        if (NSMaxX([self rectForPart:NSScrollerDecrementLine]) == NSMinX([self rectForPart:NSScrollerIncrementLine]))
+            setting = ESScrollerArrowsTogether;
+        else
+            setting = ESScrollerArrowsApart;
+    }
+    
+    return setting;
 }
 
 - (NSRect)rectForPart:(NSScrollerPart)part;
@@ -296,7 +305,7 @@ typedef NSUInteger ESScrollerArrowsSetting;
 			[outline appendBezierPathWithArcWithCenter:NSMakePoint(NSMidX(buttonRect), NSMinY(buttonRect) - NSHeight(buttonRect)/2) radius:NSWidth(buttonRect)/2 startAngle:180 endAngle:0 clockwise:YES];
 		} else {
 			[outline moveToPoint:NSMakePoint(NSMaxX(buttonRect), NSMinY(buttonRect) + 0.5)];
-			[outline appendBezierPathWithArcWithCenter:NSMakePoint(NSMinX(buttonRect) - NSHeight(buttonRect)/2, NSMidY(buttonRect)) radius:NSHeight(buttonRect)/2 startAngle:270 endAngle:90];
+			[outline appendBezierPathWithArcWithCenter:NSMakePoint(NSMinX(buttonRect) - NSWidth(buttonRect)/2, NSMidY(buttonRect)) radius:NSHeight(buttonRect)/2 startAngle:270 endAngle:90];
 		}
 	} else {
 		if (self.isVertical) {
