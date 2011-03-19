@@ -32,12 +32,12 @@
 // prefix in order to avoid duplicate symbols in the global class namespace.
 #ifndef LCLLogFile
 #define LCLLogFile                                                             \
-    <UniquePrefix>LCLLogFile
+    LCLLogFile
 #endif
 
 // Tell LCLLogFile the path of the log file.
 #define _LCLLogFile_LogFilePath /* (NSString *) */                             \
-    [LCLLogFile defaultPathInHomeLibraryLogsOrPath:nil]
+    [LCLLogFile defaultPathInHomeLibraryLogsOrPath:@"TVShows"]
 
 // Tell LCLLogFile whether it should append to an existing log file on startup,
 // instead of creating a new log file.

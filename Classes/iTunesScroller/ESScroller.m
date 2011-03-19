@@ -205,7 +205,7 @@ typedef NSUInteger ESScrollerArrowsSetting;
 
 - (id)initWithFrame:(NSRect)frame;
 {
-	NSLog(@"%p %s",self,__func__);
+//	NSLog(@"%p %s",self,__func__);
 	if (![super initWithFrame:frame])
 		return nil;
 	

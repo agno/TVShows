@@ -57,6 +57,7 @@
     
     // Only download the show list once per session
     if(hasDownloadedList == NO) {
+        LogInfo(@"Downloading an updated show list.");
         [self downloadTorrentShowList];
                 
         // Sort the shows alphabetically
@@ -193,6 +194,8 @@
         
         [context processPendingChanges];
         [delegateClass saveAction];
+        
+        LogInfo(@"Finished downloading the new show list.");
     }
     
     [delegateClass release];
@@ -296,7 +299,7 @@
        didEndSelector: nil
           contextInfo: nil];
     
-    TVLog(@"%@",message);
+    LogWarning(@"%@",message);
     
     [NSApp endSheet: PTErrorWindow];
     [NSApp runModalForWindow: PTErrorWindow];

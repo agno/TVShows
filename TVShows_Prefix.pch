@@ -15,23 +15,68 @@
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
     #import <AppKit/AppKit.h>
+    #import "LCLLogFile.h"
 #endif
 
-// Import some common log functions. Modified from:
-// http://www.cimgf.com/2010/05/02/my-current-prefix-pch-file/
-#ifdef DEBUG
-	#define DLog(...) NSLog(@"TVShows 2: %s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
-	#define ALog(...) [[NSAssertionHandler currentHandler] handleFailureInFunction:[NSString stringWithCString:__PRETTY_FUNCTION__ encoding:NSUTF8StringEncoding] file:[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lineNumber:__LINE__ description:__VA_ARGS__]
+// TVShows uses parts of LibComponentLogging <http://0xc0.de/LibComponentLogging>.
+// Check out the full library for even more awesome power.
+#if HELPER_APP
+    #define LogIdentifier   "[Downloader]"
 #else
-	#define DLog(...) do { } while (0)
-	#ifndef NS_BLOCK_ASSERTIONS
-		#define NS_BLOCK_ASSERTIONS
-	#endif
-	#define ALog(...) NSLog(@"TVShows 2: %s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+    #define LogIdentifier   "[Main App]"
 #endif
 
-#define TVLog(...) NSLog(@"TVShows 2: %@", [NSString stringWithFormat:__VA_ARGS__])
-#define ZAssert(condition, ...) do { if (!(condition)) { ALog(__VA_ARGS__); }} while(0)
+// CRITICAL
+#define LogCritical(...) [LCLLogFile logWithIdentifier: LogIdentifier                           \
+                                                 level: 1                                       \
+                                                  path: __FILE__                                \
+                                                  line: __LINE__                                \
+                                              function: __PRETTY_FUNCTION__                     \
+                                                format: [NSString stringWithFormat:__VA_ARGS__]];
+
+// ERROR
+#define LogError(...) [LCLLogFile logWithIdentifier: LogIdentifier                           \
+                                              level: 2                                       \
+                                               path: __FILE__                                \
+                                               line: __LINE__                                \
+                                           function: __PRETTY_FUNCTION__                     \
+                                             format: [NSString stringWithFormat:__VA_ARGS__]];
+
+// WARNING
+#define LogWarning(...) [LCLLogFile logWithIdentifier: LogIdentifier                           \
+                                                level: 3                                       \
+                                                 path: __FILE__                                \
+                                                 line: __LINE__                                \
+                                             function: __PRETTY_FUNCTION__                     \
+                                               format: [NSString stringWithFormat:__VA_ARGS__]];
+
+// INFO
+#define LogInfo(...) [LCLLogFile logWithIdentifier: LogIdentifier                           \
+                                             level: 4                                       \
+                                              path: __FILE__                                \
+                                              line: __LINE__                                \
+                                          function: __PRETTY_FUNCTION__                     \
+                                            format: [NSString stringWithFormat:__VA_ARGS__]];
+#ifdef DEBUG
+    // DEBUG
+    #define LogDebug(...) [LCLLogFile logWithIdentifier: LogIdentifier                           \
+                                                  level: 5                                       \
+                                                   path: __FILE__                                \
+                                                   line: __LINE__                                \
+                                               function: __PRETTY_FUNCTION__                     \
+                                                 format: [NSString stringWithFormat:__VA_ARGS__]];
+
+    // TRACE
+    #define LogTrace(...) [LCLLogFile logWithIdentifier: LogIdentifier                           \
+                                                  level: 6                                       \
+                                                   path: __FILE__                                \
+                                                   line: __LINE__                                \
+                                               function: __PRETTY_FUNCTION__                     \
+                                                 format: [NSString stringWithFormat:__VA_ARGS__]];
+#else
+    #define LogDebug(...) do { } while (0)
+    #define LogTrace(...) do { } while (0)
+#endif
 
 // I'm sure that this is entirely unorthodox, but let's make a custom
 // localiztion macro to save us from having to type all this crap in.

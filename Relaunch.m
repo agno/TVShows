@@ -13,6 +13,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import "TVShows_Prefix.pch"
 
 // Thanks to Matt Patenaude and his blog post on how to relaunch an application.
 // Slightly modified to work with a Preference Pane.
@@ -33,7 +34,7 @@ int main(int argc, char *argv[])
                                            withApplication:[appPath stringByExpandingTildeInPath]];
     
     if (!success)
-        NSLog(@"Error: could not relaunch application at %@", appPath);
+        NSLog(@"Could not relaunch application at %@", appPath);
     
     [pool drain];
     return (success) ? 0 : 1;

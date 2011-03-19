@@ -102,7 +102,7 @@
                              arguments:[NSArray arrayWithObjects: bundlePath, prefPath, 
                                         [NSString stringWithFormat:@"%d", [[NSProcessInfo processInfo] processIdentifier]], nil] ];
     
-    TVLog(@"Relaunching TVShows to fix the System Preferences update bug.");
+    LogInfo(@"Relaunching TVShows to fix the System Preferences update bug.");
     [NSApp terminate:sender];
 }
 

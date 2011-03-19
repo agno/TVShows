@@ -54,7 +54,7 @@
     NSManagedObjectModel *mom = [self managedObjectModel];
     if (!mom) {
         NSAssert(NO, @"Managed object model is nil");
-        NSLog(@"%@:%@ No model to generate a store from", [self class], _cmd);
+        LogCritical(@"%@:%@ No model to generate a store from", [self class], _cmd);
         return nil;
     }
 
@@ -65,7 +65,7 @@
     if ( ![fileManager fileExistsAtPath:applicationSupportDirectory isDirectory:NULL] ) {
         if (![fileManager createDirectoryAtPath:applicationSupportDirectory withIntermediateDirectories:NO attributes:nil error:&error]) {
             NSAssert(NO, ([NSString stringWithFormat:@"Failed to create App Support directory %@ : %@", applicationSupportDirectory,error]));
-            NSLog(@"Error creating application support directory at %@ : %@",applicationSupportDirectory,error);
+            LogCritical(@"Error creating application support directory at %@ : %@",applicationSupportDirectory,error);
             return nil;
         }
     }
@@ -120,7 +120,7 @@
     NSError *error = nil;
     
     if (![[self managedObjectContext] commitEditing]) {
-        NSLog(@"%@:%@ unable to commit editing before saving", [self class], _cmd);
+        LogCritical(@"%@:%@ unable to commit editing before saving", [self class], _cmd);
     }
 
     if (![[self managedObjectContext] save:&error]) {

@@ -120,7 +120,7 @@
     
     if ( ![fileManager fileExistsAtPath:applicationCacheDirectory isDirectory:NULL] ) {
         if (![fileManager createDirectoryAtPath:applicationCacheDirectory withIntermediateDirectories:NO attributes:nil error:&error]) {
-            TVLog(@"Error creating application cache directory: %@",error);
+            LogError(@"Error creating application cache directory: %@",error);
             return nil;
         }
     }

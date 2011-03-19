@@ -255,7 +255,7 @@
     [fileContents writeToFile:saveLocation atomically:YES];
     
     if (!fileContents) {
-        TVLog(@"Unable to download file: %@",url);
+        LogError(@"Unable to download file: %@",url);
     }
     
     // Check to see if the user wants to automatically open new downloads

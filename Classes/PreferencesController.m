@@ -381,6 +381,6 @@
                     forKey:@"RunAtLoad"];
     
     if (![launchAgent writeToFile:[self launchAgentPath] atomically:YES])
-        TVLog(@"Could not write to ~/Library/LaunchAgents/%@",TVShowsHelperDomain);
+        LogCritical(@"Could not write to ~/Library/LaunchAgents/%@",TVShowsHelperDomain);
 }
 @end

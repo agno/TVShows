@@ -60,7 +60,7 @@
         NSArray *results = [context executeFetchRequest:request error:&error];
         
         if (error != nil) {
-            TVLog(@"%@",[error description]);
+            LogError(@"%@",[error description]);
         } else {
             
             // No error occurred so check for new episodes
@@ -74,6 +74,7 @@
                     
                     // Only check for new episodes if it's enabled.
                     if ([show valueForKey:@"isEnabled"]) {
+                        LogDebug(@"Checking for new episodes of %@", [show valueForKey:@"name"]);
                         [self checkForNewEpisodes:show];
                     }
 //              }
@@ -90,7 +91,7 @@
         
     } else {
         // TVShows is not enabled.
-        TVLog(@"The TVShowsHelper was run even though TVShows is not enabled. Quitting.");
+        LogWarning(@"The TVShowsHelper was run even though TVShows is not enabled. Quitting.");
     }
 
 }
@@ -145,7 +146,7 @@
     [fileContents writeToFile:saveLocation atomically:YES];
     
     if (!fileContents) {
-        TVLog(@"Unable to download file: %@",url);
+        LogError(@"Unable to download file: %@",url);
     } else {
         // The file downloaded successfully, continuing...
         id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
@@ -182,7 +183,7 @@
     // We use this to help no whether or not the TVShowsHelper should close after
     // downloading new episodes or whether it should wait for Sparkle to finish
     // installing new updates.
-    DLog(@"Sparkle found a valid update.");
+    LogDebug(@"Sparkle found a valid update.");
     
     // If the user has automatic updates turned on, set a value saying that we installed
     // an update in the background and send a Growl notification.
@@ -215,7 +216,7 @@
     // We use this to help no whether or not the TVShowsHelper should close after
     // downloading new episodes or whether it should wait for Sparkle to finish
     // installing new updates.
-    DLog(@"Sparkle did not find valid update. Closing TVShows.");
+    LogDebug(@"Sparkle did not find valid update. Closing TVShows.");
     [NSApp terminate:nil];
 }
 
