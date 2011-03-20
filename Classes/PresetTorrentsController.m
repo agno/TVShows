@@ -229,6 +229,7 @@
                                      [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]];
             if (description != NULL) {
                 [showDescription setString: [TSRegexFun replaceHTMLEntitiesInString:description]];
+                [showDescription moveToBeginningOfDocument:nil];
             } else {
                 [showDescription setString: @"No description was found for this show."];
             }
