@@ -21,6 +21,7 @@
 #import "TSUserDefaults.h"
 
 #import "TheTVDB.h"
+#import "LCLLogFile.h"
 
 
 @implementation TabController
@@ -158,6 +159,38 @@
     
     [[textView_aboutBox textStorage] setAttributedString:aboutBoxText];
 }
+
+#pragma mark -
+#pragma mark Log Viewer
+
+- (IBAction) showLogViewerWindow:(id)sender
+{
+    NSString *loggedItems;
+    
+    [NSApp beginSheet: logViewerWindow
+       modalForWindow: [[NSApplication sharedApplication] mainWindow]
+        modalDelegate: nil
+       didEndSelector: nil
+          contextInfo: nil];
+    
+    loggedItems = [NSString stringWithContentsOfFile: [LCLLogFile defaultPathInHomeLibraryLogsOrPath:nil]
+                                               encoding: NSUTF8StringEncoding
+                                                  error: NULL];
+    
+    [textView_logViewer setFont:[NSFont fontWithName:@"Monaco" size:10.0]];
+    [textView_logViewer setString:loggedItems];
+    [textView_logViewer moveToEndOfDocument:nil];
+    
+    [NSApp runModalForWindow: logViewerWindow];
+    [NSApp endSheet: logViewerWindow];
+}
+
+- (IBAction) closeLogViewerWindow:(id)sender
+{
+    [NSApp stopModal];
+    [logViewerWindow orderOut: self];
+}
+
 
 #pragma mark -
 #pragma mark Subscriptions Tab

@@ -30,6 +30,10 @@
     // About tab
     IBOutlet NSTextView *textView_aboutBox;
     
+    // Log Viewer
+    IBOutlet NSTextView *textView_logViewer;
+    IBOutlet NSWindow *logViewerWindow;
+    
     // Subscriptions tab
     IBOutlet NSArrayController *SBArrayController;
     IBOutlet NSWindow *showInfoWindow;
@@ -65,6 +69,11 @@
 - (IBAction) openPaypal:(id)sender;
 - (IBAction) openUninstaller:(id)sender;
 - (void) drawAboutBox;
+
+#pragma mark -
+#pragma mark Log Viwer
+- (IBAction) showLogViewerWindow:(id)sender;
+- (IBAction) closeLogViewerWindow:(id)sender;
 
 #pragma mark -
 #pragma mark Subscriptions TabController
