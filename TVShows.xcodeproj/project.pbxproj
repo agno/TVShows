@@ -30,8 +30,6 @@
 		344A204211F5470B00026735 /* MBSliderButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 344A204111F5470B00026735 /* MBSliderButton.m */; };
 		344A205A11F5485900026735 /* Toggle-Knob.png in Resources */ = {isa = PBXBuildFile; fileRef = 344A205811F5485900026735 /* Toggle-Knob.png */; };
 		344A205B11F5485900026735 /* Toggle-Slider.png in Resources */ = {isa = PBXBuildFile; fileRef = 344A205911F5485900026735 /* Toggle-Slider.png */; };
-		344A637513330EAA0076FC2F /* LCLLogFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 344A637413330EAA0076FC2F /* LCLLogFile.m */; };
-		344A637613330EAA0076FC2F /* LCLLogFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 344A637413330EAA0076FC2F /* LCLLogFile.m */; };
 		344AFA3011A4C58D00D9C4E9 /* ESiTunesScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 344AFA2C11A4C58D00D9C4E9 /* ESiTunesScroller.m */; };
 		344AFA3211A4C58D00D9C4E9 /* ESScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 344AFA2E11A4C58D00D9C4E9 /* ESScroller.m */; };
 		344AFA8611A4D19C00D9C4E9 /* ESScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 344AFA8411A4D19C00D9C4E9 /* ESScrollView.m */; };
@@ -56,6 +54,8 @@
 		347F1E6911AA090D005A40AA /* PresetShowsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 347F1E6711AA090D005A40AA /* PresetShowsDelegate.m */; };
 		347F1E6D11AA093C005A40AA /* PresetTorrentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 347F1E6B11AA093C005A40AA /* PresetTorrentsController.m */; };
 		34908BD1119B9C1C00BDFC01 /* SUPublicDSAKey.pem in Resources */ = {isa = PBXBuildFile; fileRef = 34908BD0119B9C1C00BDFC01 /* SUPublicDSAKey.pem */; };
+		3493F1141335B0F800467073 /* LCLLogFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 3493F1131335B0F800467073 /* LCLLogFile.m */; };
+		3493F1151335B0F800467073 /* LCLLogFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 3493F1131335B0F800467073 /* LCLLogFile.m */; };
 		349F2F8311B2E7DB00D10D96 /* NSDate_FeedParserExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 349F2F6511B2E7DB00D10D96 /* NSDate_FeedParserExtensions.m */; };
 		349F2F8511B2E7DB00D10D96 /* NSString_extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 349F2F6711B2E7DB00D10D96 /* NSString_extensions.m */; };
 		349F2F8811B2E7DB00D10D96 /* FPEnclosure.m in Sources */ = {isa = PBXBuildFile; fileRef = 349F2F6A11B2E7DB00D10D96 /* FPEnclosure.m */; };
@@ -218,8 +218,6 @@
 		344A205811F5485900026735 /* Toggle-Knob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Toggle-Knob.png"; sourceTree = "<group>"; };
 		344A205911F5485900026735 /* Toggle-Slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Toggle-Slider.png"; sourceTree = "<group>"; };
 		344A637213330E960076FC2F /* LCLLogFileConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLLogFileConfig.h; path = LCLLogFile/LCLLogFileConfig.h; sourceTree = "<group>"; };
-		344A637313330EAA0076FC2F /* LCLLogFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLLogFile.h; path = "LCLLogFile/LibComponentLogging-LogFile/LCLLogFile.h"; sourceTree = "<group>"; };
-		344A637413330EAA0076FC2F /* LCLLogFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCLLogFile.m; path = "LCLLogFile/LibComponentLogging-LogFile/LCLLogFile.m"; sourceTree = "<group>"; };
 		344AFA2B11A4C58D00D9C4E9 /* ESiTunesScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESiTunesScroller.h; sourceTree = "<group>"; };
 		344AFA2C11A4C58D00D9C4E9 /* ESiTunesScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESiTunesScroller.m; sourceTree = "<group>"; };
 		344AFA2D11A4C58D00D9C4E9 /* ESScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESScroller.h; sourceTree = "<group>"; };
@@ -255,6 +253,8 @@
 		347FC7AB11F6AE1E00E5B353 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = Resources/it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		347FC7AC11F6AE2400E5B353 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = Resources/it.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; };
 		34908BD0119B9C1C00BDFC01 /* SUPublicDSAKey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SUPublicDSAKey.pem; path = Resources/SUPublicDSAKey.pem; sourceTree = "<group>"; };
+		3493F1121335B0F800467073 /* LCLLogFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLLogFile.h; path = LCLLogFile/LCLLogFile.h; sourceTree = "<group>"; };
+		3493F1131335B0F800467073 /* LCLLogFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCLLogFile.m; path = LCLLogFile/LCLLogFile.m; sourceTree = "<group>"; };
 		349F2F6411B2E7DB00D10D96 /* NSDate_FeedParserExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDate_FeedParserExtensions.h; sourceTree = "<group>"; };
 		349F2F6511B2E7DB00D10D96 /* NSDate_FeedParserExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDate_FeedParserExtensions.m; sourceTree = "<group>"; };
 		349F2F6611B2E7DB00D10D96 /* NSString_extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_extensions.h; sourceTree = "<group>"; };
@@ -492,8 +492,8 @@
 		344A6367133307970076FC2F /* LCLLogFile */ = {
 			isa = PBXGroup;
 			children = (
-				344A637313330EAA0076FC2F /* LCLLogFile.h */,
-				344A637413330EAA0076FC2F /* LCLLogFile.m */,
+				3493F1121335B0F800467073 /* LCLLogFile.h */,
+				3493F1131335B0F800467073 /* LCLLogFile.m */,
 				344A637213330E960076FC2F /* LCLLogFileConfig.h */,
 			);
 			name = LCLLogFile;
@@ -898,7 +898,7 @@
 				3446722911C155690014C522 /* TVShowsHelper.m in Sources */,
 				34EC6DCD11CDA4F8001AEF04 /* PresetShows.xcdatamodel in Sources */,
 				345EC8DB13235DA400F36BFF /* Subscriptions.xcdatamodel in Sources */,
-				344A637613330EAA0076FC2F /* LCLLogFile.m in Sources */,
+				3493F1151335B0F800467073 /* LCLLogFile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -948,7 +948,7 @@
 				34463CD01331B424001453EB /* NSColor+BWAdditions.m in Sources */,
 				34463CD51331B90D001453EB /* InfoViewSubclass.m in Sources */,
 				34463CD81331BC40001453EB /* CRViewSubclass.m in Sources */,
-				344A637513330EAA0076FC2F /* LCLLogFile.m in Sources */,
+				3493F1141335B0F800467073 /* LCLLogFile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
