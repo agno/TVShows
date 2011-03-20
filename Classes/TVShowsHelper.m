@@ -148,7 +148,7 @@
     [fileContents writeToFile:saveLocation atomically:YES];
     
     if (!fileContents) {
-        LogError(@"Unable to download file: %@",url);
+        LogError(@"Unable to download file: %@ <%@>",fileName, url);
     } else {
         // The file downloaded successfully, continuing...
         LogInfo(@"Episode downloaded successfully.");

@@ -177,6 +177,10 @@
                                                encoding: NSUTF8StringEncoding
                                                   error: NULL];
     
+    if (!loggedItems) {
+        loggedItems = @"No activity has been logged yet. Have you recently installed TVShows?";
+    }
+    
     [textView_logViewer setFont:[NSFont fontWithName:@"Monaco" size:10.0]];
     [textView_logViewer setString:loggedItems];
     [textView_logViewer moveToEndOfDocument:nil];
