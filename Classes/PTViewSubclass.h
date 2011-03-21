@@ -20,6 +20,9 @@
     NSColor *startingColor;
     NSColor *endingColor;
     int angle;
+    
+    NSColor *topBorderColor;
+    NSColor *bottomBorderColor;
 }
 
 @property (nonatomic, retain) NSColor *startingColor;
