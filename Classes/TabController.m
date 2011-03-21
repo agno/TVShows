@@ -226,8 +226,13 @@
     
     // Reset the Episode Array Controller and grab the new list of episodes
     [[episodeArrayController content] removeAllObjects];
-    [episodeArrayController addObjects:[TSParseXMLFeeds parseEpisodesFromFeed:[selectedShow valueForKey:@"url"]
-                                                                     maxItems:10]];
+    NSArray *episodes = [TSParseXMLFeeds parseEpisodesFromFeed:[selectedShow valueForKey:@"url"] maxItems:10];
+    
+    if ([episodes count] == 0) {
+        LogError(@"Could not download/parse feed for %@ <%@>", [selectedShow valueForKey:@"name"], [selectedShow valueForKey:@"url"]);
+    } else {
+        [episodeArrayController addObjects:episodes];
+    }
     
     // Display the show poster now that it's been resized.
     [showPoster setImage: [TheTVDB getPosterForShow:[selectedShow valueForKey:@"name"]
@@ -286,18 +291,22 @@
 - (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName
 {
     // Method copied from TVShowsHelper.m
+    LogInfo(@"Attempting to download episode: %@", fileName);
     NSData *fileContents = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
     NSString *saveLocation = [[TSUserDefaults getStringFromKey:@"downloadFolder"] stringByAppendingPathComponent:fileName];
     
     [fileContents writeToFile:saveLocation atomically:YES];
     
     if (!fileContents) {
-        LogError(@"Unable to download file: %@",url);
-    }
-    
-    // Check to see if the user wants to automatically open new downloads
-    if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
-        [[NSWorkspace sharedWorkspace] openFile:saveLocation withApplication:nil andDeactivate:NO];
+        LogError(@"Unable to download file: %@ <%@>",fileName, url);
+    } else {
+        // The file downloaded successfully, continuing...
+        LogInfo(@"Episode downloaded successfully.");
+        
+        // Check to see if the user wants to automatically open new downloads
+        if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
+            [[NSWorkspace sharedWorkspace] openFile:saveLocation withApplication:nil andDeactivate:NO];
+        }
     }
 }
 

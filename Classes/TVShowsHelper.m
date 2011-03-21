@@ -102,6 +102,10 @@
     NSDate *pubDate, *lastDownloaded;
     NSArray *episodes = [TSParseXMLFeeds parseEpisodesFromFeed:[show valueForKey:@"url"] maxItems:10];
     
+    if ([episodes count] == 0) {
+        LogError(@"Could not download/parse feed for %@ <%@>", [show valueForKey:@"name"], [show valueForKey:@"url"]);
+    }
+    
     BOOL feedHasHDEpisodes = [TSParseXMLFeeds feedHasHDEpisodes:episodes];
     BOOL feedHasSDEpisodes = [TSParseXMLFeeds feedHasSDEpisodes:episodes];
 
