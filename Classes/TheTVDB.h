@@ -17,6 +17,7 @@
 
 @interface TheTVDB : NSObject {
     NSURL *mirrorURL;
+    NSString *serverTime;
 }
 
 @property (retain) NSURL *mirrorURL;
