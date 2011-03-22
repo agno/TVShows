@@ -353,11 +353,12 @@
 - (IBAction) unsubscribeFromShow:(id)sender
 {
     id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
+    NSManagedObject *selectedShowObj = [[delegateClass managedObjectContext] objectWithID:[selectedShow objectID]];
     
     // I don't understand why I have to remove the object from both locations
     // but it works so I won't question it.
     [SBArrayController removeObject:selectedShow];
-    [[delegateClass managedObjectContext] deleteObject:selectedShow];
+    [[delegateClass managedObjectContext] deleteObject:selectedShowObj];
     
     [self closeShowInfoWindow:(id)sender];
     
