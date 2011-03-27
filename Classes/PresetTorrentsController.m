@@ -113,10 +113,10 @@
 {
     if ([showQuality state]) {
         // Is HD and HD is enabled.
-//      [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '1'"]];
+//        [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '1'"]];
     } else if (![showQuality state]) {
         // Is not HD and HD is not enabled.
-//      [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '0'"]];
+//        [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '0'"]];
     }
 }
 
@@ -168,7 +168,7 @@
                                                                      inManagedObjectContext: context];
             NSMutableDictionary *showDict = [NSMutableDictionary dictionary];
             
-            // I hate having to search for each valute separately but I can't seem to figure out any other way
+            // I hate having to search for each value separately but I can't seem to figure out any other way
             displayName = [[[showInformation componentsMatchedByRegex:DisplayNameRegex] objectAtIndex:0]
                            stringByReplacingOccurrencesOfRegex:SeparatorBetweenNameAndID withString:@""];
             sortName = [displayName stringByReplacingOccurrencesOfRegex:@"^The[[:space:]]" withString:@""];
@@ -242,7 +242,7 @@
                                                   withWidth:129] ];
             
             // Update the filter predicate to only display the correct quality.
-            // [self showQualityDidChange:nil];
+//            [self showQualityDidChange:nil];
         }
     }
 }
@@ -335,13 +335,32 @@
     [newSubscription setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
     [newSubscription setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
     
-    [SBArrayController addObject:newSubscription];
+    // Don't do this at home, kids, it's a horrible coding practice.
+    // Here until I can figure out why Core Data hates me.
+    #if __x86_64__ || __ppc64__
+        [SBArrayController addObject:newSubscription];
+    #else
+        NSMutableDictionary *showDict = [NSMutableDictionary dictionary];
+        
+        [showDict setValue:[[selectedShow valueForKey:@"displayName"] objectAtIndex:0] forKey:@"name"];
+        [showDict setValue:[[selectedShow valueForKey:@"sortName"] objectAtIndex:0] forKey:@"sortName"];
+        [showDict setValue:[NSString stringWithFormat:@"http://showrss.karmorra.info/feeds/%@.rss",
+                            [[selectedShow valueForKey:@"showrssID"] objectAtIndex:0]]
+                    forKey:@"url"];
+        [showDict setValue:[NSDate date] forKey:@"lastDownloaded"];
+        [showDict setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
+        [showDict setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
+        
+        [SBArrayController addObject:showDict];
+        [context insertObject:newSubscription];
+    #endif
+    
     [delegateClass saveAction];
     
     // Close the modal dialog box
-    [prefTabView selectTabViewItemWithIdentifier:@"tabItemSubscriptions"];
+//    [prefTabView selectTabViewItemWithIdentifier:@"tabItemSubscriptions"];
     [self closePresetTorrentsWindow:(id)sender];
-
+    
     [delegateClass release];
 }
 
