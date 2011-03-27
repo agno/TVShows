@@ -20,6 +20,7 @@ No actual videos are downloaded by TVShows, only torrents which require other pr
 ## Collaboration Notes
 * You can also use GitHub's forking feature to make changes and then send me a pull request.
 * By default, the Debug configuration automatically installs TVShows into `~/Library/PreferencePanes/` each time it's built.
+* Xcode 4 users will need to make sure the 10.5 SDK is in `/Developer/SDKs/`. Install Xcode 3 first if you do not have it, or change the target OS version.
 
 ## License
 TVShows is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
