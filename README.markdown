@@ -22,6 +22,19 @@ No actual videos are downloaded by TVShows, only torrents which require other pr
 * By default, the Debug configuration automatically installs TVShows into `~/Library/PreferencePanes/` each time it's built.
 * Xcode 4 users will need to make sure the 10.5 SDK is in `/Developer/SDKs/`. Install Xcode 3 first if you do not have it, or change the target OS version.
 
+## Roadmap
+### Beta 6
+* Download episode names.
+* Add a loading bar to the show list and show info window.
+* Fade out subscribed shows from the show list.
+* Fade out "disabled" shows.
+* Make it more obvious what's happening with SD/HD episodes.
+* Fix the two shows who have no posters, but don't display the placeholder.
+
+### Beta 7
+* Add a list view to the Subscriptions tab.
+* Use NSTask for downloading torrents, posters, and descriptions.
+
 ## License
 TVShows is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
