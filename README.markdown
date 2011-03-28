@@ -27,9 +27,9 @@ No actual videos are downloaded by TVShows, only torrents which require other pr
 * Download episode names.
 * Add a loading bar to the show list and show info window.
 * Fade out subscribed shows from the show list.
-* Fade out "disabled" shows.
 * Make it more obvious what's happening with SD/HD episodes.
 * Fix the two shows who have no posters, but don't display the placeholder.
+* <strike>Fade out "disabled" subscriptions.</strike>
 
 ### Beta 7
 * Add a list view to the Subscriptions tab.
