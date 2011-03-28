@@ -4,7 +4,7 @@ TVShows 2 is the next version of [TVShows][tvshows], the easiest way to download
 No actual videos are downloaded by TVShows, only torrents which require other programs to use. It is up to the user to decide the legality of using any files downloaded by this application, in accordance with applicable copyright laws of their country.
 
 ## Screenshots
-<a href="http://embercode.com/blog/category/tvshows-news/" title="TVShows News">![Show List][preview-1] ![Subscriptions][preview-2] ![Show Info][preview-3]</a>
+<a href="http://embercode.com/blog/category/tvshows-news/" title="TVShows News">![Show List][preview-1]&nbsp;&nbsp;![Subscriptions][preview-2]&nbsp;&nbsp;![Show Info][preview-3]</a>
 
 <!-- ## Translations
 * Help localize TVShows 2 into your native language! [Click here][translate] ([more info][translate-info]) to be added to the translation team. -->
