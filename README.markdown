@@ -44,8 +44,8 @@ For a copy of the GNU General Public License see &lt;[http://www.gnu.org/license
 [translate]:https://webtranslateit.com/en/projects/874-TVShows-2/invitation_request "Help Translate TVShows 2"
 [translate-info]:http://embercode.com/blog/2010/help-translate-tvshows-2/ "Help Translate TVShows 2"
 
-[preview-1]:http://embercode.com/_tvshows/screenshots/show-list.png "TVShows 2: Show List"
-[preview-2]:http://embercode.com/_tvshows/screenshots/subscriptions.png "TVShows 2: Subscriptions"
-[preview-3]:http://embercode.com/_tvshows/screenshots/show-info.png "TVShows 2: Show Info Window"
+[preview-1]:http://embercode.com/_tvshows/screenshots/show-list_small.png "TVShows 2: Show List"
+[preview-2]:http://embercode.com/_tvshows/screenshots/subscriptions_small.png "TVShows 2: Subscriptions"
+[preview-3]:http://embercode.com/_tvshows/screenshots/show-info_small.png "TVShows 2: Show Info Window"
 
 [license]:http://www.gnu.org/licenses/ "GNU General Public License"
