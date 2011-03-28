@@ -4,7 +4,7 @@ TVShows 2 is the next version of [TVShows][tvshows], the easiest way to download
 No actual videos are downloaded by TVShows, only torrents which require other programs to use. It is up to the user to decide the legality of using any files downloaded by this application, in accordance with applicable copyright laws of their country.
 
 ## Screenshots
-<a href="http://embercode.com/blog/category/tvshows-news/" title="TVShows News">![Getting Started][preview-1] ![About][preview-2] ![Preferences][preview-3]</a>
+<a href="http://embercode.com/blog/category/tvshows-news/" title="TVShows News">![Show List][preview-1] ![Subscriptions][preview-2] ![Show Info][preview-3]</a>
 
 <!-- ## Translations
 * Help localize TVShows 2 into your native language! [Click here][translate] ([more info][translate-info]) to be added to the translation team. -->
@@ -31,8 +31,8 @@ For a copy of the GNU General Public License see &lt;[http://www.gnu.org/license
 [translate]:https://webtranslateit.com/en/projects/874-TVShows-2/invitation_request "Help Translate TVShows 2"
 [translate-info]:http://embercode.com/blog/2010/help-translate-tvshows-2/ "Help Translate TVShows 2"
 
-[preview-1]:http://embercode.com/blog/wp-content/uploads/2010/05/TVShows2_r175_Preview-300x201.png "TVShows 2 (r175) Preview"
-[preview-2]:http://embercode.com/blog/wp-content/uploads/2010/05/TVShows2_r191_AboutTeaser-300x201.png "TVShows 2 Teaser: About Tab"
-[preview-3]:http://embercode.com/blog/wp-content/uploads/2010/05/TVShows2_r191_PrefTeaser-300x243.png "TVShows 2 Teaser: Preferences"
+[preview-1]:http://embercode.com/_tvshows/screenshots/show-list.png "TVShows 2: Show List"
+[preview-2]:http://embercode.com/_tvshows/screenshots/subscriptions.png "TVShows 2: Subscriptions"
+[preview-3]:http://embercode.com/_tvshows/screenshots/show-info.png "TVShows 2: Show Info Window"
 
 [license]:http://www.gnu.org/licenses/ "GNU General Public License"
