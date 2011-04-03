@@ -75,7 +75,7 @@
                     
                     // Only check for new episodes if it's enabled.
                     if ([show valueForKey:@"isEnabled"]) {
-                        LogDebug(@"Checking for new episodes of %@.", [show valueForKey:@"name"]);
+//                        LogDebug(@"Checking for new episodes of %@.", [show valueForKey:@"name"]);
                         [self checkForNewEpisodes:show];
                     }
 //              }

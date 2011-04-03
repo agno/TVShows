@@ -245,6 +245,8 @@
     if ([showName isEqualToString:@"Mr. Sunshine"])         return @"164481";
     if ([showName isEqualToString:@"The Office"])           return @"73244";
     if ([showName isEqualToString:@"Parenthood"])           return @"94551";
+    if ([showName isEqualToString:@"Penn & Teller: Bullshit!"])
+                                                            return @"72301";
     if ([showName isEqualToString:@"Shit My Dad Says"])     return @"164951";
     if ([showName isEqualToString:@"V"])                    return @"94971";
 
