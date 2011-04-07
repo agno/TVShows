@@ -33,7 +33,7 @@
             [self saveLaunchAgentPlist];
             [self loadLaunchAgent];
         } else {
-            // This user has already run TVShows before, so only update the LaunchAgent
+            // This user has already run TVShows before, so only update the LaunchAgent.
             [self updateLaunchAgent];   
         }
     }
@@ -144,6 +144,7 @@
         [TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
                                      [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
                                       pathForResource: @"TVShows-Beta-Large" ofType: @"icns"]] autorelease]];
+        [self saveLaunchAgentPlist];
         [self loadLaunchAgent];
     } else {
         [TSUserDefaults setKey:@"isEnabled" fromBool: 0];
@@ -301,23 +302,31 @@
 
 - (void) unloadLaunchAgent
 {
-    // Unload the old LaunchAgent if it exists.
+    // Unload and delete the old LaunchAgent if it exists.
     if ( [[NSFileManager defaultManager] fileExistsAtPath:[self launchAgentPath]] ) {
         NSTask *aTask = [[NSTask alloc] init];
         [aTask setLaunchPath:@"/bin/launchctl"];
-        [aTask setArguments:[NSArray arrayWithObjects:@"unload",[self launchAgentPath],nil]];
-        [aTask launch];
-        [aTask waitUntilExit];
+        [aTask setArguments:[NSArray arrayWithObjects:@"unload",@"-w",[self launchAgentPath],nil]];
+        [aTask launchPath];
+//      [aTask waitUntilExit];
         [aTask release];
+        
+        [[NSFileManager defaultManager] removeItemAtPath:[self launchAgentPath] error:nil];
     }
 }
 
 - (void) loadLaunchAgent
 {
+    // Create the LaunchAgent if it doesn't exist (should not happen).
+    if ( ![[NSFileManager defaultManager] fileExistsAtPath:[self launchAgentPath]] ) {
+        [self saveLaunchAgentPlist];
+    }
+    
+    // Loads the LaunchAgent.
     NSTask *aTask = [[NSTask alloc] init];
     [aTask setLaunchPath:@"/bin/launchctl"];
-    [aTask setArguments:[NSArray arrayWithObjects:@"load",[self launchAgentPath],nil]];
-    [aTask launch];
+    [aTask setArguments:[NSArray arrayWithObjects:@"load",@"-wF",[self launchAgentPath],nil]];
+    [aTask launchPath];
     [aTask waitUntilExit];
     [aTask release];
 }
@@ -331,13 +340,19 @@
 
 - (void) saveLaunchAgentPlist
 {
+    // Create an NSDictionary for saving into a LaunchAgent plist.
     NSMutableDictionary *launchAgent = [NSMutableDictionary dictionary];
     
-    // Delete the old LaunchAgent if it exists.
-    if ( [[NSFileManager defaultManager] fileExistsAtPath:[self launchAgentPath]] ) {
-        [[NSFileManager defaultManager] removeItemAtPath:[self launchAgentPath] error:nil];
-    }
+    // Label: Uniquely identifies the job to launchd.
+    [launchAgent setObject:TVShowsHelperDomain forKey:@"Label"];
     
+    // Program: Tells launchd the location of the program to launch.
+    [launchAgent setObject:[[[NSBundle bundleWithIdentifier: TVShowsAppDomain] 
+                             pathForResource: @"TVShowsHelper" ofType: @"app"]
+                            stringByAppendingPathComponent:@"Contents/MacOS/TVShowsHelper"]
+                    forKey:@"Program"];
+    
+    // StartInterval: Causes the job to be started every N seconds.
     NSInteger checkDelay = [TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:0];
     switch (checkDelay) {
         case 0:
@@ -370,15 +385,17 @@
             break;
     }
     
-    [launchAgent setObject:TVShowsHelperDomain forKey:@"Label"];
+    // RunAtLoad: Controls whether your job is launched immediately after the job is loaded.
+    [launchAgent setObject:[NSNumber numberWithBool:YES] forKey:@"RunAtLoad"];
     
-    [launchAgent setObject:[[[NSBundle bundleWithIdentifier: TVShowsAppDomain] 
-                            pathForResource: @"TVShowsHelper" ofType: @"app"]
-                            stringByAppendingPathComponent:@"Contents/MacOS/TVShowsHelper"]
-                    forKey:@"Program"];
+    // Disabled: Controls whether the job is disabled; somewhat deprecated.
+    [launchAgent setObject:[NSNumber numberWithBool:NO] forKey:@"Disabled"];
     
-    [launchAgent setObject:[NSNumber numberWithBool:YES]
-                    forKey:@"RunAtLoad"];
+    // LowPriorityIO: Specifies whether the daemon is low priority when doing file system I/O.
+    [launchAgent setObject:[NSNumber numberWithBool:YES] forKey:@"LowPriorityIO"];
+    
+    // ThrottleInterval: Limits the time (in seconds) between program launches.
+    [launchAgent setObject:[NSNumber numberWithInt:10*60] forKey:@"ThrottleInterval"];
     
     if (![launchAgent writeToFile:[self launchAgentPath] atomically:YES])
         LogCritical(@"Could not write to ~/Library/LaunchAgents/%@",TVShowsHelperDomain);
