@@ -65,7 +65,10 @@
     [[prefTabView tabViewItemAtIndex:2] setLabel: TSLocalizeString(@"About")];
     
     [feedbackButton setTitle: TSLocalizeString(@"Submit Feedback")];
-
+    
+    [addButton setTitle: TSLocalizeString(@"Add Show")];
+    [lastCheckedText setStringValue: TSLocalizeString(@"Last Checked:")];
+    
     // Sort the subscription list and draw the About box
     [self sortSubscriptionList];
     [self drawAboutBox];
@@ -222,7 +225,7 @@
     [infoBoxTitle setTitle: TSLocalizeString(@"Info")];
     [prefBoxTitle setTitle: TSLocalizeString(@"Preferences")];
     [closeButton setTitle: TSLocalizeString(@"Close")];
-//  [unsubscribeButton setTitle: TSLocalizeString(@"Unsubscribe")];
+    [unsubscribeButton setTitle: TSLocalizeString(@"Unsubscribe")];
     
     // Reset the Episode Array Controller and grab the new list of episodes
     [[episodeArrayController content] removeAllObjects];

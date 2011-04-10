@@ -37,6 +37,8 @@
     // Subscriptions tab
     IBOutlet NSArrayController *SBArrayController;
     IBOutlet NSWindow *showInfoWindow;
+    IBOutlet NSTextField *lastCheckedText;
+    IBOutlet NSButton *addButton;
     IBOutlet NSTextField *lastCheckedDate;
     
     // Show info window

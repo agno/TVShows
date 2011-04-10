@@ -5970,6 +5970,22 @@ dGljYWxseSBpbnN0YWxsIG5ldyB1cGRhdGVzLiI</string>
 					</object>
 					<int key="connectionID">2584</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">addButton</string>
+						<reference key="source" ref="202797967"/>
+						<reference key="destination" ref="27100468"/>
+					</object>
+					<int key="connectionID">2587</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">lastCheckedText</string>
+						<reference key="source" ref="202797967"/>
+						<reference key="destination" ref="940025212"/>
+					</object>
+					<int key="connectionID">2588</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -9158,7 +9174,7 @@ dGljYWxseSBpbnN0YWxsIG5ldyB1cGRhdGVzLiI</string>
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">2584</int>
+			<int key="maxID">2588</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -10097,12 +10113,14 @@ dGljYWxseSBpbnN0YWxsIG5ldyB1cGRhdGVzLiI</string>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>SBArrayController</string>
+							<string>addButton</string>
 							<string>closeButton</string>
 							<string>episodeArrayController</string>
 							<string>episodeTableView</string>
 							<string>feedbackButton</string>
 							<string>infoBoxTitle</string>
 							<string>lastCheckedDate</string>
+							<string>lastCheckedText</string>
 							<string>lastDownloadedTitle</string>
 							<string>logViewerWindow</string>
 							<string>prefBoxTitle</string>
@@ -10126,10 +10144,12 @@ dGljYWxseSBpbnN0YWxsIG5ldyB1cGRhdGVzLiI</string>
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSArrayController</string>
 							<string>NSButton</string>
+							<string>NSButton</string>
 							<string>NSArrayController</string>
 							<string>NSTableView</string>
 							<string>NSButton</string>
 							<string>NSBox</string>
+							<string>NSTextField</string>
 							<string>NSTextField</string>
 							<string>NSTextField</string>
 							<string>NSWindow</string>
@@ -10156,12 +10176,14 @@ dGljYWxseSBpbnN0YWxsIG5ldyB1cGRhdGVzLiI</string>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>SBArrayController</string>
+							<string>addButton</string>
 							<string>closeButton</string>
 							<string>episodeArrayController</string>
 							<string>episodeTableView</string>
 							<string>feedbackButton</string>
 							<string>infoBoxTitle</string>
 							<string>lastCheckedDate</string>
+							<string>lastCheckedText</string>
 							<string>lastDownloadedTitle</string>
 							<string>logViewerWindow</string>
 							<string>prefBoxTitle</string>
@@ -10188,6 +10210,10 @@ dGljYWxseSBpbnN0YWxsIG5ldyB1cGRhdGVzLiI</string>
 								<string key="candidateClassName">NSArrayController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">addButton</string>
+								<string key="candidateClassName">NSButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">closeButton</string>
 								<string key="candidateClassName">NSButton</string>
 							</object>
@@ -10209,6 +10235,10 @@ dGljYWxseSBpbnN0YWxsIG5ldyB1cGRhdGVzLiI</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">lastCheckedDate</string>
+								<string key="candidateClassName">NSTextField</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">lastCheckedText</string>
 								<string key="candidateClassName">NSTextField</string>
 							</object>
 							<object class="IBToOneOutletInfo">
