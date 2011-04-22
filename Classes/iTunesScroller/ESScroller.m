@@ -317,7 +317,7 @@ typedef NSUInteger ESScrollerArrowsSetting;
 	
 	if (whichArrow == NSScrollerDecrementArrow)
 		frame = [self rectForPart:NSScrollerDecrementLine];
-	if (whichArrow == NSScrollerIncrementArrow)
+	else
 		frame = [self rectForPart:NSScrollerIncrementLine];
 	
 	path = [NSBezierPath bezierPathWithRect:frame];
