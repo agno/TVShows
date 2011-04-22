@@ -1,17 +1,27 @@
-# About
+# Important!
+
+This software [has been sadly discontinued][theend] by its developers, and it is not very clear when it is going to stop working. It is unfinished, it is buggy and it is slow. From my point of view, it barely works.
+
+I (victorpimentel) do not have anything to do with the original developers. I only forked it just at the right time. In the near future I do not plan to continue the development, if you want to pick up or contribute in any way you are free to fork this repository. Just comply with the license and remove any mention to Ember Code _in any future code or binary application you release_.
+
+## Download
+
+As a courtesy you can download the latest build [from my site][download]. That preference pane should work in Leopard and Snow Leopard.
+
+## About
 TVShows 2 is the next version of [TVShows][tvshows], the easiest way to download your favorite shows automatically. It includes a completely rewritten codebase as well as a major overhaul of the UI and a move to System Preferences.
 
 No actual videos are downloaded by TVShows, only torrents which require other programs to use. It is up to the user to decide the legality of using any files downloaded by this application, in accordance with applicable copyright laws of their country.
 
-## Screenshots
-<a href="http://embercode.com/blog/category/tvshows-news/" title="TVShows News">![Show List][preview-1]&nbsp;&nbsp;![Subscriptions][preview-2]&nbsp;&nbsp;![Show Info][preview-3]</a>
+<!-- ## Screenshots
+<a href="http://embercode.com/blog/category/tvshows-news/" title="TVShows News">![Show List][preview-1]&nbsp;&nbsp;![Subscriptions][preview-2]&nbsp;&nbsp;![Show Info][preview-3]</a> -->
 
 <!-- ## Translations
 * Help localize TVShows 2 into your native language! [Click here][translate] ([more info][translate-info]) to be added to the translation team. -->
 
 ## Collaboration Instructions
 1. Checkout the repository:
-    * `$ git clone http://github.com/mattprice/TVShows.git`
+    * `$ git clone http://github.com/victorpimentel/TVShows.git`
 1. Download all the required submodules:
     * `$ cd TVShows`
     * `$ git submodule init`
@@ -39,6 +49,9 @@ No actual videos are downloaded by TVShows, only torrents which require other pr
 TVShows is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
 For a copy of the GNU General Public License see &lt;[http://www.gnu.org/licenses/][license]&gt;.
+
+[theend]:http://embercode.com/tvshows/the-end.html "Sad News"
+[download]:http://victorpimentel.com/tvshows/TVShows.zip "Download TVShows"
 
 [tvshows]:http://embercode.com/tvshows/ "TVShows Website"
 [translate]:https://webtranslateit.com/en/projects/874-TVShows-2/invitation_request "Help Translate TVShows 2"
