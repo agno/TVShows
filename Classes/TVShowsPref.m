@@ -1,6 +1,6 @@
 /*
  *  This file is part of the TVShows 2 ("Phoenix") source code.
- *  http://github.com/mattprice/TVShows/
+ *  http://github.com/victorpimentel/TVShows/
  *
  *  TVShows is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -65,7 +65,7 @@
 - (void) displayUpdateWindowForVersion:(NSString *)installedBuild
 {
     // Display a window showing the release notes.
-    releaseNotesURL = [NSString stringWithFormat:@"http://embercode.com/tvshows/notes/beta-%@",installedBuild];
+    releaseNotesURL = [NSString stringWithFormat:@"http://victorpimentel.com/tvshows/notes/beta-%@",installedBuild];
     
     [NSApp beginSheet: updateWindow
        modalForWindow: [[NSApplication sharedApplication] mainWindow]

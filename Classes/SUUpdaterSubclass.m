@@ -1,6 +1,6 @@
 /*
  *  This file is part of the TVShows 2 ("Phoenix") source code.
- *  http://github.com/mattprice/TVShows/
+ *  http://github.com/victorpimentel/TVShows/
  *
  *  TVShows is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -88,7 +88,7 @@
 - (void) delayUntilCheck:(NSTimeInterval)delayUntilCheck
 {
     // This is a custom subclass added in the custom Sparkle framework for TVShows.
-    // For more information see: http://github.com/mattprice/Sparkle/
+    // For more information see: http://github.com/victorpimentel/Sparkle/
     
     if(delayUntilCheck) {
         // Unless delayUntilCheck returns 0, Sparkle did not check for an update

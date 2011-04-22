@@ -1,6 +1,6 @@
 /*
  *  This file is part of the TVShows 2 ("Phoenix") source code.
- *  http://github.com/mattprice/TVShows/
+ *  http://github.com/victorpimentel/TVShows/
  *
  *  TVShows is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

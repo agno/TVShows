@@ -1,6 +1,6 @@
 /*
  *  This file is part of the TVShows 2 ("Phoenix") source code.
- *  http://github.com/mattprice/TVShows/
+ *  http://github.com/victorpimentel/TVShows/
  *
  *  TVShows is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -12,23 +12,23 @@
  *
  */
 
-#define TVShowsAppDomain            @"com.embercode.TVShows2"
-#define TVShowsHelperDomain         @"com.embercode.TVShowsHelper"
+#define TVShowsAppDomain            @"com.victorpimentel.TVShows2"
+#define TVShowsHelperDomain         @"com.victorpimentel.TVShowsHelper"
 
-#define TVShowsWebsite              @"http://embercode.com/tvshows/"
-#define TVShowsTwitter              @"http://twitter.com/embercode/"
-#define TVShowsDonations            @"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RFJZBTH9WNAXY"
+#define TVShowsWebsite              @"http://victorpimentel.com/tvshows/"
+#define TVShowsTwitter              @"http://twitter.com/TVShows2/"
+#define TVShowsDonations            @"https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=2PARRGESKRQJ6&item_name=TVShows2&item_number=TVShows2&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted"
 
-#define TVShowsAppcastURL           @"http://embercode.com/updates/tvshows.xml"
-#define TVShowsBetaAppcastURL       @"http://embercode.com/updates/tvshows-beta.xml"
+#define TVShowsAppcastURL           @"http://victorpimentel.com/tvshows/updates/tvshows.xml"
+#define TVShowsBetaAppcastURL       @"http://victorpimentel.com/tvshows/updates/tvshows-beta.xml"
 
 // This is a TVShows specific API key. Please DO NOT reuse it.
 // You can get your own at http://thetvdb.com/?tab=apiregister
-#define API_KEY                     @"E455EEEEFF5E6E2B"
+#define API_KEY                     @"BB420D2FDA505290"
 
 // Used in the Delegate methods so that we don't have to duplicate files.
 #if PREFPANE
-    #define CurrentBundleDomain     @"com.embercode.TVShows2"
+    #define CurrentBundleDomain     @"com.victorpimentel.TVShows2"
 #elif HELPER_APP
-    #define CurrentBundleDomain     @"com.embercode.TVShowsHelper"
+    #define CurrentBundleDomain     @"com.victorpimentel.TVShowsHelper"
 #endif
