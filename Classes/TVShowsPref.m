@@ -65,7 +65,7 @@
 - (void) displayUpdateWindowForVersion:(NSString *)installedBuild
 {
     // Display a window showing the release notes.
-    releaseNotesURL = [NSString stringWithFormat:@"http://victorpimentel.com/tvshows/notes/beta-%@",installedBuild];
+    releaseNotesURL = [NSString stringWithFormat:@"http://victorpimentel.com/tvshows/notes-%@",installedBuild];
     
     [NSApp beginSheet: updateWindow
        modalForWindow: [[NSApplication sharedApplication] mainWindow]

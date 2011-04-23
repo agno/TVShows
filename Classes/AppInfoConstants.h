@@ -19,8 +19,8 @@
 #define TVShowsTwitter              @"http://twitter.com/TVShows2/"
 #define TVShowsDonations            @"https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=2PARRGESKRQJ6&item_name=TVShows2&item_number=TVShows2&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted"
 
-#define TVShowsAppcastURL           @"http://victorpimentel.com/tvshows/updates/tvshows.xml"
-#define TVShowsBetaAppcastURL       @"http://victorpimentel.com/tvshows/updates/tvshows-beta.xml"
+#define TVShowsAppcastURL           @"http://victorpimentel.com/tvshows/tvshows.xml"
+#define TVShowsBetaAppcastURL       @"http://victorpimentel.com/tvshows/tvshows-beta.xml"
 
 // This is a TVShows specific API key. Please DO NOT reuse it.
 // You can get your own at http://thetvdb.com/?tab=apiregister

@@ -12,23 +12,16 @@
 #import <Sparkle/SUVersionComparisonProtocol.h>
 
 @class SUUpdateDriver, SUAppcastItem, SUHost, SUAppcast;
-@interface SUUpdater : NSObject
-{
-@private
+@interface SUUpdater : NSObject {
 	NSTimer *checkTimer;
 	SUUpdateDriver *driver;
-
-	NSString *customUserAgentString;
+	
 	SUHost *host;
 	IBOutlet id delegate;
 }
 
 + (SUUpdater *)sharedUpdater;
 + (SUUpdater *)updaterForBundle:(NSBundle *)bundle;
-- initForBundle:(NSBundle *)bundle;
-
-- (void)delayUntilCheck:(NSTimeInterval)delayUntilCheck;
-
 - (NSBundle *)hostBundle;
 
 - (void)setDelegate:(id)delegate;
@@ -42,9 +35,6 @@
 
 - (void)setFeedURL:(NSURL *)feedURL;
 - (NSURL *)feedURL;
-
-- (void)setUserAgentString:(NSString *)userAgent;
-- (NSString *)userAgentString;
 
 - (void)setSendsSystemProfile:(BOOL)sendsSystemProfile;
 - (BOOL)sendsSystemProfile;
