@@ -29,10 +29,19 @@
     
     // About tab
     IBOutlet NSTextView *textView_aboutBox;
+    IBOutlet NSButton *websiteButton;
+    IBOutlet NSButton *donateButton;
+    IBOutlet NSButton *viewLogsButton;
+    IBOutlet NSButton *uninstallButton;
+    IBOutlet NSTextField *disclaimer;
     
     // Log Viewer
     IBOutlet NSTextView *textView_logViewer;
     IBOutlet NSWindow *logViewerWindow;
+    IBOutlet NSTextField *logTitleText;
+    IBOutlet NSTextField *logExplanationText;
+    IBOutlet NSTextField *logLocalizationText;
+    IBOutlet NSButton *closeLogButton;
     
     // Subscriptions tab
     IBOutlet NSArrayController *SBArrayController;
@@ -73,7 +82,7 @@
 - (void) drawAboutBox;
 
 #pragma mark -
-#pragma mark Log Viwer
+#pragma mark Log Viewer
 - (IBAction) showLogViewerWindow:(id)sender;
 - (IBAction) closeLogViewerWindow:(id)sender;
 

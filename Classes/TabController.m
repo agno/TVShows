@@ -23,7 +23,6 @@
 #import "TheTVDB.h"
 #import "LCLLogFile.h"
 
-
 @implementation TabController
 
 @synthesize selectedShow;
@@ -53,10 +52,10 @@
         [timeFormatter setDateStyle:NSDateFormatterNoStyle];
         [timeFormatter setTimeStyle:NSDateFormatterShortStyle];
         
-        [lastCheckedDate setStringValue: [[[dateFormatter stringFromDate: date] stringByAppendingString:@" at "]
+        [lastCheckedDate setStringValue: [[[dateFormatter stringFromDate: date] stringByAppendingString:TSLocalizeString(@" at ")]
                                           stringByAppendingString: [timeFormatter stringFromDate: date]]];
     } else {
-        [lastCheckedDate setStringValue:@"Never"];
+        [lastCheckedDate setStringValue: TSLocalizeString(@"Never")];
     }
     
     // Localize everything
@@ -69,6 +68,17 @@
     [addButton setTitle: TSLocalizeString(@"Add Show")];
     [lastCheckedText setStringValue: TSLocalizeString(@"Last Checked:")];
     
+    [websiteButton setTitle: TSLocalizeString(@"Website")];
+    [donateButton setTitle: TSLocalizeString(@"Donate")];
+    [viewLogsButton setTitle: TSLocalizeString(@"View Logs")];
+    [uninstallButton setTitle: TSLocalizeString(@"Uninstall")];
+    [disclaimer setStringValue: TSLocalizeString(@"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country.")];
+    
+    [logTitleText setStringValue: TSLocalizeString(@"Recently Logged Activity")];
+    [logExplanationText setStringValue: TSLocalizeString(@"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found.")];
+    [logLocalizationText setStringValue: TSLocalizeString(@"Logs are stored in ~/Library/Logs/TVShows/")];
+    [closeLogButton setTitle: TSLocalizeString(@"Close")];
+    
     // Sort the subscription list and draw the About box
     [self sortSubscriptionList];
     [self drawAboutBox];
@@ -76,7 +86,7 @@
 
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {
-    NSRect  tabFrame;
+    NSRect tabFrame;
     int newWinHeight;
     
     tabFrame = [[tabView window] frame];
@@ -84,13 +94,10 @@
     // newWinHeight should be equal to the wanted window size (in Interface Builder) + 54 (title bar height)
     if ([[tabViewItem identifier] isEqualTo:@"tabItemPreferences"]) {
         newWinHeight = 475;
-        
     } else if ([[tabViewItem identifier] isEqualTo:@"tabItemSubscriptions"]) {
         newWinHeight = 570;
-        
     }  else if ([[tabViewItem identifier] isEqualTo:@"tabItemAbout"]) {
         newWinHeight = 422;
-        
     } else {
         newWinHeight = 422;
     }
@@ -126,17 +133,18 @@
 {
     // Create an alert box.
     NSAlert *alert = [[NSAlert alloc] init];
-    [alert addButtonWithTitle:@"Yes"];
-    [alert addButtonWithTitle:@"No"];
-    [alert setMessageText:@"Uninstall TVShows"];
-    [alert setInformativeText:@"Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions."];
+    [alert addButtonWithTitle: TSLocalizeString(@"Yes")];
+    [alert addButtonWithTitle: TSLocalizeString(@"No")];
+    [alert setMessageText: TSLocalizeString(@"Uninstall TVShows")];
+    [alert setInformativeText: TSLocalizeString(@"Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions.")];
     [alert setAlertStyle:NSWarningAlertStyle];
     
     // Run the alert and then wait for user input.
     if ([alert runModal] == NSAlertFirstButtonReturn) {
         // Drat! They really do want to uninstall. Find the path to the uninstaller.
-        NSString *launchPath = [[NSBundle bundleWithIdentifier: TVShowsAppDomain] pathForResource:@"Uninstaller"
-                                                                                           ofType:@"app"];
+        NSString *launchPath = [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
+                                pathForResource:@"Uninstaller"
+                                ofType:@"app"];
         launchPath = [launchPath stringByAppendingPathComponent:@"Contents/MacOS/applet"];
         
         // Start up an NSTask to run the uninstaller.
@@ -177,11 +185,11 @@
           contextInfo: nil];
     
     loggedItems = [NSString stringWithContentsOfFile: [LCLLogFile defaultPathInHomeLibraryLogsOrPath:nil]
-                                               encoding: NSUTF8StringEncoding
-                                                  error: NULL];
+                                            encoding: NSUTF8StringEncoding
+                                               error: NULL];
     
     if (!loggedItems) {
-        loggedItems = @"No activity has been logged yet. Have you recently installed TVShows?";
+        loggedItems = TSLocalizeString(@"No activity has been logged yet. Have you recently installed TVShows?");
     }
     
     [textView_logViewer setFont:[NSFont fontWithName:@"Monaco" size:10.0]];
@@ -197,7 +205,6 @@
     [NSApp stopModal];
     [logViewerWindow orderOut: self];
 }
-
 
 #pragma mark -
 #pragma mark Subscriptions Tab
@@ -284,10 +291,10 @@
 {
     if ([showQuality state]) {
         // Is HD and HD is enabled.
-//      [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '1'"]];
+        //      [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '1'"]];
     } else if (![showQuality state]) {
         // Is not HD and HD is not enabled.
-//      [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '0'"]];
+        //      [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '0'"]];
     }
 }
 
@@ -368,7 +375,6 @@
     [delegateClass saveAction];
     [delegateClass release];
 }
-
 
 - (void) dealloc
 {
