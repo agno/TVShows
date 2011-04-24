@@ -79,6 +79,23 @@
     [logLocalizationText setStringValue: TSLocalizeString(@"Logs are stored in ~/Library/Logs/TVShows/")];
     [closeLogButton setTitle: TSLocalizeString(@"Close")];
     
+    // Localize the headings of the table columns
+    [[colHD headerCell] setStringValue: TSLocalizeString(@"HD")];
+    [[colName headerCell] setStringValue: TSLocalizeString(@"Episode Name")];
+    [[colSeason headerCell] setStringValue: TSLocalizeString(@"Season")];
+    [[colEpisode headerCell] setStringValue: TSLocalizeString(@"Episode")];
+    [[colDate headerCell] setStringValue: TSLocalizeString(@"Published Date")];
+    
+    // Localize everything else
+    [showQuality setTitle: TSLocalizeString(@"Download in HD")];
+    [showIsEnabled setTitle: TSLocalizeString(@"Enable downloading new episodes")];
+    [statusTitle setStringValue: TSLocalizeString(@"Status")];
+    [lastDownloadedTitle setStringValue: TSLocalizeString(@"Last Downloaded")];
+    [infoBoxTitle setTitle: TSLocalizeString(@"Info")];
+    [prefBoxTitle setTitle: TSLocalizeString(@"Preferences")];
+    [closeButton setTitle: TSLocalizeString(@"Close")];
+    [unsubscribeButton setTitle: TSLocalizeString(@"Unsubscribe")];
+    
     // Sort the subscription list and draw the About box
     [self sortSubscriptionList];
     [self drawAboutBox];
@@ -93,7 +110,7 @@
     
     // newWinHeight should be equal to the wanted window size (in Interface Builder) + 54 (title bar height)
     if ([[tabViewItem identifier] isEqualTo:@"tabItemPreferences"]) {
-        newWinHeight = 475;
+        newWinHeight = 500;
     } else if ([[tabViewItem identifier] isEqualTo:@"tabItemSubscriptions"]) {
         newWinHeight = 570;
     }  else if ([[tabViewItem identifier] isEqualTo:@"tabItemAbout"]) {
@@ -217,40 +234,34 @@
     [dateFormatter setDateStyle:NSDateFormatterLongStyle];
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     
-    // Set the displayed values
+    // Set the available values now
     [showName setStringValue: [selectedShow valueForKey:@"name"]];
-    [showStatus setStringValue: [TheTVDB getShowStatus:[selectedShow valueForKey:@"name"]]];
+    [showStatus setStringValue: TSLocalizeString(@"Unknown")];
     [showLastDownloaded setStringValue: [dateFormatter stringFromDate:[selectedShow valueForKey:@"lastDownloaded"]]];
-    [showQuality setTitle: TSLocalizeString(@"Download in HD")];
     [showQuality setState: [[selectedShow valueForKey:@"quality"] intValue]];
-    [showIsEnabled setTitle: TSLocalizeString(@"Enable downloading new episodes")];
     [showIsEnabled setState: [[selectedShow valueForKey:@"isEnabled"] boolValue]];
     
-    // Localize everything else
-    [statusTitle setStringValue: TSLocalizeString(@"Status")];
-    [lastDownloadedTitle setStringValue: TSLocalizeString(@"Last Downloaded")];
-    [infoBoxTitle setTitle: TSLocalizeString(@"Info")];
-    [prefBoxTitle setTitle: TSLocalizeString(@"Preferences")];
-    [closeButton setTitle: TSLocalizeString(@"Close")];
-    [unsubscribeButton setTitle: TSLocalizeString(@"Unsubscribe")];
+    NSImage *defaultPoster = [[[NSImage alloc] initByReferencingFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"posterArtPlaceholder" ofType:@"jpg"]] autorelease];
+    [defaultPoster setSize: NSMakeSize(127, 184)];
+    [showPoster setImage: defaultPoster];
     
-    // Reset the Episode Array Controller and grab the new list of episodes
+    // Reset the Episode Array Controller
     [[episodeArrayController content] removeAllObjects];
-    NSArray *episodes = [TSParseXMLFeeds parseEpisodesFromFeed:[selectedShow valueForKey:@"url"] maxItems:10];
+    [episodeTableView reloadData];
     
-    if ([episodes count] == 0) {
-        LogError(@"Could not download/parse feed for %@ <%@>", [selectedShow valueForKey:@"name"], [selectedShow valueForKey:@"url"]);
-    } else {
-        [episodeArrayController addObjects:episodes];
-    }
+    NSString *selectedShowName = [selectedShow valueForKey:@"name"];
     
     // Display the show poster now that it's been resized.
-    [showPoster setImage: [TheTVDB getPosterForShow:[selectedShow valueForKey:@"name"]
-                                         withHeight:184
-                                          withWidth:127] ];
+    [self performSelectorInBackground:@selector(setPosterForShow:) withObject:selectedShowName];
+    
+    // Grab the show status
+    [self performSelectorInBackground:@selector(setStatusForShow:) withObject:selectedShowName];
+    
+    // Grab the list of episodes
+    [self performSelector:@selector(setEpisodesForShow)];
     
     // Update the filter predicate to only display the correct quality.
-    // [self showQualityDidChange:nil];
+    //[self showQualityDidChange:nil];
     
     [NSApp beginSheet: showInfoWindow
        modalForWindow: [[NSApplication sharedApplication] mainWindow]
@@ -262,8 +273,42 @@
     [NSApp endSheet: showInfoWindow];
 }
 
+- (void) setEpisodesForShow
+{
+    NSArray *results = [TSParseXMLFeeds parseEpisodesFromFeed:[selectedShow valueForKey:@"url"] maxItems:10];
+    
+    if ([results count] == 0) {
+        LogError(@"Could not download/parse feed for %@ <%@>", [selectedShow valueForKey:@"name"], [selectedShow valueForKey:@"url"]);
+    } else {
+        [episodeArrayController addObjects:results];
+    }
+}
+
+- (void) setStatusForShow:(NSString *)show
+{
+    NSString *status = [TheTVDB getShowStatus:show];
+    NSString *copy = [selectedShow valueForKey:@"name"];
+
+    // Check if the request is still valid (an impacient user may start to rapidly change)
+    if ([show isEqualToString:copy]) {
+        [showStatus setStringValue: TSLocalizeString(status)];
+    }
+}
+
+- (void) setPosterForShow:(NSString *)show
+{
+    NSImage *poster = [[[TheTVDB getPosterForShow:show withHeight:184 withWidth:127] copy] autorelease];
+    NSString *copy = [selectedShow valueForKey:@"name"];
+    
+    // Check if the request is still valid (an impacient user may start to rapidly change)
+    if ([show isEqualToString:copy]) {
+        [showPoster setImage: poster];
+        [showPoster display];
+    }
+}
+
 - (IBAction) closeShowInfoWindow:(id)sender
-{   
+{
     // NSManagedContext objectWithID is required for it to save changes to the disk.
     // We also need to update the original selectedShow NSManagedObject so that the
     // interface displays any changes when the window is opened multiple times a session.
@@ -291,10 +336,10 @@
 {
     if ([showQuality state]) {
         // Is HD and HD is enabled.
-        //      [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '1'"]];
-    } else if (![showQuality state]) {
+        [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '1'"]];
+    } else {
         // Is not HD and HD is not enabled.
-        //      [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '0'"]];
+        [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '0'"]];
     }
 }
 
@@ -315,7 +360,8 @@
         
         // Check to see if the user wants to automatically open new downloads
         if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
-            [[NSWorkspace sharedWorkspace] openFile:saveLocation withApplication:nil andDeactivate:NO];
+          
+ [[NSWorkspace sharedWorkspace] openFile:saveLocation withApplication:nil andDeactivate:NO];
         }
     }
 }
@@ -344,7 +390,7 @@
             NSObject *episode = [[episodeArrayController content] objectAtIndex:clickedRow];
             [self startDownloadingURL:[episode valueForKey:@"link"]
                          withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"] ];
-        }           
+        }
     }
     
     return result;
@@ -352,11 +398,19 @@
 
 - (void) sortSubscriptionList
 {
+    // Arguably, I don't really know how this works, and I only reached this method
+    // after hours and hours of debugging and trying to make the NSArrayController not
+    // send all its elements to the NSControllerView in every sorting step.
+    // But OMG, THIS IS THE MOST AMAZING THING IN THE WORLD
+    // IT'S SO GOOD I WANT TO HAVE KIDS WITH IT,
+    // KILL THEM AND THEN MAKE MORE KIDS
+    [SBArrayController setUsesLazyFetching:YES];
+    
     NSSortDescriptor *SBSortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"sortName"
-                                                                     ascending: YES 
+                                                                     ascending: YES
                                                                       selector: @selector(caseInsensitiveCompare:)];
     [SBArrayController setSortDescriptors:[NSArray arrayWithObject:SBSortDescriptor]];
-    
+
     [SBSortDescriptor release];
 }
 

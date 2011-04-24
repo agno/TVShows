@@ -30,12 +30,15 @@
     IBOutlet NSButton *tvcomButton;
     IBOutlet NSImageView *showPoster;
     IBOutlet NSTextView *showDescription;
+    IBOutlet NSScrollView *descriptionView;
     IBOutlet NSTextField *ratingsTitle;
     IBOutlet NSTableColumn *colHD;
     IBOutlet NSTableColumn *colName;
     IBOutlet NSTableColumn *colSeason;
     IBOutlet NSTableColumn *colEpisode;
     IBOutlet NSTableColumn *colDate;
+    IBOutlet NSProgressIndicator *loading;
+    IBOutlet NSTextField *loadingText;
     
     // Error window
     IBOutlet NSWindow *PTErrorWindow;
@@ -46,6 +49,7 @@
     // Selected show arrays
     IBOutlet NSArrayController *SBArrayController;
     IBOutlet NSArrayController *episodeArrayController;
+    IBOutlet NSTableView *episodeTableView;
     IBOutlet NSTabView *prefTabView;
 }
 
@@ -54,8 +58,12 @@
 - (IBAction) displayPresetTorrentsWindow:(id)sender;
 - (IBAction) closePresetTorrentsWindow:(id)sender;
 - (IBAction) showQualityDidChange:(id)sender;
+- (void) sortTorrentShowList;
 - (void) downloadTorrentShowList;
 - (void) tableViewSelectionDidChange:(NSNotification *)notification;
+- (void) setEpisodesForShowID:(NSString *)showID;
+- (void) setDescriptionForShow:(NSString *)show;
+- (void) setPosterForShow:(NSString *)show;
 
 #pragma mark -
 #pragma mark Error Window Methors

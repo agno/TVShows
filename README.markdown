@@ -1,12 +1,16 @@
 # Important!
 
-This software [has been sadly discontinued][theend] by its developers, and it is not very clear when it is going to stop working. It is unfinished, it is buggy and it is slow. From my point of view, it barely works.
+This software [has been sadly discontinued][theend] by its developers. I (victorpimentel) do not have anything to do with the original developers. I only forked it just at the right time. Incidentally, the source for RSS feeds (EZTV/EZRSS) has been down, but the application still works (or it would work if the source was not down).
 
-I (victorpimentel) do not have anything to do with the original developers. I only forked it just at the right time. In the near future I do not plan to continue the development, if you want to pick up or contribute in any way you are free to fork this repository. Just comply with the license and remove any mention to Ember Code _in any future code or binary application you release_.
+It seems that in the near future I will continue its development, but in any case if you want to pick up or contribute in any way you are free to fork this repository. Just comply with the license.
 
 ## Download
 
-As a courtesy you can download the latest build [from my site][download]. That preference pane should work in Leopard and Snow Leopard.
+The latest build is always available here:
+
+[http://victorpimentel.com/tvshows/TVShows.zip][download]
+
+That preference pane should work in Leopard and Snow Leopard. In the near future when I have time I will create a proper website.
 
 ## About
 TVShows 2 is the next version of [TVShows][tvshows], the easiest way to download your favorite shows automatically. It includes a completely rewritten codebase as well as a major overhaul of the UI and a move to System Preferences.
@@ -34,16 +38,19 @@ No actual videos are downloaded by TVShows, only torrents which require other pr
 
 ## Roadmap
 ### Beta 6
-* Download episode names.
-* Add a loading bar to the show list and show info window.
-* Fade out subscribed shows from the show list.
-* Make it more obvious what's happening with SD/HD episodes.
-* Fix the two shows who have no posters, but don't display the placeholder.
+* <strike>Fix performance bugs, improve responsiveness.</strike>
+* <strike>Add a loading bar to the show list and show info window.</strike>
+* <strike>Make it more obvious what's happening with SD/HD episodes.</strike>
+* <strike>Add an option to mark by default the HD or SD versions of the show.</strike>
 * <strike>Fade out "disabled" subscriptions.</strike>
 
 ### Beta 7
+* Download episode names.
+* Fade out subscribed shows from the show list.
+* Fix the two shows who have no posters, but don't display the placeholder.
 * Add a list view to the Subscriptions tab.
 * Use NSTask for downloading torrents, posters, and descriptions.
+* Consider additional sources for the RSS feeds.
 
 ## License
 TVShows is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
@@ -53,7 +60,7 @@ For a copy of the GNU General Public License see &lt;[http://www.gnu.org/license
 [theend]:http://embercode.com/tvshows/the-end.html "Sad News"
 [download]:http://victorpimentel.com/tvshows/TVShows.zip "Download TVShows"
 
-[tvshows]:http://embercode.com/tvshows/ "TVShows Website"
+[tvshows]:http://victorpimentel.com/tvshows/ "TVShows Website"
 [translate]:https://webtranslateit.com/en/projects/874-TVShows-2/invitation_request "Help Translate TVShows 2"
 [translate-info]:http://embercode.com/blog/2010/help-translate-tvshows-2/ "Help Translate TVShows 2"
 

@@ -49,6 +49,11 @@
     IBOutlet NSTextField *lastCheckedText;
     IBOutlet NSButton *addButton;
     IBOutlet NSTextField *lastCheckedDate;
+    IBOutlet NSTableColumn *colHD;
+    IBOutlet NSTableColumn *colName;
+    IBOutlet NSTableColumn *colSeason;
+    IBOutlet NSTableColumn *colEpisode;
+    IBOutlet NSTableColumn *colDate;
     
     // Show info window
     IBOutlet NSTextField *showName;
@@ -89,6 +94,9 @@
 #pragma mark -
 #pragma mark Subscriptions TabController
 - (IBAction) displayShowInfoWindow:(id)sender;
+- (void) setEpisodesForShow;
+- (void) setStatusForShow:(NSString *)show;
+- (void) setPosterForShow:(NSString *)show;
 - (IBAction) closeShowInfoWindow:(id)sender;
 - (IBAction) showQualityDidChange:(id)sender;
 - (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName;

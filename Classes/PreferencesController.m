@@ -50,6 +50,7 @@
 - (void) setDefaultUserDefaults
 {
     [TSUserDefaults setKey:@"AutoOpenDownloadedFiles"   fromBool:YES];
+    [TSUserDefaults setKey:@"AutoSelectHDVersion"       fromBool:YES];
     [TSUserDefaults setKey:@"checkDelay"                fromFloat:0];
     [TSUserDefaults setKey:@"downloadFolder"            fromString:[NSHomeDirectory() stringByAppendingPathComponent:@"Downloads"]];
     [TSUserDefaults setKey:@"GrowlOnAppUpdate"          fromBool:YES];
@@ -85,6 +86,10 @@
     // Automatically open downloaded files
     [autoOpenDownloadedFiles setTitle: TSLocalizeString(@"Automatically open each file after download")];
     [autoOpenDownloadedFiles setState: [TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]];
+    
+    // Automatically select HD version by default
+    [autoSelectHDVersion setTitle: TSLocalizeString(@"Download HD versions by default")];
+    [autoSelectHDVersion setState: [TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:1]];
     
     // Check for new episodes every...
     [episodeCheckText setStringValue: TSLocalizeString(@"Check for episodes every:")];
@@ -236,6 +241,11 @@
 - (IBAction) autoOpenDownloadedFilesDidChange:(id)sender
 {
     [TSUserDefaults setKey:@"AutoOpenDownloadedFiles" fromBool: [autoOpenDownloadedFiles state]];
+}
+
+- (IBAction) autoSelectHDVersionDidChange:(id)sender
+{
+    [TSUserDefaults setKey:@"AutoSelectHDVersion" fromBool: [autoSelectHDVersion state]];
 }
 
 #pragma mark -

@@ -55,52 +55,88 @@
 {
     errorHasOccurred = NO;
     
-    // Only download the show list once per session
+    // Localize things and prepare the window (only needed the first time)
     if(hasDownloadedList == NO) {
-        LogInfo(@"Downloading an updated show list.");
-        [self downloadTorrentShowList];
-                
-        // Sort the shows alphabetically
-        NSSortDescriptor *PTSortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"sortName"
-                                                                         ascending: YES 
-                                                                          selector: @selector(caseInsensitiveCompare:)];
-        [PTArrayController setSortDescriptors:[NSArray arrayWithObject:PTSortDescriptor]];
         
-        [PTSortDescriptor release];
-    }
-    
-    // Continue if no error occurred when downloading the show list
-    if(errorHasOccurred == NO) {
-        // Reset the selection and search bar each time they open the window
-        [[[PTSearchField cell] cancelButtonCell] performClick:self];
-        [PTArrayController setSelectionIndex:0];
-        
-        // Setup the default video quality
+        // Localize the buttons
         [showQuality setTitle: TSLocalizeString(@"Download in HD")];
-        [showQuality setState: 1];
-        
-        // Localize the other buttons
         [cancelButton setTitle: TSLocalizeString(@"Cancel")];
         [subscribeButton setTitle: TSLocalizeString(@"Subscribe")];
         [tvcomButton setTitle: TSLocalizeString(@"View on TV.com")];
-//      [ratingsTitle setStringValue: TSLocalizeString(@"Rating:")];
+        [ratingsTitle setStringValue: TSLocalizeString(@"Rating:")];
         
         // Localize the headings of the table columns
-//      [[colHD headerCell] setStringValue: TSLocalizeString(@"HD")];
-//      [[colName headerCell] setStringValue: TSLocalizeString(@"Episode Name")];
-//      [[colSeason headerCell] setStringValue: TSLocalizeString(@"Season")];
-//      [[colEpisode headerCell] setStringValue: TSLocalizeString(@"Episode")];
-//      [[colDate headerCell] setStringValue: TSLocalizeString(@"Published Date")];
+        [[colHD headerCell] setStringValue: TSLocalizeString(@"HD")];
+        [[colName headerCell] setStringValue: TSLocalizeString(@"Episode Name")];
+        [[colSeason headerCell] setStringValue: TSLocalizeString(@"Season")];
+        [[colEpisode headerCell] setStringValue: TSLocalizeString(@"Episode")];
+        [[colDate headerCell] setStringValue: TSLocalizeString(@"Published Date")];
         
-        [NSApp beginSheet: PTWindow
-           modalForWindow: [[NSApplication sharedApplication] mainWindow]
-            modalDelegate: nil
-           didEndSelector: nil
-              contextInfo: nil];
+        // Search field and Loading text
+        [[PTSearchField cell] setPlaceholderString: TSLocalizeString(@"Search")];
+        [loadingText setStringValue: TSLocalizeString(@"Updating Show Information…")];
         
-        [NSApp endSheet: PTWindow];
-        [NSApp runModalForWindow: PTWindow];
+        // Sort the preloaded list
+        [self sortTorrentShowList];
+        
+        // Reset the selection and search bar
+        [PTArrayController setSelectionIndex:-1];
+        [[PTSearchField cell] cancelButtonCell];
+        
+        // Disable any control
+        [PTSearchField setEnabled:NO];
+        [PTTableView setEnabled:NO];
+        [cancelButton setEnabled:NO];
+        [subscribeButton setEnabled:NO];
+        [showQuality setEnabled:NO];
+        
+        // Setup the default video quality
+        [showQuality setState: 1];
+        
+        // And start the loading throbber
+        [loading startAnimation:nil];
+        [loadingText setHidden:NO];
+        [descriptionView setHidden:YES];
     }
+    
+    // Always remember the user preference
+    [showQuality setState: [TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:1]];
+    
+    [NSApp beginSheet: PTWindow
+       modalForWindow: [[NSApplication sharedApplication] mainWindow]
+        modalDelegate: nil
+       didEndSelector: nil
+          contextInfo: nil];
+
+    // Only download the show list once per session
+    if(hasDownloadedList == NO) {
+        [self downloadTorrentShowList];
+        
+        // Close the window
+        if(errorHasOccurred == YES) {
+            [NSApp endSheet: PTWindow];
+            [self closePresetTorrentsWindow:0];
+            return;
+        }
+        
+        // Enable the controls
+        [PTSearchField setEnabled:YES];
+        [PTTableView setEnabled:YES];
+        [cancelButton setEnabled:YES];
+        [subscribeButton setEnabled:YES];
+        [showQuality setEnabled:YES];
+        
+        // Reset the selection, focus the search field
+        [PTArrayController setSelectionIndex:0];
+        [PTTableView scrollRowToVisible:0];
+    }
+    
+    // Focus the search field
+    [[PTSearchField cell] performClick:self];
+    
+    [NSApp runModalForWindow: PTWindow];
+    
+    [NSApp endSheet: PTWindow];
 }
 
 - (IBAction) closePresetTorrentsWindow:(id)sender
@@ -113,17 +149,30 @@
 {
     if ([showQuality state]) {
         // Is HD and HD is enabled.
-//        [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '1'"]];
+        [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '1'"]];
     } else if (![showQuality state]) {
         // Is not HD and HD is not enabled.
-//        [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '0'"]];
+        [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '0'"]];
     }
+}
+
+- (void) sortTorrentShowList
+{
+    // Sort the shows alphabetically
+    NSSortDescriptor *PTSortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"sortName"
+                                                                     ascending: YES 
+                                                                      selector: @selector(caseInsensitiveCompare:)];
+    [PTArrayController setSortDescriptors:[NSArray arrayWithObject:PTSortDescriptor]];
+    
+    [PTSortDescriptor release];
 }
 
 - (void) downloadTorrentShowList
 {
+    LogInfo(@"Downloading an updated show list.");
+    
     // There's probably a better way to do this:
-    id delegateClass = [[[PresetShowsDelegate class] alloc] init];
+    id delegateClass = [[PresetShowsDelegate alloc] init];
     
     NSString *displayName, *sortName;
     int showrssID;
@@ -198,6 +247,8 @@
         LogInfo(@"Finished downloading the new show list.");
     }
     
+    [self sortTorrentShowList];
+    
     [delegateClass release];
 }
 
@@ -218,32 +269,77 @@
         // or else searching and the scrollbar will fail.
         if ( ([PTTableView selectedRow] > -1) || ([PTTableView selectedRow] == 0) && ([PTTableView selectedRow]) ) {
             
-            // Grab the list of episodes
-            NSString *selectedShowURL = [NSString stringWithFormat:@"http://showrss.karmorra.info/feeds/%@.rss",
-                                         [[[PTArrayController selectedObjects] valueForKey:@"showrssID"] objectAtIndex:0]];
-            [episodeArrayController addObjects:[TSParseXMLFeeds parseEpisodesFromFeed:selectedShowURL
-                                                                             maxItems:10]];
+            NSImage *defaultPoster = [[[NSImage alloc] initByReferencingFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"posterArtPlaceholder" ofType:@"jpg"]] autorelease];
+            [defaultPoster setSize: NSMakeSize(129, 187)];
+            [showPoster setImage: defaultPoster];
+            [showQuality setState: [TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:1]];
             
-            // Grab the show description
-            NSString *description = [TheTVDB getValueForKey:@"Overview" andShow:
-                                     [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]];
-            if (description != NULL) {
-                [showDescription setString: [TSRegexFun replaceHTMLEntitiesInString:description]];
-                [showDescription moveToBeginningOfDocument:nil];
-            } else {
-                [showDescription setString: @"No description was found for this show."];
-            }
-
-
+            // Start the loading throbber
+            [loading startAnimation:nil];
+            [loadingText setHidden:NO];
+            [descriptionView setHidden:YES];
+            
+            NSString *selectedShowID = [[[PTArrayController selectedObjects] valueForKey:@"showrssID"] objectAtIndex:0];
+            NSString *selectedShowName = [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0];
             
             // Display the show poster now that it's been resized.
-            [showPoster setImage: [TheTVDB getPosterForShow:[[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0]
-                                                 withHeight:187
-                                                  withWidth:129] ];
+            [self performSelectorInBackground:@selector(setPosterForShow:) withObject:selectedShowName];
+            
+            // Grab the show description
+            [self performSelectorInBackground:@selector(setDescriptionForShow:) withObject:selectedShowName];
+            
+            // Grab the list of episodes
+            [self performSelector:@selector(setEpisodesForShowID:) withObject:selectedShowID];
             
             // Update the filter predicate to only display the correct quality.
 //            [self showQualityDidChange:nil];
+            
         }
+    }
+}
+
+- (void) setEpisodesForShowID:(NSString *)showID
+{
+    NSString *selectedShowURL = [NSString stringWithFormat:@"http://showrss.karmorra.info/feeds/%@.rss", showID];
+    NSArray *results = [TSParseXMLFeeds parseEpisodesFromFeed:selectedShowURL maxItems:10];
+    
+    if ([results count] == 0) {
+        LogError(@"Could not download/parse feed <%@>", selectedShowURL);
+    } else {
+        [episodeArrayController addObjects:results];
+    }
+}
+
+- (void) setDescriptionForShow:(NSString *)show
+{
+    NSString *description = [TheTVDB getValueForKey:@"Overview" andShow:show];
+    NSString *copy = [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0];
+    
+    // Check if the request is still valid (an impacient user may start to rapidly change)
+    if ([show isEqualToString:copy]) {
+        if (description != NULL) {
+            [showDescription setString: [TSRegexFun replaceHTMLEntitiesInString:description]];
+            [showDescription moveToBeginningOfDocument:nil];
+        } else {
+            [showDescription setString: TSLocalizeString(@"No description was found for this show.")];
+        }
+        
+        // And stop the loading throbber
+        [loading stopAnimation:nil];
+        [loadingText setHidden:YES];
+        [descriptionView setHidden:NO];
+    }
+}
+
+- (void) setPosterForShow:(NSString *)show
+{
+    NSImage *poster = [[[TheTVDB getPosterForShow:show withHeight:187 withWidth:129] copy] autorelease];
+    NSString *copy = [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0];
+    
+    // Check if the request is still valid (an impacient user may start to rapidly change)
+    if ([show isEqualToString:copy]) {
+        [showPoster setImage: poster];
+        [showPoster display];
     }
 }
 
@@ -316,6 +412,9 @@
 #pragma mark Subscription Methods
 - (IBAction) subscribeToShow:(id)sender
 {
+    // To force the view to sort the new subscription
+    [SBArrayController setUsesLazyFetching:NO];
+
     // There's probably a better way to do this:
     id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
     

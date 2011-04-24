@@ -35,6 +35,7 @@
     IBOutlet NSPopUpButton *downloadLocationMenu;
     
     IBOutlet NSButton *autoOpenDownloadedFiles;
+    IBOutlet NSButton *autoSelectHDVersion;
 
     // Growl Settings
     IBOutlet NSTextField *growlNotifyText;
