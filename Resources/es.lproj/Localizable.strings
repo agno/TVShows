@@ -1,6 +1,6 @@
-" at " = " a las ";
-
 "1 day" = "1 día";
+
+" at " = " a las ";
 
 "1 hour" = "1 hora";
 
@@ -27,27 +27,31 @@
 
 "About" = "Acerca de";
 
-/* This string is on a button. */
-"Add Show" = "Añadir";
-
-"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "En cada comprobación de episodios se registra un mensaje. Salvo que se indique lo contrario, no hay nuevos episodios.";
+"Add a custom RSS source" = "";
 
 /* Title of an error message or Growl notification. */
 "An Error Has Occurred" = "Ha ocurrido un error.";
 
+"Add a show from NZBs.org" = "";
+
+/* This string is on a button. */
+"Add Show" = "Añadir";
+
 "An unknown error has occurred. Please try again later." = "Ha ocurrido un error desconocido. Por favor, inténtelo mas tarde.";
+
+"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "En cada comprobación de episodios se registra un mensaje. Salvo que se indique lo contrario, no hay nuevos episodios.";
 
 "An update for TVShows has been installed automatically. To disable this feature go to the Preferences tab and uncheck 'Automatically install new updates.'" = "Se ha instalado automáticamente una actualización de TVShows. Para deshabilitar esta funcionalidad, vaya a la pestaña Preferencias y deseleccione 'Instalar automáticamente nuevas actualizaciones'.";
 
 "Application Update Preferences" = "Preferencias de actualización de la aplicación";
-
-"Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "¿Seguro que quieres desinstalar TVShows? Se borrarán todas tus preferencias y suscripciones.";
 
 "Automatically check for updates" = "Buscar actualizaciones automáticamente";
 
 "Automatically install new updates" = "Instalar nuevas actualizaciones automáticamente";
 
 "Automatically open each file after download" = "Abrir automáticamente los archivos al terminar la descarga";
+
+"Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "¿Seguro que quieres desinstalar TVShows? Se borrarán todas tus preferencias y suscripciones.";
 
 /* This string is on a button. */
 "Cancel" = "Cancelar";
@@ -64,24 +68,28 @@
 /* This string is on a button. */
 "Close" = "Cerrar";
 
-"Continuing" = "En emisión";
-
-"Donate" = "Donar";
-
 "Download Preferences" = "Preferencias de descarga";
+
+"Choose this to download torrent files from a list of preset shows." = "";
 
 "Download beta versions when available" = "Descargar versiones beta cuando estén disponibles";
 
-"Download HD versions by default" = "Descargar versiones en HD por defecto";
+"Choose this to download Usenet files using your NZBs.org account." = "";
 
 "Download in HD" = "Descargar en HD";
 
+"Choose this to input your own RSS feed." = "";
+
 "Enable downloading new episodes" = "Habilitar descarga de nuevos episodios";
 
-"Ended" = "Terminado";
+"Continuing" = "En emisión";
 
 /* Title of a column in a table. */
 "Episode" = "Episodio";
+
+"Default video quality:" = "";
+
+"Donate" = "Donar";
 
 /* Title of a column in a table. */
 "Episode Name" = "Nombre del Episodio";
@@ -90,37 +98,32 @@
 
 "Feed" = "Feed";
 
+"Download HD versions by default" = "Descargar versiones en HD por defecto";
+
 "Growl Settings" = "Preferencias de Growl";
 
 "Include anonymous system information" = "Incluir información anónima del sistema";
 
 "Info" = "Información";
 
+"Ended" = "Terminado";
+
 "Last Aired" = "Último emitido";
 
-"Last Checked:" = "Última actualización:";
-
 "Last Downloaded" = "Último descargado";
-
-"Logs are stored in ~/Library/Logs/TVShows/" = "Los archivos de registro se guardan en ~/Library/Logs/TVShows/";
 
 /* This string is on a button. */
 "More Info" = "Más información";
 
+"Getting Started" = "";
+
 "Name" = "Nombre";
-
-"Never" = "Nunca";
-
-"No" = "No";
-
-"No activity has been logged yet. Have you recently installed TVShows?" = "Por ahora no se ha registrado ninguna actividad. ¿Has instalado recientemente TVShows?";
-
-"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country." = "TVShows no descarga ningún vídeo, solo archivos torrent que requieren de otros programas para descargar el contenido real. Es tu responsabilidad conocer si el uso legal de cualquier archivo descargado por esta aplicación se enmarca en las leyes de copyright vigentes de tu país.";
-
-"No description was found for this show." = "No se encontró ninguna descripción para esta serie."; 
 
 /* This string is on a button. */
 "Off" = "Desactivado";
+
+/* This string refers to the default episode quality to download (Standard/High Definition). */
+"High Definition" = "";
 
 /* This string is on a button. */
 "Ok" = "OK";
@@ -132,27 +135,41 @@
 
 "Please Select a Show:" = "Por favor, elija una serie:";
 
+"Last Checked:" = "Última actualización:";
+
 "Preferences" = "Preferencias";
 
 /* Title of a column in a table. */
 "Published Date" = "Fecha de emisión";
 
-"Rating:" = "Valoración:";
-
-"Recently Logged Activity" = "Actividad registrada recientemente";
+"Logs are stored in ~/Library/Logs/TVShows/" = "Los archivos de registro se guardan en ~/Library/Logs/TVShows/";
 
 "RSS Feed Information:" = "Información del Feed RSS:";
 
+"Rating:" = "Valoración:";
+
 "Search" = "Buscar";
+
+"Never" = "Nunca";
 
 /* Title of a column in a table. */
 "Season" = "Temporada";
 
+"No" = "No";
+
 "Select a preset show from showRSS" = "Seleccione una serie predeterminada de showRSS.";
+
+"No activity has been logged yet. Have you recently installed TVShows?" = "Por ahora no se ha registrado ninguna actividad. ¿Has instalado recientemente TVShows?";
+
+"Please choose one of the following actions:" = "";
 
 "Send Growl notifications when…" = "Enviar una notificación Growl cuando…";
 
+"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country." = "TVShows no descarga ningún vídeo, solo archivos torrent que requieren de otros programas para descargar el contenido real. Es tu responsabilidad conocer si el uso legal de cualquier archivo descargado por esta aplicación se enmarca en las leyes de copyright vigentes de tu país.";
+
 "Status" = "Estado";
+
+"No description was found for this show." = "No se encontró ninguna descripción para esta serie.";
 
 /* This string is on a button. */
 "Submit Feedback" = "Enviar opinión";
@@ -166,10 +183,28 @@
 "TVShows Update Available" = "Actualización de TVShows disponible";
 
 /* Title of an error message or Growl notification. */
-"TVShows Update Downloading" = "Descargando actualización de TVShows.";
+"TVShows Update Downloading" = "Descargando actualización de TVShows";
 
 /* Title of an error message or Growl notification. */
-"Unable to Update the Show List" = "No se puede actualizar la lista de series.";
+"Unable to Update the Show List" = "No se puede actualizar la lista de series";
+
+/* This string is on a button. */
+"Unsubscribe" = "Eliminar";
+
+/* Title of an error message or Growl notification. */
+"Update Installed Automatically" = "Actualización instalada automáticamente.";
+
+/* This string refers to the default episode quality to download (Standard/High Definition). */
+"Standard" = "";
+
+/* This string is on a button. */
+"View on TV.com" = "Ver en TV.com";
+
+"… a new episode is downloaded." = "… se haya descargado un nuevo episodio.";
+
+"Recently Logged Activity" = "Actividad registrada recientemente";
+
+"… a new version of TVShows is released." = "… haya disponible una nueva versión de TVShows.";
 
 /* This string is on a button. */
 "Uninstall" = "Desinstalar";
@@ -178,23 +213,11 @@
 
 "Unknown" = "Desconocido";
 
-/* This string is on a button. */
-"Unsubscribe" = "Eliminar";
-
-/* Title of an error message or Growl notification. */
-"Update Installed Automatically" = "Actualización instalada automáticamente.";
-
 "Updating Show Information…" = "Actualizando información de la serie…";
 
 "View Logs" = "Ver logs";
-
-/* This string is on a button. */
-"View on TV.com" = "Ver en TV.com";
 
 "Website" = "Sitio web";
 
 "Yes" = "Sí";
 
-"… a new episode is downloaded." = "… se haya descargado un nuevo episodio.";
-
-"… a new version of TVShows is released." = "… haya disponible una nueva versión de TVShows.";

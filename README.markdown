@@ -20,8 +20,9 @@ No actual videos are downloaded by TVShows, only torrents which require other pr
 <!-- ## Screenshots
 <a href="http://embercode.com/blog/category/tvshows-news/" title="TVShows News">![Show List][preview-1]&nbsp;&nbsp;![Subscriptions][preview-2]&nbsp;&nbsp;![Show Info][preview-3]</a> -->
 
-<!-- ## Translations
-* Help localize TVShows 2 into your native language! [Click here][translate] ([more info][translate-info]) to be added to the translation team. -->
+## Translations
+<!--* Help localize TVShows 2 into your native language! [Click here][translate] ([more info][translate-info]) to be added to the translation team.-->
+* Help localize TVShows 2 into your native language! [Click here][translate] to be added to the translation team.
 
 ## Collaboration Instructions
 1. Checkout the repository:
@@ -61,7 +62,7 @@ For a copy of the GNU General Public License see &lt;[http://www.gnu.org/license
 [download]:http://victorpimentel.com/tvshows/TVShows.zip "Download TVShows"
 
 [tvshows]:http://victorpimentel.com/tvshows/ "TVShows Website"
-[translate]:https://webtranslateit.com/en/projects/874-TVShows-2/invitation_request "Help Translate TVShows 2"
+[translate]:https://webtranslateit.com/en/projects/1852-TVShows/invitation_request "Help Translate TVShows 2"
 [translate-info]:http://embercode.com/blog/2010/help-translate-tvshows-2/ "Help Translate TVShows 2"
 
 [preview-1]:http://embercode.com/_tvshows/screenshots/show-list_small.png "TVShows 2: Show List"
