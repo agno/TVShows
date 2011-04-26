@@ -1,21 +1,15 @@
-# Important!
+## About
+TVShows 2 is the next version of [TVShows][tvshows], the easiest way to download your favorite shows automatically. It includes a completely rewritten codebase as well as a major overhaul of the UI and a move to System Preferences.
 
-This software [has been sadly discontinued][theend] by its developers. I (victorpimentel) do not have anything to do with the original developers. I only forked it just at the right time. Incidentally, the source for RSS feeds (EZTV/EZRSS) has been down, but the application still works (or it would work if the source was not down).
-
-It seems that in the near future I will continue its development, but in any case if you want to pick up or contribute in any way you are free to fork this repository. Just comply with the license.
+No actual videos are downloaded by TVShows, only torrents which require other programs to use. It is up to the user to decide the legality of using any files downloaded by this application, in accordance with applicable copyright laws of their country.
 
 ## Download
 
 The latest build is always available here:
 
-[http://victorpimentel.com/tvshows/TVShows.zip][download]
+[http://victorpimentel.com/tvshows/][tvshows]
 
 That preference pane should work in Leopard and Snow Leopard. In the near future when I have time I will create a proper website.
-
-## About
-TVShows 2 is the next version of [TVShows][tvshows], the easiest way to download your favorite shows automatically. It includes a completely rewritten codebase as well as a major overhaul of the UI and a move to System Preferences.
-
-No actual videos are downloaded by TVShows, only torrents which require other programs to use. It is up to the user to decide the legality of using any files downloaded by this application, in accordance with applicable copyright laws of their country.
 
 <!-- ## Screenshots
 <a href="http://embercode.com/blog/category/tvshows-news/" title="TVShows News">![Show List][preview-1]&nbsp;&nbsp;![Subscriptions][preview-2]&nbsp;&nbsp;![Show Info][preview-3]</a> -->
@@ -59,10 +53,9 @@ TVShows is free software: you can redistribute it and/or modify it under the ter
 For a copy of the GNU General Public License see &lt;[http://www.gnu.org/licenses/][license]&gt;.
 
 [theend]:http://embercode.com/tvshows/the-end.html "Sad News"
-[download]:http://victorpimentel.com/tvshows/TVShows.zip "Download TVShows"
 
 [tvshows]:http://victorpimentel.com/tvshows/ "TVShows Website"
-[translate]:https://webtranslateit.com/en/projects/1852-TVShows/invitation_request "Help Translate TVShows 2"
+[translate]:https://webtranslateit.com/en/projects/874-TVShows/invitation_request "Help Translate TVShows 2"
 [translate-info]:http://embercode.com/blog/2010/help-translate-tvshows-2/ "Help Translate TVShows 2"
 
 [preview-1]:http://embercode.com/_tvshows/screenshots/show-list_small.png "TVShows 2: Show List"
