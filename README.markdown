@@ -7,7 +7,7 @@ No actual videos are downloaded by TVShows, only torrents which require other pr
 
 The latest build is always available here:
 
-[http://victorpimentel.com/tvshows/][tvshows]
+[http://tvshowsapp.com/][tvshows]
 
 That preference pane should work in Leopard and Snow Leopard. In the near future when I have time I will create a proper website.
 
@@ -54,7 +54,7 @@ For a copy of the GNU General Public License see &lt;[http://www.gnu.org/license
 
 [theend]:http://embercode.com/tvshows/the-end.html "Sad News"
 
-[tvshows]:http://victorpimentel.com/tvshows/ "TVShows Website"
+[tvshows]:http://tvshowsapp.com/ "TVShows Website"
 [translate]:https://webtranslateit.com/en/projects/874-TVShows/invitation_request "Help Translate TVShows 2"
 [translate-info]:http://embercode.com/blog/2010/help-translate-tvshows-2/ "Help Translate TVShows 2"
 
