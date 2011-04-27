@@ -1,6 +1,7 @@
 "1 day" = "Günde bir";
 
-" at " = "";
+/* This string is used between a date and a time, e.g, 1/1/1 at 01:01am. */
+" at " = "tarihinde";
 
 "1 hour" = "Saat başı";
 
@@ -27,19 +28,19 @@
 
 "About" = "Hakkında";
 
-"Add a custom RSS source" = "";
+"Add a custom RSS source" = "Kendi RSS kaynağını ekle";
 
 /* Title of an error message or Growl notification. */
 "An Error Has Occurred" = "Bir Hata Oluştu";
 
-"Add a show from NZBs.org" = "";
+"Add a show from NZBs.org" = "NZBs.org'daki programlardan ekle";
 
 /* This string is on a button. */
-"Add Show" = "";
+"Add Show" = "Dizi Ekle";
 
 "An unknown error has occurred. Please try again later." = "Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar dene.";
 
-"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "";
+"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "Yeni bölümler her denetlendiğinde günlüğe bir mesaj kaydı eklenir. Aksi belirtilmedikçe, yeni bölümler bulunmamış demektir.";
 
 "An update for TVShows has been installed automatically. To disable this feature go to the Preferences tab and uncheck 'Automatically install new updates.'" = "TVShows ile ilgili bir güncelleme kuruldu. Bu özelliği iptal etmek için Tercihler sekmesine gidip 'Yeni güncellemeleri otomatik kur' seçeneğini devre dışı bırak.";
 
@@ -51,7 +52,7 @@
 
 "Automatically open each file after download" = "İndirme sonrası dosyayı otomatik olarak çalıştır";
 
-"Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "";
+"Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "TVShows uygulamasını kaldırmak istediğinden emin misin? Bu eylem tüm ayarları ve abonelikleri de kaldıracaktır.";
 
 /* This string is on a button. */
 "Cancel" = "İptal";
@@ -70,26 +71,26 @@
 
 "Download Preferences" = "İndirme Tercihleri";
 
-"Choose this to download torrent files from a list of preset shows." = "";
+"Choose this to download torrent files from a list of preset shows." = "Hazır program listesinden torrent dosyaları indirmek için bunu seç.";
 
 "Download beta versions when available" = "Beta sürüm çıkarsa indir";
 
-"Choose this to download Usenet files using your NZBs.org account." = "";
+"Choose this to download Usenet files using your NZBs.org account." = "NZBs.org hesabından Usenet dosyaları indirmek için bunu seç.";
 
 "Download in HD" = "Yüksek Çözünürlükte İndir";
 
-"Choose this to input your own RSS feed." = "";
+"Choose this to input your own RSS feed." = "Kendi RSS akışını eklemek için bunu seç.";
 
 "Enable downloading new episodes" = "Yeni bölümlerin indirilmesine izin ver";
 
-"Continuing" = "";
+"Continuing" = "Devam ediyor";
 
 /* Title of a column in a table. */
 "Episode" = "Bölüm";
 
-"Default video quality:" = "";
+"Default video quality:" = "Seçili görüntü kalitesi:";
 
-"Donate" = "";
+"Donate" = "Bağış yap";
 
 /* Title of a column in a table. */
 "Episode Name" = "Bölüm Adı";
@@ -98,7 +99,7 @@
 
 "Feed" = "Akış";
 
-"Download HD versions by default" = "";
+"Download HD versions by default" = "Dizileri HD kalitede indirme kuralı getir";
 
 "Growl Settings" = "Growl Ayarları";
 
@@ -106,7 +107,7 @@
 
 "Info" = "Bilgi";
 
-"Ended" = "";
+"Ended" = "Bitti";
 
 "Last Aired" = "Son Yayım Tarihi";
 
@@ -115,7 +116,7 @@
 /* This string is on a button. */
 "More Info" = "Ek Bilgi";
 
-"Getting Started" = "";
+"Getting Started" = "Buradan Başla";
 
 "Name" = "İsim";
 
@@ -123,7 +124,7 @@
 "Off" = "Kapalı";
 
 /* This string refers to the default episode quality to download (Standard/High Definition). */
-"High Definition" = "";
+"High Definition" = "Yüksek Çözünürlük";
 
 /* This string is on a button. */
 "Ok" = "Tamam";
@@ -135,14 +136,14 @@
 
 "Please Select a Show:" = "Lütfen Bir Dizi Seç:";
 
-"Last Checked:" = "";
+"Last Checked:" = "Son Denetleme:";
 
 "Preferences" = "Tercihler";
 
 /* Title of a column in a table. */
 "Published Date" = "Çıkış Tarihi";
 
-"Logs are stored in ~/Library/Logs/TVShows/" = "";
+"Logs are stored in ~/Library/Logs/TVShows/" = "Günlükler ~/Library/Logs/TVShows/ adresinde tutuluyor";
 
 "RSS Feed Information:" = "RSS Akış Bilgisi:";
 
@@ -150,26 +151,26 @@
 
 "Search" = "Ara";
 
-"Never" = "";
+"Never" = "Hiçbir zaman";
 
 /* Title of a column in a table. */
 "Season" = "Sezon";
 
-"No" = "";
+"No" = "Hayır";
 
 "Select a preset show from showRSS" = "ShowRSS'ten hazır bir program seç";
 
-"No activity has been logged yet. Have you recently installed TVShows?" = "";
+"No activity has been logged yet. Have you recently installed TVShows?" = "Henüz hiçbir eylem günlüğe kaydedilmedi. TVShows'u yeni kurmuş olabilir misin?";
 
-"Please choose one of the following actions:" = "";
+"Please choose one of the following actions:" = "Lütfen aşağıdaki eylemlerden birini seç:";
 
 "Send Growl notifications when…" = "Growl mesajı gönderme zamanlaması:";
 
-"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country." = "";
+"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country." = "TVShows ile film dosyaları indirilmez, başka yazılımların kullandığı yığın dosyaları indirilir. Bu uygulamanın indirdiği dosyalarla ne yapılacağı kararı, bulunulan ülkenin telif kanunlarınla uyumlu olmak kaydıyla, tamamen kullanıcıya aittir. ";
 
 "Status" = "Durum";
 
-"No description was found for this show." = "";
+"No description was found for this show." = "Bu dizi ile ilgili hiçbir açıklama bulunamadı.";
 
 /* This string is on a button. */
 "Submit Feedback" = "Geribildirim İlet";
@@ -195,29 +196,29 @@
 "Update Installed Automatically" = "Güncelleme Otomatik Kuruldu";
 
 /* This string refers to the default episode quality to download (Standard/High Definition). */
-"Standard" = "";
+"Standard" = "Standart";
 
 /* This string is on a button. */
 "View on TV.com" = "TV.com'da Bul";
 
 "… a new episode is downloaded." = "Her yeni bölüm indirildiğinde.";
 
-"Recently Logged Activity" = "";
+"Recently Logged Activity" = "Günlüğe yeni kaydedilen aktiviteler";
 
 "… a new version of TVShows is released." = "TVShows'un her yeni sürümü çıktığında.";
 
 /* This string is on a button. */
-"Uninstall" = "";
+"Uninstall" = "Kaldır";
 
-"Uninstall TVShows" = "";
+"Uninstall TVShows" = "TVShows'u kaldır";
 
-"Unknown" = "";
+"Unknown" = "Bilinmeyen";
 
-"Updating Show Information…" = "";
+"Updating Show Information…" = "Dizi Bilgisi Güncelleniyor...";
 
-"View Logs" = "";
+"View Logs" = "Günlüğe bak";
 
-"Website" = "";
+"Website" = "Web sitesi";
 
-"Yes" = "";
+"Yes" = "Evet";
 

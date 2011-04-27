@@ -1,6 +1,7 @@
 "1 day" = "1 dag";
 
-" at " = "";
+/* This string is used between a date and a time, e.g, 1/1/1 at 01:01am. */
+" at " = "om";
 
 "1 hour" = "1 uur";
 
@@ -19,44 +20,44 @@
 
 "A new version of TVShows is available for download." = "Een nieuwe versie van TVShows is beschikbaar om te downloaden.";
 
-"A newer show list cannot be found. Using an old show list temporarily." = "Er kan geen nieuwere lijst met series gevonden worden. Er wordt tijdelijk gebruik gemaakt van een oude lijst. ";
-
 "A new version of TVShows is being downloaded and installed." = "Een nieuwe versie van TVShows wordt gedownload en geïnstalleerd. ";
+
+"A newer show list cannot be found. Using an old show list temporarily." = "Er kan geen nieuwere lijst met series gevonden worden. Er wordt tijdelijk gebruik gemaakt van een oude lijst. ";
 
 "A show list cannot be found. Please try again later or check your internet connection." = "Er kan geen lijst met series gevonden worden. Probeert u het later nog eens of controleer uw internet verbinding. ";
 
 "About" = "Over";
 
-/* Title of an error message or Growl notification. */
-"An Error Has Occurred" = "Er is een fout opgetreden";
-
 "Add a custom RSS source" = "Voeg een aangepaste RSS bron toe";
 
-"An unknown error has occurred. Please try again later." = "Er heeft zich een onbekende fout voorgedaan. Probeer het later opnieuw. ";
+/* Title of an error message or Growl notification. */
+"An Error Has Occurred" = "Er is een fout opgetreden";
 
 "Add a show from NZBs.org" = "Voeg een serie toe van NZBs.org";
 
 /* This string is on a button. */
-"Add Show" = "";
+"Add Show" = "Voeg show toe";
 
-"Application Update Preferences" = "Programma Update Voorkeuren";
+"An unknown error has occurred. Please try again later." = "Er is een onbekende fout opgetreden. Probeer het later opnieuw. ";
 
-"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "";
+"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "Elke keer dat er naar nieuwe afleveringen is gezocht wordt er een bericht in het log opgeslagen. Tenzij anders genoteerd zijn er geen nieuwe afleveringen gevonden. ";
+
+"An update for TVShows has been installed automatically. To disable this feature go to the Preferences tab and uncheck 'Automatically install new updates.'" = "Een update voor TVShows werd automatisch geïnstalleerd. Om deze optie uit te schakelen ga je de Preferences tab en vink je 'Automatisch nieuwe versies installeren' uit.";
+
+"Application Update Preferences" = "Programma update voorkeuren";
 
 "Automatically check for updates" = "Controleer automatisch voor nieuwe versies";
 
 "Automatically install new updates" = "Installeer automatisch nieuwe versies";
 
-"An update for TVShows has been installed automatically. To disable this feature go to the Preferences tab and uncheck 'Automatically install new updates.'" = "Een update voor TVShows werd automatisch geïnstalleerd. Om deze optie uit te schakelen ga je de Preferences tab en vink je 'Automatisch nieuwe versies installeren' uit.";
-
 "Automatically open each file after download" = "Open elk bestand automatisch na het downloaden";
+
+"Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "Bent u er zeker van dat u TVShows wilt verwijderen? Hiermee verwijdert u ook alle voorkeuren en abonnementen.";
 
 /* This string is on a button. */
 "Cancel" = "Annuleer";
 
 "Cannot connect. Please try again later or check your internet connection" = "Kan geen verbinding maken. Probeert u het later nog eens of controleer uw internet verbinding. ";
-
-"Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "";
 
 "Cannot connect. Using an old show list temporarily." = "Kan geen verbinding maken. Er wordt tijdelijk gebruik gemaakt van een oude lijst met series. ";
 
@@ -68,41 +69,45 @@
 /* This string is on a button. */
 "Close" = "Sluiten";
 
-"Download Preferences" = "Download Voorkeuren";
-
-"Download beta versions when available" = "Download bèta versies wanneer beschikbaar";
-
-"Download in HD" = "Downloaden in HD";
+"Download Preferences" = "Download voorkeuren";
 
 "Choose this to download torrent files from a list of preset shows." = "Kies deze optie om torrent-bestanden te downloaden uit een lijst van vooraf ingestelde series. ";
 
-"Enable downloading new episodes" = "Nieuwe afleveringen downloaden inschakelen";
+"Download beta versions when available" = "Download bèta versies wanneer beschikbaar";
 
 "Choose this to download Usenet files using your NZBs.org account." = "Kies deze optie om Usenet-bestanden te downloaden met uw NZBs.org-account. ";
+
+"Download in HD" = "Downloaden in HD";
+
+"Choose this to input your own RSS feed." = "Kies deze optie om uw eigen RSS-feed in te voeren. ";
+
+"Enable downloading new episodes" = "Nieuwe afleveringen downloaden inschakelen";
+
+"Continuing" = "Verder gaan";
 
 /* Title of a column in a table. */
 "Episode" = "Aflevering";
 
-"Choose this to input your own RSS feed." = "Kies deze optie om uw eigen RSS-feed in te voeren. ";
+"Default video quality:" = "Standaard video kwaliteit: ";
+
+"Donate" = "Doneer";
 
 /* Title of a column in a table. */
 "Episode Name" = "Naam van de aflevering";
 
-"Continuing" = "";
-
 "Episode save location:" = "Opslaglocatie voor afleveringen: ";
 
-"Default video quality:" = "Standaard video kwaliteit: ";
+"Feed" = "Feed";
 
-"Donate" = "";
+"Download HD versions by default" = "Download standaard in HD";
 
-"Growl Settings" = "Growl Voorkeuren";
+"Growl Settings" = "Growl voorkeuren";
 
 "Include anonymous system information" = "Voeg anonieme systeeminformatie toe";
 
 "Info" = "Info";
 
-"Download HD versions by default" = "";
+"Ended" = "Beëindigd";
 
 "Last Aired" = "Laatst uitgezonden";
 
@@ -111,71 +116,61 @@
 /* This string is on a button. */
 "More Info" = "Meer info";
 
-"Ended" = "";
+"Getting Started" = "Om te beginnen";
 
 "Name" = "Naam";
 
 /* This string is on a button. */
 "Off" = "Uit";
 
-"Feed" = "Feed";
+/* This string refers to the default episode quality to download (Standard/High Definition). */
+"High Definition" = "High Definition";
 
 /* This string is on a button. */
 "Ok" = "OK";
 
-"Getting Started" = "Om te beginnen";
-
 /* This string is on a button. */
-"On" = "Op";
+"On" = "Aan";
+
+"Only download items matching the following rules:" = "Download alleen items die aan de volgende voorwaarden voldoen:";
 
 "Please Select a Show:" = "Kies een serie: ";
 
-/* This string refers to the default episode quality to download (Standard/High Definition). */
-"High Definition" = "High Definition";
+"Last Checked:" = "Laatst gecontroleerd:";
 
 "Preferences" = "Voorkeuren";
 
 /* Title of a column in a table. */
 "Published Date" = "Datum van publicatie";
 
+"Logs are stored in ~/Library/Logs/TVShows/" = "Logbestanden worden opgeslagen in ~/Library/Logs/TVShows/";
+
 "RSS Feed Information:" = "RSS feed informatie: ";
-
-"Last Checked:" = "";
-
-/* The %@ will be replaced by the log directory. */
-"Logs are stored in ~/Library/Logs/TVShows/" = "";
-
-"Never" = "";
-
-"No" = "";
-
-"Only download items matching the following rules:" = "Download alleen items die aan de volgende voorwaarden voldoen:";
-
-"No activity has been logged yet. Have you recently installed TVShows?" = "";
-
-"Please choose one of the following actions:" = "Kies een van de volgende acties: ";
-
-"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country." = "";
-
-"No description was found for this show." = "";
 
 "Rating:" = "Beoordeling: ";
 
 "Search" = "Zoeken";
 
+"Never" = "Nooit";
+
 /* Title of a column in a table. */
 "Season" = "Seizoen";
 
+"No" = "Nee";
+
 "Select a preset show from showRSS" = "Kies een vooraf ingestelde serie van showRSS";
+
+"No activity has been logged yet. Have you recently installed TVShows?" = "Er is nog geen activiteit gerapporteerd. Heeft u recent TVShows geïnstalleerd?";
+
+"Please choose one of the following actions:" = "Kies een van de volgende acties: ";
 
 "Send Growl notifications when…" = "Verstuur Growl notificatie wanneer…";
 
-/* This string refers to the default episode quality to download (Standard/High Definition). */
-"Standard" = "Standaard";
-
-"Recently Logged Activity" = "";
+"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country." = "De video bestanden zelf worden niet door TVShows gedownload, alleen de torrents welke een apart programma vereisen. Aan u, de gebruiker, is het de verantwoordelijk de legaliteit van de bestanden die gedownload zijn door TVShows te verifiëren in overeenstemming met de copyright-wetten geldend in uw land. ";
 
 "Status" = "Status";
+
+"No description was found for this show." = "Er is geen beschrijving gevonden voor deze tv serie.";
 
 /* This string is on a button. */
 "Submit Feedback" = "Feedback sturen";
@@ -200,25 +195,30 @@
 /* Title of an error message or Growl notification. */
 "Update Installed Automatically" = "Update automatisch geïnstalleerd";
 
+/* This string refers to the default episode quality to download (Standard/High Definition). */
+"Standard" = "Standaard";
+
 /* This string is on a button. */
 "View on TV.com" = "Bekijk op TV.com";
 
 "… a new episode is downloaded." = "…er een nieuwe aflevering is gedownload. ";
 
+"Recently Logged Activity" = "Onlangs geregistreerde activiteit";
+
 "… a new version of TVShows is released." = "…er een nieuwe versie van TVShows beschikbaar is. ";
 
 /* This string is on a button. */
-"Uninstall" = "";
+"Uninstall" = "Verwijder";
 
-"Uninstall TVShows" = "";
+"Uninstall TVShows" = "Verwijder TVShows";
 
-"Unknown" = "";
+"Unknown" = "Onbekend";
 
-"Updating Show Information…" = "";
+"Updating Show Information…" = "De informatie over de serie wordt geüpdatet... ";
 
-"View Logs" = "";
+"View Logs" = "Bekijk het log";
 
-"Website" = "";
+"Website" = "Website";
 
-"Yes" = "";
+"Yes" = "Ja";
 

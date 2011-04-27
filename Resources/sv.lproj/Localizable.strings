@@ -1,6 +1,7 @@
 "1 day" = "1 dag";
 
-" at " = "";
+/* This string is used between a date and a time, e.g, 1/1/1 at 01:01am. */
+" at " = "klockan";
 
 "1 hour" = "1 timme";
 
@@ -27,19 +28,19 @@
 
 "About" = "Om";
 
-"Add a custom RSS source" = "";
+"Add a custom RSS source" = "Lägg till en egen RSS-källa";
 
 /* Title of an error message or Growl notification. */
 "An Error Has Occurred" = "Ett fel har inträffat";
 
-"Add a show from NZBs.org" = "";
+"Add a show from NZBs.org" = "Lägg till ett TV-program från NZBs.org";
 
 /* This string is on a button. */
-"Add Show" = "";
+"Add Show" = "Lägg till avsnitt";
 
 "An unknown error has occurred. Please try again later." = "Ett okänt fel har inträffat. Var vänlig försök igen senare.";
 
-"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "";
+"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "Ett meddelande blir loggat varje gång nya avsnitt söks.\nOm inget annat meddelas så hittades inga nya avsnitt";
 
 "An update for TVShows has been installed automatically. To disable this feature go to the Preferences tab and uncheck 'Automatically install new updates.'" = "En uppdatering av TVShows har installerats automatiskt. För att stänga av denna funktion, gå till inställningar och bocka ur 'Installera nya uppdateringar automatiskt'.";
 
@@ -51,7 +52,7 @@
 
 "Automatically open each file after download" = "Öppna varje fil automatiskt efter nedladdning";
 
-"Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "";
+"Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "Är du säker på att du vill avinstallerara TVShows?\nDetta kommer även att ta bort alla inställningar\noch prenumerationer.";
 
 /* This string is on a button. */
 "Cancel" = "Avbryt";
@@ -70,26 +71,26 @@
 
 "Download Preferences" = "Ladda ned inställningar";
 
-"Choose this to download torrent files from a list of preset shows." = "";
+"Choose this to download torrent files from a list of preset shows." = "Välj detta för att ladda ned torrentfiler från en lista av förvalda TV-program.";
 
 "Download beta versions when available" = "Ladda ned betaversioner då de är tillgängliga";
 
-"Choose this to download Usenet files using your NZBs.org account." = "";
+"Choose this to download Usenet files using your NZBs.org account." = "Välj detta för att ladda ned Usenetfiler via ditt NZBs.org konto.";
 
 "Download in HD" = "Ladda ned i HD-kvalitét";
 
-"Choose this to input your own RSS feed." = "";
+"Choose this to input your own RSS feed." = "Välj detta för att lägga in ett eget RSS-flöde.";
 
 "Enable downloading new episodes" = "Aktivera nedladdning av nya avsnitt";
 
-"Continuing" = "";
+"Continuing" = "Fortsätter";
 
 /* Title of a column in a table. */
 "Episode" = "Avsnitt";
 
-"Default video quality:" = "";
+"Default video quality:" = "Standard videokvalitét:";
 
-"Donate" = "";
+"Donate" = "Donera";
 
 /* Title of a column in a table. */
 "Episode Name" = "Avsnittsnamn";
@@ -98,7 +99,7 @@
 
 "Feed" = "Flöde";
 
-"Download HD versions by default" = "";
+"Download HD versions by default" = "Ladda ned avsnitt i HD som standard";
 
 "Growl Settings" = "Growl-inställningar";
 
@@ -106,7 +107,7 @@
 
 "Info" = "Information";
 
-"Ended" = "";
+"Ended" = "Avslutad";
 
 "Last Aired" = "Senast sänt";
 
@@ -115,7 +116,7 @@
 /* This string is on a button. */
 "More Info" = "Mer information";
 
-"Getting Started" = "";
+"Getting Started" = "Komma Igång";
 
 "Name" = "Namn";
 
@@ -123,7 +124,7 @@
 "Off" = "Av";
 
 /* This string refers to the default episode quality to download (Standard/High Definition). */
-"High Definition" = "";
+"High Definition" = "Högupplöst (HD)";
 
 /* This string is on a button. */
 "Ok" = "Ok";
@@ -135,14 +136,14 @@
 
 "Please Select a Show:" = "Var vänlig välj ett TV-program:";
 
-"Last Checked:" = "";
+"Last Checked:" = "Senast kontrollerad:";
 
 "Preferences" = "Inställningar";
 
 /* Title of a column in a table. */
 "Published Date" = "Publicerades den";
 
-"Logs are stored in ~/Library/Logs/TVShows/" = "";
+"Logs are stored in ~/Library/Logs/TVShows/" = "Loggfiler sparas i ~/Bibliotek/Logs/TVShows/";
 
 "RSS Feed Information:" = "RSS-flödesinformation";
 
@@ -150,26 +151,26 @@
 
 "Search" = "Sök";
 
-"Never" = "";
+"Never" = "Aldrig";
 
 /* Title of a column in a table. */
 "Season" = "Säsong";
 
-"No" = "";
+"No" = "Nej";
 
 "Select a preset show from showRSS" = "Välj ett förinställt TV-program från showRSS";
 
-"No activity has been logged yet. Have you recently installed TVShows?" = "";
+"No activity has been logged yet. Have you recently installed TVShows?" = "Ingen aktivitet har registrerats ännu.\nHar du nyligen installerat TVShows?";
 
-"Please choose one of the following actions:" = "";
+"Please choose one of the following actions:" = "Vänligen välj en av följande åtgärder:";
 
 "Send Growl notifications when…" = "Skicka Growl-meddelanden när…";
 
-"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country." = "";
+"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country." = "TVShows laddar inte ned videofiler utan endast torrentfiler\nsom det krävs ett annat program för att kunna använda.\nDet är upp till dig, användaren, att bestämma legitimiteten\nför användandet av filerna som laddas ned med det här programmet,\nhuruvida det fungerar med ditt lands upphovsrättslagar.";
 
 "Status" = "Status";
 
-"No description was found for this show." = "";
+"No description was found for this show." = "Ingen beskrivning kunde hittas för detta avsnitt.";
 
 /* This string is on a button. */
 "Submit Feedback" = "Ge synpunkter";
@@ -195,29 +196,29 @@
 "Update Installed Automatically" = "Installerade uppdatering automatiskt";
 
 /* This string refers to the default episode quality to download (Standard/High Definition). */
-"Standard" = "";
+"Standard" = "Standard";
 
 /* This string is on a button. */
 "View on TV.com" = "Se det på TV.com";
 
 "… a new episode is downloaded." = "… ett nytt avsnitt är nedladdat.";
 
-"Recently Logged Activity" = "";
+"Recently Logged Activity" = "Nyligen registrerad aktivitet";
 
 "… a new version of TVShows is released." = "...en ny version av TVShows är släppt.";
 
 /* This string is on a button. */
-"Uninstall" = "";
+"Uninstall" = "Avinstallera";
 
-"Uninstall TVShows" = "";
+"Uninstall TVShows" = "Avinstallera TVShows";
 
-"Unknown" = "";
+"Unknown" = "Okänd";
 
-"Updating Show Information…" = "";
+"Updating Show Information…" = "Uppdaterar avsnittsinformation";
 
-"View Logs" = "";
+"View Logs" = "Se loggfil";
 
-"Website" = "";
+"Website" = "Hemsida";
 
-"Yes" = "";
+"Yes" = "Ja";
 

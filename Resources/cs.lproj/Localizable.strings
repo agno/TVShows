@@ -1,6 +1,7 @@
 "1 day" = "1 den";
 
-" at " = "";
+/* This string is used between a date and a time, e.g, 1/1/1 at 01:01am. */
+" at " = "v";
 
 "1 hour" = "1 hodina";
 
@@ -27,15 +28,19 @@
 
 "About" = "O aplikaci";
 
+"Add a custom RSS source" = "Přidat vlastní RSS zdroj";
+
 /* Title of an error message or Growl notification. */
 "An Error Has Occurred" = "Nastala chyba";
 
+"Add a show from NZBs.org" = "Přidat pořad z NZBs.org";
+
 /* This string is on a button. */
-"Add Show" = "";
+"Add Show" = "Přidat pořad";
 
 "An unknown error has occurred. Please try again later." = "Nastala neznámá chyba. Zkuste to prosím později znovu.";
 
-"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "";
+"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "Při každém ověření dostupnosti nové epizody se vytváří zápis. Pokud není uvedeno jinak, nebyly nalezeny žádné nové epizody.";
 
 "An update for TVShows has been installed automatically. To disable this feature go to the Preferences tab and uncheck 'Automatically install new updates.'" = "Aktualizace TVShows byla nainstalována automaticky. Pokud chcete tuto funkci zakázat, přejděte na záložku Nastavení a odškrtňěte políčko s popiskem „Instalovat nové aktualizace automaticky.“";
 
@@ -47,7 +52,7 @@
 
 "Automatically open each file after download" = "Po stažení každý soubor automaticky otevřít";
 
-"Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "";
+"Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "Jste si jistí, že chcete odinstalovat TVShows? Odstraní se tím také veškerá nastavení a odběry.";
 
 /* This string is on a button. */
 "Cancel" = "Zrušit";
@@ -66,18 +71,26 @@
 
 "Download Preferences" = "Nastavení stahování";
 
+"Choose this to download torrent files from a list of preset shows." = "Zvolte, pokud chcete stahovat soubory torrent ze seznamu přednastavených pořadů.";
+
 "Download beta versions when available" = "V případě dostupnosti stahovat betaverze";
+
+"Choose this to download Usenet files using your NZBs.org account." = "Zvolte, pokud chcete stahovat soubory Usenet přes váš NZBs.org účet.";
 
 "Download in HD" = "Stahovat v HD";
 
+"Choose this to input your own RSS feed." = "Zvolte, pokud chcete vložit váš vlastní RSS kanál.";
+
 "Enable downloading new episodes" = "Povolit stahování nových epizod";
 
-"Continuing" = "";
+"Continuing" = "Pokračování";
 
 /* Title of a column in a table. */
 "Episode" = "Epizoda";
 
-"Donate" = "";
+"Default video quality:" = "Výchozí kvalita videa:";
+
+"Donate" = "Darujte peníze";
 
 /* Title of a column in a table. */
 "Episode Name" = "Název epizody";
@@ -86,7 +99,7 @@
 
 "Feed" = "Kanál";
 
-"Download HD versions by default" = "";
+"Download HD versions by default" = "Vždy stahovat HD verze pořadů";
 
 "Growl Settings" = "Nastavení Growlu";
 
@@ -94,7 +107,7 @@
 
 "Info" = "Info";
 
-"Ended" = "";
+"Ended" = "Konec";
 
 "Last Aired" = "Naposledy odvysíláno";
 
@@ -103,10 +116,15 @@
 /* This string is on a button. */
 "More Info" = "Podrobnosti";
 
+"Getting Started" = "Začínáme";
+
 "Name" = "Jméno";
 
 /* This string is on a button. */
 "Off" = "Off";
+
+/* This string refers to the default episode quality to download (Standard/High Definition). */
+"High Definition" = "Vysoké rozlišení";
 
 /* This string is on a button. */
 "Ok" = "OK";
@@ -118,15 +136,14 @@
 
 "Please Select a Show:" = "Prosím zvolte pořad:";
 
-"Last Checked:" = "";
+"Last Checked:" = "Naposledy zkontrolováno:";
 
 "Preferences" = "Nastavení";
 
 /* Title of a column in a table. */
 "Published Date" = "Datum zveřejnění";
 
-/* The %@ will be replaced by the log directory. */
-"Logs are stored in ~/Library/Logs/TVShows/" = "";
+"Logs are stored in ~/Library/Logs/TVShows/" = "Logy jsou uloženy v ~/Library/Logs/TVShows/";
 
 "RSS Feed Information:" = "Informace o RSS kanálu:";
 
@@ -134,24 +151,26 @@
 
 "Search" = "Hledat";
 
-"Never" = "";
+"Never" = "Nikdy";
 
 /* Title of a column in a table. */
 "Season" = "Sezóna";
 
-"No" = "";
+"No" = "Žádné";
 
 "Select a preset show from showRSS" = "Zvolit přednastavený pořad ze showRSS";
 
-"No activity has been logged yet. Have you recently installed TVShows?" = "";
+"No activity has been logged yet. Have you recently installed TVShows?" = "Zatím nebyla zaznamenána žádná aktivita. Nainstalovali jste TVShows terprve nedávno?";
+
+"Please choose one of the following actions:" = "Zvolte prosím jednu z následujících možností:";
 
 "Send Growl notifications when…" = "Zobrazit Growl oznámení vždy, když...";
 
-"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country." = "";
+"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country." = "TVShows nestahují žádná videa, pouze torrenty, pro jejichž použití je třeba jiných programů. Je pouze na vás jako uživateli, abyste zvážil nebo zvážila legálnost použití kteréhokoli ze souborů stažených touto aplikací, podle použitelných autorských zákonů vaší země.";
 
 "Status" = "Status";
 
-"No description was found for this show." = "";
+"No description was found for this show." = "Pro tento pořad nebyl nalezen žádný popis.";
 
 /* This string is on a button. */
 "Submit Feedback" = "Poslat odezvu";
@@ -176,6 +195,9 @@
 /* Title of an error message or Growl notification. */
 "Update Installed Automatically" = "Aktualizace byla nainstalována automaticky";
 
+/* This string refers to the default episode quality to download (Standard/High Definition). */
+"Standard" = "Standardní rozlišení";
+
 /* This string is on a button. */
 "View on TV.com" = "Zobrazit na TV.com";
 
@@ -186,17 +208,17 @@
 "… a new version of TVShows is released." = "... je zveřejněna nová verze TVShows.";
 
 /* This string is on a button. */
-"Uninstall" = "";
+"Uninstall" = "Odinstalovat";
 
-"Uninstall TVShows" = "";
+"Uninstall TVShows" = "Odinstalovat TVShows";
 
-"Unknown" = "";
+"Unknown" = "Neznámé";
 
-"Updating Show Information…" = "";
+"Updating Show Information…" = "Aktualizuji informace o pořadu...";
 
-"View Logs" = "";
+"View Logs" = "Zobrazit záznamy";
 
-"Website" = "";
+"Website" = "Webová stránka";
 
-"Yes" = "";
+"Yes" = "Ano";
 

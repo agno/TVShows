@@ -1,6 +1,7 @@
 "1 day" = "1 dia";
 
-" at " = "";
+/* This string is used between a date and a time, e.g, 1/1/1 at 01:01am. */
+" at " = " a les ";
 
 "1 hour" = "1 hora";
 
@@ -27,11 +28,15 @@
 
 "About" = "Quant a";
 
+"Add a custom RSS source" = "Afegiu una font RSS personalitzada.";
+
 /* Title of an error message or Growl notification. */
 "An Error Has Occurred" = "Hi ha hagut un error.";
 
+"Add a show from NZBs.org" = "Afegiu un programa de NZBs.org.";
+
 /* This string is on a button. */
-"Add Show" = "";
+"Add Show" = "Afegir programa";
 
 "An unknown error has occurred. Please try again later." = "Hi ha hagut un error desconegut. Torneu-ho a provar més tard.";
 
@@ -66,9 +71,15 @@
 
 "Download Preferences" = "Preferències de baixada.";
 
+"Choose this to download torrent files from a list of preset shows." = "Seleccioneu aquesta opció per baixar arxius torrent d'una llista predefinida.";
+
 "Download beta versions when available" = "Baixa versions beta quan estiguin disponibles.";
 
+"Choose this to download Usenet files using your NZBs.org account." = "Seleccioneu aquesta opció per baixar arxius Usenet mitjançant un compte NZBs.org.";
+
 "Download in HD" = "Baixa en HD.";
+
+"Choose this to input your own RSS feed." = "Seleccioneu aquesta opció per introduir el vostre propi feed RSS.";
 
 "Enable downloading new episodes" = "Habilita la baixada de nous episodis.";
 
@@ -76,6 +87,8 @@
 
 /* Title of a column in a table. */
 "Episode" = "Episodi";
+
+"Default video quality:" = "Qualitat de vídeo per defecte:";
 
 "Donate" = "";
 
@@ -86,7 +99,7 @@
 
 "Feed" = "Feed";
 
-"Download HD versions by default" = "";
+"Download HD versions by default" = "Descarrega versions HD per defecte";
 
 "Growl Settings" = "Configuració de Growl";
 
@@ -94,7 +107,7 @@
 
 "Info" = "Info";
 
-"Ended" = "";
+"Ended" = "Finalitzat";
 
 "Last Aired" = "Darrera emissió";
 
@@ -103,10 +116,15 @@
 /* This string is on a button. */
 "More Info" = "Més informació";
 
+"Getting Started" = "Per començar";
+
 "Name" = "Nom";
 
 /* This string is on a button. */
 "Off" = "Inactiu";
+
+/* This string refers to the default episode quality to download (Standard/High Definition). */
+"High Definition" = "Alta definició";
 
 /* This string is on a button. */
 "Ok" = "D'acord";
@@ -125,8 +143,7 @@
 /* Title of a column in a table. */
 "Published Date" = "Data de publicació";
 
-/* The %@ will be replaced by the log directory. */
-"Logs are stored in ~/Library/Logs/TVShows/" = "";
+"Logs are stored in ~/Library/Logs/TVShows/" = "Els fitxers de registre s'emmagatzemen a ~/Library/Logs/TVShows/";
 
 "RSS Feed Information:" = "Informació del feed RSS:";
 
@@ -134,16 +151,18 @@
 
 "Search" = "Cerca";
 
-"Never" = "";
+"Never" = "Mai";
 
 /* Title of a column in a table. */
 "Season" = "Temporada";
 
-"No" = "";
+"No" = "No";
 
 "Select a preset show from showRSS" = "Seleccioneu un programa predefinit de showRSS.";
 
-"No activity has been logged yet. Have you recently installed TVShows?" = "";
+"No activity has been logged yet. Have you recently installed TVShows?" = "Encara no s'ha registrat cap activitat. Heu instal·lat TVShows recentment?";
+
+"Please choose one of the following actions:" = "Escolliu una de les següents accions:";
 
 "Send Growl notifications when…" = "Envia notificacions de Growl quan…";
 
@@ -151,7 +170,7 @@
 
 "Status" = "Estat";
 
-"No description was found for this show." = "";
+"No description was found for this show." = "No s'ha trobat cap descripció d'aquest programa.";
 
 /* This string is on a button. */
 "Submit Feedback" = "Envieu la vostra opinió.";
@@ -176,27 +195,30 @@
 /* Title of an error message or Growl notification. */
 "Update Installed Automatically" = "S'ha instal·lat automàticament la nova versió.";
 
+/* This string refers to the default episode quality to download (Standard/High Definition). */
+"Standard" = "Estàndard";
+
 /* This string is on a button. */
 "View on TV.com" = "Visualitza a TV.com.";
 
 "… a new episode is downloaded." = "… s'hagi baixat un nou episodi.";
 
-"Recently Logged Activity" = "";
+"Recently Logged Activity" = "Activitat registrada recentment";
 
 "… a new version of TVShows is released." = "… estigui disponible una nova versió de TVShows.";
 
 /* This string is on a button. */
-"Uninstall" = "";
+"Uninstall" = "Desinstal·la";
 
-"Uninstall TVShows" = "";
+"Uninstall TVShows" = "Desinstal·la TVShows";
 
-"Unknown" = "";
+"Unknown" = "Desconegut";
 
 "Updating Show Information…" = "";
 
-"View Logs" = "";
+"View Logs" = "Veure fitxers de registre";
 
-"Website" = "";
+"Website" = "Lloc web";
 
-"Yes" = "";
+"Yes" = "Sí";
 

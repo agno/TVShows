@@ -1,6 +1,7 @@
-" at " = " at ";
-
 "1 day" = "1 day";
+
+/* This string is used between a date and a time, e.g, 1/1/1 at 01:01am. */
+" at " = " at ";
 
 "1 hour" = "1 hour";
 
@@ -27,27 +28,31 @@
 
 "About" = "About";
 
-/* This string is on a button. */
-"Add Show" = "Add Show";
-
-"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found.";
+"Add a custom RSS source" = "Add a custom RSS source";
 
 /* Title of an error message or Growl notification. */
 "An Error Has Occurred" = "An Error Has Occurred";
 
+"Add a show from NZBs.org" = "Add a show from NZBs.org";
+
+/* This string is on a button. */
+"Add Show" = "Add Show";
+
 "An unknown error has occurred. Please try again later." = "An unknown error has occurred. Please try again later.";
+
+"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found.";
 
 "An update for TVShows has been installed automatically. To disable this feature go to the Preferences tab and uncheck 'Automatically install new updates.'" = "An update for TVShows has been installed automatically. To disable this feature go to the Preferences tab and uncheck 'Automatically install new updates.'";
 
 "Application Update Preferences" = "Application Update Preferences";
-
-"Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions.";
 
 "Automatically check for updates" = "Automatically check for updates";
 
 "Automatically install new updates" = "Automatically install new updates";
 
 "Automatically open each file after download" = "Automatically open each file after download";
+
+"Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions.";
 
 /* This string is on a button. */
 "Cancel" = "Cancel";
@@ -64,24 +69,28 @@
 /* This string is on a button. */
 "Close" = "Close";
 
-"Continuing" = "Continuing";
-
-"Donate" = "Donate";
-
 "Download Preferences" = "Download Preferences";
+
+"Choose this to download torrent files from a list of preset shows." = "Choose this to download torrent files from a list of preset shows.";
 
 "Download beta versions when available" = "Download beta versions when available";
 
-"Download HD versions by default" = "Download HD versions by default";
+"Choose this to download Usenet files using your NZBs.org account." = "Choose this to download Usenet files using your NZBs.org account.";
 
 "Download in HD" = "Download in HD";
 
+"Choose this to input your own RSS feed." = "Choose this to input your own RSS feed.";
+
 "Enable downloading new episodes" = "Enable downloading new episodes";
 
-"Ended" = "Ended";
+"Continuing" = "Continuing";
 
 /* Title of a column in a table. */
 "Episode" = "Episode";
+
+"Default video quality:" = "Default video quality:";
+
+"Donate" = "Donate";
 
 /* Title of a column in a table. */
 "Episode Name" = "Episode Name";
@@ -90,38 +99,32 @@
 
 "Feed" = "Feed";
 
+"Download HD versions by default" = "Download HD versions by default";
+
 "Growl Settings" = "Growl Settings";
 
 "Include anonymous system information" = "Include anonymous system information";
 
 "Info" = "Info";
 
+"Ended" = "Ended";
+
 "Last Aired" = "Last Aired";
 
-"Last Checked:" = "Last Checked:";
-
 "Last Downloaded" = "Last Downloaded";
-
-/* The %@ will be replaced by the log directory. */
-"Logs are stored in ~/Library/Logs/TVShows/" = "Logs are stored in ~/Library/Logs/TVShows/";
 
 /* This string is on a button. */
 "More Info" = "More Info";
 
+"Getting Started" = "Getting Started";
+
 "Name" = "Name";
-
-"Never" = "Never";
-
-"No" = "No";
-
-"No activity has been logged yet. Have you recently installed TVShows?" = "No activity has been logged yet. Have you recently installed TVShows?";
-
-"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country." = "No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country.";
-
-"No description was found for this show." = "No description was found for this show.";
 
 /* This string is on a button. */
 "Off" = "Off";
+
+/* This string refers to the default episode quality to download (Standard/High Definition). */
+"High Definition" = "High Definition";
 
 /* This string is on a button. */
 "Ok" = "Ok";
@@ -133,27 +136,41 @@
 
 "Please Select a Show:" = "Please Select a Show:";
 
+"Last Checked:" = "Last Checked:";
+
 "Preferences" = "Preferences";
 
 /* Title of a column in a table. */
 "Published Date" = "Published Date";
 
-"Rating:" = "Rating:";
-
-"Recently Logged Activity" = "Actividad registrada recientemente";
+"Logs are stored in ~/Library/Logs/TVShows/" = "Logs are stored in ~/Library/Logs/TVShows/";
 
 "RSS Feed Information:" = "RSS Feed Information:";
 
+"Rating:" = "Rating:";
+
 "Search" = "Search";
+
+"Never" = "Never";
 
 /* Title of a column in a table. */
 "Season" = "Season";
 
+"No" = "No";
+
 "Select a preset show from showRSS" = "Select a preset show from showRSS";
+
+"No activity has been logged yet. Have you recently installed TVShows?" = "No activity has been logged yet. Have you recently installed TVShows?";
+
+"Please choose one of the following actions:" = "Please choose one of the following actions:";
 
 "Send Growl notifications when…" = "Send Growl notifications when…";
 
+"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country." = "No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country.";
+
 "Status" = "Status";
+
+"No description was found for this show." = "No description was found for this show.";
 
 /* This string is on a button. */
 "Submit Feedback" = "Submit Feedback";
@@ -173,29 +190,35 @@
 "Unable to Update the Show List" = "Unable to Update the Show List";
 
 /* This string is on a button. */
+"Unsubscribe" = "Unsubscribe";
+
+/* Title of an error message or Growl notification. */
+"Update Installed Automatically" = "Update Installed Automatically";
+
+/* This string refers to the default episode quality to download (Standard/High Definition). */
+"Standard" = "Standard";
+
+/* This string is on a button. */
+"View on TV.com" = "View on TV.com";
+
+"… a new episode is downloaded." = "… a new episode is downloaded.";
+
+"Recently Logged Activity" = "Recently Logged Activity";
+
+"… a new version of TVShows is released." = "… a new version of TVShows is released.";
+
+/* This string is on a button. */
 "Uninstall" = "Uninstall";
 
 "Uninstall TVShows" = "Uninstall TVShows";
 
 "Unknown" = "Unknown";
 
-/* This string is on a button. */
-"Unsubscribe" = "Unsubscribe";
-
-/* Title of an error message or Growl notification. */
-"Update Installed Automatically" = "Update Installed Automatically";
-
 "Updating Show Information…" = "Updating Show Information…";
 
 "View Logs" = "View Logs";
-
-/* This string is on a button. */
-"View on TV.com" = "View on TV.com";
 
 "Website" = "Website";
 
 "Yes" = "Yes";
 
-"… a new episode is downloaded." = "… a new episode is downloaded.";
-
-"… a new version of TVShows is released." = "… a new version of TVShows is released.";

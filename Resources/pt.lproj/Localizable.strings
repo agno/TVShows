@@ -1,6 +1,7 @@
 "1 day" = "1 dia";
 
-" at " = "";
+/* This string is used between a date and a time, e.g, 1/1/1 at 01:01am. */
+" at " = "as";
 
 "1 hour" = "1 hora";
 
@@ -27,23 +28,23 @@
 
 "About" = "Sobre";
 
-"Add a custom RSS source" = "";
+"Add a custom RSS source" = "Adicionar uma fonte RSS";
 
 /* Title of an error message or Growl notification. */
 "An Error Has Occurred" = "Ocorreu um Erro";
 
-"Add a show from NZBs.org" = "";
+"Add a show from NZBs.org" = "Adicionar uma série de NZBs.org";
 
 /* This string is on a button. */
-"Add Show" = "";
+"Add Show" = "Adicionar Série";
 
 "An unknown error has occurred. Please try again later." = "Um erro desconhecido ocorreu. Por favor tente novamente mais tarde.";
 
-"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "";
+"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "Uma mensagem é registrada toda vez que é checado por um novo episódio. A não ser que tenha pedido o contrário, nenhum episódio foi encontrado.";
 
 "An update for TVShows has been installed automatically. To disable this feature go to the Preferences tab and uncheck 'Automatically install new updates.'" = "Uma atualização para o TVShows foi instalada automaticamente. Para desativar esse recurso vá até a aba Preferências e desmarque a opção 'Automaticamente instalar novas atualizações'.";
 
-"Application Update Preferences" = "Atualização do Aplicativo";
+"Application Update Preferences" = "Preferências de Atualização do Aplicativo";
 
 "Automatically check for updates" = "Automaticamente verificar por atualizações";
 
@@ -51,7 +52,7 @@
 
 "Automatically open each file after download" = "Abrir cada arquivo automaticamente após transferência";
 
-"Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "";
+"Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "Você tem certeza que deseja remover o TVShows? Isto remove também todas suas preferências e inscrições.";
 
 /* This string is on a button. */
 "Cancel" = "Cancelar";
@@ -70,26 +71,26 @@
 
 "Download Preferences" = "Preferências de Transferência";
 
-"Choose this to download torrent files from a list of preset shows." = "";
+"Choose this to download torrent files from a list of preset shows." = "Transfira arquivos torrent de uma lista de séries.";
 
 "Download beta versions when available" = "Transferir versões beta quando disponível";
 
-"Choose this to download Usenet files using your NZBs.org account." = "";
+"Choose this to download Usenet files using your NZBs.org account." = "Transfira arquivos Usenet usando sua conta NZBs.org.";
 
 "Download in HD" = "Transferir em HD";
 
-"Choose this to input your own RSS feed." = "";
+"Choose this to input your own RSS feed." = "Insira seu próprio feed RSS.";
 
 "Enable downloading new episodes" = "Ativar transferência de novos episódios";
 
-"Continuing" = "";
+"Continuing" = "Em exibição";
 
 /* Title of a column in a table. */
 "Episode" = "Episódio";
 
-"Default video quality:" = "";
+"Default video quality:" = "Qualidade padrão:";
 
-"Donate" = "";
+"Donate" = "Doar";
 
 /* Title of a column in a table. */
 "Episode Name" = "Nome do Episódio";
@@ -98,7 +99,7 @@
 
 "Feed" = "Feed";
 
-"Download HD versions by default" = "";
+"Download HD versions by default" = "Fazer download em HD por padrão";
 
 "Growl Settings" = "Configurações do Growl";
 
@@ -106,7 +107,7 @@
 
 "Info" = "Info";
 
-"Ended" = "";
+"Ended" = "Terminada";
 
 "Last Aired" = "Última Exibição";
 
@@ -115,7 +116,7 @@
 /* This string is on a button. */
 "More Info" = "Mais Info";
 
-"Getting Started" = "";
+"Getting Started" = "Começando";
 
 "Name" = "Nome";
 
@@ -123,7 +124,7 @@
 "Off" = "O";
 
 /* This string refers to the default episode quality to download (Standard/High Definition). */
-"High Definition" = "";
+"High Definition" = "Alta Definição";
 
 /* This string is on a button. */
 "Ok" = "Ok";
@@ -135,15 +136,14 @@
 
 "Please Select a Show:" = "Selecione uma Série:";
 
-"Last Checked:" = "";
+"Last Checked:" = "Ultima atualização";
 
 "Preferences" = "Preferências";
 
 /* Title of a column in a table. */
 "Published Date" = "Data de Publicação";
 
-/* The %@ will be replaced by the log directory. */
-"Logs are stored in ~/Library/Logs/TVShows/" = "";
+"Logs are stored in ~/Library/Logs/TVShows/" = "As logs estão armazenadas em  ~/Library/Logs/TVShows/";
 
 "RSS Feed Information:" = "Informação do Feed RSS:";
 
@@ -151,26 +151,26 @@
 
 "Search" = "Pesquisar";
 
-"Never" = "";
+"Never" = "Nunca";
 
 /* Title of a column in a table. */
 "Season" = "Temporada";
 
-"No" = "";
+"No" = "Não";
 
 "Select a preset show from showRSS" = "Selecione uma série de showRSS";
 
-"No activity has been logged yet. Have you recently installed TVShows?" = "";
+"No activity has been logged yet. Have you recently installed TVShows?" = "Nenhuma atividade foi registrada ainda. Você instalou o TVShows recentemente?";
 
-"Please choose one of the following actions:" = "";
+"Please choose one of the following actions:" = "Escolha uma das seguintes ações:";
 
 "Send Growl notifications when…" = "Enviar notificações Growl quando…";
 
-"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country." = "";
+"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country." = "Nenhum vídeo é realmente baixado pelo TVShows, somente arquivos torrents, que por sua vez irão precisar de outros programas para serem usados. É de sua responsabilidade, usuário, decidir se é legal ou não usar este tipo de arquivo que foi feito o download pela aplicação de acordo com as leis de copyright do seu país.";
 
 "Status" = "Estado";
 
-"No description was found for this show." = "";
+"No description was found for this show." = "Nenhuma descrição foi encontrada para este show.";
 
 /* This string is on a button. */
 "Submit Feedback" = "Enviar Feedback";
@@ -196,29 +196,29 @@
 "Update Installed Automatically" = "Atualização Instalada Automaticamente";
 
 /* This string refers to the default episode quality to download (Standard/High Definition). */
-"Standard" = "";
+"Standard" = "Padrão";
 
 /* This string is on a button. */
 "View on TV.com" = "Ver em TV.com";
 
 "… a new episode is downloaded." = "… um novo episódio for transferido.";
 
-"Recently Logged Activity" = "";
+"Recently Logged Activity" = "Atividade registrada recentemente.";
 
 "… a new version of TVShows is released." = "… uma nova versão do TVShows for lançada.";
 
 /* This string is on a button. */
-"Uninstall" = "";
+"Uninstall" = "Desinstalar";
 
-"Uninstall TVShows" = "";
+"Uninstall TVShows" = "Desinstalar o TVShows";
 
-"Unknown" = "";
+"Unknown" = "Desconhecido";
 
-"Updating Show Information…" = "";
+"Updating Show Information…" = "Atualizando informação sobre o Show...";
 
-"View Logs" = "";
+"View Logs" = "Ver Logs";
 
-"Website" = "";
+"Website" = "Site da internet";
 
-"Yes" = "";
+"Yes" = "Sim";
 
