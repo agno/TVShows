@@ -1,6 +1,7 @@
 "1 day" = "1 dag";
 
-" at " = "";
+/* This string is used between a date and a time, e.g, 1/1/1 at 01:01am. */
+" at " = "kl.";
 
 "1 hour" = "1 time";
 
@@ -27,15 +28,17 @@
 
 "About" = "Om";
 
+"Add a custom RSS source" = "Tilføj en RSS kilde";
+
 /* Title of an error message or Growl notification. */
 "An Error Has Occurred" = "Der er opstået en fejl";
 
+"Add a show from NZBs.org" = "Tilføj en udsendelse fra NZBs.org";
+
 /* This string is on a button. */
-"Add Show" = "";
+"Add Show" = "Tilføj serie";
 
 "An unknown error has occurred. Please try again later." = "Der opstod en ukendt fejl. Prøv venligst senere.";
-
-"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "";
 
 "An update for TVShows has been installed automatically. To disable this feature go to the Preferences tab and uncheck 'Automatically install new updates.'" = "En TVShows opdatering er blevet installeret automatisk. Hvis du fremover ønsker at installeringen ikke sker automatisk, skal vælge Indstillinger og fjern markeringen ud for 'Installér automatisk nye opdateringer'.";
 
@@ -46,8 +49,6 @@
 "Automatically install new updates" = "Installér automatisk nye opdateringer";
 
 "Automatically open each file after download" = "Åben automatisk hver fil når den er hentet";
-
-"Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "";
 
 /* This string is on a button. */
 "Cancel" = "Afbryd";
@@ -66,47 +67,54 @@
 
 "Download Preferences" = "Hent indstillinger";
 
+"Choose this to download torrent files from a list of preset shows." = "Klik her for at hente torrent-filer fra en liste af udsendelser.";
+
 "Download beta versions when available" = "Hent betaversioner når de er tilgængelige";
+
+"Choose this to download Usenet files using your NZBs.org account." = "Klik her for at hente Usenet-filer med din NZBs.org konto.";
 
 "Download in HD" = "Hent i HD";
 
-"Enable downloading new episodes" = "Tillad at nye afsnit hentes";
+"Choose this to input your own RSS feed." = "Klik her for at tilføje dit eget RSS feed.";
 
-"Continuing" = "";
+"Enable downloading new episodes" = "Tillad at nye afsnit hentes";
 
 /* Title of a column in a table. */
 "Episode" = "Afsnit";
 
-"Donate" = "";
+"Default video quality:" = "Standard videokvalitet:";
 
 /* Title of a column in a table. */
-"Episode Name" = "Afsnit";
+"Episode Name" = "Navn på afsnit";
 
 "Episode save location:" = "Sti til hentede afsnit:";
 
 "Feed" = "Feed";
 
-"Download HD versions by default" = "";
-
 "Growl Settings" = "Growl indstillinger";
 
 "Include anonymous system information" = "Medsend anonym systeminformation";
 
-"Info" = "Info";
+"Info" = "Information";
 
-"Ended" = "";
+"Ended" = "Afsluttet";
 
-"Last Aired" = "Sidst vist";
+"Last Aired" = "Sidst sendt";
 
 "Last Downloaded" = "Sidst hentet";
 
 /* This string is on a button. */
 "More Info" = "Læs mere";
 
+"Getting Started" = "Kom igang";
+
 "Name" = "Navn";
 
 /* This string is on a button. */
 "Off" = "Fra";
+
+/* This string refers to the default episode quality to download (Standard/High Definition). */
+"High Definition" = "High Definition";
 
 /* This string is on a button. */
 "Ok" = "Ok";
@@ -118,15 +126,12 @@
 
 "Please Select a Show:" = "Vælg venligst en udsendelse:";
 
-"Last Checked:" = "";
+"Last Checked:" = "Sidst opdateret:";
 
 "Preferences" = "Indstillinger";
 
 /* Title of a column in a table. */
 "Published Date" = "Dato";
-
-/* The %@ will be replaced by the log directory. */
-"Logs are stored in ~/Library/Logs/TVShows/" = "";
 
 "RSS Feed Information:" = "RSS Feed information:";
 
@@ -134,24 +139,18 @@
 
 "Search" = "Søg";
 
-"Never" = "";
-
 /* Title of a column in a table. */
 "Season" = "Sæson";
 
-"No" = "";
+"No" = "Nej";
 
 "Select a preset show from showRSS" = "Vælg en forudindstillet udsendelse fra showRSS";
 
-"No activity has been logged yet. Have you recently installed TVShows?" = "";
+"Please choose one of the following actions:" = "Vælg venligst en af de følgende muligheder:";
 
 "Send Growl notifications when…" = "Vis Growl meddelelser når…";
 
-"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country." = "";
-
 "Status" = "Status";
-
-"No description was found for this show." = "";
 
 /* This string is on a button. */
 "Submit Feedback" = "Send feedback";
@@ -168,7 +167,7 @@
 "TVShows Update Downloading" = "TVShows opdatering hentes";
 
 /* Title of an error message or Growl notification. */
-"Unable to Update the Show List" = "Det var ikke muligt at opdatere listen over udsendelser";
+"Unable to Update the Show List" = "Det mislykkedes at opdatere listen over udsendelser";
 
 /* This string is on a button. */
 "Unsubscribe" = "Stop abonnement";
@@ -176,27 +175,28 @@
 /* Title of an error message or Growl notification. */
 "Update Installed Automatically" = "En opdatering er installeret automatisk";
 
+/* This string refers to the default episode quality to download (Standard/High Definition). */
+"Standard" = "Standard";
+
 /* This string is on a button. */
 "View on TV.com" = "Se på TV.com";
 
-"… a new episode is downloaded." = "… et ny afsnit er hentet.";
-
-"Recently Logged Activity" = "";
+"… a new episode is downloaded." = "… et nyt afsnit er hentet.";
 
 "… a new version of TVShows is released." = "… TVShows er tilgængelig i en ny version.";
 
 /* This string is on a button. */
-"Uninstall" = "";
+"Uninstall" = "Afinstallér";
 
-"Uninstall TVShows" = "";
+"Uninstall TVShows" = "Afinstallér TVShows";
 
-"Unknown" = "";
+"Unknown" = "Ukendt";
 
-"Updating Show Information…" = "";
+"Updating Show Information…" = "Opdaterer information om serie...";
 
-"View Logs" = "";
+"View Logs" = "Se logs";
 
-"Website" = "";
+"Website" = "Hjemmeside";
 
-"Yes" = "";
+"Yes" = "Ja";
 
