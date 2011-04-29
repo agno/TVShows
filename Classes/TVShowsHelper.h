@@ -14,9 +14,10 @@
 
 #import <Cocoa/Cocoa.h>
 #import <Sparkle/SUUpdater.h>
+#import <Growl/GrowlApplicationBridge.h>
 
 
-@interface TVShowsHelper : NSObject
+@interface TVShowsHelper : NSObject <GrowlApplicationBridgeDelegate>
 {
     NSData *TVShowsHelperIcon;
 }

@@ -46,7 +46,7 @@
     if ([TSUserDefaults getBoolFromKey:@"isEnabled" withDefault:1]) {
         
         // Set up Growl notifications
-        [GrowlApplicationBridge setGrowlDelegate:@""];
+        [GrowlApplicationBridge setGrowlDelegate:self];
         
         // TVShows is enabled, continuing...
         id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
