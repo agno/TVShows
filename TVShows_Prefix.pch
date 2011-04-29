@@ -26,58 +26,34 @@
     #define LogIdentifier   "[393 ~ Main App]"
 #endif
 
-// CRITICAL
-#define LogCritical(...) [LCLLogFile logWithIdentifier: LogIdentifier                           \
-                                                 level: 1                                       \
-                                                  path: __FILE__                                \
-                                                  line: __LINE__                                \
-                                              function: __PRETTY_FUNCTION__                     \
-                                                format: [NSString stringWithFormat:__VA_ARGS__]];
+// Define the _ts_logger macro
+#define _ts_logger(_level, _format, ...) {                                     \
+    NSAutoreleasePool *_ts_logger_pool = [[NSAutoreleasePool alloc] init];     \
+    [LCLLogFile logWithIdentifier:LogIdentifier                                \
+                            level:_level                                       \
+                             path:__FILE__                                     \
+                             line:__LINE__                                     \
+                         function:__PRETTY_FUNCTION__                          \
+                           format:_format,                                     \
+                               ## __VA_ARGS__];                                \
+    [_ts_logger_pool drain];                                                   \
+}
 
-// ERROR
-#define LogError(...) [LCLLogFile logWithIdentifier: LogIdentifier                           \
-                                              level: 2                                       \
-                                               path: __FILE__                                \
-                                               line: __LINE__                                \
-                                           function: __PRETTY_FUNCTION__                     \
-                                             format: [NSString stringWithFormat:__VA_ARGS__]];
+// Define easy to remember logging macros
+#define LogCritical(...) _ts_logger(1, __VA_ARGS__)
+#define LogError(...) _ts_logger(2, __VA_ARGS__)
+#define LogWarning(...) _ts_logger(3, __VA_ARGS__)
+#define LogInfo(...) _ts_logger(4, __VA_ARGS__)
 
-// WARNING
-#define LogWarning(...) [LCLLogFile logWithIdentifier: LogIdentifier                           \
-                                                level: 3                                       \
-                                                 path: __FILE__                                \
-                                                 line: __LINE__                                \
-                                             function: __PRETTY_FUNCTION__                     \
-                                               format: [NSString stringWithFormat:__VA_ARGS__]];
-
-// INFO
-#define LogInfo(...) [LCLLogFile logWithIdentifier: LogIdentifier                           \
-                                             level: 4                                       \
-                                              path: __FILE__                                \
-                                              line: __LINE__                                \
-                                          function: __PRETTY_FUNCTION__                     \
-                                            format: [NSString stringWithFormat:__VA_ARGS__]];
 #ifdef DEBUG
-    // DEBUG
-    #define LogDebug(...) [LCLLogFile logWithIdentifier: LogIdentifier                           \
-                                                  level: 5                                       \
-                                                   path: __FILE__                                \
-                                                   line: __LINE__                                \
-                                               function: __PRETTY_FUNCTION__                     \
-                                                 format: [NSString stringWithFormat:__VA_ARGS__]];
-
-    // TRACE
-    #define LogTrace(...) [LCLLogFile logWithIdentifier: LogIdentifier                           \
-                                                  level: 6                                       \
-                                                   path: __FILE__                                \
-                                                   line: __LINE__                                \
-                                               function: __PRETTY_FUNCTION__                     \
-                                                 format: [NSString stringWithFormat:__VA_ARGS__]];
+    #define LogDebug(...) _ts_logger(5, __VA_ARGS__)
+    #define LogTrace(...) _ts_logger(6, __VA_ARGS__)
 #else
     #define LogDebug(...) do { } while (0)
     #define LogTrace(...) do { } while (0)
 #endif
 
 // I'm sure that this is entirely unorthodox, but let's make a custom
-// localiztion macro to save us from having to type all this crap in.
+// localization macro to save us from having to type all this crap in.
 #define TSLocalizeString(...) NSLocalizedStringFromTableInBundle(__VA_ARGS__, @"Localizable", [NSBundle bundleForClass:[self class]], nil)
+#define JRLocalizeString(...) NSLocalizedStringFromTableInBundle(__VA_ARGS__, @"JRFeedbackProvider", [NSBundle bundleForClass:[self class]], nil)
