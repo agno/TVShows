@@ -116,6 +116,8 @@
 		34FBC64211C0B601005D290B /* Sparkle.framework in Copy Linked Libraries */ = {isa = PBXBuildFile; fileRef = 3473845E119074C8003DFFA0 /* Sparkle.framework */; };
 		34FBC69511C0B7CE005D290B /* SUUpdaterSubclass.m in Sources */ = {isa = PBXBuildFile; fileRef = 340F15F9118FEBDE00A1BD00 /* SUUpdaterSubclass.m */; };
 		34FBC69B11C0B804005D290B /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3473845E119074C8003DFFA0 /* Sparkle.framework */; };
+		575C0D59136A487A005DE73D /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = 575C0D58136A487A005DE73D /* VERSION */; };
+		575C0D5A136A487A005DE73D /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = 575C0D58136A487A005DE73D /* VERSION */; };
 		8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F506C035013D953901CA16C8 /* PreferencePanes.framework */; };
 /* End PBXBuildFile section */
@@ -327,11 +329,12 @@
 		34FBC5E111C0B3C2005D290B /* TVShowsHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShowsHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34FBC5E311C0B3C2005D290B /* TVShowsHelper-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TVShowsHelper-Info.plist"; sourceTree = "<group>"; };
 		34FBC62D11C0B567005D290B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		575C0D58136A487A005DE73D /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
 		5793D8161369560000BFF6B0 /* gl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = gl; path = Resources/gl.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		5793D8171369560000BFF6B0 /* gl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = gl; path = Resources/gl.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		5793D8181369569F00BFF6B0 /* el */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = el; path = Resources/el.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		5793D8191369569F00BFF6B0 /* el */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = el; path = Resources/el.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
-		57DCE07713695336001569D9 /* zh-Hans */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = Resources/zh-Hans.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		57DCE07713695336001569D9 /* zh-Hans */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "Resources/zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		57DCE07813695336001569D9 /* zh-Hans */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = "zh-Hans"; path = "Resources/zh-Hans.lproj/JRFeedbackProvider.strings"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		57DCE0791369533B001569D9 /* pl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = pl; path = Resources/pl.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		57DCE07A1369533B001569D9 /* pl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = pl; path = Resources/pl.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
@@ -413,6 +416,7 @@
 				3424120C11DC023600BC0742 /* Growl Registration Ticket.growlRegDict */,
 				34908BD0119B9C1C00BDFC01 /* SUPublicDSAKey.pem */,
 				34A8FF9C1187C17000DDD3DE /* LICENSE.txt */,
+				575C0D58136A487A005DE73D /* VERSION */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -759,6 +763,7 @@
 			buildConfigurationList = 34FBC5E611C0B3C3005D290B /* Build configuration list for PBXNativeTarget "TVShowsHelper" */;
 			buildPhases = (
 				34FBC5DD11C0B3C2005D290B /* Resources */,
+				575C0D5B136A4968005DE73D /* Generate Version */,
 				34FBC61411C0B50D005D290B /* Copy Linked Libraries */,
 				34FBC5DE11C0B3C2005D290B /* Sources */,
 				34FBC5DF11C0B3C2005D290B /* Frameworks */,
@@ -777,6 +782,7 @@
 			buildConfigurationList = 1DBD214808BA80EA00186707 /* Build configuration list for PBXNativeTarget "TVShows" */;
 			buildPhases = (
 				8D202CEC0486D31800D8A456 /* Resources */,
+				575C0D5C136A4F26005DE73D /* Generate Version */,
 				340799BF11868C1000291D97 /* Copy Linked Libraries */,
 				8D202CF00486D31800D8A456 /* Sources */,
 				8D202CF20486D31800D8A456 /* Frameworks */,
@@ -850,6 +856,7 @@
 				34FBC60B11C0B4D0005D290B /* SUPublicDSAKey.pem in Resources */,
 				34184AFE11F88F7700AA1DC2 /* TVShowsHelper.xib in Resources */,
 				3424120D11DC023600BC0742 /* Growl Registration Ticket.growlRegDict in Resources */,
+				575C0D5A136A487A005DE73D /* VERSION in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -878,10 +885,42 @@
 				344A205A11F5485900026735 /* Toggle-Knob.png in Resources */,
 				344A205B11F5485900026735 /* Toggle-Slider.png in Resources */,
 				344971571330671700D24D68 /* Uninstaller.app in Resources */,
+				575C0D59136A487A005DE73D /* VERSION in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		575C0D5B136A4968005DE73D /* Generate Version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Version";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "BUILD_VERSION=`/usr/bin/env git log --pretty=format:'' | wc -l | egrep '[0-9]{1,}' -o`\nBUILD_DATE=`git log -1 --pretty=format:'%cD' | awk '{print $3 \" \" $2 \", \" $4}'`\nRELEASE_VERSION=`cat ${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VERSION`\n\n/usr/libexec/PListBuddy -c \"Set CFBundleVersion $BUILD_VERSION\" ${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\n/usr/libexec/PListBuddy -c \"Set TSBundleBuildDate $BUILD_DATE\" ${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\n/usr/libexec/PListBuddy -c \"Set CFBundleShortVersionString $RELEASE_VERSION\" ${TARGET_BUILD_DIR}/${INFOPLIST_PATH}";
+		};
+		575C0D5C136A4F26005DE73D /* Generate Version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Version";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "BUILD_VERSION=`/usr/bin/env git log --pretty=format:'' | wc -l | egrep '[0-9]{1,}' -o`\nBUILD_DATE=`git log -1 --pretty=format:'%cD' | awk '{print $3 \" \" $2 \", \" $4}'`\nRELEASE_VERSION=`cat ${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VERSION`\n\n/usr/libexec/PListBuddy -c \"Set CFBundleVersion $BUILD_VERSION\" ${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\n/usr/libexec/PListBuddy -c \"Set TSBundleBuildDate $BUILD_DATE\" ${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\n/usr/libexec/PListBuddy -c \"Set CFBundleShortVersionString $RELEASE_VERSION\" ${TARGET_BUILD_DIR}/${INFOPLIST_PATH}";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3444F2C011DD182000BF3724 /* Sources */ = {
@@ -1133,7 +1172,10 @@
 		1DBD214D08BA80EA00186707 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = (
+					"$(ARCHS_STANDARD_32_64_BIT)",
+					ppc,
+				);
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = /;
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch *.xcode* (*) CVS .svn .git";
@@ -1159,7 +1201,10 @@
 		1DBD214E08BA80EA00186707 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = (
+					"$(ARCHS_STANDARD_32_64_BIT)",
+					ppc,
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_GC = supported;
 				GCC_VERSION = 4.2;

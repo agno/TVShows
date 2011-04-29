@@ -12,6 +12,7 @@
  *
  */
 
+#import "AppInfoConstants.h"
 #import "TVShowsHelper.h"
 #import "TSParseXMLFeeds.h"
 #import "TSUserDefaults.h"

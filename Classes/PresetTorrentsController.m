@@ -12,6 +12,8 @@
  *
  */
 
+#import "AppInfoConstants.h"
+
 #import "PresetTorrentsController.h"
 #import "TabController.h"
 

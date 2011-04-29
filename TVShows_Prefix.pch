@@ -18,18 +18,24 @@
     #import "LCLLogFile.h"
 #endif
 
+// Bundle version of the application
+#define TSBundleVersion [[[NSBundle bundleWithIdentifier: CurrentBundleDomain] infoDictionary] \
+                                             valueForKey:@"CFBundleVersion"]
+#define TSBundleShortVersionString [[[NSBundle bundleWithIdentifier: CurrentBundleDomain] infoDictionary] \
+                                                        valueForKey:@"CFBundleShortVersionString"]
+
 // TVShows uses parts of LibComponentLogging <http://0xc0.de/LibComponentLogging>.
 // Check out the full library for even more awesome power.
 #if HELPER_APP
-    #define LogIdentifier   "[393 ~ Downloader]"
+    #define LogIdentifier [NSString stringWithFormat:@"[%@ ~ Downloader]", TSBundleVersion]
 #else
-    #define LogIdentifier   "[393 ~ Main App]"
+    #define LogIdentifier [NSString stringWithFormat:@"[%@ ~ Main App]", TSBundleVersion]
 #endif
 
 // Define the _ts_logger macro
 #define _ts_logger(_level, _format, ...) {                                     \
     NSAutoreleasePool *_ts_logger_pool = [[NSAutoreleasePool alloc] init];     \
-    [LCLLogFile logWithIdentifier:LogIdentifier                                \
+    [LCLLogFile logWithIdentifier:[LogIdentifier UTF8String]                   \
                             level:_level                                       \
                              path:__FILE__                                     \
                              line:__LINE__                                     \
