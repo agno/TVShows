@@ -259,66 +259,148 @@
     // Don't prematurely download show information;
     // tableViewSelectionDidChange is called when the app first starts
     if (hasDownloadedList) {
+        
         // If the selectedRow is -1 (no selection) or null, try to set a selection.
         if ([PTTableView selectedRow] == -1 || ![PTTableView selectedRow]) {
             [PTArrayController setSelectionIndex:0];
         }
         
-        // No matter what, reset the Episode Array Controller.
-        [[episodeArrayController content] removeAllObjects];
+        // No matter what, reset the elements of the view
+        [self resetShowView];
         
         // Make sure we were able to correctly set a selection before continuing,
         // or else searching and the scrollbar will fail.
-        if ( ([PTTableView selectedRow] > -1) || ([PTTableView selectedRow] == 0) && ([PTTableView selectedRow]) ) {
+        if ([PTTableView selectedRow] != -1 || ![PTTableView selectedRow]) {
             
-            NSImage *defaultPoster = [[[NSImage alloc] initByReferencingFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"posterArtPlaceholder" ofType:@"jpg"]] autorelease];
-            [defaultPoster setSize: NSMakeSize(129, 187)];
-            [showPoster setImage: defaultPoster];
-            [showQuality setState: [TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:1]];
-            
-            // Start the loading throbber
-            [loading startAnimation:nil];
-            [loadingText setHidden:NO];
-            [descriptionView setHidden:YES];
-            
-            NSString *selectedShowID = [[[PTArrayController selectedObjects] valueForKey:@"showrssID"] objectAtIndex:0];
-            NSString *selectedShowName = [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0];
-            
-            // Display the show poster now that it's been resized.
-            [self performSelectorInBackground:@selector(setPosterForShow:) withObject:selectedShowName];
-            
-            // Grab the show description
-            [self performSelectorInBackground:@selector(setDescriptionForShow:) withObject:selectedShowName];
+            // In the meantime show the loading throbber
+            [self showLoadingThrobber];
             
             // Grab the list of episodes
-            [self performSelector:@selector(setEpisodesForShowID:) withObject:selectedShowID];
+            [self performSelectorInBackground:@selector(setEpisodesForSelectedShow) withObject:nil];
             
-            // Update the filter predicate to only display the correct quality.
-//            [self showQualityDidChange:nil];
+            // Grab the show poster
+            [self performSelectorInBackground:@selector(setPosterForSelectedShow) withObject:nil];
             
+            // Grab the show description
+            [self performSelectorInBackground:@selector(setDescriptionForSelectedShow) withObject:nil];
+
         }
     }
 }
 
-- (void) setEpisodesForShowID:(NSString *)showID
+- (void) resetShowView {
+    [episodeArrayController removeObjects:[episodeArrayController content]];
+    [showDescription setString: @""];
+    [self setDefaultPoster];
+    [self setUserDefinedShowQuality];
+    //[showQuality setEnabled:NO];
+}
+
+- (void) setDefaultPoster {
+    NSImage *defaultPoster = [[[NSImage alloc] initByReferencingFile:
+                               [[NSBundle bundleForClass:[self class]] pathForResource:@"posterArtPlaceholder"
+                                                                                ofType:@"jpg"]] autorelease];
+    [defaultPoster setSize: NSMakeSize(129, 187)];
+    [showPoster setImage: defaultPoster];
+}
+
+- (void) setUserDefinedShowQuality {
+    [showQuality setState: [TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:1]];
+}
+
+- (void) showLoadingThrobber {
+    [loading startAnimation:nil];
+    [loadingText setHidden:NO];
+    [descriptionView setHidden:YES];
+}
+
+- (void) hideLoadingThrobber {
+    [loading stopAnimation:nil];
+    [loadingText setHidden:YES];
+    [descriptionView setHidden:NO];
+}
+
+- (void) setEpisodesForSelectedShow
 {
+    // Get the show ID
+    NSArray *selectedObjects = [PTArrayController selectedObjects];
+    if ([selectedObjects count] == 0) {
+        return;
+    }
+    NSNumber *showID = [[selectedObjects objectAtIndex:0] valueForKey:@"showrssID"];
+    
+    // Build the RSS URL (hardcoded to ShowRSS)
     NSString *selectedShowURL = [NSString stringWithFormat:@"http://showrss.karmorra.info/feeds/%@.rss", showID];
+    
+    // Now we can trigger the time-expensive task
     NSArray *results = [TSParseXMLFeeds parseEpisodesFromFeed:selectedShowURL maxItems:10];
     
-    if ([results count] == 0) {
-        LogError(@"Could not download/parse feed <%@>", selectedShowURL);
-    } else {
-        [episodeArrayController addObjects:results];
+    // We are back after probably a lot of time, so check carefully if the user has changed the selection
+    selectedObjects = [PTArrayController selectedObjects];
+    if ([selectedObjects count] == 0) {
+        return;
+    }
+    NSNumber *copy = [[selectedObjects objectAtIndex:0] valueForKey:@"showrssID"];
+    
+    // Continue only if the selected show is the same as before
+    if ([showID isEqualToNumber:copy]) {
+        if ([results count] == 0) {
+            LogError(@"Could not download/parse feed <%@>", selectedShowURL);
+        } else {
+            [episodeArrayController addObjects:results];
+            // TODO: check if there are HD episodes, if so enable the box
+        }
     }
 }
 
-- (void) setDescriptionForShow:(NSString *)show
+- (void) setPosterForSelectedShow
 {
-    NSString *description = [TheTVDB getValueForKey:@"Overview" andShow:show];
-    NSString *copy = [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0];
+    // Get the show name
+    NSArray *selectedObjects = [PTArrayController selectedObjects];
+    if ([selectedObjects count] == 0) {
+        return;
+    }
+    NSString *showName = [[selectedObjects objectAtIndex:0] valueForKey:@"name"];
     
-    // Check if the request is still valid (an impacient user may start to rapidly change)
-    if ([show isEqualToString:copy]) {
+    // Now we can trigger the time-expensive task
+    NSImage *poster = [[[TheTVDB getPosterForShow:showName withHeight:187 withWidth:129] copy] autorelease];
+    
+    // We are back after probably a lot of time, so check carefully if the user has changed the selection
+    selectedObjects = [PTArrayController selectedObjects];
+    if ([selectedObjects count] == 0) {
+        return;
+    }
+    NSString *copy = [[selectedObjects objectAtIndex:0] valueForKey:@"name"];
+    
+    // Continue only if the selected show is the same as before
+    if ([showName isEqualToString:copy]) {
+        [showPoster setImage: poster];
+        [showPoster display];
+    }
+}
+
+- (void) setDescriptionForSelectedShow
+{
+    // Get the show name
+    NSArray *selectedObjects = [PTArrayController selectedObjects];
+    if ([selectedObjects count] == 0) {
+        return;
+    }
+    NSString *showName = [[selectedObjects objectAtIndex:0] valueForKey:@"name"];
+    
+    // Now we can trigger the time-expensive task
+    NSString *description = [TheTVDB getValueForKey:@"Overview" andShow:showName];
+    
+    // We are back after probably a lot of time, so check carefully if the user has changed the selection
+    selectedObjects = [PTArrayController selectedObjects];
+    if ([selectedObjects count] == 0) {
+        return;
+    }
+    NSString *copy = [[selectedObjects objectAtIndex:0] valueForKey:@"name"];
+    
+    // Continue only if the selected show is the same as before
+    if ([showName isEqualToString:copy]) {
+        // And finally we can set the description
         if (description != NULL) {
             [showDescription setString: [TSRegexFun replaceHTMLEntitiesInString:description]];
             [showDescription moveToBeginningOfDocument:nil];
@@ -327,21 +409,7 @@
         }
         
         // And stop the loading throbber
-        [loading stopAnimation:nil];
-        [loadingText setHidden:YES];
-        [descriptionView setHidden:NO];
-    }
-}
-
-- (void) setPosterForShow:(NSString *)show
-{
-    NSImage *poster = [[[TheTVDB getPosterForShow:show withHeight:187 withWidth:129] copy] autorelease];
-    NSString *copy = [[[PTArrayController selectedObjects] valueForKey:@"name"] objectAtIndex:0];
-    
-    // Check if the request is still valid (an impacient user may start to rapidly change)
-    if ([show isEqualToString:copy]) {
-        [showPoster setImage: poster];
-        [showPoster display];
+        [self hideLoadingThrobber];
     }
 }
 

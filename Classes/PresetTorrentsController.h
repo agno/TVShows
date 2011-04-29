@@ -61,9 +61,14 @@
 - (void) sortTorrentShowList;
 - (void) downloadTorrentShowList;
 - (void) tableViewSelectionDidChange:(NSNotification *)notification;
-- (void) setEpisodesForShowID:(NSString *)showID;
-- (void) setDescriptionForShow:(NSString *)show;
-- (void) setPosterForShow:(NSString *)show;
+- (void) resetShowView;
+- (void) setDefaultPoster;
+- (void) setUserDefinedShowQuality;
+- (void) showLoadingThrobber;
+- (void) hideLoadingThrobber;
+- (void) setEpisodesForSelectedShow;
+- (void) setDescriptionForSelectedShow;
+- (void) setPosterForSelectedShow;
 
 #pragma mark -
 #pragma mark Error Window Methors
