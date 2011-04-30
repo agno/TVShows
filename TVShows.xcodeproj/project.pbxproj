@@ -338,6 +338,10 @@
 		57DCE07813695336001569D9 /* zh-Hans */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = "zh-Hans"; path = "Resources/zh-Hans.lproj/JRFeedbackProvider.strings"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		57DCE0791369533B001569D9 /* pl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = pl; path = Resources/pl.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		57DCE07A1369533B001569D9 /* pl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = pl; path = Resources/pl.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		57E4EB3E136B9A23003E59E5 /* pt-PT */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = pt-PT; path = Resources/pt-PT.lproj/Localizable.strings; sourceTree = "<group>"; };
+		57E4EB3F136B9A32003E59E5 /* pt-BR */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = pt-BR; path = Resources/pt-BR.lproj/Localizable.strings; sourceTree = "<group>"; };
+		57E4EB40136B9A57003E59E5 /* pt-PT */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = pt-PT; path = Resources/pt-PT.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		57E4EB41136B9A57003E59E5 /* pt-BR */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = pt-BR; path = Resources/pt-BR.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		8D202CF80486D31800D8A456 /* TVShows.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVShows.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
 		F506C035013D953901CA16C8 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = /System/Library/Frameworks/PreferencePanes.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -833,9 +837,11 @@
 				is,
 				nl,
 				"pl-PL",
+				pt,
 				"pt-PT",
 				ru,
 				tr,
+				"pt-BR",
 			);
 			mainGroup = 089C166AFE841209C02AAC07 /* TVShows */;
 			projectDirPath = "";
@@ -1063,6 +1069,8 @@
 				57DCE0791369533B001569D9 /* pl */,
 				5793D8171369560000BFF6B0 /* gl */,
 				5793D8191369569F00BFF6B0 /* el */,
+				57E4EB3E136B9A23003E59E5 /* pt-PT */,
+				57E4EB3F136B9A32003E59E5 /* pt-BR */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1099,6 +1107,8 @@
 				57DCE07A1369533B001569D9 /* pl */,
 				5793D8161369560000BFF6B0 /* gl */,
 				5793D8181369569F00BFF6B0 /* el */,
+				57E4EB40136B9A57003E59E5 /* pt-PT */,
+				57E4EB41136B9A57003E59E5 /* pt-BR */,
 			);
 			name = JRFeedbackProvider.strings;
 			sourceTree = "<group>";
