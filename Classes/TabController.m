@@ -260,9 +260,6 @@
     // Grab the list of episodes
     [self performSelector:@selector(setEpisodesForShow)];
     
-    // Update the filter predicate to only display the correct quality.
-    //[self showQualityDidChange:nil];
-    
     [NSApp beginSheet: showInfoWindow
        modalForWindow: [[NSApplication sharedApplication] mainWindow]
         modalDelegate: nil
@@ -294,6 +291,9 @@
             [showQuality setState:NO];
         }
         [showQuality setEnabled:isHD];
+        
+        // Update the filter predicate to only display the correct quality.
+        [self showQualityDidChange:nil];
     }
 }
 

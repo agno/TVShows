@@ -365,6 +365,9 @@
                 [showQuality setState:NO];
             }
             [showQuality setEnabled:isHD];
+            
+            // Update the filter predicate to only display the correct quality.
+            [self showQualityDidChange:nil];
         }
     }
 }
