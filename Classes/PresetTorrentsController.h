@@ -78,5 +78,6 @@
 #pragma mark -
 #pragma mark Subscription Methods
 - (IBAction) subscribeToShow:(id)sender;
+- (BOOL) userIsSubscribedToShow:(NSString*)showName;
 
 @end

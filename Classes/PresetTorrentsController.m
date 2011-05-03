@@ -276,6 +276,15 @@
         // or else searching and the scrollbar will fail.
         if ([PTTableView selectedRow] != -1 || ![PTTableView selectedRow]) {
             
+            // First disable completely the subscribe button is the user is already subscribed
+            if ([[PTArrayController selectedObjects] count] != 0) {
+                if ([self userIsSubscribedToShow:[[[PTArrayController selectedObjects] objectAtIndex:0] valueForKey:@"name"]]) {
+                    [subscribeButton setEnabled:NO];
+                } else {
+                    [subscribeButton setEnabled:YES];
+                }
+            }
+            
             // In the meantime show the loading throbber
             [self showLoadingThrobber];
             
@@ -550,6 +559,17 @@
     [self closePresetTorrentsWindow:(id)sender];
     
     [delegateClass release];
+}
+
+- (BOOL) userIsSubscribedToShow:(NSString*)showName
+{
+    for (NSManagedObject *subscription in [SBArrayController arrangedObjects]) {
+        if ([[subscription valueForKey:@"name"] isEqualToString:showName]) {
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 @end
