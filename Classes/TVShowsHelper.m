@@ -266,7 +266,7 @@
     NSString *formattedDateString = [dateFormatter stringFromDate:[TSUserDefaults getDateFromKey:@"lastCheckedForEpisodes"]];
     
     // Finally, update the string
-    [lastUpdateItem setTitle:[TSLocalizeString(@"Last checked:") stringByAppendingFormat:@" %@", formattedDateString]];
+    [lastUpdateItem setTitle:[TSLocalizeString(@"Last Checked:") stringByAppendingFormat:@" %@", formattedDateString]];
     
     // Enable again the menubar option
     [checkShowsItem setAction:@selector(checkNow:)];
@@ -285,22 +285,78 @@
 
 - (IBAction) showSubscriptions:(id)sender
 {
-    [self openApplication:sender];
+    NSString *command =
+    @"tell application \"System Preferences\"                               \n"
+    @"   activate                                                           \n"
+    @"   set the current pane to pane id \"com.victorpimentel.TVShows2\"    \n"
+    @"end tell                                                              \n"
+    @"tell application \"System Events\"                                    \n"
+    @"    tell process \"System Preferences\"                               \n"
+    @"        click radio button 1 of tab group 1 of window \"TVShows\"     \n"
+    @"    end tell                                                          \n"
+    @"end tell                                                              ";
+    
+    NSTask *task = [[[NSTask alloc] init] autorelease];
+    [task setLaunchPath:@"/usr/bin/osascript"];
+    [task setArguments:[NSMutableArray arrayWithObjects:@"-e", command, nil]];
+    [task launch];
 }
 
 - (IBAction) showPreferences:(id)sender
 {
-    [self openApplication:sender];
+    NSString *command =
+    @"tell application \"System Preferences\"                               \n"
+    @"   activate                                                           \n"
+    @"   set the current pane to pane id \"com.victorpimentel.TVShows2\"    \n"
+    @"end tell                                                              \n"
+    @"tell application \"System Events\"                                    \n"
+    @"    tell process \"System Preferences\"                               \n"
+    @"        click radio button 2 of tab group 1 of window \"TVShows\"     \n"
+    @"    end tell                                                          \n"
+    @"end tell                                                              ";
+    
+    NSTask *task = [[[NSTask alloc] init] autorelease];
+    [task setLaunchPath:@"/usr/bin/osascript"];
+    [task setArguments:[NSMutableArray arrayWithObjects:@"-e", command, nil]];
+    [task launch];
 }
 
 - (IBAction) showAbout:(id)sender
 {
-    [self openApplication:sender];
+    NSString *command =
+    @"tell application \"System Preferences\"                               \n"
+    @"   activate                                                           \n"
+    @"   set the current pane to pane id \"com.victorpimentel.TVShows2\"    \n"
+    @"end tell                                                              \n"
+    @"tell application \"System Events\"                                    \n"
+    @"    tell process \"System Preferences\"                               \n"
+    @"        click radio button 3 of tab group 1 of window \"TVShows\"     \n"
+    @"    end tell                                                          \n"
+    @"end tell                                                              ";
+    
+    NSTask *task = [[[NSTask alloc] init] autorelease];
+    [task setLaunchPath:@"/usr/bin/osascript"];
+    [task setArguments:[NSMutableArray arrayWithObjects:@"-e", command, nil]];
+    [task launch];
 }
 
 - (IBAction) showFeedback:(id)sender
 {
-    [self openApplication:sender];
+    NSString *command =
+    @"tell application \"System Preferences\"                               \n"
+    @"   activate                                                           \n"
+    @"   set the current pane to pane id \"com.victorpimentel.TVShows2\"    \n"
+    @"end tell                                                              \n"
+    @"tell application \"System Events\"                                    \n"
+    @"    tell process \"System Preferences\"                               \n"
+    @"        click button 4 of window \"TVShows\"                          \n"
+    @"    end tell                                                          \n"
+    @"end tell                                                              ";
+    
+    NSTask *task = [[[NSTask alloc] init] autorelease];
+    [task setLaunchPath:@"/usr/bin/osascript"];
+    [task setArguments:[NSMutableArray arrayWithObjects:@"-e", command, nil]];
+    [task launch];
 }
 
 - (IBAction) quitHelper:(id)sender

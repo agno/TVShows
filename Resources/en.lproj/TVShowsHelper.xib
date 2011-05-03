@@ -65,7 +65,7 @@
 					</object>
 					<object class="NSMenuItem" id="429497406">
 						<reference key="NSMenu" ref="962946239"/>
-						<string key="NSTitle">Check For New Episodes Now</string>
+						<string key="NSTitle">Check for new episodes now</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="138414130"/>
@@ -83,7 +83,7 @@
 					</object>
 					<object class="NSMenuItem" id="918719190">
 						<reference key="NSMenu" ref="962946239"/>
-						<string key="NSTitle">Manage Subscriptions...</string>
+						<string key="NSTitle">Subscriptions...</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="138414130"/>
@@ -117,7 +117,7 @@
 					</object>
 					<object class="NSMenuItem" id="477587851">
 						<reference key="NSMenu" ref="962946239"/>
-						<string key="NSTitle">About</string>
+						<string key="NSTitle">About TVShows</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="138414130"/>
@@ -135,7 +135,7 @@
 					</object>
 					<object class="NSMenuItem" id="127761296">
 						<reference key="NSMenu" ref="962946239"/>
-						<string key="NSTitle">Quit TVShows</string>
+						<string key="NSTitle">Disable TVShows</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="138414130"/>
@@ -508,29 +508,67 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>aboutItem</string>
+							<string>checkShowsItem</string>
+							<string>disableItem</string>
+							<string>feedbackItem</string>
 							<string>lastUpdateItem</string>
+							<string>preferencesItem</string>
 							<string>statusItem</string>
 							<string>statusMenu</string>
+							<string>subscriptionsItem</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSMenuItem</string>
+							<string>NSMenuItem</string>
+							<string>NSMenuItem</string>
+							<string>NSMenuItem</string>
+							<string>NSMenuItem</string>
+							<string>NSMenuItem</string>
 							<string>NSStatusItem</string>
 							<string>NSMenu</string>
+							<string>NSMenuItem</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>aboutItem</string>
+							<string>checkShowsItem</string>
+							<string>disableItem</string>
+							<string>feedbackItem</string>
 							<string>lastUpdateItem</string>
+							<string>preferencesItem</string>
 							<string>statusItem</string>
 							<string>statusMenu</string>
+							<string>subscriptionsItem</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
+								<string key="name">aboutItem</string>
+								<string key="candidateClassName">NSMenuItem</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">checkShowsItem</string>
+								<string key="candidateClassName">NSMenuItem</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">disableItem</string>
+								<string key="candidateClassName">NSMenuItem</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">feedbackItem</string>
+								<string key="candidateClassName">NSMenuItem</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">lastUpdateItem</string>
+								<string key="candidateClassName">NSMenuItem</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">preferencesItem</string>
 								<string key="candidateClassName">NSMenuItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -540,6 +578,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">statusMenu</string>
 								<string key="candidateClassName">NSMenu</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">subscriptionsItem</string>
+								<string key="candidateClassName">NSMenuItem</string>
 							</object>
 						</object>
 					</object>
