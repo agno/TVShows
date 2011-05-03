@@ -52,11 +52,11 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
         && !(reachabilityFlags & kSCNetworkFlagsInterventionRequired);
     
     if (!showFeedbackWindow) {
-        int alertResult = [[NSAlert alertWithMessageText:NSLocalizedStringFromTable(@"Feedback Server Unavailable", @"JRFeedbackProvider", nil)
-                                           defaultButton:NSLocalizedStringFromTable(@"Proceed Anyway", @"JRFeedbackProvider", nil)
+        int alertResult = [[NSAlert alertWithMessageText:JRLocalizeString(@"Feedback Server Unavailable")
+                                           defaultButton:JRLocalizeString(@"Proceed Anyway")
                                          alternateButton:TSLocalizeString(@"Cancel")
                                              otherButton:nil
-                               informativeTextWithFormat:NSLocalizedStringFromTable(@"TVShows was unable to connect to the TVShows website. Please check your connection or try again later.", @"JRFeedbackProvider", nil), [[JRFeedbackController postURL] host]
+                               informativeTextWithFormat:JRLocalizeString(@"TVShows was unable to connect to the TVShows website. Please check your connection or try again later."), [[JRFeedbackController postURL] host]
                             ] runModal];
         if (NSAlertDefaultReturn == alertResult) {
             showFeedbackWindow = YES;
@@ -92,9 +92,19 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
     [segmentedControl setSegmentStyle:NSSegmentStyleTexturedSquare];
     [segmentedControl setSegmentStyle:NSSegmentStyleTexturedSquare];
 #endif
-    NSString *fmt = NSLocalizedStringFromTable(@"TVShows Feedback", @"JRFeedbackProvider", nil);
+    NSString *fmt = JRLocalizeString(@"TVShows Feedback");
     NSString *title = [NSString stringWithFormat:fmt, [[[NSBundle bundleForClass:[self class]] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey]];
     [[self window] setTitle:title];
+    
+    [segmentedControl setLabel:JRLocalizeString(@"Bug Report") forSegment:0];
+    [segmentedControl setLabel:JRLocalizeString(@"Feature Request") forSegment:1];
+    [segmentedControl setLabel:JRLocalizeString(@"Support Question") forSegment:2];
+    [cancelButton setTitle:TSLocalizeString(@"Cancel")];
+    [sendButton setTitle:JRLocalizeString(@"Send")];
+    [includeHardwareDetailsCheckbox setTitle:JRLocalizeString(@"Include anonymous information about my computer")];
+    [includePersonalDetailsCheckbox setTitle:JRLocalizeString(@"Include contact information")];
+    [disclaimerBox setTitle:JRLocalizeString(@"Important")];
+    [disclaimerTextField setStringValue:JRLocalizeString(@"The TVShows support team will only be able to understand your feedback if written in English or Spanish.")];
     
     NSTextStorage *text = [textView textStorage];
     
@@ -237,8 +247,8 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
 - (void)connectionDidFinishLoading:(NSURLConnection*)connection {
 #if USE_GROWL
 	[GrowlApplicationBridge setGrowlDelegate:@""];
-	[GrowlApplicationBridge notifyWithTitle:NSLocalizedStringFromTable(@"Thank you!", @"JRFeedbackProvider", nil)
-								description:NSLocalizedStringFromTable(@"Your feedback has been sent.", @"JRFeedbackProvider", nil)
+	[GrowlApplicationBridge notifyWithTitle:JRLocalizeString(@"Thank you!")
+								description:JRLocalizeString(@"Your feedback has been sent.")
 						   notificationName:@"Feedback Sent"
 								   iconData:nil
 								   priority:0
@@ -247,8 +257,8 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
 	[self closeFeedback];
 #else
 	//	drop thank you sheet
-	[self displayAlertMessage:NSLocalizedStringFromTable(@"Thank you for your feedback!", @"JRFeedbackProvider", nil)
-		  withInformativeText:NSLocalizedStringFromTable(@"Your feedback has been sent.", @"JRFeedbackProvider", nil)
+	[self displayAlertMessage:JRLocalizeString(@"Thank you for your feedback!")
+		  withInformativeText:JRLocalizeString(@"Your feedback has been sent.")
 				andAlertStyle:NSInformationalAlertStyle];
 #endif
 }
@@ -284,8 +294,8 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
     NSLog(@"-[JRFeedback connection:didFailWithError:%@]", error);
 	
 	//	drop fail sheet
-	[self displayAlertMessage:NSLocalizedStringFromTable(@"An Error Occured", @"JRFeedbackProvider", nil)
-		  withInformativeText:NSLocalizedStringFromTable(@"There was a problem sending your feedback. Please try again at another time.", @"JRFeedbackProvider", nil)
+	[self displayAlertMessage:JRLocalizeString(@"An Error Occured")
+		  withInformativeText:JRLocalizeString(@"There was a problem sending your feedback. Please try again at another time.")
 				andAlertStyle:NSInformationalAlertStyle];
 
 }

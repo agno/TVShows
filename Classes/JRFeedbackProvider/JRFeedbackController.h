@@ -24,8 +24,11 @@ typedef enum {
 } JRFeedbackController_Section;
 
 @interface JRFeedbackController : NSWindowController {
+    IBOutlet NSBox *disclaimerBox;
+    IBOutlet NSTextField *disclaimerTextField;
     IBOutlet NSTextView *textView;
     IBOutlet NSButton *includeHardwareDetailsCheckbox;
+    IBOutlet NSButton *includePersonalDetailsCheckbox;
     IBOutlet NSTextField *nameTextField;
     IBOutlet NSComboBox *emailAddressComboBox;
     IBOutlet NSProgressIndicator *progress;
