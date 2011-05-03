@@ -24,12 +24,13 @@
 
 @implementation TVShowsHelper
 
-@synthesize mainLoop, TVShowsHelperIcon;
+@synthesize checkerLoop, TVShowsHelperIcon;
 
 - init
 {
     if((self = [super init])) {
-        mainLoop = nil;
+        checkerThread = nil;
+        checkerLoop = nil;
         
         NSMutableString *appPath = [NSMutableString stringWithString:[[NSBundle bundleForClass:[self class]] bundlePath] ];
         [appPath replaceOccurrencesOfString:@"TVShowsHelper.app"
@@ -65,6 +66,9 @@
 
 - (void) runLoop
 {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    NSRunLoop* threadLoop = [NSRunLoop currentRunLoop];
+    
     NSInteger delay;
     NSTimeInterval seconds;
     delay = [TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:0];
@@ -103,41 +107,46 @@
             seconds = 15*60;
     }
     
-    mainLoop = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:0.1]
+    checkerLoop = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:0.1]
                                         interval:seconds
                                           target:self
                                         selector:@selector(checkAllShows)
                                         userInfo:nil
                                          repeats:YES];
     
-    [[NSRunLoop currentRunLoop] addTimer:mainLoop forMode:NSDefaultRunLoopMode];
+    [threadLoop addTimer:checkerLoop forMode:NSDefaultRunLoopMode];
+    [threadLoop run];
+    [pool drain];
 }
 
 - (IBAction) checkNow:(id)sender
 {
-    if (mainLoop != nil) {
-        [mainLoop invalidate];
-        [mainLoop release];
-        mainLoop = nil;
+    if (checkerLoop != nil) {
+        [checkerLoop performSelector:@selector(invalidate) onThread:checkerThread withObject:nil waitUntilDone:YES];
+        checkerLoop = nil;
+        [checkerThread release];
+        checkerThread = nil;
+        // Notify the user to give him some feedback
+        [GrowlApplicationBridge notifyWithTitle:@"TVShows"
+                                    description:@"Checking for new episodes..."
+                               notificationName:@"Checking For New Episodes"
+                                       iconData:TVShowsHelperIcon
+                                       priority:0
+                                       isSticky:0
+                                   clickContext:nil];
     }
     
-    // Notify the user to give him some feedback
-    [GrowlApplicationBridge notifyWithTitle:@"TVShows"
-                                description:@"Checking for new episodes..."
-                           notificationName:@"Checking For New Episodes"
-                                   iconData:TVShowsHelperIcon
-                                   priority:0
-                                   isSticky:0
-                               clickContext:nil];
+    // First disable the menubar option
+    [checkShowsItem setAction:nil];
+    [checkShowsItem setTitle:@"Checking now, please wait..."];
     
-    [self runLoop];
+    // And start the thread
+    checkerThread = [[NSThread alloc] initWithTarget:self selector:@selector(runLoop) object:nil];
+    [checkerThread start];
 }
 
 - (void) checkAllShows
 {
-    // First update the menu to reflect the date
-    [self updateLastCheckedItem];
-    
     id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
     
     NSManagedObjectContext *context = [delegateClass managedObjectContext];
@@ -176,9 +185,11 @@
     // Now that everything is done, update the time our last check was made.
     [TSUserDefaults setKey:@"lastCheckedForEpisodes" fromDate:[NSDate date]];
     
+    // And update the menu to reflect the date
+    [self performSelectorOnMainThread:@selector(updateLastCheckedItem)  withObject:nil waitUntilDone:NO];
+    
     [delegateClass saveAction];
     [delegateClass release];
-    
 }
 
 - (void) checkForNewEpisodes:(NSArray *)show
@@ -251,11 +262,15 @@
     [dateFormatter setDateStyle:NSDateFormatterNoStyle];
     [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     
-    // Create the string form this date
-    NSString *formattedDateString = [dateFormatter stringFromDate:[NSDate date]];
+    // Create the string from this date
+    NSString *formattedDateString = [dateFormatter stringFromDate:[TSUserDefaults getDateFromKey:@"lastCheckedForEpisodes"]];
     
     // Finally, update the string
-    [lastUpdateItem setTitle:[TSLocalizeString(@"Last Checked:") stringByAppendingFormat:@" %@", formattedDateString]];
+    [lastUpdateItem setTitle:[TSLocalizeString(@"Last checked:") stringByAppendingFormat:@" %@", formattedDateString]];
+    
+    // Enable again the menubar option
+    [checkShowsItem setAction:@selector(checkNow:)];
+    [checkShowsItem setTitle:@"Check for new episodes now"];
 }
 
 - (IBAction) openApplication:(id)sender
@@ -371,8 +386,8 @@
 
 - (void) dealloc
 {
-    [mainLoop invalidate];
-    [mainLoop release];
+    [checkerLoop invalidate];
+    [checkerLoop release];
     [TVShowsHelperIcon release];
     [super dealloc];
 }

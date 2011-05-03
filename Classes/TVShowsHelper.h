@@ -19,14 +19,21 @@
 
 @interface TVShowsHelper : NSObject <GrowlApplicationBridgeDelegate>
 {
-    NSTimer *mainLoop;
+    NSThread *checkerThread;
+    NSTimer *checkerLoop;
     NSData *TVShowsHelperIcon;
     IBOutlet NSStatusItem *statusItem;
     IBOutlet NSMenu *statusMenu;
     IBOutlet NSMenuItem *lastUpdateItem;
+    IBOutlet NSMenuItem *checkShowsItem;
+    IBOutlet NSMenuItem *subscriptionsItem;
+    IBOutlet NSMenuItem *preferencesItem;
+    IBOutlet NSMenuItem *feedbackItem;
+    IBOutlet NSMenuItem *aboutItem;
+    IBOutlet NSMenuItem *disableItem;
 }
 
-@property (retain) NSTimer *mainLoop;
+@property (retain) NSTimer *checkerLoop;
 @property (retain) NSData *TVShowsHelperIcon;
 
 - (void) runLoop;
