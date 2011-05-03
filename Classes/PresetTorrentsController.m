@@ -104,6 +104,10 @@
     // Always remember the user preference
     [showQuality setState: [TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:1]];
     
+    // Grab the list of episodes
+    [episodeArrayController removeObjects:[episodeArrayController content]];
+    [self setEpisodesForSelectedShow];
+    
     [NSApp beginSheet: PTWindow
        modalForWindow: [[NSApplication sharedApplication] mainWindow]
         modalDelegate: nil

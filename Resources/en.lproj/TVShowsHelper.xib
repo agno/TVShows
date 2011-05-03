@@ -99,7 +99,7 @@
 					</object>
 					<object class="NSMenuItem" id="966356482">
 						<reference key="NSMenu" ref="962946239"/>
-						<string key="NSTitle">Send feedback...</string>
+						<string key="NSTitle">Send Feedback...</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="138414130"/>
@@ -226,6 +226,54 @@
 						<reference key="destination" ref="127761296"/>
 					</object>
 					<int key="connectionID">856</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">subscriptionsItem</string>
+						<reference key="source" ref="397300107"/>
+						<reference key="destination" ref="918719190"/>
+					</object>
+					<int key="connectionID">857</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">checkShowsItem</string>
+						<reference key="source" ref="397300107"/>
+						<reference key="destination" ref="429497406"/>
+					</object>
+					<int key="connectionID">858</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">preferencesItem</string>
+						<reference key="source" ref="397300107"/>
+						<reference key="destination" ref="742739034"/>
+					</object>
+					<int key="connectionID">859</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">feedbackItem</string>
+						<reference key="source" ref="397300107"/>
+						<reference key="destination" ref="966356482"/>
+					</object>
+					<int key="connectionID">860</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">aboutItem</string>
+						<reference key="source" ref="397300107"/>
+						<reference key="destination" ref="477587851"/>
+					</object>
+					<int key="connectionID">861</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">disableItem</string>
+						<reference key="source" ref="397300107"/>
+						<reference key="destination" ref="127761296"/>
+					</object>
+					<int key="connectionID">862</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -391,7 +439,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">856</int>
+			<int key="maxID">862</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -594,6 +642,10 @@
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
+		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
+			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
+			<real value="1050" key="NS.object.0"/>
+		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
 			<integer value="1050" key="NS.object.0"/>

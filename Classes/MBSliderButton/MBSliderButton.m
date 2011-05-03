@@ -74,7 +74,7 @@
     
     [green_gradient drawInRect:NSMakeRect(0, location.y, location.x+10, HEIGHT) angle:270];   
    
-    NSString* s = @"ON";
+    NSString* s = TSLocalizeString(@"On");
     NSMutableDictionary* attr = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                           [NSFont boldSystemFontOfSize:15.0], NSFontAttributeName, 
                           [NSColor colorWithDeviceRed:0.2 green:0.333 blue:0.027 alpha:1.0], NSForegroundColorAttributeName, 
@@ -89,7 +89,7 @@
     int x = location.x+KNOB_WIDTH-2;
     [gray_gradient drawInRect:NSMakeRect(x, location.y, WIDTH-x, HEIGHT) angle:270];
     
-    s = @"OFF";
+    s = TSLocalizeString(@"Off");
     [attr setObject:[NSColor colorWithDeviceWhite:0.2 alpha:0.66] forKey:NSForegroundColorAttributeName];
     sz = [s sizeWithAttributes:attr];
     pt.x = location.x+KNOB_WIDTH+(KNOB_MAX_X-sz.width)/2;

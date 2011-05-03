@@ -128,7 +128,7 @@
         checkerThread = nil;
         // Notify the user to give him some feedback
         [GrowlApplicationBridge notifyWithTitle:@"TVShows"
-                                    description:@"Checking for new episodes..."
+                                    description:TSLocalizeString(@"Checking for new episodes...")
                                notificationName:@"Checking For New Episodes"
                                        iconData:TVShowsHelperIcon
                                        priority:0
@@ -138,7 +138,7 @@
     
     // First disable the menubar option
     [checkShowsItem setAction:nil];
-    [checkShowsItem setTitle:@"Checking now, please wait..."];
+    [checkShowsItem setTitle:TSLocalizeString(@"Checking now, please wait...")];
     
     // And start the thread
     checkerThread = [[NSThread alloc] initWithTarget:self selector:@selector(runLoop) object:nil];
@@ -242,8 +242,6 @@
 {
     statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength] retain];
     
-    // Uncomment this area and fill in the name of your image<br />
-    // to add a custom icon to your status item.<br />
     [statusItem setImage:[NSImage imageNamed:@"TVShows-Menu-Icon-Black"]];
     [statusItem setAlternateImage:[NSImage imageNamed:@"TVShows-Menu-Icon-White"]];
     [statusItem setEnabled:YES];
@@ -252,6 +250,15 @@
     
     [statusItem setAction:@selector(openApplication:)];
     [statusItem setMenu:statusMenu];
+    
+    // Localize
+    [lastUpdateItem setTitle:[NSString stringWithFormat:@"%@ %@", TSLocalizeString(@"Last Checked:"), TSLocalizeString(@"Never")]];
+    [checkShowsItem setTitle:TSLocalizeString(@"Checking now, please wait...")];
+    [subscriptionsItem setTitle:[NSString stringWithFormat:@"%@...", TSLocalizeString(@"Subscriptions")]];
+    [preferencesItem setTitle:[NSString stringWithFormat:@"%@...", TSLocalizeString(@"Preferences")]];
+    [feedbackItem setTitle:[NSString stringWithFormat:@"%@...", TSLocalizeString(@"Submit Feedback")]];
+    [aboutItem setTitle:[NSString stringWithFormat:@"%@ TVShows", TSLocalizeString(@"About")]];
+    [disableItem setTitle:TSLocalizeString(@"Disable TVShows")];
 }
 
 - (void) updateLastCheckedItem
@@ -266,11 +273,11 @@
     NSString *formattedDateString = [dateFormatter stringFromDate:[TSUserDefaults getDateFromKey:@"lastCheckedForEpisodes"]];
     
     // Finally, update the string
-    [lastUpdateItem setTitle:[TSLocalizeString(@"Last Checked:") stringByAppendingFormat:@" %@", formattedDateString]];
+    [lastUpdateItem setTitle:[NSString stringWithFormat:@"%@ %@", TSLocalizeString(@"Last Checked:"), formattedDateString]];
     
     // Enable again the menubar option
     [checkShowsItem setAction:@selector(checkNow:)];
-    [checkShowsItem setTitle:@"Check for new episodes now"];
+    [checkShowsItem setTitle:TSLocalizeString(@"Check for new episodes now")];
 }
 
 - (IBAction) openApplication:(id)sender
@@ -390,7 +397,7 @@
         if([TSUserDefaults getBoolFromKey:@"GrowlOnNewEpisode" withDefault:1]) {
         // In the future this may display the show's poster instead of our app icon.
         [GrowlApplicationBridge notifyWithTitle:[NSString stringWithFormat:@"%@", [show valueForKey:@"name"]]
-                                    description:[NSString stringWithFormat:@"A new episode of %@ is being downloaded.", [show valueForKey:@"name"]]
+                                    description:[NSString stringWithFormat:TSLocalizeString(@"A new episode of %@ is being downloaded."), [show valueForKey:@"name"]]
                                notificationName:@"New Episode Downloaded"
                                        iconData:TVShowsHelperIcon
                                        priority:0
@@ -422,7 +429,7 @@
         
         if([TSUserDefaults getBoolFromKey:@"GrowlOnAppUpdate" withDefault:YES]) {
             [GrowlApplicationBridge notifyWithTitle:@"TVShows Update Downloading"
-                                        description:@"A new version of TVShows is being downloaded and installed."
+                                        description:TSLocalizeString(@"A new version of TVShows is being downloaded and installed.")
                                    notificationName:@"TVShows Update Downloaded"
                                            iconData:TVShowsHelperIcon
                                            priority:0
@@ -431,7 +438,7 @@
         }
     } else if([TSUserDefaults getBoolFromKey:@"GrowlOnAppUpdate" withDefault:YES]) {
         [GrowlApplicationBridge notifyWithTitle:@"TVShows Update Available"
-                                    description:@"A new version of TVShows is available for download."
+                                    description:TSLocalizeString(@"A new version of TVShows is available for download.")
                                notificationName:@"TVShows Update Available"
                                        iconData:TVShowsHelperIcon
                                        priority:0
