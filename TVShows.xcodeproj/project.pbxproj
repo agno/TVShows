@@ -120,6 +120,7 @@
 		57557510136DC9E5006D1FC9 /* TVShows-Menu-Icon-Black.png in Resources */ = {isa = PBXBuildFile; fileRef = 5755750E136DC9E5006D1FC9 /* TVShows-Menu-Icon-Black.png */; };
 		575C0D59136A487A005DE73D /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = 575C0D58136A487A005DE73D /* VERSION */; };
 		575C0D5A136A487A005DE73D /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = 575C0D58136A487A005DE73D /* VERSION */; };
+		57D9AF801370203C00A76D59 /* TVShows-Beta-Large.icns in Resources */ = {isa = PBXBuildFile; fileRef = 57D9AF7F1370203C00A76D59 /* TVShows-Beta-Large.icns */; };
 		8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F506C035013D953901CA16C8 /* PreferencePanes.framework */; };
 /* End PBXBuildFile section */
@@ -338,6 +339,7 @@
 		5793D8171369560000BFF6B0 /* gl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = gl; path = Resources/gl.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		5793D8181369569F00BFF6B0 /* el */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = el; path = Resources/el.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		5793D8191369569F00BFF6B0 /* el */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = el; path = Resources/el.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		57D9AF7F1370203C00A76D59 /* TVShows-Beta-Large.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "TVShows-Beta-Large.icns"; sourceTree = "<group>"; };
 		57DCE07713695336001569D9 /* zh-Hans */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "Resources/zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		57DCE07813695336001569D9 /* zh-Hans */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = "zh-Hans"; path = "Resources/zh-Hans.lproj/JRFeedbackProvider.strings"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		57DCE0791369533B001569D9 /* pl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = pl; path = Resources/pl.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
@@ -390,6 +392,7 @@
 		089C166AFE841209C02AAC07 /* TVShows */ = {
 			isa = PBXGroup;
 			children = (
+				57D9AF7F1370203C00A76D59 /* TVShows-Beta-Large.icns */,
 				3401816611951C9D00FB0E39 /* Models */,
 				349FEE141183597500D24FC9 /* Classes */,
 				347F1E7911AA0E54005A40AA /* External Classes */,
@@ -871,6 +874,7 @@
 				575C0D5A136A487A005DE73D /* VERSION in Resources */,
 				5755750F136DC9E5006D1FC9 /* TVShows-Menu-Icon-White.png in Resources */,
 				57557510136DC9E5006D1FC9 /* TVShows-Menu-Icon-Black.png in Resources */,
+				57D9AF801370203C00A76D59 /* TVShows-Beta-Large.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
