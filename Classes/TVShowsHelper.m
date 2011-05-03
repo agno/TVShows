@@ -291,6 +291,7 @@
 - (IBAction) quitHelper:(id)sender
 {
     [[[PreferencesController new] autorelease] enabledControlDidChange:NO];
+    [NSApp terminate];
 }
 
 #pragma mark -
