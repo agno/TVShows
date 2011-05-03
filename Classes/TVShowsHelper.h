@@ -19,13 +19,32 @@
 
 @interface TVShowsHelper : NSObject <GrowlApplicationBridgeDelegate>
 {
+    NSTimer *mainLoop;
     NSData *TVShowsHelperIcon;
+    IBOutlet NSStatusItem *statusItem;
+    IBOutlet NSMenu *statusMenu;
+    IBOutlet NSMenuItem *lastUpdateItem;
 }
 
+@property (retain) NSTimer *mainLoop;
 @property (retain) NSData *TVShowsHelperIcon;
 
-- (void) applicationDidFinishLaunching:(NSNotification *)notification;
+- (void) runLoop;
+- (void) checkAllShows;
 - (void) checkForNewEpisodes:(NSArray *)show;
+
+#pragma mark -
+#pragma mark Status Menu
+
+- (void) activateStatusMenu;
+- (void) updateLastCheckedItem;
+- (IBAction) checkNow:(id)sender;
+- (IBAction) openApplication:(id)sender;
+- (IBAction) showSubscriptions:(id)sender;
+- (IBAction) showPreferences:(id)sender;
+- (IBAction) showAbout:(id)sender;
+- (IBAction) showFeedback:(id)sender;
+- (IBAction) quitHelper:(id)sender;
 
 #pragma mark -
 #pragma mark Download Methods
@@ -34,6 +53,5 @@
 #pragma mark -
 #pragma mark Sparkle Delegate Methods
 - (void) updater:(SUUpdater *)updater didFindValidUpdate:(SUAppcastItem *)update;
-- (void) updaterDidNotFindUpdate:(SUUpdater *)update;
 
 @end

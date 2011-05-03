@@ -109,7 +109,7 @@
         modalDelegate: nil
        didEndSelector: nil
           contextInfo: nil];
-
+    
     // Only download the show list once per session
     if(hasDownloadedList == NO) {
         [self downloadTorrentShowList];
@@ -179,7 +179,7 @@
     NSString *displayName, *sortName;
     int showrssID;
     
-    // This rest of this method is extremely messy but it works for the time being
+    // The rest of this method is extremely messy but it works for the time being
     // Feel free to improve it if you find a way
     
     // Download the page containing the show list

@@ -36,12 +36,12 @@
     
     IBOutlet NSButton *autoOpenDownloadedFiles;
     IBOutlet NSButton *autoSelectHDVersion;
-
+    
     // Growl Settings
     IBOutlet NSTextField *growlNotifyText;
     IBOutlet NSButton *growlNotifyEpisode;
     IBOutlet NSButton *growlNotifyApplication;
-
+    
     // Application Update Preferences
     IBOutlet NSButton *checkNowButton;
     IBOutlet NSButton *checkForUpdates;

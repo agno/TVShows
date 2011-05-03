@@ -22,6 +22,4 @@
 + (id) sharedUpdater;
 - (id) init;
 
-- (void) delayUntilCheck:(NSTimeInterval)delayUntilCheck;
-
 @end

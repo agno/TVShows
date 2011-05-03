@@ -14,6 +14,7 @@
 
 #import "AppInfoConstants.h"
 #import "TVShowsHelper.h"
+#import "PreferencesController.h"
 #import "TSParseXMLFeeds.h"
 #import "TSUserDefaults.h"
 #import "SubscriptionsDelegate.h"
@@ -23,11 +24,13 @@
 
 @implementation TVShowsHelper
 
-@synthesize TVShowsHelperIcon;
+@synthesize mainLoop, TVShowsHelperIcon;
 
 - init
 {
     if((self = [super init])) {
+        mainLoop = nil;
+        
         NSMutableString *appPath = [NSMutableString stringWithString:[[NSBundle bundleForClass:[self class]] bundlePath] ];
         [appPath replaceOccurrencesOfString:@"TVShowsHelper.app"
                                  withString:@""
@@ -41,61 +44,141 @@
     return self;
 }
 
-- (void) applicationDidFinishLaunching:(NSNotification *)notification
+- (void) awakeFromNib
 {
     // This should never happen, but let's make sure TVShows is enabled before continuing.
-    if ([TSUserDefaults getBoolFromKey:@"isEnabled" withDefault:1]) {
+    if ([TSUserDefaults getBoolFromKey:@"isEnabled" withDefault:YES]) {
         
         // Set up Growl notifications
         [GrowlApplicationBridge setGrowlDelegate:self];
         
-        // TVShows is enabled, continuing...
-        id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
+        [self activateStatusMenu];
         
-        NSManagedObjectContext *context = [delegateClass managedObjectContext];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Subscription" inManagedObjectContext:context];
-        NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
-        [request setEntity:entity];
-        
-        NSError *error = nil;
-        NSArray *results = [context executeFetchRequest:request error:&error];
-        
-        if (error != nil) {
-            LogError(@"%@",[error description]);
-        } else {
-            
-            // No error occurred so check for new episodes
-            LogInfo(@"Checking for new episodes.");
-            for (NSArray *show in results) {
-                
-                // Don't download unless it's been at least 15minutes (or close to it)
-//              NSNumber *lastDownloaded = [NSNumber numberWithDouble:[[show valueForKey:@"lastDownloaded"] timeIntervalSinceNow]];
-//              NSNumber *timeLimit = [NSNumber numberWithInt:-15*60+10];
-                
-//              if ([lastDownloaded compare:timeLimit] == NSOrderedAscending) {
-                    
-                    // Only check for new episodes if it's enabled.
-                    if ([show valueForKey:@"isEnabled"]) {
-//                        LogDebug(@"Checking for new episodes of %@.", [show valueForKey:@"name"]);
-                        [self checkForNewEpisodes:show];
-                    }
-//              }
-                
-            }
-            
-        }
-        
-        // Now that everything is done, update the time our last check was made.
-        [TSUserDefaults setKey:@"lastCheckedForEpisodes" fromDate:[NSDate date]];
-        
-        [delegateClass saveAction];
-        [delegateClass release];
+        [self checkNow:nil];
         
     } else {
         // TVShows is not enabled.
         LogWarning(@"The TVShowsHelper was run even though TVShows is not enabled. Quitting.");
+        [self quitHelper:nil];
     }
+}
 
+- (void) runLoop
+{
+    NSInteger delay;
+    NSTimeInterval seconds;
+    delay = [TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:0];
+    
+    switch (delay) {
+        case 0:
+            // 15 minutes
+            seconds = 15*60;
+            break;
+        case 1:
+            // 30 minutes
+            seconds = 30*60;
+            break;
+        case 2:
+            // 1 hour
+            seconds = 1*60*60;
+            break;
+        case 3:
+            // 3 hours
+            seconds = 3*60*60;
+            break;
+        case 4:
+            // 6 hours
+            seconds = 6*60*60;
+            break;
+        case 5:
+            // 12 hours
+            seconds = 12*60*60;
+            break;
+        case 6:
+            // 1 day
+            seconds = 24*60*60;
+            break;
+        default:
+            // 15 minutes
+            seconds = 15*60;
+    }
+    
+    mainLoop = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:0.1]
+                                        interval:seconds
+                                          target:self
+                                        selector:@selector(checkAllShows)
+                                        userInfo:nil
+                                         repeats:YES];
+    
+    [[NSRunLoop currentRunLoop] addTimer:mainLoop forMode:NSDefaultRunLoopMode];
+}
+
+- (IBAction) checkNow:(id)sender
+{
+    if (mainLoop != nil) {
+        [mainLoop invalidate];
+        [mainLoop release];
+        mainLoop = nil;
+    }
+    
+    // Notify the user to give him some feedback
+    [GrowlApplicationBridge notifyWithTitle:@"TVShows"
+                                description:@"Checking for new episodes..."
+                           notificationName:@"Checking For New Episodes"
+                                   iconData:TVShowsHelperIcon
+                                   priority:0
+                                   isSticky:0
+                               clickContext:nil];
+    
+    [self runLoop];
+}
+
+- (void) checkAllShows
+{
+    // First update the menu to reflect the date
+    [self updateLastCheckedItem];
+    
+    id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
+    
+    NSManagedObjectContext *context = [delegateClass managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Subscription" inManagedObjectContext:context];
+    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+    [request setEntity:entity];
+    
+    NSError *error = nil;
+    NSArray *results = [context executeFetchRequest:request error:&error];
+    
+    if (error != nil) {
+        LogError(@"%@",[error description]);
+    } else {
+        
+        // No error occurred so check for new episodes
+        LogInfo(@"Checking for new episodes.");
+        for (NSArray *show in results) {
+            
+            // Don't download unless it's been at least 15minutes (or close to it)
+            //              NSNumber *lastDownloaded = [NSNumber numberWithDouble:[[show valueForKey:@"lastDownloaded"] timeIntervalSinceNow]];
+            //              NSNumber *timeLimit = [NSNumber numberWithInt:-15*60+10];
+            
+            //              if ([lastDownloaded compare:timeLimit] == NSOrderedAscending) {
+            
+            // Only check for new episodes if it's enabled.
+            if ([show valueForKey:@"isEnabled"]) {
+                //                        LogDebug(@"Checking for new episodes of %@.", [show valueForKey:@"name"]);
+                [self checkForNewEpisodes:show];
+            }
+            //              }
+            
+        }
+        
+    }
+    
+    // Now that everything is done, update the time our last check was made.
+    [TSUserDefaults setKey:@"lastCheckedForEpisodes" fromDate:[NSDate date]];
+    
+    [delegateClass saveAction];
+    [delegateClass release];
+    
 }
 
 - (void) checkForNewEpisodes:(NSArray *)show
@@ -143,6 +226,74 @@
 }
 
 #pragma mark -
+#pragma mark Status Menu
+- (void) activateStatusMenu
+{
+    statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength] retain];
+    
+    // Uncomment this area and fill in the name of your image<br />
+    // to add a custom icon to your status item.<br />
+    [statusItem setImage:[NSImage imageNamed:@"TVShows-Menu-Icon-Black"]];
+    [statusItem setAlternateImage:[NSImage imageNamed:@"TVShows-Menu-Icon-White"]];
+    [statusItem setEnabled:YES];
+    [statusItem setHighlightMode:YES];
+    [statusItem setTarget:self];
+    
+    [statusItem setAction:@selector(openApplication:)];
+    [statusItem setMenu:statusMenu];
+}
+
+- (void) updateLastCheckedItem
+{
+    // We have to build a localized string with the date info
+    // Prepare the date formatter
+    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setDateStyle:NSDateFormatterNoStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    // Create the string form this date
+    NSString *formattedDateString = [dateFormatter stringFromDate:[NSDate date]];
+    
+    // Finally, update the string
+    [lastUpdateItem setTitle:[TSLocalizeString(@"Last Checked:") stringByAppendingFormat:@" %@", formattedDateString]];
+}
+
+- (IBAction) openApplication:(id)sender
+{
+    BOOL success = [[NSWorkspace sharedWorkspace] openFile:
+                    [[[NSBundle bundleWithIdentifier:TVShowsAppDomain] bundlePath] stringByExpandingTildeInPath]];
+    
+    if (!success) {
+        LogError(@"Application did not open at request.");
+    }
+}
+
+- (IBAction) showSubscriptions:(id)sender
+{
+    [self openApplication:sender];
+}
+
+- (IBAction) showPreferences:(id)sender
+{
+    [self openApplication:sender];
+}
+
+- (IBAction) showAbout:(id)sender
+{
+    [self openApplication:sender];
+}
+
+- (IBAction) showFeedback:(id)sender
+{
+    [self openApplication:sender];
+}
+
+- (IBAction) quitHelper:(id)sender
+{
+    [[[PreferencesController new] autorelease] enabledControlDidChange:NO];
+}
+
+#pragma mark -
 #pragma mark Download Methods
 - (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName showInfo:(NSArray *)show
 {
@@ -183,7 +334,6 @@
     }
 }
 
-
 #pragma mark -
 #pragma mark Sparkle Delegate Methods
 - (void) updater:(SUUpdater *)updater didFindValidUpdate:(SUAppcastItem *)update
@@ -198,7 +348,7 @@
     if ([TSUserDefaults getBoolFromKey:@"SUAutomaticallyUpdate" withDefault:YES]) {
         [TSUserDefaults setKey:@"AutomaticallyInstalledLastUpdate" fromBool:YES];
         
-        if([TSUserDefaults getBoolFromKey:@"GrowlOnAppUpdate" withDefault:1]) {
+        if([TSUserDefaults getBoolFromKey:@"GrowlOnAppUpdate" withDefault:YES]) {
             [GrowlApplicationBridge notifyWithTitle:@"TVShows Update Downloading"
                                         description:@"A new version of TVShows is being downloaded and installed."
                                    notificationName:@"TVShows Update Downloaded"
@@ -207,10 +357,9 @@
                                            isSticky:0
                                        clickContext:nil];
         }
-    } else if([TSUserDefaults getBoolFromKey:@"GrowlOnAppUpdate" withDefault:1]) {
+    } else if([TSUserDefaults getBoolFromKey:@"GrowlOnAppUpdate" withDefault:YES]) {
         [GrowlApplicationBridge notifyWithTitle:@"TVShows Update Available"
                                     description:@"A new version of TVShows is available for download."
-//                                  description:@"A new version of TVShows is available for download. Click here for information."
                                notificationName:@"TVShows Update Available"
                                        iconData:TVShowsHelperIcon
                                        priority:0
@@ -219,17 +368,10 @@
     }
 }
 
-- (void) updaterDidNotFindUpdate:(SUUpdater *)update
-{
-    // We use this to help no whether or not the TVShowsHelper should close after
-    // downloading new episodes or whether it should wait for Sparkle to finish
-    // installing new updates.
-    LogDebug(@"Sparkle did not find valid update. Closing TVShows.");
-    [NSApp terminate:nil];
-}
-
 - (void) dealloc
 {
+    [mainLoop invalidate];
+    [mainLoop release];
     [TVShowsHelperIcon release];
     [super dealloc];
 }

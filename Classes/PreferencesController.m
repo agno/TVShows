@@ -24,18 +24,20 @@
 - init
 {
     if((self = [super init])) {
+        #if PREFPANE
         // Set default user preferences if TVShows has never launched
         // In a perfect world this would check for any keys that don't
         // exist, regardless of whether we've launched before or not.
         
-        if ([TSUserDefaults getBoolFromKey:@"hasLaunched" withDefault:0] == 0) {
+        if ([TSUserDefaults getBoolFromKey:@"hasLaunched" withDefault:NO] == NO) {
             [self setDefaultUserDefaults];
             [self saveLaunchAgentPlist];
             [self loadLaunchAgent];
         } else {
             // This user has already run TVShows before, so only update the LaunchAgent.
-            [self updateLaunchAgent];   
+            [self updateLaunchAgent];
         }
+        #endif
     }
     
     return self;
@@ -43,8 +45,10 @@
 
 - (void) awakeFromNib
 {
+    #if PREFPANE
     // Load the user's preferences
     [self loadSavedDefaults];
+    #endif
 }
 
 - (void) setDefaultUserDefaults
@@ -67,76 +71,71 @@
 - (void) loadSavedDefaults
 {
     // Localize section headings
-    [downloadBoxTitle   setTitle: TSLocalizeString(@"Download Preferences")];
-    [growlBoxTitle      setTitle: TSLocalizeString(@"Growl Settings")];
-    [updateBoxTitle     setTitle: TSLocalizeString(@"Application Update Preferences")];
+    [downloadBoxTitle   setTitle:TSLocalizeString(@"Download Preferences")];
+    [growlBoxTitle      setTitle:TSLocalizeString(@"Growl Settings")];
+    [updateBoxTitle     setTitle:TSLocalizeString(@"Application Update Preferences")];
     
-    if ([TSUserDefaults getBoolFromKey:@"isEnabled" withDefault:1]) {
-        [isEnabledControl setState: NSOnState];
-//      [TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
-//                                   [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
-//                                    pathForResource: @"TVShows-Beta-Large" ofType: @"icns"]] autorelease]];
+    // Set slider state
+    if ([TSUserDefaults getBoolFromKey:@"isEnabled" withDefault:YES]) {
+        [isEnabledControl setState:NSOnState];
     } else {
-        [isEnabledControl setState: NSOffState];
-//      [TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
-//                                   [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
-//                                    pathForResource: @"TVShows-Off-Large" ofType: @"icns"]] autorelease]];
+        [isEnabledControl setState:NSOffState];
     }
     
     // Automatically open downloaded files
-    [autoOpenDownloadedFiles setTitle: TSLocalizeString(@"Automatically open each file after download")];
-    [autoOpenDownloadedFiles setState: [TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]];
+    [autoOpenDownloadedFiles setTitle:TSLocalizeString(@"Automatically open each file after download")];
+    [autoOpenDownloadedFiles setState:[TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:YES]];
     
     // Automatically select HD version by default
-    [autoSelectHDVersion setTitle: TSLocalizeString(@"Download HD versions by default")];
-    [autoSelectHDVersion setState: [TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:1]];
+    [autoSelectHDVersion setTitle:TSLocalizeString(@"Download HD versions by default")];
+    [autoSelectHDVersion setState:[TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:YES]];
     
     // Check for new episodes every...
-    [episodeCheckText setStringValue: TSLocalizeString(@"Check for episodes every:")];
-    [episodeCheckDelay selectItemAtIndex: [TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:0]];
-    [[episodeCheckDelay itemAtIndex: 0] setTitle: TSLocalizeString(@"15 minutes")];
-    [[episodeCheckDelay itemAtIndex: 1] setTitle: TSLocalizeString(@"30 minutes")];
-    [[episodeCheckDelay itemAtIndex: 2] setTitle: TSLocalizeString(@"1 hour")];
-    [[episodeCheckDelay itemAtIndex: 3] setTitle: TSLocalizeString(@"3 hours")];
-    [[episodeCheckDelay itemAtIndex: 4] setTitle: TSLocalizeString(@"6 hours")];
-    [[episodeCheckDelay itemAtIndex: 5] setTitle: TSLocalizeString(@"12 hours")];
-    [[episodeCheckDelay itemAtIndex: 6] setTitle: TSLocalizeString(@"1 day")];
+    [episodeCheckText setStringValue:TSLocalizeString(@"Check for episodes every:")];
+    [episodeCheckDelay selectItemAtIndex:[TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:0]];
+    [[episodeCheckDelay itemAtIndex:0] setTitle:TSLocalizeString(@"15 minutes")];
+    [[episodeCheckDelay itemAtIndex:1] setTitle:TSLocalizeString(@"30 minutes")];
+    [[episodeCheckDelay itemAtIndex:2] setTitle:TSLocalizeString(@"1 hour")];
+    [[episodeCheckDelay itemAtIndex:3] setTitle:TSLocalizeString(@"3 hours")];
+    [[episodeCheckDelay itemAtIndex:4] setTitle:TSLocalizeString(@"6 hours")];
+    [[episodeCheckDelay itemAtIndex:5] setTitle:TSLocalizeString(@"12 hours")];
+    [[episodeCheckDelay itemAtIndex:6] setTitle:TSLocalizeString(@"1 day")];
     
     // Default save location
-    [downloadLocationText setStringValue: TSLocalizeString(@"Episode save location:")];
+    [downloadLocationText setStringValue:TSLocalizeString(@"Episode save location:")];
     [self buildDownloadLocationMenu];
     
     // Notify when a new episode is downloaded
-    [growlNotifyText setStringValue: TSLocalizeString(@"Send Growl notifications when…")];
-    [growlNotifyEpisode setTitle: TSLocalizeString(@"… a new episode is downloaded.")];
-    [growlNotifyEpisode setState: [TSUserDefaults getBoolFromKey:@"GrowlOnNewEpisode" withDefault:1]];
+    [growlNotifyText setStringValue:TSLocalizeString(@"Send Growl notifications when…")];
+    [growlNotifyEpisode setTitle:TSLocalizeString(@"… a new episode is downloaded.")];
+    [growlNotifyEpisode setState:[TSUserDefaults getBoolFromKey:@"GrowlOnNewEpisode" withDefault:YES]];
     
     // Notify when a TVShows update is released
-    [growlNotifyApplication setTitle: TSLocalizeString(@"… a new version of TVShows is released.")];
-    [growlNotifyApplication setState: [TSUserDefaults getBoolFromKey:@"GrowlOnAppUpdate" withDefault:1]];
+    [growlNotifyApplication setTitle:TSLocalizeString(@"… a new version of TVShows is released.")];
+    [growlNotifyApplication setState:[TSUserDefaults getBoolFromKey:@"GrowlOnAppUpdate" withDefault:YES]];
     
     // Automatically check for new updates
-    [checkForUpdates setTitle: TSLocalizeString(@"Automatically check for updates")];
-    if ([TSUserDefaults getBoolFromKey:@"SUEnableAutomaticChecks" withDefault:1] == 0) {
-        [checkForUpdates            setState: 0];
-        [autoInstallNewUpdates      setEnabled: NO];
-        [includeSystemInformation   setEnabled: NO];
-        [downloadBetaVersions       setEnabled: NO];
+    [checkForUpdates setTitle:TSLocalizeString(@"Automatically check for updates")];
+    if ([TSUserDefaults getBoolFromKey:@"SUEnableAutomaticChecks" withDefault:YES] == NO) {
+        [checkForUpdates            setState:0];
+        [autoInstallNewUpdates      setEnabled:NO];
+        [includeSystemInformation   setEnabled:NO];
+        [downloadBetaVersions       setEnabled:NO];
     }
     // Automatically install new updates
-    [autoInstallNewUpdates setTitle: TSLocalizeString(@"Automatically install new updates")];
-    [autoInstallNewUpdates setState: [TSUserDefaults getBoolFromKey:@"SUAutomaticallyUpdate" withDefault:1]];
+    [autoInstallNewUpdates setTitle:TSLocalizeString(@"Automatically install new updates")];
+    [autoInstallNewUpdates setState:[TSUserDefaults getBoolFromKey:@"SUAutomaticallyUpdate" withDefault:YES]];
     
     // Download beta versions of TVShows
-    [downloadBetaVersions setTitle: TSLocalizeString(@"Download beta versions when available")];
-    [downloadBetaVersions setState: [TSUserDefaults getBoolFromKey:@"SUDownloadBetaVersions" withDefault:1]];
+    [downloadBetaVersions setTitle:TSLocalizeString(@"Download beta versions when available")];
+    [downloadBetaVersions setState:[TSUserDefaults getBoolFromKey:@"SUDownloadBetaVersions" withDefault:NO]];
     
     // Include anonymous system information
-    [includeSystemInformation setTitle: TSLocalizeString(@"Include anonymous system information")];
-    [includeSystemInformation setState: [TSUserDefaults getBoolFromKey:@"SUSendProfileInfo" withDefault:1]];
+    [includeSystemInformation setTitle:TSLocalizeString(@"Include anonymous system information")];
+    [includeSystemInformation setState:[TSUserDefaults getBoolFromKey:@"SUSendProfileInfo" withDefault:YES]];
     
     // Check Now button
-    [checkNowButton setTitle: TSLocalizeString(@"Check Now")];
+    [checkNowButton setTitle:TSLocalizeString(@"Check Now")];
 }
 
 #pragma mark -
@@ -144,26 +143,19 @@
 - (void) enabledControlDidChange:(BOOL)isEnabled
 {
     if (isEnabled) {
-        [TSUserDefaults setKey:@"isEnabled" fromBool: 1];
-        
-        [TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
-                                     [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
-                                      pathForResource: @"TVShows-Beta-Large" ofType: @"icns"]] autorelease]];
+        [TSUserDefaults setKey:@"isEnabled" fromBool: YES];
         [self saveLaunchAgentPlist];
         [self loadLaunchAgent];
     } else {
-        [TSUserDefaults setKey:@"isEnabled" fromBool: 0];
-        
-        [TVShowsAppImage setImage: [[[NSImage alloc] initWithContentsOfFile:
-                                     [[NSBundle bundleWithIdentifier: TVShowsAppDomain]
-                                      pathForResource: @"TVShows-Off-Large" ofType: @"icns"]] autorelease]];
+        [TSUserDefaults setKey:@"isEnabled" fromBool: NO];
+        [self saveLaunchAgentPlist];
         [self unloadLaunchAgent];
     }
 }
 
 - (IBAction) episodeCheckDelayDidChange:(id)sender
 {
-    [TSUserDefaults setKey:@"checkDelay" fromFloat: [episodeCheckDelay indexOfSelectedItem]];
+    [TSUserDefaults setKey:@"checkDelay" fromFloat:[episodeCheckDelay indexOfSelectedItem]];
     [self updateLaunchAgent];
 }
 
@@ -171,8 +163,8 @@
 // Original version: http://hg.adium.im/adium/file/tip/Source/ESFileTransferPreferences.m
 - (void) buildDownloadLocationMenu
 {
-    [downloadLocationMenu setMenu: [self downloadLocationMenu]];
-    [downloadLocationMenu selectItem: [downloadLocationMenu itemAtIndex:0]];
+    [downloadLocationMenu setMenu:[self downloadLocationMenu]];
+    [downloadLocationMenu selectItem:[downloadLocationMenu itemAtIndex:0]];
 }
 
 - (NSMenu *) downloadLocationMenu
@@ -187,10 +179,10 @@
     
     // Create the menu item for the current download folder
     userPreferredDownloadFolder = [TSUserDefaults getStringFromKey:@"downloadFolder"];
-    menuItem = [[[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle: [[NSFileManager defaultManager] displayNameAtPath:userPreferredDownloadFolder]
-                                                                     action: nil
-                                                              keyEquivalent: @""] autorelease];
-
+    menuItem = [[[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle:[[NSFileManager defaultManager] displayNameAtPath:userPreferredDownloadFolder]
+                                                                     action:nil
+                                                              keyEquivalent:@""] autorelease];
+    
     // Get the download folder's icon and resize it
     iconForDownloadFolder = [[NSWorkspace sharedWorkspace] iconForFile:userPreferredDownloadFolder];
     [iconForDownloadFolder setSize:NSMakeSize(16, 16)];
@@ -202,7 +194,7 @@
     [menu addItem:[NSMenuItem separatorItem]];
     
     // Create the menu item for changing the current download folder
-    menuItem = [[[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle:@"Other..."
+    menuItem = [[[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle:TSLocalizeString(@"Other...")
                                                                      action:@selector(selectOtherDownloadFolder:)
                                                               keyEquivalent:@""] autorelease];
     [menuItem setTarget:self];
@@ -240,24 +232,24 @@
 
 - (IBAction) autoOpenDownloadedFilesDidChange:(id)sender
 {
-    [TSUserDefaults setKey:@"AutoOpenDownloadedFiles" fromBool: [autoOpenDownloadedFiles state]];
+    [TSUserDefaults setKey:@"AutoOpenDownloadedFiles" fromBool:[autoOpenDownloadedFiles state]];
 }
 
 - (IBAction) autoSelectHDVersionDidChange:(id)sender
 {
-    [TSUserDefaults setKey:@"AutoSelectHDVersion" fromBool: [autoSelectHDVersion state]];
+    [TSUserDefaults setKey:@"AutoSelectHDVersion" fromBool:[autoSelectHDVersion state]];
 }
 
 #pragma mark -
 #pragma mark Growl Notification Preferences
 - (IBAction) growlNotifyEpisodeDidChange:(id)sender
 {
-    [TSUserDefaults setKey:@"GrowlOnNewEpisode" fromBool: [growlNotifyEpisode state]];
+    [TSUserDefaults setKey:@"GrowlOnNewEpisode" fromBool:[growlNotifyEpisode state]];
 }
 
 - (IBAction) growlNotifyApplicationDidChange:(id)sender
 {
-    [TSUserDefaults setKey:@"GrowlOnAppUpdate" fromBool: [growlNotifyApplication state]];
+    [TSUserDefaults setKey:@"GrowlOnAppUpdate" fromBool:[growlNotifyApplication state]];
 }
 
 #pragma mark -
@@ -265,13 +257,13 @@
 - (IBAction) checkForUpdatesDidChange:(id)sender
 {
     if ([checkForUpdates state]) {
-        [TSUserDefaults setKey:@"SUEnableAutomaticChecks" fromBool: 1];
+        [TSUserDefaults setKey:@"SUEnableAutomaticChecks" fromBool:YES];
         
         [autoInstallNewUpdates setEnabled: YES];
         [includeSystemInformation setEnabled: YES];
         [downloadBetaVersions setEnabled: YES];
     } else {
-        [TSUserDefaults setKey:@"SUEnableAutomaticChecks" fromBool: 0];
+        [TSUserDefaults setKey:@"SUEnableAutomaticChecks" fromBool:NO];
         
         [autoInstallNewUpdates setEnabled: NO];
         [includeSystemInformation setEnabled: NO];
@@ -312,16 +304,16 @@
 
 - (void) unloadLaunchAgent
 {
-    // Unload and delete the old LaunchAgent if it exists.
+    // Unload the old LaunchAgent if it exists.
     if ( [[NSFileManager defaultManager] fileExistsAtPath:[self launchAgentPath]] ) {
         NSTask *aTask = [[NSTask alloc] init];
         [aTask setLaunchPath:@"/bin/launchctl"];
         [aTask setArguments:[NSArray arrayWithObjects:@"unload",@"-w",[self launchAgentPath],nil]];
-        [aTask launchPath];
-//      [aTask waitUntilExit];
+        [aTask launch];
+        #if PREFPANE
+        [aTask waitUntilExit];
+        #endif
         [aTask release];
-        
-        [[NSFileManager defaultManager] removeItemAtPath:[self launchAgentPath] error:nil];
     }
 }
 
@@ -335,8 +327,8 @@
     // Loads the LaunchAgent.
     NSTask *aTask = [[NSTask alloc] init];
     [aTask setLaunchPath:@"/bin/launchctl"];
-    [aTask setArguments:[NSArray arrayWithObjects:@"load",@"-wF",[self launchAgentPath],nil]];
-    [aTask launchPath];
+    [aTask setArguments:[NSArray arrayWithObjects:@"load",@"-w",[self launchAgentPath],nil]];
+    [aTask launch];
     [aTask waitUntilExit];
     [aTask release];
 }
@@ -350,6 +342,9 @@
 
 - (void) saveLaunchAgentPlist
 {
+    // Delete the old plist.
+    [[NSFileManager defaultManager] removeItemAtPath:[self launchAgentPath] error:nil];
+    
     // Create an NSDictionary for saving into a LaunchAgent plist.
     NSMutableDictionary *launchAgent = [NSMutableDictionary dictionary];
     
@@ -357,57 +352,25 @@
     [launchAgent setObject:TVShowsHelperDomain forKey:@"Label"];
     
     // Program: Tells launchd the location of the program to launch.
-    [launchAgent setObject:[[[NSBundle bundleWithIdentifier: TVShowsAppDomain] 
+    [launchAgent setObject:[[[NSBundle bundleWithIdentifier: TVShowsAppDomain]
                              pathForResource: @"TVShowsHelper" ofType: @"app"]
                             stringByAppendingPathComponent:@"Contents/MacOS/TVShowsHelper"]
                     forKey:@"Program"];
-    
-    // StartInterval: Causes the job to be started every N seconds.
-    NSInteger checkDelay = [TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:0];
-    switch (checkDelay) {
-        case 0:
-            // 15 minutes
-            [launchAgent setObject:[NSNumber numberWithInt:15*60] forKey:@"StartInterval"];
-            break;
-        case 1:
-            // 30 minutes
-            [launchAgent setObject:[NSNumber numberWithInt:30*60] forKey:@"StartInterval"];
-            break;
-        case 2:
-            // 1 hour
-            [launchAgent setObject:[NSNumber numberWithInt:1*60*60] forKey:@"StartInterval"];
-            break;
-        case 3:
-            // 3 hours
-            [launchAgent setObject:[NSNumber numberWithInt:3*60*60] forKey:@"StartInterval"];
-            break;
-        case 4:
-            // 6 hours
-            [launchAgent setObject:[NSNumber numberWithInt:6*60*60] forKey:@"StartInterval"];
-            break;
-        case 5:
-            // 12 hours
-            [launchAgent setObject:[NSNumber numberWithInt:12*60*60] forKey:@"StartInterval"];
-            break;
-        case 6:
-            // 1 day
-            [launchAgent setObject:[NSNumber numberWithInt:24*60*60] forKey:@"StartInterval"];
-            break;
-    }
     
     // RunAtLoad: Controls whether your job is launched immediately after the job is loaded.
     [launchAgent setObject:[NSNumber numberWithBool:YES] forKey:@"RunAtLoad"];
     
     // Disabled: Controls whether the job is disabled; somewhat deprecated.
-    [launchAgent setObject:[NSNumber numberWithBool:NO] forKey:@"Disabled"];
+    [launchAgent setObject:[NSNumber numberWithBool:![TSUserDefaults getBoolFromKey:@"isEnabled" withDefault:YES]] forKey:@"Disabled"];
     
     // LowPriorityIO: Specifies whether the daemon is low priority when doing file system I/O.
     [launchAgent setObject:[NSNumber numberWithBool:YES] forKey:@"LowPriorityIO"];
     
-    // ThrottleInterval: Limits the time (in seconds) between program launches.
-    [launchAgent setObject:[NSNumber numberWithInt:10*60] forKey:@"ThrottleInterval"];
+    // LaunchOnlyOnce: Avoid launching more than once.
+    [launchAgent setObject:[NSNumber numberWithBool:YES] forKey:@"LaunchOnlyOnce"];
     
-    if (![launchAgent writeToFile:[self launchAgentPath] atomically:YES])
+    if (![launchAgent writeToFile:[self launchAgentPath] atomically:YES]) {
         LogCritical(@"Could not write to ~/Library/LaunchAgents/%@",TVShowsHelperDomain);
+    }
 }
 @end
