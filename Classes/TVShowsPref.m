@@ -40,6 +40,14 @@
                               valueForKey:@"CFBundleVersion"];
     NSString *installedBuild = [TSUserDefaults getStringFromKey:@"installedBuild"];
     
+    // Uninstall previous versions crap if present
+    [self uninstallPreviousVersions];
+    
+    // If detected that the user is using catalan, try to fix it
+    if ([[[[NSLocale currentLocale] localeIdentifier] substringToIndex:2] isEqualToString:@"ca"]) {
+        [self fixCatalan];
+    }
+    
     // Check to see if we installed a different version, both updates and rollbacks.
     if ([buildVersion intValue] > [installedBuild intValue]) {
         
@@ -53,11 +61,6 @@
             [TSUserDefaults setKey:@"AutomaticallyInstalledLastUpdate" fromBool:NO];
             
             [self displayUpdateWindowForVersion:installedBuild];
-        }
-        
-        // If detected that the user is using catalan, try to fix it
-        if ([[[[NSLocale currentLocale] localeIdentifier] substringToIndex:2] isEqualToString:@"ca"]) {
-            [self fixCatalan];
         }
         
         // Relaunch System Preferences so that we know all the resources have been reloaded
@@ -125,6 +128,64 @@
         LogInfo(@"Fixing the catalan localization for System Preferences.app");
         [[[[NSAppleScript alloc] initWithSource:[NSString stringWithFormat:@"display dialog \"La aplicación Preferencias del Sistema no está traducida al Catalán, así que TVShows necesita arreglarla para que se pueda mostrar en tu idioma.\n\nPor favor introduce tu contraseña en la siguiente ventana para que podamos arreglarla.\"\ndo shell script \"sudo /usr/bin/env ln -s \\\"%@\\\" \\\"%@\\\"\" with administrator privileges", original, link]] autorelease] executeAndReturnError:nil];
     }
+}
+
+- (void) uninstallPreviousVersions
+{
+    NSString *tvshowsLaunchAgent = [@"~/Library/LaunchAgents/net.sourceforge.tvshows.plist" stringByExpandingTildeInPath];
+    NSString *tvshows2LaunchAgent = [@"~/Library/LaunchAgents/com.embercode.TVShowsHelper.plist"stringByExpandingTildeInPath];
+    NSString *tvshowsPreferences = [@"~/Library/Preferences/net.sourceforge.tvshows.plist" stringByExpandingTildeInPath];
+    NSString *tvshows2Preferences = [@"~/Library/Preferences/com.embercode.TVShows2.plist" stringByExpandingTildeInPath];
+    NSString *tvshowsAppSupport = [@"~/Library/Application\\ Support/TVShows" stringByExpandingTildeInPath];
+    NSString *tvshows2AppCache = [@"~/Library/Caches/com.embercode.TVShowsHelper" stringByExpandingTildeInPath];
+    
+    // Unload and remove the TVShows 0.4 LaunchAgent if it exists, with all the preferences
+    if ([[NSFileManager defaultManager] fileExistsAtPath:tvshowsLaunchAgent]) {
+        LogInfo(@"Removing %@...", tvshowsLaunchAgent);
+        [self unloadPlist:tvshowsLaunchAgent];
+        [[NSFileManager defaultManager] removeItemAtPath:tvshowsLaunchAgent error:nil];
+    }
+    
+    // Remove the old TVShows 0.4 preference plist if it exists
+    if ([[NSFileManager defaultManager] fileExistsAtPath:tvshowsPreferences]) {
+        LogInfo(@"Removing %@...", tvshowsPreferences);
+        [[NSFileManager defaultManager] removeItemAtPath:tvshowsPreferences error:nil];
+    }
+    
+    // Remove the old TVShows 0.4 support folder if it exists
+    if ([[NSFileManager defaultManager] fileExistsAtPath:tvshowsAppSupport]) {
+        LogInfo(@"Removing %@...", tvshowsAppSupport);
+        [[NSFileManager defaultManager] removeItemAtPath:tvshowsAppSupport error:nil];
+    }
+    
+    // Unload and remove the old TVShows 2 LaunchAgent if it exists
+    if ([[NSFileManager defaultManager] fileExistsAtPath:tvshows2LaunchAgent]) {
+        LogInfo(@"Removing %@...", tvshows2LaunchAgent);
+        [self unloadPlist:tvshows2LaunchAgent];
+        [[NSFileManager defaultManager] removeItemAtPath:tvshows2LaunchAgent error:nil];
+    }
+    
+    // Remove the old TVShows 2 preference plist if it exists
+    if ([[NSFileManager defaultManager] fileExistsAtPath:tvshows2Preferences]) {
+        LogInfo(@"Removing %@...", tvshows2Preferences);
+        [[NSFileManager defaultManager] removeItemAtPath:tvshows2Preferences error:nil];
+    }
+    
+    // Remove the old TVShows 2 cache folder if it exists
+    if ([[NSFileManager defaultManager] fileExistsAtPath:tvshows2AppCache]) {
+        LogInfo(@"Removing %@...", tvshows2AppCache);
+        [[NSFileManager defaultManager] removeItemAtPath:tvshows2AppCache error:nil];
+    }
+}
+
+- (void) unloadPlist:(NSString*)aPath
+{
+    NSTask *aTask = [[NSTask alloc] init];
+    [aTask setLaunchPath:@"/bin/launchctl"];
+    [aTask setArguments:[NSArray arrayWithObjects:@"unload",@"-w",aPath,nil]];
+    [aTask launch];
+    [aTask waitUntilExit];
+    [aTask release];
 }
 
 - (void) dealloc

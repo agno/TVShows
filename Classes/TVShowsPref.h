@@ -29,6 +29,8 @@
 - (IBAction) closeUpdateWindow:(id)sender;
 - (void) relaunch:(id)sender;
 - (void) fixCatalan;
+- (void) uninstallPreviousVersions;
+- (void) unloadPlist:(NSString*)aPath;
 - (IBAction) openMoreInfoURL:(id)sender;
 
 @end
