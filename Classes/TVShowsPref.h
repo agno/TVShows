@@ -28,7 +28,8 @@
 - (void) displayUpdateWindowForVersion:(NSString *)oldBuild;
 - (IBAction) closeUpdateWindow:(id)sender;
 - (void) relaunch:(id)sender;
-- (void) fixCatalan;
+- (BOOL) fixUnsupportedLanguages;
+- (BOOL) fixUnsupportedLanguage:(NSString *)aLang withFallback:(NSString *)anotherLang withMessage:(NSString *)aMessage;
 - (void) uninstallPreviousVersions;
 - (void) unloadPlist:(NSString*)aPath;
 - (IBAction) openMoreInfoURL:(id)sender;

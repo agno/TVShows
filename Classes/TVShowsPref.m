@@ -43,10 +43,8 @@
     // Uninstall previous versions crap if present
     [self uninstallPreviousVersions];
     
-    // If detected that the user is using catalan, try to fix it
-    if ([[[[NSLocale currentLocale] localeIdentifier] substringToIndex:2] isEqualToString:@"ca"]) {
-        [self fixCatalan];
-    }
+    // Try to fix languages not supported in System Preferences but supported by TVShows
+    BOOL needsRelaunch = [self fixUnsupportedLanguages];
     
     // Check to see if we installed a different version, both updates and rollbacks.
     if ([buildVersion intValue] > [installedBuild intValue]) {
@@ -65,8 +63,12 @@
         
         // Relaunch System Preferences so that we know all the resources have been reloaded
         // correctly. This is due to a bug in how it handles updating bundles.
+        needsRelaunch = YES;
+    }
+    
+    // Relaunch if needed
+    if (needsRelaunch) {
         [self relaunch:nil];
-        
     }
 }
 
@@ -114,20 +116,48 @@
     [NSApp terminate:sender];
 }
 
-- (void) fixCatalan
+- (BOOL) fixUnsupportedLanguages
 {
     // There is a problem with the catalan localization (and I'm sure there are a lot more)
     // Since the System Preferences.app is not localized into that language, no preference pane can be localized to catalan
     // A quick and dirty fix is deceiving System Preferences.app by linking the missing localization to a fallback language
     // Then the panel is shown in this fallback localization (as before), but our app is shown in this other language
     // The only problem with this solution is that we have to ask for admin privileges
-    NSString *link = @"/Applications/System Preferences.app/Contents/Resources/ca.lproj";
-    NSString *original = @"/Applications/System Preferences.app/Contents/Resources/Spanish.lproj";
+    NSString *locale = [[[NSLocale currentLocale] localeIdentifier] substringToIndex:2];
     
-    if (![[NSFileManager defaultManager] fileExistsAtPath:link]) {
-        LogInfo(@"Fixing the catalan localization for System Preferences.app");
-        [[[[NSAppleScript alloc] initWithSource:[NSString stringWithFormat:@"display dialog \"La aplicación Preferencias del Sistema no está traducida al Catalán, así que TVShows necesita arreglarla para que se pueda mostrar en tu idioma.\n\nPor favor introduce tu contraseña en la siguiente ventana para que podamos arreglarla.\"\ndo shell script \"sudo /usr/bin/env ln -s \\\"%@\\\" \\\"%@\\\"\" with administrator privileges", original, link]] autorelease] executeAndReturnError:nil];
+    // Fix catalan
+    if ([locale isEqualToString:@"ca"]) {
+        return [self fixUnsupportedLanguage:@"ca" withFallback:@"Spanish" withMessage:@"La aplicación Preferencias del Sistema no está traducida al Catalán, así que TVShows necesita arreglarla para que se pueda mostrar en tu idioma.\n\nPor favor introduce tu contraseña en la siguiente ventana para que podamos arreglarla."];
+    } else if ([locale isEqualToString:@"gl"]) {
+        return [self fixUnsupportedLanguage:@"gl" withFallback:@"Spanish" withMessage:@"La aplicación Preferencias del Sistema no está traducida al Gallego, así que TVShows necesita arreglarla para que se pueda mostrar en tu idioma.\n\nPor favor introduce tu contraseña en la siguiente ventana para que podamos arreglarla."];
+    } else if ([locale isEqualToString:@"cs"]) {
+        return [self fixUnsupportedLanguage:@"cs" withFallback:@"English" withMessage:@"System Preferences is not translated to Czech, so TVShows needs to fix it to be able to show the application in your language.\n\nPlease provide your password in the window wo we can fix it."];
+    } else if ([locale isEqualToString:@"et"]) {
+        return [self fixUnsupportedLanguage:@"et" withFallback:@"English" withMessage:@"System Preferences is not translated to Estonian, so TVShows needs to fix it to be able to show the application in your language.\n\nPlease provide your password in the window wo we can fix it."];
+    } else if ([locale isEqualToString:@"is"]) {
+        return [self fixUnsupportedLanguage:@"is" withFallback:@"English" withMessage:@"System Preferences is not translated to Icelandic, so TVShows needs to fix it to be able to show the application in your language.\n\nPlease provide your password in the window wo we can fix it."];
+    } else if ([locale isEqualToString:@"tr"]) {
+        return [self fixUnsupportedLanguage:@"tr" withFallback:@"English" withMessage:@"System Preferences is not translated to Turkish, so TVShows needs to fix it to be able to show the application in your language.\n\nPlease provide your password in the window wo we can fix it."];
     }
+    
+    return NO;
+}
+
+- (BOOL) fixUnsupportedLanguage:(NSString *)aLang withFallback:(NSString *)anotherLang withMessage:(NSString *)aMessage
+{
+    NSString *link = @"/Applications/System Preferences.app/Contents/Resources/%@.lproj";
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:link, aLang]]) {
+        LogInfo(@"Fixing the %@ localization for System Preferences.app", aLang);
+        [[[[NSAppleScript alloc] initWithSource:[NSString stringWithFormat:@"display dialog \"%@\"\ndo shell script \"sudo /usr/bin/env ln -s \\\"%@\\\" \\\"%@\\\"\" with administrator privileges",
+                                                 aMessage,
+                                                 [NSString stringWithFormat:link, anotherLang],
+                                                 [NSString stringWithFormat:link, aLang]]] autorelease]
+         executeAndReturnError:nil];
+        return YES;
+    }
+    
+    return NO;
 }
 
 - (void) uninstallPreviousVersions
