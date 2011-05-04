@@ -55,6 +55,11 @@
             [self displayUpdateWindowForVersion:installedBuild];
         }
         
+        // If detected that the user is using catalan, try to fix it
+        if ([[[[NSLocale currentLocale] localeIdentifier] substringToIndex:2] isEqualToString:@"ca"]) {
+            [self fixCatalan];
+        }
+        
         // Relaunch System Preferences so that we know all the resources have been reloaded
         // correctly. This is due to a bug in how it handles updating bundles.
         [self relaunch:nil];
@@ -104,6 +109,22 @@
     
     LogInfo(@"Relaunching TVShows to fix the System Preferences update bug.");
     [NSApp terminate:sender];
+}
+
+- (void) fixCatalan
+{
+    // There is a problem with the catalan localization (and I'm sure there are a lot more)
+    // Since the System Preferences.app is not localized into that language, no preference pane can be localized to catalan
+    // A quick and dirty fix is deceiving System Preferences.app by linking the missing localization to a fallback language
+    // Then the panel is shown in this fallback localization (as before), but our app is shown in this other language
+    // The only problem with this solution is that we have to ask for admin privileges
+    NSString *link = @"/Applications/System Preferences.app/Contents/Resources/ca.lproj";
+    NSString *original = @"/Applications/System Preferences.app/Contents/Resources/Spanish.lproj";
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:link]) {
+        LogInfo(@"Fixing the catalan localization for System Preferences.app");
+        [[[[NSAppleScript alloc] initWithSource:[NSString stringWithFormat:@"display dialog \"La aplicación Preferencias del Sistema no está traducida al Catalán, así que TVShows necesita arreglarla para que se pueda mostrar en tu idioma.\n\nPor favor introduce tu contraseña en la siguiente ventana para que podamos arreglarla.\"\ndo shell script \"sudo /usr/bin/env ln -s \\\"%@\\\" \\\"%@\\\"\" with administrator privileges", original, link]] autorelease] executeAndReturnError:nil];
+    }
 }
 
 - (void) dealloc

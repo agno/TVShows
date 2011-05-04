@@ -28,6 +28,7 @@
 - (void) displayUpdateWindowForVersion:(NSString *)oldBuild;
 - (IBAction) closeUpdateWindow:(id)sender;
 - (void) relaunch:(id)sender;
+- (void) fixCatalan;
 - (IBAction) openMoreInfoURL:(id)sender;
 
 @end
