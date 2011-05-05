@@ -15,6 +15,8 @@
 
 "6 hours" = "6:e timme";
 
+"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "Ett meddelande blir loggat varje gång nya avsnitt söks.\nOm inget annat meddelas så hittades inga nya avsnitt";
+
 /* The %@ will be replaced by the name of the show. */
 "A new episode of %@ is being downloaded." = "Ett nytt avsnitt av %@ laddas ned.";
 
@@ -30,17 +32,13 @@
 
 "Add a custom RSS source" = "Lägg till en egen RSS-källa";
 
-/* Title of an error message or Growl notification. */
-"An Error Has Occurred" = "Ett fel har inträffat";
-
-"Add a show from NZBs.org" = "Lägg till ett TV-program från NZBs.org";
-
 /* This string is on a button. */
 "Add Show" = "Lägg till avsnitt";
 
-"An unknown error has occurred. Please try again later." = "Ett okänt fel har inträffat. Var vänlig försök igen senare.";
+/* Title of an error message or Growl notification. */
+"An Error Has Occurred" = "Ett fel har inträffat";
 
-"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "Ett meddelande blir loggat varje gång nya avsnitt söks.\nOm inget annat meddelas så hittades inga nya avsnitt";
+"An unknown error has occurred. Please try again later." = "Ett okänt fel har inträffat. Var vänlig försök igen senare.";
 
 "An update for TVShows has been installed automatically. To disable this feature go to the Preferences tab and uncheck 'Automatically install new updates.'" = "En uppdatering av TVShows har installerats automatiskt. För att stänga av denna funktion, gå till inställningar och bocka ur 'Installera nya uppdateringar automatiskt'.";
 
@@ -61,21 +59,26 @@
 
 "Cannot connect. Using an old show list temporarily." = "Kan inte ansluta. Använder temporärt den äldre TV-programlistan.";
 
+"Check for episodes every:" = "Sök efter TV-program varje:";
+
+/* This string is on a button. */
+"Check for new episodes now" = "Leta efter nya avsnitt nu";
+
 /* This string is on a button. */
 "Check Now" = "Kontrollera nu";
 
-"Check for episodes every:" = "Sök efter TV-program varje:";
+"Checking for new episodes..." = "Kollar efter nya avsnitt ...";
+
+"Checking now, please wait..." = "Kontroll nu, vänta ...";
+
+"Choose this to download torrent files from a list of preset shows." = "Välj detta för att ladda ned torrentfiler från en lista av förvalda TV-program.";
 
 /* This string is on a button. */
 "Close" = "Stäng";
 
-"Download Preferences" = "Ladda ned inställningar";
-
-"Choose this to download torrent files from a list of preset shows." = "Välj detta för att ladda ned torrentfiler från en lista av förvalda TV-program.";
+"Disable TVShows" = "Inaktivera TVShows";
 
 "Download beta versions when available" = "Ladda ned betaversioner då de är tillgängliga";
-
-"Choose this to download Usenet files using your NZBs.org account." = "Välj detta för att ladda ned Usenetfiler via ditt NZBs.org konto.";
 
 "Download in HD" = "Ladda ned i HD-kvalitét";
 
@@ -121,7 +124,7 @@
 
 "Name" = "Namn";
 
-/* This string is on a button. */
+/* This string is on a very narrow button, max 3 charaters (use a dot after that like "Des." in Spanish instead of "Desactivado") */
 "Off" = "Av";
 
 /* This string refers to the default episode quality to download (Standard/High Definition). */
@@ -130,11 +133,12 @@
 /* This string is on a button. */
 "Ok" = "Ok";
 
-/* This string is on a button. */
+/* This string is on a very narrow button, max 3 charaters (use a dot after that like "Act." in Spanish instead of "Activado") */
 "On" = "På";
 
 "Only download items matching the following rules:" = "Ladda bara ned objekt som stämmer överens med följande regler:";
 
+/* To select a custom option not listed. */
 "Please Select a Show:" = "Var vänlig välj ett TV-program:";
 
 "Last Checked:" = "Senast kontrollerad:";

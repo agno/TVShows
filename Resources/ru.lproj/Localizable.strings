@@ -1,5 +1,8 @@
 "1 day" = "1 день";
 
+/* This string is used between a date and a time, e.g, 1/1/1 at 01:01am. */
+" at " = "в";
+
 "1 hour" = "1 час";
 
 "12 hours" = "12 часов";
@@ -11,6 +14,8 @@
 "30 minutes" = "30 минут";
 
 "6 hours" = "6 часов";
+
+"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "Сообщение регистрируется каждый раз, когда происходит поиск новых эпизодов. Если не указано другое, то новые эпизоды не были найдены.";
 
 /* The %@ will be replaced by the name of the show. */
 "A new episode of %@ is being downloaded." = "Новая серия %@ была скачана.";
@@ -27,10 +32,11 @@
 
 "Add a custom RSS source" = "Добавить пользовательский источник RSS";
 
+/* This string is on a button. */
+"Add Show" = "Добавить телешоу";
+
 /* Title of an error message or Growl notification. */
 "An Error Has Occurred" = "Произошла ошибка.";
-
-"Add a show from NZBs.org" = "Добавить телешоу с NZBs.org";
 
 "An unknown error has occurred. Please try again later." = "Произошла неизвестная ошибка. Пожалуйста, повторите позже.";
 
@@ -44,6 +50,8 @@
 
 "Automatically open each file after download" = "Автоматически открывать файл после окончания загрузки";
 
+"Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "Вы уверены, что хотите удалить TVShows? Это также удалит все настройки и подписки";
+
 /* This string is on a button. */
 "Cancel" = "Отмена";
 
@@ -51,21 +59,26 @@
 
 "Cannot connect. Using an old show list temporarily." = "Невозможно подсоедениться. Временно будет использован старый список телешоу.";
 
+"Check for episodes every:" = "Проверять наличие новых серий каждые:";
+
+/* This string is on a button. */
+"Check for new episodes now" = "Проверить наличие новых эпизодов сейчас";
+
 /* This string is on a button. */
 "Check Now" = "Проверить сейчас";
 
-"Check for episodes every:" = "Проверять наличие новых серий каждые:";
+"Checking for new episodes..." = "Проверка на наличие новых эпизодов ...";
+
+"Checking now, please wait..." = "Идет проверка, пожалуйста, подождите...";
+
+"Choose this to download torrent files from a list of preset shows." = "Выберите этот пункт, чтобы скачать torrent-файлы из списка телешоу.";
 
 /* This string is on a button. */
 "Close" = "Закрыть";
 
-"Download Preferences" = "Настройки закачки";
-
-"Choose this to download torrent files from a list of preset shows." = "Выберите этот пункт, чтобы скачать torrent-файлы из списка телешоу.";
+"Disable TVShows" = "Отключить TVShows";
 
 "Download beta versions when available" = "Обновляться до бета-версий, если доступно";
-
-"Choose this to download Usenet files using your NZBs.org account." = "Выберите этот пункт, чтобы скачать файлы Usenet используя ваш NZBs.org аккаунт.";
 
 "Download in HD" = "Скачать в HD";
 
@@ -73,10 +86,15 @@
 
 "Enable downloading new episodes" = "Разрешить закачку новых серий";
 
+/* Status of the current show when it is airing. It is shown in a label as "Status: Continuing" */
+"Continuing" = "Продолжается";
+
 /* Title of a column in a table. */
 "Episode" = "Серия";
 
 "Default video quality:" = "Качество видео по-умолчанию:";
+
+"Donate" = "Пожертвовать";
 
 /* Title of a column in a table. */
 "Episode Name" = "Название серии";
@@ -85,11 +103,15 @@
 
 "Feed" = "Лента";
 
+"Download HD versions by default" = "Скачивать в HD по-умолчанию";
+
 "Growl Settings" = "Настройки Growl";
 
 "Include anonymous system information" = "Включать анонимную информацию о системе";
 
 "Info" = "Информация";
+
+"Ended" = "Завершено";
 
 "Last Aired" = "Последний эфир";
 
@@ -102,7 +124,7 @@
 
 "Name" = "Имя";
 
-/* This string is on a button. */
+/* This string is on a very narrow button, max 3 charaters (use a dot after that like "Des." in Spanish instead of "Desactivado") */
 "Off" = "Выкл.";
 
 /* This string refers to the default episode quality to download (Standard/High Definition). */
@@ -111,17 +133,22 @@
 /* This string is on a button. */
 "Ok" = "Ок";
 
-/* This string is on a button. */
+/* This string is on a very narrow button, max 3 charaters (use a dot after that like "Act." in Spanish instead of "Activado") */
 "On" = "Вкл.";
 
 "Only download items matching the following rules:" = "Скачивать только объекты соответствующие условиям:";
 
+/* To select a custom option not listed. */
 "Please Select a Show:" = "Пожалуйста, выберите телешоу:";
+
+"Last Checked:" = "Последняя проверка:";
 
 "Preferences" = "Настройки";
 
 /* Title of a column in a table. */
 "Published Date" = "Дата публикации";
+
+"Logs are stored in ~/Library/Logs/TVShows/" = "Логи хранятся в ~/Library/Logs/TVShows/";
 
 "RSS Feed Information:" = "Информация о RSS-ленте:";
 
@@ -129,16 +156,26 @@
 
 "Search" = "Поиск";
 
+"Never" = "Никогда";
+
 /* Title of a column in a table. */
 "Season" = "Сезон";
 
+"No" = "Нет";
+
 "Select a preset show from showRSS" = "Выберите заданное шоу из showRSS";
+
+"No activity has been logged yet. Have you recently installed TVShows?" = "Не зарегестрировано никакой активности. Возможно, вы установили TVShows недавно?";
 
 "Please choose one of the following actions:" = "Пожалуйста, выберите одно из следующих действий:";
 
 "Send Growl notifications when…" = "Показывать сообщения Growl когда…";
 
+"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country." = "TVShows не скачивает видеофайлы, только торренты, для которых, в свою очередь, требуются другие приложения. Вы, как конечный пользователь, решаете самостоятельно о законности использования любого из файлов, которые были скачаны этим приложением, в соответствии с действующим законодательством в вашей стране.";
+
 "Status" = "Статус";
+
+"No description was found for this show." = "Не найдено описания телешоу.";
 
 /* This string is on a button. */
 "Submit Feedback" = "Отправить отчет";
@@ -171,5 +208,22 @@
 
 "… a new episode is downloaded." = "… скачана новая серия.";
 
+"Recently Logged Activity" = "Свежая активность";
+
 "… a new version of TVShows is released." = "… вышла новая версия TVShows.";
+
+/* This string is on a button. */
+"Uninstall" = "Удалить";
+
+"Uninstall TVShows" = "Удалить TVShows";
+
+"Unknown" = "Неизвестно";
+
+"Updating Show Information…" = "Обновление информации о телешоу...";
+
+"View Logs" = "Просмотреть логи";
+
+"Website" = "Сайт";
+
+"Yes" = "Да";
 

@@ -15,6 +15,8 @@
 
 "6 hours" = "6 horas";
 
+"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "En cada comprobación de episodios se registra un mensaje. Salvo que se indique lo contrario, no hay nuevos episodios.";
+
 /* The %@ will be replaced by the name of the show. */
 "A new episode of %@ is being downloaded." = "Se está descargando un nuevo episodio de %@.";
 
@@ -30,17 +32,13 @@
 
 "Add a custom RSS source" = "Agregar una fuente RSS personalizada";
 
-/* Title of an error message or Growl notification. */
-"An Error Has Occurred" = "Ha ocurrido un error.";
-
-"Add a show from NZBs.org" = "Agregar una serie desde NZBs.org";
-
 /* This string is on a button. */
 "Add Show" = "Añadir serie";
 
-"An unknown error has occurred. Please try again later." = "Ha ocurrido un error desconocido. Por favor, inténtelo mas tarde.";
+/* Title of an error message or Growl notification. */
+"An Error Has Occurred" = "Ha ocurrido un error.";
 
-"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "En cada comprobación de episodios se registra un mensaje. Salvo que se indique lo contrario, no hay nuevos episodios.";
+"An unknown error has occurred. Please try again later." = "Ha ocurrido un error desconocido. Por favor, inténtelo mas tarde.";
 
 "An update for TVShows has been installed automatically. To disable this feature go to the Preferences tab and uncheck 'Automatically install new updates.'" = "Se ha instalado automáticamente una actualización de TVShows. Para deshabilitar esta funcionalidad, vaya a la pestaña Preferencias y deseleccione 'Instalar automáticamente nuevas actualizaciones'.";
 
@@ -61,32 +59,28 @@
 
 "Cannot connect. Using an old show list temporarily." = "No se puede establecer conexión. Se utilizará una lista de series antigua por el momento.";
 
-/* This string is on a button. */
-"Check Now" = "Comprobar";
-
 "Check for episodes every:" = "Buscar si hay episodios cada:";
 
 /* This string is on a button. */
 "Check for new episodes now" = "Comprobar nuevos episodios ahora";
 
+/* This string is on a button. */
+"Check Now" = "Comprobar";
+
 "Checking for new episodes..." = "Comprobando si hay nuevos episodios...";
 
 "Checking now, please wait..." = "Comprobando, por favor espera...";
 
-/* This string is on a button. */
-"Close" = "Cerrar";
-
 "Choose this to download torrent files from a list of preset shows." = "Escoge esto para bajar archivos torrent de una lista predeterminada de series";
 
-"Choose this to download Usenet files using your NZBs.org account." = "Escoge esto para bajar archivos Usenet usando tu cuenta NZB.org.";
+/* This string is on a button. */
+"Close" = "Cerrar";
 
 "Disable TVShows" = "Deshabilitar TVShows";
 
 "Download beta versions when available" = "Descargar versiones beta cuando estén disponibles";
 
 "Download in HD" = "Descargar en HD";
-
-"Download Preferences" = "Preferencias de descarga";
 
 "Choose this to input your own RSS feed." = "Escoge esto para ingresar tu propia fuente RSS.";
 
@@ -144,6 +138,7 @@
 
 "Only download items matching the following rules:" = "Descargar sólo elementos que concuerden con las siguientes reglas:";
 
+/* To select a custom option not listed. */
 "Please Select a Show:" = "Por favor, elija una serie:";
 
 "Last Checked:" = "Última actualización:";

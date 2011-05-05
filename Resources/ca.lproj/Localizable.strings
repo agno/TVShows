@@ -15,12 +15,14 @@
 
 "6 hours" = "6 hores";
 
+"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "Es guarda un missatge al fitxer de registre cada vegada que es busquen nous episodis. Mentre no s'indiqui el contrari, no s'han trobat episodis.";
+
 /* The %@ will be replaced by the name of the show. */
 "A new episode of %@ is being downloaded." = "S'està baixant un nou episodi de %@.";
 
-"A new version of TVShows is available for download." = "Una nova versió de TVShows està disponible per baixar.";
+"A new version of TVShows is available for download." = "Hi ha una nova versió del TVShows disponible per baixar.";
 
-"A new version of TVShows is being downloaded and installed." = "S'està baixant i instal·lant una nova versió de TVShows.";
+"A new version of TVShows is being downloaded and installed." = "S'està baixant i instal·lant una nova versió del TVShows.";
 
 "A newer show list cannot be found. Using an old show list temporarily." = "No es pot trobar una llista de programes més recent. S'està utilitzant una antiga temporalment.";
 
@@ -30,17 +32,15 @@
 
 "Add a custom RSS source" = "Afegiu una font RSS personalitzada.";
 
+/* This string is on a button. */
+"Add Show" = "Nou programa";
+
 /* Title of an error message or Growl notification. */
 "An Error Has Occurred" = "Hi ha hagut un error.";
 
-"Add a show from NZBs.org" = "Afegiu un programa de NZBs.org.";
-
-/* This string is on a button. */
-"Add Show" = "Afegir programa";
-
 "An unknown error has occurred. Please try again later." = "Hi ha hagut un error desconegut. Torneu-ho a provar més tard.";
 
-"An update for TVShows has been installed automatically. To disable this feature go to the Preferences tab and uncheck 'Automatically install new updates.'" = "S'ha instal·lat automàticament una nova versió de TVShows. Per desactivar aquesta funció aneu a la pestanya Preferències i desmarqueu 'Instal·la automàticament noves versions'.";
+"An update for TVShows has been installed automatically. To disable this feature go to the Preferences tab and uncheck 'Automatically install new updates.'" = "S'ha instal·lat automàticament una nova versió del TVShows. Per desactivar aquesta funció aneu a la pestanya Preferències i desmarqueu 'Instal·la automàticament noves versions'.";
 
 "Application Update Preferences" = "Preferències d'actualització de l'aplicació.";
 
@@ -50,6 +50,8 @@
 
 "Automatically open each file after download" = "Obre automàticament tots els arxius després de la baixada.";
 
+"Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "Esteu segur que voleu desinstal·lar el TVShows? També s'eliminaran les preferències i les subscripcions.";
+
 /* This string is on a button. */
 "Cancel" = "Cancel·la";
 
@@ -57,21 +59,26 @@
 
 "Cannot connect. Using an old show list temporarily." = "No es pot connectar. S'està utilitzant una llista de programes antiga temporalment.";
 
+"Check for episodes every:" = "Cerca nous episodis cada:";
+
+/* This string is on a button. */
+"Check for new episodes now" = "Comproveu si hi ha nous episodis ara";
+
 /* This string is on a button. */
 "Check Now" = "Comprova ara";
 
-"Check for episodes every:" = "Comprova si hi ha nous episodis cada:";
+"Checking for new episodes..." = "Comprovació dels nous episodis ...";
+
+"Checking now, please wait..." = "Comprovació d'ara, si us plau esperi ...";
+
+"Choose this to download torrent files from a list of preset shows." = "Seleccioneu aquesta opció per baixar arxius torrent d'una llista predefinida.";
 
 /* This string is on a button. */
 "Close" = "Tanca";
 
-"Download Preferences" = "Preferències de baixada.";
-
-"Choose this to download torrent files from a list of preset shows." = "Seleccioneu aquesta opció per baixar arxius torrent d'una llista predefinida.";
+"Disable TVShows" = "Deshabilitar TVShows";
 
 "Download beta versions when available" = "Baixa versions beta quan estiguin disponibles.";
-
-"Choose this to download Usenet files using your NZBs.org account." = "Seleccioneu aquesta opció per baixar arxius Usenet mitjançant un compte NZBs.org.";
 
 "Download in HD" = "Baixa en HD.";
 
@@ -79,10 +86,15 @@
 
 "Enable downloading new episodes" = "Habilita la baixada de nous episodis.";
 
+/* Status of the current show when it is airing. It is shown in a label as "Status: Continuing" */
+"Continuing" = "En emissió";
+
 /* Title of a column in a table. */
 "Episode" = "Episodi";
 
 "Default video quality:" = "Qualitat de vídeo per defecte:";
+
+"Donate" = "Dóna";
 
 /* Title of a column in a table. */
 "Episode Name" = "Nom de l'episodi";
@@ -97,7 +109,7 @@
 
 "Include anonymous system information" = "Inclou informació anònima del sistema.";
 
-"Info" = "Info";
+"Info" = "Informació";
 
 "Ended" = "Finalitzat";
 
@@ -112,7 +124,7 @@
 
 "Name" = "Nom";
 
-/* This string is on a button. */
+/* This string is on a very narrow button, max 3 charaters (use a dot after that like "Des." in Spanish instead of "Desactivado") */
 "Off" = "Inactiu";
 
 /* This string refers to the default episode quality to download (Standard/High Definition). */
@@ -121,12 +133,15 @@
 /* This string is on a button. */
 "Ok" = "D'acord";
 
-/* This string is on a button. */
+/* This string is on a very narrow button, max 3 charaters (use a dot after that like "Act." in Spanish instead of "Activado") */
 "On" = "Actiu";
 
 "Only download items matching the following rules:" = "Només baixa els ítems que segueixin les següents regles:";
 
+/* To select a custom option not listed. */
 "Please Select a Show:" = "Seleccioneu un programa:";
+
+"Last Checked:" = "Última comprovació:";
 
 "Preferences" = "Preferències";
 
@@ -150,18 +165,20 @@
 
 "Select a preset show from showRSS" = "Seleccioneu un programa predefinit de showRSS.";
 
-"No activity has been logged yet. Have you recently installed TVShows?" = "Encara no s'ha registrat cap activitat. Heu instal·lat TVShows recentment?";
+"No activity has been logged yet. Have you recently installed TVShows?" = "Encara no s'ha registrat cap activitat. Heu instal·lat el TVShows recentment?";
 
 "Please choose one of the following actions:" = "Escolliu una de les següents accions:";
 
 "Send Growl notifications when…" = "Envia notificacions de Growl quan…";
+
+"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country." = "El TVShows no baixa cap vídeo, només arxius torrent que requereixen altres programes per baixar el contingut real. És responsabilitat vostra, com a usuari, conèixer si l'ús dels fitxers baixats per aquesta aplicació s'emmarca dins les lleis de copyright vigents del vostre país.";
 
 "Status" = "Estat";
 
 "No description was found for this show." = "No s'ha trobat cap descripció d'aquest programa.";
 
 /* This string is on a button. */
-"Submit Feedback" = "Envieu la vostra opinió.";
+"Submit Feedback" = "Envia comentaris";
 
 /* This string is on a button. */
 "Subscribe" = "Subscriure's";
@@ -169,16 +186,16 @@
 "Subscriptions" = "Subscripcions";
 
 /* Title of an error message or Growl notification. */
-"TVShows Update Available" = "Nova versió de TVShows disponible.";
+"TVShows Update Available" = "Nova versió del TVShows disponible.";
 
 /* Title of an error message or Growl notification. */
-"TVShows Update Downloading" = "S'està baixant una nova versió de TVShows.";
+"TVShows Update Downloading" = "S'està baixant una nova versió del TVShows.";
 
 /* Title of an error message or Growl notification. */
 "Unable to Update the Show List" = "No es pot descarregar la llista de programes.";
 
 /* This string is on a button. */
-"Unsubscribe" = "Anul·la la subscripció";
+"Unsubscribe" = "Elimina";
 
 /* Title of an error message or Growl notification. */
 "Update Installed Automatically" = "S'ha instal·lat automàticament la nova versió.";
@@ -187,22 +204,24 @@
 "Standard" = "Estàndard";
 
 /* This string is on a button. */
-"View on TV.com" = "Visualitza a TV.com.";
+"View on TV.com" = "Mostra a TV.com.";
 
 "… a new episode is downloaded." = "… s'hagi baixat un nou episodi.";
 
 "Recently Logged Activity" = "Activitat registrada recentment";
 
-"… a new version of TVShows is released." = "… estigui disponible una nova versió de TVShows.";
+"… a new version of TVShows is released." = "… estigui disponible una nova versió del TVShows.";
 
 /* This string is on a button. */
 "Uninstall" = "Desinstal·la";
 
-"Uninstall TVShows" = "Desinstal·la TVShows";
+"Uninstall TVShows" = "Desinstal·la el TVShows";
 
 "Unknown" = "Desconegut";
 
-"View Logs" = "Veure fitxers de registre";
+"Updating Show Information…" = "Actualitzant la informació del programa...";
+
+"View Logs" = "Mostra log";
 
 "Website" = "Lloc web";
 

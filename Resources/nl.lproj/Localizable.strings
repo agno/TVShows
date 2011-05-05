@@ -15,6 +15,8 @@
 
 "6 hours" = "6 uur";
 
+"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "Elke keer dat er naar nieuwe afleveringen is gezocht wordt er een bericht in het log opgeslagen. Tenzij anders genoteerd zijn er geen nieuwe afleveringen gevonden. ";
+
 /* The %@ will be replaced by the name of the show. */
 "A new episode of %@ is being downloaded." = "Een nieuwe aflevering van %@ wordt gedownload.";
 
@@ -30,17 +32,13 @@
 
 "Add a custom RSS source" = "Voeg een aangepaste RSS bron toe";
 
-/* Title of an error message or Growl notification. */
-"An Error Has Occurred" = "Er is een fout opgetreden";
-
-"Add a show from NZBs.org" = "Voeg een serie toe van NZBs.org";
-
 /* This string is on a button. */
 "Add Show" = "Voeg show toe";
 
-"An unknown error has occurred. Please try again later." = "Er is een onbekende fout opgetreden. Probeer het later opnieuw. ";
+/* Title of an error message or Growl notification. */
+"An Error Has Occurred" = "Er is een fout opgetreden";
 
-"A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "Elke keer dat er naar nieuwe afleveringen is gezocht wordt er een bericht in het log opgeslagen. Tenzij anders genoteerd zijn er geen nieuwe afleveringen gevonden. ";
+"An unknown error has occurred. Please try again later." = "Er is een onbekende fout opgetreden. Probeer het later opnieuw. ";
 
 "An update for TVShows has been installed automatically. To disable this feature go to the Preferences tab and uncheck 'Automatically install new updates.'" = "Een update voor TVShows werd automatisch geïnstalleerd. Om deze optie uit te schakelen ga je de Preferences tab en vink je 'Automatisch nieuwe versies installeren' uit.";
 
@@ -61,21 +59,26 @@
 
 "Cannot connect. Using an old show list temporarily." = "Kan geen verbinding maken. Er wordt tijdelijk gebruik gemaakt van een oude lijst met series. ";
 
+"Check for episodes every:" = "Controleer op afleveringen elke:";
+
+/* This string is on a button. */
+"Check for new episodes now" = "Check nu voor de nieuwe afleveringen";
+
 /* This string is on a button. */
 "Check Now" = "Controleer nu";
 
-"Check for episodes every:" = "Controleer op afleveringen elke:";
+"Checking for new episodes..." = "Controleren op nieuwe afleveringen ...";
+
+"Checking now, please wait..." = "Het controleren van nu, even geduld aub ...";
+
+"Choose this to download torrent files from a list of preset shows." = "Kies deze optie om torrent-bestanden te downloaden uit een lijst van vooraf ingestelde series. ";
 
 /* This string is on a button. */
 "Close" = "Sluiten";
 
-"Download Preferences" = "Download voorkeuren";
-
-"Choose this to download torrent files from a list of preset shows." = "Kies deze optie om torrent-bestanden te downloaden uit een lijst van vooraf ingestelde series. ";
+"Disable TVShows" = "Uitschakelen TVShows";
 
 "Download beta versions when available" = "Download bèta versies wanneer beschikbaar";
-
-"Choose this to download Usenet files using your NZBs.org account." = "Kies deze optie om Usenet-bestanden te downloaden met uw NZBs.org-account. ";
 
 "Download in HD" = "Downloaden in HD";
 
@@ -121,7 +124,7 @@
 
 "Name" = "Naam";
 
-/* This string is on a button. */
+/* This string is on a very narrow button, max 3 charaters (use a dot after that like "Des." in Spanish instead of "Desactivado") */
 "Off" = "Uit";
 
 /* This string refers to the default episode quality to download (Standard/High Definition). */
@@ -130,11 +133,12 @@
 /* This string is on a button. */
 "Ok" = "OK";
 
-/* This string is on a button. */
+/* This string is on a very narrow button, max 3 charaters (use a dot after that like "Act." in Spanish instead of "Activado") */
 "On" = "Aan";
 
 "Only download items matching the following rules:" = "Download alleen items die aan de volgende voorwaarden voldoen:";
 
+/* To select a custom option not listed. */
 "Please Select a Show:" = "Kies een serie: ";
 
 "Last Checked:" = "Laatst gecontroleerd:";
