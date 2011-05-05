@@ -362,18 +362,12 @@
         } else {
             [episodeArrayController addObjects:results];
             // Check if there are HD episodes, if so enable the "Download in HD" checkbox
-            BOOL isHD = NO;
-            for (int i = 0; i < [results count]; i++) {
-                NSMutableDictionary *episode = [results objectAtIndex:i];
-                if ([[episode valueForKey:@"isHD"] intValue] == YES) {
-                    isHD = YES;
-                    break;
-                }
-            }
-            if (!isHD) {
+            BOOL feedHasHDEpisodes = [TSParseXMLFeeds feedHasHDEpisodes:results];
+            
+            if (!feedHasHDEpisodes) {
                 [showQuality setState:NO];
             }
-            [showQuality setEnabled:isHD];
+            [showQuality setEnabled:feedHasHDEpisodes];
             
             // Update the filter predicate to only display the correct quality.
             //[self showQualityDidChange:nil];

@@ -82,28 +82,24 @@
 
 + (BOOL) feedHasHDEpisodes:(NSArray *)parsedFeed
 {
-    BOOL returnValue = NO;
-    
     for (NSArray *item in parsedFeed) {
-        if ( [[item valueForKey:@"isHD"] intValue] == 1 ) {
-            returnValue = YES;
+        if ([[item valueForKey:@"isHD"] intValue] == YES) {
+            return YES;
         }
     }
     
-    return returnValue;
+    return NO;
 }
 
 + (BOOL) feedHasSDEpisodes:(NSArray *)parsedFeed
 {
-    BOOL returnValue = NO;
-    
     for (NSArray *item in parsedFeed) {
-        if ( [[item valueForKey:@"isHD"] intValue] == 0 ) {
-            returnValue = YES;
+        if ([[item valueForKey:@"isHD"] intValue] == NO) {
+            return YES;
         }
     }
     
-    return returnValue;
+    return NO;
 }
 
 @end
