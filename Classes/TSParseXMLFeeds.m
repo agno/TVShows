@@ -83,7 +83,7 @@
 + (BOOL) feedHasHDEpisodes:(NSArray *)parsedFeed
 {
     for (NSArray *item in parsedFeed) {
-        if ([[item valueForKey:@"isHD"] intValue] == YES) {
+        if ([[item valueForKey:@"isHD"] boolValue]) {
             return YES;
         }
     }
@@ -94,7 +94,7 @@
 + (BOOL) feedHasSDEpisodes:(NSArray *)parsedFeed
 {
     for (NSArray *item in parsedFeed) {
-        if ([[item valueForKey:@"isHD"] intValue] == NO) {
+        if (![[item valueForKey:@"isHD"] boolValue]) {
             return YES;
         }
     }
