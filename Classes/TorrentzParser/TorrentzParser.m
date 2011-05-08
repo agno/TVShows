@@ -28,12 +28,23 @@
     return self;
 }
 
-+ (NSString *) getAlternateTorrentForEpisode:(NSArray *)anEpisode ofShow:(NSArray *)aShow
++ (NSString *) getAlternateTorrentForEpisode:(NSString *)episodeName
 {
+    NSString *torrentzURLFormat;
+    
+    // Decide if quotes are needed (for late nights) or not
+    // Because I'm lazy, this piece of code will be useless in 2020
+    // Sorry late nights viewers from the next decade
+    if ([episodeName rangeOfString:@" 201"].location == NSNotFound) {
+        torrentzURLFormat = @"http://torrentz.eu/feed_any?q=%@+720p";
+    } else {
+        torrentzURLFormat = @"http://torrentz.eu/feed_any?q=%%22%@%%22+720p";
+    }
+    
     // Prepare the Torrentz search URL
-    NSURL *torrentzURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://torrentz.eu/feed_any?q=%%22%@%%22+720p",
-                                               [[anEpisode valueForKey:@"episodeName"]
-                                                stringByReplacingOccurrencesOfString:@" " withString:@"+"]]];
+    NSURL *torrentzURL = [NSURL URLWithString:[NSString stringWithFormat:torrentzURLFormat,
+                                               [episodeName stringByReplacingOccurrencesOfString:@" "
+                                                                                      withString:@"+"]]];
     
     // Now let's grab the search results
     NSString *searchResults = [[[NSString alloc] initWithContentsOfURL:torrentzURL

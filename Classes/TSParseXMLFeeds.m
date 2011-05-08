@@ -12,9 +12,11 @@
  *
  */
 
+#import "AppInfoConstants.h"
 #import "TSParseXMLFeeds.h"
 #import "FeedParser.h"
 #import "TSRegexFun.h"
+#import "TorrentzParser.h"
 
 
 @implementation TSParseXMLFeeds
@@ -22,13 +24,16 @@
 + (NSArray *) parseEpisodesFromFeed:(NSString *)url maxItems:(int)maxItems
 {
     // Begin parsing the feed
-    NSString *episodeTitle = @"", *episodeSeason = @"", *episodeNumber = @"", *episodeQuality = @"", *qualityString = @"";
+    NSString *episodeTitle = @"", *lastEpisodeTitle = @"", *episodeSeason = @"", *episodeNumber = @"", *episodeQuality = @"", *lastEpisodeQuality = @"", *qualityString = @"";
     NSError *error;
     NSMutableArray *episodeArray = [NSMutableArray array];
+    NSMutableArray *fakeEpisodeArray = [NSMutableArray array];
     NSData *feedData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
     FPFeed *parsedData = [FPParser parsedFeedWithData:feedData error:&error];
     
     int i=0;
+    BOOL feedHasHDEpisodes = NO;
+    lastEpisodeTitle = lastEpisodeQuality = @"";
     
     for (FPItem *item in parsedData.items) {
         if (i <= maxItems) {
@@ -54,7 +59,8 @@
             episodeQuality = [NSString stringWithFormat:@"%d",[TSRegexFun isEpisodeHD:[item title]]];
             
             if ([episodeQuality intValue] == 1) {
-                qualityString = @"✓";   
+                qualityString = @"✓";
+                feedHasHDEpisodes = YES;
             } else {
                 // qualityString = @"✗";
                 qualityString = @"";
@@ -68,7 +74,13 @@
             [Episode setValue:episodeQuality        forKey:@"isHD"];
             [Episode setValue:qualityString         forKey:@"qualityString"];
             
-            [episodeArray addObject:Episode];
+            // Check if we already add this same episode
+            if (![episodeTitle isEqualToString:lastEpisodeTitle] ||
+                ![episodeQuality isEqualToString:lastEpisodeQuality]) {
+                [episodeArray addObject:Episode];
+                lastEpisodeTitle = episodeTitle;
+                lastEpisodeQuality = episodeQuality;
+            }
             
             [Episode release];
         }
@@ -76,8 +88,33 @@
         i++;
     }
     
-    return episodeArray;
-    [episodeArray release];
+    // Fake HD episodes if ShowRSS does not list any
+    if (!feedHasHDEpisodes) {
+        for (NSMutableDictionary *realEpisode in episodeArray) {
+            NSMutableDictionary *fakeEpisode = [[NSMutableDictionary alloc] init];
+            
+            [fakeEpisode setValue:[realEpisode valueForKey:@"episodeName"]     forKey:@"episodeName"];
+            [fakeEpisode setValue:[realEpisode valueForKey:@"pubDate"]         forKey:@"pubDate"];
+            [fakeEpisode setValue:[realEpisode valueForKey:@"episodeName"]     forKey:@"link"];
+            [fakeEpisode setValue:[realEpisode valueForKey:@"episodeSeason"]   forKey:@"episodeSeason"];
+            [fakeEpisode setValue:[realEpisode valueForKey:@"episodeNumber"]   forKey:@"episodeNumber"];
+            [fakeEpisode setValue:[NSString stringWithFormat:@"%d", YES]       forKey:@"isHD"];
+            [fakeEpisode setValue:@"✓"                                         forKey:@"qualityString"];
+            
+            [fakeEpisodeArray addObject:fakeEpisode];
+            [fakeEpisodeArray addObject:realEpisode];
+            
+            [fakeEpisode release];
+        }
+        
+        return fakeEpisodeArray;
+        [episodeArray release];
+        [fakeEpisodeArray release];
+    } else {
+        return episodeArray;
+        [episodeArray release];
+        [fakeEpisodeArray release];
+    }
 }
 
 + (BOOL) feedHasHDEpisodes:(NSArray *)parsedFeed

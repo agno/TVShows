@@ -15,7 +15,7 @@
 #import "AppInfoConstants.h"
 #import "TVShowsHelper.h"
 #import "PreferencesController.h"
-#import "TorrentzParser/TorrentzParser.h"
+#import "TorrentzParser.h"
 #import "TSParseXMLFeeds.h"
 #import "TSUserDefaults.h"
 #import "SubscriptionsDelegate.h"
@@ -242,27 +242,6 @@
                 
             }
             
-            // If no success let's try to download the HD version using Torrentz
-            // Only if HD is enabled
-            if ([[show valueForKey:@"quality"] boolValue] ||
-                chooseAnyVersion) {
-                
-                // Try to get the URL for an alterate torrent using Torrentz
-                NSString *altTorrentURL = [TorrentzParser getAlternateTorrentForEpisode:episode ofShow:show];
-                
-                if (altTorrentURL != nil &&
-                    [self startDownloadingURL:altTorrentURL
-                                 withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
-                                     showInfo:show]) {
-                    
-                    // Update when the show was last downloaded.
-                    [show setValue:pubDate forKey:@"lastDownloaded"];
-                    
-                    break;
-                }
-                
-            }
-            
             // If no success let's try to download the SD version then
             if ((![[show valueForKey:@"quality"] boolValue] &&
                  ![[episode valueForKey:@"isHD"] boolValue]) ||
@@ -425,12 +404,18 @@
 #pragma mark Download Methods
 - (BOOL) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName showInfo:(NSArray *)show
 {
+    // Process the URL if the is not found
+    if ([url rangeOfString:@"http"].location == NSNotFound) {
+        LogInfo(@"Retrieving an HD torrent file from Torrentz of: %@", url);
+        url = [TorrentzParser getAlternateTorrentForEpisode:url];
+    }
+    
     LogInfo(@"Attempting to download new episode: %@", fileName);
     NSData *fileContents = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
     NSString *saveLocation = [[TSUserDefaults getStringFromKey:@"downloadFolder"] stringByAppendingPathComponent:fileName];
     
     // Check if the download was right
-    if (!fileContents && [fileContents length] > 100) {
+    if (!fileContents || [fileContents length] < 100) {
         LogError(@"Unable to download file: %@ <%@>", fileName, url);
         
         // Failure!

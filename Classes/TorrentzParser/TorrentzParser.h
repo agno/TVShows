@@ -18,7 +18,7 @@
 @interface TorrentzParser : NSObject {
 }
 
-+ (NSString *) getAlternateTorrentForEpisode:(NSArray *)anEpisode ofShow:(NSArray *)aShow;
++ (NSString *) getAlternateTorrentForEpisode:(NSString *)anEpisode;
 + (NSArray *) getAllTorrentsFromTorrenzURL:(NSURL*)aTorrentzURL;
 + (NSString *) getTorrentFromTracker:(NSURL*)theBaseURL withLinkMatcher:(NSString*)theLinkMatcher appending:(NSString*)aString;
 
