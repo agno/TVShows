@@ -99,6 +99,7 @@
             torrent = [TorrentzParser getTorrentFromTracker:[NSURL URLWithString:tracker]
                                             withLinkMatcher:@"http://www.vertor.com/([^\"]*)mod=download([^\"]*)id=([^\"]*)"
                                                   appending:@""];
+            torrent = [torrent stringByReplacingOccurrencesOfString:@"amp;" withString:@""];
         } else if([tracker hasPrefix:@"http://thepiratebay.org"]) {
             torrent = [TorrentzParser getTorrentFromTracker:[NSURL URLWithString:tracker]
                                             withLinkMatcher:@"http://torrents.thepiratebay.org([^\"]*)"
