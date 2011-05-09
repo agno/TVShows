@@ -408,6 +408,10 @@
     if ([url rangeOfString:@"http"].location == NSNotFound) {
         LogInfo(@"Retrieving an HD torrent file from Torrentz of: %@", url);
         url = [TorrentzParser getAlternateTorrentForEpisode:url];
+        if (url == nil) {
+            LogError(@"Unable to found an HD torrent file for: %@", fileName);
+            return NO;
+        }
     }
     
     LogInfo(@"Attempting to download new episode: %@", fileName);
