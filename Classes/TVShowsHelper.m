@@ -53,7 +53,10 @@
         // Set up Growl notifications
         [GrowlApplicationBridge setGrowlDelegate:self];
         
-        [self activateStatusMenu];
+        // Show the menu if the user wants
+        if([TSUserDefaults getBoolFromKey:@"ShowMenuBarIcon" withDefault:YES]) {
+            [self activateStatusMenu];
+        }
         
         [self checkNow:nil];
         

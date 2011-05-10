@@ -111,7 +111,7 @@
     
     // newWinHeight should be equal to the wanted window size (in Interface Builder) + 54 (title bar height)
     if ([[tabViewItem identifier] isEqualTo:@"tabItemPreferences"]) {
-        newWinHeight = 500;
+        newWinHeight = 560;
     } else if ([[tabViewItem identifier] isEqualTo:@"tabItemSubscriptions"]) {
         newWinHeight = 570;
     }  else if ([[tabViewItem identifier] isEqualTo:@"tabItemAbout"]) {

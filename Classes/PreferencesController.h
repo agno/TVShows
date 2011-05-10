@@ -20,6 +20,7 @@
 @interface PreferencesController : NSObject
 {
     // Section headings
+    IBOutlet NSBox *generalBoxTitle;
     IBOutlet NSBox *downloadBoxTitle;
     IBOutlet NSBox *growlBoxTitle;
     IBOutlet NSBox *updateBoxTitle;
@@ -34,6 +35,7 @@
     IBOutlet NSTextField *downloadLocationText;
     IBOutlet NSPopUpButton *downloadLocationMenu;
     
+    IBOutlet NSButton *showMenuBarIcon;
     IBOutlet NSButton *autoOpenDownloadedFiles;
     IBOutlet NSButton *autoSelectHDVersion;
     
@@ -66,6 +68,7 @@
 - (void) selectOtherDownloadFolder:(id)sender;
 - (void) openPanelDidEnd:(NSOpenPanel *)openPanel returnCode:(int)returnCode contextInfo:(void *)contextInfo;
 - (IBAction) autoOpenDownloadedFilesDidChange:(id)sender;
+- (IBAction) showMenuBarIconDidChange:(id)sender;
 
 #pragma mark -
 #pragma mark Growl Notification Preferences
