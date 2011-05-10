@@ -361,6 +361,7 @@
             LogError(@"Could not download/parse feed <%@>", selectedShowURL);
         } else {
             [episodeArrayController addObjects:results];
+            
             // Check if there are HD episodes, if so enable the "Download in HD" checkbox
             BOOL feedHasHDEpisodes = [TSParseXMLFeeds feedHasHDEpisodes:results];
             
@@ -370,7 +371,7 @@
             [showQuality setEnabled:feedHasHDEpisodes];
             
             // Update the filter predicate to only display the correct quality.
-            //[self showQualityDidChange:nil];
+            [self showQualityDidChange:nil];
         }
     }
 }

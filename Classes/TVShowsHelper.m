@@ -15,11 +15,11 @@
 #import "AppInfoConstants.h"
 #import "TVShowsHelper.h"
 #import "PreferencesController.h"
+#import "TorrentzParser.h"
 #import "TSParseXMLFeeds.h"
 #import "TSUserDefaults.h"
 #import "SubscriptionsDelegate.h"
 #import "SUUpdaterSubclass.h"
-#import <Growl/GrowlApplicationBridge.h>
 
 
 @implementation TVShowsHelper
@@ -172,7 +172,7 @@
             //              if ([lastDownloaded compare:timeLimit] == NSOrderedAscending) {
             
             // Only check for new episodes if it's enabled.
-            if ([show valueForKey:@"isEnabled"]) {
+            if ([[show valueForKey:@"isEnabled"] boolValue]) {
                 //                        LogDebug(@"Checking for new episodes of %@.", [show valueForKey:@"name"]);
                 [self checkForNewEpisodes:show];
             }
@@ -194,43 +194,71 @@
 
 - (void) checkForNewEpisodes:(NSArray *)show
 {
-    NSDate *pubDate, *lastDownloaded;
+    NSDate *pubDate, *lastDownloaded, *lastChecked;
     NSArray *episodes = [TSParseXMLFeeds parseEpisodesFromFeed:[show valueForKey:@"url"] maxItems:10];
     
     if ([episodes count] == 0) {
         LogError(@"Could not download/parse feed for %@ <%@>", [show valueForKey:@"name"], [show valueForKey:@"url"]);
     }
     
-    BOOL feedHasHDEpisodes = [TSParseXMLFeeds feedHasHDEpisodes:episodes];
-    BOOL feedHasSDEpisodes = [TSParseXMLFeeds feedHasSDEpisodes:episodes];
-
+    BOOL chooseAnyVersion = NO;
+    
+    // Get the dates before checking anything, in case we have to download more than one episode
+    lastDownloaded = [show valueForKey:@"lastDownloaded"];
+    lastChecked = [TSUserDefaults getDateFromKey:@"lastCheckedForEpisodes"];
+    
     // For each episode that was parsed...
     for (NSArray *episode in episodes) {
         pubDate = [episode valueForKey:@"pubDate"];
-        lastDownloaded = [show valueForKey:@"lastDownloaded"];
         
         // If the date we lastDownloaded episodes is before this torrent
         // was published then we should probably download the episode.
         if ([lastDownloaded compare:pubDate] == NSOrderedAscending) {
             
-            if ([[show valueForKey:@"quality"] intValue] == 1 &&
-                [[episode valueForKey:@"isHD"] intValue] == 1 ||
-                feedHasSDEpisodes == NO) {
-                
-                // Is HD and HD is enabled.
-                [self startDownloadingURL:[episode valueForKey:@"link"]
-                             withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
-                                 showInfo:show ];
-                
-            } else if ([[show valueForKey:@"quality"] intValue] == 0 &&
-                       [[episode valueForKey:@"isHD"] intValue] == 0 ||
-                       feedHasHDEpisodes == NO) {
-                
-                // Is not HD and HD is not enabled.
-                [self startDownloadingURL:[episode valueForKey:@"link"]
-                             withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
-                                 showInfo:show ];   
+            // If three full days has passed since the episode was aired attempt the download of any version
+            // Also check that we have checked for episodes at least once in the last day
+            if ([pubDate timeIntervalSinceDate:[NSDate date]] > 3*24*60*60 &&
+                [[NSDate date] timeIntervalSinceDate:lastChecked] < 25*60*60) {
+                chooseAnyVersion = YES;
+            } else {
+                chooseAnyVersion = NO;
             }
+            
+            // First let's try to download the HD version from the RSS
+            // Only if it is HD and HD is enabled (or SD was not available last three days)
+            if (([[show valueForKey:@"quality"] boolValue] &&
+                 [[episode valueForKey:@"isHD"] boolValue]) ||
+                chooseAnyVersion) {
+                
+                if ([self startDownloadingURL:[episode valueForKey:@"link"]
+                                 withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
+                                     showInfo:show]) {
+                    
+                    // Update when the show was last downloaded.
+                    [show setValue:pubDate forKey:@"lastDownloaded"];
+                    
+                    break;
+                }
+                
+            }
+            
+            // If no success let's try to download the SD version then
+            if ((![[show valueForKey:@"quality"] boolValue] &&
+                 ![[episode valueForKey:@"isHD"] boolValue]) ||
+                chooseAnyVersion) {
+                
+                if ([self startDownloadingURL:[episode valueForKey:@"link"]
+                                 withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
+                                     showInfo:show]) {
+                    
+                    // Update when the show was last downloaded.
+                    [show setValue:pubDate forKey:@"lastDownloaded"];
+                    
+                }
+            }
+        } else {
+            // The rest is not important because it is even before the previous entry
+            return;
         }
         
     }
@@ -374,19 +402,34 @@
 
 #pragma mark -
 #pragma mark Download Methods
-- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName showInfo:(NSArray *)show
+- (BOOL) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName showInfo:(NSArray *)show
 {
+    // Process the URL if the is not found
+    if ([url rangeOfString:@"http"].location == NSNotFound) {
+        LogInfo(@"Retrieving an HD torrent file from Torrentz of: %@", url);
+        url = [TorrentzParser getAlternateTorrentForEpisode:url];
+        if (url == nil) {
+            LogError(@"Unable to found an HD torrent file for: %@", fileName);
+            return NO;
+        }
+    }
+    
     LogInfo(@"Attempting to download new episode: %@", fileName);
     NSData *fileContents = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
     NSString *saveLocation = [[TSUserDefaults getStringFromKey:@"downloadFolder"] stringByAppendingPathComponent:fileName];
     
-    [fileContents writeToFile:saveLocation atomically:YES];
-    
-    if (!fileContents) {
-        LogError(@"Unable to download file: %@ <%@>",fileName, url);
+    // Check if the download was right
+    if (!fileContents || [fileContents length] < 100) {
+        LogError(@"Unable to download file: %@ <%@>", fileName, url);
+        
+        // Failure!
+        return NO;
     } else {
         // The file downloaded successfully, continuing...
         LogInfo(@"Episode downloaded successfully.");
+        
+        [fileContents writeToFile:saveLocation atomically:YES];
+        
         id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
         
         // Check to see if the user wants to automatically open new downloads
@@ -405,11 +448,11 @@
                                    clickContext:nil];
         }
         
-        // Update when the show was last downloaded.
-        [show setValue:[NSDate date] forKey:@"lastDownloaded"];
-        
         [delegateClass saveAction];
         [delegateClass release];
+        
+        // Success!
+        return YES;
     }
 }
 
