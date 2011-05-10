@@ -36,8 +36,10 @@
 
 - (void) didSelect
 {
-    NSString *buildVersion = [[[NSBundle bundleWithIdentifier: TVShowsHelperDomain] infoDictionary]
-                              valueForKey:@"CFBundleVersion"];
+    NSString *versionPath = [[NSBundle bundleWithIdentifier:TVShowsAppDomain] pathForResource:@"VERSION" ofType:nil];
+    NSString *buildVersion = [NSString stringWithContentsOfFile:versionPath
+                                                       encoding:NSUTF8StringEncoding
+                                                          error:nil];
     NSString *installedBuild = [TSUserDefaults getStringFromKey:@"installedBuild"];
     
     // Uninstall previous versions crap if present
@@ -46,8 +48,10 @@
     // Try to fix languages not supported in System Preferences but supported by TVShows
     BOOL needsRelaunch = [self fixUnsupportedLanguages];
     
+    LogInfo(@"Installed: %@ Build: %@", installedBuild, buildVersion);
+    
     // Check to see if we installed a different version, both updates and rollbacks.
-    if ([buildVersion intValue] != [installedBuild intValue]) {
+    if (![buildVersion isEqualToString:installedBuild]) {
         
         // Update the application build number in installedBuild
         [TSUserDefaults setKey:@"installedBuild" fromString:buildVersion];
