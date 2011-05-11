@@ -75,6 +75,7 @@
 @property (retain) NSManagedObject *selectedShow;
 
 - (void) awakeFromNib;
+- (NSObject *) getEpisodeAtRow:(NSInteger)row;
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
 - (IBAction) showFeedbackWindow:(id)sender;
 

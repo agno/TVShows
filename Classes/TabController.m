@@ -20,6 +20,7 @@
 #import "TSParseXMLFeeds.h"
 #import "TSUserDefaults.h"
 
+#import "TorrentzParser.h"
 #import "TheTVDB.h"
 #import "LCLLogFile.h"
 
@@ -110,7 +111,7 @@
     
     // newWinHeight should be equal to the wanted window size (in Interface Builder) + 54 (title bar height)
     if ([[tabViewItem identifier] isEqualTo:@"tabItemPreferences"]) {
-        newWinHeight = 500;
+        newWinHeight = 560;
     } else if ([[tabViewItem identifier] isEqualTo:@"tabItemSubscriptions"]) {
         newWinHeight = 570;
     }  else if ([[tabViewItem identifier] isEqualTo:@"tabItemAbout"]) {
@@ -278,19 +279,14 @@
         LogError(@"Could not download/parse feed for %@ <%@>", [selectedShow valueForKey:@"name"], [selectedShow valueForKey:@"url"]);
     } else {
         [episodeArrayController addObjects:results];
+        
         // Check if there are HD episodes, if so enable the "Download in HD" checkbox
-        BOOL isHD = NO;
-        for (int i = 0; i < [results count]; i++) {
-            NSMutableDictionary *episode = [results objectAtIndex:i];
-            if ([[episode valueForKey:@"isHD"] intValue] == YES) {
-                isHD = YES;
-                break;
-            }
-        }
-        if (!isHD) {
+        BOOL feedHasHDEpisodes = [TSParseXMLFeeds feedHasHDEpisodes:results];
+        
+        if (!feedHasHDEpisodes) {
             [showQuality setState:NO];
         }
-        [showQuality setEnabled:isHD];
+        [showQuality setEnabled:feedHasHDEpisodes];
         
         // Update the filter predicate to only display the correct quality.
         [self showQualityDidChange:nil];
@@ -358,6 +354,16 @@
 
 - (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName
 {
+    // Process the URL if the is not found
+    if ([url rangeOfString:@"http"].location == NSNotFound) {
+        LogInfo(@"Retrieving an HD torrent file from Torrentz of: %@", url);
+        url = [TorrentzParser getAlternateTorrentForEpisode:url];
+        if (url == nil) {
+            LogError(@"Unable to found an HD torrent file for: %@",fileName);
+            return;
+        }
+    }
+    
     // Method copied from TVShowsHelper.m
     LogInfo(@"Attempting to download episode: %@", fileName);
     NSData *fileContents = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
@@ -365,7 +371,7 @@
     
     [fileContents writeToFile:saveLocation atomically:YES];
     
-    if (!fileContents) {
+    if (!fileContents || [fileContents length] < 100) {
         LogError(@"Unable to download file: %@ <%@>",fileName, url);
     } else {
         // The file downloaded successfully, continuing...
@@ -376,6 +382,20 @@
             [[NSWorkspace sharedWorkspace] openFile:saveLocation withApplication:nil andDeactivate:NO];
         }
     }
+}
+
+- (NSObject *) getEpisodeAtRow:(NSInteger)row
+{
+    for (NSObject *episode in [episodeArrayController content]) {
+        if ([[episode valueForKey:@"isHD"] boolValue] == [showQuality state]) {
+            if (row == 0) {
+                return episode;
+            } else {
+                row--;
+            }
+        }
+    }
+    return nil;
 }
 
 - (BOOL) tableView:(NSTableView *)aTableView shouldSelectRow:(NSInteger)rowIndex
@@ -399,7 +419,7 @@
             
             // This currently only returns a Torrent file and should eventually regex
             // out the actual file extension of the item we're downloading.
-            NSObject *episode = [[episodeArrayController content] objectAtIndex:clickedRow];
+            NSObject *episode = [self getEpisodeAtRow:clickedRow];
             [self startDownloadingURL:[episode valueForKey:@"link"]
                          withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"] ];
         }
@@ -422,7 +442,7 @@
                                                                      ascending: YES
                                                                       selector: @selector(caseInsensitiveCompare:)];
     [SBArrayController setSortDescriptors:[NSArray arrayWithObject:SBSortDescriptor]];
-
+    
     [SBSortDescriptor release];
 }
 

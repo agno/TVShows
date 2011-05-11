@@ -53,6 +53,7 @@
 
 - (void) setDefaultUserDefaults
 {
+    [TSUserDefaults setKey:@"ShowMenuBarIcon"           fromBool:YES];
     [TSUserDefaults setKey:@"AutoOpenDownloadedFiles"   fromBool:YES];
     [TSUserDefaults setKey:@"AutoSelectHDVersion"       fromBool:YES];
     [TSUserDefaults setKey:@"checkDelay"                fromFloat:0];
@@ -71,6 +72,7 @@
 - (void) loadSavedDefaults
 {
     // Localize section headings
+    [generalBoxTitle    setTitle:TSLocalizeString(@"General Settings")];
     [downloadBoxTitle   setTitle:TSLocalizeString(@"Download Preferences")];
     [growlBoxTitle      setTitle:TSLocalizeString(@"Growl Settings")];
     [updateBoxTitle     setTitle:TSLocalizeString(@"Application Update Preferences")];
@@ -81,6 +83,10 @@
     } else {
         [isEnabledControl setState:NSOffState];
     }
+    
+    // Show the menubar icon
+    [showMenuBarIcon setTitle:TSLocalizeString(@"Show TVShows status in the menu bar")];
+    [showMenuBarIcon setState:[TSUserDefaults getBoolFromKey:@"ShowMenuBarIcon" withDefault:YES]];
     
     // Automatically open downloaded files
     [autoOpenDownloadedFiles setTitle:TSLocalizeString(@"Automatically open each file after download")];
@@ -238,6 +244,12 @@
 - (IBAction) autoSelectHDVersionDidChange:(id)sender
 {
     [TSUserDefaults setKey:@"AutoSelectHDVersion" fromBool:[autoSelectHDVersion state]];
+}
+
+- (IBAction) showMenuBarIconDidChange:(id)sender
+{
+    [TSUserDefaults setKey:@"ShowMenuBarIcon" fromBool:[showMenuBarIcon state]];
+    [self updateLaunchAgent];
 }
 
 #pragma mark -
