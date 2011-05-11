@@ -48,8 +48,6 @@
     // Try to fix languages not supported in System Preferences but supported by TVShows
     BOOL needsRelaunch = [self fixUnsupportedLanguages];
     
-    LogInfo(@"Installed: %@ Build: %@", installedBuild, buildVersion);
-    
     // Check to see if we installed a different version, both updates and rollbacks.
     if (![buildVersion isEqualToString:installedBuild]) {
         
