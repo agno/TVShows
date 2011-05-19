@@ -67,6 +67,7 @@
     [feedbackButton setTitle: TSLocalizeString(@"Submit Feedback")];
     
     [addButton setTitle: TSLocalizeString(@"Add Show")];
+    [addRSSButton setTitle: TSLocalizeString(@"Add Custom RSS")];
     [lastCheckedText setStringValue: TSLocalizeString(@"Last Checked:")];
     
     [websiteButton setTitle: TSLocalizeString(@"Website")];

@@ -48,6 +48,7 @@
     IBOutlet NSWindow *showInfoWindow;
     IBOutlet NSTextField *lastCheckedText;
     IBOutlet NSButton *addButton;
+    IBOutlet NSButton *addRSSButton;
     IBOutlet NSTextField *lastCheckedDate;
     IBOutlet NSTableColumn *colHD;
     IBOutlet NSTableColumn *colName;

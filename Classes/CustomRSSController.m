@@ -19,22 +19,43 @@
 
 @implementation CustomRSSController
 
+- init
+{
+    if((self = [super init])) {
+        isTranslated = NO;
+    }
+    
+    return self;
+}
+
 - (IBAction) displayCustomRSSWindow:(id)sender
 {
-    // Localize everything
-    [rssSectionTitle setStringValue: TSLocalizeString(@"RSS Feed Information:")];
-    [filterSectionTitle setStringValue: TSLocalizeString(@"Only download items matching the following rules:")];
-    [nameText setStringValue: TSLocalizeString(@"Name:")];
-    [feedText setStringValue: TSLocalizeString(@"Feed:")];
+    // Localize things and prepare the window (only needed the first time)
+    if(isTranslated == NO) {
+        [rssSectionTitle setStringValue: TSLocalizeString(@"RSS Feed Information:")];
+        [filterSectionTitle setStringValue: TSLocalizeString(@"Only download items matching the following rules:")];
+        [nameText setStringValue: [NSString stringWithFormat:@"%@:", TSLocalizeString(@"Name")]];
+        [feedText setStringValue: [NSString stringWithFormat:@"%@:", TSLocalizeString(@"Feed URL")]];
+        [tvdbText setStringValue: [NSString stringWithFormat:@"%@:", TSLocalizeString(@"TVDB Link")]];
+        [cancelButton setTitle: TSLocalizeString(@"Cancel")];
+        [subscribeButton setTitle: TSLocalizeString(@"Subscribe")];
+        
+        // Localize the headings of the table columns
+        [[colHD headerCell] setStringValue: TSLocalizeString(@"HD")];
+        [[colName headerCell] setStringValue: TSLocalizeString(@"Episode Name")];
+        [[colSeason headerCell] setStringValue: TSLocalizeString(@"Season")];
+        [[colEpisode headerCell] setStringValue: TSLocalizeString(@"Episode")];
+        [[colDate headerCell] setStringValue: TSLocalizeString(@"Published Date")];
+    }
     
     [NSApp beginSheet: CustomRSSWindow
        modalForWindow: [[NSApplication sharedApplication] mainWindow]
         modalDelegate: nil
        didEndSelector: nil
           contextInfo: nil];
-
-    [NSApp endSheet: CustomRSSWindow];
+    
     [NSApp runModalForWindow: CustomRSSWindow];
+    [NSApp endSheet: CustomRSSWindow];
 }
 
 - (IBAction) closeCustomRSSWindow:(id)sender

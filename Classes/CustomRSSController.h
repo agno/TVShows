@@ -17,12 +17,25 @@
 
 @interface CustomRSSController : NSWindowController
 {
+    Boolean isTranslated;
+    
     IBOutlet NSWindow *CustomRSSWindow;
     
     IBOutlet NSTextField *rssSectionTitle;
     IBOutlet NSTextField *filterSectionTitle;
     IBOutlet NSTextField *nameText;
     IBOutlet NSTextField *feedText;
+    IBOutlet NSTextField *tvdbText;
+    IBOutlet NSButton *cancelButton;
+    IBOutlet NSButton *subscribeButton;
+    IBOutlet NSTableColumn *colHD;
+    IBOutlet NSTableColumn *colName;
+    IBOutlet NSTableColumn *colSeason;
+    IBOutlet NSTableColumn *colEpisode;
+    IBOutlet NSTableColumn *colDate;
+    
+    IBOutlet NSArrayController *episodeArrayController;
+    IBOutlet NSTableView *episodeTableView;
 }
 
 - (IBAction) displayCustomRSSWindow:(id)sender;
