@@ -25,7 +25,9 @@
     IBOutlet NSTextField *filterSectionTitle;
     IBOutlet NSTextField *nameText;
     IBOutlet NSTextField *feedText;
-    IBOutlet NSTextField *tvdbText;
+    IBOutlet NSComboBox *nameValue;
+    IBOutlet NSComboBox *feedValue;
+    IBOutlet NSButton *showQuality;
     IBOutlet NSButton *cancelButton;
     IBOutlet NSButton *subscribeButton;
     IBOutlet NSTableColumn *colHD;
@@ -34,11 +36,24 @@
     IBOutlet NSTableColumn *colEpisode;
     IBOutlet NSTableColumn *colDate;
     
+    IBOutlet NSArrayController *SBArrayController;
     IBOutlet NSArrayController *episodeArrayController;
     IBOutlet NSTableView *episodeTableView;
+    IBOutlet NSPredicateEditor *filtersEditor;
+    
+    IBOutlet NSPredicate *filterRules;
 }
 
 - (IBAction) displayCustomRSSWindow:(id)sender;
+- (void) setEpisodesFromRSS:(NSString *)feedURL;
+- (void) resetShowView;
+- (void) setUserDefinedShowQuality;
+- (IBAction) showQualityDidChange:(id)sender;
+- (void) setPossibleNamesFromFeed;
 - (IBAction) closeCustomRSSWindow:(id)sender;
+
+#pragma mark -
+#pragma mark Subscription Methods
+- (IBAction) subscribeToShow:(id)sender;
 
 @end

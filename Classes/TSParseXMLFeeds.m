@@ -41,14 +41,14 @@
             NSArray *seasonAndEpisode = [TSRegexFun parseSeasonAndEpisode:[item title]];
             
             if ([seasonAndEpisode count] == 3) {
-                episodeTitle = [TSRegexFun parseTitleFromString:[parsedData title]
+                episodeTitle = [TSRegexFun parseTitleFromString:[item title]
                                                  withIdentifier:seasonAndEpisode
                                                        withType:@"episode"];
                 episodeSeason = [TSRegexFun removeLeadingZero:[seasonAndEpisode objectAtIndex:1]];
                 episodeNumber = [TSRegexFun removeLeadingZero:[seasonAndEpisode objectAtIndex:2]];
                 
             } else if ([seasonAndEpisode count] == 4) {
-                episodeTitle = [TSRegexFun parseTitleFromString:[parsedData title]
+                episodeTitle = [TSRegexFun parseTitleFromString:[item title]
                                                  withIdentifier:seasonAndEpisode
                                                        withType:@"date"];
                 episodeSeason = @"-";
@@ -89,6 +89,7 @@
     }
     
     // Fake HD episodes if ShowRSS does not list any
+    // The maxItems is a quick hack for when this is not from ShowRSS
     if (!feedHasHDEpisodes) {
         for (NSMutableDictionary *realEpisode in episodeArray) {
             NSMutableDictionary *fakeEpisode = [[NSMutableDictionary alloc] init];

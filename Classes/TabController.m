@@ -274,7 +274,7 @@
 
 - (void) setEpisodesForShow
 {
-    NSArray *results = [TSParseXMLFeeds parseEpisodesFromFeed:[selectedShow valueForKey:@"url"] maxItems:10];
+    NSArray *results = [TSParseXMLFeeds parseEpisodesFromFeed:[selectedShow valueForKey:@"url"] maxItems:50];
     
     if ([results count] == 0) {
         LogError(@"Could not download/parse feed for %@ <%@>", [selectedShow valueForKey:@"name"], [selectedShow valueForKey:@"url"]);
@@ -345,11 +345,15 @@
 - (IBAction) showQualityDidChange:(id)sender
 {
     if ([showQuality state]) {
-        // Is HD and HD is enabled.
-        [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '1'"]];
+        [episodeArrayController setFilterPredicate:
+         [NSCompoundPredicate andPredicateWithSubpredicates:
+          [NSArray arrayWithObjects:[NSPredicate predicateWithFormat:@"isHD == '1'"],
+           [selectedShow valueForKey:@"filters"],nil]]];
     } else {
-        // Is not HD and HD is not enabled.
-        [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '0'"]];
+        [episodeArrayController setFilterPredicate:
+         [NSCompoundPredicate andPredicateWithSubpredicates:
+          [NSArray arrayWithObjects:[NSPredicate predicateWithFormat:@"isHD == '0'"],
+           [selectedShow valueForKey:@"filters"],nil]]];
     }
 }
 
@@ -385,20 +389,6 @@
     }
 }
 
-- (NSObject *) getEpisodeAtRow:(NSInteger)row
-{
-    for (NSObject *episode in [episodeArrayController content]) {
-        if ([[episode valueForKey:@"isHD"] boolValue] == [showQuality state]) {
-            if (row == 0) {
-                return episode;
-            } else {
-                row--;
-            }
-        }
-    }
-    return nil;
-}
-
 - (BOOL) tableView:(NSTableView *)aTableView shouldSelectRow:(NSInteger)rowIndex
 {
     // Check to see whether or not this is the GET button or not.
@@ -420,9 +410,9 @@
             
             // This currently only returns a Torrent file and should eventually regex
             // out the actual file extension of the item we're downloading.
-            NSObject *episode = [self getEpisodeAtRow:clickedRow];
+            NSObject *episode = [[episodeArrayController arrangedObjects] objectAtIndex:clickedRow];
             [self startDownloadingURL:[episode valueForKey:@"link"]
-                         withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"] ];
+                         withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]];
         }
     }
     

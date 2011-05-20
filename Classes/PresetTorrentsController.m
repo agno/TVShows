@@ -92,9 +92,6 @@
         [subscribeButton setEnabled:NO];
         [showQuality setEnabled:NO];
         
-        // Setup the default video quality
-        [showQuality setState: 1];
-        
         // And start the loading throbber
         [loading startAnimation:nil];
         [loadingText setHidden:NO];
@@ -306,7 +303,6 @@
     [showDescription setString: @""];
     [self setDefaultPoster];
     [self setUserDefinedShowQuality];
-    [showQuality setEnabled:NO];
 }
 
 - (void) setDefaultPoster {
@@ -346,7 +342,7 @@
     NSString *selectedShowURL = [NSString stringWithFormat:@"http://showrss.karmorra.info/feeds/%@.rss", showID];
     
     // Now we can trigger the time-expensive task
-    NSArray *results = [TSParseXMLFeeds parseEpisodesFromFeed:selectedShowURL maxItems:10];
+    NSArray *results = [TSParseXMLFeeds parseEpisodesFromFeed:selectedShowURL maxItems:50];
     
     // We are back after probably a lot of time, so check carefully if the user has changed the selection
     selectedObjects = [PTArrayController selectedObjects];

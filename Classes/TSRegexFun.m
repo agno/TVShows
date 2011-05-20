@@ -59,7 +59,10 @@
 + (NSString *) parseTitleFromString:(NSString *)title withIdentifier:(NSArray* )identifier withType:(NSString *)type
 {
     // This is a temporary method until theTVDB support is added
-    NSString *showTitle = [title stringByReplacingOccurrencesOfRegex:@"showRSS: feed for " withString:@""];
+    NSString *showTitle = [title stringByReplacingOccurrencesOfRegex:@"HD 720p: " withString:@""];
+    
+    showTitle = [showTitle stringByReplacingOccurrencesOfRegex:@"[\\. ]+(-.*)?[sS]?\\d.*" withString:@""];
+    showTitle = [showTitle stringByReplacingOccurrencesOfRegex:@"\\." withString:@" "];
     
     if (type == @"episode") {
         
@@ -82,6 +85,17 @@
         return nil;
     }
 
+}
+
++ (NSString *) parseShowFromTitle:(NSString *)title
+{
+    // This is a temporary method until theTVDB support is added
+    NSString *showTitle = [title stringByReplacingOccurrencesOfRegex:@"HD 720p: " withString:@""];
+    
+    showTitle = [showTitle stringByReplacingOccurrencesOfRegex:@"[\\. ]+(-.*)?[sS]?\\d.*" withString:@""];
+    showTitle = [showTitle stringByReplacingOccurrencesOfRegex:@"\\." withString:@" "];
+    
+    return showTitle;
 }
 
 + (NSString *) replaceHTMLEntitiesInString:(NSString *)string
