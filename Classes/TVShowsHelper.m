@@ -240,7 +240,7 @@
                 
                 if ([self startDownloadingURL:[episode valueForKey:@"link"]
                                  withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
-                                     showInfo:show]) {
+                                  andShowName:[show valueForKey:@"name"]]) {
                     
                     // Update when the show was last downloaded.
                     [show setValue:pubDate forKey:@"lastDownloaded"];
@@ -257,7 +257,7 @@
                 
                 if ([self startDownloadingURL:[episode valueForKey:@"link"]
                                  withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
-                                     showInfo:show]) {
+                                  andShowName:[show valueForKey:@"name"]]) {
                     
                     // Update when the show was last downloaded.
                     [show setValue:pubDate forKey:@"lastDownloaded"];
@@ -410,7 +410,7 @@
 
 #pragma mark -
 #pragma mark Download Methods
-- (BOOL) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName showInfo:(NSArray *)show
+- (BOOL) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName andShowName:(NSString *)show
 {
     // Process the URL if the is not found
     if ([url rangeOfString:@"http"].location == NSNotFound) {
@@ -422,9 +422,26 @@
         }
     }
     
+    // Build the saving folder
+    NSString *saveLocation = [TSUserDefaults getStringFromKey:@"downloadFolder"];
+    
+    // Check if we have to sort shows by folders or not
+    if ([TSUserDefaults getBoolFromKey:@"SortInFolders" withDefault:NO]) {
+        saveLocation = [saveLocation stringByAppendingPathComponent:[show valueForKey:@"name"]];
+        if (![[NSFileManager defaultManager] createDirectoryAtPath:saveLocation
+                                       withIntermediateDirectories:YES
+                                                        attributes:nil
+                                                             error:nil]) {
+            LogError(@"Unable to create the folder: %@", fileName);
+            return NO;
+        }
+    }
+    
+    // Add the filename
+    saveLocation = [saveLocation stringByAppendingPathComponent:fileName];
+    
     LogInfo(@"Attempting to download new episode: %@", fileName);
-    NSData *fileContents = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
-    NSString *saveLocation = [[TSUserDefaults getStringFromKey:@"downloadFolder"] stringByAppendingPathComponent:fileName];
+    NSData *fileContents = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
     
     // Check if the download was right
     if (!fileContents || [fileContents length] < 100) {

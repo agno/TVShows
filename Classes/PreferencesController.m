@@ -55,6 +55,7 @@
 {
     [TSUserDefaults setKey:@"ShowMenuBarIcon"           fromBool:YES];
     [TSUserDefaults setKey:@"AutoOpenDownloadedFiles"   fromBool:YES];
+    [TSUserDefaults setKey:@"SortInFolders"             fromBool:NO];
     [TSUserDefaults setKey:@"AutoSelectHDVersion"       fromBool:YES];
     [TSUserDefaults setKey:@"checkDelay"                fromFloat:0];
     [TSUserDefaults setKey:@"downloadFolder"            fromString:[NSHomeDirectory() stringByAppendingPathComponent:@"Downloads"]];
@@ -91,6 +92,10 @@
     // Automatically open downloaded files
     [autoOpenDownloadedFiles setTitle:TSLocalizeString(@"Automatically open each file after download")];
     [autoOpenDownloadedFiles setState:[TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:YES]];
+    
+    // Automatically select HD version by default
+    [sortInFolders setTitle:TSLocalizeString(@"Save each show in its own folder")];
+    [sortInFolders setState:[TSUserDefaults getBoolFromKey:@"SortInFolders" withDefault:NO]];
     
     // Automatically select HD version by default
     [autoSelectHDVersion setTitle:TSLocalizeString(@"Download HD versions by default")];
@@ -142,6 +147,12 @@
     
     // Check Now button
     [checkNowButton setTitle:TSLocalizeString(@"Check Now")];
+}
+
+- (IBAction) showMenuBarIconDidChange:(id)sender
+{
+    [TSUserDefaults setKey:@"ShowMenuBarIcon" fromBool:[showMenuBarIcon state]];
+    [self updateLaunchAgent];
 }
 
 #pragma mark -
@@ -241,15 +252,14 @@
     [TSUserDefaults setKey:@"AutoOpenDownloadedFiles" fromBool:[autoOpenDownloadedFiles state]];
 }
 
+- (IBAction) sortInFoldersDidChange:(id)sender
+{
+    [TSUserDefaults setKey:@"SortInFolders" fromBool:[sortInFolders state]];
+}
+
 - (IBAction) autoSelectHDVersionDidChange:(id)sender
 {
     [TSUserDefaults setKey:@"AutoSelectHDVersion" fromBool:[autoSelectHDVersion state]];
-}
-
-- (IBAction) showMenuBarIconDidChange:(id)sender
-{
-    [TSUserDefaults setKey:@"ShowMenuBarIcon" fromBool:[showMenuBarIcon state]];
-    [self updateLaunchAgent];
 }
 
 #pragma mark -

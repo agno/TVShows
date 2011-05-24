@@ -101,7 +101,7 @@
 - (void) setPosterForShow:(NSString *)show;
 - (IBAction) closeShowInfoWindow:(id)sender;
 - (IBAction) showQualityDidChange:(id)sender;
-- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName;
+- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName andShowName:(NSString *)show;
 - (void) sortSubscriptionList;
 - (IBAction) unsubscribeFromShow:(id)sender;
 

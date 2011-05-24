@@ -113,13 +113,13 @@
     
     // newWinHeight should be equal to the wanted window size (in Interface Builder) + 54 (title bar height)
     if ([[tabViewItem identifier] isEqualTo:@"tabItemPreferences"]) {
-        newWinHeight = 560;
+        newWinHeight = 590;
     } else if ([[tabViewItem identifier] isEqualTo:@"tabItemSubscriptions"]) {
-        newWinHeight = 570;
+        newWinHeight = 590;
     }  else if ([[tabViewItem identifier] isEqualTo:@"tabItemAbout"]) {
-        newWinHeight = 422;
+        newWinHeight = 500;
     } else {
-        newWinHeight = 422;
+        newWinHeight = 590;
     }
     
     tabFrame = NSMakeRect(tabFrame.origin.x, tabFrame.origin.y - (newWinHeight - (int)(NSHeight(tabFrame))), (int)(NSWidth(tabFrame)), newWinHeight);
@@ -361,7 +361,7 @@
     }
 }
 
-- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName
+- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName andShowName:(NSString *)show
 {
     // Process the URL if the is not found
     if ([url rangeOfString:@"http"].location == NSNotFound) {
@@ -381,10 +381,27 @@
         }
     }
     
+    // Build the saving folder
+    NSString *saveLocation = [TSUserDefaults getStringFromKey:@"downloadFolder"];
+    
+    // Check if we have to sort shows by folders or not
+    if ([TSUserDefaults getBoolFromKey:@"SortInFolders" withDefault:NO]) {
+        saveLocation = [saveLocation stringByAppendingPathComponent:show];
+        if (![[NSFileManager defaultManager] createDirectoryAtPath:saveLocation
+                                       withIntermediateDirectories:YES
+                                                        attributes:nil
+                                                             error:nil]) {
+            LogError(@"Unable to create the folder: %@", fileName);
+            return;
+        }
+    }
+    
+    // Add the filename
+    saveLocation = [saveLocation stringByAppendingPathComponent:fileName];
+    
     // Method copied from TVShowsHelper.m
     LogInfo(@"Attempting to download new episode: %@", fileName);
-    NSData *fileContents = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
-    NSString *saveLocation = [[TSUserDefaults getStringFromKey:@"downloadFolder"] stringByAppendingPathComponent:fileName];
+    NSData *fileContents = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
     
     if (!fileContents || [fileContents length] < 100) {
         LogError(@"Unable to download file: %@ <%@>",fileName, url);
@@ -432,7 +449,8 @@
             // out the actual file extension of the item we're downloading.
             NSObject *episode = [[episodeArrayController arrangedObjects] objectAtIndex:clickedRow];
             [self startDownloadingURL:[episode valueForKey:@"link"]
-                         withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]];
+                         withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
+                          andShowName:[selectedShow valueForKey:@"name"]];
         }
     }
     
