@@ -63,7 +63,7 @@
     // This is a temporary method until theTVDB support is added
     NSString *showTitle = [title stringByReplacingOccurrencesOfRegex:@"HD 720p: " withString:@""];
     
-    showTitle = [showTitle stringByReplacingOccurrencesOfRegex:@"[\\. ]+(-.*)?[sS]?\\d.*" withString:@""];
+    showTitle = [showTitle stringByReplacingOccurrencesOfRegex:@"[\\._ ]+([\\[-].*)?[sS]?\\d.*" withString:@""];
     showTitle = [showTitle stringByReplacingOccurrencesOfRegex:@"[\\._ ]+" withString:@" "];
     
     if (type == @"episode") {
@@ -94,8 +94,8 @@
     // This is a temporary method until theTVDB support is added
     NSString *showTitle = [title stringByReplacingOccurrencesOfRegex:@"HD 720p: " withString:@""];
     
-    showTitle = [showTitle stringByReplacingOccurrencesOfRegex:@"[\\. ]+(-.*)?[sS]?\\d.*" withString:@""];
-    showTitle = [showTitle stringByReplacingOccurrencesOfRegex:@"\\." withString:@" "];
+    showTitle = [showTitle stringByReplacingOccurrencesOfRegex:@"[\\._ ]+([\\[-].*)?[sS]?\\d.*" withString:@""];
+    showTitle = [showTitle stringByReplacingOccurrencesOfRegex:@"[\\._ ]+" withString:@" "];
     
     return showTitle;
 }
