@@ -67,6 +67,7 @@
     [feedbackButton setTitle: TSLocalizeString(@"Submit Feedback")];
     
     [addButton setTitle: TSLocalizeString(@"Add Show")];
+    [addRSSButton setTitle: TSLocalizeString(@"Add Custom RSS")];
     [lastCheckedText setStringValue: TSLocalizeString(@"Last Checked:")];
     
     [websiteButton setTitle: TSLocalizeString(@"Website")];
@@ -95,6 +96,7 @@
     [infoBoxTitle setTitle: TSLocalizeString(@"Info")];
     [prefBoxTitle setTitle: TSLocalizeString(@"Preferences")];
     [closeButton setTitle: TSLocalizeString(@"Close")];
+    [editButton setTitle: TSLocalizeString(@"Edit")];
     [unsubscribeButton setTitle: TSLocalizeString(@"Unsubscribe")];
     
     // Sort the subscription list and draw the About box
@@ -214,8 +216,8 @@
     [textView_logViewer setString:loggedItems];
     [textView_logViewer moveToEndOfDocument:nil];
     
-    [NSApp runModalForWindow: logViewerWindow];
     [NSApp endSheet: logViewerWindow];
+    [NSApp runModalForWindow: logViewerWindow];
 }
 
 - (IBAction) closeLogViewerWindow:(id)sender
@@ -229,6 +231,9 @@
 - (IBAction) displayShowInfoWindow:(id)sender
 {
     selectedShow = [[[sender cell] representedObject] representedObject];
+    
+    // Link that info to the edit button
+    [[editButton cell] setRepresentedObject:self];
     
     // Set up the date formatter
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
@@ -267,13 +272,13 @@
        didEndSelector: nil
           contextInfo: nil];
     
-    [NSApp runModalForWindow: showInfoWindow];
     [NSApp endSheet: showInfoWindow];
+    [NSApp runModalForWindow: showInfoWindow];
 }
 
 - (void) setEpisodesForShow
 {
-    NSArray *results = [TSParseXMLFeeds parseEpisodesFromFeed:[selectedShow valueForKey:@"url"] maxItems:10];
+    NSArray *results = [TSParseXMLFeeds parseEpisodesFromFeed:[selectedShow valueForKey:@"url"] maxItems:50];
     
     if ([results count] == 0) {
         LogError(@"Could not download/parse feed for %@ <%@>", [selectedShow valueForKey:@"name"], [selectedShow valueForKey:@"url"]);
@@ -344,11 +349,15 @@
 - (IBAction) showQualityDidChange:(id)sender
 {
     if ([showQuality state]) {
-        // Is HD and HD is enabled.
-        [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '1'"]];
+        [episodeArrayController setFilterPredicate:
+         [NSCompoundPredicate andPredicateWithSubpredicates:
+          [NSArray arrayWithObjects:[NSPredicate predicateWithFormat:@"isHD == '1'"],
+           [selectedShow valueForKey:@"filters"],nil]]];
     } else {
-        // Is not HD and HD is not enabled.
-        [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '0'"]];
+        [episodeArrayController setFilterPredicate:
+         [NSCompoundPredicate andPredicateWithSubpredicates:
+          [NSArray arrayWithObjects:[NSPredicate predicateWithFormat:@"isHD == '0'"],
+           [selectedShow valueForKey:@"filters"],nil]]];
     }
 }
 
@@ -359,7 +368,7 @@
         LogInfo(@"Retrieving an HD torrent file from Torrentz of: %@", url);
         url = [TorrentzParser getAlternateTorrentForEpisode:url];
         if (url == nil) {
-            LogError(@"Unable to found an HD torrent file for: %@",fileName);
+            LogError(@"Unable to find an HD torrent file for: %@",fileName);
             return;
         }
     }
@@ -384,20 +393,6 @@
     }
 }
 
-- (NSObject *) getEpisodeAtRow:(NSInteger)row
-{
-    for (NSObject *episode in [episodeArrayController content]) {
-        if ([[episode valueForKey:@"isHD"] boolValue] == [showQuality state]) {
-            if (row == 0) {
-                return episode;
-            } else {
-                row--;
-            }
-        }
-    }
-    return nil;
-}
-
 - (BOOL) tableView:(NSTableView *)aTableView shouldSelectRow:(NSInteger)rowIndex
 {
     // Check to see whether or not this is the GET button or not.
@@ -419,9 +414,9 @@
             
             // This currently only returns a Torrent file and should eventually regex
             // out the actual file extension of the item we're downloading.
-            NSObject *episode = [self getEpisodeAtRow:clickedRow];
+            NSObject *episode = [[episodeArrayController arrangedObjects] objectAtIndex:clickedRow];
             [self startDownloadingURL:[episode valueForKey:@"link"]
-                         withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"] ];
+                         withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]];
         }
     }
     
@@ -448,6 +443,16 @@
 
 - (IBAction) unsubscribeFromShow:(id)sender
 {
+    // Ask for confirmation to the user
+    if (NSRunCriticalAlertPanel([NSString stringWithFormat:TSLocalizeString(@"Are you sure you want to unsubscribe from %@?"),
+                                 [selectedShow valueForKey:@"name"]],
+                                TSLocalizeString(@"This action cannot be undone."),
+                                TSLocalizeString(@"Unsubscribe"),
+                                TSLocalizeString(@"Cancel"),
+                                nil) != NSAlertDefaultReturn) { 
+        return;
+    }
+    
     id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
     NSManagedObject *selectedShowObj = [[delegateClass managedObjectContext] objectWithID:[selectedShow objectID]];
     

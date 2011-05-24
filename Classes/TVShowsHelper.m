@@ -176,7 +176,7 @@
             
             // Only check for new episodes if it's enabled.
             if ([[show valueForKey:@"isEnabled"] boolValue]) {
-                //                        LogDebug(@"Checking for new episodes of %@.", [show valueForKey:@"name"]);
+                //LogDebug(@"Checking for new episodes of %@.", [show valueForKey:@"name"]);
                 [self checkForNewEpisodes:show];
             }
             //              }
@@ -198,7 +198,7 @@
 - (void) checkForNewEpisodes:(NSArray *)show
 {
     NSDate *pubDate, *lastDownloaded, *lastChecked;
-    NSArray *episodes = [TSParseXMLFeeds parseEpisodesFromFeed:[show valueForKey:@"url"] maxItems:10];
+    NSArray *episodes = [TSParseXMLFeeds parseEpisodesFromFeed:[show valueForKey:@"url"] maxItems:50];
     
     if ([episodes count] == 0) {
         LogError(@"Could not download/parse feed for %@ <%@>", [show valueForKey:@"name"], [show valueForKey:@"url"]);
@@ -209,6 +209,11 @@
     // Get the dates before checking anything, in case we have to download more than one episode
     lastDownloaded = [show valueForKey:@"lastDownloaded"];
     lastChecked = [TSUserDefaults getDateFromKey:@"lastCheckedForEpisodes"];
+    
+    // Filter episodes according to user filters
+    if ([show valueForKey:@"filters"] != nil) {
+        episodes = [episodes filteredArrayUsingPredicate:[show valueForKey:@"filters"]];
+    }
     
     // For each episode that was parsed...
     for (NSArray *episode in episodes) {
@@ -412,7 +417,7 @@
         LogInfo(@"Retrieving an HD torrent file from Torrentz of: %@", url);
         url = [TorrentzParser getAlternateTorrentForEpisode:url];
         if (url == nil) {
-            LogError(@"Unable to found an HD torrent file for: %@", fileName);
+            LogError(@"Unable to find an HD torrent file for: %@", fileName);
             return NO;
         }
     }

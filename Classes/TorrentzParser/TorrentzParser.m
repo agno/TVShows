@@ -15,7 +15,7 @@
 #import "AppInfoConstants.h"
 #import "TorrentzParser.h"
 #import "RegexKitLite.h"
-
+#import "WebsiteFunctions.h"
 
 @implementation TorrentzParser
 
@@ -41,15 +41,11 @@
         torrentzURLFormat = @"http://torrentz.eu/feed_any?q=%%22%@%%22+720p";
     }
     
-    // Prepare the Torrentz search URL
-    NSURL *torrentzURL = [NSURL URLWithString:[NSString stringWithFormat:torrentzURLFormat,
-                                               [episodeName stringByReplacingOccurrencesOfString:@" "
-                                                                                      withString:@"+"]]];
-    
     // Now let's grab the search results
-    NSString *searchResults = [[[NSString alloc] initWithContentsOfURL:torrentzURL
-                                                              encoding:NSUTF8StringEncoding
-                                                                 error:nil] autorelease];
+    NSString *torrentzURL = [NSString stringWithFormat:torrentzURLFormat,
+                             [episodeName stringByReplacingOccurrencesOfString:@" "
+                                                                    withString:@"+"]];
+    NSString *searchResults = [WebsiteFunctions downloadURL:torrentzURL];
     
     // Regex fun...
     NSString *regex = @"<guid>[^<]+</guid>";
@@ -59,8 +55,7 @@
     if ([tempValues count] >= 1) {
         
         // Get the torrentz result page
-        NSString *value = [tempValues objectAtIndex:0];
-        torrentzURL = [NSURL URLWithString:[value stringByReplacingOccurrencesOfRegex:@"<[^<]+>" withString:@""]];
+        torrentzURL = [[tempValues objectAtIndex:0] stringByReplacingOccurrencesOfRegex:@"<[^<]+>" withString:@""];
         
         // Get all possible torrent files
         tempValues = [TorrentzParser getAllTorrentsFromTorrenzURL:torrentzURL];
@@ -77,12 +72,10 @@
     }
 }
 
-+ (NSArray *) getAllTorrentsFromTorrenzURL:(NSURL*)aTorrentzURL
++ (NSArray *) getAllTorrentsFromTorrenzURL:(NSString *)aTorrentzURL
 {
     // Now let's grab the meta search results
-    NSString *searchResults = [[[NSString alloc] initWithContentsOfURL:aTorrentzURL
-                                                              encoding:NSUTF8StringEncoding
-                                                                 error:nil] autorelease];
+    NSString *searchResults = [WebsiteFunctions downloadURL:aTorrentzURL];
     
     // Get all the external links (the trackers)
     NSString *regex = @"<a href=\"http[^\"]+";
@@ -96,24 +89,24 @@
         
         // Process only known trackers
         if([tracker hasPrefix:@"http://www.vertor.com"]) {
-            torrent = [TorrentzParser getTorrentFromTracker:[NSURL URLWithString:tracker]
+            torrent = [TorrentzParser getTorrentFromTracker:tracker
                                             withLinkMatcher:@"http://www.vertor.com/([^\"]*)mod=download([^\"]*)id=([^\"]*)"
                                                   appending:@""];
             torrent = [torrent stringByReplacingOccurrencesOfString:@"amp;" withString:@""];
         } else if([tracker hasPrefix:@"http://thepiratebay.org"]) {
-            torrent = [TorrentzParser getTorrentFromTracker:[NSURL URLWithString:tracker]
+            torrent = [TorrentzParser getTorrentFromTracker:tracker
                                             withLinkMatcher:@"http://torrents.thepiratebay.org([^\"]*)"
                                                   appending:@""];
         } else if([tracker hasPrefix:@"http://btjunkie.org"]) {
-            torrent = [TorrentzParser getTorrentFromTracker:[NSURL URLWithString:tracker]
+            torrent = [TorrentzParser getTorrentFromTracker:tracker
                                             withLinkMatcher:@"http://dl.btjunkie.org/torrent/([^\"]*)\\.torrent"
                                                   appending:@""];
         } else if([tracker hasPrefix:@"http://www.btmon.com"]) {
-            torrent = [TorrentzParser getTorrentFromTracker:[NSURL URLWithString:tracker]
+            torrent = [TorrentzParser getTorrentFromTracker:tracker
                                             withLinkMatcher:@"/([^\"]*)\\.torrent"
                                                   appending:@"http://www.btmon.com"];
         } else if([tracker hasPrefix:@"http://www.torrenthound.com"]) {
-            torrent = [TorrentzParser getTorrentFromTracker:[NSURL URLWithString:tracker]
+            torrent = [TorrentzParser getTorrentFromTracker:tracker
                                             withLinkMatcher:@"/torrent/([^\"]*)"
                                                   appending:@"http://www.torrenthound.com"];
         }
@@ -126,12 +119,10 @@
     return torrents;
 }
 
-+ (NSString *) getTorrentFromTracker:(NSURL*)theURL withLinkMatcher:(NSString*)theLinkMatcher appending:(NSString*)aString
++ (NSString *) getTorrentFromTracker:(NSString*)theURL withLinkMatcher:(NSString*)theLinkMatcher appending:(NSString*)aString
 {
     // Let's grab this URL content
-    NSString *content = [[[NSString alloc] initWithContentsOfURL:theURL
-                                                        encoding:NSUTF8StringEncoding
-                                                           error:nil] autorelease];
+    NSString *content = [WebsiteFunctions downloadURL:theURL];
     
     // Get all the URLs
     NSArray *tempValues = [content componentsMatchedByRegex:theLinkMatcher];

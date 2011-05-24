@@ -92,9 +92,6 @@
         [subscribeButton setEnabled:NO];
         [showQuality setEnabled:NO];
         
-        // Setup the default video quality
-        [showQuality setState: 1];
-        
         // And start the loading throbber
         [loading startAnimation:nil];
         [loadingText setHidden:NO];
@@ -106,7 +103,7 @@
     
     // Grab the list of episodes
     [episodeArrayController removeObjects:[episodeArrayController content]];
-    [self setEpisodesForSelectedShow];
+    [self tableViewSelectionDidChange:nil];
     
     [NSApp beginSheet: PTWindow
        modalForWindow: [[NSApplication sharedApplication] mainWindow]
@@ -140,9 +137,9 @@
     // Focus the search field
     [[PTSearchField cell] performClick:self];
     
-    [NSApp runModalForWindow: PTWindow];
-    
     [NSApp endSheet: PTWindow];
+    
+    [NSApp runModalForWindow: PTWindow];
 }
 
 - (IBAction) closePresetTorrentsWindow:(id)sender
@@ -187,10 +184,7 @@
     // Feel free to improve it if you find a way
     
     // Download the page containing the show list
-    NSURL *showListURL = [NSURL URLWithString:ShowListURL];
-    NSString *showListContents = [[[NSString alloc] initWithContentsOfURL: showListURL
-                                                                 encoding: NSUTF8StringEncoding
-                                                                    error: NULL] autorelease];
+    NSString *showListContents = [WebsiteFunctions downloadURL:ShowListURL];
     
     // Be sure to only search for shows between the <select> tags
     // Warning about never being read can be safely ignored
@@ -276,6 +270,9 @@
         // or else searching and the scrollbar will fail.
         if ([PTTableView selectedRow] != -1 || ![PTTableView selectedRow]) {
             
+            NSNumber *showID = nil;
+            NSString *showName = nil;
+            
             // First disable completely the subscribe button is the user is already subscribed
             if ([[PTArrayController selectedObjects] count] != 0) {
                 if ([self userIsSubscribedToShow:[[[PTArrayController selectedObjects] objectAtIndex:0] valueForKey:@"name"]]) {
@@ -283,20 +280,26 @@
                 } else {
                     [subscribeButton setEnabled:YES];
                 }
+                
+                showID = [[[PTArrayController selectedObjects] objectAtIndex:0] valueForKey:@"showrssID"];
+                showName = [[[PTArrayController selectedObjects] objectAtIndex:0] valueForKey:@"name"];
             }
             
             // In the meantime show the loading throbber
             [self showLoadingThrobber];
             
-            // Grab the list of episodes
-            [self performSelectorInBackground:@selector(setEpisodesForSelectedShow) withObject:nil];
+            if (showID != nil) {
+                // Grab the list of episodes
+                [self performSelectorInBackground:@selector(setEpisodesForShow:) withObject:showID];
+            }
             
-            // Grab the show poster
-            [self performSelectorInBackground:@selector(setPosterForSelectedShow) withObject:nil];
-            
-            // Grab the show description
-            [self performSelectorInBackground:@selector(setDescriptionForSelectedShow) withObject:nil];
-
+            if (showName != nil) {
+                // Grab the show poster
+                [self performSelectorInBackground:@selector(setPosterForShow:) withObject:showName];
+                
+                // Grab the show description
+                [self performSelectorInBackground:@selector(setDescriptionForShow:) withObject:showName];
+            }
         }
     }
 }
@@ -306,7 +309,6 @@
     [showDescription setString: @""];
     [self setDefaultPoster];
     [self setUserDefinedShowQuality];
-    [showQuality setEnabled:NO];
 }
 
 - (void) setDefaultPoster {
@@ -333,92 +335,104 @@
     [descriptionView setHidden:NO];
 }
 
-- (void) setEpisodesForSelectedShow
+#pragma mark -
+#pragma mark Background workers
+- (void) setEpisodesForShow:(NSNumber *)showID
 {
-    // Get the show ID
-    NSArray *selectedObjects = [PTArrayController selectedObjects];
-    if ([selectedObjects count] == 0) {
-        return;
-    }
-    NSNumber *showID = [[selectedObjects objectAtIndex:0] valueForKey:@"showrssID"];
-    
     // Build the RSS URL (hardcoded to ShowRSS)
     NSString *selectedShowURL = [NSString stringWithFormat:@"http://showrss.karmorra.info/feeds/%@.rss", showID];
     
     // Now we can trigger the time-expensive task
-    NSArray *results = [TSParseXMLFeeds parseEpisodesFromFeed:selectedShowURL maxItems:10];
+    NSArray *results = [NSArray arrayWithObjects:showID,
+                        [TSParseXMLFeeds parseEpisodesFromFeed:selectedShowURL maxItems:50], nil];
     
+    if ([results count] == 0) {
+        LogError(@"Could not download/parse feed <%@>", selectedShowURL);
+        return;
+    }
+
+    [self performSelectorOnMainThread:@selector(updateEpisodes:) withObject:results waitUntilDone:NO];
+}
+
+- (void) setPosterForShow:(NSString *)showName
+{
+    // Now we can trigger the time-expensive task
+    NSArray *results = [NSArray arrayWithObjects:showName,
+                        [[[TheTVDB getPosterForShow:showName withHeight:187 withWidth:129] copy] autorelease], nil];
+    
+    [self performSelectorOnMainThread:@selector(updatePoster:) withObject:results waitUntilDone:NO];
+}
+
+- (void) setDescriptionForShow:(NSString *)showName
+{
+    // Now we can trigger the time-expensive task
+    NSArray *results = [NSArray arrayWithObjects:showName,
+                        [TheTVDB getValueForKey:@"Overview" andShow:showName], nil];
+    
+    [self performSelectorOnMainThread:@selector(updateDescription:) withObject:results waitUntilDone:NO];
+}
+
+- (void) updateEpisodes:(NSArray *)data
+{
     // We are back after probably a lot of time, so check carefully if the user has changed the selection
-    selectedObjects = [PTArrayController selectedObjects];
+    NSArray *selectedObjects = [PTArrayController selectedObjects];
     if ([selectedObjects count] == 0) {
         return;
     }
+    
+    // Extract the data
+    NSNumber *showID = [data objectAtIndex:0];
+    NSArray *results = [data objectAtIndex:1];
     NSNumber *copy = [[selectedObjects objectAtIndex:0] valueForKey:@"showrssID"];
     
     // Continue only if the selected show is the same as before
     if ([showID isEqualToNumber:copy]) {
-        if ([results count] == 0) {
-            LogError(@"Could not download/parse feed <%@>", selectedShowURL);
-        } else {
-            [episodeArrayController addObjects:results];
-            
-            // Check if there are HD episodes, if so enable the "Download in HD" checkbox
-            BOOL feedHasHDEpisodes = [TSParseXMLFeeds feedHasHDEpisodes:results];
-            
-            if (!feedHasHDEpisodes) {
-                [showQuality setState:NO];
-            }
-            [showQuality setEnabled:feedHasHDEpisodes];
-            
-            // Update the filter predicate to only display the correct quality.
-            [self showQualityDidChange:nil];
+        [episodeArrayController addObjects:results];
+        
+        // Check if there are HD episodes, if so enable the "Download in HD" checkbox
+        BOOL feedHasHDEpisodes = [TSParseXMLFeeds feedHasHDEpisodes:results];
+        
+        if (!feedHasHDEpisodes) {
+            [showQuality setState:NO];
         }
+        [showQuality setEnabled:feedHasHDEpisodes];
+        
+        // Update the filter predicate to only display the correct quality.
+        [self showQualityDidChange:nil];
     }
 }
 
-- (void) setPosterForSelectedShow
+- (void) updatePoster:(NSArray *)data
 {
-    // Get the show name
+    // We are back after probably a lot of time, so check carefully if the user has changed the selection
     NSArray *selectedObjects = [PTArrayController selectedObjects];
     if ([selectedObjects count] == 0) {
         return;
     }
-    NSString *showName = [[selectedObjects objectAtIndex:0] valueForKey:@"name"];
     
-    // Now we can trigger the time-expensive task
-    NSImage *poster = [[[TheTVDB getPosterForShow:showName withHeight:187 withWidth:129] copy] autorelease];
-    
-    // We are back after probably a lot of time, so check carefully if the user has changed the selection
-    selectedObjects = [PTArrayController selectedObjects];
-    if ([selectedObjects count] == 0) {
-        return;
-    }
+    // Extract the data
+    NSString *showName = [data objectAtIndex:0];
+    NSImage *poster = [data objectAtIndex:1];
     NSString *copy = [[selectedObjects objectAtIndex:0] valueForKey:@"name"];
     
     // Continue only if the selected show is the same as before
     if ([showName isEqualToString:copy]) {
-        [showPoster setImage: poster];
+        [showPoster setImage:poster];
         [showPoster display];
     }
 }
 
-- (void) setDescriptionForSelectedShow
+- (void) updateDescription:(NSArray *)data
 {
-    // Get the show name
+    // We are back after probably a lot of time, so check carefully if the user has changed the selection
     NSArray *selectedObjects = [PTArrayController selectedObjects];
     if ([selectedObjects count] == 0) {
         return;
     }
-    NSString *showName = [[selectedObjects objectAtIndex:0] valueForKey:@"name"];
     
-    // Now we can trigger the time-expensive task
-    NSString *description = [TheTVDB getValueForKey:@"Overview" andShow:showName];
-    
-    // We are back after probably a lot of time, so check carefully if the user has changed the selection
-    selectedObjects = [PTArrayController selectedObjects];
-    if ([selectedObjects count] == 0) {
-        return;
-    }
+    // Extract the data
+    NSString *showName = [data objectAtIndex:0];
+    NSString *description = [data objectAtIndex:1];
     NSString *copy = [[selectedObjects objectAtIndex:0] valueForKey:@"name"];
     
     // Continue only if the selected show is the same as before

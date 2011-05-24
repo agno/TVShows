@@ -66,9 +66,15 @@
 - (void) setUserDefinedShowQuality;
 - (void) showLoadingThrobber;
 - (void) hideLoadingThrobber;
-- (void) setEpisodesForSelectedShow;
-- (void) setDescriptionForSelectedShow;
-- (void) setPosterForSelectedShow;
+
+#pragma mark -
+#pragma mark Background workers
+- (void) setEpisodesForShow:(NSNumber *)showID;
+- (void) setPosterForShow:(NSString *)showName;
+- (void) setDescriptionForShow:(NSString *)showName;
+- (void) updateEpisodes:(NSArray *)data;
+- (void) updatePoster:(NSArray *)data;
+- (void) updateDescription:(NSArray *)data;
 
 #pragma mark -
 #pragma mark Error Window Methors

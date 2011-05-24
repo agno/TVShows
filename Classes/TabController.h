@@ -48,6 +48,7 @@
     IBOutlet NSWindow *showInfoWindow;
     IBOutlet NSTextField *lastCheckedText;
     IBOutlet NSButton *addButton;
+    IBOutlet NSButton *addRSSButton;
     IBOutlet NSTextField *lastCheckedDate;
     IBOutlet NSTableColumn *colHD;
     IBOutlet NSTableColumn *colName;
@@ -68,6 +69,7 @@
     IBOutlet NSBox *infoBoxTitle;
     IBOutlet NSBox *prefBoxTitle;
     IBOutlet NSButton *closeButton;
+    IBOutlet NSButton *editButton;
     IBOutlet NSButton *unsubscribeButton;
     IBOutlet NSImageView *showPoster;
 }
@@ -75,7 +77,6 @@
 @property (retain) NSManagedObject *selectedShow;
 
 - (void) awakeFromNib;
-- (NSObject *) getEpisodeAtRow:(NSInteger)row;
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
 - (IBAction) showFeedbackWindow:(id)sender;
 
