@@ -31,8 +31,6 @@
 
 + (NSString *) downloadURL:(NSString *)url
 {
-    // Return value
-    
     // Set a restrictive timeout
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
                                              cachePolicy:NSURLRequestReloadIgnoringCacheData

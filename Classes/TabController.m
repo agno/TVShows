@@ -368,23 +368,39 @@
         LogInfo(@"Retrieving an HD torrent file from Torrentz of: %@", url);
         url = [TorrentzParser getAlternateTorrentForEpisode:url];
         if (url == nil) {
-            LogError(@"Unable to find an HD torrent file for: %@",fileName);
+            LogError(@"Unable to find an HD torrent file for: %@", fileName);
+            
+            // Display the error
+            NSRunCriticalAlertPanel([NSString stringWithFormat:TSLocalizeString(@"Unable to find an HD torrent for %@"), fileName],
+                                    TSLocalizeString(@"The file may not be released yet. Please try again later or check your internet connection. Alternatively you can download the SD version."),
+                                    TSLocalizeString(@"Ok"),
+                                    nil,
+                                    nil);
+            
             return;
         }
     }
     
     // Method copied from TVShowsHelper.m
-    LogInfo(@"Attempting to download episode: %@", fileName);
+    LogInfo(@"Attempting to download new episode: %@", fileName);
     NSData *fileContents = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
     NSString *saveLocation = [[TSUserDefaults getStringFromKey:@"downloadFolder"] stringByAppendingPathComponent:fileName];
     
-    [fileContents writeToFile:saveLocation atomically:YES];
-    
     if (!fileContents || [fileContents length] < 100) {
         LogError(@"Unable to download file: %@ <%@>",fileName, url);
+        
+        // Display the error
+        NSRunCriticalAlertPanel([NSString stringWithFormat:TSLocalizeString(@"Unable to download %@"), fileName],
+                                TSLocalizeString(@"Cannot connect. Please try again later or check your internet connection"),
+                                TSLocalizeString(@"Ok"),
+                                nil,
+                                nil);
+        
     } else {
         // The file downloaded successfully, continuing...
         LogInfo(@"Episode downloaded successfully.");
+        
+        [fileContents writeToFile:saveLocation atomically:YES];
         
         // Check to see if the user wants to automatically open new downloads
         if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
