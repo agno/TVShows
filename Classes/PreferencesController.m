@@ -381,6 +381,14 @@
     // LaunchOnlyOnce: Avoid launching more than once.
     [launchAgent setObject:[NSNumber numberWithBool:YES] forKey:@"LaunchOnlyOnce"];
     
+    // Create the Launch Agent directory for the user (just in case)
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[[self launchAgentPath] stringByDeletingLastPathComponent]]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:[[self launchAgentPath] stringByDeletingLastPathComponent]
+                                  withIntermediateDirectories:YES
+                                                   attributes:nil
+                                                        error:nil];
+    }
+    
     if (![launchAgent writeToFile:[self launchAgentPath] atomically:YES]) {
         LogCritical(@"Could not write to ~/Library/LaunchAgents/%@",TVShowsHelperDomain);
     }
