@@ -91,6 +91,13 @@
     // Fake HD episodes if ShowRSS does not list any
     if (!feedHasHDEpisodes) {
         for (NSMutableDictionary *realEpisode in episodeArray) {
+            // Ignore this episode if it is a daily show
+            // The scene does not release late nights regularly
+            if ([[realEpisode valueForKey:@"episodeSeason"] isEqualToString:@"-"]) {
+                [fakeEpisodeArray addObject:realEpisode];
+                continue;
+            }
+            
             NSMutableDictionary *fakeEpisode = [[NSMutableDictionary alloc] init];
             
             [fakeEpisode setValue:[realEpisode valueForKey:@"episodeName"]     forKey:@"episodeName"];
