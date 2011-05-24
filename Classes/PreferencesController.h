@@ -39,6 +39,7 @@
     IBOutlet NSButton *autoOpenDownloadedFiles;
     IBOutlet NSButton *sortInFolders;
     IBOutlet NSButton *autoSelectHDVersion;
+    IBOutlet NSButton *useAdditionalSourcesHD;
     
     // Growl Settings
     IBOutlet NSTextField *growlNotifyText;
@@ -72,6 +73,7 @@
 - (IBAction) autoOpenDownloadedFilesDidChange:(id)sender;
 - (IBAction) sortInFoldersDidChange:(id)sender;
 - (IBAction) autoSelectHDVersionDidChange:(id)sender;
+- (IBAction) useAdditionalSourcesHDDidChange:(id)sender;
 
 #pragma mark -
 #pragma mark Growl Notification Preferences

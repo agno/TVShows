@@ -113,13 +113,13 @@
     
     // newWinHeight should be equal to the wanted window size (in Interface Builder) + 54 (title bar height)
     if ([[tabViewItem identifier] isEqualTo:@"tabItemPreferences"]) {
-        newWinHeight = 590;
+        newWinHeight = 617;
     } else if ([[tabViewItem identifier] isEqualTo:@"tabItemSubscriptions"]) {
-        newWinHeight = 590;
+        newWinHeight = 617;
     }  else if ([[tabViewItem identifier] isEqualTo:@"tabItemAbout"]) {
         newWinHeight = 500;
     } else {
-        newWinHeight = 590;
+        newWinHeight = 617;
     }
     
     tabFrame = NSMakeRect(tabFrame.origin.x, tabFrame.origin.y - (newWinHeight - (int)(NSHeight(tabFrame))), (int)(NSWidth(tabFrame)), newWinHeight);

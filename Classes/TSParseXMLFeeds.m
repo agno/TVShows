@@ -16,6 +16,7 @@
 #import "TSParseXMLFeeds.h"
 #import "FeedParser.h"
 #import "TSRegexFun.h"
+#import "TSUserDefaults.h"
 #import "TorrentzParser.h"
 
 
@@ -89,7 +90,7 @@
     }
     
     // Fake HD episodes if ShowRSS does not list any
-    if (!feedHasHDEpisodes) {
+    if (!feedHasHDEpisodes && [TSUserDefaults getBoolFromKey:@"UseAdditionalSourcesHD" withDefault:YES]) {
         for (NSMutableDictionary *realEpisode in episodeArray) {
             // Ignore this episode if it is a daily show
             // The scene does not release late nights regularly
