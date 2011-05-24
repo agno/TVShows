@@ -427,12 +427,12 @@
     
     // Check if we have to sort shows by folders or not
     if ([TSUserDefaults getBoolFromKey:@"SortInFolders" withDefault:NO]) {
-        saveLocation = [saveLocation stringByAppendingPathComponent:[show valueForKey:@"name"]];
+        saveLocation = [saveLocation stringByAppendingPathComponent:show];
         if (![[NSFileManager defaultManager] createDirectoryAtPath:saveLocation
                                        withIntermediateDirectories:YES
                                                         attributes:nil
                                                              error:nil]) {
-            LogError(@"Unable to create the folder: %@", fileName);
+            LogError(@"Unable to create the folder: %@", saveLocation);
             return NO;
         }
     }
@@ -464,8 +464,8 @@
         
         if([TSUserDefaults getBoolFromKey:@"GrowlOnNewEpisode" withDefault:1]) {
         // In the future this may display the show's poster instead of our app icon.
-        [GrowlApplicationBridge notifyWithTitle:[NSString stringWithFormat:@"%@", [show valueForKey:@"name"]]
-                                    description:[NSString stringWithFormat:TSLocalizeString(@"A new episode of %@ is being downloaded."), [show valueForKey:@"name"]]
+        [GrowlApplicationBridge notifyWithTitle:[NSString stringWithFormat:@"%@", show]
+                                    description:[NSString stringWithFormat:TSLocalizeString(@"A new episode of %@ is being downloaded."), show]
                                notificationName:@"New Episode Downloaded"
                                        iconData:TVShowsHelperIcon
                                        priority:0

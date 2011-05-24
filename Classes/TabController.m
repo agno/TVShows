@@ -391,7 +391,7 @@
                                        withIntermediateDirectories:YES
                                                         attributes:nil
                                                              error:nil]) {
-            LogError(@"Unable to create the folder: %@", fileName);
+            LogError(@"Unable to create the folder: %@", saveLocation);
             return;
         }
     }
