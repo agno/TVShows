@@ -29,18 +29,24 @@
     }
 }
 
-+ (NSString *) downloadURL:(NSString *)url
++ (NSData *) downloadDataFrom:(NSString *)url
 {
     // Set a restrictive timeout
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
                                              cachePolicy:NSURLRequestReloadIgnoringCacheData
-                                         timeoutInterval:5.0];
+                                         timeoutInterval:10.0];
     
     // Get the data
-    NSString *content = [[[NSString alloc] initWithData:[NSURLConnection sendSynchronousRequest:request
-                                                returningResponse:nil
-                                                            error:nil]
-                 encoding:NSUTF8StringEncoding] autorelease];
+    return [NSURLConnection sendSynchronousRequest:request
+                                 returningResponse:nil
+                                             error:nil];
+}
+
++ (NSString *) downloadStringFrom:(NSString *)url
+{
+    // Get the data
+    NSString *content = [[[NSString alloc] initWithData:[WebsiteFunctions downloadDataFrom:url]
+                                               encoding:NSUTF8StringEncoding] autorelease];
     
     return content;
 }

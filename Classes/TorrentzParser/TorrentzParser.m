@@ -45,7 +45,7 @@
     NSString *torrentzURL = [NSString stringWithFormat:torrentzURLFormat,
                              [episodeName stringByReplacingOccurrencesOfString:@" "
                                                                     withString:@"+"]];
-    NSString *searchResults = [WebsiteFunctions downloadURL:torrentzURL];
+    NSString *searchResults = [WebsiteFunctions downloadStringFrom:torrentzURL];
     
     // Regex fun...
     NSString *regex = @"<guid>[^<]+</guid>";
@@ -75,7 +75,7 @@
 + (NSArray *) getAllTorrentsFromTorrenzURL:(NSString *)aTorrentzURL
 {
     // Now let's grab the meta search results
-    NSString *searchResults = [WebsiteFunctions downloadURL:aTorrentzURL];
+    NSString *searchResults = [WebsiteFunctions downloadStringFrom:aTorrentzURL];
     
     // Get all the external links (the trackers)
     NSString *regex = @"<a href=\"http[^\"]+";
@@ -122,7 +122,7 @@
 + (NSString *) getTorrentFromTracker:(NSString*)theURL withLinkMatcher:(NSString*)theLinkMatcher appending:(NSString*)aString
 {
     // Let's grab this URL content
-    NSString *content = [WebsiteFunctions downloadURL:theURL];
+    NSString *content = [WebsiteFunctions downloadStringFrom:theURL];
     
     // Get all the URLs
     NSArray *tempValues = [content componentsMatchedByRegex:theLinkMatcher];

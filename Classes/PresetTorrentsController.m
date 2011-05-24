@@ -184,7 +184,7 @@
     // Feel free to improve it if you find a way
     
     // Download the page containing the show list
-    NSString *showListContents = [WebsiteFunctions downloadURL:ShowListURL];
+    NSString *showListContents = [WebsiteFunctions downloadStringFrom:ShowListURL];
     
     // Be sure to only search for shows between the <select> tags
     // Warning about never being read can be safely ignored

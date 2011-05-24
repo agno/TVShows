@@ -61,7 +61,7 @@
     if ( [seriesID isEqualToString:@"0"] ) {
         NSString *seriesURL = [NSString stringWithFormat:@"http://www.thetvdb.com/api/GetSeries.php?seriesname=%@",
                                [show stringByReplacingOccurrencesOfRegex:@" " withString:@"+"]];
-        NSString *seriesInfo = [WebsiteFunctions downloadURL:seriesURL];
+        NSString *seriesInfo = [WebsiteFunctions downloadStringFrom:seriesURL];
         
         // For now select the first show in the list that's returned.
         NSArray *tempArray = [seriesInfo componentsMatchedByRegex:@"(?!<seriesid>)(\\d|\n|\r)*?(?=</seriesid>)"];
@@ -75,7 +75,7 @@
         // Now let's grab complete info for the show using our API key.
         // TODO: Grab the correct localization.
         NSString *seriesURL = [NSString stringWithFormat:@"http://www.thetvdb.com/api/%@/series/%@/en.xml",API_KEY,seriesID];
-        NSString *seriesInfo = [WebsiteFunctions downloadURL:seriesURL];
+        NSString *seriesInfo = [WebsiteFunctions downloadStringFrom:seriesURL];
         
         // Regex fun...
         key = [NSString stringWithFormat:@"<%@>(.|\n|\r)*?</%@>",key,key];
@@ -147,8 +147,9 @@
         
         // If a poster URL was returned, download the image.
         if (posterURL != NULL) {
-            sourceImage = [[[NSImage alloc] initWithContentsOfFile:
-                            [WebsiteFunctions downloadURL:[NSString stringWithFormat:@"http://www.thetvdb.com/banners/%@",posterURL]]] autorelease];
+            sourceImage = [[[NSImage alloc] initWithData:
+                            [WebsiteFunctions downloadDataFrom:
+                             [NSString stringWithFormat:@"http://thetvdb.com/banners/_cache/%@", posterURL]]] autorelease];
         } else {
             sourceImage = [[[NSImage alloc] initWithContentsOfFile:
                             [[NSBundle bundleWithIdentifier: TVShowsAppDomain] pathForResource: @"posterArtPlaceholder"
