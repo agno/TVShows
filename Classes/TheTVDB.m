@@ -16,6 +16,7 @@
 
 #import "TheTVDB.h"
 #import "RegexKitLite.h"
+#import "WebsiteFunctions.h"
 
 
 @implementation TheTVDB
@@ -58,12 +59,10 @@
     // Check to see if we already know the show's ID. If we don't then we need to search for it.
     NSString *seriesID = [self getIDForShow:show];
     if ( [seriesID isEqualToString:@"0"] ) {
-        NSURL *seriesURL = [NSURL URLWithString:[[NSString stringWithString: @"http://www.thetvdb.com/api/GetSeries.php?seriesname="]
-                                                 stringByAppendingString: [show stringByReplacingOccurrencesOfRegex:@" " withString:@"+"]]];
-        NSString *seriesInfo = [[[NSString alloc] initWithContentsOfURL: seriesURL
-                                                               encoding: NSUTF8StringEncoding
-                                                                  error: NULL] autorelease];
-
+        NSString *seriesURL = [NSString stringWithFormat:@"http://www.thetvdb.com/api/GetSeries.php?seriesname=%@",
+                               [show stringByReplacingOccurrencesOfRegex:@" " withString:@"+"]];
+        NSString *seriesInfo = [WebsiteFunctions downloadURL:seriesURL];
+        
         // For now select the first show in the list that's returned.
         NSArray *tempArray = [seriesInfo componentsMatchedByRegex:@"(?!<seriesid>)(\\d|\n|\r)*?(?=</seriesid>)"];
         if ( [tempArray count] >= 1 ) {
@@ -75,10 +74,8 @@
     if ( [seriesID isNotEqualTo:@"0"] ) {
         // Now let's grab complete info for the show using our API key.
         // TODO: Grab the correct localization.
-        NSURL *seriesURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.thetvdb.com/api/%@/series/%@/en.xml",API_KEY,seriesID]];
-        NSString *seriesInfo = [[[NSString alloc] initWithContentsOfURL: seriesURL
-                                                     encoding: NSUTF8StringEncoding
-                                                        error: NULL] autorelease];
+        NSString *seriesURL = [NSString stringWithFormat:@"http://www.thetvdb.com/api/%@/series/%@/en.xml",API_KEY,seriesID];
+        NSString *seriesInfo = [WebsiteFunctions downloadURL:seriesURL];
         
         // Regex fun...
         key = [NSString stringWithFormat:@"<%@>(.|\n|\r)*?</%@>",key,key];
@@ -150,8 +147,8 @@
         
         // If a poster URL was returned, download the image.
         if (posterURL != NULL) {
-            sourceImage = [[[NSImage alloc] initWithContentsOfURL:
-                            [NSURL URLWithString: [NSString stringWithFormat:@"http://www.thetvdb.com/banners/%@",posterURL]]] autorelease];
+            sourceImage = [[[NSImage alloc] initWithContentsOfFile:
+                            [WebsiteFunctions downloadURL:[NSString stringWithFormat:@"http://www.thetvdb.com/banners/%@",posterURL]]] autorelease];
         } else {
             sourceImage = [[[NSImage alloc] initWithContentsOfFile:
                             [[NSBundle bundleWithIdentifier: TVShowsAppDomain] pathForResource: @"posterArtPlaceholder"

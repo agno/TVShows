@@ -21,5 +21,6 @@
 }
 
 + (BOOL) canConnectToHostname:(NSString *)hostName;
++ (NSString *) downloadURL:(NSString *)url;
 
 @end

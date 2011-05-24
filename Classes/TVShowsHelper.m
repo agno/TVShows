@@ -417,7 +417,7 @@
         LogInfo(@"Retrieving an HD torrent file from Torrentz of: %@", url);
         url = [TorrentzParser getAlternateTorrentForEpisode:url];
         if (url == nil) {
-            LogError(@"Unable to found an HD torrent file for: %@", fileName);
+            LogError(@"Unable to find an HD torrent file for: %@", fileName);
             return NO;
         }
     }

@@ -89,7 +89,6 @@
     }
     
     // Fake HD episodes if ShowRSS does not list any
-    // The maxItems is a quick hack for when this is not from ShowRSS
     if (!feedHasHDEpisodes) {
         for (NSMutableDictionary *realEpisode in episodeArray) {
             NSMutableDictionary *fakeEpisode = [[NSMutableDictionary alloc] init];

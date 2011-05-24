@@ -96,6 +96,7 @@
     [infoBoxTitle setTitle: TSLocalizeString(@"Info")];
     [prefBoxTitle setTitle: TSLocalizeString(@"Preferences")];
     [closeButton setTitle: TSLocalizeString(@"Close")];
+    [editButton setTitle: TSLocalizeString(@"Edit")];
     [unsubscribeButton setTitle: TSLocalizeString(@"Unsubscribe")];
     
     // Sort the subscription list and draw the About box
@@ -215,8 +216,8 @@
     [textView_logViewer setString:loggedItems];
     [textView_logViewer moveToEndOfDocument:nil];
     
-    [NSApp runModalForWindow: logViewerWindow];
     [NSApp endSheet: logViewerWindow];
+    [NSApp runModalForWindow: logViewerWindow];
 }
 
 - (IBAction) closeLogViewerWindow:(id)sender
@@ -230,6 +231,9 @@
 - (IBAction) displayShowInfoWindow:(id)sender
 {
     selectedShow = [[[sender cell] representedObject] representedObject];
+    
+    // Link that info to the edit button
+    [[editButton cell] setRepresentedObject:self];
     
     // Set up the date formatter
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
@@ -268,8 +272,8 @@
        didEndSelector: nil
           contextInfo: nil];
     
-    [NSApp runModalForWindow: showInfoWindow];
     [NSApp endSheet: showInfoWindow];
+    [NSApp runModalForWindow: showInfoWindow];
 }
 
 - (void) setEpisodesForShow
@@ -364,7 +368,7 @@
         LogInfo(@"Retrieving an HD torrent file from Torrentz of: %@", url);
         url = [TorrentzParser getAlternateTorrentForEpisode:url];
         if (url == nil) {
-            LogError(@"Unable to found an HD torrent file for: %@",fileName);
+            LogError(@"Unable to find an HD torrent file for: %@",fileName);
             return;
         }
     }
@@ -439,6 +443,16 @@
 
 - (IBAction) unsubscribeFromShow:(id)sender
 {
+    // Ask for confirmation to the user
+    if (NSRunCriticalAlertPanel([NSString stringWithFormat:TSLocalizeString(@"Are you sure you want to unsubscribe from %@?"),
+                                 [selectedShow valueForKey:@"name"]],
+                                TSLocalizeString(@"This action cannot be undone."),
+                                TSLocalizeString(@"Unsubscribe"),
+                                TSLocalizeString(@"Cancel"),
+                                nil) != NSAlertDefaultReturn) { 
+        return;
+    }
+    
     id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
     NSManagedObject *selectedShowObj = [[delegateClass managedObjectContext] objectWithID:[selectedShow objectID]];
     

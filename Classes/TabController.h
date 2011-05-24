@@ -69,6 +69,7 @@
     IBOutlet NSBox *infoBoxTitle;
     IBOutlet NSBox *prefBoxTitle;
     IBOutlet NSButton *closeButton;
+    IBOutlet NSButton *editButton;
     IBOutlet NSButton *unsubscribeButton;
     IBOutlet NSImageView *showPoster;
 }

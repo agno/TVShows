@@ -18,6 +18,7 @@
 @interface CustomRSSController : NSWindowController
 {
     Boolean isTranslated;
+    NSManagedObject *selectedShow;
     
     IBOutlet NSWindow *CustomRSSWindow;
     
@@ -44,8 +45,12 @@
     IBOutlet NSPredicate *filterRules;
 }
 
+@property (retain) NSManagedObject *selectedShow;
+
 - (IBAction) displayCustomRSSWindow:(id)sender;
+- (IBAction) displayEditWindow:(id)sender;
 - (void) setEpisodesFromRSS:(NSString *)feedURL;
+- (void) updateEpisodes:(NSArray *)data;
 - (void) resetShowView;
 - (void) setUserDefinedShowQuality;
 - (IBAction) showQualityDidChange:(id)sender;

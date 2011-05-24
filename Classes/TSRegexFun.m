@@ -24,6 +24,8 @@
     NSArray *matchedRegex, *returnThis = [NSArray array];
     NSArray *parseTypes = [NSArray arrayWithObjects:@"S([0-9]+)(?:[[:space:]]*)E([0-9]+)",  // S01E01
                                                     @"([0-9]+)(?:[[:space:]]*x[[:space:]]*)([0-9]+)", // 01x01
+                                                    @"EPI-([0-9]+)-([0-9]+)", // EPI-1-1 (Hamsterpit)
+                                                    @"DAY-([0-9]{4})([0-9]{2})([0-9]{2})", // DAY-20110115 (Hamsterpit)
                                                     @"([0-9]{4})(?:[[:space:]]|[.])([0-9]{2})(?:[[:space:]]|[.])([0-9]{2})", // YYYY MM DD
                                                     @"([0-9]{2})(?:[[:space:]]|[.])([0-9]{2})(?:[[:space:]]|[.])([0-9]{4})",nil]; // MM DD YYYY
     
@@ -62,7 +64,7 @@
     NSString *showTitle = [title stringByReplacingOccurrencesOfRegex:@"HD 720p: " withString:@""];
     
     showTitle = [showTitle stringByReplacingOccurrencesOfRegex:@"[\\. ]+(-.*)?[sS]?\\d.*" withString:@""];
-    showTitle = [showTitle stringByReplacingOccurrencesOfRegex:@"\\." withString:@" "];
+    showTitle = [showTitle stringByReplacingOccurrencesOfRegex:@"[\\._ ]+" withString:@" "];
     
     if (type == @"episode") {
         

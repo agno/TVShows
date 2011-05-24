@@ -15,6 +15,7 @@
 #import "AppInfoConstants.h"
 
 #import "CustomRSSController.h"
+#import "TabController.h"
 
 #import "SubscriptionsDelegate.h"
 
@@ -22,42 +23,57 @@
 #import "TSUserDefaults.h"
 #import "TSRegexFun.h"
 
+#import "RegexKitLite.h"
+
+#define DEFAULT_PREDICATE [NSCompoundPredicate andPredicateWithSubpredicates:\
+    [NSArray arrayWithObject:[NSPredicate predicateWithFormat:@"episodeName contains[cd] ' '"]]]
 
 @implementation CustomRSSController
+
+@synthesize selectedShow;
 
 - init
 {
     if((self = [super init])) {
         isTranslated = NO;
-        filterRules = [NSCompoundPredicate andPredicateWithSubpredicates:
-                       [NSArray arrayWithObject:[NSPredicate predicateWithFormat:@"episodeName contains[cd] ' '"]]];
+        selectedShow = nil;
+        filterRules = DEFAULT_PREDICATE;
     }
     
     return self;
 }
 
+- (void) localizeWindow
+{
+    [rssSectionTitle setStringValue: TSLocalizeString(@"RSS Feed Information:")];
+    [filterSectionTitle setStringValue: TSLocalizeString(@"Only download items matching the following rules:")];
+    [nameText setStringValue: [NSString stringWithFormat:@"%@:", TSLocalizeString(@"Name")]];
+    [feedText setStringValue: [NSString stringWithFormat:@"%@:", TSLocalizeString(@"Feed URL")]];
+    [showQuality setTitle: TSLocalizeString(@"Download in HD")];
+    [cancelButton setTitle: TSLocalizeString(@"Cancel")];
+    
+    // Localize the headings of the table columns
+    [[colHD headerCell] setStringValue: TSLocalizeString(@"HD")];
+    [[colName headerCell] setStringValue: TSLocalizeString(@"Episode Name")];
+    [[colSeason headerCell] setStringValue: TSLocalizeString(@"Season")];
+    [[colEpisode headerCell] setStringValue: TSLocalizeString(@"Episode")];
+    [[colDate headerCell] setStringValue: TSLocalizeString(@"Published Date")];
+    
+    isTranslated = YES;
+}
+
 - (IBAction) displayCustomRSSWindow:(id)sender
 {
-    // Localize things and prepare the window (only needed the first time)
+    // Localize things (only needed the first time)
     if(isTranslated == NO) {
-        [rssSectionTitle setStringValue: TSLocalizeString(@"RSS Feed Information:")];
-        [filterSectionTitle setStringValue: TSLocalizeString(@"Only download items matching the following rules:")];
-        [nameText setStringValue: [NSString stringWithFormat:@"%@:", TSLocalizeString(@"Name")]];
-        [feedText setStringValue: [NSString stringWithFormat:@"%@:", TSLocalizeString(@"Feed URL")]];
-        [showQuality setTitle: TSLocalizeString(@"Download in HD")];
-        [cancelButton setTitle: TSLocalizeString(@"Cancel")];
-        [subscribeButton setTitle: TSLocalizeString(@"Subscribe")];
-        
-        // Localize the headings of the table columns
-        [[colHD headerCell] setStringValue: TSLocalizeString(@"HD")];
-        [[colName headerCell] setStringValue: TSLocalizeString(@"Episode Name")];
-        [[colSeason headerCell] setStringValue: TSLocalizeString(@"Season")];
-        [[colEpisode headerCell] setStringValue: TSLocalizeString(@"Episode")];
-        [[colDate headerCell] setStringValue: TSLocalizeString(@"Published Date")];
+        [self localizeWindow];
     }
     
-    filterRules = [NSCompoundPredicate andPredicateWithSubpredicates:
-                   [NSArray arrayWithObject:[NSPredicate predicateWithFormat:@"episodeName contains[cd] ' '"]]];
+    // Just in case localize the subscribe button
+    [subscribeButton setTitle: TSLocalizeString(@"Subscribe")];
+    selectedShow = nil;
+    
+    filterRules = DEFAULT_PREDICATE;
     
     [filtersEditor setObjectValue:filterRules];
     [episodeArrayController setFilterPredicate:filterRules];
@@ -70,8 +86,51 @@
        didEndSelector: nil
           contextInfo: nil];
     
-    [NSApp runModalForWindow: CustomRSSWindow];
     [NSApp endSheet: CustomRSSWindow];
+    [NSApp runModalForWindow: CustomRSSWindow];
+}
+
+- (IBAction) displayEditWindow:(id)sender
+{
+    // Localize things (only needed the first time)
+    if(isTranslated == NO) {
+        [self localizeWindow];
+    }
+    
+    // Localize the subscribe button (now called save)
+    [subscribeButton setTitle: TSLocalizeString(@"Save")];
+    
+    // Get the data and close the modal window
+    TabController *infoController = [[sender cell] representedObject];
+    selectedShow = [infoController selectedShow];
+    [infoController closeShowInfoWindow:nil];
+    
+    // Set the filter rules
+    filterRules = [selectedShow valueForKey:@"filters"];
+    
+    if (filterRules == nil) {
+        filterRules = DEFAULT_PREDICATE;
+    }
+    
+    [filtersEditor setObjectValue:filterRules];
+    [episodeArrayController setFilterPredicate:filterRules];
+    
+    // Set the info
+    [feedValue setStringValue:[selectedShow valueForKey:@"url"]];
+    [nameValue setStringValue:[selectedShow valueForKey:@"name"]];
+    [showQuality setState:[[selectedShow valueForKey:@"quality"] intValue]];
+    [showQuality setEnabled:YES];
+    [subscribeButton setEnabled:YES];
+    [self showQualityDidChange:nil];
+    
+    [NSApp beginSheet: CustomRSSWindow
+       modalForWindow: [[NSApplication sharedApplication] mainWindow]
+        modalDelegate: nil
+       didEndSelector: nil
+          contextInfo: nil];
+    
+    [NSApp endSheet: CustomRSSWindow];
+    [NSApp runModalForWindow: CustomRSSWindow];
 }
 
 - (void) controlTextDidEndEditing:(NSNotification *)notification
@@ -98,7 +157,6 @@
             return;
         } else {
             // Otherwise disallow the subscription to this invalid show
-            [showQuality setState:NO];
             [showQuality setEnabled:NO];
             [subscribeButton setEnabled:NO];
         }
@@ -108,7 +166,17 @@
 - (void) setEpisodesFromRSS:(NSString *)feedURL
 {
     // Now we can trigger the time-expensive task
-    NSArray *results = [TSParseXMLFeeds parseEpisodesFromFeed:feedURL maxItems:100];
+    NSArray *results = [NSArray arrayWithObjects:feedURL,
+                        [TSParseXMLFeeds parseEpisodesFromFeed:feedURL maxItems:100], nil];
+    
+    [self performSelectorOnMainThread:@selector(updateEpisodes:) withObject:results waitUntilDone:NO];
+}
+
+- (void) updateEpisodes:(NSArray *)data
+{
+    // Extract the data
+    NSString *feedURL = [data objectAtIndex:0];
+    NSArray *results = [data objectAtIndex:1];
     
     // We are back after probably a lot of time, so check carefully if the user has changed the text field
     NSString *cleanFeed = [[feedValue stringValue] stringByTrimmingCharactersInSet:
@@ -118,7 +186,6 @@
     if ([feedURL isEqualToString:cleanFeed]) {
         [episodeArrayController removeObjects:[episodeArrayController content]];
         if ([results count] == 0) {
-            [showQuality setState:NO];
             [showQuality setEnabled:NO];
             [subscribeButton setEnabled:NO];
             [nameValue removeAllItems];
@@ -129,7 +196,6 @@
             BOOL feedHasHDEpisodes = [TSParseXMLFeeds feedHasHDEpisodes:results];
             
             if (feedHasHDEpisodes) {
-                [self setUserDefinedShowQuality];
                 [showQuality setEnabled:YES];
             }
             
@@ -145,7 +211,8 @@
     }
 }
 
-- (void) setPossibleNamesFromFeed {
+- (void) setPossibleNamesFromFeed
+{
     // Remove the previous data
     [nameValue removeAllItems];
     
@@ -160,11 +227,12 @@
     [nameValue addItemsWithObjectValues:[shows allObjects]];
 }
 
-- (void) resetShowView {
+- (void) resetShowView
+{
     [episodeArrayController removeObjects:[episodeArrayController content]];
     [feedValue setStringValue:@""];
     [nameValue setStringValue:@""];
-    [showQuality setState:NO];
+    [self setUserDefinedShowQuality];
     [showQuality setEnabled:NO];
     [subscribeButton setEnabled:NO];
 }
@@ -179,16 +247,16 @@
     if ([showQuality state]) {
         [episodeArrayController setFilterPredicate:
          [NSCompoundPredicate andPredicateWithSubpredicates:
-          [NSArray arrayWithObjects:filterRules, [NSPredicate predicateWithFormat:@"isHD == '1'"], nil]]];
+          [NSArray arrayWithObjects:[NSPredicate predicateWithFormat:@"isHD == '1'"], filterRules, nil]]];
     } else if (![showQuality state]) {
         [episodeArrayController setFilterPredicate:
          [NSCompoundPredicate andPredicateWithSubpredicates:
-          [NSArray arrayWithObjects:filterRules, [NSPredicate predicateWithFormat:@"isHD == '0'"], nil]]];
+          [NSArray arrayWithObjects:[NSPredicate predicateWithFormat:@"isHD == '0'"], filterRules, nil]]];
     }
 }
 
 - (IBAction) closeCustomRSSWindow:(id)sender
-{   
+{
     [episodeArrayController setFilterPredicate:nil];
     [NSApp stopModal];
     [CustomRSSWindow orderOut:self];
@@ -203,38 +271,62 @@
     
     // There's probably a better way to do this:
     id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
-    
     NSManagedObjectContext *context = [delegateClass managedObjectContext];
-    NSManagedObject *newSubscription = [NSEntityDescription insertNewObjectForEntityForName: @"Subscription"
-                                                                     inManagedObjectContext: context];
     
-    // Set the information about the new show
-    [newSubscription setValue:[nameValue stringValue] forKey:@"name"];
-    [newSubscription setValue:[nameValue stringValue] forKey:@"sortName"];
-    [newSubscription setValue:[feedValue stringValue] forKey:@"url"];
-    [newSubscription setValue:[NSDate date] forKey:@"lastDownloaded"];
-    [newSubscription setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
-    [newSubscription setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
-    [newSubscription setValue:filterRules forKey:@"filters"];
+    // Calculate the sort name, i.e. remove "The"
+    NSString *sortName = [[nameValue stringValue] stringByReplacingOccurrencesOfRegex:@"^The[[:space:]]"
+                                                                           withString:@""];
     
-    // Don't do this at home, kids, it's a horrible coding practice.
-    // Here until I can figure out why Core Data hates me.
+    if (selectedShow != nil) {
+        NSManagedObject *selectedShowObj = [context objectWithID:[selectedShow objectID]];
+        
+        // Update the per-show preferences
+        [selectedShow setValue:[nameValue stringValue] forKey:@"name"];
+        [selectedShow setValue:sortName forKey:@"sortName"];
+        [selectedShow setValue:[feedValue stringValue] forKey:@"url"];
+        [selectedShow setValue:[NSDate date] forKey:@"lastDownloaded"];
+        [selectedShow setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
+        [selectedShow setValue:filterRules forKey:@"filters"];
+        [selectedShowObj setValue:[nameValue stringValue] forKey:@"name"];
+        [selectedShowObj setValue:sortName forKey:@"sortName"];
+        [selectedShowObj setValue:[feedValue stringValue] forKey:@"url"];
+        [selectedShowObj setValue:[NSDate date] forKey:@"lastDownloaded"];
+        [selectedShowObj setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
+        [selectedShowObj setValue:filterRules forKey:@"filters"];
+    } else {
+        NSManagedObject *newSubscription = [NSEntityDescription insertNewObjectForEntityForName: @"Subscription"
+                                                                         inManagedObjectContext: context];
+        
+        // Set the information about the new show
+        [newSubscription setValue:[nameValue stringValue] forKey:@"name"];
+        [newSubscription setValue:sortName forKey:@"sortName"];
+        [newSubscription setValue:[feedValue stringValue] forKey:@"url"];
+        [newSubscription setValue:[NSDate date] forKey:@"lastDownloaded"];
+        [newSubscription setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
+        [newSubscription setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
+        [newSubscription setValue:filterRules forKey:@"filters"];
+        
+        // Don't do this at home, kids, it's a horrible coding practice.
+        // Here until I can figure out why Core Data hates me.
 #if __x86_64__ || __ppc64__
-    [SBArrayController addObject:newSubscription];
+        [SBArrayController addObject:newSubscription];
 #else
-    NSMutableDictionary *showDict = [NSMutableDictionary dictionary];
-    
-    [showDict setValue:[nameValue stringValue] forKey:@"name"];
-    [showDict setValue:[nameValue stringValue] forKey:@"sortName"];
-    [showDict setValue:[feedValue stringValue] forKey:@"url"];
-    [showDict setValue:[NSDate date] forKey:@"lastDownloaded"];
-    [showDict setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
-    [showDict setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
-    
-    [SBArrayController addObject:showDict];
-    [context insertObject:newSubscription];
+        NSMutableDictionary *showDict = [NSMutableDictionary dictionary];
+        
+        [showDict setValue:[nameValue stringValue] forKey:@"name"];
+        [showDict setValue:sortName forKey:@"sortName"];
+        [showDict setValue:[feedValue stringValue] forKey:@"url"];
+        [showDict setValue:[NSDate date] forKey:@"lastDownloaded"];
+        [showDict setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
+        [showDict setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
+        
+        [SBArrayController addObject:showDict];
+        [context insertObject:newSubscription];
 #endif
+    }
     
+    // Be sure to process pending changes before saving or it won't save correctly.
+    [[delegateClass managedObjectContext] processPendingChanges];
     [delegateClass saveAction];
     
     // Close the modal dialog box

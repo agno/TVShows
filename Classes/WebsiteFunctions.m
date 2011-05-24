@@ -29,4 +29,22 @@
     }
 }
 
++ (NSString *) downloadURL:(NSString *)url
+{
+    // Return value
+    
+    // Set a restrictive timeout
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
+                                             cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                         timeoutInterval:5.0];
+    
+    // Get the data
+    NSString *content = [[[NSString alloc] initWithData:[NSURLConnection sendSynchronousRequest:request
+                                                returningResponse:nil
+                                                            error:nil]
+                 encoding:NSUTF8StringEncoding] autorelease];
+    
+    return content;
+}
+
 @end
