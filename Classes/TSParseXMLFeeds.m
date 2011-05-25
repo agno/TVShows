@@ -18,7 +18,7 @@
 #import "TSRegexFun.h"
 #import "TSUserDefaults.h"
 #import "TorrentzParser.h"
-
+#import "WebsiteFunctions.h"
 
 @implementation TSParseXMLFeeds
 
@@ -29,7 +29,7 @@
     NSError *error;
     NSMutableArray *episodeArray = [NSMutableArray array];
     NSMutableArray *fakeEpisodeArray = [NSMutableArray array];
-    NSData *feedData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+    NSData *feedData = [WebsiteFunctions downloadDataFrom:url];
     FPFeed *parsedData = [FPParser parsedFeedWithData:feedData error:&error];
     
     int i=0;

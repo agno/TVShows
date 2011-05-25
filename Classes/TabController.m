@@ -23,6 +23,7 @@
 #import "TorrentzParser.h"
 #import "TheTVDB.h"
 #import "LCLLogFile.h"
+#import "WebsiteFunctions.h"
 
 @implementation TabController
 
@@ -97,7 +98,6 @@
     [infoBoxTitle setTitle: TSLocalizeString(@"Info")];
     [prefBoxTitle setTitle: TSLocalizeString(@"Preferences")];
     [closeButton setTitle: TSLocalizeString(@"Close")];
-    [checkEpisodesButton setTitle: TSLocalizeString(@"Check Now")];
     [editButton setTitle: TSLocalizeString(@"Edit")];
     [unsubscribeButton setTitle: TSLocalizeString(@"Unsubscribe")];
     
@@ -256,9 +256,14 @@
     
     // Reset the Episode Array Controller
     [[episodeArrayController content] removeAllObjects];
+    [episodeArrayController removeObjects:[episodeArrayController arrangedObjects]];
     [episodeTableView reloadData];
+    [episodeTableView setEnabled:NO];
     
     NSString *selectedShowName = [selectedShow valueForKey:@"name"];
+    
+    // Grab the list of episodes
+    [self performSelectorInBackground:@selector(setEpisodesForShow:) withObject:selectedShowName];
     
     // Display the show poster now that it's been resized.
     [self performSelectorInBackground:@selector(setPosterForShow:) withObject:selectedShowName];
@@ -268,9 +273,6 @@
     
     // Grab the next episode date
     [self performSelectorInBackground:@selector(setNextEpisodeForShow:) withObject:selectedShowName];
-    
-    // Grab the list of episodes
-    [self performSelector:@selector(setEpisodesForShow)];
     
     [NSApp beginSheet: showInfoWindow
        modalForWindow: [[NSApplication sharedApplication] mainWindow]
@@ -282,25 +284,29 @@
     [NSApp runModalForWindow: showInfoWindow];
 }
 
-- (void) setEpisodesForShow
+- (void) setEpisodesForShow:(NSString *)show
 {
     NSArray *results = [TSParseXMLFeeds parseEpisodesFromFeed:[selectedShow valueForKey:@"url"] maxItems:50];
+    NSString *copy = [selectedShow valueForKey:@"name"];
     
-    if ([results count] == 0) {
-        LogError(@"Could not download/parse feed for %@ <%@>", [selectedShow valueForKey:@"name"], [selectedShow valueForKey:@"url"]);
-    } else {
-        [episodeArrayController addObjects:results];
-        
-        // Check if there are HD episodes, if so enable the "Download in HD" checkbox
-        BOOL feedHasHDEpisodes = [TSParseXMLFeeds feedHasHDEpisodes:results];
-        
-        if (!feedHasHDEpisodes) {
-            [showQuality setState:NO];
+    if ([show isEqualToString:copy]) {
+        if ([results count] == 0) {
+            LogError(@"Could not download/parse feed for %@ <%@>", show, [selectedShow valueForKey:@"url"]);
+        } else {
+            [episodeTableView setEnabled:YES];
+            [episodeArrayController addObjects:results];
+            
+            // Check if there are HD episodes, if so enable the "Download in HD" checkbox
+            BOOL feedHasHDEpisodes = [TSParseXMLFeeds feedHasHDEpisodes:results];
+            
+            if (!feedHasHDEpisodes) {
+                [showQuality setState:NO];
+            }
+            [showQuality setEnabled:feedHasHDEpisodes];
+            
+            // Update the filter predicate to only display the correct quality.
+            [self showQualityDidChange:nil];
         }
-        [showQuality setEnabled:feedHasHDEpisodes];
-        
-        // Update the filter predicate to only display the correct quality.
-        [self showQualityDidChange:nil];
     }
 }
 
@@ -308,7 +314,7 @@
 {
     NSString *status = [TheTVDB getShowStatus:show];
     NSString *copy = [selectedShow valueForKey:@"name"];
-
+    
     // Check if the request is still valid (an impacient user may start to rapidly change)
     if ([show isEqualToString:copy]) {
         [showStatus setStringValue:TSLocalizeString(status)];
@@ -426,7 +432,7 @@
     
     // Method copied from TVShowsHelper.m
     LogInfo(@"Attempting to download new episode: %@", fileName);
-    NSData *fileContents = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+    NSData *fileContents = [WebsiteFunctions downloadDataFrom:url];
     
     if (!fileContents || [fileContents length] < 100) {
         LogError(@"Unable to download file: %@ <%@>",fileName, url);

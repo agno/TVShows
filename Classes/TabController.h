@@ -70,7 +70,6 @@
     IBOutlet NSTextField *nextEpisodeTitle;
     IBOutlet NSBox *infoBoxTitle;
     IBOutlet NSBox *prefBoxTitle;
-    IBOutlet NSButton *checkEpisodesButton;
     IBOutlet NSButton *closeButton;
     IBOutlet NSButton *editButton;
     IBOutlet NSButton *unsubscribeButton;
@@ -99,7 +98,7 @@
 #pragma mark -
 #pragma mark Subscriptions TabController
 - (IBAction) displayShowInfoWindow:(id)sender;
-- (void) setEpisodesForShow;
+- (void) setEpisodesForShow:(NSString *)show;
 - (void) setStatusForShow:(NSString *)show;
 - (void) setNextEpisodeForShow:(NSString *)show;
 - (void) setPosterForShow:(NSString *)show;

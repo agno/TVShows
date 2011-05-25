@@ -18,23 +18,39 @@
 
 @implementation WebsiteFunctions
 
-// Currently broken if the user has OpenDNS or similar
-+ (BOOL) canConnectToHostname:(NSString *)hostName {
-    SCNetworkConnectionFlags flags;
++ (BOOL) canConnectToHostname:(NSString *)hostName
+{
+    SCNetworkReachabilityRef target;
+    SCNetworkConnectionFlags flags = 0;
+    Boolean ok;
+    target = SCNetworkReachabilityCreateWithName(NULL, [hostName UTF8String]);
+    ok = SCNetworkReachabilityGetFlags(target, &flags);
+    CFRelease(target);
+    return ok;
+}
+
++ (BOOL) canConnectToURL:(NSString *)url
+{
+    NSURL *realURL = [NSURL URLWithString:url];
     
-    if (SCNetworkCheckReachabilityByName([hostName UTF8String], &flags) && flags > 0) {
-        return TRUE;
-    } else {
+    if (realURL == nil) {
         return FALSE;
+    } else {
+        return [WebsiteFunctions canConnectToHostname:[realURL host]];
     }
 }
 
 + (NSData *) downloadDataFrom:(NSString *)url
 {
+    // Check before if it can connect to that hostname
+    if (![WebsiteFunctions canConnectToURL:url]) {
+        return [NSData data];
+    }
+    
     // Set a restrictive timeout
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
                                              cachePolicy:NSURLRequestReloadIgnoringCacheData
-                                         timeoutInterval:10.0];
+                                         timeoutInterval:5.0];
     
     // Get the data
     return [NSURLConnection sendSynchronousRequest:request

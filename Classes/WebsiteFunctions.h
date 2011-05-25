@@ -21,6 +21,7 @@
 }
 
 + (BOOL) canConnectToHostname:(NSString *)hostName;
++ (BOOL) canConnectToURL:(NSString *)url;
 + (NSData *) downloadDataFrom:(NSString *)url;
 + (NSString *) downloadStringFrom:(NSString *)url;
 

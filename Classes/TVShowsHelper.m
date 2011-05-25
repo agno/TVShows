@@ -20,6 +20,7 @@
 #import "TSUserDefaults.h"
 #import "SubscriptionsDelegate.h"
 #import "SUUpdaterSubclass.h"
+#import "WebsiteFunctions.h"
 
 
 @implementation TVShowsHelper
@@ -441,7 +442,7 @@
     saveLocation = [saveLocation stringByAppendingPathComponent:fileName];
     
     LogInfo(@"Attempting to download new episode: %@", fileName);
-    NSData *fileContents = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+    NSData *fileContents = [WebsiteFunctions downloadDataFrom:url];
     
     // Check if the download was right
     if (!fileContents || [fileContents length] < 100) {
