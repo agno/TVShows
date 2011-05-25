@@ -94,6 +94,53 @@
     }
 }
 
++ (NSArray *) getValuesForKey:(NSString *)key andShow:(NSString *)show
+{
+    // TODO: Save the information returned for each series into the Cache.
+    // TODO: Get the TVDB ID from the Subscriptions file.
+    // Quick dirty code mostly copied from the previous method, it should be refactored
+    
+    // Check to see if we already know the show's ID. If we don't then we need to search for it.
+    NSString *seriesID = [self getIDForShow:show];
+    if ( [seriesID isEqualToString:@"0"] ) {
+        NSString *seriesURL = [NSString stringWithFormat:@"http://www.thetvdb.com/api/GetSeries.php?seriesname=%@&language=all",
+                               [show stringByReplacingOccurrencesOfRegex:@" " withString:@"+"]];
+        NSString *seriesInfo = [WebsiteFunctions downloadStringFrom:seriesURL];
+        
+        // For now select the first show in the list that's returned.
+        NSArray *tempArray = [seriesInfo componentsMatchedByRegex:@"(?!<seriesid>)(\\d|\n|\r)*?(?=</seriesid>)"];
+        if ( [tempArray count] >= 1 ) {
+            seriesID = [tempArray objectAtIndex:0];
+        }
+    }
+    
+    // Only proceed if we received a series ID from somewhere above...
+    if ( [seriesID isNotEqualTo:@"0"] ) {
+        // Now let's grab complete info for the show using our API key.
+        // TODO: Grab the correct localization.
+        NSString *seriesURL = [NSString stringWithFormat:@"http://www.thetvdb.com/api/%@/series/%@/all/en.xml",API_KEY,seriesID];
+        NSString *seriesInfo = [WebsiteFunctions downloadStringFrom:seriesURL];
+        
+        // Regex fun...
+        key = [NSString stringWithFormat:@"<%@>(.|\n|\r)*?</%@>",key,key];
+        NSArray *tempValues = [seriesInfo componentsMatchedByRegex:key];
+        if ( [tempValues count] >= 1 ) {
+            NSMutableArray *values = [[NSMutableArray alloc] initWithCapacity:[tempValues count]];
+            
+            for (NSString *value in tempValues) {
+                [values addObject:[value stringByReplacingOccurrencesOfRegex:@"<(.+?)>" withString:@""]];
+            }
+            
+            return values;
+        } else {
+            return NULL;
+        }
+        
+    } else {
+        return NULL;
+    }
+}
+
 + (NSString *) getShowStatus:(NSString *)showName
 {
     // Grab the show's status.
@@ -105,6 +152,30 @@
     }
     
     return status;
+}
+
++ (NSDate *) getShowNextEpisode:(NSString *)showName
+{
+    // Preset date formatter
+    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSDate *now = [NSDate date];
+    NSDate *date = [[[NSDateFormatter alloc] init] autorelease];
+    
+    // Grab the show's dates for all episodes
+    for (NSString *value in [self getValuesForKey:@"FirstAired" andShow:showName]) {
+        
+        date = [dateFormatter dateFromString:value];
+        
+        // The first date that is after now is the very first unaired episode
+        if ([date isGreaterThan:now]) {
+            return date;
+        }
+    }
+    
+    // There is no known unaired episode ::sadface::
+    return nil;
 }
 
 + (NSImage *) getPosterForShow:(NSString *)showName withHeight:(float)height withWidth:(float)width

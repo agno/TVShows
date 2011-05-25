@@ -93,9 +93,11 @@
     [showIsEnabled setTitle: TSLocalizeString(@"Enable downloading new episodes")];
     [statusTitle setStringValue: TSLocalizeString(@"Status")];
     [lastDownloadedTitle setStringValue: TSLocalizeString(@"Last Downloaded")];
+    [nextEpisodeTitle setStringValue: TSLocalizeString(@"Next Episode")];
     [infoBoxTitle setTitle: TSLocalizeString(@"Info")];
     [prefBoxTitle setTitle: TSLocalizeString(@"Preferences")];
     [closeButton setTitle: TSLocalizeString(@"Close")];
+    [checkEpisodesButton setTitle: TSLocalizeString(@"Check Now")];
     [editButton setTitle: TSLocalizeString(@"Edit")];
     [unsubscribeButton setTitle: TSLocalizeString(@"Unsubscribe")];
     
@@ -237,13 +239,14 @@
     
     // Set up the date formatter
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     
     // Set the available values now
     [showName setStringValue: [selectedShow valueForKey:@"name"]];
     [showStatus setStringValue: TSLocalizeString(@"Unknown")];
     [showLastDownloaded setStringValue: [dateFormatter stringFromDate:[selectedShow valueForKey:@"lastDownloaded"]]];
+    [showNextEpisode setStringValue: TSLocalizeString(@"Unknown")];
     [showQuality setState: [[selectedShow valueForKey:@"quality"] intValue]];
     [showIsEnabled setState: [[selectedShow valueForKey:@"isEnabled"] boolValue]];
     
@@ -262,6 +265,9 @@
     
     // Grab the show status
     [self performSelectorInBackground:@selector(setStatusForShow:) withObject:selectedShowName];
+    
+    // Grab the next episode date
+    [self performSelectorInBackground:@selector(setNextEpisodeForShow:) withObject:selectedShowName];
     
     // Grab the list of episodes
     [self performSelector:@selector(setEpisodesForShow)];
@@ -305,7 +311,26 @@
 
     // Check if the request is still valid (an impacient user may start to rapidly change)
     if ([show isEqualToString:copy]) {
-        [showStatus setStringValue: TSLocalizeString(status)];
+        [showStatus setStringValue:TSLocalizeString(status)];
+        if ([status isEqualToString:@"Ended"]) {
+            [showNextEpisode setStringValue:TSLocalizeString(@"Never")];
+        }
+    }
+}
+
+- (void) setNextEpisodeForShow:(NSString *)show
+{
+    NSDate *nextEpisode = [TheTVDB getShowNextEpisode:show];
+    NSString *copy = [selectedShow valueForKey:@"name"];
+    
+    // Check if the request is still valid (an impacient user may start to rapidly change)
+    if ([show isEqualToString:copy] && nextEpisode != nil) {
+        // Set up the date formatter
+        NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+        [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+        
+        [showNextEpisode setStringValue: [dateFormatter stringFromDate:nextEpisode]];
     }
 }
 

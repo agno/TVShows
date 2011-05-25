@@ -25,8 +25,10 @@
 
 + (NSString *) applicationCacheDirectory;
 + (NSString *) getValueForKey:(NSString *)key andShow:(NSString *)show;
++ (NSArray *) getValuesForKey:(NSString *)key andShow:(NSString *)show;
 
 + (NSString *) getShowStatus:(NSString *)showName;
++ (NSDate *) getShowNextEpisode:(NSString *)showName;
 + (NSImage *) getPosterForShow:(NSString *)showName withHeight:(float)height withWidth:(float)width;
 - (NSImage *) getPosterForShow:(NSString *)showName withHeight:(float)height withWidth:(float)width;
 + (NSString *) getIDForShow:(NSString *)showName;

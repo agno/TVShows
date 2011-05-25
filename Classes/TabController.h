@@ -60,14 +60,17 @@
     IBOutlet NSTextField *showName;
     IBOutlet NSTextField *showStatus;
     IBOutlet NSTextField *showLastDownloaded;
+    IBOutlet NSTextField *showNextEpisode;
     IBOutlet NSButton *showQuality;
     IBOutlet NSButton *showIsEnabled;
     IBOutlet NSArrayController *episodeArrayController;
     IBOutlet NSTableView *episodeTableView;
     IBOutlet NSTextField *statusTitle;
     IBOutlet NSTextField *lastDownloadedTitle;
+    IBOutlet NSTextField *nextEpisodeTitle;
     IBOutlet NSBox *infoBoxTitle;
     IBOutlet NSBox *prefBoxTitle;
+    IBOutlet NSButton *checkEpisodesButton;
     IBOutlet NSButton *closeButton;
     IBOutlet NSButton *editButton;
     IBOutlet NSButton *unsubscribeButton;
@@ -98,6 +101,7 @@
 - (IBAction) displayShowInfoWindow:(id)sender;
 - (void) setEpisodesForShow;
 - (void) setStatusForShow:(NSString *)show;
+- (void) setNextEpisodeForShow:(NSString *)show;
 - (void) setPosterForShow:(NSString *)show;
 - (IBAction) closeShowInfoWindow:(id)sender;
 - (IBAction) showQualityDidChange:(id)sender;
