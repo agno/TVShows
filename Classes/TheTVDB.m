@@ -59,7 +59,7 @@
     // Check to see if we already know the show's ID. If we don't then we need to search for it.
     NSString *seriesID = [self getIDForShow:show];
     if ( [seriesID isEqualToString:@"0"] ) {
-        NSString *seriesURL = [NSString stringWithFormat:@"http://www.thetvdb.com/api/GetSeries.php?seriesname=%@",
+        NSString *seriesURL = [NSString stringWithFormat:@"http://www.thetvdb.com/api/GetSeries.php?seriesname=%@&language=all",
                                [show stringByReplacingOccurrencesOfRegex:@" " withString:@"+"]];
         NSString *seriesInfo = [WebsiteFunctions downloadStringFrom:seriesURL];
         
@@ -105,7 +105,6 @@
     }
     
     return status;
-    
 }
 
 + (NSImage *) getPosterForShow:(NSString *)showName withHeight:(float)height withWidth:(float)width
