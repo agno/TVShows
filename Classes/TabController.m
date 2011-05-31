@@ -354,6 +354,12 @@
 
 - (IBAction) closeShowInfoWindow:(id)sender
 {
+    // Close the window first
+    // The following code has a bug in Intel 32-bit that I couldn't fix,
+    // so I prefer not to save that information rather than not be able to close the app
+    [NSApp stopModal];
+    [showInfoWindow orderOut: self];
+    
     // NSManagedContext objectWithID is required for it to save changes to the disk.
     // We also need to update the original selectedShow NSManagedObject so that the
     // interface displays any changes when the window is opened multiple times a session.
@@ -371,10 +377,8 @@
     [delegateClass saveAction];
     [delegateClass release];
     
-    // Reset the selected show and close the window
+    // Reset the selected show
     selectedShow = nil;
-    [NSApp stopModal];
-    [showInfoWindow orderOut: self];
 }
 
 - (IBAction) showQualityDidChange:(id)sender
