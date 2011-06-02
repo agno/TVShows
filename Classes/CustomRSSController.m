@@ -49,6 +49,7 @@
     [filterSectionTitle setStringValue: TSLocalizeString(@"Only download items matching the following rules:")];
     [nameText setStringValue: [NSString stringWithFormat:@"%@:", TSLocalizeString(@"Name")]];
     [feedText setStringValue: [NSString stringWithFormat:@"%@:", TSLocalizeString(@"Feed URL")]];
+    [tvdbText setStringValue: [NSString stringWithFormat:@"%@:", TSLocalizeString(@"TVDB id")]];
     [showQuality setTitle: TSLocalizeString(@"Download in HD")];
     [cancelButton setTitle: TSLocalizeString(@"Cancel")];
     
@@ -118,6 +119,7 @@
     // Set the info
     [feedValue setStringValue:[selectedShow valueForKey:@"url"]];
     [nameValue setStringValue:[selectedShow valueForKey:@"name"]];
+    [tvdbValue setStringValue:[NSString stringWithFormat:@"%@", [selectedShow valueForKey:@"tvdbID"]]];
     [showQuality setState:[[selectedShow valueForKey:@"quality"] intValue]];
     [showQuality setEnabled:YES];
     [subscribeButton setEnabled:YES];
@@ -167,7 +169,8 @@
 {
     // Now we can trigger the time-expensive task
     NSArray *results = [NSArray arrayWithObjects:feedURL,
-                        [TSParseXMLFeeds parseEpisodesFromFeed:feedURL maxItems:100], nil];
+                        [TSParseXMLFeeds parseEpisodesFromFeeds:[feedURL componentsSeparatedByString:@"#"]
+                                                       maxItems:100], nil];
     
     [self performSelectorOnMainThread:@selector(updateEpisodes:) withObject:results waitUntilDone:NO];
 }
@@ -232,6 +235,7 @@
     [episodeArrayController removeObjects:[episodeArrayController content]];
     [feedValue setStringValue:@""];
     [nameValue setStringValue:@""];
+    [tvdbValue setStringValue:@""];
     [self setUserDefinedShowQuality];
     [showQuality setEnabled:NO];
     [subscribeButton setEnabled:NO];
@@ -284,23 +288,26 @@
         [selectedShow setValue:[nameValue stringValue] forKey:@"name"];
         [selectedShow setValue:sortName forKey:@"sortName"];
         [selectedShow setValue:[feedValue stringValue] forKey:@"url"];
+        [selectedShow setValue:[NSNumber numberWithInt:[[tvdbValue stringValue] intValue]] forKey:@"tvdbID"];
         [selectedShow setValue:[NSDate date] forKey:@"lastDownloaded"];
         [selectedShow setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
         [selectedShow setValue:filterRules forKey:@"filters"];
         [selectedShowObj setValue:[nameValue stringValue] forKey:@"name"];
         [selectedShowObj setValue:sortName forKey:@"sortName"];
         [selectedShowObj setValue:[feedValue stringValue] forKey:@"url"];
+        [selectedShowObj setValue:[NSNumber numberWithInt:[[tvdbValue stringValue] intValue]] forKey:@"tvdbID"];
         [selectedShowObj setValue:[NSDate date] forKey:@"lastDownloaded"];
         [selectedShowObj setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
         [selectedShowObj setValue:filterRules forKey:@"filters"];
     } else {
-        NSManagedObject *newSubscription = [NSEntityDescription insertNewObjectForEntityForName: @"Subscription"
-                                                                         inManagedObjectContext: context];
+        NSManagedObject *newSubscription = [NSEntityDescription insertNewObjectForEntityForName:@"Subscription"
+                                                                         inManagedObjectContext:context];
         
         // Set the information about the new show
         [newSubscription setValue:[nameValue stringValue] forKey:@"name"];
         [newSubscription setValue:sortName forKey:@"sortName"];
         [newSubscription setValue:[feedValue stringValue] forKey:@"url"];
+        [newSubscription setValue:[NSNumber numberWithInt:[[tvdbValue stringValue] intValue]] forKey:@"tvdbID"];
         [newSubscription setValue:[NSDate date] forKey:@"lastDownloaded"];
         [newSubscription setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
         [newSubscription setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];

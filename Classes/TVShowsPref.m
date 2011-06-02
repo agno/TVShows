@@ -127,7 +127,6 @@
     // The only problem with this solution is that we have to ask for admin privileges
     NSString *locale = [[[NSLocale currentLocale] localeIdentifier] substringToIndex:2];
     
-    // Fix catalan
     if ([locale isEqualToString:@"ca"]) {
         return [self fixUnsupportedLanguage:@"ca" withFallback:@"Spanish" withMessage:@"La aplicación Preferencias del Sistema no está traducida al Catalán, así que TVShows necesita arreglarla para que se pueda mostrar en tu idioma.\n\nPor favor introduce tu contraseña en la siguiente ventana para que podamos arreglarla."];
     } else if ([locale isEqualToString:@"gl"]) {

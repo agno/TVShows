@@ -20,6 +20,8 @@
     // Preset Torrents window
     Boolean errorHasOccurred;
     Boolean hasDownloadedList;
+    Boolean isTranslated;
+    
     IBOutlet NSWindow *PTWindow;
     IBOutlet NSTableView *PTTableView;
     IBOutlet NSArrayController *PTArrayController;
@@ -69,9 +71,9 @@
 
 #pragma mark -
 #pragma mark Background workers
-- (void) setEpisodesForShow:(NSNumber *)showID;
-- (void) setPosterForShow:(NSString *)showName;
-- (void) setDescriptionForShow:(NSString *)showName;
+- (void) setEpisodesForShow:(NSString *)showFeeds;
+- (void) setPosterForShow:(NSArray *)arguments;
+- (void) setDescriptionForShow:(NSArray *)arguments;
 - (void) updateEpisodes:(NSArray *)data;
 - (void) updatePoster:(NSArray *)data;
 - (void) updateDescription:(NSArray *)data;

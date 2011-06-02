@@ -27,11 +27,12 @@
 #import "RegexKitLite.h"
 #import "WebsiteFunctions.h"
 #import "TheTVDB.h"
+#import "NSXMLNode-utils.h"
 
 #pragma mark Define Macros
 
-#define ShowListHostname            @"showrss.karmorra.info"
-#define ShowListURL                 @"http://showrss.karmorra.info/?cs=feeds"
+#define ShowListURL                 @"https://github.com/victorpimentel/tvshowsapp.com/raw/master/showlist/showlist.xml"
+#define ShowListMirror              @"http://tvshowsapp.com/showlist/showlist.xml"
 #define SelectTagsRegex             @"<select name=\"show\">(.+?)</select>"
 #define OptionTagsRegex             @"(?!<option value=\")([[:digit:]]+)(.*?)(?=</option>)"
 #define RSSIDRegex                  @"([[:digit:]]+)(?![[:alnum:]]|[[:space:]])"
@@ -48,9 +49,52 @@
 {
     if((self = [super init])) {
         hasDownloadedList = NO;
+        isTranslated = NO;
     }
     
     return self;
+}
+
+- (void) localizeWindow
+{
+    // Localize the buttons
+    [showQuality setTitle: TSLocalizeString(@"Download in HD")];
+    [cancelButton setTitle: TSLocalizeString(@"Cancel")];
+    [subscribeButton setTitle: TSLocalizeString(@"Subscribe")];
+    [tvcomButton setTitle: TSLocalizeString(@"View on TV.com")];
+    [ratingsTitle setStringValue: TSLocalizeString(@"Rating:")];
+    
+    // Localize the headings of the table columns
+    [[colHD headerCell] setStringValue: TSLocalizeString(@"HD")];
+    [[colName headerCell] setStringValue: TSLocalizeString(@"Episode Name")];
+    [[colSeason headerCell] setStringValue: TSLocalizeString(@"Season")];
+    [[colEpisode headerCell] setStringValue: TSLocalizeString(@"Episode")];
+    [[colDate headerCell] setStringValue: TSLocalizeString(@"Published Date")];
+    
+    // Search field and Loading text
+    [[PTSearchField cell] setPlaceholderString: TSLocalizeString(@"Search")];
+    [loadingText setStringValue: TSLocalizeString(@"Updating Show Information…")];
+    
+    // Sort the preloaded list
+    [self sortTorrentShowList];
+    
+    // Reset the selection and search bar
+    [PTArrayController setSelectionIndex:-1];
+    [[PTSearchField cell] cancelButtonCell];
+    
+    // Disable any control
+    [PTSearchField setEnabled:NO];
+    [PTTableView setEnabled:NO];
+    [cancelButton setEnabled:NO];
+    [subscribeButton setEnabled:NO];
+    [showQuality setEnabled:NO];
+    
+    // And start the loading throbber
+    [loading startAnimation:nil];
+    [loadingText setHidden:NO];
+    [descriptionView setHidden:YES];
+    
+    isTranslated = YES;
 }
 
 - (IBAction) displayPresetTorrentsWindow:(id)sender
@@ -58,67 +102,31 @@
     errorHasOccurred = NO;
     
     // Localize things and prepare the window (only needed the first time)
-    if(hasDownloadedList == NO) {
-        
-        // Localize the buttons
-        [showQuality setTitle: TSLocalizeString(@"Download in HD")];
-        [cancelButton setTitle: TSLocalizeString(@"Cancel")];
-        [subscribeButton setTitle: TSLocalizeString(@"Subscribe")];
-        [tvcomButton setTitle: TSLocalizeString(@"View on TV.com")];
-        [ratingsTitle setStringValue: TSLocalizeString(@"Rating:")];
-        
-        // Localize the headings of the table columns
-        [[colHD headerCell] setStringValue: TSLocalizeString(@"HD")];
-        [[colName headerCell] setStringValue: TSLocalizeString(@"Episode Name")];
-        [[colSeason headerCell] setStringValue: TSLocalizeString(@"Season")];
-        [[colEpisode headerCell] setStringValue: TSLocalizeString(@"Episode")];
-        [[colDate headerCell] setStringValue: TSLocalizeString(@"Published Date")];
-        
-        // Search field and Loading text
-        [[PTSearchField cell] setPlaceholderString: TSLocalizeString(@"Search")];
-        [loadingText setStringValue: TSLocalizeString(@"Updating Show Information…")];
-        
-        // Sort the preloaded list
-        [self sortTorrentShowList];
-        
-        // Reset the selection and search bar
-        [PTArrayController setSelectionIndex:-1];
-        [[PTSearchField cell] cancelButtonCell];
-        
-        // Disable any control
-        [PTSearchField setEnabled:NO];
-        [PTTableView setEnabled:NO];
-        [cancelButton setEnabled:NO];
-        [subscribeButton setEnabled:NO];
-        [showQuality setEnabled:NO];
-        
-        // And start the loading throbber
-        [loading startAnimation:nil];
-        [loadingText setHidden:NO];
-        [descriptionView setHidden:YES];
+    if (!isTranslated) {
+        [self localizeWindow];
     }
     
     // Always remember the user preference
-    [showQuality setState: [TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:1]];
+    [showQuality setState:[TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:1]];
     
     // Grab the list of episodes
     [episodeArrayController removeObjects:[episodeArrayController content]];
     [self tableViewSelectionDidChange:nil];
     
-    [NSApp beginSheet: PTWindow
-       modalForWindow: [[NSApplication sharedApplication] mainWindow]
-        modalDelegate: nil
-       didEndSelector: nil
-          contextInfo: nil];
+    [NSApp beginSheet:PTWindow
+       modalForWindow:[[NSApplication sharedApplication] mainWindow]
+        modalDelegate:nil
+       didEndSelector:nil
+          contextInfo:nil];
     
     // Only download the show list once per session
-    if(hasDownloadedList == NO) {
+    if (!hasDownloadedList) {
         [self downloadTorrentShowList];
         
         // Close the window
         if(errorHasOccurred == YES) {
-            [NSApp endSheet: PTWindow];
-            [self closePresetTorrentsWindow:0];
+            [NSApp endSheet:PTWindow];
+            [self closePresetTorrentsWindow:nil];
             return;
         }
         
@@ -129,7 +137,7 @@
         [subscribeButton setEnabled:YES];
         [showQuality setEnabled:YES];
         
-        // Reset the selection, focus the search field
+        // Reset the selection
         [PTArrayController setSelectionIndex:0];
         [PTTableView scrollRowToVisible:0];
     }
@@ -162,23 +170,114 @@
 - (void) sortTorrentShowList
 {
     // Sort the shows alphabetically
-    NSSortDescriptor *PTSortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"sortName"
-                                                                     ascending: YES 
-                                                                      selector: @selector(caseInsensitiveCompare:)];
+    NSSortDescriptor *PTSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"sortName"
+                                                                     ascending:YES 
+                                                                      selector:@selector(caseInsensitiveCompare:)];
     [PTArrayController setSortDescriptors:[NSArray arrayWithObject:PTSortDescriptor]];
     
     [PTSortDescriptor release];
 }
 
+- (void) updateSubscriptions
+{
+    // To force the view to sort the new subscription
+    [SBArrayController setUsesLazyFetching:NO];
+    
+    // There's probably a better way to do this:
+    id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
+    NSManagedObjectContext *context = [delegateClass managedObjectContext];
+    NSString *name;
+    
+    // Update all subscriptions
+    for (NSManagedObject *show in [SBArrayController arrangedObjects]) {
+        
+        // Only update the default tv shows
+        if ([show valueForKey:@"filters"] == nil) {
+            
+            // Let's assume it is cancelled
+            BOOL cancelled = YES;
+            
+            // Search in every known show
+            for (NSMutableDictionary *showDict in [PTArrayController arrangedObjects]) {
+                name = [show valueForKey:@"name"];
+                
+                // Fix some shows that changed their names
+                if ([name isEqualToString:@"30 Seconds AU"]) name = @"30 Seconds";
+                if ([name isEqualToString:@"Archer"]) name = @"Archer (2009)";
+                if ([name isEqualToString:@"Being Human"]) name = @"Being Human (US)";
+                if ([name isEqualToString:@"Big Brother US"]) name = @"Big Brother";
+                if ([name isEqualToString:@"Bob's Burger"]) name = @"Bob's Burgers";
+                if ([name isEqualToString:@"Castle"]) name = @"Castle (2009)";
+                if ([name isEqualToString:@"Conan"]) name = @"Conan (2010)";
+                if ([name isEqualToString:@"Doctor Who"]) name = @"Doctor Who (2005)";
+                if ([name isEqualToString:@"David Letterman"]) name = @"Late Show with David Letterman";
+                if ([name isEqualToString:@"Hells Kitchen"]) name = @"Hells Kitchen (US)";
+                if ([name isEqualToString:@"MonsterQuest"]) name = @"Monster Quest";
+                if ([name isEqualToString:@"Parenthood"]) name = @"Parenthood (2010)";
+                if ([name isEqualToString:@"The Big C	"]) name = @"The Big C";
+                if ([name isEqualToString:@"The Office"]) name = @"The Office (US)";
+                if ([name isEqualToString:@"The Daily Show"]) name = @"The Daily Show with Jon Stewart";
+                if ([name isEqualToString:@"The Killing"]) name = @"The Killing (2011)";
+                if ([name isEqualToString:@"Undercover Boss"]) name = @"Undercover Boss (US)";
+                if ([name isEqualToString:@"Who Do You Think You Are"]) name = @"Who Do You Think You Are (US)";
+                
+                // And finally update all the info!
+                if ([name isEqualToString:[showDict valueForKey:@"displayName"]]) {
+                    NSManagedObject *subscription = [context objectWithID:[show objectID]];
+                    
+                    [show setValue:[showDict valueForKey:@"displayName"] forKey:@"name"];
+                    [show setValue:[showDict valueForKey:@"sortName"] forKey:@"sortName"];
+                    [show setValue:[showDict valueForKey:@"tvdbID"] forKey:@"tvdbID"];
+                    [show setValue:[showDict valueForKey:@"name"] forKey:@"url"];
+                    [subscription setValue:[showDict valueForKey:@"displayName"] forKey:@"name"];
+                    [subscription setValue:[showDict valueForKey:@"sortName"] forKey:@"sortName"];
+                    [subscription setValue:[showDict valueForKey:@"tvdbID"] forKey:@"tvdbID"];
+                    [subscription setValue:[showDict valueForKey:@"name"] forKey:@"url"];
+                    
+                    // Great, so it is not cancelled
+                    cancelled = NO;
+                    
+                    break;
+                }
+            }
+            
+            // Oh, oh, the show has been cancelled, warn the user!
+            if (cancelled) {
+                // By disabling the sortName, the user interface gets updated
+                NSManagedObject *subscription = [context objectWithID:[show objectID]];
+                [show setValue:@"" forKey:@"sortName"];
+                [subscription setValue:@"" forKey:@"sortName"];
+            }
+            
+        }
+    }
+    
+    // Be sure to process pending changes before saving or it won't save correctly.
+    [[delegateClass managedObjectContext] processPendingChanges];
+    [delegateClass saveAction];
+    [delegateClass release];
+}
+
 - (void) downloadTorrentShowList
 {
+    // First check if we need to update the show list
+    NSDate *lastChecked = [TSUserDefaults getDateFromKey:@"LastDownloadedShowList"];
+    
+    // If three days did not pass since the last check, do not update the show list
+    if (lastChecked != nil && [[NSDate date] timeIntervalSinceDate:lastChecked] < 3*24*60*60) {
+        LogInfo(@"Using a cached show list.");
+        hasDownloadedList = YES;
+        return;
+    }
+    
     LogInfo(@"Downloading an updated show list.");
     
     // There's probably a better way to do this:
     id delegateClass = [[PresetShowsDelegate alloc] init];
     
     NSString *displayName, *sortName;
-    int showrssID;
+    NSMutableString *name;
+    int tvdbID;
     
     // The rest of this method is extremely messy but it works for the time being
     // Feel free to improve it if you find a way
@@ -186,19 +285,27 @@
     // Download the page containing the show list
     NSString *showListContents = [WebsiteFunctions downloadStringFrom:ShowListURL];
     
-    // Be sure to only search for shows between the <select> tags
-    // Warning about never being read can be safely ignored
-    NSArray *selectTags = [showListContents componentsMatchedByRegex:SelectTagsRegex];
-    
-    // Check to make sure the website is loading and that selectTags isn't NULL
-    if ([WebsiteFunctions canConnectToHostname:ShowListHostname] && [selectTags count] == 0) {
-        [self errorWindowWithStatusCode:101];
+    // Try the mirror if there was no luck
+    if (!showListContents || [showListContents length] < 1000) {
+        LogInfo(@"Downloading an updated show list from the mirror.");
+        showListContents = [WebsiteFunctions downloadStringFrom:ShowListMirror];
     }
-    else if (![WebsiteFunctions canConnectToHostname:ShowListHostname]) {
+    
+    NSXMLDocument *doc = [[[NSXMLDocument alloc] initWithXMLString:showListContents
+                                                          options:NSXMLDocumentTidyXML
+                                                            error:nil] autorelease];
+    NSXMLNode *rootNode = nil;
+    
+    if (doc != nil) {
+        rootNode = [doc rootElement];
+    }
+    
+    // Check to make sure the website is loading and that the root node isn't nil
+    if (showListContents && [showListContents length] < 1000) {
         [self errorWindowWithStatusCode:102];
+    } else if (rootNode == nil) {
+        [self errorWindowWithStatusCode:101];
     } else {
-        showListContents = [selectTags objectAtIndex:0];
-        
         // Reset the existing show list before continuing. In a perfect world we'd
         // only be adding shows that didn't already exist, instead of deleting
         // everything and starting from scratch.
@@ -207,33 +314,43 @@
         
         NSManagedObjectContext *context = [delegateClass managedObjectContext];
         
-        // Extract the show name and number from the <option> tags
-        NSArray *optionTags = [showListContents componentsMatchedByRegex:OptionTagsRegex];
+        // Extract the shows from the children nodes
+        NSArray *shows = [rootNode children];
         
-        for(NSString *showInformation in optionTags) {
+        for (NSXMLNode *show in shows) {
             // Yes, it's extremely messy to be adding it to the array controller and to
             // the MOC separately but I don't have time to debug the issue with 32bit.
-            NSManagedObject *showObj = [NSEntityDescription insertNewObjectForEntityForName: @"Show"
-                                                                     inManagedObjectContext: context];
+            NSManagedObject *showObj = [NSEntityDescription insertNewObjectForEntityForName:@"Show"
+                                                                     inManagedObjectContext:context];
             NSMutableDictionary *showDict = [NSMutableDictionary dictionary];
             
-            // I hate having to search for each value separately but I can't seem to figure out any other way
-            displayName = [[[showInformation componentsMatchedByRegex:DisplayNameRegex] objectAtIndex:0]
-                           stringByReplacingOccurrencesOfRegex:SeparatorBetweenNameAndID withString:@""];
+            displayName = [[show childNamed:@"name"] stringValue];
             sortName = [displayName stringByReplacingOccurrencesOfRegex:@"^The[[:space:]]" withString:@""];
-            showrssID = [[[showInformation componentsMatchedByRegex:RSSIDRegex] objectAtIndex:0] intValue];
+            tvdbID = [[[show childNamed:@"tvdbid"] stringValue] intValue];
+            
+            // Now we get to the really tricky part. We are going to use the name to store
+            // all the feed urls for this tv show. WHY? Because we cannot change the
+            // CoreData store until we moved this preference pane to an app
+            name = [[[NSMutableString alloc] init] autorelease];
+            
+            // We concatenate every feed separating them with #
+            for (NSString *feed in [[show childNamed:@"mirrors"] childrenAsStrings]) {
+                [name appendFormat:@"%@#", feed];
+            }
             
             [showObj setValue:displayName forKey:@"displayName"];
-            [showObj setValue:displayName forKey:@"name"];
+            [showObj setValue:name forKey:@"name"];
             [showObj setValue:sortName forKey:@"sortName"];
-            [showObj setValue:[NSNumber numberWithInt:showrssID] forKey:@"showrssID"];
             [showObj setValue:[NSDate date] forKey:@"dateAdded"];
+            [showObj setValue:[NSNumber numberWithInt:tvdbID] forKey:@"tvdbID"];
+            [showObj setValue:[NSNumber numberWithInt:tvdbID] forKey:@"showrssID"];
             
             [showDict setValue:displayName forKey:@"displayName"];
-            [showDict setValue:displayName forKey:@"name"];
+            [showDict setValue:name forKey:@"name"];
             [showDict setValue:sortName forKey:@"sortName"];
-            [showDict setValue:[NSNumber numberWithInt:showrssID] forKey:@"showrssID"];
             [showDict setValue:[NSDate date] forKey:@"dateAdded"];
+            [showDict setValue:[NSNumber numberWithInt:tvdbID] forKey:@"tvdbID"];
+            [showDict setValue:[NSNumber numberWithInt:tvdbID] forKey:@"showrssID"];
             
             [PTArrayController addObject:showDict];
             [context insertObject:showObj];
@@ -245,6 +362,9 @@
         [delegateClass saveAction];
         
         LogInfo(@"Finished downloading the new show list.");
+        
+        [TSUserDefaults setKey:@"LastDownloadedShowList" fromDate:[NSDate date]];
+        [self updateSubscriptions];
     }
     
     [self sortTorrentShowList];
@@ -270,35 +390,38 @@
         // or else searching and the scrollbar will fail.
         if ([PTTableView selectedRow] != -1 || ![PTTableView selectedRow]) {
             
-            NSNumber *showID = nil;
-            NSString *showName = nil;
+            NSString *showFeeds = nil;
+            NSArray *arguments = nil;
             
             // First disable completely the subscribe button is the user is already subscribed
             if ([[PTArrayController selectedObjects] count] != 0) {
-                if ([self userIsSubscribedToShow:[[[PTArrayController selectedObjects] objectAtIndex:0] valueForKey:@"name"]]) {
+                if ([self userIsSubscribedToShow:[[[PTArrayController selectedObjects] objectAtIndex:0] valueForKey:@"displayName"]]) {
                     [subscribeButton setEnabled:NO];
                 } else {
                     [subscribeButton setEnabled:YES];
                 }
                 
-                showID = [[[PTArrayController selectedObjects] objectAtIndex:0] valueForKey:@"showrssID"];
-                showName = [[[PTArrayController selectedObjects] objectAtIndex:0] valueForKey:@"name"];
+                showFeeds = [[[PTArrayController selectedObjects] objectAtIndex:0] valueForKey:@"name"];
+                arguments = [NSArray arrayWithObjects:
+                             [[[PTArrayController selectedObjects] objectAtIndex:0] valueForKey:@"displayName"],
+                             [NSString stringWithFormat:@"%@",
+                              [[[PTArrayController selectedObjects] objectAtIndex:0] valueForKey:@"tvdbID"]], nil];
             }
             
             // In the meantime show the loading throbber
             [self showLoadingThrobber];
             
-            if (showID != nil) {
+            if (showFeeds != nil) {
                 // Grab the list of episodes
-                [self performSelectorInBackground:@selector(setEpisodesForShow:) withObject:showID];
+                [self performSelectorInBackground:@selector(setEpisodesForShow:) withObject:showFeeds];
             }
             
-            if (showName != nil) {
+            if (arguments != nil) {
                 // Grab the show poster
-                [self performSelectorInBackground:@selector(setPosterForShow:) withObject:showName];
+                [self performSelectorInBackground:@selector(setPosterForShow:) withObject:arguments];
                 
                 // Grab the show description
-                [self performSelectorInBackground:@selector(setDescriptionForShow:) withObject:showName];
+                [self performSelectorInBackground:@selector(setDescriptionForShow:) withObject:arguments];
             }
         }
     }
@@ -315,12 +438,12 @@
     NSImage *defaultPoster = [[[NSImage alloc] initByReferencingFile:
                                [[NSBundle bundleForClass:[self class]] pathForResource:@"posterArtPlaceholder"
                                                                                 ofType:@"jpg"]] autorelease];
-    [defaultPoster setSize: NSMakeSize(129, 187)];
-    [showPoster setImage: defaultPoster];
+    [defaultPoster setSize:NSMakeSize(129, 187)];
+    [showPoster setImage:defaultPoster];
 }
 
 - (void) setUserDefinedShowQuality {
-    [showQuality setState: [TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:1]];
+    [showQuality setState:[TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:1]];
 }
 
 - (void) showLoadingThrobber {
@@ -337,37 +460,40 @@
 
 #pragma mark -
 #pragma mark Background workers
-- (void) setEpisodesForShow:(NSNumber *)showID
+- (void) setEpisodesForShow:(NSString *)showFeeds
 {
-    // Build the RSS URL (hardcoded to ShowRSS)
-    NSString *selectedShowURL = [NSString stringWithFormat:@"http://showrss.karmorra.info/feeds/%@.rss", showID];
-    
     // Now we can trigger the time-expensive task
-    NSArray *results = [NSArray arrayWithObjects:showID,
-                        [TSParseXMLFeeds parseEpisodesFromFeed:selectedShowURL maxItems:50], nil];
+    NSArray *results = [NSArray arrayWithObjects:showFeeds,
+                        [TSParseXMLFeeds parseEpisodesFromFeeds:[showFeeds componentsSeparatedByString:@"#"]
+                                                       maxItems:50], nil];
     
-    if ([results count] == 0) {
-        LogError(@"Could not download/parse feed <%@>", selectedShowURL);
+    if ([results count] < 2) {
+        LogError(@"Could not download/parse feed(s) <%@>", showFeeds);
         return;
     }
-
+    
     [self performSelectorOnMainThread:@selector(updateEpisodes:) withObject:results waitUntilDone:NO];
 }
 
-- (void) setPosterForShow:(NSString *)showName
+- (void) setPosterForShow:(NSArray *)arguments
 {
     // Now we can trigger the time-expensive task
-    NSArray *results = [NSArray arrayWithObjects:showName,
-                        [[[TheTVDB getPosterForShow:showName withHeight:187 withWidth:129] copy] autorelease], nil];
+    NSArray *results = [NSArray arrayWithObjects:[arguments objectAtIndex:0],
+                        [[[TheTVDB getPosterForShow:[arguments objectAtIndex:0]
+                                         withShowID:[arguments objectAtIndex:1]
+                                         withHeight:187
+                                          withWidth:129] copy] autorelease], nil];
     
     [self performSelectorOnMainThread:@selector(updatePoster:) withObject:results waitUntilDone:NO];
 }
 
-- (void) setDescriptionForShow:(NSString *)showName
+- (void) setDescriptionForShow:(NSArray *)arguments
 {
     // Now we can trigger the time-expensive task
-    NSArray *results = [NSArray arrayWithObjects:showName,
-                        [TheTVDB getValueForKey:@"Overview" andShow:showName], nil];
+    NSArray *results = [NSArray arrayWithObjects:[arguments objectAtIndex:0],
+                        [TheTVDB getValueForKey:@"Overview"
+                                     withShowID:[arguments objectAtIndex:1]
+                                    andShowName:[arguments objectAtIndex:0]], nil];
     
     [self performSelectorOnMainThread:@selector(updateDescription:) withObject:results waitUntilDone:NO];
 }
@@ -381,12 +507,12 @@
     }
     
     // Extract the data
-    NSNumber *showID = [data objectAtIndex:0];
+    NSString *showFeeds = [data objectAtIndex:0];
     NSArray *results = [data objectAtIndex:1];
-    NSNumber *copy = [[selectedObjects objectAtIndex:0] valueForKey:@"showrssID"];
+    NSString *copy = [[selectedObjects objectAtIndex:0] valueForKey:@"name"];
     
     // Continue only if the selected show is the same as before
-    if ([showID isEqualToNumber:copy]) {
+    if ([showFeeds isEqualToString:copy]) {
         [episodeArrayController addObjects:results];
         
         // Check if there are HD episodes, if so enable the "Download in HD" checkbox
@@ -413,7 +539,7 @@
     // Extract the data
     NSString *showName = [data objectAtIndex:0];
     NSImage *poster = [data objectAtIndex:1];
-    NSString *copy = [[selectedObjects objectAtIndex:0] valueForKey:@"name"];
+    NSString *copy = [[selectedObjects objectAtIndex:0] valueForKey:@"displayName"];
     
     // Continue only if the selected show is the same as before
     if ([showName isEqualToString:copy]) {
@@ -433,7 +559,7 @@
     // Extract the data
     NSString *showName = [data objectAtIndex:0];
     NSString *description = [data objectAtIndex:1];
-    NSString *copy = [[selectedObjects objectAtIndex:0] valueForKey:@"name"];
+    NSString *copy = [[selectedObjects objectAtIndex:0] valueForKey:@"displayName"];
     
     // Continue only if the selected show is the same as before
     if ([showName isEqualToString:copy]) {
@@ -521,7 +647,7 @@
 {
     // To force the view to sort the new subscription
     [SBArrayController setUsesLazyFetching:NO];
-
+    
     // There's probably a better way to do this:
     id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
     
@@ -530,13 +656,12 @@
                                                                      inManagedObjectContext: context];
     
     NSArray *selectedShow = [PTArrayController selectedObjects];
-
+    
     // Set the information about the new show
     [newSubscription setValue:[[selectedShow valueForKey:@"displayName"] objectAtIndex:0] forKey:@"name"];
     [newSubscription setValue:[[selectedShow valueForKey:@"sortName"] objectAtIndex:0] forKey:@"sortName"];
-    [newSubscription setValue:[NSString stringWithFormat:@"http://showrss.karmorra.info/feeds/%@.rss",
-                               [[selectedShow valueForKey:@"showrssID"] objectAtIndex:0]]
-                       forKey:@"url"];
+    [newSubscription setValue:[[selectedShow valueForKey:@"tvdbID"] objectAtIndex:0] forKey:@"tvdbID"];
+    [newSubscription setValue:[[selectedShow valueForKey:@"name"] objectAtIndex:0] forKey:@"url"];
     [newSubscription setValue:[NSDate date] forKey:@"lastDownloaded"];
     [newSubscription setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
     [newSubscription setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
@@ -550,8 +675,8 @@
         
         [showDict setValue:[[selectedShow valueForKey:@"displayName"] objectAtIndex:0] forKey:@"name"];
         [showDict setValue:[[selectedShow valueForKey:@"sortName"] objectAtIndex:0] forKey:@"sortName"];
-        [showDict setValue:[NSString stringWithFormat:@"http://showrss.karmorra.info/feeds/%@.rss",
-                            [[selectedShow valueForKey:@"showrssID"] objectAtIndex:0]]
+        [showDict setValue:[[selectedShow valueForKey:@"tvdbID"] objectAtIndex:0] forKey:@"tvdbID"];
+        [showDict setValue:[[selectedShow valueForKey:@"name"] objectAtIndex:0]
                     forKey:@"url"];
         [showDict setValue:[NSDate date] forKey:@"lastDownloaded"];
         [showDict setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
@@ -564,7 +689,6 @@
     [delegateClass saveAction];
     
     // Close the modal dialog box
-//    [prefTabView selectTabViewItemWithIdentifier:@"tabItemSubscriptions"];
     [self closePresetTorrentsWindow:(id)sender];
     
     [delegateClass release];

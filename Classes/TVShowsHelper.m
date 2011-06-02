@@ -75,40 +75,41 @@
     
     NSInteger delay;
     NSTimeInterval seconds;
-    delay = [TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:0];
+    delay = [TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:1];
     
     switch (delay) {
         case 0:
-            // 15 minutes
-            seconds = 15*60;
-            break;
-        case 1:
             // 30 minutes
             seconds = 30*60;
             break;
-        case 2:
+        case 1:
             // 1 hour
             seconds = 1*60*60;
             break;
-        case 3:
+        case 2:
             // 3 hours
             seconds = 3*60*60;
             break;
-        case 4:
+        case 3:
             // 6 hours
             seconds = 6*60*60;
             break;
-        case 5:
+        case 4:
             // 12 hours
             seconds = 12*60*60;
             break;
-        case 6:
+        case 5:
             // 1 day
             seconds = 24*60*60;
             break;
+        case 6:
+            // 1 day, old value, needs to be reverted back to 5
+            seconds = 24*60*60;
+            [TSUserDefaults setKey:@"checkDelay" fromFloat:5];
+            break;
         default:
             // 15 minutes
-            seconds = 15*60;
+            seconds = 1*60;
     }
     
     checkerLoop = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:0.1]
@@ -190,7 +191,7 @@
     [TSUserDefaults setKey:@"lastCheckedForEpisodes" fromDate:[NSDate date]];
     
     // And update the menu to reflect the date
-    [self performSelectorOnMainThread:@selector(updateLastCheckedItem)  withObject:nil waitUntilDone:NO];
+    [self performSelectorOnMainThread:@selector(updateLastCheckedItem) withObject:nil waitUntilDone:NO];
     
     [delegateClass saveAction];
     [delegateClass release];
@@ -199,7 +200,9 @@
 - (void) checkForNewEpisodes:(NSArray *)show
 {
     NSDate *pubDate, *lastDownloaded, *lastChecked;
-    NSArray *episodes = [TSParseXMLFeeds parseEpisodesFromFeed:[show valueForKey:@"url"] maxItems:50];
+    NSArray *episodes = [TSParseXMLFeeds parseEpisodesFromFeeds:
+                         [[show valueForKey:@"url"] componentsSeparatedByString:@"#"]
+                                                       maxItems:50];
     
     if ([episodes count] == 0) {
         LogError(@"Could not download/parse feed for %@ <%@>", [show valueForKey:@"name"], [show valueForKey:@"url"]);
@@ -224,9 +227,9 @@
         // was published then we should probably download the episode.
         if ([lastDownloaded compare:pubDate] == NSOrderedAscending) {
             
-            // If three full days has passed since the episode was aired attempt the download of any version
+            // If it has been two full days since the episode was aired attempt the download of any version
             // Also check that we have checked for episodes at least once in the last day
-            if ([pubDate timeIntervalSinceDate:[NSDate date]] > 3*24*60*60 &&
+            if ([pubDate timeIntervalSinceDate:[NSDate date]] > 2*24*60*60 &&
                 [[NSDate date] timeIntervalSinceDate:lastChecked] < 25*60*60) {
                 chooseAnyVersion = YES;
             } else {
@@ -234,36 +237,20 @@
             }
             
             // First let's try to download the HD version from the RSS
-            // Only if it is HD and HD is enabled (or SD was not available last three days)
+            // Only if it is HD and HD is enabled (or SD was not available last two days)
             if (([[show valueForKey:@"quality"] boolValue] &&
                  [[episode valueForKey:@"isHD"] boolValue]) ||
-                chooseAnyVersion) {
-                
-                if ([self startDownloadingURL:[episode valueForKey:@"link"]
-                                 withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
-                                  andShowName:[show valueForKey:@"name"]]) {
-                    
-                    // Update when the show was last downloaded.
-                    [show setValue:pubDate forKey:@"lastDownloaded"];
-                    
-                    break;
-                }
-                
-            }
-            
-            // If no success let's try to download the SD version then
-            if ((![[show valueForKey:@"quality"] boolValue] &&
+                (![[show valueForKey:@"quality"] boolValue] &&
                  ![[episode valueForKey:@"isHD"] boolValue]) ||
                 chooseAnyVersion) {
                 
                 if ([self startDownloadingURL:[episode valueForKey:@"link"]
                                  withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
                                   andShowName:[show valueForKey:@"name"]]) {
-                    
                     // Update when the show was last downloaded.
                     [show setValue:pubDate forKey:@"lastDownloaded"];
-                    
                 }
+                
             }
         } else {
             // The rest is not important because it is even before the previous entry

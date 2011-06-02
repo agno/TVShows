@@ -12,25 +12,12 @@
  *
  */
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 
-@interface ShowPosterValueTransformer : NSValueTransformer {
-    
-}
+@interface NSXMLNode (utils)
 
-+ (Class) transformedValueClass;
-+ (BOOL) allowsReverseTransformation;
-- (id) transformedValue:(id)value;
-
-@end
-
-@interface CancelledShowValueTransformer : NSValueTransformer {
-    
-}
-
-+ (Class) transformedValueClass;
-+ (BOOL) allowsReverseTransformation;
-- (id) transformedValue:(id)value;
+- (NSXMLNode *)childNamed:(NSString *)name;
+- (NSArray *)childrenAsStrings;
 
 @end

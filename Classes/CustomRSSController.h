@@ -26,8 +26,10 @@
     IBOutlet NSTextField *filterSectionTitle;
     IBOutlet NSTextField *nameText;
     IBOutlet NSTextField *feedText;
+    IBOutlet NSTextField *tvdbText;
     IBOutlet NSComboBox *nameValue;
     IBOutlet NSComboBox *feedValue;
+    IBOutlet NSTextField *tvdbValue;
     IBOutlet NSButton *showQuality;
     IBOutlet NSButton *cancelButton;
     IBOutlet NSButton *subscribeButton;

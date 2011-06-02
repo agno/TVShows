@@ -22,10 +22,12 @@
 {
     SCNetworkReachabilityRef target;
     SCNetworkConnectionFlags flags = 0;
-    Boolean ok;
+    Boolean ok = NO;
     target = SCNetworkReachabilityCreateWithName(NULL, [hostName UTF8String]);
-    ok = SCNetworkReachabilityGetFlags(target, &flags);
-    CFRelease(target);
+    if (target != nil) {
+        ok = SCNetworkReachabilityGetFlags(target, &flags);
+        CFRelease(target);
+    }
     return ok;
 }
 
@@ -33,7 +35,7 @@
 {
     NSURL *realURL = [NSURL URLWithString:url];
     
-    if (realURL == nil) {
+    if (realURL == nil || [realURL host] == nil || [url length] < 5) {
         return FALSE;
     } else {
         return [WebsiteFunctions canConnectToHostname:[realURL host]];

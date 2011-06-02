@@ -85,6 +85,7 @@
 #pragma mark -
 #pragma mark About Tab
 - (IBAction) openWebsite:(id)sender;
+- (IBAction) openBlog:(id)sender;
 - (IBAction) openTwitter:(id)sender;
 - (IBAction) openPaypal:(id)sender;
 - (IBAction) openUninstaller:(id)sender;
@@ -98,10 +99,10 @@
 #pragma mark -
 #pragma mark Subscriptions TabController
 - (IBAction) displayShowInfoWindow:(id)sender;
-- (void) setEpisodesForShow:(NSString *)show;
-- (void) setStatusForShow:(NSString *)show;
-- (void) setNextEpisodeForShow:(NSString *)show;
-- (void) setPosterForShow:(NSString *)show;
+- (void) setEpisodesForShow:(NSArray *)arguments;
+- (void) setStatusForShow:(NSArray *)arguments;
+- (void) setNextEpisodeForShow:(NSArray *)arguments;
+- (void) setPosterForShow:(NSArray *)arguments;
 - (IBAction) closeShowInfoWindow:(id)sender;
 - (IBAction) showQualityDidChange:(id)sender;
 - (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName andShowName:(NSString *)show;

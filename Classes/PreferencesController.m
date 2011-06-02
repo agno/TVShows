@@ -58,7 +58,7 @@
     [TSUserDefaults setKey:@"SortInFolders"             fromBool:NO];
     [TSUserDefaults setKey:@"AutoSelectHDVersion"       fromBool:YES];
     [TSUserDefaults setKey:@"UseAdditionalSourcesHD"    fromBool:YES];
-    [TSUserDefaults setKey:@"checkDelay"                fromFloat:0];
+    [TSUserDefaults setKey:@"checkDelay"                fromFloat:1];
     [TSUserDefaults setKey:@"downloadFolder"            fromString:[NSHomeDirectory() stringByAppendingPathComponent:@"Downloads"]];
     [TSUserDefaults setKey:@"GrowlOnAppUpdate"          fromBool:YES];
     [TSUserDefaults setKey:@"GrowlOnNewEpisode"         fromBool:YES];
@@ -108,14 +108,13 @@
     
     // Check for new episodes every...
     [episodeCheckText setStringValue:TSLocalizeString(@"Check for episodes every:")];
-    [episodeCheckDelay selectItemAtIndex:[TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:0]];
-    [[episodeCheckDelay itemAtIndex:0] setTitle:TSLocalizeString(@"15 minutes")];
-    [[episodeCheckDelay itemAtIndex:1] setTitle:TSLocalizeString(@"30 minutes")];
-    [[episodeCheckDelay itemAtIndex:2] setTitle:TSLocalizeString(@"1 hour")];
-    [[episodeCheckDelay itemAtIndex:3] setTitle:TSLocalizeString(@"3 hours")];
-    [[episodeCheckDelay itemAtIndex:4] setTitle:TSLocalizeString(@"6 hours")];
-    [[episodeCheckDelay itemAtIndex:5] setTitle:TSLocalizeString(@"12 hours")];
-    [[episodeCheckDelay itemAtIndex:6] setTitle:TSLocalizeString(@"1 day")];
+    [episodeCheckDelay selectItemAtIndex:[TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:1]];
+    [[episodeCheckDelay itemAtIndex:0] setTitle:TSLocalizeString(@"30 minutes")];
+    [[episodeCheckDelay itemAtIndex:1] setTitle:TSLocalizeString(@"1 hour")];
+    [[episodeCheckDelay itemAtIndex:2] setTitle:TSLocalizeString(@"3 hours")];
+    [[episodeCheckDelay itemAtIndex:3] setTitle:TSLocalizeString(@"6 hours")];
+    [[episodeCheckDelay itemAtIndex:4] setTitle:TSLocalizeString(@"12 hours")];
+    [[episodeCheckDelay itemAtIndex:5] setTitle:TSLocalizeString(@"1 day")];
     
     // Default save location
     [downloadLocationText setStringValue:TSLocalizeString(@"Episode save location:")];

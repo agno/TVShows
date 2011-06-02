@@ -16,21 +16,15 @@
 
 
 @interface TheTVDB : NSObject {
-    NSURL *mirrorURL;
-    NSString *serverTime;
 }
 
-@property (retain) NSURL *mirrorURL;
-@property (retain) NSString *serverTime;
-
 + (NSString *) applicationCacheDirectory;
-+ (NSString *) getValueForKey:(NSString *)key andShow:(NSString *)show;
-+ (NSArray *) getValuesForKey:(NSString *)key andShow:(NSString *)show;
-
-+ (NSString *) getShowStatus:(NSString *)showName;
-+ (NSDate *) getShowNextEpisode:(NSString *)showName;
-+ (NSImage *) getPosterForShow:(NSString *)showName withHeight:(float)height withWidth:(float)width;
-- (NSImage *) getPosterForShow:(NSString *)showName withHeight:(float)height withWidth:(float)width;
 + (NSString *) getIDForShow:(NSString *)showName;
++ (NSString *) getValueForKey:(NSString *)key withShowID:(NSString *)seriesID andShowName:(NSString *)show;
++ (NSArray *) getValuesForKey:(NSString *)key withShowID:(NSString *)seriesID andShowName:(NSString *)show;
+
++ (NSString *) getShowStatus:(NSString *)showName withShowID:(NSString *)seriesID;
++ (NSDate *) getShowNextEpisode:(NSString *)showName withShowID:(NSString *)seriesID;
++ (NSImage *) getPosterForShow:(NSString *)showName withShowID:(NSString *)seriesID withHeight:(float)height withWidth:(float)width;
 
 @end

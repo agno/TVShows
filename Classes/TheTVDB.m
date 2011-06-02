@@ -18,32 +18,12 @@
 #import "RegexKitLite.h"
 #import "WebsiteFunctions.h"
 
+#define TVDB_SEARCH @"http://www.thetvdb.com/api/GetSeries.php?seriesname=%@&language=all"
 
 @implementation TheTVDB
 
-@synthesize mirrorURL, serverTime;
-
-- init
-{
-    if((self = [super init])) {
-        // Before we can do anything we need to download a list of mirrors.
-        // TODO: Grab the list of mirrors. Currently only one server is listed, though.
-//      mirrorURL = [NSURL URLWithString:@"http://www.thetvdb.com"];
-        
-        // Get the current server time.
-        // TODO: This isn't actually saved anywhere but will be used for knowing
-        // whether we need to update the Cache or not.
-//      serverTime = [[[NSString alloc] initWithContentsOfURL: [NSURL URLWithString:@"http://www.thetvdb.com/api/Updates.php?type=none"]
-//                                                   encoding: NSUTF8StringEncoding
-//                                                      error: NULL] autorelease];
-    }
-    
-    return self;
-}
-
 + (NSString *) applicationCacheDirectory
 {
-    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
     NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
     
@@ -51,27 +31,33 @@
     return [basePath stringByAppendingPathComponent:@"Cache"];
 }
 
-+ (NSString *) getValueForKey:(NSString *)key andShow:(NSString *)show
++ (NSString *) getIDForShow:(NSString *)showName
+{
+    NSString *seriesURL = [NSString stringWithFormat:TVDB_SEARCH,
+                           [showName stringByReplacingOccurrencesOfRegex:@" " withString:@"+"]];
+    NSString *seriesInfo = [WebsiteFunctions downloadStringFrom:seriesURL];
+    
+    // For now select the first show in the list that's returned.
+    NSArray *tempArray = [seriesInfo componentsMatchedByRegex:@"(?!<seriesid>)(\\d|\n|\r)*?(?=</seriesid>)"];
+    if ([tempArray count] >= 1) {
+        return [tempArray objectAtIndex:0];
+    } else {
+        return nil;
+    }
+}
+
++ (NSString *) getValueForKey:(NSString *)key withShowID:(NSString *)seriesID andShowName:(NSString *)show
 {
     // TODO: Save the information returned for each series into the Cache.
     // TODO: Get the TVDB ID from the Subscriptions file.
     
     // Check to see if we already know the show's ID. If we don't then we need to search for it.
-    NSString *seriesID = [self getIDForShow:show];
-    if ( [seriesID isEqualToString:@"0"] ) {
-        NSString *seriesURL = [NSString stringWithFormat:@"http://www.thetvdb.com/api/GetSeries.php?seriesname=%@&language=all",
-                               [show stringByReplacingOccurrencesOfRegex:@" " withString:@"+"]];
-        NSString *seriesInfo = [WebsiteFunctions downloadStringFrom:seriesURL];
-        
-        // For now select the first show in the list that's returned.
-        NSArray *tempArray = [seriesInfo componentsMatchedByRegex:@"(?!<seriesid>)(\\d|\n|\r)*?(?=</seriesid>)"];
-        if ( [tempArray count] >= 1 ) {
-            seriesID = [tempArray objectAtIndex:0];
-        }
+    if ([seriesID length] == 0 || [seriesID isEqualToString:@"(null)"] || [seriesID isEqualToString:@"0"]) {
+        seriesID = [self getIDForShow:show];
     }
     
     // Only proceed if we received a series ID from somewhere above...
-    if ( [seriesID isNotEqualTo:@"0"] ) {
+    if ([seriesID length] > 0 && ![seriesID isEqualToString:@"0"]) {
         // Now let's grab complete info for the show using our API key.
         // TODO: Grab the correct localization.
         NSString *seriesURL = [NSString stringWithFormat:@"http://www.thetvdb.com/api/%@/series/%@/en.xml",API_KEY,seriesID];
@@ -94,28 +80,19 @@
     }
 }
 
-+ (NSArray *) getValuesForKey:(NSString *)key andShow:(NSString *)show
++ (NSArray *) getValuesForKey:(NSString *)key withShowID:(NSString *)seriesID andShowName:(NSString *)show
 {
     // TODO: Save the information returned for each series into the Cache.
     // TODO: Get the TVDB ID from the Subscriptions file.
     // Quick dirty code mostly copied from the previous method, it should be refactored
     
     // Check to see if we already know the show's ID. If we don't then we need to search for it.
-    NSString *seriesID = [self getIDForShow:show];
-    if ( [seriesID isEqualToString:@"0"] ) {
-        NSString *seriesURL = [NSString stringWithFormat:@"http://www.thetvdb.com/api/GetSeries.php?seriesname=%@&language=all",
-                               [show stringByReplacingOccurrencesOfRegex:@" " withString:@"+"]];
-        NSString *seriesInfo = [WebsiteFunctions downloadStringFrom:seriesURL];
-        
-        // For now select the first show in the list that's returned.
-        NSArray *tempArray = [seriesInfo componentsMatchedByRegex:@"(?!<seriesid>)(\\d|\n|\r)*?(?=</seriesid>)"];
-        if ( [tempArray count] >= 1 ) {
-            seriesID = [tempArray objectAtIndex:0];
-        }
+    if ([seriesID length] == 0 || [seriesID isEqualToString:@"(null)"] || [seriesID isEqualToString:@"0"]) {
+        seriesID = [self getIDForShow:show];
     }
     
     // Only proceed if we received a series ID from somewhere above...
-    if ( [seriesID isNotEqualTo:@"0"] ) {
+    if ([seriesID length] > 0 && ![seriesID isEqualToString:@"0"]) {
         // Now let's grab complete info for the show using our API key.
         // TODO: Grab the correct localization.
         NSString *seriesURL = [NSString stringWithFormat:@"http://www.thetvdb.com/api/%@/series/%@/all/en.xml",API_KEY,seriesID];
@@ -125,7 +102,7 @@
         key = [NSString stringWithFormat:@"<%@>(.|\n|\r)*?</%@>",key,key];
         NSArray *tempValues = [seriesInfo componentsMatchedByRegex:key];
         if ( [tempValues count] >= 1 ) {
-            NSMutableArray *values = [[NSMutableArray alloc] initWithCapacity:[tempValues count]];
+            NSMutableArray *values = [[[NSMutableArray alloc] initWithCapacity:[tempValues count]] autorelease];
             
             for (NSString *value in tempValues) {
                 [values addObject:[value stringByReplacingOccurrencesOfRegex:@"<(.+?)>" withString:@""]];
@@ -141,10 +118,10 @@
     }
 }
 
-+ (NSString *) getShowStatus:(NSString *)showName
++ (NSString *) getShowStatus:(NSString *)showName withShowID:(NSString *)seriesID
 {
     // Grab the show's status.
-    NSString *status = [self getValueForKey:@"Status" andShow: showName];
+    NSString *status = [self getValueForKey:@"Status" withShowID:seriesID andShowName:showName];
     
     // If no known status was returned...
     if (status == NULL) {
@@ -154,17 +131,17 @@
     return status;
 }
 
-+ (NSDate *) getShowNextEpisode:(NSString *)showName
++ (NSDate *) getShowNextEpisode:(NSString *)showName withShowID:(NSString *)seriesID
 {
     // Preset date formatter
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     
     NSDate *now = [NSDate date];
-    NSDate *date = [[[NSDateFormatter alloc] init] autorelease];
+    NSDate *date = nil;
     
     // Grab the show's dates for all episodes
-    for (NSString *value in [self getValuesForKey:@"FirstAired" andShow:showName]) {
+    for (NSString *value in [self getValuesForKey:@"FirstAired" withShowID:seriesID andShowName:showName]) {
         
         date = [dateFormatter dateFromString:value];
         
@@ -178,7 +155,7 @@
     return nil;
 }
 
-+ (NSImage *) getPosterForShow:(NSString *)showName withHeight:(float)height withWidth:(float)width
++ (NSImage *) getPosterForShow:(NSString *)showName withShowID:(NSString *)seriesID withHeight:(float)height withWidth:(float)width
 {
     // If the TVShows cache directory doesn't exist then create it.
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -195,7 +172,7 @@
     // If the image already exists then return the data, otherwise we need to download it.
     NSString *imagePath = [[[self applicationCacheDirectory] stringByAppendingPathComponent:showName] stringByAppendingFormat:@".jpg"];
     
-    if ( [fileManager fileExistsAtPath:imagePath] ) {
+    if ([fileManager fileExistsAtPath:imagePath]) {
         NSImage *sourceImage = [[[NSImage alloc] initWithContentsOfFile:imagePath] autorelease];
         NSImage *finalImage = [[[NSImage alloc] initWithSize: NSMakeSize(width, height)] autorelease];
         
@@ -213,7 +190,7 @@
     } else {
         // Grab the URL of the show poster
         NSImage *sourceImage;
-        NSString *posterURL = [self getValueForKey:@"poster" andShow: showName];
+        NSString *posterURL = [self getValueForKey:@"poster" withShowID:seriesID andShowName:showName];
         
         // If a poster URL was returned, download the image.
         if (posterURL != NULL) {
@@ -268,67 +245,6 @@
         
         return finalImage;
     }
-}
-
-- (NSImage *) getPosterForShow:(NSString *)showName withHeight:(float)height withWidth:(float)width
-{
-    return [[TheTVDB class] getPosterForShow:showName withHeight:height withWidth:width];
-}
-
-+ (NSString *) getIDForShow:(NSString *)showName
-{
-    // TODO: Use an NSDictionary instead (?).
-    if ([showName isEqualToString:@"30 Seconds AU"])        return @"114461";
-    if ([showName isEqualToString:@"Archer"])               return @"110381";
-    if ([showName isEqualToString:@"Big Brother US"])       return @"76706";
-    if ([showName isEqualToString:@"Bob's Burger"])         return @"194031";
-    if ([showName isEqualToString:@"Brothers and Sisters"]) return @"79506";
-    if ([showName isEqualToString:@"The Cape"])             return @"160671";
-    if ([showName isEqualToString:@"Castle"])               return @"83462";
-    if ([showName isEqualToString:@"Chase"])                return @"163541";
-    if ([showName isEqualToString:@"Conan"])                return @"194751";
-    if ([showName isEqualToString:@"Cops"])                 return @"74709";
-    if ([showName isEqualToString:@"CSI"])                  return @"72546";
-    if ([showName isEqualToString:@"Cupid"])                return @"83615";
-    if ([showName isEqualToString:@"The Daily Show"])       return @"71256";
-    if ([showName isEqualToString:@"David Letterman"])      return @"75088";
-    if ([showName isEqualToString:@"The Defenders"])        return @"164521";
-    if ([showName isEqualToString:@"Doctor Who"])           return @"112671";
-    if ([showName isEqualToString:@"Eastbound and Down"])   return @"82467";
-    if ([showName isEqualToString:@"The Good Guys"])        return @"140101";
-    if ([showName isEqualToString:@"Human Target"])         return @"94801";
-    if ([showName isEqualToString:@"Law and Order: Special Victims Unit"])
-                                                            return @"75692";
-    if ([showName isEqualToString:@"Law & Order: Los Angeles"])
-                                                            return @"168161";
-    if ([showName isEqualToString:@"Law and Order"])        return @"72368";
-    if ([showName isEqualToString:@"Law and Order: UK"])    return @"85228";
-    if ([showName isEqualToString:@"The Life and Times of Tim"])
-                                                            return @"83130";
-    if ([showName isEqualToString:@"Lights Out"])           return @"194051";
-    if ([showName isEqualToString:@"Louie"])                return @"155201";
-    if ([showName isEqualToString:@"Melissa and Joey"])     return @"168621";
-    if ([showName isEqualToString:@"Merlin"])               return @"83123";
-    if ([showName isEqualToString:@"Mike and Molly"])       return @"164501";
-    if ([showName isEqualToString:@"Mr. Sunshine"])         return @"164481";
-    if ([showName isEqualToString:@"The Office"])           return @"73244";
-    if ([showName isEqualToString:@"Parenthood"])           return @"94551";
-    if ([showName isEqualToString:@"Penn & Teller: Bullshit!"])
-                                                            return @"72301";
-    if ([showName isEqualToString:@"Shit My Dad Says"])     return @"164951";
-    if ([showName isEqualToString:@"V"])                    return @"94971";
-
-    // Run's House (no poster)
-    // Spicks and Specks (no poster)
-    
-    else return @"0";
-}
-
-- (void) dealloc
-{
-    [serverTime release];
-    [mirrorURL release];
-    [super dealloc];
 }
 
 @end

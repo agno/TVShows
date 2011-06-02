@@ -12,6 +12,8 @@
  *
  */
 
+#import <QuartzCore/QuartzCore.h>
+
 #import "AppInfoConstants.h"
 #import "TabController.h"
 
@@ -104,6 +106,42 @@
     // Sort the subscription list and draw the About box
     [self sortSubscriptionList];
     [self drawAboutBox];
+    
+    // Start the animation about one second after loading this
+    [self performSelector:@selector(animateDonateButton) withObject:nil afterDelay:1];
+}
+
+- (void) animateDonateButton
+{
+    // Each animation step is a full second
+    CATransition *presentAnimation = [CATransition animation];
+    [presentAnimation setDuration:1];
+    [presentAnimation setDelegate:self];
+    
+    // Animate the Core Animation content filters
+    [donateButton setAnimations:[NSDictionary dictionaryWithObject:presentAnimation forKey:@"contentFilters"]];
+    
+    [self animationDidStop:nil finished:YES];
+}
+
+- (void) animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)finished
+{
+    if (finished) {
+        // Get the content filters for the button (there are two, one to add color and another one to change the hue)
+        CIFilter *colorAdjust = [[donateButton contentFilters] objectAtIndex:0];
+        CIFilter *hueAdjustOld = [[donateButton contentFilters] objectAtIndex:1];
+        
+        float hue = [[hueAdjustOld valueForKey:@"inputAngle"] floatValue];
+        
+        // Slowly change the hue (in radians, max is 2*PI because it is a circle)
+        hue += (2 * M_PI) / 100;
+        
+        CIFilter *hueAdjust = [CIFilter filterWithName:@"CIHueAdjust"];
+        [hueAdjust setDefaults];
+        [hueAdjust setValue:[NSNumber numberWithFloat:hue] forKey:@"inputAngle"];
+        
+        [[donateButton animator] setContentFilters:[NSArray arrayWithObjects:colorAdjust, hueAdjust, nil]];
+    }
 }
 
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
@@ -141,6 +179,11 @@
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString: TVShowsWebsite]];
 }
 
+- (IBAction) openBlog:(id)sender
+{
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString: TVShowsBlog]];
+}
+
 - (IBAction) openTwitter:(id)sender
 {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString: TVShowsTwitter]];
@@ -148,7 +191,35 @@
 
 - (IBAction) openPaypal:(id)sender
 {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString: TVShowsDonations]];
+    // This is a list of accepted currencies for Paypal transfers and donations
+    NSArray *acceptedCurrencies = [NSArray arrayWithObjects:@"AUD", @"BRL", @"CAD", @"CZK", @"DKK", @"EUR",
+                                   @"HKD", @"HUF", @"ILS", @"JPY", @"MXN", @"NOK", @"NZD", @"PHP", @"PLN",
+                                   @"GBP", @"SGD", @"SEK", @"CHF", @"TWD", @"THB", @"TRY", @"USD", nil];
+    
+    // And this should be the preferred currency for this user
+    NSString *currencyCode = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode];
+    
+    // Let's assume is not supported
+    BOOL supported = NO;
+    
+    // And let's see if it is in that currency list
+    for (NSString *code in acceptedCurrencies) {
+        if ([currencyCode isEqualToString:code]) {
+            supported = YES;
+            break;
+        }
+    }
+    
+    // Fallback to euros!
+    if (!supported) {
+        currencyCode = @"EUR";
+    }
+    
+    // Also retrieve the country for this user
+    NSString *countryCode = [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode];
+    
+    NSString *donationURL = [NSString stringWithFormat:TVShowsDonations, currencyCode, countryCode];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:donationURL]];
 }
 
 - (IBAction) openUninstaller:(id)sender
@@ -239,7 +310,7 @@
     
     // Set up the date formatter
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    [dateFormatter setDateStyle:NSDateFormatterLongStyle];
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     
     // Set the available values now
@@ -260,19 +331,20 @@
     [episodeTableView reloadData];
     [episodeTableView setEnabled:NO];
     
-    NSString *selectedShowName = [selectedShow valueForKey:@"name"];
+    NSArray *arguments = [NSArray arrayWithObjects:[selectedShow valueForKey:@"name"],
+                          [NSString stringWithFormat:@"%@", [selectedShow valueForKey:@"tvdbID"]], nil];
     
     // Grab the list of episodes
-    [self performSelectorInBackground:@selector(setEpisodesForShow:) withObject:selectedShowName];
+    [self performSelectorInBackground:@selector(setEpisodesForShow:) withObject:arguments];
     
     // Display the show poster now that it's been resized.
-    [self performSelectorInBackground:@selector(setPosterForShow:) withObject:selectedShowName];
+    [self performSelectorInBackground:@selector(setPosterForShow:) withObject:arguments];
     
     // Grab the show status
-    [self performSelectorInBackground:@selector(setStatusForShow:) withObject:selectedShowName];
+    [self performSelectorInBackground:@selector(setStatusForShow:) withObject:arguments];
     
     // Grab the next episode date
-    [self performSelectorInBackground:@selector(setNextEpisodeForShow:) withObject:selectedShowName];
+    [self performSelectorInBackground:@selector(setNextEpisodeForShow:) withObject:arguments];
     
     [NSApp beginSheet: showInfoWindow
        modalForWindow: [[NSApplication sharedApplication] mainWindow]
@@ -284,14 +356,18 @@
     [NSApp runModalForWindow: showInfoWindow];
 }
 
-- (void) setEpisodesForShow:(NSString *)show
+- (void) setEpisodesForShow:(NSArray *)arguments
 {
-    NSArray *results = [TSParseXMLFeeds parseEpisodesFromFeed:[selectedShow valueForKey:@"url"] maxItems:50];
+    NSArray *results = [TSParseXMLFeeds parseEpisodesFromFeeds:
+                        [[selectedShow valueForKey:@"url"] componentsSeparatedByString:@"#"]
+                                                      maxItems:50];
     NSString *copy = [selectedShow valueForKey:@"name"];
     
-    if ([show isEqualToString:copy]) {
+    if ([[arguments objectAtIndex:0] isEqualToString:copy]) {
         if ([results count] == 0) {
-            LogError(@"Could not download/parse feed for %@ <%@>", show, [selectedShow valueForKey:@"url"]);
+            LogError(@"Could not download/parse feed for %@ <%@>",
+                     [arguments objectAtIndex:0],
+                     [selectedShow valueForKey:@"url"]);
         } else {
             [episodeTableView setEnabled:YES];
             [episodeArrayController addObjects:results];
@@ -310,13 +386,14 @@
     }
 }
 
-- (void) setStatusForShow:(NSString *)show
+- (void) setStatusForShow:(NSArray *)arguments
 {
-    NSString *status = [TheTVDB getShowStatus:show];
+    NSString *status = [TheTVDB getShowStatus:[arguments objectAtIndex:0]
+                                   withShowID:[arguments objectAtIndex:1]];
     NSString *copy = [selectedShow valueForKey:@"name"];
     
     // Check if the request is still valid (an impacient user may start to rapidly change)
-    if ([show isEqualToString:copy]) {
+    if ([[arguments objectAtIndex:0] isEqualToString:copy]) {
         [showStatus setStringValue:TSLocalizeString(status)];
         if ([status isEqualToString:@"Ended"]) {
             [showNextEpisode setStringValue:TSLocalizeString(@"Never")];
@@ -324,29 +401,33 @@
     }
 }
 
-- (void) setNextEpisodeForShow:(NSString *)show
+- (void) setNextEpisodeForShow:(NSArray *)arguments
 {
-    NSDate *nextEpisode = [TheTVDB getShowNextEpisode:show];
+    NSDate *nextEpisode = [TheTVDB getShowNextEpisode:[arguments objectAtIndex:0]
+                                           withShowID:[arguments objectAtIndex:1]];
     NSString *copy = [selectedShow valueForKey:@"name"];
     
     // Check if the request is still valid (an impacient user may start to rapidly change)
-    if ([show isEqualToString:copy] && nextEpisode != nil) {
+    if ([[arguments objectAtIndex:0] isEqualToString:copy] && nextEpisode != nil) {
         // Set up the date formatter
         NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-        [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+        [dateFormatter setDateStyle:NSDateFormatterLongStyle];
         [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
         
         [showNextEpisode setStringValue: [dateFormatter stringFromDate:nextEpisode]];
     }
 }
 
-- (void) setPosterForShow:(NSString *)show
+- (void) setPosterForShow:(NSArray *)arguments
 {
-    NSImage *poster = [[[TheTVDB getPosterForShow:show withHeight:184 withWidth:127] copy] autorelease];
+    NSImage *poster = [[[TheTVDB getPosterForShow:[arguments objectAtIndex:0]
+                                       withShowID:[arguments objectAtIndex:1]
+                                       withHeight:184
+                                        withWidth:127] copy] autorelease];
     NSString *copy = [selectedShow valueForKey:@"name"];
     
     // Check if the request is still valid (an impacient user may start to rapidly change)
-    if ([show isEqualToString:copy]) {
+    if ([[arguments objectAtIndex:0] isEqualToString:copy]) {
         [showPoster setImage: poster];
         [showPoster display];
     }
