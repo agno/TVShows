@@ -94,13 +94,17 @@
 + (BOOL) getEpisode:(NSMutableDictionary *)episode fromArray:(NSArray *)episodes
 {
     for (NSMutableDictionary *ep in episodes) {
-        if ([[[[[episode valueForKey:@"episodeName"] lowercaseString]
-               stringByReplacingOccurrencesOfString:@"\\s+us\\s+" withString:@" "]
-              stringByReplacingOccurrencesOfRegex:@"\\s+\\(.*\\)\\s+" withString:@" "]
+        if ([[[[[[[episode valueForKey:@"episodeName"] lowercaseString]
+                 stringByReplacingOccurrencesOfString:@"\\s+us\\s+" withString:@" "]
+                stringByReplacingOccurrencesOfRegex:@"\\s+\\(.*\\)\\s+" withString:@" "]
+               stringByReplacingOccurrencesOfRegex:@"\\s+and\\s+" withString:@" "]
+              stringByReplacingOccurrencesOfRegex:@"\\s+&\\s+" withString:@" "]
              isEqualToString:
-             [[[[ep valueForKey:@"episodeName"] lowercaseString]
-               stringByReplacingOccurrencesOfString:@"\\s+us\\s+" withString:@" "]
-              stringByReplacingOccurrencesOfRegex:@"\\s+\\(.*\\)\\s+" withString:@" "]] &&
+             [[[[[[ep valueForKey:@"episodeName"] lowercaseString]
+                 stringByReplacingOccurrencesOfString:@"\\s+us\\s+" withString:@" "]
+                stringByReplacingOccurrencesOfRegex:@"\\s+\\(.*\\)\\s+" withString:@" "]
+               stringByReplacingOccurrencesOfRegex:@"\\s+and\\s+" withString:@" "]
+              stringByReplacingOccurrencesOfRegex:@"\\s+&\\s+" withString:@" "]] &&
             [[episode valueForKey:@"isHD"] boolValue] == [[ep valueForKey:@"isHD"] boolValue]) {
             return YES;
         }
