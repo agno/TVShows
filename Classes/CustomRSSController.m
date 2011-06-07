@@ -48,7 +48,7 @@
     [rssSectionTitle setStringValue: TSLocalizeString(@"RSS Feed Information:")];
     [filterSectionTitle setStringValue: TSLocalizeString(@"Only download items matching the following rules:")];
     [nameText setStringValue: [NSString stringWithFormat:@"%@:", TSLocalizeString(@"Name")]];
-    [feedText setStringValue: [NSString stringWithFormat:@"%@:", TSLocalizeString(@"Feed URL")]];
+    [feedText setStringValue: [NSString stringWithFormat:@"%@:", TSLocalizeString(@"Feed URLs")]];
     [tvdbText setStringValue: [NSString stringWithFormat:@"%@:", TSLocalizeString(@"TVDB id")]];
     [showQuality setTitle: TSLocalizeString(@"Download in HD")];
     [cancelButton setTitle: TSLocalizeString(@"Cancel")];
@@ -81,6 +81,9 @@
     
     [self resetShowView];
     
+    // At least a feed must be set
+    [self addFeed:nil];
+    
     [NSApp beginSheet: CustomRSSWindow
        modalForWindow: [[NSApplication sharedApplication] mainWindow]
         modalDelegate: nil
@@ -99,7 +102,7 @@
     }
     
     // Localize the subscribe button (now called save)
-    [subscribeButton setTitle: TSLocalizeString(@"Save")];
+    [subscribeButton setTitle:TSLocalizeString(@"Save")];
     
     // Get the data and close the modal window
     TabController *infoController = [[sender cell] representedObject];
@@ -117,13 +120,23 @@
     [episodeArrayController setFilterPredicate:filterRules];
     
     // Set the info
-    [feedValue setStringValue:[selectedShow valueForKey:@"url"]];
     [nameValue setStringValue:[selectedShow valueForKey:@"name"]];
     [tvdbValue setStringValue:[NSString stringWithFormat:@"%@", [selectedShow valueForKey:@"tvdbID"]]];
     [showQuality setState:[[selectedShow valueForKey:@"quality"] intValue]];
     [showQuality setEnabled:YES];
     [subscribeButton setEnabled:YES];
     [self showQualityDidChange:nil];
+    
+    // Add the feeds
+    [feedArrayController removeObjects:[feedArrayController content]];
+    for (NSString *feed in [[selectedShow valueForKey:@"url"] componentsSeparatedByString:@"#"]) {
+        if (![feed isEqualToString:@""]) {
+            [self addFeed:feed];
+        }
+    }
+    
+    // Update the episode list
+    [self controlTextDidEndEditing:nil];
     
     [NSApp beginSheet: CustomRSSWindow
        modalForWindow: [[NSApplication sharedApplication] mainWindow]
@@ -135,10 +148,57 @@
     [NSApp runModalForWindow: CustomRSSWindow];
 }
 
+- (IBAction) addFeed:(id)sender {
+    // Set the text
+    NSMutableDictionary *newFeed = [NSMutableDictionary dictionary];
+    if (sender != nil && [sender isKindOfClass:[NSString class]]) {
+        [newFeed setValue:sender forKey:@"url"];
+    } else {
+        [newFeed setValue:@"http://" forKey:@"url"];
+    }
+    
+    // Add the new row
+    [feedArrayController addObject:newFeed];
+    
+    // Select the last row!
+    NSInteger lastRow = [feedsValue numberOfRows]-1;
+    [feedsValue selectRowIndexes:[NSIndexSet indexSetWithIndex:lastRow] byExtendingSelection:NO];
+    
+    // And edit it if the user added a new row
+    if (sender == nil || ![sender isKindOfClass:[NSString class]]) {
+        [feedsValue editColumn:0 row:lastRow withEvent:nil select:YES];
+    }
+}
+
+- (IBAction) removeFeed:(id)sender {
+    NSInteger selectedRow = [feedsValue selectedRow];
+    
+    // If something is selected, remove it
+    if (selectedRow != -1) {
+        [feedArrayController removeObjectAtArrangedObjectIndex:selectedRow];
+        
+        // If there are no more entries, add one
+        if ([[feedArrayController arrangedObjects] count] == 0) {
+            [self addFeed:nil];
+        } else {
+            // Then just select the previous row
+            NSInteger previousRow = selectedRow - 1;
+            if (previousRow == -1) {
+                previousRow = 0;
+            }
+            
+            [feedsValue selectRowIndexes:[NSIndexSet indexSetWithIndex:previousRow] byExtendingSelection:NO];
+        }
+        
+        // Force changes!
+        [self controlTextDidEndEditing:nil];
+    }
+}
+
 - (void) controlTextDidEndEditing:(NSNotification *)notification
 {
     // Check if the field that changed was the name or the feed URL
-    if ([notification object] == nameValue) {
+    if (notification != nil && [notification object] == nameValue) {
         NSString *cleanName = [[nameValue stringValue] stringByTrimmingCharactersInSet:
                                [NSCharacterSet whitespaceAndNewlineCharacterSet]];
         
@@ -150,26 +210,18 @@
             [subscribeButton setEnabled:NO];
         }
     } else {
-        NSString *cleanFeed = [[feedValue stringValue] stringByTrimmingCharactersInSet:
-                               [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        NSArray *feeds = [[feedArrayController arrangedObjects] performSelector:@selector(valueForKey:) withObject:@"url"];
         
         // Try to set the new episodes
-        if ([NSURL URLWithString:cleanFeed] != nil) {
-            [self performSelectorInBackground:@selector(setEpisodesFromRSS:) withObject:cleanFeed];
-            return;
-        } else {
-            // Otherwise disallow the subscription to this invalid show
-            [showQuality setEnabled:NO];
-            [subscribeButton setEnabled:NO];
-        }
+        [self performSelectorInBackground:@selector(setEpisodesFromRSS:) withObject:feeds];
     }
 }
 
-- (void) setEpisodesFromRSS:(NSString *)feedURL
+- (void) setEpisodesFromRSS:(NSArray *)feeds
 {
     // Now we can trigger the time-expensive task
-    NSArray *results = [NSArray arrayWithObjects:feedURL,
-                        [TSParseXMLFeeds parseEpisodesFromFeeds:[feedURL componentsSeparatedByString:@"#"]
+    NSArray *results = [NSArray arrayWithObjects:feeds,
+                        [TSParseXMLFeeds parseEpisodesFromFeeds:feeds
                                                        maxItems:100], nil];
     
     [self performSelectorOnMainThread:@selector(updateEpisodes:) withObject:results waitUntilDone:NO];
@@ -178,15 +230,14 @@
 - (void) updateEpisodes:(NSArray *)data
 {
     // Extract the data
-    NSString *feedURL = [data objectAtIndex:0];
+    NSArray *feeds = [data objectAtIndex:0];
     NSArray *results = [data objectAtIndex:1];
     
     // We are back after probably a lot of time, so check carefully if the user has changed the text field
-    NSString *cleanFeed = [[feedValue stringValue] stringByTrimmingCharactersInSet:
-                           [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSArray *copy = [[feedArrayController arrangedObjects] performSelector:@selector(valueForKey:) withObject:@"url"];
     
     // Continue only if the selected show is the same as before
-    if ([feedURL isEqualToString:cleanFeed]) {
+    if ([feeds isEqualToArray:copy]) {
         [episodeArrayController removeObjects:[episodeArrayController content]];
         if ([results count] == 0) {
             [showQuality setEnabled:NO];
@@ -233,7 +284,7 @@
 - (void) resetShowView
 {
     [episodeArrayController removeObjects:[episodeArrayController content]];
-    [feedValue setStringValue:@""];
+    [feedArrayController removeObjects:[feedArrayController content]];
     [nameValue setStringValue:@""];
     [tvdbValue setStringValue:@""];
     [self setUserDefinedShowQuality];
@@ -270,6 +321,9 @@
 #pragma mark Subscription Methods
 - (IBAction) subscribeToShow:(id)sender
 {
+    // Close the modal dialog box
+    [self closeCustomRSSWindow:(id)sender];
+    
     // To force the view to sort the new subscription
     [SBArrayController setUsesLazyFetching:NO];
     
@@ -281,20 +335,25 @@
     NSString *sortName = [[nameValue stringValue] stringByReplacingOccurrencesOfRegex:@"^The[[:space:]]"
                                                                            withString:@""];
     
+    // Build the url for storage (joining them with #)
+    NSString *url = [[[feedArrayController arrangedObjects] performSelector:@selector(valueForKey:)
+                                                                 withObject:@"url"]
+                     componentsJoinedByString:@"#"];
+    
     if (selectedShow != nil) {
         NSManagedObject *selectedShowObj = [context objectWithID:[selectedShow objectID]];
         
         // Update the per-show preferences
         [selectedShow setValue:[nameValue stringValue] forKey:@"name"];
         [selectedShow setValue:sortName forKey:@"sortName"];
-        [selectedShow setValue:[feedValue stringValue] forKey:@"url"];
+        [selectedShow setValue:url forKey:@"url"];
         [selectedShow setValue:[NSNumber numberWithInt:[[tvdbValue stringValue] intValue]] forKey:@"tvdbID"];
         [selectedShow setValue:[NSDate date] forKey:@"lastDownloaded"];
         [selectedShow setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
         [selectedShow setValue:filterRules forKey:@"filters"];
         [selectedShowObj setValue:[nameValue stringValue] forKey:@"name"];
         [selectedShowObj setValue:sortName forKey:@"sortName"];
-        [selectedShowObj setValue:[feedValue stringValue] forKey:@"url"];
+        [selectedShowObj setValue:url forKey:@"url"];
         [selectedShowObj setValue:[NSNumber numberWithInt:[[tvdbValue stringValue] intValue]] forKey:@"tvdbID"];
         [selectedShowObj setValue:[NSDate date] forKey:@"lastDownloaded"];
         [selectedShowObj setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
@@ -306,7 +365,7 @@
         // Set the information about the new show
         [newSubscription setValue:[nameValue stringValue] forKey:@"name"];
         [newSubscription setValue:sortName forKey:@"sortName"];
-        [newSubscription setValue:[feedValue stringValue] forKey:@"url"];
+        [newSubscription setValue:url forKey:@"url"];
         [newSubscription setValue:[NSNumber numberWithInt:[[tvdbValue stringValue] intValue]] forKey:@"tvdbID"];
         [newSubscription setValue:[NSDate date] forKey:@"lastDownloaded"];
         [newSubscription setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
@@ -322,7 +381,7 @@
         
         [showDict setValue:[nameValue stringValue] forKey:@"name"];
         [showDict setValue:sortName forKey:@"sortName"];
-        [showDict setValue:[feedValue stringValue] forKey:@"url"];
+        [showDict setValue:url forKey:@"url"];
         [showDict setValue:[NSDate date] forKey:@"lastDownloaded"];
         [showDict setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
         [showDict setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
@@ -335,9 +394,6 @@
     // Be sure to process pending changes before saving or it won't save correctly.
     [[delegateClass managedObjectContext] processPendingChanges];
     [delegateClass saveAction];
-    
-    // Close the modal dialog box
-    [self closeCustomRSSWindow:(id)sender];
     
     [delegateClass release];
 }

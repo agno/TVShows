@@ -28,7 +28,9 @@
     IBOutlet NSTextField *feedText;
     IBOutlet NSTextField *tvdbText;
     IBOutlet NSComboBox *nameValue;
-    IBOutlet NSComboBox *feedValue;
+    IBOutlet NSTableView *feedsValue;
+    IBOutlet NSButton *addFeedButton;
+    IBOutlet NSButton *removeFeedButton;
     IBOutlet NSTextField *tvdbValue;
     IBOutlet NSButton *showQuality;
     IBOutlet NSButton *cancelButton;
@@ -41,6 +43,7 @@
     
     IBOutlet NSArrayController *SBArrayController;
     IBOutlet NSArrayController *episodeArrayController;
+    IBOutlet NSArrayController *feedArrayController;
     IBOutlet NSTableView *episodeTableView;
     IBOutlet NSPredicateEditor *filtersEditor;
     
@@ -51,7 +54,9 @@
 
 - (IBAction) displayCustomRSSWindow:(id)sender;
 - (IBAction) displayEditWindow:(id)sender;
-- (void) setEpisodesFromRSS:(NSString *)feedURL;
+- (IBAction) addFeed:(id)sender;
+- (IBAction) removeFeed:(id)sender;
+- (void) setEpisodesFromRSS:(NSArray *)feeds;
 - (void) updateEpisodes:(NSArray *)data;
 - (void) resetShowView;
 - (void) setUserDefinedShowQuality;
