@@ -332,20 +332,23 @@
     [episodeTableView reloadData];
     [episodeTableView setEnabled:NO];
     
-    NSArray *arguments = [NSArray arrayWithObjects:[selectedShow valueForKey:@"name"],
-                          [NSString stringWithFormat:@"%@", [selectedShow valueForKey:@"tvdbID"]], nil];
-    
-    // Grab the list of episodes
-    [self performSelectorInBackground:@selector(setEpisodesForShow:) withObject:arguments];
-    
-    // Display the show poster now that it's been resized.
-    [self performSelectorInBackground:@selector(setPosterForShow:) withObject:arguments];
-    
-    // Grab the show status
-    [self performSelectorInBackground:@selector(setStatusForShow:) withObject:arguments];
-    
-    // Grab the next episode date
-    [self performSelectorInBackground:@selector(setNextEpisodeForShow:) withObject:arguments];
+    if (selectedShow) {
+        NSString *showFeeds = [selectedShow valueForKey:@"url"];
+        NSArray *arguments = [NSArray arrayWithObjects:[selectedShow valueForKey:@"name"],
+                              [NSString stringWithFormat:@"%@", [selectedShow valueForKey:@"tvdbID"]], nil];
+        
+        // Grab the list of episodes
+        [self performSelectorInBackground:@selector(setEpisodesForShow:) withObject:showFeeds];
+        
+        // Display the show poster now that it's been resized.
+        [self performSelectorInBackground:@selector(setPosterForShow:) withObject:arguments];
+        
+        // Grab the show status
+        [self performSelectorInBackground:@selector(setStatusForShow:) withObject:arguments];
+        
+        // Grab the next episode date
+        [self performSelectorInBackground:@selector(setNextEpisodeForShow:) withObject:arguments];
+    }
     
     [NSApp beginSheet: showInfoWindow
        modalForWindow: [[NSApplication sharedApplication] mainWindow]
@@ -357,44 +360,103 @@
     [NSApp runModalForWindow: showInfoWindow];
 }
 
-- (void) setEpisodesForShow:(NSArray *)arguments
+#pragma mark -
+#pragma mark Background workers
+- (void) setEpisodesForShow:(NSString *)showFeeds
 {
-    NSArray *results = [TSParseXMLFeeds parseEpisodesFromFeeds:
-                        [[selectedShow valueForKey:@"url"] componentsSeparatedByString:@"#"]
-                                                      maxItems:50];
-    NSString *copy = [selectedShow valueForKey:@"name"];
+    // Now we can trigger the time-expensive task
+    NSArray *results = [NSArray arrayWithObjects:showFeeds,
+                        [TSParseXMLFeeds parseEpisodesFromFeeds:[showFeeds componentsSeparatedByString:@"#"]
+                                                       maxItems:50], nil];
     
-    if ([[arguments objectAtIndex:0] isEqualToString:copy]) {
-        if ([results count] == 0) {
-            LogError(@"Could not download/parse feed for %@ <%@>",
-                     [arguments objectAtIndex:0],
-                     [selectedShow valueForKey:@"url"]);
-        } else {
-            [episodeTableView setEnabled:YES];
-            [episodeArrayController addObjects:results];
-            
-            // Check if there are HD episodes, if so enable the "Download in HD" checkbox
-            BOOL feedHasHDEpisodes = [TSParseXMLFeeds feedHasHDEpisodes:results];
-            
-            if (!feedHasHDEpisodes) {
-                [showQuality setState:NO];
-            }
-            [showQuality setEnabled:feedHasHDEpisodes];
-            
-            // Update the filter predicate to only display the correct quality.
-            [self showQualityDidChange:nil];
-        }
+    if ([results count] < 2) {
+        LogError(@"Could not download/parse feed(s) <%@>", showFeeds);
+        return;
     }
+    
+    [self performSelectorOnMainThread:@selector(updateEpisodes:) withObject:results waitUntilDone:NO];
 }
 
 - (void) setStatusForShow:(NSArray *)arguments
 {
-    NSString *status = [TheTVDB getShowStatus:[arguments objectAtIndex:0]
-                                   withShowID:[arguments objectAtIndex:1]];
+    // Now we can trigger the time-expensive task
+    NSArray *results = [NSArray arrayWithObjects:[arguments objectAtIndex:0],
+                            [TheTVDB getShowStatus:[arguments objectAtIndex:0]
+                                        withShowID:[arguments objectAtIndex:1]], nil];
+    
+    [self performSelectorOnMainThread:@selector(updateStatus:) withObject:results waitUntilDone:NO];
+}
+
+- (void) setNextEpisodeForShow:(NSArray *)arguments
+{
+    // Now we can trigger the time-expensive task
+    NSArray *results = [NSArray arrayWithObjects:[arguments objectAtIndex:0],
+                        [TheTVDB getShowNextEpisode:[arguments objectAtIndex:0]
+                                         withShowID:[arguments objectAtIndex:1]], nil];
+    
+    [self performSelectorOnMainThread:@selector(updateNextEpisode:) withObject:results waitUntilDone:NO];
+}
+
+- (void) setPosterForShow:(NSArray *)arguments
+{
+    // Now we can trigger the time-expensive task
+    NSArray *results = [NSArray arrayWithObjects:[arguments objectAtIndex:0],
+                        [[[TheTVDB getPosterForShow:[arguments objectAtIndex:0]
+                                         withShowID:[arguments objectAtIndex:1]
+                                         withHeight:187
+                                          withWidth:129] copy] autorelease], nil];
+    
+    [self performSelectorOnMainThread:@selector(updatePoster:) withObject:results waitUntilDone:NO];
+}
+
+- (void) updateEpisodes:(NSArray *)data
+{
+    // We are back after probably a lot of time, so check carefully if the user has changed the selection
+    if (!selectedShow) {
+        return;
+    }
+    
+    // Extract the data
+    NSString *showFeeds = [data objectAtIndex:0];
+    NSArray *results = [data objectAtIndex:1];
+    NSString *copy = [selectedShow valueForKey:@"url"];
+    
+    // Continue only if the selected show is the same as before
+    if ([showFeeds isEqualToString:copy]) {
+        [episodeTableView setEnabled:YES];
+        [episodeArrayController addObjects:results];
+        
+        // Check if there are HD episodes, if so enable the "Download in HD" checkbox
+        BOOL feedHasHDEpisodes = [TSParseXMLFeeds feedHasHDEpisodes:results];
+        
+        if (!feedHasHDEpisodes) {
+            [showQuality setState:NO];
+        }
+        [showQuality setEnabled:feedHasHDEpisodes];
+        
+        // Update the filter predicate to only display the correct quality.
+        [self showQualityDidChange:nil];
+    }
+}
+
+- (void) updateStatus:(NSArray *)data
+{
+    // We are back after probably a lot of time, so check carefully if the user has changed the selection
+    if (!selectedShow) {
+        return;
+    }
+    
+    // Extract the data
+    NSString *name = [data objectAtIndex:0];
+    NSString *status = nil;
+    if ([data count] > 1) {
+        status = [data objectAtIndex:1];
+    }
     NSString *copy = [selectedShow valueForKey:@"name"];
     
-    // Check if the request is still valid (an impacient user may start to rapidly change)
-    if ([[arguments objectAtIndex:0] isEqualToString:copy]) {
+    // Continue only if the selected show is the same as before
+    if ([name isEqualToString:copy] && status != nil) {
+        // And finally we can set the status
         [showStatus setStringValue:TSLocalizeString(status)];
         if ([status isEqualToString:@"Ended"]) {
             [showNextEpisode setStringValue:TSLocalizeString(@"Never")];
@@ -402,34 +464,47 @@
     }
 }
 
-- (void) setNextEpisodeForShow:(NSArray *)arguments
+- (void) updateNextEpisode:(NSArray *)data
 {
-    NSDate *nextEpisode = [TheTVDB getShowNextEpisode:[arguments objectAtIndex:0]
-                                           withShowID:[arguments objectAtIndex:1]];
+    // We are back after probably a lot of time, so check carefully if the user has changed the selection
+    if (!selectedShow) {
+        return;
+    }
+    
+    // Extract the data
+    NSString *name = [data objectAtIndex:0];
+    NSDate *nextEpisode = nil;
+    if ([data count] > 1) {
+        nextEpisode = [data objectAtIndex:1];
+    }
     NSString *copy = [selectedShow valueForKey:@"name"];
     
-    // Check if the request is still valid (an impacient user may start to rapidly change)
-    if ([[arguments objectAtIndex:0] isEqualToString:copy] && nextEpisode != nil) {
+    // Continue only if the selected show is the same as before
+    if ([name isEqualToString:copy] && nextEpisode != nil) {
         // Set up the date formatter
         NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
         [dateFormatter setDateStyle:NSDateFormatterLongStyle];
         [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
         
-        [showNextEpisode setStringValue: [dateFormatter stringFromDate:nextEpisode]];
+        [showNextEpisode setStringValue:[dateFormatter stringFromDate:nextEpisode]];
     }
 }
 
-- (void) setPosterForShow:(NSArray *)arguments
+- (void) updatePoster:(NSArray *)data
 {
-    NSImage *poster = [[[TheTVDB getPosterForShow:[arguments objectAtIndex:0]
-                                       withShowID:[arguments objectAtIndex:1]
-                                       withHeight:184
-                                        withWidth:127] copy] autorelease];
+    // We are back after probably a lot of time, so check carefully if the user has changed the selection
+    if (!selectedShow) {
+        return;
+    }
+    
+    // Extract the data
+    NSString *name = [data objectAtIndex:0];
+    NSImage *poster = [data objectAtIndex:1];
     NSString *copy = [selectedShow valueForKey:@"name"];
     
-    // Check if the request is still valid (an impacient user may start to rapidly change)
-    if ([[arguments objectAtIndex:0] isEqualToString:copy]) {
-        [showPoster setImage: poster];
+    // Continue only if the selected show is the same as before
+    if ([name isEqualToString:copy]) {
+        [showPoster setImage:poster];
         [showPoster display];
     }
 }

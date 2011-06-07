@@ -100,10 +100,14 @@
 #pragma mark -
 #pragma mark Subscriptions TabController
 - (IBAction) displayShowInfoWindow:(id)sender;
-- (void) setEpisodesForShow:(NSArray *)arguments;
+- (void) setEpisodesForShow:(NSString *)showFeeds;
 - (void) setStatusForShow:(NSArray *)arguments;
 - (void) setNextEpisodeForShow:(NSArray *)arguments;
 - (void) setPosterForShow:(NSArray *)arguments;
+- (void) updateEpisodes:(NSArray *)data;
+- (void) updateStatus:(NSArray *)data;
+- (void) updateNextEpisode:(NSArray *)data;
+- (void) updatePoster:(NSArray *)data;
 - (IBAction) closeShowInfoWindow:(id)sender;
 - (IBAction) showQualityDidChange:(id)sender;
 - (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName andShowName:(NSString *)show;
