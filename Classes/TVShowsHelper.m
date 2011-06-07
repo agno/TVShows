@@ -21,7 +21,7 @@
 #import "SubscriptionsDelegate.h"
 #import "SUUpdaterSubclass.h"
 #import "WebsiteFunctions.h"
-
+#import "RegexKitLite.h"
 
 @implementation TVShowsHelper
 
@@ -227,6 +227,17 @@
         // was published then we should probably download the episode.
         if ([lastDownloaded compare:pubDate] == NSOrderedAscending) {
             
+            // HACK HACK HACK: To avoid download an episode twice
+            // Check if the sortname contains this episode name
+            NSString *sortName = [[show valueForKey:@"name"] stringByReplacingOccurrencesOfRegex:@"^The[[:space:]]"
+                                                                                      withString:@""];
+            
+            // Detect copy!
+            if ([[show valueForKey:@"sortName"] isEqualToString:
+                 [sortName stringByAppendingString:[episode valueForKey:@"episodeName"]]]) {
+                return;
+            }
+            
             // If it has been two full days since the episode was aired attempt the download of any version
             // Also check that we have checked for episodes at least once in the last day
             if ([pubDate timeIntervalSinceDate:[NSDate date]] > 2*24*60*60 &&
@@ -249,6 +260,11 @@
                                   andShowName:[show valueForKey:@"name"]]) {
                     // Update when the show was last downloaded.
                     [show setValue:pubDate forKey:@"lastDownloaded"];
+                    // HACK HACK HACK: put on the sortname the episode name
+                    // Why not storing this on a key? Because Core Data migrations and PrefPanes do not mix well
+                    NSString *sortName = [[show valueForKey:@"name"] stringByReplacingOccurrencesOfRegex:@"^The[[:space:]]"
+                                                                                              withString:@""];
+                    [show setValue:[sortName stringByAppendingString:[episode valueForKey:@"episodeName"]] forKey:@"sortName"];
                 }
                 
             }
