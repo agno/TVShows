@@ -43,7 +43,8 @@
     
     [sidebarHeader setStringValue:@"TVShows 2"];
     [sidebarVersionText setStringValue: [NSString stringWithFormat:@"%@ (r%@)", bundleVersion, buildVersion]];
-    [sidebarDateText setStringValue: buildDate];
+    [sidebarDateText setStringValue:buildDate];
+    [endedRibbonText setStringValue:[TSLocalizeString(@"Ended") uppercaseString]];
     
     NSDate *date = [TSUserDefaults getDateFromKey:@"lastCheckedForEpisodes"];
     if (date) {

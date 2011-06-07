@@ -116,6 +116,7 @@
 		34FBC64211C0B601005D290B /* Sparkle.framework in Copy Linked Libraries */ = {isa = PBXBuildFile; fileRef = 3473845E119074C8003DFFA0 /* Sparkle.framework */; };
 		34FBC69511C0B7CE005D290B /* SUUpdaterSubclass.m in Sources */ = {isa = PBXBuildFile; fileRef = 340F15F9118FEBDE00A1BD00 /* SUUpdaterSubclass.m */; };
 		34FBC69B11C0B804005D290B /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3473845E119074C8003DFFA0 /* Sparkle.framework */; };
+		571C60E3139905320072D921 /* ribbon.png in Resources */ = {isa = PBXBuildFile; fileRef = 571C60E2139905320072D921 /* ribbon.png */; };
 		573ABCC813734E9B0018F6F3 /* TorrentzParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 573ABCC713734E9B0018F6F3 /* TorrentzParser.m */; };
 		5755750F136DC9E5006D1FC9 /* TVShows-Menu-Icon-White.png in Resources */ = {isa = PBXBuildFile; fileRef = 5755750D136DC9E5006D1FC9 /* TVShows-Menu-Icon-White.png */; };
 		57557510136DC9E5006D1FC9 /* TVShows-Menu-Icon-Black.png in Resources */ = {isa = PBXBuildFile; fileRef = 5755750E136DC9E5006D1FC9 /* TVShows-Menu-Icon-Black.png */; };
@@ -337,6 +338,7 @@
 		34FBC5E111C0B3C2005D290B /* TVShowsHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShowsHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34FBC5E311C0B3C2005D290B /* TVShowsHelper-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TVShowsHelper-Info.plist"; sourceTree = "<group>"; };
 		34FBC62D11C0B567005D290B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		571C60E2139905320072D921 /* ribbon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ribbon.png; sourceTree = "<group>"; };
 		573ABCC613734E9B0018F6F3 /* TorrentzParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TorrentzParser.h; path = TorrentzParser/TorrentzParser.h; sourceTree = "<group>"; };
 		573ABCC713734E9B0018F6F3 /* TorrentzParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TorrentzParser.m; path = TorrentzParser/TorrentzParser.m; sourceTree = "<group>"; };
 		5755750D136DC9E5006D1FC9 /* TVShows-Menu-Icon-White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TVShows-Menu-Icon-White.png"; sourceTree = "<group>"; };
@@ -693,17 +695,18 @@
 		349FEE021183590500D24FC9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				5755750D136DC9E5006D1FC9 /* TVShows-Menu-Icon-White.png */,
-				5755750E136DC9E5006D1FC9 /* TVShows-Menu-Icon-Black.png */,
 				342FEC8411E1864000E21FC0 /* hd.png */,
 				34B6914011D9F1A9001E2518 /* get.png */,
 				340A20B011AF0E15004351EB /* posterArtPlaceholder.jpg */,
 				34EB967E118389FC005825C1 /* NZB.png */,
+				571C60E2139905320072D921 /* ribbon.png */,
 				34EB966F118384DB005825C1 /* RSS-Large.png */,
 				34EB966D11838131005825C1 /* showRSS.png */,
 				344A205811F5485900026735 /* Toggle-Knob.png */,
 				344A205911F5485900026735 /* Toggle-Slider.png */,
 				349FEE031183590500D24FC9 /* TVShows-Beta-Large.icns */,
+				5755750D136DC9E5006D1FC9 /* TVShows-Menu-Icon-White.png */,
+				5755750E136DC9E5006D1FC9 /* TVShows-Menu-Icon-Black.png */,
 				349FEE051183590500D24FC9 /* TVShows-Off-Large.icns */,
 				349FEE071183590500D24FC9 /* TVShows-On-Large.icns */,
 			);
@@ -927,6 +930,7 @@
 				344A205B11F5485900026735 /* Toggle-Slider.png in Resources */,
 				344971571330671700D24D68 /* Uninstaller.app in Resources */,
 				575C0D59136A487A005DE73D /* VERSION in Resources */,
+				571C60E3139905320072D921 /* ribbon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
