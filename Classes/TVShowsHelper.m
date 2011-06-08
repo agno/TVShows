@@ -22,6 +22,7 @@
 #import "SUUpdaterSubclass.h"
 #import "WebsiteFunctions.h"
 #import "RegexKitLite.h"
+#import "TSRegexFun.h"
 
 @implementation TVShowsHelper
 
@@ -219,9 +220,11 @@
         episodes = [episodes filteredArrayUsingPredicate:[show valueForKey:@"filters"]];
     }
     
+    NSString *lastEpisodeName = [[show valueForKey:@"sortName"] copy];
+    
     // For each episode that was parsed...
     for (NSArray *episode in episodes) {
-        pubDate = [episode valueForKey:@"pubDate"];
+        pubDate = [[episode valueForKey:@"pubDate"] copy];
         
         // If the date we lastDownloaded episodes is before this torrent
         // was published then we should probably download the episode.
@@ -229,12 +232,17 @@
             
             // HACK HACK HACK: To avoid download an episode twice
             // Check if the sortname contains this episode name
-            NSString *sortName = [[show valueForKey:@"name"] stringByReplacingOccurrencesOfRegex:@"^The[[:space:]]"
-                                                                                      withString:@""];
+            // HACK HACK HACK: put on the sortname the episode name
+            // Why not storing this on a key? Because Core Data migrations and PrefPanes do not mix well
+            NSString *episodeName = [[show valueForKey:@"name"] stringByReplacingOccurrencesOfRegex:@"^The[[:space:]]"
+                                                                                         withString:@""];
+            episodeName = [episodeName stringByAppendingString:[episode valueForKey:@"episodeName"]];
             
-            // Detect copy!
-            if ([[show valueForKey:@"sortName"] isEqualToString:
-                 [sortName stringByAppendingString:[episode valueForKey:@"episodeName"]]]) {
+            // Detect if the last downloaded episode was aired after this one (so do not download it!)
+            // Use a cache version (lastEpisodename) because we could have download it several episodes
+            // in this session, for example if the show aired two episodes in the same day
+            if (![TSRegexFun wasThisEpisode:episodeName
+                          airedAfterThisOne:lastEpisodeName]) {
                 return;
             }
             
@@ -258,13 +266,13 @@
                 if ([self startDownloadingURL:[episode valueForKey:@"link"]
                                  withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
                                   andShowName:[show valueForKey:@"name"]]) {
-                    // Update when the show was last downloaded.
-                    [show setValue:pubDate forKey:@"lastDownloaded"];
-                    // HACK HACK HACK: put on the sortname the episode name
-                    // Why not storing this on a key? Because Core Data migrations and PrefPanes do not mix well
-                    NSString *sortName = [[show valueForKey:@"name"] stringByReplacingOccurrencesOfRegex:@"^The[[:space:]]"
-                                                                                              withString:@""];
-                    [show setValue:[sortName stringByAppendingString:[episode valueForKey:@"episodeName"]] forKey:@"sortName"];
+                    // Update the last downloaded episode name only if it was aired after the previous stored one
+                    if ([TSRegexFun wasThisEpisode:episodeName
+                                 airedAfterThisOne:[show valueForKey:@"sortName"]]) {
+                        // Update when the show was last downloaded
+                        [show setValue:pubDate forKey:@"lastDownloaded"];
+                        [show setValue:episodeName forKey:@"sortName"];
+                    }
                 }
                 
             }

@@ -15,7 +15,6 @@
 #import "TSRegexFun.h"
 #import "RegexKitLite.h"
 
-
 @implementation TSRegexFun
 
 + (NSArray *) parseSeasonAndEpisode:(NSString *)title
@@ -38,7 +37,7 @@
             returnThis = [matchedRegex objectAtIndex:0];
         }
     }
-
+    
     // If at least one of the strings matched, return it.
     if (returnThis) {
         return returnThis;
@@ -106,6 +105,49 @@
     string = [string stringByReplacingOccurrencesOfRegex:@"&quot;" withString:@"\""];
     
     return string;
+}
+
++ (Boolean) wasThisEpisode:(NSString *)anEpisode airedAfterThisOne:(NSString *)anotherEpisode
+{
+    NSArray *seasonAndEpisodeOne = [self parseSeasonAndEpisode:anEpisode];
+    NSArray *seasonAndEpisodeTwo = [self parseSeasonAndEpisode:anotherEpisode];
+    
+    // If the second episode is not actually an episode, it is the beginning
+    if (seasonAndEpisodeTwo == nil) {
+        return YES;
+    // But if the first episode is not, there is some error
+    } else if (seasonAndEpisodeOne == nil) {
+        return NO;
+    // If they are numbered differently, treat it as differente shows (so yes)
+    } else if ([seasonAndEpisodeOne count] != [seasonAndEpisodeTwo count]) {
+        return YES;
+    }
+    
+    // Compare the arrays
+    if ([seasonAndEpisodeOne count] == 3) {
+        return ([[seasonAndEpisodeOne objectAtIndex:1] integerValue] >
+                [[seasonAndEpisodeTwo objectAtIndex:1] integerValue]) ||
+        ([[seasonAndEpisodeOne objectAtIndex:1] integerValue] ==
+         [[seasonAndEpisodeTwo objectAtIndex:1] integerValue] &&
+         [[seasonAndEpisodeOne objectAtIndex:2] integerValue] >
+         [[seasonAndEpisodeTwo objectAtIndex:2] integerValue]);
+    } else if ([seasonAndEpisodeOne count] == 4) {
+        return ([[seasonAndEpisodeOne objectAtIndex:1] integerValue] >
+                [[seasonAndEpisodeTwo objectAtIndex:1] integerValue]) ||
+        ([[seasonAndEpisodeOne objectAtIndex:1] integerValue] ==
+         [[seasonAndEpisodeTwo objectAtIndex:1] integerValue] &&
+         [[seasonAndEpisodeOne objectAtIndex:2] integerValue] >
+         [[seasonAndEpisodeTwo objectAtIndex:2] integerValue]) ||
+        ([[seasonAndEpisodeOne objectAtIndex:1] integerValue] ==
+         [[seasonAndEpisodeTwo objectAtIndex:1] integerValue] &&
+         [[seasonAndEpisodeOne objectAtIndex:2] integerValue] ==
+         [[seasonAndEpisodeTwo objectAtIndex:2] integerValue] &&
+         [[seasonAndEpisodeOne objectAtIndex:3] integerValue] >
+         [[seasonAndEpisodeTwo objectAtIndex:3] integerValue]);
+    }
+    
+    // Otherwise better be safe than sorry
+    return YES;
 }
 
 @end
