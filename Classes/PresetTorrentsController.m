@@ -225,12 +225,14 @@
                 if ([name isEqualToString:[showDict valueForKey:@"displayName"]]) {
                     NSManagedObject *subscription = [context objectWithID:[show objectID]];
                     
+                    bool cleanSortName = ([TSRegexFun parseSeasonAndEpisode:[show valueForKey:@"sortName"]] == nil);
+                    
                     [show setValue:[showDict valueForKey:@"displayName"] forKey:@"name"];
-                    [show setValue:[showDict valueForKey:@"sortName"] forKey:@"sortName"];
+                    if (cleanSortName) [show setValue:[showDict valueForKey:@"sortName"] forKey:@"sortName"];
                     [show setValue:[showDict valueForKey:@"tvdbID"] forKey:@"tvdbID"];
                     [show setValue:[showDict valueForKey:@"name"] forKey:@"url"];
                     [subscription setValue:[showDict valueForKey:@"displayName"] forKey:@"name"];
-                    [subscription setValue:[showDict valueForKey:@"sortName"] forKey:@"sortName"];
+                    if (cleanSortName) [subscription setValue:[showDict valueForKey:@"sortName"] forKey:@"sortName"];
                     [subscription setValue:[showDict valueForKey:@"tvdbID"] forKey:@"tvdbID"];
                     [subscription setValue:[showDict valueForKey:@"name"] forKey:@"url"];
                     
