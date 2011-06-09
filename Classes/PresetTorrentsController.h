@@ -29,11 +29,13 @@
     IBOutlet NSButton *showQuality;
     IBOutlet NSButton *cancelButton;
     IBOutlet NSButton *subscribeButton;
-    IBOutlet NSButton *tvcomButton;
+    IBOutlet NSButton *moreInfoButton;
     IBOutlet NSImageView *showPoster;
     IBOutlet NSTextView *showDescription;
     IBOutlet NSScrollView *descriptionView;
-    IBOutlet NSTextField *ratingsTitle;
+    IBOutlet NSTextField *startFromText;
+    IBOutlet NSButtonCell *nextAiredButton;
+    IBOutlet NSButtonCell *otherEpisodeButton;
     IBOutlet NSTableColumn *colHD;
     IBOutlet NSTableColumn *colName;
     IBOutlet NSTableColumn *colSeason;
@@ -68,6 +70,9 @@
 - (void) setUserDefinedShowQuality;
 - (void) showLoadingThrobber;
 - (void) hideLoadingThrobber;
+- (IBAction) openMoreInfoURL:(id)sender;
+- (IBAction) selectNextAired:(id)sender;
+- (IBAction) selectOtherEpisode:(id)sender;
 
 #pragma mark -
 #pragma mark Background workers
@@ -86,6 +91,7 @@
 #pragma mark -
 #pragma mark Subscription Methods
 - (IBAction) subscribeToShow:(id)sender;
+- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName andShowName:(NSString *)show;
 - (BOOL) userIsSubscribedToShow:(NSString*)showName;
 
 @end

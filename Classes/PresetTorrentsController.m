@@ -27,10 +27,12 @@
 #import "RegexKitLite.h"
 #import "WebsiteFunctions.h"
 #import "TheTVDB.h"
+#import "TorrentzParser.h"
 #import "NSXMLNode-utils.h"
 
 #pragma mark Define Macros
 
+#define TVDBURL                     @"http://thetvdb.com/?tab=series&id=%@"
 #define ShowListURL                 @"https://github.com/victorpimentel/tvshowsapp.com/raw/master/showlist/showlist.xml"
 #define ShowListMirror              @"http://tvshowsapp.com/showlist/showlist.xml"
 #define SelectTagsRegex             @"<select name=\"show\">(.+?)</select>"
@@ -61,8 +63,10 @@
     [showQuality setTitle: TSLocalizeString(@"Download in HD")];
     [cancelButton setTitle: TSLocalizeString(@"Cancel")];
     [subscribeButton setTitle: TSLocalizeString(@"Subscribe")];
-    [tvcomButton setTitle: TSLocalizeString(@"View on TV.com")];
-    [ratingsTitle setStringValue: TSLocalizeString(@"Rating:")];
+    [moreInfoButton setTitle: [NSString stringWithFormat:@"%@...", TSLocalizeString(@"More Info")]];
+    [startFromText setStringValue: TSLocalizeString(@"Start subscription with:")];
+    [nextAiredButton setTitle: TSLocalizeString(@"Next aired episode")];
+    [otherEpisodeButton setTitle: TSLocalizeString(@"This episode:")];
     
     // Localize the headings of the table columns
     [[colHD headerCell] setStringValue: TSLocalizeString(@"HD")];
@@ -165,6 +169,17 @@
         // Is not HD and HD is not enabled.
         [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '0'"]];
     }
+    
+    // Select the first result
+    if ([[episodeArrayController arrangedObjects] count] > 0) {
+        [episodeTableView selectRow:0 byExtendingSelection:NO];
+        [otherEpisodeButton setEnabled:YES];
+    } else {
+        [episodeTableView selectRow:0 byExtendingSelection:NO];
+        [nextAiredButton setState:YES];
+        [otherEpisodeButton setEnabled:NO];
+        [otherEpisodeButton setState:NO];
+    }
 }
 
 - (void) sortTorrentShowList
@@ -180,9 +195,6 @@
 
 - (void) updateSubscriptions
 {
-    // To force the view to sort the new subscription
-    [SBArrayController setUsesLazyFetching:NO];
-    
     // There's probably a better way to do this:
     id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
     NSManagedObjectContext *context = [delegateClass managedObjectContext];
@@ -408,6 +420,8 @@
                              [[[PTArrayController selectedObjects] objectAtIndex:0] valueForKey:@"displayName"],
                              [NSString stringWithFormat:@"%@",
                               [[[PTArrayController selectedObjects] objectAtIndex:0] valueForKey:@"tvdbID"]], nil];
+                
+                [moreInfoButton setEnabled:YES];
             }
             
             // In the meantime show the loading throbber
@@ -431,7 +445,12 @@
 
 - (void) resetShowView {
     [episodeArrayController removeObjects:[episodeArrayController content]];
-    [showDescription setString: @""];
+    [showDescription setString:@""];
+    [moreInfoButton setEnabled:NO];
+    [nextAiredButton setState:YES];
+    [otherEpisodeButton setEnabled:NO];
+    [otherEpisodeButton setState:NO];
+    [episodeTableView setEnabled:NO];
     [self setDefaultPoster];
     [self setUserDefinedShowQuality];
 }
@@ -458,6 +477,28 @@
     [loading stopAnimation:nil];
     [loadingText setHidden:YES];
     [descriptionView setHidden:NO];
+}
+
+- (IBAction) openMoreInfoURL:(id)sender {
+    // Check if any show is selected
+    NSArray *selectedObjects = [PTArrayController selectedObjects];
+    if ([selectedObjects count] == 0) {
+        return;
+    }
+    
+    // Extract the TVDB id
+    NSString *tvdbid = [[selectedObjects objectAtIndex:0] valueForKey:@"tvdbID"];
+    
+    // Open the url
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:TVDBURL, tvdbid]]];
+}
+
+- (IBAction) selectNextAired:(id)sender {
+    [episodeTableView setEnabled:NO];
+}
+
+- (IBAction) selectOtherEpisode:(id)sender {
+    [episodeTableView setEnabled:YES];
 }
 
 #pragma mark -
@@ -694,6 +735,80 @@
     [self closePresetTorrentsWindow:(id)sender];
     
     [delegateClass release];
+    
+    // If other episode is selected, start with it
+    if ([otherEpisodeButton state]) {
+        for (int i = 0; i <= [episodeTableView selectedRow]; i++) {
+            NSObject *episode = [[episodeArrayController arrangedObjects] objectAtIndex:i];
+            [self startDownloadingURL:[episode valueForKey:@"link"]
+                         withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
+                          andShowName:[selectedShow valueForKey:@"displayName"]];
+        }
+    }
+}
+
+- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName andShowName:(NSString *)show
+{
+    // Process the URL if the is not found
+    if ([url rangeOfString:@"http"].location == NSNotFound) {
+        LogInfo(@"Retrieving an HD torrent file from Torrentz of: %@", url);
+        url = [TorrentzParser getAlternateTorrentForEpisode:url];
+        if (url == nil) {
+            LogError(@"Unable to find an HD torrent file for: %@", fileName);
+            
+            // Display the error
+            NSRunCriticalAlertPanel([NSString stringWithFormat:TSLocalizeString(@"Unable to find an HD torrent for %@"), fileName],
+                                    TSLocalizeString(@"The file may not be released yet. Please try again later or check your internet connection. Alternatively you can download the SD version."),
+                                    TSLocalizeString(@"Ok"),
+                                    nil,
+                                    nil);
+            
+            return;
+        }
+    }
+    
+    // Build the saving folder
+    NSString *saveLocation = [TSUserDefaults getStringFromKey:@"downloadFolder"];
+    
+    // Check if we have to sort shows by folders or not
+    if ([TSUserDefaults getBoolFromKey:@"SortInFolders" withDefault:NO]) {
+        saveLocation = [saveLocation stringByAppendingPathComponent:show];
+        if (![[NSFileManager defaultManager] createDirectoryAtPath:saveLocation
+                                       withIntermediateDirectories:YES
+                                                        attributes:nil
+                                                             error:nil]) {
+            LogError(@"Unable to create the folder: %@", saveLocation);
+            return;
+        }
+    }
+    
+    // Add the filename
+    saveLocation = [saveLocation stringByAppendingPathComponent:fileName];
+    
+    // Method copied from TVShowsHelper.m
+    LogInfo(@"Attempting to download new episode: %@", fileName);
+    NSData *fileContents = [WebsiteFunctions downloadDataFrom:url];
+    
+    if (!fileContents || [fileContents length] < 100) {
+        LogError(@"Unable to download file: %@ <%@>",fileName, url);
+        
+        // Display the error
+        NSRunCriticalAlertPanel([NSString stringWithFormat:TSLocalizeString(@"Unable to download %@"), fileName],
+                                TSLocalizeString(@"Cannot connect. Please try again later or check your internet connection"),
+                                TSLocalizeString(@"Ok"),
+                                nil,
+                                nil);
+    } else {
+        // The file downloaded successfully, continuing...
+        LogInfo(@"Episode downloaded successfully.");
+        
+        [fileContents writeToFile:saveLocation atomically:YES];
+        
+        // Check to see if the user wants to automatically open new downloads
+        if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
+            [[NSWorkspace sharedWorkspace] openFile:saveLocation withApplication:nil andDeactivate:NO];
+        }
+    }
 }
 
 - (BOOL) userIsSubscribedToShow:(NSString*)showName
