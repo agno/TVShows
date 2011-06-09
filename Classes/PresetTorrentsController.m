@@ -92,6 +92,9 @@
     [cancelButton setEnabled:NO];
     [subscribeButton setEnabled:NO];
     [showQuality setEnabled:NO];
+    [moreInfoButton setEnabled:NO];
+    [nextAiredButton setEnabled:NO];
+    [otherEpisodeButton setEnabled:NO];
     
     // And start the loading throbber
     [loading startAnimation:nil];
@@ -140,6 +143,8 @@
         [cancelButton setEnabled:YES];
         [subscribeButton setEnabled:YES];
         [showQuality setEnabled:YES];
+        [moreInfoButton setEnabled:YES];
+        [nextAiredButton setEnabled:YES];
         
         // Reset the selection
         [PTArrayController setSelectionIndex:0];
@@ -191,6 +196,26 @@
     [PTArrayController setSortDescriptors:[NSArray arrayWithObject:PTSortDescriptor]];
     
     [PTSortDescriptor release];
+}
+
+- (IBAction) reloadShowList:(id)sender {
+    
+    // Start the loading throbber
+    [loading startAnimation:nil];
+    [loadingText setHidden:NO];
+    
+    // Grab the list of episodes (again)
+    [episodeArrayController removeObjects:[episodeArrayController content]];
+    [TSUserDefaults setKey:@"LastDownloadedShowList" fromDate:nil];
+    [self downloadTorrentShowList];
+    
+    // Reset the selection
+    [PTArrayController setSelectionIndex:0];
+    [PTTableView scrollRowToVisible:0];
+    
+    // Focus the search field
+    [[PTSearchField cell] performClick:self];
+    
 }
 
 - (void) updateSubscriptions
@@ -353,14 +378,14 @@
             }
             
             [showObj setValue:displayName forKey:@"displayName"];
-            [showObj setValue:name forKey:@"name"];
+            [showObj setValue:[name copy] forKey:@"name"];
             [showObj setValue:sortName forKey:@"sortName"];
             [showObj setValue:[NSDate date] forKey:@"dateAdded"];
             [showObj setValue:[NSNumber numberWithInt:tvdbID] forKey:@"tvdbID"];
             [showObj setValue:[NSNumber numberWithInt:tvdbID] forKey:@"showrssID"];
             
             [showDict setValue:displayName forKey:@"displayName"];
-            [showDict setValue:name forKey:@"name"];
+            [showDict setValue:[name copy] forKey:@"name"];
             [showDict setValue:sortName forKey:@"sortName"];
             [showDict setValue:[NSDate date] forKey:@"dateAdded"];
             [showDict setValue:[NSNumber numberWithInt:tvdbID] forKey:@"tvdbID"];

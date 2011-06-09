@@ -63,6 +63,7 @@
 - (IBAction) closePresetTorrentsWindow:(id)sender;
 - (IBAction) showQualityDidChange:(id)sender;
 - (void) sortTorrentShowList;
+- (IBAction) reloadShowList:(id)sender;
 - (void) downloadTorrentShowList;
 - (void) tableViewSelectionDidChange:(NSNotification *)notification;
 - (void) resetShowView;
