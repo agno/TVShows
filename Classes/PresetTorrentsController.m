@@ -17,9 +17,6 @@
 #import "PresetTorrentsController.h"
 #import "TabController.h"
 
-#import "PresetShowsDelegate.h"
-#import "SubscriptionsDelegate.h"
-
 #import "TSUserDefaults.h"
 #import "TSParseXMLFeeds.h"
 #import "TSRegexFun.h"
@@ -43,15 +40,17 @@
 
 #pragma mark -
 #pragma mark Preset Torrents Window
-
-
 @implementation PresetTorrentsController
+
+@synthesize subscriptionsDelegate, presetsDelegate;
 
 - init
 {
     if((self = [super init])) {
         hasDownloadedList = NO;
         isTranslated = NO;
+        subscriptionsDelegate = [[SubscriptionsDelegate alloc] init];
+        presetsDelegate = [[PresetShowsDelegate alloc] init];
     }
     
     return self;
@@ -177,10 +176,9 @@
     
     // Select the first result
     if ([[episodeArrayController arrangedObjects] count] > 0) {
-        [episodeTableView selectRow:0 byExtendingSelection:NO];
+        [episodeTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
         [otherEpisodeButton setEnabled:YES];
     } else {
-        [episodeTableView selectRow:0 byExtendingSelection:NO];
         [nextAiredButton setState:YES];
         [otherEpisodeButton setEnabled:NO];
         [otherEpisodeButton setState:NO];
@@ -220,9 +218,6 @@
 
 - (void) updateSubscriptions
 {
-    // There's probably a better way to do this:
-    id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
-    NSManagedObjectContext *context = [delegateClass managedObjectContext];
     NSString *name;
     
     // Update all subscriptions
@@ -252,6 +247,7 @@
                 if ([name isEqualToString:@"MonsterQuest"]) name = @"Monster Quest";
                 if ([name isEqualToString:@"Parenthood"]) name = @"Parenthood (2010)";
                 if ([name isEqualToString:@"The Big C	"]) name = @"The Big C";
+                if ([name isEqualToString:@"Shameless US"]) name = @"Shameless (US)";
                 if ([name isEqualToString:@"The Office"]) name = @"The Office (US)";
                 if ([name isEqualToString:@"The Daily Show"]) name = @"The Daily Show with Jon Stewart";
                 if ([name isEqualToString:@"The Killing"]) name = @"The Killing (2011)";
@@ -260,18 +256,12 @@
                 
                 // And finally update all the info!
                 if ([name isEqualToString:[showDict valueForKey:@"displayName"]]) {
-                    NSManagedObject *subscription = [context objectWithID:[show objectID]];
-                    
                     bool cleanSortName = ([TSRegexFun parseSeasonAndEpisode:[show valueForKey:@"sortName"]] == nil);
                     
                     [show setValue:[showDict valueForKey:@"displayName"] forKey:@"name"];
                     if (cleanSortName) [show setValue:[showDict valueForKey:@"sortName"] forKey:@"sortName"];
                     [show setValue:[showDict valueForKey:@"tvdbID"] forKey:@"tvdbID"];
                     [show setValue:[showDict valueForKey:@"name"] forKey:@"url"];
-                    [subscription setValue:[showDict valueForKey:@"displayName"] forKey:@"name"];
-                    if (cleanSortName) [subscription setValue:[showDict valueForKey:@"sortName"] forKey:@"sortName"];
-                    [subscription setValue:[showDict valueForKey:@"tvdbID"] forKey:@"tvdbID"];
-                    [subscription setValue:[showDict valueForKey:@"name"] forKey:@"url"];
                     
                     // Great, so it is not cancelled
                     cancelled = NO;
@@ -283,18 +273,14 @@
             // Oh, oh, the show has been cancelled, warn the user!
             if (cancelled) {
                 // By disabling the sortName, the user interface gets updated
-                NSManagedObject *subscription = [context objectWithID:[show objectID]];
                 [show setValue:@"" forKey:@"sortName"];
-                [subscription setValue:@"" forKey:@"sortName"];
             }
-            
         }
     }
     
     // Be sure to process pending changes before saving or it won't save correctly.
-    [[delegateClass managedObjectContext] processPendingChanges];
-    [delegateClass saveAction];
-    [delegateClass release];
+    [[subscriptionsDelegate managedObjectContext] processPendingChanges];
+    [subscriptionsDelegate saveAction];
 }
 
 - (void) downloadTorrentShowList
@@ -310,9 +296,6 @@
     }
     
     LogInfo(@"Downloading an updated show list.");
-    
-    // There's probably a better way to do this:
-    id delegateClass = [[PresetShowsDelegate alloc] init];
     
     NSString *displayName, *sortName;
     NSMutableString *name;
@@ -348,10 +331,8 @@
         // Reset the existing show list before continuing. In a perfect world we'd
         // only be adding shows that didn't already exist, instead of deleting
         // everything and starting from scratch.
-        [delegateClass resetPresetShows];
+        [presetsDelegate resetPresetShows];
         [[PTArrayController content] removeAllObjects];
-        
-        NSManagedObjectContext *context = [delegateClass managedObjectContext];
         
         // Extract the shows from the children nodes
         NSArray *shows = [rootNode children];
@@ -360,8 +341,7 @@
             // Yes, it's extremely messy to be adding it to the array controller and to
             // the MOC separately but I don't have time to debug the issue with 32bit.
             NSManagedObject *showObj = [NSEntityDescription insertNewObjectForEntityForName:@"Show"
-                                                                     inManagedObjectContext:context];
-            NSMutableDictionary *showDict = [NSMutableDictionary dictionary];
+                                                                     inManagedObjectContext:[presetsDelegate managedObjectContext]];
             
             displayName = [[show childNamed:@"name"] stringValue];
             sortName = [displayName stringByReplacingOccurrencesOfRegex:@"^The[[:space:]]" withString:@""];
@@ -378,27 +358,19 @@
             }
             
             [showObj setValue:displayName forKey:@"displayName"];
-            [showObj setValue:[name copy] forKey:@"name"];
+            [showObj setValue:name forKey:@"name"];
             [showObj setValue:sortName forKey:@"sortName"];
             [showObj setValue:[NSDate date] forKey:@"dateAdded"];
             [showObj setValue:[NSNumber numberWithInt:tvdbID] forKey:@"tvdbID"];
             [showObj setValue:[NSNumber numberWithInt:tvdbID] forKey:@"showrssID"];
             
-            [showDict setValue:displayName forKey:@"displayName"];
-            [showDict setValue:[name copy] forKey:@"name"];
-            [showDict setValue:sortName forKey:@"sortName"];
-            [showDict setValue:[NSDate date] forKey:@"dateAdded"];
-            [showDict setValue:[NSNumber numberWithInt:tvdbID] forKey:@"tvdbID"];
-            [showDict setValue:[NSNumber numberWithInt:tvdbID] forKey:@"showrssID"];
-            
-            [PTArrayController addObject:showDict];
-            [context insertObject:showObj];
+            [PTArrayController addObject:showObj];
         }
         
         hasDownloadedList = YES;
         
-        [context processPendingChanges];
-        [delegateClass saveAction];
+        [[presetsDelegate managedObjectContext] processPendingChanges];
+        [presetsDelegate saveAction];
         
         LogInfo(@"Finished downloading the new show list.");
         
@@ -407,8 +379,6 @@
     }
     
     [self sortTorrentShowList];
-    
-    [delegateClass release];
 }
 
 - (void) tableViewSelectionDidChange:(NSNotification *)notification
@@ -530,6 +500,8 @@
 #pragma mark Background workers
 - (void) setEpisodesForShow:(NSString *)showFeeds
 {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
     // Now we can trigger the time-expensive task
     NSArray *results = [NSArray arrayWithObjects:showFeeds,
                         [TSParseXMLFeeds parseEpisodesFromFeeds:[showFeeds componentsSeparatedByString:@"#"]
@@ -537,14 +509,19 @@
     
     if ([results count] < 2) {
         LogError(@"Could not download/parse feed(s) <%@>", showFeeds);
+        [pool drain];
         return;
     }
     
     [self performSelectorOnMainThread:@selector(updateEpisodes:) withObject:results waitUntilDone:NO];
+    
+    [pool drain];
 }
 
 - (void) setPosterForShow:(NSArray *)arguments
 {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
     // Now we can trigger the time-expensive task
     NSArray *results = [NSArray arrayWithObjects:[arguments objectAtIndex:0],
                         [[[TheTVDB getPosterForShow:[arguments objectAtIndex:0]
@@ -553,10 +530,14 @@
                                           withWidth:129] copy] autorelease], nil];
     
     [self performSelectorOnMainThread:@selector(updatePoster:) withObject:results waitUntilDone:NO];
+    
+    [pool drain];
 }
 
 - (void) setDescriptionForShow:(NSArray *)arguments
 {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
     // Now we can trigger the time-expensive task
     NSArray *results = [NSArray arrayWithObjects:[arguments objectAtIndex:0],
                         [TheTVDB getValueForKey:@"Overview"
@@ -564,6 +545,8 @@
                                     andShowName:[arguments objectAtIndex:0]], nil];
     
     [self performSelectorOnMainThread:@selector(updateDescription:) withObject:results waitUntilDone:NO];
+    
+    [pool drain];
 }
 
 - (void) updateEpisodes:(NSArray *)data
@@ -716,12 +699,11 @@
     // To force the view to sort the new subscription
     [SBArrayController setUsesLazyFetching:NO];
     
-    // There's probably a better way to do this:
-    id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
+    // Close the modal dialog box
+    [self closePresetTorrentsWindow:(id)sender];
     
-    NSManagedObjectContext *context = [delegateClass managedObjectContext];
-    NSManagedObject *newSubscription = [NSEntityDescription insertNewObjectForEntityForName: @"Subscription"
-                                                                     inManagedObjectContext: context];
+    NSManagedObject *newSubscription = [NSEntityDescription insertNewObjectForEntityForName:@"Subscription"
+                                                                     inManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
     
     NSArray *selectedShow = [PTArrayController selectedObjects];
     
@@ -734,32 +716,10 @@
     [newSubscription setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
     [newSubscription setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
     
-    // Don't do this at home, kids, it's a horrible coding practice.
-    // Here until I can figure out why Core Data hates me.
-    #if __x86_64__ || __ppc64__
-        [SBArrayController addObject:newSubscription];
-    #else
-        NSMutableDictionary *showDict = [NSMutableDictionary dictionary];
-        
-        [showDict setValue:[[selectedShow valueForKey:@"displayName"] objectAtIndex:0] forKey:@"name"];
-        [showDict setValue:[[selectedShow valueForKey:@"sortName"] objectAtIndex:0] forKey:@"sortName"];
-        [showDict setValue:[[selectedShow valueForKey:@"tvdbID"] objectAtIndex:0] forKey:@"tvdbID"];
-        [showDict setValue:[[selectedShow valueForKey:@"name"] objectAtIndex:0]
-                    forKey:@"url"];
-        [showDict setValue:[NSDate date] forKey:@"lastDownloaded"];
-        [showDict setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
-        [showDict setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
-        
-        [SBArrayController addObject:showDict];
-        [context insertObject:newSubscription];
-    #endif
+    [SBArrayController addObject:newSubscription];
     
-    [delegateClass saveAction];
-    
-    // Close the modal dialog box
-    [self closePresetTorrentsWindow:(id)sender];
-    
-    [delegateClass release];
+    [[subscriptionsDelegate managedObjectContext] processPendingChanges];
+    [subscriptionsDelegate saveAction];
     
     // If other episode is selected, start with it
     if ([otherEpisodeButton state]) {
@@ -845,6 +805,13 @@
     }
     
     return NO;
+}
+
+- (void) dealloc
+{
+    [subscriptionsDelegate release];
+    [presetsDelegate release];
+    [super dealloc];
 }
 
 @end

@@ -13,7 +13,8 @@
  */
 
 #import <Cocoa/Cocoa.h>
-
+#import "SubscriptionsDelegate.h"
+#import "PresetShowsDelegate.h"
 
 @interface PresetTorrentsController : NSWindowController
 {
@@ -21,6 +22,8 @@
     Boolean errorHasOccurred;
     Boolean hasDownloadedList;
     Boolean isTranslated;
+    SubscriptionsDelegate *subscriptionsDelegate;
+    PresetShowsDelegate *presetsDelegate;
     
     IBOutlet NSWindow *PTWindow;
     IBOutlet NSTableView *PTTableView;
@@ -56,6 +59,9 @@
     IBOutlet NSTableView *episodeTableView;
     IBOutlet NSTabView *prefTabView;
 }
+
+@property (retain) SubscriptionsDelegate *subscriptionsDelegate;
+@property (retain) PresetShowsDelegate *presetsDelegate;
 
 #pragma mark -
 #pragma mark Preset Torrents Window

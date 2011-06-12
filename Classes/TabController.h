@@ -14,13 +14,14 @@
 
 #import <PreferencePanes/PreferencePanes.h>
 #import <Cocoa/Cocoa.h>
-#import "JRFeedbackController.h"
+#import "SubscriptionsDelegate.h"
 
 @interface TabController : NSPreferencePane
 {
     IBOutlet NSTabView *prefTabView;
     IBOutlet NSButton *feedbackButton;
     NSManagedObject *selectedShow;
+    SubscriptionsDelegate *subscriptionsDelegate;
     
     // Version information
     IBOutlet NSTextField *sidebarHeader;
@@ -78,6 +79,7 @@
 }
 
 @property (retain) NSManagedObject *selectedShow;
+@property (retain) SubscriptionsDelegate *subscriptionsDelegate;
 
 - (void) awakeFromNib;
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;

@@ -18,7 +18,6 @@
 #import "TorrentzParser.h"
 #import "TSParseXMLFeeds.h"
 #import "TSUserDefaults.h"
-#import "SubscriptionsDelegate.h"
 #import "SUUpdaterSubclass.h"
 #import "WebsiteFunctions.h"
 #import "RegexKitLite.h"
@@ -26,7 +25,7 @@
 
 @implementation TVShowsHelper
 
-@synthesize checkerLoop, TVShowsHelperIcon;
+@synthesize checkerLoop, TVShowsHelperIcon, subscriptionsDelegate;
 
 - init
 {
@@ -42,6 +41,8 @@
         
         TVShowsHelperIcon = [[NSData alloc] initWithContentsOfFile:
                              [appPath stringByAppendingPathComponent:@"TVShows-On-Large.icns"]];
+        
+        subscriptionsDelegate = [[SubscriptionsDelegate alloc] init];
     }
     
     return self;
@@ -153,15 +154,15 @@
 
 - (void) checkAllShows
 {
-    id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
-    NSManagedObjectContext *context = [delegateClass managedObjectContext];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Subscription" inManagedObjectContext:context];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Subscription"
+                                              inManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
     NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
     [request setEntity:entity];
     
     NSError *error = nil;
-    NSArray *results = [context executeFetchRequest:request error:&error];
+    NSArray *results = [[subscriptionsDelegate managedObjectContext] executeFetchRequest:request error:&error];
     
     if (error != nil) {
         LogError(@"%@",[error description]);
@@ -194,8 +195,10 @@
     // And update the menu to reflect the date
     [self performSelectorOnMainThread:@selector(updateLastCheckedItem) withObject:nil waitUntilDone:NO];
     
-    [delegateClass saveAction];
-    [delegateClass release];
+    [[subscriptionsDelegate managedObjectContext] processPendingChanges];
+    [subscriptionsDelegate saveAction];
+    
+    [pool drain];
 }
 
 - (void) checkForNewEpisodes:(NSArray *)show
@@ -220,11 +223,11 @@
         episodes = [episodes filteredArrayUsingPredicate:[show valueForKey:@"filters"]];
     }
     
-    NSString *lastEpisodeName = [[show valueForKey:@"sortName"] copy];
+    NSString *lastEpisodeName = [show valueForKey:@"sortName"];
     
     // For each episode that was parsed...
     for (NSArray *episode in episodes) {
-        pubDate = [[episode valueForKey:@"pubDate"] copy];
+        pubDate = [episode valueForKey:@"pubDate"];
         
         // If the date we lastDownloaded episodes is before this torrent
         // was published then we should probably download the episode.
@@ -467,8 +470,6 @@
         
         [fileContents writeToFile:saveLocation atomically:YES];
         
-        id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
-        
         // Check to see if the user wants to automatically open new downloads
         if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
             [[NSWorkspace sharedWorkspace] openFile:saveLocation withApplication:nil andDeactivate:NO];
@@ -484,9 +485,6 @@
                                        isSticky:0
                                    clickContext:nil];
         }
-        
-        [delegateClass saveAction];
-        [delegateClass release];
         
         // Success!
         return YES;
@@ -532,6 +530,7 @@
     [checkerLoop invalidate];
     [checkerLoop release];
     [TVShowsHelperIcon release];
+    [subscriptionsDelegate release];
     [super dealloc];
 }
 

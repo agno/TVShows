@@ -15,13 +15,15 @@
 #import <Cocoa/Cocoa.h>
 #import <Sparkle/SUUpdater.h>
 #import <Growl/GrowlApplicationBridge.h>
-
+#import "SubscriptionsDelegate.h"
 
 @interface TVShowsHelper : NSObject <GrowlApplicationBridgeDelegate>
 {
     NSThread *checkerThread;
     NSTimer *checkerLoop;
     NSData *TVShowsHelperIcon;
+    SubscriptionsDelegate *subscriptionsDelegate;
+    
     IBOutlet NSStatusItem *statusItem;
     IBOutlet NSMenu *statusMenu;
     IBOutlet NSMenuItem *lastUpdateItem;
@@ -35,6 +37,7 @@
 
 @property (retain) NSTimer *checkerLoop;
 @property (retain) NSData *TVShowsHelperIcon;
+@property (retain) SubscriptionsDelegate *subscriptionsDelegate;
 
 - (void) runLoop;
 - (void) checkAllShows;

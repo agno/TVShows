@@ -17,8 +17,6 @@
 #import "CustomRSSController.h"
 #import "TabController.h"
 
-#import "SubscriptionsDelegate.h"
-
 #import "TSParseXMLFeeds.h"
 #import "TSUserDefaults.h"
 #import "TSRegexFun.h"
@@ -30,7 +28,7 @@
 
 @implementation CustomRSSController
 
-@synthesize selectedShow;
+@synthesize selectedShow, subscriptionsDelegate;
 
 - init
 {
@@ -38,6 +36,7 @@
         isTranslated = NO;
         selectedShow = nil;
         filterRules = DEFAULT_PREDICATE;
+        subscriptionsDelegate = [[SubscriptionsDelegate alloc] init];
     }
     
     return self;
@@ -219,12 +218,16 @@
 
 - (void) setEpisodesFromRSS:(NSArray *)feeds
 {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
     // Now we can trigger the time-expensive task
     NSArray *results = [NSArray arrayWithObjects:feeds,
                         [TSParseXMLFeeds parseEpisodesFromFeeds:feeds
                                                        maxItems:100], nil];
     
     [self performSelectorOnMainThread:@selector(updateEpisodes:) withObject:results waitUntilDone:NO];
+    
+    [pool drain];
 }
 
 - (void) updateEpisodes:(NSArray *)data
@@ -327,10 +330,6 @@
     // To force the view to sort the new subscription
     [SBArrayController setUsesLazyFetching:NO];
     
-    // There's probably a better way to do this:
-    id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
-    NSManagedObjectContext *context = [delegateClass managedObjectContext];
-    
     // Calculate the sort name, i.e. remove "The"
     NSString *sortName = [[nameValue stringValue] stringByReplacingOccurrencesOfRegex:@"^The[[:space:]]"
                                                                            withString:@""];
@@ -341,7 +340,7 @@
                      componentsJoinedByString:@"#"];
     
     if (selectedShow != nil) {
-        NSManagedObject *selectedShowObj = [context objectWithID:[selectedShow objectID]];
+        NSManagedObject *selectedShowObj = [[subscriptionsDelegate managedObjectContext] objectWithID:[selectedShow objectID]];
         
         // Update the per-show preferences
         [selectedShow setValue:[nameValue stringValue] forKey:@"name"];
@@ -360,7 +359,7 @@
         [selectedShowObj setValue:filterRules forKey:@"filters"];
     } else {
         NSManagedObject *newSubscription = [NSEntityDescription insertNewObjectForEntityForName:@"Subscription"
-                                                                         inManagedObjectContext:context];
+                                                                         inManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
         
         // Set the information about the new show
         [newSubscription setValue:[nameValue stringValue] forKey:@"name"];
@@ -372,30 +371,12 @@
         [newSubscription setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
         [newSubscription setValue:filterRules forKey:@"filters"];
         
-        // Don't do this at home, kids, it's a horrible coding practice.
-        // Here until I can figure out why Core Data hates me.
-#if __x86_64__ || __ppc64__
         [SBArrayController addObject:newSubscription];
-#else
-        NSMutableDictionary *showDict = [NSMutableDictionary dictionary];
-        
-        [showDict setValue:[nameValue stringValue] forKey:@"name"];
-        [showDict setValue:sortName forKey:@"sortName"];
-        [showDict setValue:url forKey:@"url"];
-        [showDict setValue:[NSDate date] forKey:@"lastDownloaded"];
-        [showDict setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
-        [showDict setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
-        
-        [SBArrayController addObject:showDict];
-        [context insertObject:newSubscription];
-#endif
     }
     
     // Be sure to process pending changes before saving or it won't save correctly.
-    [[delegateClass managedObjectContext] processPendingChanges];
-    [delegateClass saveAction];
-    
-    [delegateClass release];
+    [[subscriptionsDelegate managedObjectContext] processPendingChanges];
+    [subscriptionsDelegate saveAction];
 }
 
 - (void)dealloc

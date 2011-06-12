@@ -16,8 +16,7 @@
 
 #import "AppInfoConstants.h"
 #import "TabController.h"
-
-#import "SubscriptionsDelegate.h"
+#import "JRFeedbackController.h"
 
 #import "TSParseXMLFeeds.h"
 #import "TSUserDefaults.h"
@@ -29,10 +28,13 @@
 
 @implementation TabController
 
-@synthesize selectedShow;
+@synthesize selectedShow, subscriptionsDelegate;
 
 - (void) awakeFromNib
 {
+    // Init the subscriptions delegate
+    subscriptionsDelegate = [[SubscriptionsDelegate alloc] init];
+    
     // Set displayed version information
     NSString *bundleVersion = [[[NSBundle bundleWithIdentifier: TVShowsAppDomain] infoDictionary] 
                                valueForKey:@"CFBundleShortVersionString"];
@@ -364,6 +366,8 @@
 #pragma mark Background workers
 - (void) setEpisodesForShow:(NSString *)showFeeds
 {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
     // Now we can trigger the time-expensive task
     NSArray *results = [NSArray arrayWithObjects:showFeeds,
                         [TSParseXMLFeeds parseEpisodesFromFeeds:[showFeeds componentsSeparatedByString:@"#"]
@@ -375,30 +379,42 @@
     }
     
     [self performSelectorOnMainThread:@selector(updateEpisodes:) withObject:results waitUntilDone:NO];
+    
+    [pool drain];
 }
 
 - (void) setStatusForShow:(NSArray *)arguments
 {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
     // Now we can trigger the time-expensive task
     NSArray *results = [NSArray arrayWithObjects:[arguments objectAtIndex:0],
                             [TheTVDB getShowStatus:[arguments objectAtIndex:0]
                                         withShowID:[arguments objectAtIndex:1]], nil];
     
     [self performSelectorOnMainThread:@selector(updateStatus:) withObject:results waitUntilDone:NO];
+    
+    [pool drain];
 }
 
 - (void) setNextEpisodeForShow:(NSArray *)arguments
 {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
     // Now we can trigger the time-expensive task
     NSArray *results = [NSArray arrayWithObjects:[arguments objectAtIndex:0],
                         [TheTVDB getShowNextEpisode:[arguments objectAtIndex:0]
                                          withShowID:[arguments objectAtIndex:1]], nil];
     
     [self performSelectorOnMainThread:@selector(updateNextEpisode:) withObject:results waitUntilDone:NO];
+    
+    [pool drain];
 }
 
 - (void) setPosterForShow:(NSArray *)arguments
 {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
     // Now we can trigger the time-expensive task
     NSArray *results = [NSArray arrayWithObjects:[arguments objectAtIndex:0],
                         [[[TheTVDB getPosterForShow:[arguments objectAtIndex:0]
@@ -407,6 +423,8 @@
                                           withWidth:129] copy] autorelease], nil];
     
     [self performSelectorOnMainThread:@selector(updatePoster:) withObject:results waitUntilDone:NO];
+    
+    [pool drain];
 }
 
 - (void) updateEpisodes:(NSArray *)data
@@ -520,8 +538,7 @@
     // NSManagedContext objectWithID is required for it to save changes to the disk.
     // We also need to update the original selectedShow NSManagedObject so that the
     // interface displays any changes when the window is opened multiple times a session.
-    id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
-    NSManagedObject *selectedShowObj = [[delegateClass managedObjectContext] objectWithID:[selectedShow objectID]];
+    NSManagedObject *selectedShowObj = [[subscriptionsDelegate managedObjectContext] objectWithID:[selectedShow objectID]];
     
     // Update the per-show preferences
     [selectedShow setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
@@ -530,9 +547,8 @@
     [selectedShowObj setValue:[NSNumber numberWithBool:[showIsEnabled state]] forKey:@"isEnabled"];
     
     // Be sure to process pending changes before saving or it won't save correctly.
-    [[delegateClass managedObjectContext] processPendingChanges];
-    [delegateClass saveAction];
-    [delegateClass release];
+    [[subscriptionsDelegate managedObjectContext] processPendingChanges];
+    [subscriptionsDelegate saveAction];
     
     // Reset the selected show
     selectedShow = nil;
@@ -679,23 +695,23 @@
         return;
     }
     
-    id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
-    NSManagedObject *selectedShowObj = [[delegateClass managedObjectContext] objectWithID:[selectedShow objectID]];
+    NSManagedObject *selectedShowObj = [[subscriptionsDelegate managedObjectContext] objectWithID:[selectedShow objectID]];
     
     // I don't understand why I have to remove the object from both locations
     // but it works so I won't question it.
     [SBArrayController removeObject:selectedShow];
-    [[delegateClass managedObjectContext] deleteObject:selectedShowObj];
+    [[subscriptionsDelegate managedObjectContext] deleteObject:selectedShowObj];
     
     [self closeShowInfoWindow:(id)sender];
     
-    [delegateClass saveAction];
-    [delegateClass release];
+    [[subscriptionsDelegate managedObjectContext] processPendingChanges];
+    [subscriptionsDelegate saveAction];
 }
 
 - (void) dealloc
 {
     [selectedShow release];
+    [subscriptionsDelegate release];
     [super dealloc];
 }
 

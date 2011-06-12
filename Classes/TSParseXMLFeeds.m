@@ -95,13 +95,13 @@
 {
     for (NSMutableDictionary *ep in episodes) {
         if ([[[[[[[episode valueForKey:@"episodeName"] lowercaseString]
-                 stringByReplacingOccurrencesOfString:@"\\s+us\\s+" withString:@" "]
+                 stringByReplacingOccurrencesOfRegex:@"\\s+us\\s+" withString:@" "]
                 stringByReplacingOccurrencesOfRegex:@"\\s+\\(.*\\)\\s+" withString:@" "]
                stringByReplacingOccurrencesOfRegex:@"\\s+and\\s+" withString:@" "]
               stringByReplacingOccurrencesOfRegex:@"\\s+&\\s+" withString:@" "]
              isEqualToString:
              [[[[[[ep valueForKey:@"episodeName"] lowercaseString]
-                 stringByReplacingOccurrencesOfString:@"\\s+us\\s+" withString:@" "]
+                 stringByReplacingOccurrencesOfRegex:@"\\s+us\\s+" withString:@" "]
                 stringByReplacingOccurrencesOfRegex:@"\\s+\\(.*\\)\\s+" withString:@" "]
                stringByReplacingOccurrencesOfRegex:@"\\s+and\\s+" withString:@" "]
               stringByReplacingOccurrencesOfRegex:@"\\s+&\\s+" withString:@" "]] &&
