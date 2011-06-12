@@ -33,6 +33,9 @@
 "Add a custom RSS source" = "Add a custom RSS source";
 
 /* This string is on a button. */
+"Add Custom RSS" = "Add Custom RSS";
+
+/* This string is on a button. */
 "Add Show" = "Add Show";
 
 /* Title of an error message or Growl notification. */
@@ -51,6 +54,9 @@
 "Automatically open each file after download" = "Automatically open each file after download";
 
 "Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions.";
+
+/* The %@ will be replaced by the name of the show. */
+"Are you sure you want to unsubscribe from %@?" = "Are you sure you want to unsubscribe from %@?";
 
 /* This string is on a button. */
 "Cancel" = "Cancel";
@@ -98,12 +104,17 @@
 
 "Download Preferences" = "Download Preferences";
 
+/* This string is on a button. */
+"Edit" = "Edit";
+
 /* Title of a column in a table. */
 "Episode Name" = "Episode Name";
 
 "Episode save location:" = "Episode save location:";
 
 "Feed" = "Feed";
+
+"Feed URLs" = "Feed URLs";
 
 "Download HD versions by default" = "Download HD versions by default";
 
@@ -160,9 +171,19 @@
 
 "Rating:" = "Rating:";
 
+"Save each show in its own folder" = "Save each show in its own folder";
+
+/* This string is on a button. */
+"Save" = "Save";
+
 "Search" = "Search";
 
 "Never" = "Never";
+
+"Next Episode" = "Next Episode";
+
+/* This string is split, the full version is "Start subscription with: Next aired episode" */
+"Next aired episode" = "Next aired episode";
 
 /* Title of a column in a table. */
 "Season" = "Season";
@@ -191,11 +212,30 @@
 
 "Subscriptions" = "Subscriptions";
 
+/* This string is split, the full version is "Start subscription with: Next aired episode" or "Start subscription with: This episode: My Show S01E01" */
+"Start subscription with:" = "Start subscription with:";
+
+"The file may not be released yet. Please try again later or check your internet connection. Alternatively you can download the SD version." = "The file may not be released yet. Please try again later or check your internet connection. Alternatively you can download the SD version.";
+
+/* Disclaimer for a destructive action */
+"This action cannot be undone." = "This action cannot be undone.";
+
+/* This string is split, the full version is "Start subscription with: This episode: My Show S01E01" */
+"This episode:" = "This episode:";
+
+"TVDB id" = "TVDB id";
+
 /* Title of an error message or Growl notification. */
 "TVShows Update Available" = "TVShows Update Available";
 
 /* Title of an error message or Growl notification. */
 "TVShows Update Downloading" = "TVShows Update Downloading";
+
+/* The %@ will be replaced by the name of the torrent file. */
+"Unable to download %@" = "Unable to download %@";
+
+/* The %@ will be replaced by the name of the torrent file. */
+"Unable to find an HD torrent for %@" = "Unable to find an HD torrent for %@";
 
 /* Title of an error message or Growl notification. */
 "Unable to Update the Show List" = "Unable to Update the Show List";
@@ -228,6 +268,8 @@
 "Unknown" = "Unknown";
 
 "Updating Show Information…" = "Updating Show Information…";
+
+"Use additional sources for HD (may contain rars)" = "Use additional sources for HD (may contain rars)";
 
 "View Logs" = "View Logs";
 

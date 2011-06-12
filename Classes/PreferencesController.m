@@ -55,8 +55,10 @@
 {
     [TSUserDefaults setKey:@"ShowMenuBarIcon"           fromBool:YES];
     [TSUserDefaults setKey:@"AutoOpenDownloadedFiles"   fromBool:YES];
+    [TSUserDefaults setKey:@"SortInFolders"             fromBool:NO];
     [TSUserDefaults setKey:@"AutoSelectHDVersion"       fromBool:YES];
-    [TSUserDefaults setKey:@"checkDelay"                fromFloat:0];
+    [TSUserDefaults setKey:@"UseAdditionalSourcesHD"    fromBool:YES];
+    [TSUserDefaults setKey:@"checkDelay"                fromFloat:1];
     [TSUserDefaults setKey:@"downloadFolder"            fromString:[NSHomeDirectory() stringByAppendingPathComponent:@"Downloads"]];
     [TSUserDefaults setKey:@"GrowlOnAppUpdate"          fromBool:YES];
     [TSUserDefaults setKey:@"GrowlOnNewEpisode"         fromBool:YES];
@@ -92,20 +94,27 @@
     [autoOpenDownloadedFiles setTitle:TSLocalizeString(@"Automatically open each file after download")];
     [autoOpenDownloadedFiles setState:[TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:YES]];
     
+    // Sort episodes in folders using the show name
+    [sortInFolders setTitle:TSLocalizeString(@"Save each show in its own folder")];
+    [sortInFolders setState:[TSUserDefaults getBoolFromKey:@"SortInFolders" withDefault:NO]];
+    
     // Automatically select HD version by default
     [autoSelectHDVersion setTitle:TSLocalizeString(@"Download HD versions by default")];
     [autoSelectHDVersion setState:[TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:YES]];
     
+    // Use additional sources (i.e. Torrentz) when HD is not available
+    [useAdditionalSourcesHD setTitle:TSLocalizeString(@"Use additional sources for HD (may contain rars)")];
+    [useAdditionalSourcesHD setState:[TSUserDefaults getBoolFromKey:@"UseAdditionalSourcesHD" withDefault:YES]];
+    
     // Check for new episodes every...
     [episodeCheckText setStringValue:TSLocalizeString(@"Check for episodes every:")];
-    [episodeCheckDelay selectItemAtIndex:[TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:0]];
-    [[episodeCheckDelay itemAtIndex:0] setTitle:TSLocalizeString(@"15 minutes")];
-    [[episodeCheckDelay itemAtIndex:1] setTitle:TSLocalizeString(@"30 minutes")];
-    [[episodeCheckDelay itemAtIndex:2] setTitle:TSLocalizeString(@"1 hour")];
-    [[episodeCheckDelay itemAtIndex:3] setTitle:TSLocalizeString(@"3 hours")];
-    [[episodeCheckDelay itemAtIndex:4] setTitle:TSLocalizeString(@"6 hours")];
-    [[episodeCheckDelay itemAtIndex:5] setTitle:TSLocalizeString(@"12 hours")];
-    [[episodeCheckDelay itemAtIndex:6] setTitle:TSLocalizeString(@"1 day")];
+    [episodeCheckDelay selectItemAtIndex:[TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:1]];
+    [[episodeCheckDelay itemAtIndex:0] setTitle:TSLocalizeString(@"30 minutes")];
+    [[episodeCheckDelay itemAtIndex:1] setTitle:TSLocalizeString(@"1 hour")];
+    [[episodeCheckDelay itemAtIndex:2] setTitle:TSLocalizeString(@"3 hours")];
+    [[episodeCheckDelay itemAtIndex:3] setTitle:TSLocalizeString(@"6 hours")];
+    [[episodeCheckDelay itemAtIndex:4] setTitle:TSLocalizeString(@"12 hours")];
+    [[episodeCheckDelay itemAtIndex:5] setTitle:TSLocalizeString(@"1 day")];
     
     // Default save location
     [downloadLocationText setStringValue:TSLocalizeString(@"Episode save location:")];
@@ -142,6 +151,12 @@
     
     // Check Now button
     [checkNowButton setTitle:TSLocalizeString(@"Check Now")];
+}
+
+- (IBAction) showMenuBarIconDidChange:(id)sender
+{
+    [TSUserDefaults setKey:@"ShowMenuBarIcon" fromBool:[showMenuBarIcon state]];
+    [self updateLaunchAgent];
 }
 
 #pragma mark -
@@ -241,15 +256,19 @@
     [TSUserDefaults setKey:@"AutoOpenDownloadedFiles" fromBool:[autoOpenDownloadedFiles state]];
 }
 
+- (IBAction) sortInFoldersDidChange:(id)sender
+{
+    [TSUserDefaults setKey:@"SortInFolders" fromBool:[sortInFolders state]];
+}
+
 - (IBAction) autoSelectHDVersionDidChange:(id)sender
 {
     [TSUserDefaults setKey:@"AutoSelectHDVersion" fromBool:[autoSelectHDVersion state]];
 }
 
-- (IBAction) showMenuBarIconDidChange:(id)sender
+- (IBAction) useAdditionalSourcesHDDidChange:(id)sender
 {
-    [TSUserDefaults setKey:@"ShowMenuBarIcon" fromBool:[showMenuBarIcon state]];
-    [self updateLaunchAgent];
+    [TSUserDefaults setKey:@"UseAdditionalSourcesHD" fromBool:[useAdditionalSourcesHD state]];
 }
 
 #pragma mark -
@@ -380,6 +399,14 @@
     
     // LaunchOnlyOnce: Avoid launching more than once.
     [launchAgent setObject:[NSNumber numberWithBool:YES] forKey:@"LaunchOnlyOnce"];
+    
+    // Create the Launch Agent directory for the user (just in case)
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[[self launchAgentPath] stringByDeletingLastPathComponent]]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:[[self launchAgentPath] stringByDeletingLastPathComponent]
+                                  withIntermediateDirectories:YES
+                                                   attributes:nil
+                                                        error:nil];
+    }
     
     if (![launchAgent writeToFile:[self launchAgentPath] atomically:YES]) {
         LogCritical(@"Could not write to ~/Library/LaunchAgents/%@",TVShowsHelperDomain);

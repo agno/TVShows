@@ -14,13 +14,14 @@
 
 #import <PreferencePanes/PreferencePanes.h>
 #import <Cocoa/Cocoa.h>
-#import "JRFeedbackController.h"
+#import "SubscriptionsDelegate.h"
 
 @interface TabController : NSPreferencePane
 {
     IBOutlet NSTabView *prefTabView;
     IBOutlet NSButton *feedbackButton;
     NSManagedObject *selectedShow;
+    SubscriptionsDelegate *subscriptionsDelegate;
     
     // Version information
     IBOutlet NSTextField *sidebarHeader;
@@ -48,7 +49,9 @@
     IBOutlet NSWindow *showInfoWindow;
     IBOutlet NSTextField *lastCheckedText;
     IBOutlet NSButton *addButton;
+    IBOutlet NSButton *addRSSButton;
     IBOutlet NSTextField *lastCheckedDate;
+    IBOutlet NSTextField *endedRibbonText;
     IBOutlet NSTableColumn *colHD;
     IBOutlet NSTableColumn *colName;
     IBOutlet NSTableColumn *colSeason;
@@ -59,29 +62,33 @@
     IBOutlet NSTextField *showName;
     IBOutlet NSTextField *showStatus;
     IBOutlet NSTextField *showLastDownloaded;
+    IBOutlet NSTextField *showNextEpisode;
     IBOutlet NSButton *showQuality;
     IBOutlet NSButton *showIsEnabled;
     IBOutlet NSArrayController *episodeArrayController;
     IBOutlet NSTableView *episodeTableView;
     IBOutlet NSTextField *statusTitle;
     IBOutlet NSTextField *lastDownloadedTitle;
+    IBOutlet NSTextField *nextEpisodeTitle;
     IBOutlet NSBox *infoBoxTitle;
     IBOutlet NSBox *prefBoxTitle;
     IBOutlet NSButton *closeButton;
+    IBOutlet NSButton *editButton;
     IBOutlet NSButton *unsubscribeButton;
     IBOutlet NSImageView *showPoster;
 }
 
 @property (retain) NSManagedObject *selectedShow;
+@property (retain) SubscriptionsDelegate *subscriptionsDelegate;
 
 - (void) awakeFromNib;
-- (NSObject *) getEpisodeAtRow:(NSInteger)row;
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
 - (IBAction) showFeedbackWindow:(id)sender;
 
 #pragma mark -
 #pragma mark About Tab
 - (IBAction) openWebsite:(id)sender;
+- (IBAction) openBlog:(id)sender;
 - (IBAction) openTwitter:(id)sender;
 - (IBAction) openPaypal:(id)sender;
 - (IBAction) openUninstaller:(id)sender;
@@ -95,12 +102,17 @@
 #pragma mark -
 #pragma mark Subscriptions TabController
 - (IBAction) displayShowInfoWindow:(id)sender;
-- (void) setEpisodesForShow;
-- (void) setStatusForShow:(NSString *)show;
-- (void) setPosterForShow:(NSString *)show;
+- (void) setEpisodesForShow:(NSString *)showFeeds;
+- (void) setStatusForShow:(NSArray *)arguments;
+- (void) setNextEpisodeForShow:(NSArray *)arguments;
+- (void) setPosterForShow:(NSArray *)arguments;
+- (void) updateEpisodes:(NSArray *)data;
+- (void) updateStatus:(NSArray *)data;
+- (void) updateNextEpisode:(NSArray *)data;
+- (void) updatePoster:(NSArray *)data;
 - (IBAction) closeShowInfoWindow:(id)sender;
 - (IBAction) showQualityDidChange:(id)sender;
-- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName;
+- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName andShowName:(NSString *)show;
 - (void) sortSubscriptionList;
 - (IBAction) unsubscribeFromShow:(id)sender;
 

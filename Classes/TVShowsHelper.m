@@ -18,13 +18,14 @@
 #import "TorrentzParser.h"
 #import "TSParseXMLFeeds.h"
 #import "TSUserDefaults.h"
-#import "SubscriptionsDelegate.h"
 #import "SUUpdaterSubclass.h"
-
+#import "WebsiteFunctions.h"
+#import "RegexKitLite.h"
+#import "TSRegexFun.h"
 
 @implementation TVShowsHelper
 
-@synthesize checkerLoop, TVShowsHelperIcon;
+@synthesize checkerLoop, TVShowsHelperIcon, subscriptionsDelegate;
 
 - init
 {
@@ -40,6 +41,8 @@
         
         TVShowsHelperIcon = [[NSData alloc] initWithContentsOfFile:
                              [appPath stringByAppendingPathComponent:@"TVShows-On-Large.icns"]];
+        
+        subscriptionsDelegate = [[SubscriptionsDelegate alloc] init];
     }
     
     return self;
@@ -74,40 +77,41 @@
     
     NSInteger delay;
     NSTimeInterval seconds;
-    delay = [TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:0];
+    delay = [TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:1];
     
     switch (delay) {
         case 0:
-            // 15 minutes
-            seconds = 15*60;
-            break;
-        case 1:
             // 30 minutes
             seconds = 30*60;
             break;
-        case 2:
+        case 1:
             // 1 hour
             seconds = 1*60*60;
             break;
-        case 3:
+        case 2:
             // 3 hours
             seconds = 3*60*60;
             break;
-        case 4:
+        case 3:
             // 6 hours
             seconds = 6*60*60;
             break;
-        case 5:
+        case 4:
             // 12 hours
             seconds = 12*60*60;
             break;
-        case 6:
+        case 5:
             // 1 day
             seconds = 24*60*60;
             break;
+        case 6:
+            // 1 day, old value, needs to be reverted back to 5
+            seconds = 24*60*60;
+            [TSUserDefaults setKey:@"checkDelay" fromFloat:5];
+            break;
         default:
             // 15 minutes
-            seconds = 15*60;
+            seconds = 1*60;
     }
     
     checkerLoop = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:0.1]
@@ -150,15 +154,15 @@
 
 - (void) checkAllShows
 {
-    id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
-    NSManagedObjectContext *context = [delegateClass managedObjectContext];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Subscription" inManagedObjectContext:context];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Subscription"
+                                              inManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
     NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
     [request setEntity:entity];
     
     NSError *error = nil;
-    NSArray *results = [context executeFetchRequest:request error:&error];
+    NSArray *results = [[subscriptionsDelegate managedObjectContext] executeFetchRequest:request error:&error];
     
     if (error != nil) {
         LogError(@"%@",[error description]);
@@ -176,7 +180,7 @@
             
             // Only check for new episodes if it's enabled.
             if ([[show valueForKey:@"isEnabled"] boolValue]) {
-                //                        LogDebug(@"Checking for new episodes of %@.", [show valueForKey:@"name"]);
+                //LogDebug(@"Checking for new episodes of %@.", [show valueForKey:@"name"]);
                 [self checkForNewEpisodes:show];
             }
             //              }
@@ -189,16 +193,20 @@
     [TSUserDefaults setKey:@"lastCheckedForEpisodes" fromDate:[NSDate date]];
     
     // And update the menu to reflect the date
-    [self performSelectorOnMainThread:@selector(updateLastCheckedItem)  withObject:nil waitUntilDone:NO];
+    [self performSelectorOnMainThread:@selector(updateLastCheckedItem) withObject:nil waitUntilDone:NO];
     
-    [delegateClass saveAction];
-    [delegateClass release];
+    [[subscriptionsDelegate managedObjectContext] processPendingChanges];
+    [subscriptionsDelegate saveAction];
+    
+    [pool drain];
 }
 
 - (void) checkForNewEpisodes:(NSArray *)show
 {
     NSDate *pubDate, *lastDownloaded, *lastChecked;
-    NSArray *episodes = [TSParseXMLFeeds parseEpisodesFromFeed:[show valueForKey:@"url"] maxItems:10];
+    NSArray *episodes = [TSParseXMLFeeds parseEpisodesFromFeeds:
+                         [[show valueForKey:@"url"] componentsSeparatedByString:@"#"]
+                                                       maxItems:50];
     
     if ([episodes count] == 0) {
         LogError(@"Could not download/parse feed for %@ <%@>", [show valueForKey:@"name"], [show valueForKey:@"url"]);
@@ -210,6 +218,13 @@
     lastDownloaded = [show valueForKey:@"lastDownloaded"];
     lastChecked = [TSUserDefaults getDateFromKey:@"lastCheckedForEpisodes"];
     
+    // Filter episodes according to user filters
+    if ([show valueForKey:@"filters"] != nil) {
+        episodes = [episodes filteredArrayUsingPredicate:[show valueForKey:@"filters"]];
+    }
+    
+    NSString *lastEpisodeName = [show valueForKey:@"sortName"];
+    
     // For each episode that was parsed...
     for (NSArray *episode in episodes) {
         pubDate = [episode valueForKey:@"pubDate"];
@@ -218,9 +233,25 @@
         // was published then we should probably download the episode.
         if ([lastDownloaded compare:pubDate] == NSOrderedAscending) {
             
-            // If three full days has passed since the episode was aired attempt the download of any version
+            // HACK HACK HACK: To avoid download an episode twice
+            // Check if the sortname contains this episode name
+            // HACK HACK HACK: put on the sortname the episode name
+            // Why not storing this on a key? Because Core Data migrations and PrefPanes do not mix well
+            NSString *episodeName = [[show valueForKey:@"name"] stringByReplacingOccurrencesOfRegex:@"^The[[:space:]]"
+                                                                                         withString:@""];
+            episodeName = [episodeName stringByAppendingString:[episode valueForKey:@"episodeName"]];
+            
+            // Detect if the last downloaded episode was aired after this one (so do not download it!)
+            // Use a cache version (lastEpisodename) because we could have download it several episodes
+            // in this session, for example if the show aired two episodes in the same day
+            if (![TSRegexFun wasThisEpisode:episodeName
+                          airedAfterThisOne:lastEpisodeName]) {
+                return;
+            }
+            
+            // If it has been two full days since the episode was aired attempt the download of any version
             // Also check that we have checked for episodes at least once in the last day
-            if ([pubDate timeIntervalSinceDate:[NSDate date]] > 3*24*60*60 &&
+            if ([pubDate timeIntervalSinceDate:[NSDate date]] > 2*24*60*60 &&
                 [[NSDate date] timeIntervalSinceDate:lastChecked] < 25*60*60) {
                 chooseAnyVersion = YES;
             } else {
@@ -228,36 +259,25 @@
             }
             
             // First let's try to download the HD version from the RSS
-            // Only if it is HD and HD is enabled (or SD was not available last three days)
+            // Only if it is HD and HD is enabled (or SD was not available last two days)
             if (([[show valueForKey:@"quality"] boolValue] &&
                  [[episode valueForKey:@"isHD"] boolValue]) ||
-                chooseAnyVersion) {
-                
-                if ([self startDownloadingURL:[episode valueForKey:@"link"]
-                                 withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
-                                     showInfo:show]) {
-                    
-                    // Update when the show was last downloaded.
-                    [show setValue:pubDate forKey:@"lastDownloaded"];
-                    
-                    break;
-                }
-                
-            }
-            
-            // If no success let's try to download the SD version then
-            if ((![[show valueForKey:@"quality"] boolValue] &&
+                (![[show valueForKey:@"quality"] boolValue] &&
                  ![[episode valueForKey:@"isHD"] boolValue]) ||
                 chooseAnyVersion) {
                 
                 if ([self startDownloadingURL:[episode valueForKey:@"link"]
                                  withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
-                                     showInfo:show]) {
-                    
-                    // Update when the show was last downloaded.
-                    [show setValue:pubDate forKey:@"lastDownloaded"];
-                    
+                                  andShowName:[show valueForKey:@"name"]]) {
+                    // Update the last downloaded episode name only if it was aired after the previous stored one
+                    if ([TSRegexFun wasThisEpisode:episodeName
+                                 airedAfterThisOne:[show valueForKey:@"sortName"]]) {
+                        // Update when the show was last downloaded
+                        [show setValue:pubDate forKey:@"lastDownloaded"];
+                        [show setValue:episodeName forKey:@"sortName"];
+                    }
                 }
+                
             }
         } else {
             // The rest is not important because it is even before the previous entry
@@ -405,21 +425,38 @@
 
 #pragma mark -
 #pragma mark Download Methods
-- (BOOL) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName showInfo:(NSArray *)show
+- (BOOL) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName andShowName:(NSString *)show
 {
     // Process the URL if the is not found
     if ([url rangeOfString:@"http"].location == NSNotFound) {
         LogInfo(@"Retrieving an HD torrent file from Torrentz of: %@", url);
         url = [TorrentzParser getAlternateTorrentForEpisode:url];
         if (url == nil) {
-            LogError(@"Unable to found an HD torrent file for: %@", fileName);
+            LogError(@"Unable to find an HD torrent file for: %@", fileName);
             return NO;
         }
     }
     
+    // Build the saving folder
+    NSString *saveLocation = [TSUserDefaults getStringFromKey:@"downloadFolder"];
+    
+    // Check if we have to sort shows by folders or not
+    if ([TSUserDefaults getBoolFromKey:@"SortInFolders" withDefault:NO]) {
+        saveLocation = [saveLocation stringByAppendingPathComponent:show];
+        if (![[NSFileManager defaultManager] createDirectoryAtPath:saveLocation
+                                       withIntermediateDirectories:YES
+                                                        attributes:nil
+                                                             error:nil]) {
+            LogError(@"Unable to create the folder: %@", saveLocation);
+            return NO;
+        }
+    }
+    
+    // Add the filename
+    saveLocation = [saveLocation stringByAppendingPathComponent:fileName];
+    
     LogInfo(@"Attempting to download new episode: %@", fileName);
-    NSData *fileContents = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
-    NSString *saveLocation = [[TSUserDefaults getStringFromKey:@"downloadFolder"] stringByAppendingPathComponent:fileName];
+    NSData *fileContents = [WebsiteFunctions downloadDataFrom:url];
     
     // Check if the download was right
     if (!fileContents || [fileContents length] < 100) {
@@ -433,8 +470,6 @@
         
         [fileContents writeToFile:saveLocation atomically:YES];
         
-        id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
-        
         // Check to see if the user wants to automatically open new downloads
         if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
             [[NSWorkspace sharedWorkspace] openFile:saveLocation withApplication:nil andDeactivate:NO];
@@ -442,17 +477,14 @@
         
         if([TSUserDefaults getBoolFromKey:@"GrowlOnNewEpisode" withDefault:1]) {
         // In the future this may display the show's poster instead of our app icon.
-        [GrowlApplicationBridge notifyWithTitle:[NSString stringWithFormat:@"%@", [show valueForKey:@"name"]]
-                                    description:[NSString stringWithFormat:TSLocalizeString(@"A new episode of %@ is being downloaded."), [show valueForKey:@"name"]]
+        [GrowlApplicationBridge notifyWithTitle:[NSString stringWithFormat:@"%@", show]
+                                    description:[NSString stringWithFormat:TSLocalizeString(@"A new episode of %@ is being downloaded."), show]
                                notificationName:@"New Episode Downloaded"
                                        iconData:TVShowsHelperIcon
                                        priority:0
                                        isSticky:0
                                    clickContext:nil];
         }
-        
-        [delegateClass saveAction];
-        [delegateClass release];
         
         // Success!
         return YES;
@@ -498,6 +530,7 @@
     [checkerLoop invalidate];
     [checkerLoop release];
     [TVShowsHelperIcon release];
+    [subscriptionsDelegate release];
     [super dealloc];
 }
 

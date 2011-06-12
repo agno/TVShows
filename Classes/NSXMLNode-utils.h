@@ -12,17 +12,12 @@
  *
  */
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 
-@interface WebsiteFunctions : NSObject
-{
+@interface NSXMLNode (utils)
 
-}
-
-+ (BOOL) canConnectToHostname:(NSString *)hostName;
-+ (BOOL) canConnectToURL:(NSString *)url;
-+ (NSData *) downloadDataFrom:(NSString *)url;
-+ (NSString *) downloadStringFrom:(NSString *)url;
+- (NSXMLNode *)childNamed:(NSString *)name;
+- (NSArray *)childrenAsStrings;
 
 @end

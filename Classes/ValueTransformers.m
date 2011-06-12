@@ -34,8 +34,37 @@
     // Those will crash the program if we aren't careful.
     if (value == nil) return nil;
     
-    NSImage *showPoster = [[TheTVDB class] getPosterForShow:value withHeight:96 withWidth:66];
+    NSImage *showPoster = [[TheTVDB class] getPosterForShow:[value valueForKey:@"name"]
+                                                 withShowID:[NSString stringWithFormat:@"%@",
+                                                             [value valueForKey:@"tvdbID"]]
+                                                 withHeight:96
+                                                  withWidth:66];
     return showPoster;
+}
+
+@end
+
+@implementation CancelledShowValueTransformer
+
++ (Class) transformedValueClass;
+{
+    return [NSNumber class];
+}
+
++ (BOOL) allowsReverseTransformation
+{
+    return NO;
+}
+
+- (id) transformedValue:(id)value
+{
+    // For some reason, we sometimes receive nil values.
+    // Those will crash the program if we aren't careful.
+    if (value == nil || [value isEqualToString:@""]) {
+        return [NSNumber numberWithBool:NO];
+    } else {
+        return [NSNumber numberWithBool:YES];
+    }
 }
 
 @end

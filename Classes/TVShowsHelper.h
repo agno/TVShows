@@ -15,13 +15,15 @@
 #import <Cocoa/Cocoa.h>
 #import <Sparkle/SUUpdater.h>
 #import <Growl/GrowlApplicationBridge.h>
-
+#import "SubscriptionsDelegate.h"
 
 @interface TVShowsHelper : NSObject <GrowlApplicationBridgeDelegate>
 {
     NSThread *checkerThread;
     NSTimer *checkerLoop;
     NSData *TVShowsHelperIcon;
+    SubscriptionsDelegate *subscriptionsDelegate;
+    
     IBOutlet NSStatusItem *statusItem;
     IBOutlet NSMenu *statusMenu;
     IBOutlet NSMenuItem *lastUpdateItem;
@@ -35,6 +37,7 @@
 
 @property (retain) NSTimer *checkerLoop;
 @property (retain) NSData *TVShowsHelperIcon;
+@property (retain) SubscriptionsDelegate *subscriptionsDelegate;
 
 - (void) runLoop;
 - (void) checkAllShows;
@@ -55,7 +58,7 @@
 
 #pragma mark -
 #pragma mark Download Methods
-- (BOOL) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName showInfo:(NSArray *)show;
+- (BOOL) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName andShowName:(NSString *)show;
 
 #pragma mark -
 #pragma mark Sparkle Delegate Methods

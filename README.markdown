@@ -5,61 +5,65 @@ No actual videos are downloaded by TVShows, only torrents which require other pr
 
 ## Download
 
-The latest build is always available here:
+The latest build is always available in the official site:
 
 [http://tvshowsapp.com/][tvshows]
 
-That preference pane should work in Leopard and Snow Leopard. In the near future when I have time I will create a proper website.
+The preference pane works in Leopard and Snow Leopard, both Intel and PPC.
 
-<!-- ## Screenshots
-<a href="http://embercode.com/blog/category/tvshows-news/" title="TVShows News">![Show List][preview-1]&nbsp;&nbsp;![Subscriptions][preview-2]&nbsp;&nbsp;![Show Info][preview-3]</a> -->
+## Screenshots
+<a href="http://tvshowsapp.com/img/tvshows2-addshow.png">![Show List][preview-1]</a>&nbsp;&nbsp;<a href="http://tvshowsapp.com/img/tvshows2-subscriptions.png">![Subscriptions][preview-2]</a>&nbsp;&nbsp;<a href="http://tvshowsapp.com/img/tvshows2-preferences.png">![Preferences][preview-3]</a>&nbsp;&nbsp;<a href="http://tvshowsapp.com/img/tvshows2-custom.png">![Custom RSS][preview-4]</a>
 
 ## Translations
-<!--* Help localize TVShows 2 into your native language! [Click here][translate] ([more info][translate-info]) to be added to the translation team.-->
-* Help localize TVShows 2 into your native language! [Click here][translate] to be added to the translation team.
+Help localize TVShows 2 into your native language! [Click here][translate] to be added to the translation team.
 
 ## Collaboration Instructions
-1. Checkout the repository:
-    * `$ git clone http://github.com/victorpimentel/TVShows.git`
-1. Download all the required submodules:
-    * `$ cd TVShows`
-    * `$ git submodule init`
-    * `$ git submodule update`
+1. Checkout the repository and all submodules:
+    * `$ git clone --recursive http://github.com/victorpimentel/TVShows.git`
+1. Change to the develop branch:
+    * `$ git checkout develop`
+1. Open the Xcode project or compile it from the terminal:
+    * `$ xcodebuild`
 
 ## Collaboration Notes
-* You can also use GitHub's forking feature to make changes and then send me a pull request.
+* You can use GitHub's forking feature to make changes and then send me a pull request. Patches or anything else also works.
 * By default, the Debug configuration automatically installs TVShows into `~/Library/PreferencePanes/` each time it's built.
-* Xcode 4 users will need to make sure the 10.5 SDK is in `/Developer/SDKs/`. Install Xcode 3 first if you do not have it, or change the target OS version.
+* Xcode 4 is preferred over Xcode 3, but it should work on both.
+* Xcode 4 users will need to make sure the 10.5 SDK is in `/Developer/SDKs/`. Also, some things needs to be changed to add PPC support, [see the instructions][xcode4-instructions]. If you don't want/need to add that, change the target OS version and SDK in the project settings (some warnings may appear).
 
 ## Roadmap
-### Beta 6
-* <strike>Fix performance bugs, improve responsiveness.</strike>
-* <strike>Add a loading bar to the show list and show info window.</strike>
-* <strike>Make it more obvious what's happening with SD/HD episodes.</strike>
-* <strike>Add an option to mark by default the HD or SD versions of the show.</strike>
-* <strike>Fade out "disabled" subscriptions.</strike>
+### Beta 8 (last 2.0 beta)
+* <strike>Add more sources for the RSS feeds.</strike>
+* <strike>Mark subscribed shows from the show list.</strike>
+* <strike>Add support for customized RSS feeds.</strike>
+* <strike>Allow the edition of a subscription.</strike>
+* <strike>Show date for next aired episode.</strike>
+* <strike>Option to store episodes in its own folders.</strike>
+* <strike>Start a subscription from a previous episode (so downloading every show since then).</strike>
 
-### Beta 7
+### 3.0 (future)
+* Convert the preference pane in a standalone app.
+  * This is a final decision, it is needed for technical reasons.
+  * PPC support will be removed. Leopard and Intel 32 bits support will be probably removed.
+* Option to download subtitles automatically.
+* Option to unrar episodes when the download is finished.
+* Choose format for episode names (s01e01 or 1x01).
 * Download episode names.
-* Fade out subscribed shows from the show list.
-* Fix the two shows who have no posters, but don't display the placeholder.
 * Add a list view to the Subscriptions tab.
-* Use NSTask for downloading torrents, posters, and descriptions.
-* Consider additional sources for the RSS feeds.
 
 ## License
 TVShows is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
 For a copy of the GNU General Public License see &lt;[http://www.gnu.org/licenses/][license]&gt;.
 
-[theend]:http://embercode.com/tvshows/the-end.html "Sad News"
-
 [tvshows]:http://tvshowsapp.com/ "TVShows Website"
 [translate]:https://webtranslateit.com/en/projects/874-TVShows/invitation_request "Help Translate TVShows 2"
-[translate-info]:http://embercode.com/blog/2010/help-translate-tvshows-2/ "Help Translate TVShows 2"
 
-[preview-1]:http://embercode.com/_tvshows/screenshots/show-list_small.png "TVShows 2: Show List"
-[preview-2]:http://embercode.com/_tvshows/screenshots/subscriptions_small.png "TVShows 2: Subscriptions"
-[preview-3]:http://embercode.com/_tvshows/screenshots/show-info_small.png "TVShows 2: Show Info Window"
+[preview-1]:http://tvshowsapp.com/img/tvshows2-addshow-thumb.png "TVShows 2: Show List"
+[preview-2]:http://tvshowsapp.com/img/tvshows2-subscriptions-thumb.png "TVShows 2: Subscriptions"
+[preview-3]:http://tvshowsapp.com/img/tvshows2-preferences-thumb.png "TVShows 2: Preferences"
+[preview-4]:http://tvshowsapp.com/img/tvshows2-custom-thumb.png "TVShows 2: Custom RSS"
+
+[xcode4-instructions]:http://stackoverflow.com/questions/5333490/how-can-we-restore-ppc-ppc64-as-well-as-full-10-4-10-5-sdk-support-to-xcode-4/5333500#5333500 "Instructions to add PPC support for Xcode 4"
 
 [license]:http://www.gnu.org/licenses/ "GNU General Public License"

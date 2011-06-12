@@ -12,10 +12,11 @@
  *
  */
 
+#import <QuartzCore/QuartzCore.h>
+
 #import "AppInfoConstants.h"
 #import "TabController.h"
-
-#import "SubscriptionsDelegate.h"
+#import "JRFeedbackController.h"
 
 #import "TSParseXMLFeeds.h"
 #import "TSUserDefaults.h"
@@ -23,13 +24,17 @@
 #import "TorrentzParser.h"
 #import "TheTVDB.h"
 #import "LCLLogFile.h"
+#import "WebsiteFunctions.h"
 
 @implementation TabController
 
-@synthesize selectedShow;
+@synthesize selectedShow, subscriptionsDelegate;
 
 - (void) awakeFromNib
 {
+    // Init the subscriptions delegate
+    subscriptionsDelegate = [[SubscriptionsDelegate alloc] init];
+    
     // Set displayed version information
     NSString *bundleVersion = [[[NSBundle bundleWithIdentifier: TVShowsAppDomain] infoDictionary] 
                                valueForKey:@"CFBundleShortVersionString"];
@@ -40,7 +45,8 @@
     
     [sidebarHeader setStringValue:@"TVShows 2"];
     [sidebarVersionText setStringValue: [NSString stringWithFormat:@"%@ (r%@)", bundleVersion, buildVersion]];
-    [sidebarDateText setStringValue: buildDate];
+    [sidebarDateText setStringValue:buildDate];
+    [endedRibbonText setStringValue:[TSLocalizeString(@"Ended") uppercaseString]];
     
     NSDate *date = [TSUserDefaults getDateFromKey:@"lastCheckedForEpisodes"];
     if (date) {
@@ -67,6 +73,7 @@
     [feedbackButton setTitle: TSLocalizeString(@"Submit Feedback")];
     
     [addButton setTitle: TSLocalizeString(@"Add Show")];
+    [addRSSButton setTitle: TSLocalizeString(@"Add Custom RSS")];
     [lastCheckedText setStringValue: TSLocalizeString(@"Last Checked:")];
     
     [websiteButton setTitle: TSLocalizeString(@"Website")];
@@ -92,14 +99,52 @@
     [showIsEnabled setTitle: TSLocalizeString(@"Enable downloading new episodes")];
     [statusTitle setStringValue: TSLocalizeString(@"Status")];
     [lastDownloadedTitle setStringValue: TSLocalizeString(@"Last Downloaded")];
+    [nextEpisodeTitle setStringValue: TSLocalizeString(@"Next Episode")];
     [infoBoxTitle setTitle: TSLocalizeString(@"Info")];
     [prefBoxTitle setTitle: TSLocalizeString(@"Preferences")];
     [closeButton setTitle: TSLocalizeString(@"Close")];
+    [editButton setTitle: TSLocalizeString(@"Edit")];
     [unsubscribeButton setTitle: TSLocalizeString(@"Unsubscribe")];
     
     // Sort the subscription list and draw the About box
     [self sortSubscriptionList];
     [self drawAboutBox];
+    
+    // Start the animation about one second after loading this
+    [self performSelector:@selector(animateDonateButton) withObject:nil afterDelay:1];
+}
+
+- (void) animateDonateButton
+{
+    // Each animation step is a full second
+    CATransition *presentAnimation = [CATransition animation];
+    [presentAnimation setDuration:1];
+    [presentAnimation setDelegate:self];
+    
+    // Animate the Core Animation content filters
+    [donateButton setAnimations:[NSDictionary dictionaryWithObject:presentAnimation forKey:@"contentFilters"]];
+    
+    [self animationDidStop:nil finished:YES];
+}
+
+- (void) animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)finished
+{
+    if (finished) {
+        // Get the content filters for the button (there are two, one to add color and another one to change the hue)
+        CIFilter *colorAdjust = [[donateButton contentFilters] objectAtIndex:0];
+        CIFilter *hueAdjustOld = [[donateButton contentFilters] objectAtIndex:1];
+        
+        float hue = [[hueAdjustOld valueForKey:@"inputAngle"] floatValue];
+        
+        // Slowly change the hue (in radians, max is 2*PI because it is a circle)
+        hue += (2 * M_PI) / 100;
+        
+        CIFilter *hueAdjust = [CIFilter filterWithName:@"CIHueAdjust"];
+        [hueAdjust setDefaults];
+        [hueAdjust setValue:[NSNumber numberWithFloat:hue] forKey:@"inputAngle"];
+        
+        [[donateButton animator] setContentFilters:[NSArray arrayWithObjects:colorAdjust, hueAdjust, nil]];
+    }
 }
 
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
@@ -111,13 +156,13 @@
     
     // newWinHeight should be equal to the wanted window size (in Interface Builder) + 54 (title bar height)
     if ([[tabViewItem identifier] isEqualTo:@"tabItemPreferences"]) {
-        newWinHeight = 560;
+        newWinHeight = 617;
     } else if ([[tabViewItem identifier] isEqualTo:@"tabItemSubscriptions"]) {
-        newWinHeight = 570;
+        newWinHeight = 617;
     }  else if ([[tabViewItem identifier] isEqualTo:@"tabItemAbout"]) {
-        newWinHeight = 422;
+        newWinHeight = 500;
     } else {
-        newWinHeight = 422;
+        newWinHeight = 617;
     }
     
     tabFrame = NSMakeRect(tabFrame.origin.x, tabFrame.origin.y - (newWinHeight - (int)(NSHeight(tabFrame))), (int)(NSWidth(tabFrame)), newWinHeight);
@@ -137,6 +182,11 @@
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString: TVShowsWebsite]];
 }
 
+- (IBAction) openBlog:(id)sender
+{
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString: TVShowsBlog]];
+}
+
 - (IBAction) openTwitter:(id)sender
 {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString: TVShowsTwitter]];
@@ -144,7 +194,35 @@
 
 - (IBAction) openPaypal:(id)sender
 {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString: TVShowsDonations]];
+    // This is a list of accepted currencies for Paypal transfers and donations
+    NSArray *acceptedCurrencies = [NSArray arrayWithObjects:@"AUD", @"BRL", @"CAD", @"CZK", @"DKK", @"EUR",
+                                   @"HKD", @"HUF", @"ILS", @"JPY", @"MXN", @"NOK", @"NZD", @"PHP", @"PLN",
+                                   @"GBP", @"SGD", @"SEK", @"CHF", @"TWD", @"THB", @"TRY", @"USD", nil];
+    
+    // And this should be the preferred currency for this user
+    NSString *currencyCode = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode];
+    
+    // Let's assume is not supported
+    BOOL supported = NO;
+    
+    // And let's see if it is in that currency list
+    for (NSString *code in acceptedCurrencies) {
+        if ([currencyCode isEqualToString:code]) {
+            supported = YES;
+            break;
+        }
+    }
+    
+    // Fallback to euros!
+    if (!supported) {
+        currencyCode = @"EUR";
+    }
+    
+    // Also retrieve the country for this user
+    NSString *countryCode = [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode];
+    
+    NSString *donationURL = [NSString stringWithFormat:TVShowsDonations, currencyCode, countryCode];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:donationURL]];
 }
 
 - (IBAction) openUninstaller:(id)sender
@@ -214,8 +292,8 @@
     [textView_logViewer setString:loggedItems];
     [textView_logViewer moveToEndOfDocument:nil];
     
-    [NSApp runModalForWindow: logViewerWindow];
     [NSApp endSheet: logViewerWindow];
+    [NSApp runModalForWindow: logViewerWindow];
 }
 
 - (IBAction) closeLogViewerWindow:(id)sender
@@ -230,6 +308,9 @@
 {
     selectedShow = [[[sender cell] representedObject] representedObject];
     
+    // Link that info to the edit button
+    [[editButton cell] setRepresentedObject:self];
+    
     // Set up the date formatter
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     [dateFormatter setDateStyle:NSDateFormatterLongStyle];
@@ -239,6 +320,7 @@
     [showName setStringValue: [selectedShow valueForKey:@"name"]];
     [showStatus setStringValue: TSLocalizeString(@"Unknown")];
     [showLastDownloaded setStringValue: [dateFormatter stringFromDate:[selectedShow valueForKey:@"lastDownloaded"]]];
+    [showNextEpisode setStringValue: TSLocalizeString(@"Unknown")];
     [showQuality setState: [[selectedShow valueForKey:@"quality"] intValue]];
     [showIsEnabled setState: [[selectedShow valueForKey:@"isEnabled"] boolValue]];
     
@@ -248,18 +330,27 @@
     
     // Reset the Episode Array Controller
     [[episodeArrayController content] removeAllObjects];
+    [episodeArrayController removeObjects:[episodeArrayController arrangedObjects]];
     [episodeTableView reloadData];
+    [episodeTableView setEnabled:NO];
     
-    NSString *selectedShowName = [selectedShow valueForKey:@"name"];
-    
-    // Display the show poster now that it's been resized.
-    [self performSelectorInBackground:@selector(setPosterForShow:) withObject:selectedShowName];
-    
-    // Grab the show status
-    [self performSelectorInBackground:@selector(setStatusForShow:) withObject:selectedShowName];
-    
-    // Grab the list of episodes
-    [self performSelector:@selector(setEpisodesForShow)];
+    if (selectedShow) {
+        NSString *showFeeds = [selectedShow valueForKey:@"url"];
+        NSArray *arguments = [NSArray arrayWithObjects:[selectedShow valueForKey:@"name"],
+                              [NSString stringWithFormat:@"%@", [selectedShow valueForKey:@"tvdbID"]], nil];
+        
+        // Grab the list of episodes
+        [self performSelectorInBackground:@selector(setEpisodesForShow:) withObject:showFeeds];
+        
+        // Display the show poster now that it's been resized.
+        [self performSelectorInBackground:@selector(setPosterForShow:) withObject:arguments];
+        
+        // Grab the show status
+        [self performSelectorInBackground:@selector(setStatusForShow:) withObject:arguments];
+        
+        // Grab the next episode date
+        [self performSelectorInBackground:@selector(setNextEpisodeForShow:) withObject:arguments];
+    }
     
     [NSApp beginSheet: showInfoWindow
        modalForWindow: [[NSApplication sharedApplication] mainWindow]
@@ -267,17 +358,90 @@
        didEndSelector: nil
           contextInfo: nil];
     
-    [NSApp runModalForWindow: showInfoWindow];
     [NSApp endSheet: showInfoWindow];
+    [NSApp runModalForWindow: showInfoWindow];
 }
 
-- (void) setEpisodesForShow
+#pragma mark -
+#pragma mark Background workers
+- (void) setEpisodesForShow:(NSString *)showFeeds
 {
-    NSArray *results = [TSParseXMLFeeds parseEpisodesFromFeed:[selectedShow valueForKey:@"url"] maxItems:10];
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
-    if ([results count] == 0) {
-        LogError(@"Could not download/parse feed for %@ <%@>", [selectedShow valueForKey:@"name"], [selectedShow valueForKey:@"url"]);
-    } else {
+    // Now we can trigger the time-expensive task
+    NSArray *results = [NSArray arrayWithObjects:showFeeds,
+                        [TSParseXMLFeeds parseEpisodesFromFeeds:[showFeeds componentsSeparatedByString:@"#"]
+                                                       maxItems:50], nil];
+    
+    if ([results count] < 2) {
+        LogError(@"Could not download/parse feed(s) <%@>", showFeeds);
+        return;
+    }
+    
+    [self performSelectorOnMainThread:@selector(updateEpisodes:) withObject:results waitUntilDone:NO];
+    
+    [pool drain];
+}
+
+- (void) setStatusForShow:(NSArray *)arguments
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    // Now we can trigger the time-expensive task
+    NSArray *results = [NSArray arrayWithObjects:[arguments objectAtIndex:0],
+                            [TheTVDB getShowStatus:[arguments objectAtIndex:0]
+                                        withShowID:[arguments objectAtIndex:1]], nil];
+    
+    [self performSelectorOnMainThread:@selector(updateStatus:) withObject:results waitUntilDone:NO];
+    
+    [pool drain];
+}
+
+- (void) setNextEpisodeForShow:(NSArray *)arguments
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    // Now we can trigger the time-expensive task
+    NSArray *results = [NSArray arrayWithObjects:[arguments objectAtIndex:0],
+                        [TheTVDB getShowNextEpisode:[arguments objectAtIndex:0]
+                                         withShowID:[arguments objectAtIndex:1]], nil];
+    
+    [self performSelectorOnMainThread:@selector(updateNextEpisode:) withObject:results waitUntilDone:NO];
+    
+    [pool drain];
+}
+
+- (void) setPosterForShow:(NSArray *)arguments
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    // Now we can trigger the time-expensive task
+    NSArray *results = [NSArray arrayWithObjects:[arguments objectAtIndex:0],
+                        [[[TheTVDB getPosterForShow:[arguments objectAtIndex:0]
+                                         withShowID:[arguments objectAtIndex:1]
+                                         withHeight:187
+                                          withWidth:129] copy] autorelease], nil];
+    
+    [self performSelectorOnMainThread:@selector(updatePoster:) withObject:results waitUntilDone:NO];
+    
+    [pool drain];
+}
+
+- (void) updateEpisodes:(NSArray *)data
+{
+    // We are back after probably a lot of time, so check carefully if the user has changed the selection
+    if (!selectedShow) {
+        return;
+    }
+    
+    // Extract the data
+    NSString *showFeeds = [data objectAtIndex:0];
+    NSArray *results = [data objectAtIndex:1];
+    NSString *copy = [selectedShow valueForKey:@"url"];
+    
+    // Continue only if the selected show is the same as before
+    if ([showFeeds isEqualToString:copy]) {
+        [episodeTableView setEnabled:YES];
         [episodeArrayController addObjects:results];
         
         // Check if there are HD episodes, if so enable the "Download in HD" checkbox
@@ -293,36 +457,88 @@
     }
 }
 
-- (void) setStatusForShow:(NSString *)show
+- (void) updateStatus:(NSArray *)data
 {
-    NSString *status = [TheTVDB getShowStatus:show];
+    // We are back after probably a lot of time, so check carefully if the user has changed the selection
+    if (!selectedShow) {
+        return;
+    }
+    
+    // Extract the data
+    NSString *name = [data objectAtIndex:0];
+    NSString *status = nil;
+    if ([data count] > 1) {
+        status = [data objectAtIndex:1];
+    }
     NSString *copy = [selectedShow valueForKey:@"name"];
-
-    // Check if the request is still valid (an impacient user may start to rapidly change)
-    if ([show isEqualToString:copy]) {
-        [showStatus setStringValue: TSLocalizeString(status)];
+    
+    // Continue only if the selected show is the same as before
+    if ([name isEqualToString:copy] && status != nil) {
+        // And finally we can set the status
+        [showStatus setStringValue:TSLocalizeString(status)];
+        if ([status isEqualToString:@"Ended"]) {
+            [showNextEpisode setStringValue:TSLocalizeString(@"Never")];
+        }
     }
 }
 
-- (void) setPosterForShow:(NSString *)show
+- (void) updateNextEpisode:(NSArray *)data
 {
-    NSImage *poster = [[[TheTVDB getPosterForShow:show withHeight:184 withWidth:127] copy] autorelease];
+    // We are back after probably a lot of time, so check carefully if the user has changed the selection
+    if (!selectedShow) {
+        return;
+    }
+    
+    // Extract the data
+    NSString *name = [data objectAtIndex:0];
+    NSDate *nextEpisode = nil;
+    if ([data count] > 1) {
+        nextEpisode = [data objectAtIndex:1];
+    }
     NSString *copy = [selectedShow valueForKey:@"name"];
     
-    // Check if the request is still valid (an impacient user may start to rapidly change)
-    if ([show isEqualToString:copy]) {
-        [showPoster setImage: poster];
+    // Continue only if the selected show is the same as before
+    if ([name isEqualToString:copy] && nextEpisode != nil) {
+        // Set up the date formatter
+        NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+        [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+        
+        [showNextEpisode setStringValue:[dateFormatter stringFromDate:nextEpisode]];
+    }
+}
+
+- (void) updatePoster:(NSArray *)data
+{
+    // We are back after probably a lot of time, so check carefully if the user has changed the selection
+    if (!selectedShow) {
+        return;
+    }
+    
+    // Extract the data
+    NSString *name = [data objectAtIndex:0];
+    NSImage *poster = [data objectAtIndex:1];
+    NSString *copy = [selectedShow valueForKey:@"name"];
+    
+    // Continue only if the selected show is the same as before
+    if ([name isEqualToString:copy]) {
+        [showPoster setImage:poster];
         [showPoster display];
     }
 }
 
 - (IBAction) closeShowInfoWindow:(id)sender
 {
+    // Close the window first
+    // The following code has a bug in Intel 32-bit that I couldn't fix,
+    // so I prefer not to save that information rather than not be able to close the app
+    [NSApp stopModal];
+    [showInfoWindow orderOut: self];
+    
     // NSManagedContext objectWithID is required for it to save changes to the disk.
     // We also need to update the original selectedShow NSManagedObject so that the
     // interface displays any changes when the window is opened multiple times a session.
-    id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
-    NSManagedObject *selectedShowObj = [[delegateClass managedObjectContext] objectWithID:[selectedShow objectID]];
+    NSManagedObject *selectedShowObj = [[subscriptionsDelegate managedObjectContext] objectWithID:[selectedShow objectID]];
     
     // Update the per-show preferences
     [selectedShow setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
@@ -331,71 +547,91 @@
     [selectedShowObj setValue:[NSNumber numberWithBool:[showIsEnabled state]] forKey:@"isEnabled"];
     
     // Be sure to process pending changes before saving or it won't save correctly.
-    [[delegateClass managedObjectContext] processPendingChanges];
-    [delegateClass saveAction];
-    [delegateClass release];
+    [[subscriptionsDelegate managedObjectContext] processPendingChanges];
+    [subscriptionsDelegate saveAction];
     
-    // Reset the selected show and close the window
+    // Reset the selected show
     selectedShow = nil;
-    [NSApp stopModal];
-    [showInfoWindow orderOut: self];
 }
 
 - (IBAction) showQualityDidChange:(id)sender
 {
     if ([showQuality state]) {
-        // Is HD and HD is enabled.
-        [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '1'"]];
+        [episodeArrayController setFilterPredicate:
+         [NSCompoundPredicate andPredicateWithSubpredicates:
+          [NSArray arrayWithObjects:[NSPredicate predicateWithFormat:@"isHD == '1'"],
+           [selectedShow valueForKey:@"filters"],nil]]];
     } else {
-        // Is not HD and HD is not enabled.
-        [episodeArrayController setFilterPredicate:[NSPredicate predicateWithFormat:@"isHD == '0'"]];
+        [episodeArrayController setFilterPredicate:
+         [NSCompoundPredicate andPredicateWithSubpredicates:
+          [NSArray arrayWithObjects:[NSPredicate predicateWithFormat:@"isHD == '0'"],
+           [selectedShow valueForKey:@"filters"],nil]]];
     }
 }
 
-- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName
+- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName andShowName:(NSString *)show
 {
     // Process the URL if the is not found
     if ([url rangeOfString:@"http"].location == NSNotFound) {
         LogInfo(@"Retrieving an HD torrent file from Torrentz of: %@", url);
         url = [TorrentzParser getAlternateTorrentForEpisode:url];
         if (url == nil) {
-            LogError(@"Unable to found an HD torrent file for: %@",fileName);
+            LogError(@"Unable to find an HD torrent file for: %@", fileName);
+            
+            // Display the error
+            NSRunCriticalAlertPanel([NSString stringWithFormat:TSLocalizeString(@"Unable to find an HD torrent for %@"), fileName],
+                                    TSLocalizeString(@"The file may not be released yet. Please try again later or check your internet connection. Alternatively you can download the SD version."),
+                                    TSLocalizeString(@"Ok"),
+                                    nil,
+                                    nil);
+            
             return;
         }
     }
     
-    // Method copied from TVShowsHelper.m
-    LogInfo(@"Attempting to download episode: %@", fileName);
-    NSData *fileContents = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
-    NSString *saveLocation = [[TSUserDefaults getStringFromKey:@"downloadFolder"] stringByAppendingPathComponent:fileName];
+    // Build the saving folder
+    NSString *saveLocation = [TSUserDefaults getStringFromKey:@"downloadFolder"];
     
-    [fileContents writeToFile:saveLocation atomically:YES];
+    // Check if we have to sort shows by folders or not
+    if ([TSUserDefaults getBoolFromKey:@"SortInFolders" withDefault:NO]) {
+        saveLocation = [saveLocation stringByAppendingPathComponent:show];
+        if (![[NSFileManager defaultManager] createDirectoryAtPath:saveLocation
+                                       withIntermediateDirectories:YES
+                                                        attributes:nil
+                                                             error:nil]) {
+            LogError(@"Unable to create the folder: %@", saveLocation);
+            return;
+        }
+    }
+    
+    // Add the filename
+    saveLocation = [saveLocation stringByAppendingPathComponent:fileName];
+    
+    // Method copied from TVShowsHelper.m
+    LogInfo(@"Attempting to download new episode: %@", fileName);
+    NSData *fileContents = [WebsiteFunctions downloadDataFrom:url];
     
     if (!fileContents || [fileContents length] < 100) {
         LogError(@"Unable to download file: %@ <%@>",fileName, url);
+        
+        // Display the error
+        NSRunCriticalAlertPanel([NSString stringWithFormat:TSLocalizeString(@"Unable to download %@"), fileName],
+                                TSLocalizeString(@"Cannot connect. Please try again later or check your internet connection"),
+                                TSLocalizeString(@"Ok"),
+                                nil,
+                                nil);
+        
     } else {
         // The file downloaded successfully, continuing...
         LogInfo(@"Episode downloaded successfully.");
+        
+        [fileContents writeToFile:saveLocation atomically:YES];
         
         // Check to see if the user wants to automatically open new downloads
         if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
             [[NSWorkspace sharedWorkspace] openFile:saveLocation withApplication:nil andDeactivate:NO];
         }
     }
-}
-
-- (NSObject *) getEpisodeAtRow:(NSInteger)row
-{
-    for (NSObject *episode in [episodeArrayController content]) {
-        if ([[episode valueForKey:@"isHD"] boolValue] == [showQuality state]) {
-            if (row == 0) {
-                return episode;
-            } else {
-                row--;
-            }
-        }
-    }
-    return nil;
 }
 
 - (BOOL) tableView:(NSTableView *)aTableView shouldSelectRow:(NSInteger)rowIndex
@@ -419,9 +655,10 @@
             
             // This currently only returns a Torrent file and should eventually regex
             // out the actual file extension of the item we're downloading.
-            NSObject *episode = [self getEpisodeAtRow:clickedRow];
+            NSObject *episode = [[episodeArrayController arrangedObjects] objectAtIndex:clickedRow];
             [self startDownloadingURL:[episode valueForKey:@"link"]
-                         withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"] ];
+                         withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
+                          andShowName:[selectedShow valueForKey:@"name"]];
         }
     }
     
@@ -448,23 +685,33 @@
 
 - (IBAction) unsubscribeFromShow:(id)sender
 {
-    id delegateClass = [[[SubscriptionsDelegate class] alloc] init];
-    NSManagedObject *selectedShowObj = [[delegateClass managedObjectContext] objectWithID:[selectedShow objectID]];
+    // Ask for confirmation to the user
+    if (NSRunCriticalAlertPanel([NSString stringWithFormat:TSLocalizeString(@"Are you sure you want to unsubscribe from %@?"),
+                                 [selectedShow valueForKey:@"name"]],
+                                TSLocalizeString(@"This action cannot be undone."),
+                                TSLocalizeString(@"Unsubscribe"),
+                                TSLocalizeString(@"Cancel"),
+                                nil) != NSAlertDefaultReturn) { 
+        return;
+    }
+    
+    NSManagedObject *selectedShowObj = [[subscriptionsDelegate managedObjectContext] objectWithID:[selectedShow objectID]];
     
     // I don't understand why I have to remove the object from both locations
     // but it works so I won't question it.
     [SBArrayController removeObject:selectedShow];
-    [[delegateClass managedObjectContext] deleteObject:selectedShowObj];
+    [[subscriptionsDelegate managedObjectContext] deleteObject:selectedShowObj];
     
     [self closeShowInfoWindow:(id)sender];
     
-    [delegateClass saveAction];
-    [delegateClass release];
+    [[subscriptionsDelegate managedObjectContext] processPendingChanges];
+    [subscriptionsDelegate saveAction];
 }
 
 - (void) dealloc
 {
     [selectedShow release];
+    [subscriptionsDelegate release];
     [super dealloc];
 }
 

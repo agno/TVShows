@@ -13,13 +13,18 @@
  */
 
 #import <Cocoa/Cocoa.h>
-
+#import "SubscriptionsDelegate.h"
+#import "PresetShowsDelegate.h"
 
 @interface PresetTorrentsController : NSWindowController
 {
     // Preset Torrents window
     Boolean errorHasOccurred;
     Boolean hasDownloadedList;
+    Boolean isTranslated;
+    SubscriptionsDelegate *subscriptionsDelegate;
+    PresetShowsDelegate *presetsDelegate;
+    
     IBOutlet NSWindow *PTWindow;
     IBOutlet NSTableView *PTTableView;
     IBOutlet NSArrayController *PTArrayController;
@@ -27,11 +32,13 @@
     IBOutlet NSButton *showQuality;
     IBOutlet NSButton *cancelButton;
     IBOutlet NSButton *subscribeButton;
-    IBOutlet NSButton *tvcomButton;
+    IBOutlet NSButton *moreInfoButton;
     IBOutlet NSImageView *showPoster;
     IBOutlet NSTextView *showDescription;
     IBOutlet NSScrollView *descriptionView;
-    IBOutlet NSTextField *ratingsTitle;
+    IBOutlet NSTextField *startFromText;
+    IBOutlet NSButtonCell *nextAiredButton;
+    IBOutlet NSButtonCell *otherEpisodeButton;
     IBOutlet NSTableColumn *colHD;
     IBOutlet NSTableColumn *colName;
     IBOutlet NSTableColumn *colSeason;
@@ -53,12 +60,16 @@
     IBOutlet NSTabView *prefTabView;
 }
 
+@property (retain) SubscriptionsDelegate *subscriptionsDelegate;
+@property (retain) PresetShowsDelegate *presetsDelegate;
+
 #pragma mark -
 #pragma mark Preset Torrents Window
 - (IBAction) displayPresetTorrentsWindow:(id)sender;
 - (IBAction) closePresetTorrentsWindow:(id)sender;
 - (IBAction) showQualityDidChange:(id)sender;
 - (void) sortTorrentShowList;
+- (IBAction) reloadShowList:(id)sender;
 - (void) downloadTorrentShowList;
 - (void) tableViewSelectionDidChange:(NSNotification *)notification;
 - (void) resetShowView;
@@ -66,9 +77,18 @@
 - (void) setUserDefinedShowQuality;
 - (void) showLoadingThrobber;
 - (void) hideLoadingThrobber;
-- (void) setEpisodesForSelectedShow;
-- (void) setDescriptionForSelectedShow;
-- (void) setPosterForSelectedShow;
+- (IBAction) openMoreInfoURL:(id)sender;
+- (IBAction) selectNextAired:(id)sender;
+- (IBAction) selectOtherEpisode:(id)sender;
+
+#pragma mark -
+#pragma mark Background workers
+- (void) setEpisodesForShow:(NSString *)showFeeds;
+- (void) setPosterForShow:(NSArray *)arguments;
+- (void) setDescriptionForShow:(NSArray *)arguments;
+- (void) updateEpisodes:(NSArray *)data;
+- (void) updatePoster:(NSArray *)data;
+- (void) updateDescription:(NSArray *)data;
 
 #pragma mark -
 #pragma mark Error Window Methors
@@ -78,6 +98,7 @@
 #pragma mark -
 #pragma mark Subscription Methods
 - (IBAction) subscribeToShow:(id)sender;
+- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName andShowName:(NSString *)show;
 - (BOOL) userIsSubscribedToShow:(NSString*)showName;
 
 @end
