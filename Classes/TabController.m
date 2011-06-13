@@ -637,9 +637,7 @@
 - (BOOL) tableView:(NSTableView *)aTableView shouldSelectRow:(NSInteger)rowIndex
 {
     // Check to see whether or not this is the GET button or not.
-    // If it's not, then return YES for shouldSelectRow.
-    BOOL result = YES;
-    
+
     // Which column and row was clicked?
     NSInteger clickedCol = [episodeTableView clickedColumn];
     NSInteger clickedRow = [episodeTableView clickedRow];
@@ -650,9 +648,6 @@
         
         // If the cell is an NSButtonCell and it's enabled...
         if ([cell isKindOfClass:[NSButtonCell class]] && [cell isEnabled]) {
-            // Don't select the row
-            result = NO;
-            
             // This currently only returns a Torrent file and should eventually regex
             // out the actual file extension of the item we're downloading.
             NSObject *episode = [[episodeArrayController arrangedObjects] objectAtIndex:clickedRow];
@@ -661,8 +656,9 @@
                           andShowName:[selectedShow valueForKey:@"name"]];
         }
     }
-    
-    return result;
+
+    // Don't select the row
+    return NO;
 }
 
 - (void) sortSubscriptionList
