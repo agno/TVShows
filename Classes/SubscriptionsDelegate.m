@@ -128,6 +128,23 @@
     }
 }
 
+// Refresh the data to reflect any change made by the background process
+- (void) refresh
+{
+    // Delete the data
+    if (managedObjectContext) {
+        [managedObjectContext release];
+        managedObjectContext = nil;
+    }
+    if (persistentStoreCoordinator) {
+        [persistentStoreCoordinator release];
+        persistentStoreCoordinator = nil;
+    }
+    
+    // This forces the reload
+    [self managedObjectContext];
+}
+
 // Implementation of dealloc, to release the retained variables.
 - (void) dealloc
 {

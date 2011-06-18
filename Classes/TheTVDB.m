@@ -60,7 +60,7 @@
     if ([seriesID length] > 0 && ![seriesID isEqualToString:@"0"]) {
         // Now let's grab complete info for the show using our API key.
         // TODO: Grab the correct localization.
-        NSString *seriesURL = [NSString stringWithFormat:@"http://www.thetvdb.com/api/%@/series/%@/en.xml",API_KEY,seriesID];
+        NSString *seriesURL = [NSString stringWithFormat:@"http://www.thetvdb.com/api/%@/series/%@/en.xml",TVDB_API_KEY,seriesID];
         NSString *seriesInfo = [WebsiteFunctions downloadStringFrom:seriesURL];
         
         // Regex fun...
@@ -95,7 +95,7 @@
     if ([seriesID length] > 0 && ![seriesID isEqualToString:@"0"]) {
         // Now let's grab complete info for the show using our API key.
         // TODO: Grab the correct localization.
-        NSString *seriesURL = [NSString stringWithFormat:@"http://www.thetvdb.com/api/%@/series/%@/all/en.xml",API_KEY,seriesID];
+        NSString *seriesURL = [NSString stringWithFormat:@"http://www.thetvdb.com/api/%@/series/%@/all/en.xml",TVDB_API_KEY,seriesID];
         NSString *seriesInfo = [WebsiteFunctions downloadStringFrom:seriesURL];
         
         // Regex fun...

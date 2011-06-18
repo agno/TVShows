@@ -19,11 +19,11 @@
 @interface PresetTorrentsController : NSWindowController
 {
     // Preset Torrents window
-    Boolean errorHasOccurred;
-    Boolean hasDownloadedList;
-    Boolean isTranslated;
-    SubscriptionsDelegate *subscriptionsDelegate;
-    PresetShowsDelegate *presetsDelegate;
+    BOOL errorHasOccurred;
+    BOOL hasDownloadedList;
+    BOOL isTranslated;
+    IBOutlet SubscriptionsDelegate *subscriptionsDelegate;
+    IBOutlet PresetShowsDelegate *presetsDelegate;
     
     IBOutlet NSWindow *PTWindow;
     IBOutlet NSTableView *PTTableView;
@@ -59,9 +59,6 @@
     IBOutlet NSTableView *episodeTableView;
     IBOutlet NSTabView *prefTabView;
 }
-
-@property (retain) SubscriptionsDelegate *subscriptionsDelegate;
-@property (retain) PresetShowsDelegate *presetsDelegate;
 
 #pragma mark -
 #pragma mark Preset Torrents Window

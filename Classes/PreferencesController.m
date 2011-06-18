@@ -69,6 +69,9 @@
     [TSUserDefaults setKey:@"SUEnableAutomaticChecks"   fromBool:YES];
     [TSUserDefaults setKey:@"SUFeedURL"                 fromString:TVShowsAppcastURL];
     [TSUserDefaults setKey:@"SUSendProfileInfo"         fromBool:YES];
+    [TSUserDefaults setKey:@"MisoEnabled"               fromBool:NO];
+    [TSUserDefaults setKey:@"MisoSyncEnabled"           fromBool:YES];
+    [TSUserDefaults setKey:@"MisoCheckInEnabled"        fromBool:NO];
 }
 
 - (void) loadSavedDefaults

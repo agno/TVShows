@@ -107,7 +107,7 @@
     return string;
 }
 
-+ (Boolean) wasThisEpisode:(NSString *)anEpisode airedAfterThisOne:(NSString *)anotherEpisode
++ (BOOL) wasThisEpisode:(NSString *)anEpisode airedAfterThisOne:(NSString *)anotherEpisode
 {
     NSArray *seasonAndEpisodeOne = [self parseSeasonAndEpisode:anEpisode];
     NSArray *seasonAndEpisodeTwo = [self parseSeasonAndEpisode:anotherEpisode];

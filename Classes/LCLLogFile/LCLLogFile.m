@@ -223,8 +223,8 @@ const char * const _LCLLogFile_levelHeader[] = {
         char *path_c = malloc(path_c_max_len);
         char *path0_c = malloc(path0_c_max_len);
         
-        Boolean path_fsr_created = CFStringGetFileSystemRepresentation((CFStringRef)path, path_c, path_c_max_len);
-        Boolean path0_fsr_created = CFStringGetFileSystemRepresentation((CFStringRef)path0, path0_c, path0_c_max_len);
+        BOOL path_fsr_created = CFStringGetFileSystemRepresentation((CFStringRef)path, path_c, path_c_max_len);
+        BOOL path0_fsr_created = CFStringGetFileSystemRepresentation((CFStringRef)path0, path0_c, path0_c_max_len);
         
         // create local copies of the paths
         if (path_fsr_created && path0_fsr_created) {

@@ -117,16 +117,78 @@
 		34FBC69511C0B7CE005D290B /* SUUpdaterSubclass.m in Sources */ = {isa = PBXBuildFile; fileRef = 340F15F9118FEBDE00A1BD00 /* SUUpdaterSubclass.m */; };
 		34FBC69B11C0B804005D290B /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3473845E119074C8003DFFA0 /* Sparkle.framework */; };
 		571C60E3139905320072D921 /* ribbon.png in Resources */ = {isa = PBXBuildFile; fileRef = 571C60E2139905320072D921 /* ribbon.png */; };
+		571D4FA513A9188100EBD5EA /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F7A13A9188100EBD5EA /* Base64Transcoder.c */; };
+		571D4FA613A9188100EBD5EA /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F7A13A9188100EBD5EA /* Base64Transcoder.c */; };
+		571D4FA713A9188100EBD5EA /* MPOAuthAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F7F13A9188100EBD5EA /* MPOAuthAPI.m */; };
+		571D4FA813A9188100EBD5EA /* MPOAuthAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F7F13A9188100EBD5EA /* MPOAuthAPI.m */; };
+		571D4FA913A9188100EBD5EA /* MPOAuthAPIRequestLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F8113A9188100EBD5EA /* MPOAuthAPIRequestLoader.m */; };
+		571D4FAA13A9188100EBD5EA /* MPOAuthAPIRequestLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F8113A9188100EBD5EA /* MPOAuthAPIRequestLoader.m */; };
+		571D4FAB13A9188100EBD5EA /* MPOAuthAuthenticationMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F8313A9188100EBD5EA /* MPOAuthAuthenticationMethod.m */; };
+		571D4FAC13A9188100EBD5EA /* MPOAuthAuthenticationMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F8313A9188100EBD5EA /* MPOAuthAuthenticationMethod.m */; };
+		571D4FAD13A9188100EBD5EA /* MPOAuthAuthenticationMethodAuthExchange.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F8513A9188100EBD5EA /* MPOAuthAuthenticationMethodAuthExchange.m */; };
+		571D4FAE13A9188100EBD5EA /* MPOAuthAuthenticationMethodAuthExchange.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F8513A9188100EBD5EA /* MPOAuthAuthenticationMethodAuthExchange.m */; };
+		571D4FAF13A9188100EBD5EA /* MPOAuthAuthenticationMethodOAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F8713A9188100EBD5EA /* MPOAuthAuthenticationMethodOAuth.m */; };
+		571D4FB013A9188100EBD5EA /* MPOAuthAuthenticationMethodOAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F8713A9188100EBD5EA /* MPOAuthAuthenticationMethodOAuth.m */; };
+		571D4FB113A9188100EBD5EA /* MPOAuthAuthenticationMethodXAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F8913A9188100EBD5EA /* MPOAuthAuthenticationMethodXAuth.m */; };
+		571D4FB213A9188100EBD5EA /* MPOAuthAuthenticationMethodXAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F8913A9188100EBD5EA /* MPOAuthAuthenticationMethodXAuth.m */; };
+		571D4FB313A9188100EBD5EA /* MPOAuthConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F8B13A9188100EBD5EA /* MPOAuthConnection.m */; };
+		571D4FB413A9188100EBD5EA /* MPOAuthConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F8B13A9188100EBD5EA /* MPOAuthConnection.m */; };
+		571D4FB513A9188100EBD5EA /* MPOAuthCredentiaIConcreteStore+KeychainAdditionsMac.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F8C13A9188100EBD5EA /* MPOAuthCredentiaIConcreteStore+KeychainAdditionsMac.m */; };
+		571D4FB613A9188100EBD5EA /* MPOAuthCredentiaIConcreteStore+KeychainAdditionsMac.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F8C13A9188100EBD5EA /* MPOAuthCredentiaIConcreteStore+KeychainAdditionsMac.m */; };
+		571D4FB713A9188100EBD5EA /* MPOAuthCredentialConcreteStore+KeychainAdditionsiPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F8E13A9188100EBD5EA /* MPOAuthCredentialConcreteStore+KeychainAdditionsiPhone.m */; };
+		571D4FB813A9188100EBD5EA /* MPOAuthCredentialConcreteStore+KeychainAdditionsiPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F8E13A9188100EBD5EA /* MPOAuthCredentialConcreteStore+KeychainAdditionsiPhone.m */; };
+		571D4FB913A9188100EBD5EA /* MPOAuthCredentialConcreteStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F9013A9188100EBD5EA /* MPOAuthCredentialConcreteStore.m */; };
+		571D4FBA13A9188100EBD5EA /* MPOAuthCredentialConcreteStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F9013A9188100EBD5EA /* MPOAuthCredentialConcreteStore.m */; };
+		571D4FBB13A9188100EBD5EA /* MPOAuthSignatureParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F9413A9188100EBD5EA /* MPOAuthSignatureParameter.m */; };
+		571D4FBC13A9188100EBD5EA /* MPOAuthSignatureParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F9413A9188100EBD5EA /* MPOAuthSignatureParameter.m */; };
+		571D4FBD13A9188100EBD5EA /* MPOAuthURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F9613A9188100EBD5EA /* MPOAuthURLRequest.m */; };
+		571D4FBE13A9188100EBD5EA /* MPOAuthURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F9613A9188100EBD5EA /* MPOAuthURLRequest.m */; };
+		571D4FBF13A9188100EBD5EA /* MPOAuthURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F9813A9188100EBD5EA /* MPOAuthURLResponse.m */; };
+		571D4FC013A9188100EBD5EA /* MPOAuthURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F9813A9188100EBD5EA /* MPOAuthURLResponse.m */; };
+		571D4FC113A9188100EBD5EA /* MPURLRequestParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F9A13A9188100EBD5EA /* MPURLRequestParameter.m */; };
+		571D4FC213A9188100EBD5EA /* MPURLRequestParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F9A13A9188100EBD5EA /* MPURLRequestParameter.m */; };
+		571D4FC313A9188100EBD5EA /* MPWSLRDDiscoverer.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F9C13A9188100EBD5EA /* MPWSLRDDiscoverer.m */; };
+		571D4FC413A9188100EBD5EA /* MPWSLRDDiscoverer.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F9C13A9188100EBD5EA /* MPWSLRDDiscoverer.m */; };
+		571D4FC513A9188100EBD5EA /* MPWSXRDDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F9E13A9188100EBD5EA /* MPWSXRDDocument.m */; };
+		571D4FC613A9188100EBD5EA /* MPWSXRDDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4F9E13A9188100EBD5EA /* MPWSXRDDocument.m */; };
+		571D4FC713A9188100EBD5EA /* NSString+URLEscapingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4FA013A9188100EBD5EA /* NSString+URLEscapingAdditions.m */; };
+		571D4FC813A9188100EBD5EA /* NSString+URLEscapingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4FA013A9188100EBD5EA /* NSString+URLEscapingAdditions.m */; };
+		571D4FC913A9188100EBD5EA /* NSURL+MPURLParameterAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4FA213A9188100EBD5EA /* NSURL+MPURLParameterAdditions.m */; };
+		571D4FCA13A9188100EBD5EA /* NSURL+MPURLParameterAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4FA213A9188100EBD5EA /* NSURL+MPURLParameterAdditions.m */; };
+		571D4FCB13A9188100EBD5EA /* NSURLResponse+Encoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4FA413A9188100EBD5EA /* NSURLResponse+Encoding.m */; };
+		571D4FCC13A9188100EBD5EA /* NSURLResponse+Encoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D4FA413A9188100EBD5EA /* NSURLResponse+Encoding.m */; };
+		571D4FCD13A91DD200EBD5EA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 571D4E4713A90A8D00EBD5EA /* Security.framework */; };
+		571D4FCE13A91DD500EBD5EA /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 571D4E4513A90A7900EBD5EA /* libxml2.dylib */; };
+		571D4FCF13A91DDE00EBD5EA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 571D4E4713A90A8D00EBD5EA /* Security.framework */; };
+		571D4FD013A91DE100EBD5EA /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 571D4E4513A90A7900EBD5EA /* libxml2.dylib */; };
 		573ABCC813734E9B0018F6F3 /* TorrentzParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 573ABCC713734E9B0018F6F3 /* TorrentzParser.m */; };
 		5755750F136DC9E5006D1FC9 /* TVShows-Menu-Icon-White.png in Resources */ = {isa = PBXBuildFile; fileRef = 5755750D136DC9E5006D1FC9 /* TVShows-Menu-Icon-White.png */; };
 		57557510136DC9E5006D1FC9 /* TVShows-Menu-Icon-Black.png in Resources */ = {isa = PBXBuildFile; fileRef = 5755750E136DC9E5006D1FC9 /* TVShows-Menu-Icon-Black.png */; };
 		575C0D59136A487A005DE73D /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = 575C0D58136A487A005DE73D /* VERSION */; };
 		575C0D5A136A487A005DE73D /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = 575C0D58136A487A005DE73D /* VERSION */; };
+		577322A613ACC608002F0926 /* PresetShowsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 347F1E6711AA090D005A40AA /* PresetShowsDelegate.m */; };
 		578A8B9E137048E500786FB8 /* TVShows-Beta-Large.icns in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE031183590500D24FC9 /* TVShows-Beta-Large.icns */; };
+		5791A5F013A925890038A638 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5791A5E713A925890038A638 /* NSObject+SBJSON.m */; };
+		5791A5F113A925890038A638 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5791A5E713A925890038A638 /* NSObject+SBJSON.m */; };
+		5791A5F213A925890038A638 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5791A5E913A925890038A638 /* NSString+SBJSON.m */; };
+		5791A5F313A925890038A638 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5791A5E913A925890038A638 /* NSString+SBJSON.m */; };
+		5791A5F413A925890038A638 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 5791A5EB13A925890038A638 /* SBJsonBase.m */; };
+		5791A5F513A925890038A638 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 5791A5EB13A925890038A638 /* SBJsonBase.m */; };
+		5791A5F613A925890038A638 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5791A5ED13A925890038A638 /* SBJsonParser.m */; };
+		5791A5F713A925890038A638 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5791A5ED13A925890038A638 /* SBJsonParser.m */; };
+		5791A5F813A925890038A638 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5791A5EF13A925890038A638 /* SBJsonWriter.m */; };
+		5791A5F913A925890038A638 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5791A5EF13A925890038A638 /* SBJsonWriter.m */; };
+		5791A5FD13A926D80038A638 /* Miso.m in Sources */ = {isa = PBXBuildFile; fileRef = 5791A5FC13A926D80038A638 /* Miso.m */; };
+		5791A5FE13A926D80038A638 /* Miso.m in Sources */ = {isa = PBXBuildFile; fileRef = 5791A5FC13A926D80038A638 /* Miso.m */; };
+		5791A5FF13A92A720038A638 /* oauthAutoConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 571D4F7613A914BA00EBD5EA /* oauthAutoConfig.plist */; };
+		5791A60013A92A790038A638 /* oauthAutoConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 571D4F7613A914BA00EBD5EA /* oauthAutoConfig.plist */; };
+		579CAD5213AB8216006743B4 /* MisoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 579CAD5113AB8216006743B4 /* MisoController.m */; };
+		579CAD5813AB9234006743B4 /* Miso-Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 579CAD5713AB9234006743B4 /* Miso-Logo.png */; };
 		57A82B1113953A3600E71F7F /* NSXMLNode-utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A82B1013953A3500E71F7F /* NSXMLNode-utils.m */; };
 		57C712BF139811F60045361A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57C712BE139811F50045361A /* QuartzCore.framework */; };
 		57D41B921370AFF100AB0048 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3424AF1F11EF6432009C49DD /* Localizable.strings */; };
 		57F33F891376FE4C00270A75 /* TorrentzParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 573ABCC713734E9B0018F6F3 /* TorrentzParser.m */; };
+		57FDFEBB13A94E310019EDB6 /* TheTVDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 347B35D51210DB6000F4BFF0 /* TheTVDB.m */; };
 		8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F506C035013D953901CA16C8 /* PreferencePanes.framework */; };
 /* End PBXBuildFile section */
@@ -336,18 +398,80 @@
 		34F6EA39119BCAD100F8AD4C /* TVShows_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShows_Prefix.pch; sourceTree = "<group>"; };
 		34F6EA64119BCBA200F8AD4C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34FBC5E111C0B3C2005D290B /* TVShowsHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShowsHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		34FBC5E311C0B3C2005D290B /* TVShowsHelper-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TVShowsHelper-Info.plist"; sourceTree = "<group>"; };
 		34FBC62D11C0B567005D290B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		571C60E2139905320072D921 /* ribbon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ribbon.png; sourceTree = "<group>"; };
+		571D4E4513A90A7900EBD5EA /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		571D4E4713A90A8D00EBD5EA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		571D4F7613A914BA00EBD5EA /* oauthAutoConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = oauthAutoConfig.plist; path = Resources/oauthAutoConfig.plist; sourceTree = "<group>"; };
+		571D4F7A13A9188100EBD5EA /* Base64Transcoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Base64Transcoder.c; sourceTree = "<group>"; };
+		571D4F7B13A9188100EBD5EA /* Base64Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Transcoder.h; sourceTree = "<group>"; };
+		571D4F7C13A9188100EBD5EA /* MPDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPDebug.h; sourceTree = "<group>"; };
+		571D4F7D13A9188100EBD5EA /* MPOAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuth.h; sourceTree = "<group>"; };
+		571D4F7E13A9188100EBD5EA /* MPOAuthAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthAPI.h; sourceTree = "<group>"; };
+		571D4F7F13A9188100EBD5EA /* MPOAuthAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthAPI.m; sourceTree = "<group>"; };
+		571D4F8013A9188100EBD5EA /* MPOAuthAPIRequestLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthAPIRequestLoader.h; sourceTree = "<group>"; };
+		571D4F8113A9188100EBD5EA /* MPOAuthAPIRequestLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthAPIRequestLoader.m; sourceTree = "<group>"; };
+		571D4F8213A9188100EBD5EA /* MPOAuthAuthenticationMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthAuthenticationMethod.h; sourceTree = "<group>"; };
+		571D4F8313A9188100EBD5EA /* MPOAuthAuthenticationMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthAuthenticationMethod.m; sourceTree = "<group>"; };
+		571D4F8413A9188100EBD5EA /* MPOAuthAuthenticationMethodAuthExchange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthAuthenticationMethodAuthExchange.h; sourceTree = "<group>"; };
+		571D4F8513A9188100EBD5EA /* MPOAuthAuthenticationMethodAuthExchange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthAuthenticationMethodAuthExchange.m; sourceTree = "<group>"; };
+		571D4F8613A9188100EBD5EA /* MPOAuthAuthenticationMethodOAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthAuthenticationMethodOAuth.h; sourceTree = "<group>"; };
+		571D4F8713A9188100EBD5EA /* MPOAuthAuthenticationMethodOAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthAuthenticationMethodOAuth.m; sourceTree = "<group>"; };
+		571D4F8813A9188100EBD5EA /* MPOAuthAuthenticationMethodXAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthAuthenticationMethodXAuth.h; sourceTree = "<group>"; };
+		571D4F8913A9188100EBD5EA /* MPOAuthAuthenticationMethodXAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthAuthenticationMethodXAuth.m; sourceTree = "<group>"; };
+		571D4F8A13A9188100EBD5EA /* MPOAuthConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthConnection.h; sourceTree = "<group>"; };
+		571D4F8B13A9188100EBD5EA /* MPOAuthConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthConnection.m; sourceTree = "<group>"; };
+		571D4F8C13A9188100EBD5EA /* MPOAuthCredentiaIConcreteStore+KeychainAdditionsMac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MPOAuthCredentiaIConcreteStore+KeychainAdditionsMac.m"; sourceTree = "<group>"; };
+		571D4F8D13A9188100EBD5EA /* MPOAuthCredentialConcreteStore+KeychainAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MPOAuthCredentialConcreteStore+KeychainAdditions.h"; sourceTree = "<group>"; };
+		571D4F8E13A9188100EBD5EA /* MPOAuthCredentialConcreteStore+KeychainAdditionsiPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MPOAuthCredentialConcreteStore+KeychainAdditionsiPhone.m"; sourceTree = "<group>"; };
+		571D4F8F13A9188100EBD5EA /* MPOAuthCredentialConcreteStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthCredentialConcreteStore.h; sourceTree = "<group>"; };
+		571D4F9013A9188100EBD5EA /* MPOAuthCredentialConcreteStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthCredentialConcreteStore.m; sourceTree = "<group>"; };
+		571D4F9113A9188100EBD5EA /* MPOAuthCredentialStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthCredentialStore.h; sourceTree = "<group>"; };
+		571D4F9213A9188100EBD5EA /* MPOAuthParameterFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthParameterFactory.h; sourceTree = "<group>"; };
+		571D4F9313A9188100EBD5EA /* MPOAuthSignatureParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthSignatureParameter.h; sourceTree = "<group>"; };
+		571D4F9413A9188100EBD5EA /* MPOAuthSignatureParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthSignatureParameter.m; sourceTree = "<group>"; };
+		571D4F9513A9188100EBD5EA /* MPOAuthURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthURLRequest.h; sourceTree = "<group>"; };
+		571D4F9613A9188100EBD5EA /* MPOAuthURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthURLRequest.m; sourceTree = "<group>"; };
+		571D4F9713A9188100EBD5EA /* MPOAuthURLResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthURLResponse.h; sourceTree = "<group>"; };
+		571D4F9813A9188100EBD5EA /* MPOAuthURLResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthURLResponse.m; sourceTree = "<group>"; };
+		571D4F9913A9188100EBD5EA /* MPURLRequestParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPURLRequestParameter.h; sourceTree = "<group>"; };
+		571D4F9A13A9188100EBD5EA /* MPURLRequestParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPURLRequestParameter.m; sourceTree = "<group>"; };
+		571D4F9B13A9188100EBD5EA /* MPWSLRDDiscoverer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWSLRDDiscoverer.h; sourceTree = "<group>"; };
+		571D4F9C13A9188100EBD5EA /* MPWSLRDDiscoverer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWSLRDDiscoverer.m; sourceTree = "<group>"; };
+		571D4F9D13A9188100EBD5EA /* MPWSXRDDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWSXRDDocument.h; sourceTree = "<group>"; };
+		571D4F9E13A9188100EBD5EA /* MPWSXRDDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWSXRDDocument.m; sourceTree = "<group>"; };
+		571D4F9F13A9188100EBD5EA /* NSString+URLEscapingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEscapingAdditions.h"; sourceTree = "<group>"; };
+		571D4FA013A9188100EBD5EA /* NSString+URLEscapingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEscapingAdditions.m"; sourceTree = "<group>"; };
+		571D4FA113A9188100EBD5EA /* NSURL+MPURLParameterAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+MPURLParameterAdditions.h"; sourceTree = "<group>"; };
+		571D4FA213A9188100EBD5EA /* NSURL+MPURLParameterAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+MPURLParameterAdditions.m"; sourceTree = "<group>"; };
+		571D4FA313A9188100EBD5EA /* NSURLResponse+Encoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLResponse+Encoding.h"; sourceTree = "<group>"; };
+		571D4FA413A9188100EBD5EA /* NSURLResponse+Encoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLResponse+Encoding.m"; sourceTree = "<group>"; };
 		573ABCC613734E9B0018F6F3 /* TorrentzParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TorrentzParser.h; path = TorrentzParser/TorrentzParser.h; sourceTree = "<group>"; };
 		573ABCC713734E9B0018F6F3 /* TorrentzParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TorrentzParser.m; path = TorrentzParser/TorrentzParser.m; sourceTree = "<group>"; };
 		5755750D136DC9E5006D1FC9 /* TVShows-Menu-Icon-White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TVShows-Menu-Icon-White.png"; sourceTree = "<group>"; };
 		5755750E136DC9E5006D1FC9 /* TVShows-Menu-Icon-Black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TVShows-Menu-Icon-Black.png"; sourceTree = "<group>"; };
 		575C0D58136A487A005DE73D /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
+		5791A5E513A925890038A638 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		5791A5E613A925890038A638 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		5791A5E713A925890038A638 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
+		5791A5E813A925890038A638 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		5791A5E913A925890038A638 /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
+		5791A5EA13A925890038A638 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		5791A5EB13A925890038A638 /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
+		5791A5EC13A925890038A638 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		5791A5ED13A925890038A638 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		5791A5EE13A925890038A638 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		5791A5EF13A925890038A638 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		5791A5FB13A926D80038A638 /* Miso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Miso.h; sourceTree = "<group>"; };
+		5791A5FC13A926D80038A638 /* Miso.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Miso.m; sourceTree = "<group>"; };
 		5793D8161369560000BFF6B0 /* gl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = gl; path = Resources/gl.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		5793D8171369560000BFF6B0 /* gl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = gl; path = Resources/gl.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		5793D8181369569F00BFF6B0 /* el */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = el; path = Resources/el.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		5793D8191369569F00BFF6B0 /* el */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = el; path = Resources/el.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		579CAD5013AB8216006743B4 /* MisoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MisoController.h; sourceTree = "<group>"; };
+		579CAD5113AB8216006743B4 /* MisoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MisoController.m; sourceTree = "<group>"; };
+		579CAD5413AB8471006743B4 /* AppSecretConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSecretConstants.h; sourceTree = "<group>"; };
+		579CAD5713AB9234006743B4 /* Miso-Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Miso-Logo.png"; sourceTree = "<group>"; };
 		57A82B0F13953A3500E71F7F /* NSXMLNode-utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSXMLNode-utils.h"; sourceTree = "<group>"; };
 		57A82B1013953A3500E71F7F /* NSXMLNode-utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSXMLNode-utils.m"; sourceTree = "<group>"; };
 		57C712BE139811F50045361A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -380,6 +504,8 @@
 				34FBC60D11C0B4D6005D290B /* SystemConfiguration.framework in Frameworks */,
 				34FBC61F11C0B526005D290B /* libicucore.dylib in Frameworks */,
 				3452AB2911DADEFB000C3AA7 /* Growl.framework in Frameworks */,
+				571D4FCF13A91DDE00EBD5EA /* Security.framework in Frameworks */,
+				571D4FD013A91DE100EBD5EA /* libxml2.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +521,8 @@
 				347AFBD91191207300393565 /* SystemConfiguration.framework in Frameworks */,
 				34A91884119E2C85004B339D /* libicucore.dylib in Frameworks */,
 				345CE34F11D9712200C03A9F /* WebKit.framework in Frameworks */,
+				571D4FCD13A91DD200EBD5EA /* Security.framework in Frameworks */,
+				571D4FCE13A91DD500EBD5EA /* libxml2.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,7 +539,6 @@
 				089C167CFE841241C02AAC07 /* Resources */,
 				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
-				34FBC5E311C0B3C2005D290B /* TVShowsHelper-Info.plist */,
 			);
 			name = TVShows;
 			sourceTree = "<group>";
@@ -433,6 +560,7 @@
 				34EA89D411E64370005C031A /* Localizations */,
 				34F6EA64119BCBA200F8AD4C /* Info.plist */,
 				3446726511C157B60014C522 /* TVShowsHelper-Info.plist */,
+				571D4F7613A914BA00EBD5EA /* oauthAutoConfig.plist */,
 				344971561330671700D24D68 /* Uninstaller.app */,
 				34785D04119B9CE200A28449 /* Credits.rtf */,
 				3424120C11DC023600BC0742 /* Growl Registration Ticket.growlRegDict */,
@@ -446,6 +574,8 @@
 		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				571D4E4713A90A8D00EBD5EA /* Security.framework */,
+				571D4E4513A90A7900EBD5EA /* libxml2.dylib */,
 				57C712BE139811F50045361A /* QuartzCore.framework */,
 				3452AB2711DADEFB000C3AA7 /* Growl.framework */,
 				3473845E119074C8003DFFA0 /* Sparkle.framework */,
@@ -611,6 +741,8 @@
 				34D8D1C111AB5C63006382C3 /* CustomRSSController.m */,
 				349FEEBF11835A1C00D24FC9 /* TabController.h */,
 				349FEEC011835A1C00D24FC9 /* TabController.m */,
+				579CAD5013AB8216006743B4 /* MisoController.h */,
+				579CAD5113AB8216006743B4 /* MisoController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -618,6 +750,7 @@
 		347F1E7911AA0E54005A40AA /* External Classes */ = {
 			isa = PBXGroup;
 			children = (
+				5791A5FA13A926D80038A638 /* Miso */,
 				573ABCC513734E5C0018F6F3 /* TorrentzParser */,
 				347B35CC1210D80400F4BFF0 /* The TVDB */,
 				342A5427132D4C9500FB526F /* BWToolkit */,
@@ -627,6 +760,8 @@
 				344A6367133307970076FC2F /* LCLLogFile */,
 				344A203F11F5470B00026735 /* MBSliderButton */,
 				34A91891119E2F83004B339D /* RegexKitLite */,
+				5791A5E413A925890038A638 /* JSON */,
+				571D4F7813A9188100EBD5EA /* MPOAuth */,
 			);
 			name = "External Classes";
 			path = Classes;
@@ -695,6 +830,7 @@
 		349FEE021183590500D24FC9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				579CAD5713AB9234006743B4 /* Miso-Logo.png */,
 				342FEC8411E1864000E21FC0 /* hd.png */,
 				34B6914011D9F1A9001E2518 /* get.png */,
 				340A20B011AF0E15004351EB /* posterArtPlaceholder.jpg */,
@@ -722,6 +858,7 @@
 				34E6242811DAAA74007E7854 /* Helper Classes */,
 				3444F29011DD13F700BF3724 /* Subclasses */,
 				3422ECD3118B3C130061E2E2 /* AppInfoConstants.h */,
+				579CAD5413AB8471006743B4 /* AppSecretConstants.h */,
 				3446722711C155690014C522 /* TVShowsHelper.h */,
 				3446722811C155690014C522 /* TVShowsHelper.m */,
 				349FEE151183597500D24FC9 /* TVShowsPref.h */,
@@ -768,6 +905,64 @@
 			name = Localizations;
 			sourceTree = "<group>";
 		};
+		571D4F7813A9188100EBD5EA /* MPOAuth */ = {
+			isa = PBXGroup;
+			children = (
+				571D4F7913A9188100EBD5EA /* Crypto */,
+				571D4F7C13A9188100EBD5EA /* MPDebug.h */,
+				571D4F7D13A9188100EBD5EA /* MPOAuth.h */,
+				571D4F7E13A9188100EBD5EA /* MPOAuthAPI.h */,
+				571D4F7F13A9188100EBD5EA /* MPOAuthAPI.m */,
+				571D4F8013A9188100EBD5EA /* MPOAuthAPIRequestLoader.h */,
+				571D4F8113A9188100EBD5EA /* MPOAuthAPIRequestLoader.m */,
+				571D4F8213A9188100EBD5EA /* MPOAuthAuthenticationMethod.h */,
+				571D4F8313A9188100EBD5EA /* MPOAuthAuthenticationMethod.m */,
+				571D4F8413A9188100EBD5EA /* MPOAuthAuthenticationMethodAuthExchange.h */,
+				571D4F8513A9188100EBD5EA /* MPOAuthAuthenticationMethodAuthExchange.m */,
+				571D4F8613A9188100EBD5EA /* MPOAuthAuthenticationMethodOAuth.h */,
+				571D4F8713A9188100EBD5EA /* MPOAuthAuthenticationMethodOAuth.m */,
+				571D4F8813A9188100EBD5EA /* MPOAuthAuthenticationMethodXAuth.h */,
+				571D4F8913A9188100EBD5EA /* MPOAuthAuthenticationMethodXAuth.m */,
+				571D4F8A13A9188100EBD5EA /* MPOAuthConnection.h */,
+				571D4F8B13A9188100EBD5EA /* MPOAuthConnection.m */,
+				571D4F8C13A9188100EBD5EA /* MPOAuthCredentiaIConcreteStore+KeychainAdditionsMac.m */,
+				571D4F8D13A9188100EBD5EA /* MPOAuthCredentialConcreteStore+KeychainAdditions.h */,
+				571D4F8E13A9188100EBD5EA /* MPOAuthCredentialConcreteStore+KeychainAdditionsiPhone.m */,
+				571D4F8F13A9188100EBD5EA /* MPOAuthCredentialConcreteStore.h */,
+				571D4F9013A9188100EBD5EA /* MPOAuthCredentialConcreteStore.m */,
+				571D4F9113A9188100EBD5EA /* MPOAuthCredentialStore.h */,
+				571D4F9213A9188100EBD5EA /* MPOAuthParameterFactory.h */,
+				571D4F9313A9188100EBD5EA /* MPOAuthSignatureParameter.h */,
+				571D4F9413A9188100EBD5EA /* MPOAuthSignatureParameter.m */,
+				571D4F9513A9188100EBD5EA /* MPOAuthURLRequest.h */,
+				571D4F9613A9188100EBD5EA /* MPOAuthURLRequest.m */,
+				571D4F9713A9188100EBD5EA /* MPOAuthURLResponse.h */,
+				571D4F9813A9188100EBD5EA /* MPOAuthURLResponse.m */,
+				571D4F9913A9188100EBD5EA /* MPURLRequestParameter.h */,
+				571D4F9A13A9188100EBD5EA /* MPURLRequestParameter.m */,
+				571D4F9B13A9188100EBD5EA /* MPWSLRDDiscoverer.h */,
+				571D4F9C13A9188100EBD5EA /* MPWSLRDDiscoverer.m */,
+				571D4F9D13A9188100EBD5EA /* MPWSXRDDocument.h */,
+				571D4F9E13A9188100EBD5EA /* MPWSXRDDocument.m */,
+				571D4F9F13A9188100EBD5EA /* NSString+URLEscapingAdditions.h */,
+				571D4FA013A9188100EBD5EA /* NSString+URLEscapingAdditions.m */,
+				571D4FA113A9188100EBD5EA /* NSURL+MPURLParameterAdditions.h */,
+				571D4FA213A9188100EBD5EA /* NSURL+MPURLParameterAdditions.m */,
+				571D4FA313A9188100EBD5EA /* NSURLResponse+Encoding.h */,
+				571D4FA413A9188100EBD5EA /* NSURLResponse+Encoding.m */,
+			);
+			path = MPOAuth;
+			sourceTree = "<group>";
+		};
+		571D4F7913A9188100EBD5EA /* Crypto */ = {
+			isa = PBXGroup;
+			children = (
+				571D4F7A13A9188100EBD5EA /* Base64Transcoder.c */,
+				571D4F7B13A9188100EBD5EA /* Base64Transcoder.h */,
+			);
+			path = Crypto;
+			sourceTree = "<group>";
+		};
 		573ABCC513734E5C0018F6F3 /* TorrentzParser */ = {
 			isa = PBXGroup;
 			children = (
@@ -775,6 +970,33 @@
 				573ABCC713734E9B0018F6F3 /* TorrentzParser.m */,
 			);
 			name = TorrentzParser;
+			sourceTree = "<group>";
+		};
+		5791A5E413A925890038A638 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				5791A5E513A925890038A638 /* JSON.h */,
+				5791A5E613A925890038A638 /* NSObject+SBJSON.h */,
+				5791A5E713A925890038A638 /* NSObject+SBJSON.m */,
+				5791A5E813A925890038A638 /* NSString+SBJSON.h */,
+				5791A5E913A925890038A638 /* NSString+SBJSON.m */,
+				5791A5EA13A925890038A638 /* SBJsonBase.h */,
+				5791A5EB13A925890038A638 /* SBJsonBase.m */,
+				5791A5EC13A925890038A638 /* SBJsonParser.h */,
+				5791A5ED13A925890038A638 /* SBJsonParser.m */,
+				5791A5EE13A925890038A638 /* SBJsonWriter.h */,
+				5791A5EF13A925890038A638 /* SBJsonWriter.m */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		5791A5FA13A926D80038A638 /* Miso */ = {
+			isa = PBXGroup;
+			children = (
+				5791A5FB13A926D80038A638 /* Miso.h */,
+				5791A5FC13A926D80038A638 /* Miso.m */,
+			);
+			path = Miso;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -901,6 +1123,7 @@
 				57557510136DC9E5006D1FC9 /* TVShows-Menu-Icon-Black.png in Resources */,
 				578A8B9E137048E500786FB8 /* TVShows-Beta-Large.icns in Resources */,
 				57D41B921370AFF100AB0048 /* Localizable.strings in Resources */,
+				5791A5FF13A92A720038A638 /* oauthAutoConfig.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -931,6 +1154,8 @@
 				344971571330671700D24D68 /* Uninstaller.app in Resources */,
 				575C0D59136A487A005DE73D /* VERSION in Resources */,
 				571C60E3139905320072D921 /* ribbon.png in Resources */,
+				5791A60013A92A790038A638 /* oauthAutoConfig.plist in Resources */,
+				579CAD5813AB9234006743B4 /* Miso-Logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1008,6 +1233,34 @@
 				345EC8DB13235DA400F36BFF /* Subscriptions.xcdatamodel in Sources */,
 				3493F1151335B0F800467073 /* LCLLogFile.m in Sources */,
 				573ABCC813734E9B0018F6F3 /* TorrentzParser.m in Sources */,
+				571D4FA613A9188100EBD5EA /* Base64Transcoder.c in Sources */,
+				571D4FA813A9188100EBD5EA /* MPOAuthAPI.m in Sources */,
+				571D4FAA13A9188100EBD5EA /* MPOAuthAPIRequestLoader.m in Sources */,
+				571D4FAC13A9188100EBD5EA /* MPOAuthAuthenticationMethod.m in Sources */,
+				571D4FAE13A9188100EBD5EA /* MPOAuthAuthenticationMethodAuthExchange.m in Sources */,
+				571D4FB013A9188100EBD5EA /* MPOAuthAuthenticationMethodOAuth.m in Sources */,
+				571D4FB213A9188100EBD5EA /* MPOAuthAuthenticationMethodXAuth.m in Sources */,
+				571D4FB413A9188100EBD5EA /* MPOAuthConnection.m in Sources */,
+				571D4FB613A9188100EBD5EA /* MPOAuthCredentiaIConcreteStore+KeychainAdditionsMac.m in Sources */,
+				571D4FB813A9188100EBD5EA /* MPOAuthCredentialConcreteStore+KeychainAdditionsiPhone.m in Sources */,
+				571D4FBA13A9188100EBD5EA /* MPOAuthCredentialConcreteStore.m in Sources */,
+				571D4FBC13A9188100EBD5EA /* MPOAuthSignatureParameter.m in Sources */,
+				571D4FBE13A9188100EBD5EA /* MPOAuthURLRequest.m in Sources */,
+				571D4FC013A9188100EBD5EA /* MPOAuthURLResponse.m in Sources */,
+				571D4FC213A9188100EBD5EA /* MPURLRequestParameter.m in Sources */,
+				571D4FC413A9188100EBD5EA /* MPWSLRDDiscoverer.m in Sources */,
+				571D4FC613A9188100EBD5EA /* MPWSXRDDocument.m in Sources */,
+				571D4FC813A9188100EBD5EA /* NSString+URLEscapingAdditions.m in Sources */,
+				571D4FCA13A9188100EBD5EA /* NSURL+MPURLParameterAdditions.m in Sources */,
+				571D4FCC13A9188100EBD5EA /* NSURLResponse+Encoding.m in Sources */,
+				5791A5F113A925890038A638 /* NSObject+SBJSON.m in Sources */,
+				5791A5F313A925890038A638 /* NSString+SBJSON.m in Sources */,
+				5791A5F513A925890038A638 /* SBJsonBase.m in Sources */,
+				5791A5F713A925890038A638 /* SBJsonParser.m in Sources */,
+				5791A5F913A925890038A638 /* SBJsonWriter.m in Sources */,
+				5791A5FE13A926D80038A638 /* Miso.m in Sources */,
+				57FDFEBB13A94E310019EDB6 /* TheTVDB.m in Sources */,
+				577322A613ACC608002F0926 /* PresetShowsDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1060,6 +1313,33 @@
 				3493F1141335B0F800467073 /* LCLLogFile.m in Sources */,
 				57F33F891376FE4C00270A75 /* TorrentzParser.m in Sources */,
 				57A82B1113953A3600E71F7F /* NSXMLNode-utils.m in Sources */,
+				571D4FA513A9188100EBD5EA /* Base64Transcoder.c in Sources */,
+				571D4FA713A9188100EBD5EA /* MPOAuthAPI.m in Sources */,
+				571D4FA913A9188100EBD5EA /* MPOAuthAPIRequestLoader.m in Sources */,
+				571D4FAB13A9188100EBD5EA /* MPOAuthAuthenticationMethod.m in Sources */,
+				571D4FAD13A9188100EBD5EA /* MPOAuthAuthenticationMethodAuthExchange.m in Sources */,
+				571D4FAF13A9188100EBD5EA /* MPOAuthAuthenticationMethodOAuth.m in Sources */,
+				571D4FB113A9188100EBD5EA /* MPOAuthAuthenticationMethodXAuth.m in Sources */,
+				571D4FB313A9188100EBD5EA /* MPOAuthConnection.m in Sources */,
+				571D4FB513A9188100EBD5EA /* MPOAuthCredentiaIConcreteStore+KeychainAdditionsMac.m in Sources */,
+				571D4FB713A9188100EBD5EA /* MPOAuthCredentialConcreteStore+KeychainAdditionsiPhone.m in Sources */,
+				571D4FB913A9188100EBD5EA /* MPOAuthCredentialConcreteStore.m in Sources */,
+				571D4FBB13A9188100EBD5EA /* MPOAuthSignatureParameter.m in Sources */,
+				571D4FBD13A9188100EBD5EA /* MPOAuthURLRequest.m in Sources */,
+				571D4FBF13A9188100EBD5EA /* MPOAuthURLResponse.m in Sources */,
+				571D4FC113A9188100EBD5EA /* MPURLRequestParameter.m in Sources */,
+				571D4FC313A9188100EBD5EA /* MPWSLRDDiscoverer.m in Sources */,
+				571D4FC513A9188100EBD5EA /* MPWSXRDDocument.m in Sources */,
+				571D4FC713A9188100EBD5EA /* NSString+URLEscapingAdditions.m in Sources */,
+				571D4FC913A9188100EBD5EA /* NSURL+MPURLParameterAdditions.m in Sources */,
+				571D4FCB13A9188100EBD5EA /* NSURLResponse+Encoding.m in Sources */,
+				5791A5F013A925890038A638 /* NSObject+SBJSON.m in Sources */,
+				5791A5F213A925890038A638 /* NSString+SBJSON.m in Sources */,
+				5791A5F413A925890038A638 /* SBJsonBase.m in Sources */,
+				5791A5F613A925890038A638 /* SBJsonParser.m in Sources */,
+				5791A5F813A925890038A638 /* SBJsonWriter.m in Sources */,
+				5791A5FD13A926D80038A638 /* Miso.m in Sources */,
+				579CAD5213AB8216006743B4 /* MisoController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1184,6 +1464,7 @@
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1207,8 +1488,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/Frameworks\"",
 				);
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TVShows_Prefix.pch;
@@ -1224,50 +1507,58 @@
 		1DBD214D08BA80EA00186707 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = (
 					"$(ARCHS_STANDARD_32_64_BIT)",
 					ppc,
 				);
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = /;
-				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch *.xcode* (*) CVS .svn .git";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_GC = supported;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_VERSION = 4.2;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INSTALL_PATH = $HOME/Library/PreferencePanes;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-lstdc++";
 				PREBINDING = NO;
 				PRODUCT_NAME = "";
 				SDKROOT = macosx10.5;
 				VALID_ARCHS = "i386 ppc x86_64";
+				ZERO_LINK = NO;
 			};
 			name = Debug;
 		};
 		1DBD214E08BA80EA00186707 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = (
 					"$(ARCHS_STANDARD_32_64_BIT)",
 					ppc,
 				);
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_GC = supported;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_VERSION = 4.2;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				OTHER_CFLAGS = "";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				OTHER_LDFLAGS = "-lstdc++";
 				PREBINDING = NO;
 				PRODUCT_NAME = "";
 				SDKROOT = macosx10.5;
 				VALID_ARCHS = "i386 ppc x86_64";
+				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -1362,6 +1653,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/Frameworks\"",
 				);
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;

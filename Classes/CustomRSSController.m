@@ -28,7 +28,7 @@
 
 @implementation CustomRSSController
 
-@synthesize selectedShow, subscriptionsDelegate;
+@synthesize selectedShow;
 
 - init
 {
@@ -36,7 +36,6 @@
         isTranslated = NO;
         selectedShow = nil;
         filterRules = DEFAULT_PREDICATE;
-        subscriptionsDelegate = [[SubscriptionsDelegate alloc] init];
     }
     
     return self;
@@ -327,8 +326,8 @@
     // Close the modal dialog box
     [self closeCustomRSSWindow:(id)sender];
     
-    // To force the view to sort the new subscription
-    [SBArrayController setUsesLazyFetching:NO];
+    // Reload the data (it may have changed)
+    [subscriptionsDelegate refresh];
     
     // Calculate the sort name, i.e. remove "The"
     NSString *sortName = [[nameValue stringValue] stringByReplacingOccurrencesOfRegex:@"^The[[:space:]]"
@@ -339,44 +338,31 @@
                                                                  withObject:@"url"]
                      componentsJoinedByString:@"#"];
     
+    NSManagedObject *subscription;
+    
+    // Depending on which the show is new or we were editing the show, retrieve it from Core Data
     if (selectedShow != nil) {
-        NSManagedObject *selectedShowObj = [[subscriptionsDelegate managedObjectContext] objectWithID:[selectedShow objectID]];
-        
-        // Update the per-show preferences
-        [selectedShow setValue:[nameValue stringValue] forKey:@"name"];
-        [selectedShow setValue:sortName forKey:@"sortName"];
-        [selectedShow setValue:url forKey:@"url"];
-        [selectedShow setValue:[NSNumber numberWithInt:[[tvdbValue stringValue] intValue]] forKey:@"tvdbID"];
-        [selectedShow setValue:[NSDate date] forKey:@"lastDownloaded"];
-        [selectedShow setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
-        [selectedShow setValue:filterRules forKey:@"filters"];
-        [selectedShowObj setValue:[nameValue stringValue] forKey:@"name"];
-        [selectedShowObj setValue:sortName forKey:@"sortName"];
-        [selectedShowObj setValue:url forKey:@"url"];
-        [selectedShowObj setValue:[NSNumber numberWithInt:[[tvdbValue stringValue] intValue]] forKey:@"tvdbID"];
-        [selectedShowObj setValue:[NSDate date] forKey:@"lastDownloaded"];
-        [selectedShowObj setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
-        [selectedShowObj setValue:filterRules forKey:@"filters"];
+        subscription = [[subscriptionsDelegate managedObjectContext] objectWithID:[selectedShow objectID]];
     } else {
-        NSManagedObject *newSubscription = [NSEntityDescription insertNewObjectForEntityForName:@"Subscription"
-                                                                         inManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
-        
-        // Set the information about the new show
-        [newSubscription setValue:[nameValue stringValue] forKey:@"name"];
-        [newSubscription setValue:sortName forKey:@"sortName"];
-        [newSubscription setValue:url forKey:@"url"];
-        [newSubscription setValue:[NSNumber numberWithInt:[[tvdbValue stringValue] intValue]] forKey:@"tvdbID"];
-        [newSubscription setValue:[NSDate date] forKey:@"lastDownloaded"];
-        [newSubscription setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
-        [newSubscription setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
-        [newSubscription setValue:filterRules forKey:@"filters"];
-        
-        [SBArrayController addObject:newSubscription];
+        subscription = [NSEntityDescription insertNewObjectForEntityForName:@"Subscription"
+                                                     inManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
+        // Enable the new show
+        [subscription setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
     }
     
-    // Be sure to process pending changes before saving or it won't save correctly.
+    // Update the per-show preferences
+    [subscription setValue:[nameValue stringValue] forKey:@"name"];
+    [subscription setValue:sortName forKey:@"sortName"];
+    [subscription setValue:url forKey:@"url"];
+    [subscription setValue:[NSNumber numberWithInt:[[tvdbValue stringValue] intValue]] forKey:@"tvdbID"];
+    [subscription setValue:[NSDate date] forKey:@"lastDownloaded"];
+    [subscription setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
+    [subscription setValue:filterRules forKey:@"filters"];
+    
+    // Be sure to process pending changes before saving or it won't save correctly
     [[subscriptionsDelegate managedObjectContext] processPendingChanges];
     [subscriptionsDelegate saveAction];
+    [SBArrayController setManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
 }
 
 - (void)dealloc

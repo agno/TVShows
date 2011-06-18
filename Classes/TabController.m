@@ -28,12 +28,15 @@
 
 @implementation TabController
 
-@synthesize selectedShow, subscriptionsDelegate;
+@synthesize selectedShow;
 
 - (void) awakeFromNib
 {
-    // Init the subscriptions delegate
-    subscriptionsDelegate = [[SubscriptionsDelegate alloc] init];
+    // Register the app for this notification
+    [[NSDistributedNotificationCenter defaultCenter] addObserver:self
+                                                        selector:@selector(refreshShowList:)
+                                                            name:@"TSUpdatedShows"
+                                                          object:nil];
     
     // Set displayed version information
     NSString *bundleVersion = [[[NSBundle bundleWithIdentifier: TVShowsAppDomain] infoDictionary] 
@@ -67,8 +70,9 @@
     
     // Localize everything
     [[prefTabView tabViewItemAtIndex:0] setLabel: TSLocalizeString(@"Subscriptions")];
-    [[prefTabView tabViewItemAtIndex:1] setLabel: TSLocalizeString(@"Preferences")];
-    [[prefTabView tabViewItemAtIndex:2] setLabel: TSLocalizeString(@"About")];
+    [[prefTabView tabViewItemAtIndex:1] setLabel: TSLocalizeString(@"Sync")];
+    [[prefTabView tabViewItemAtIndex:2] setLabel: TSLocalizeString(@"Preferences")];
+    [[prefTabView tabViewItemAtIndex:3] setLabel: TSLocalizeString(@"About")];
     
     [feedbackButton setTitle: TSLocalizeString(@"Submit Feedback")];
     
@@ -112,6 +116,12 @@
     
     // Start the animation about one second after loading this
     [self performSelector:@selector(animateDonateButton) withObject:nil afterDelay:1];
+}
+
+- (void) refreshShowList:(NSNotification *)inNotification
+{
+    [subscriptionsDelegate refresh];
+    [SBArrayController setManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
 }
 
 - (void) animateDonateButton
@@ -159,6 +169,8 @@
         newWinHeight = 617;
     } else if ([[tabViewItem identifier] isEqualTo:@"tabItemSubscriptions"]) {
         newWinHeight = 617;
+    } else if ([[tabViewItem identifier] isEqualTo:@"tabItemSync"]) {
+        newWinHeight = 396;
     }  else if ([[tabViewItem identifier] isEqualTo:@"tabItemAbout"]) {
         newWinHeight = 500;
     } else {
@@ -530,28 +542,28 @@
 - (IBAction) closeShowInfoWindow:(id)sender
 {
     // Close the window first
-    // The following code has a bug in Intel 32-bit that I couldn't fix,
-    // so I prefer not to save that information rather than not be able to close the app
     [NSApp stopModal];
     [showInfoWindow orderOut: self];
     
-    // NSManagedContext objectWithID is required for it to save changes to the disk.
-    // We also need to update the original selectedShow NSManagedObject so that the
-    // interface displays any changes when the window is opened multiple times a session.
-    NSManagedObject *selectedShowObj = [[subscriptionsDelegate managedObjectContext] objectWithID:[selectedShow objectID]];
-    
-    // Update the per-show preferences
-    [selectedShow setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
-    [selectedShow setValue:[NSNumber numberWithBool:[showIsEnabled state]] forKey:@"isEnabled"];
-    [selectedShowObj setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
-    [selectedShowObj setValue:[NSNumber numberWithBool:[showIsEnabled state]] forKey:@"isEnabled"];
-    
-    // Be sure to process pending changes before saving or it won't save correctly.
-    [[subscriptionsDelegate managedObjectContext] processPendingChanges];
-    [subscriptionsDelegate saveAction];
-    
-    // Reset the selected show
-    selectedShow = nil;
+    if (selectedShow != nil) {
+        // NSManagedContext objectWithID is required for it to save changes to the disk.
+        // We also need to update the original selectedShow NSManagedObject so that the
+        // interface displays any changes when the window is opened multiple times a session.
+        NSManagedObject *selectedShowObj = [[subscriptionsDelegate managedObjectContext] objectWithID:[selectedShow objectID]];
+        
+        // Update the per-show preferences
+        [selectedShow setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
+        [selectedShow setValue:[NSNumber numberWithBool:[showIsEnabled state]] forKey:@"isEnabled"];
+        [selectedShowObj setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
+        [selectedShowObj setValue:[NSNumber numberWithBool:[showIsEnabled state]] forKey:@"isEnabled"];
+        
+        // Be sure to process pending changes before saving or it won't save correctly.
+        [[subscriptionsDelegate managedObjectContext] processPendingChanges];
+        [subscriptionsDelegate saveAction];
+        
+        // Reset the selected show
+        selectedShow = nil;
+    }
 }
 
 - (IBAction) showQualityDidChange:(id)sender
@@ -631,6 +643,12 @@
         if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
             [[NSWorkspace sharedWorkspace] openFile:saveLocation withApplication:nil andDeactivate:NO];
         }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TSDownloadEpisode"
+                                                            object:nil
+                                                          userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                    fileName, @"fileName",
+                                                                    show, @"showName", nil]];
     }
 }
 
@@ -691,23 +709,30 @@
         return;
     }
     
+    // Reload the data (it may have changed)
+    [subscriptionsDelegate refresh];
+    
     NSManagedObject *selectedShowObj = [[subscriptionsDelegate managedObjectContext] objectWithID:[selectedShow objectID]];
     
-    // I don't understand why I have to remove the object from both locations
-    // but it works so I won't question it.
-    [SBArrayController removeObject:selectedShow];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"TSRemoveSubscription"
+                                                        object:nil
+                                                      userInfo:(NSDictionary *)selectedShowObj];
+    
     [[subscriptionsDelegate managedObjectContext] deleteObject:selectedShowObj];
     
-    [self closeShowInfoWindow:(id)sender];
-    
+    // Be sure to process pending changes before saving or it won't save correctly
     [[subscriptionsDelegate managedObjectContext] processPendingChanges];
     [subscriptionsDelegate saveAction];
+    [SBArrayController setManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
+    
+    selectedShow = nil;
+    
+    [self closeShowInfoWindow:(id)sender];
 }
 
 - (void) dealloc
 {
     [selectedShow release];
-    [subscriptionsDelegate release];
     [super dealloc];
 }
 

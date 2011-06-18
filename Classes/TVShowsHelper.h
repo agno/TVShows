@@ -16,13 +16,18 @@
 #import <Sparkle/SUUpdater.h>
 #import <Growl/GrowlApplicationBridge.h>
 #import "SubscriptionsDelegate.h"
+#import "PresetShowsDelegate.h"
+#import "Miso.h"
 
-@interface TVShowsHelper : NSObject <GrowlApplicationBridgeDelegate>
+@interface TVShowsHelper : NSObject <GrowlApplicationBridgeDelegate, MisoDelegate>
 {
+    BOOL manually;
     NSThread *checkerThread;
     NSTimer *checkerLoop;
     NSData *TVShowsHelperIcon;
+    Miso *misoBackend;
     SubscriptionsDelegate *subscriptionsDelegate;
+    PresetShowsDelegate *presetShowsDelegate;
     
     IBOutlet NSStatusItem *statusItem;
     IBOutlet NSMenu *statusMenu;
@@ -38,6 +43,7 @@
 @property (retain) NSTimer *checkerLoop;
 @property (retain) NSData *TVShowsHelperIcon;
 @property (retain) SubscriptionsDelegate *subscriptionsDelegate;
+@property (retain) PresetShowsDelegate *presetShowsDelegate;
 
 - (void) runLoop;
 - (void) checkAllShows;

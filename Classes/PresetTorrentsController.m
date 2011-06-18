@@ -42,15 +42,11 @@
 #pragma mark Preset Torrents Window
 @implementation PresetTorrentsController
 
-@synthesize subscriptionsDelegate, presetsDelegate;
-
 - init
 {
     if((self = [super init])) {
         hasDownloadedList = NO;
         isTranslated = NO;
-        subscriptionsDelegate = [[SubscriptionsDelegate alloc] init];
-        presetsDelegate = [[PresetShowsDelegate alloc] init];
     }
     
     return self;
@@ -696,11 +692,11 @@
 #pragma mark Subscription Methods
 - (IBAction) subscribeToShow:(id)sender
 {
-    // To force the view to sort the new subscription
-    [SBArrayController setUsesLazyFetching:NO];
-    
     // Close the modal dialog box
     [self closePresetTorrentsWindow:(id)sender];
+    
+    // Reload the data (it may have changed)
+    [subscriptionsDelegate refresh];
     
     NSManagedObject *newSubscription = [NSEntityDescription insertNewObjectForEntityForName:@"Subscription"
                                                                      inManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
@@ -716,10 +712,14 @@
     [newSubscription setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
     [newSubscription setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
     
-    [SBArrayController addObject:newSubscription];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"TSAddSubscription"
+                                                        object:nil
+                                                      userInfo:(NSDictionary *)newSubscription];
     
+    // Be sure to process pending changes before saving or it won't save correctly
     [[subscriptionsDelegate managedObjectContext] processPendingChanges];
     [subscriptionsDelegate saveAction];
+    [SBArrayController setManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
     
     // If other episode is selected, start with it
     if ([otherEpisodeButton state]) {
@@ -809,8 +809,6 @@
 
 - (void) dealloc
 {
-    [subscriptionsDelegate release];
-    [presetsDelegate release];
     [super dealloc];
 }
 

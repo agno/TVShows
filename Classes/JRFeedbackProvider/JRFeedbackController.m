@@ -38,10 +38,10 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
     const char *hostname = [[[JRFeedbackController postURL] host] UTF8String];  
 #ifdef MAC_OS_X_VERSION_10_6
     SCNetworkReachabilityRef reachability = SCNetworkReachabilityCreateWithName(NULL, hostname);
-    Boolean reachabilityResult = SCNetworkReachabilityGetFlags(reachability, &reachabilityFlags);
+    BOOL reachabilityResult = SCNetworkReachabilityGetFlags(reachability, &reachabilityFlags);
     CFRelease(reachability);
 #else  
-    Boolean reachabilityResult = SCNetworkCheckReachabilityByName(hostname, &reachabilityFlags);
+    BOOL reachabilityResult = SCNetworkCheckReachabilityByName(hostname, &reachabilityFlags);
 #endif
   
 //    NSLog(@"reachabilityFlags: %lx", reachabilityFlags);

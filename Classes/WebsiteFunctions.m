@@ -22,7 +22,7 @@
 {
     SCNetworkReachabilityRef target;
     SCNetworkConnectionFlags flags = 0;
-    Boolean ok = NO;
+    BOOL ok = NO;
     target = SCNetworkReachabilityCreateWithName(NULL, [hostName UTF8String]);
     if (target != nil) {
         ok = SCNetworkReachabilityGetFlags(target, &flags);
