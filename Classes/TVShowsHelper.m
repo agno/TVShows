@@ -550,6 +550,7 @@
     [lastUpdateItem setTitle:[NSString stringWithFormat:@"%@ %@", TSLocalizeString(@"Last Checked:"), TSLocalizeString(@"Never")]];
     [checkShowsItem setTitle:TSLocalizeString(@"Checking now, please wait...")];
     [subscriptionsItem setTitle:[NSString stringWithFormat:@"%@...", TSLocalizeString(@"Subscriptions")]];
+    [syncItem setTitle:[NSString stringWithFormat:@"%@...", TSLocalizeString(@"Sync")]];
     [preferencesItem setTitle:[NSString stringWithFormat:@"%@...", TSLocalizeString(@"Preferences")]];
     [feedbackItem setTitle:[NSString stringWithFormat:@"%@...", TSLocalizeString(@"Submit Feedback")]];
     [aboutItem setTitle:[NSString stringWithFormat:@"%@ TVShows", TSLocalizeString(@"About")]];
@@ -604,7 +605,7 @@
     [task launch];
 }
 
-- (IBAction) showPreferences:(id)sender
+- (IBAction) showSync:(id)sender
 {
     NSString *command =
     @"tell application \"System Preferences\"                               \n"
@@ -623,7 +624,7 @@
     [task launch];
 }
 
-- (IBAction) showAbout:(id)sender
+- (IBAction) showPreferences:(id)sender
 {
     NSString *command =
     @"tell application \"System Preferences\"                               \n"
@@ -633,6 +634,25 @@
     @"tell application \"System Events\"                                    \n"
     @"    tell process \"System Preferences\"                               \n"
     @"        click radio button 3 of tab group 1 of window \"TVShows\"     \n"
+    @"    end tell                                                          \n"
+    @"end tell                                                              ";
+    
+    NSTask *task = [[[NSTask alloc] init] autorelease];
+    [task setLaunchPath:@"/usr/bin/osascript"];
+    [task setArguments:[NSMutableArray arrayWithObjects:@"-e", command, nil]];
+    [task launch];
+}
+
+- (IBAction) showAbout:(id)sender
+{
+    NSString *command =
+    @"tell application \"System Preferences\"                               \n"
+    @"   activate                                                           \n"
+    @"   set the current pane to pane id \"com.victorpimentel.TVShows2\"    \n"
+    @"end tell                                                              \n"
+    @"tell application \"System Events\"                                    \n"
+    @"    tell process \"System Preferences\"                               \n"
+    @"        click radio button 4 of tab group 1 of window \"TVShows\"     \n"
     @"    end tell                                                          \n"
     @"end tell                                                              ";
     
