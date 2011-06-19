@@ -233,6 +233,57 @@
     }
 }
 
+- (BOOL)hasCheckInForShow:(NSObject *)show andEpisode:(NSObject *)episode
+{
+    // If the user did not enable check-ins, obviously we cannot know if there is a check-in
+    if (![TSUserDefaults getBoolFromKey:@"MisoEnabled" withDefault:NO] ||
+        ![TSUserDefaults getBoolFromKey:@"MisoCheckInEnabled" withDefault:NO]) {
+        return NO;
+    }
+    
+    // Only check check-ins for normal shows
+    if ([[episode valueForKey:@"episodeSeason"] isEqualToString:@"-"] ||
+        [[episode valueForKey:@"episodeNumber"] isEqualToString:@"-"] ||
+        [show valueForKey:@"filters"]) {
+        return NO;
+    }
+    
+    // Retrieve the user id
+    NSDictionary *userDetails = [misoBackend userDetails];
+    if (!userDetails) {
+        return NO;
+    }
+    
+    // Search for it on Miso
+    NSDictionary *results = [misoBackend showWithQuery:[show valueForKey:@"name"]];
+    NSObject *showData = nil;
+    
+    // Just pick the first show (too late, I cannot even think anymore)
+    for (NSObject *result in results) {
+        showData = result;
+        break;
+    }
+    if (!showData) {
+        return NO;
+    }
+    
+    // We have all the data, so search for checkins of that show!
+    NSDictionary *checkins = [misoBackend checkingsForUser:[[[userDetails valueForKey:@"user"] valueForKey:@"id"] description]
+                                                   andShow:[[[showData valueForKey:@"media"] valueForKey:@"id"] description]];
+    
+    // So check if the checkin was done
+    for (NSObject *checkin in checkins) {
+        if ([[[[checkin valueForKey:@"checkin"] valueForKey:@"episode_season_num"] description]
+             isEqualToString:[episode valueForKey:@"episodeSeason"]] &&
+            [[[[checkin valueForKey:@"checkin"] valueForKey:@"episode_num"] description]
+             isEqualToString:[episode valueForKey:@"episodeNumber"]]) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
 - (void)authenticationEnded:(BOOL)authenticated
 {
     // If the shows were updated in the prefpane, we don't need to update them again
@@ -452,7 +503,10 @@
                  ![[episode valueForKey:@"isHD"] boolValue]) ||
                 chooseAnyVersion) {
                 
-                if ([self startDownloadingURL:[episode valueForKey:@"link"]
+                // If the user has Miso enabled, check if there is a check-in for that episode
+                // Otherwise download the episode
+                if ([self hasCheckInForShow:show andEpisode:episode] ||
+                    [self startDownloadingURL:[episode valueForKey:@"link"]
                                  withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
                                   andShowName:[show valueForKey:@"name"]]) {
                     // Update the last downloaded episode name only if it was aired after the previous stored one
@@ -465,7 +519,6 @@
                         [subscriptionsDelegate saveAction];
                     }
                 }
-                
             }
         } else {
             // The rest is not important because it is even before the previous entry

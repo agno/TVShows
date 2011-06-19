@@ -75,7 +75,7 @@
                             stringByReplacingOccurrencesOfRegex:@"\\s+&\\s+" withString:@" "];
     
     NSArray *params = [MPURLRequestParameter parametersFromString:[NSString stringWithFormat:@"q=%@&kind=TvShow", queryClean]];
-
+    
     return [self jsonValue:[oauthAPI dataForMethod:@"http://gomiso.com/api/oauth/v1/media.json"
                                     withParameters:params]];
 }
@@ -154,9 +154,13 @@
 
 - (NSDictionary *)jsonValue:(NSData *)data
 {
-    NSString *string = [[[NSString alloc] initWithData:data
-                                             encoding:NSUTF8StringEncoding] autorelease];
-    return [string JSONValue];
+    if (data) {
+        NSString *string = [[[NSString alloc] initWithData:data
+                                                  encoding:NSUTF8StringEncoding] autorelease];
+        return [string JSONValue];
+    } else {
+        return nil;
+    }
 }
 
 - (void)dealloc
