@@ -29,6 +29,8 @@
 
 #pragma mark Define Macros
 
+#define AddRSSInstructionsURL       @"http://blog.tvshowsapp.com/post/6487546781/how-to-add-a-custom-rss-to-tvshows"
+#define AddRSSInstructionsURLES     @"http://blog.tvshowsapp.com/post/6488183421/como-anadir-un-rss-personalizado-a-tvshows"
 #define TVDBURL                     @"http://thetvdb.com/?tab=series&id=%@"
 #define ShowListURL                 @"https://github.com/victorpimentel/tvshowsapp.com/raw/master/showlist/showlist.xml"
 #define ShowListMirror              @"http://tvshowsapp.com/showlist/showlist.xml"
@@ -72,6 +74,7 @@
     
     // Search field and Loading text
     [[PTSearchField cell] setPlaceholderString: TSLocalizeString(@"Search")];
+    [moreShowsButton setTitle:[NSString stringWithFormat:@"%@...", TSLocalizeString(@"More Shows")]];
     [loadingText setStringValue: TSLocalizeString(@"Updating Show Information…")];
     
     // Sort the preloaded list
@@ -210,6 +213,20 @@
     // Focus the search field
     [[PTSearchField cell] performClick:self];
     
+}
+
+- (IBAction)visitInstructionsButton:(id)sender {
+    // Choose between the english version and the spanish one
+    NSString *locale = [[[NSLocale currentLocale] localeIdentifier] substringToIndex:2];
+    
+    if ([locale isEqualToString:@"es"] ||
+        [locale isEqualToString:@"ca"] ||
+        [locale isEqualToString:@"eu"] ||
+        [locale isEqualToString:@"gl"]) {
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:AddRSSInstructionsURLES]];
+    } else {
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:AddRSSInstructionsURL]];
+    }
 }
 
 - (void) updateSubscriptions

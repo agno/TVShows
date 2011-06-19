@@ -62,7 +62,7 @@
     [syncCheck setTitle:TSLocalizeString(@"Sync shows between Miso and TVShows")];
     [syncText setStringValue:TSLocalizeString(@"Your TVShows subscriptions will be automatically synced with your followed shows on Miso. Only airings shows known by TVShows will be synced.")];
     [checkinCheck setTitle:TSLocalizeString(@"Automatic check-in when an episode is downloaded")];
-    [checkinText setStringValue:TSLocalizeString(@"The check-in will be made when the download starts. This is not advisable, but it could allow you to sync episodes across several computers.")];
+    [checkinText setStringValue:TSLocalizeString(@"The check-in will be made when the download starts. This is not advisable, but it could allow you to sync episode downloads across several computers.")];
 }
 
 - (void)awakeFromNib

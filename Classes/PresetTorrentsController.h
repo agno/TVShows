@@ -29,6 +29,7 @@
     IBOutlet NSTableView *PTTableView;
     IBOutlet NSArrayController *PTArrayController;
     IBOutlet NSSearchField *PTSearchField;
+    IBOutlet NSButton *moreShowsButton;
     IBOutlet NSButton *showQuality;
     IBOutlet NSButton *cancelButton;
     IBOutlet NSButton *subscribeButton;
@@ -67,6 +68,7 @@
 - (IBAction) showQualityDidChange:(id)sender;
 - (void) sortTorrentShowList;
 - (IBAction) reloadShowList:(id)sender;
+- (IBAction) visitInstructionsButton:(id)sender;
 - (void) downloadTorrentShowList;
 - (void) tableViewSelectionDidChange:(NSNotification *)notification;
 - (void) resetShowView;
