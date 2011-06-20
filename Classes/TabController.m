@@ -20,6 +20,7 @@
 
 #import "TSParseXMLFeeds.h"
 #import "TSUserDefaults.h"
+#import "TSRegexFun.h"
 
 #import "TorrentzParser.h"
 #import "TheTVDB.h"
@@ -165,16 +166,16 @@
     tabFrame = [[tabView window] frame];
     
     // newWinHeight should be equal to the wanted window size (in Interface Builder) + 54 (title bar height)
-    if ([[tabViewItem identifier] isEqualTo:@"tabItemPreferences"]) {
-        newWinHeight = 617;
-    } else if ([[tabViewItem identifier] isEqualTo:@"tabItemSubscriptions"]) {
-        newWinHeight = 617;
+    if ([[tabViewItem identifier] isEqualTo:@"tabItemSubscriptions"]) {
+        newWinHeight = 588;
     } else if ([[tabViewItem identifier] isEqualTo:@"tabItemSync"]) {
         newWinHeight = 396;
+    } else if ([[tabViewItem identifier] isEqualTo:@"tabItemPreferences"]) {
+        newWinHeight = 670;
     }  else if ([[tabViewItem identifier] isEqualTo:@"tabItemAbout"]) {
         newWinHeight = 500;
     } else {
-        newWinHeight = 617;
+        newWinHeight = 588;
     }
     
     tabFrame = NSMakeRect(tabFrame.origin.x, tabFrame.origin.y - (newWinHeight - (int)(NSHeight(tabFrame))), (int)(NSWidth(tabFrame)), newWinHeight);
@@ -613,6 +614,22 @@
                                                              error:nil]) {
             LogError(@"Unable to create the folder: %@", saveLocation);
             return;
+        }
+        // And check if we have to go deeper (sorting by season)
+        if ([TSUserDefaults getBoolFromKey:@"SeasonSubfolders" withDefault:NO]) {
+            NSArray *seasonAndEpisode = [TSRegexFun parseSeasonAndEpisode:fileName];
+            if ([seasonAndEpisode count] == 3) {
+                saveLocation = [saveLocation stringByAppendingPathComponent:
+                                [NSString stringWithFormat:@"Season %@",
+                                 [TSRegexFun removeLeadingZero:[seasonAndEpisode objectAtIndex:1]]]];
+                if (![[NSFileManager defaultManager] createDirectoryAtPath:saveLocation
+                                               withIntermediateDirectories:YES
+                                                                attributes:nil
+                                                                     error:nil]) {
+                    LogError(@"Unable to create the folder: %@", saveLocation);
+                    return;
+                }
+            }
         }
     }
     

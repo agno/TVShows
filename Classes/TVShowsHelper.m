@@ -746,6 +746,22 @@
             LogError(@"Unable to create the folder: %@", saveLocation);
             return NO;
         }
+        // And check if we have to go deeper (sorting by season)
+        if ([TSUserDefaults getBoolFromKey:@"SeasonSubfolders" withDefault:NO]) {
+            NSArray *seasonAndEpisode = [TSRegexFun parseSeasonAndEpisode:fileName];
+            if ([seasonAndEpisode count] == 3) {
+                saveLocation = [saveLocation stringByAppendingPathComponent:
+                                [NSString stringWithFormat:@"Season %@",
+                                 [TSRegexFun removeLeadingZero:[seasonAndEpisode objectAtIndex:1]]]];
+                if (![[NSFileManager defaultManager] createDirectoryAtPath:saveLocation
+                                               withIntermediateDirectories:YES
+                                                                attributes:nil
+                                                                     error:nil]) {
+                    LogError(@"Unable to create the folder: %@", saveLocation);
+                    return NO;
+                }
+            }
+        }
     }
     
     // Add the filename
