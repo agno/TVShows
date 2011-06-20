@@ -54,6 +54,12 @@
                 episodeSeason = @"-";
                 episodeNumber = @"-";
                 
+            } else {
+                episodeTitle = [TSRegexFun parseTitleFromString:[item title]
+                                                 withIdentifier:seasonAndEpisode
+                                                       withType:@"other"];
+                episodeSeason = @"-";
+                episodeNumber = @"-";
             }
             
             episodeQuality = [NSString stringWithFormat:@"%d",[TSRegexFun isEpisodeHD:[item title]]];

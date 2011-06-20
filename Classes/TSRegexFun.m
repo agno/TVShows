@@ -14,6 +14,7 @@
 
 #import "TSRegexFun.h"
 #import "RegexKitLite.h"
+#import "TSUserDefaults.h"
 
 @implementation TSRegexFun
 
@@ -21,17 +22,17 @@
 {
     // Set up our regex strings.
     NSArray *matchedRegex, *returnThis = [NSArray array];
-    NSArray *parseTypes = [NSArray arrayWithObjects:@"S([0-9]+)(?:[[:space:]]*)E([0-9]+)",  // S01E01
+    NSArray *parseTypes = [NSArray arrayWithObjects:@"[sS]([0-9]+)(?:[[:space:]]*)[eE]([0-9]+)",  // S01E01
                                                     @"([0-9]+)(?:[[:space:]]*x[[:space:]]*)([0-9]+)", // 01x01
                                                     @"EPI-([0-9]+)-([0-9]+)", // EPI-1-1 (Hamsterpit)
                                                     @"DAY-([0-9]{4})([0-9]{2})([0-9]{2})", // DAY-20110115 (Hamsterpit)
-                                                    @"([0-9]{4})(?:[[:space:]]|[.])([0-9]{2})(?:[[:space:]]|[.])([0-9]{2})", // YYYY MM DD
-                                                    @"([0-9]{2})(?:[[:space:]]|[.])([0-9]{2})(?:[[:space:]]|[.])([0-9]{4})",nil]; // MM DD YYYY
+                                                    @"([0-9]{4})(?:[[:space:]]|[.-])([0-9]{2})(?:[[:space:]]|[.-])([0-9]{2})", // YYYY MM DD
+                                                    @"([0-9]{2})(?:[[:space:]]|[.-])([0-9]{2})(?:[[:space:]]|[.-])([0-9]{4})",nil]; // MM DD YYYY
     
     // Run through each of the regex strings we've listed above.
     for (NSString *regex in parseTypes) {
         matchedRegex = [title arrayOfCaptureComponentsMatchedByRegex:regex];
-    
+        
         // If there's a match then return it, otherwise do nothing.
         if([matchedRegex count] != 0) {
             returnThis = [matchedRegex objectAtIndex:0];
@@ -68,10 +69,17 @@
     if (type == @"episode") {
         
         // TVShow is in a Season and Episode format
-        return [NSString stringWithFormat:@"%@ S%02dE%02d",
-                showTitle,
-                [[identifier objectAtIndex:1] intValue],
-                [[identifier objectAtIndex:2] intValue]];
+        if ([TSUserDefaults getFloatFromKey:@"NamingConvention" withDefault:0] == 0) {
+            return [NSString stringWithFormat:@"%@ S%02dE%02d",
+                    showTitle,
+                    [[identifier objectAtIndex:1] intValue],
+                    [[identifier objectAtIndex:2] intValue]];
+        } else {
+            return [NSString stringWithFormat:@"%@ %dx%02d",
+                    showTitle,
+                    [[identifier objectAtIndex:1] intValue],
+                    [[identifier objectAtIndex:2] intValue]];
+        }
         
     } else if (type == @"date") {
         
@@ -83,9 +91,11 @@
                 [identifier objectAtIndex:3]];
         
     } else {
-        return nil;
+        
+        // TVShow is "unknown" so at least return something
+        return [title stringByReplacingOccurrencesOfRegex:@"[\\._ ]+" withString:@" "];
+        
     }
-
 }
 
 + (NSString *) parseShowFromTitle:(NSString *)title

@@ -253,6 +253,8 @@
             
             if (feedHasHDEpisodes) {
                 [showQuality setEnabled:YES];
+            } else {
+                [showQuality setState:NO];
             }
             
             // Update the filter predicate to only display the correct quality.
