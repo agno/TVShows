@@ -194,6 +194,17 @@
         
         // Let's check that the show is in the preset show list
         NSObject *selectedShow = [self getShow:showID fromArray:presets];
+        // Some shows do not have TVDB ids yet; try to map them together
+        if (!selectedShow && (!showID || [showID isEqualToString:@"<null>"] || [showID length] == 0)) {
+            // Just pick the first show with that name, if there is any
+            for (NSObject *presetShow in presets) {
+                if ([[presetShow valueForKey:@"displayName"] isEqualToString:seriesName]) {
+                    selectedShow = presetShow;
+                    showID = [[presetShow valueForKey:@"tvdbID"] description];
+                    break;
+                }
+            }
+        }
         
         // If the user is not subscribed to this show and the show is still airing, add to the subscriptions
         if (selectedShow && ![self getShow:showID fromArray:subscriptions] &&
@@ -209,10 +220,19 @@
             [newSubscription setValue:[selectedShow valueForKey:@"sortName"] forKey:@"sortName"];
             [newSubscription setValue:[selectedShow valueForKey:@"tvdbID"] forKey:@"tvdbID"];
             [newSubscription setValue:[selectedShow valueForKey:@"name"] forKey:@"url"];
-            [newSubscription setValue:[NSDate date] forKey:@"lastDownloaded"];
             [newSubscription setValue:[NSNumber numberWithBool:[TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:YES]]
                                forKey:@"quality"];
             [newSubscription setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
+            
+            // OK, so we know that the user has Miso.
+            // And that the user has followed a "new" show.
+            // So let's go back in time thirteen days so that the last episodes
+            // will be downloaded. So that user can leverage this Miso synchronization.
+            // If the user does not want to download an episode he can cancel,
+            // but the other user case is more cumbersome.
+            // Anyway, if the user did a check-in for th(at/ose) episode(s)
+            // it will not be downloaded (and again, the user is Miso synced)
+            [newSubscription setValue:[NSDate dateWithTimeIntervalSinceNow:-6*24*60*60] forKey:@"lastDownloaded"];
             
             [[subscriptionsDelegate managedObjectContext] processPendingChanges];
             [subscriptionsDelegate saveAction];
