@@ -15,6 +15,7 @@
 #import <PreferencePanes/PreferencePanes.h>
 #import <Cocoa/Cocoa.h>
 #import "SubscriptionsDelegate.h"
+#import "LRFilterBar.h"
 
 @interface TabController : NSPreferencePane
 {
@@ -46,6 +47,8 @@
     IBOutlet NSButton *closeLogButton;
     
     // Subscriptions tab
+    IBOutlet LRFilterBar *filterBar;
+    IBOutlet NSSearchField *filterField;
     IBOutlet NSArrayController *SBArrayController;
     IBOutlet NSWindow *showInfoWindow;
     IBOutlet NSTextField *lastCheckedText;
@@ -82,6 +85,7 @@
 @property (retain) NSManagedObject *selectedShow;
 
 - (void) awakeFromNib;
+- (IBAction) filterSubscriptions:(id)sender;
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
 - (IBAction) showFeedbackWindow:(id)sender;
 

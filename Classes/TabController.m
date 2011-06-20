@@ -39,6 +39,18 @@
                                                             name:@"TSUpdatedShows"
                                                           object:nil];
     
+    // Filter bar
+    [filterBar addItemsWithTitles:[NSArray arrayWithObjects:
+                                   TSLocalizeString(@"All"),
+                                   TSLocalizeString(@"Enabled"),
+                                   TSLocalizeString(@"Disabled"),
+                                   @"DIVIDER",
+                                   TSLocalizeString(@"All"),
+                                   TSLocalizeString(@"Preset"),
+                                   TSLocalizeString(@"Custom"), nil]
+                     withSelector:@selector(filterSubscriptions:)
+                       withTarget:self];
+    
     // Set displayed version information
     NSString *bundleVersion = [[[NSBundle bundleWithIdentifier: TVShowsAppDomain] infoDictionary] 
                                valueForKey:@"CFBundleShortVersionString"];
@@ -116,13 +128,47 @@
     [self drawAboutBox];
     
     // Start the animation about one second after loading this
+    [self performSelector:@selector(filterSubscriptions:) withObject:nil afterDelay:0.5];
+    
+    // Start the animation about one second after loading this
     [self performSelector:@selector(animateDonateButton) withObject:nil afterDelay:1];
+}
+
+- (IBAction) filterSubscriptions:(id)sender
+{
+    NSMutableArray *filters = [[NSMutableArray alloc] initWithCapacity:3];
+    switch ([filterBar getSelectedIndexInSegment:0]) {
+        case 1:
+            [filters addObject:[NSPredicate predicateWithFormat:@"isEnabled = 1"]];
+            break;
+        case 2:
+            [filters addObject:[NSPredicate predicateWithFormat:@"isEnabled = 0"]];
+            break;
+        default:
+            break;
+    }
+    switch ([filterBar getSelectedIndexInSegment:1]) {
+        case 1:
+            [filters addObject:[NSPredicate predicateWithFormat:@"filters = nil"]];
+            break;
+        case 2:
+            [filters addObject:[NSPredicate predicateWithFormat:@"filters != nil"]];
+            break;
+        default:
+            break;
+    }
+    if ([[filterField stringValue] length] > 0) {
+        [filters addObject:[NSPredicate predicateWithFormat:@"name contains[cd] %@", [filterField stringValue]]];
+    }
+    [SBArrayController setFilterPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:
+                                           filters]];
 }
 
 - (void) refreshShowList:(NSNotification *)inNotification
 {
     [subscriptionsDelegate refresh];
     [SBArrayController setManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
+    [self filterSubscriptions:nil];
 }
 
 - (void) animateDonateButton
