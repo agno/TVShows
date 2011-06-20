@@ -201,8 +201,13 @@
                                [NSCharacterSet whitespaceAndNewlineCharacterSet]];
         
         // Enable the subscription if there is a name and there are episodes
-        if (![cleanName isEqualToString:@""] && [[episodeArrayController content] count] > 0) {
+        if (![cleanName isEqualToString:@""]) {
             [subscribeButton setEnabled:YES];
+            [showQuality setEnabled:YES];
+            [showQuality setState:NO];
+            
+            // Update the filter predicate to only display the correct quality.
+            [self showQualityDidChange:nil];
         } else {
             // Otherwise disallow the subscription to this invalid show
             [subscribeButton setEnabled:NO];
@@ -242,9 +247,19 @@
     if ([feeds isEqualToArray:copy]) {
         [episodeArrayController removeObjects:[episodeArrayController content]];
         if ([results count] == 0) {
-            [showQuality setEnabled:NO];
-            [subscribeButton setEnabled:NO];
             [nameValue removeAllItems];
+            NSString *cleanName = [[nameValue stringValue] stringByTrimmingCharactersInSet:
+                                   [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            
+            // Enable the subscription if there is a name and there are episodes
+            if (![cleanName isEqualToString:@""]) {
+                [subscribeButton setEnabled:YES];
+                [showQuality setEnabled:YES];
+                [showQuality setState:NO];
+                
+                // Update the filter predicate to only display the correct quality.
+                [self showQualityDidChange:nil];
+            }
         } else {
             [episodeArrayController addObjects:results];
             
@@ -261,7 +276,13 @@
             [self showQualityDidChange:nil];
             
             // Allow the subscription!
-            [subscribeButton setEnabled:YES];
+            NSString *cleanName = [[nameValue stringValue] stringByTrimmingCharactersInSet:
+                                   [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            
+            // Enable the subscription if there is a name and there are episodes
+            if (![cleanName isEqualToString:@""]) {
+                [subscribeButton setEnabled:YES];
+            }
             
             // Set the possible names for autocompletion
             [self setPossibleNamesFromFeed];
