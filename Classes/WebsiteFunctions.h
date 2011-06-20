@@ -24,5 +24,6 @@
 + (BOOL) canConnectToURL:(NSString *)url;
 + (NSData *) downloadDataFrom:(NSString *)url;
 + (NSString *) downloadStringFrom:(NSString *)url;
++ (BOOL) dataIsValidTorrent:(NSData *)data;
 
 @end

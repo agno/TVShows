@@ -771,7 +771,7 @@
     NSData *fileContents = [WebsiteFunctions downloadDataFrom:url];
     
     // Check if the download was right
-    if (!fileContents || [fileContents length] < 100) {
+    if (!fileContents || ![WebsiteFunctions dataIsValidTorrent:fileContents]) {
         LogError(@"Unable to download file: %@ <%@>", fileName, url);
         
         // Failure!

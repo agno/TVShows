@@ -14,7 +14,7 @@
 
 #import "WebsiteFunctions.h"
 #import <SystemConfiguration/SCNetworkReachability.h>
-
+#import "RegexKitLite.h"
 
 @implementation WebsiteFunctions
 
@@ -67,6 +67,19 @@
                                                encoding:NSUTF8StringEncoding] autorelease];
     
     return content;
+}
+
++ (BOOL) dataIsValidTorrent:(NSData *) data
+{
+    NSString *string = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+    
+    if ([[string substringToIndex:11] isEqualToString:@"d8:announce"]) {
+        [string release];
+        return YES;
+    } else {
+        [string release];
+        return NO;
+    }
 }
 
 @end

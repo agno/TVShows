@@ -640,7 +640,7 @@
     LogInfo(@"Attempting to download new episode: %@", fileName);
     NSData *fileContents = [WebsiteFunctions downloadDataFrom:url];
     
-    if (!fileContents || [fileContents length] < 100) {
+    if (!fileContents || ![WebsiteFunctions dataIsValidTorrent:fileContents]) {
         LogError(@"Unable to download file: %@ <%@>",fileName, url);
         
         // Display the error
