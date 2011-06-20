@@ -273,6 +273,7 @@
 		3424AF2111EF643A009C49DD /* ca */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ca; path = Resources/ca.lproj/Localizable.strings; sourceTree = "<group>"; wrapsLines = 1; };
 		3424AF2211EF643C009C49DD /* da */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = da; path = Resources/da.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3424AF2311EF6442009C49DD /* es */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = es; path = Resources/es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3424AF2B11EF6475009C49DD /* es */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = es; path = Resources/es.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		3424AF2411EF6445009C49DD /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = Resources/fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3424AF2511EF644C009C49DD /* ja */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ja; path = Resources/ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3424AF2611EF644D009C49DD /* nb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nb; path = Resources/nb.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -484,6 +485,14 @@
 		579CAD5713AB9234006743B4 /* Miso-Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Miso-Logo.png"; sourceTree = "<group>"; };
 		57A82B0F13953A3500E71F7F /* NSXMLNode-utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSXMLNode-utils.h"; sourceTree = "<group>"; };
 		57A82B1013953A3500E71F7F /* NSXMLNode-utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSXMLNode-utils.m"; sourceTree = "<group>"; };
+		57A9248713AFE5600038C76C /* af */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = af; path = Resources/af.lproj/Localizable.strings; sourceTree = "<group>"; };
+		57A9248813AFE5780038C76C /* eu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = eu; path = Resources/eu.lproj/Localizable.strings; sourceTree = "<group>"; };
+		57A9248913AFE5830038C76C /* de-CH */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "de-CH"; path = "Resources/de-CH.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		57A9248A13AFE5FF0038C76C /* sk-SK */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "sk-SK"; path = "Resources/sk-SK.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		57A9248B13AFE63E0038C76C /* af */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = af; path = Resources/af.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		57A9248C13AFE63E0038C76C /* sk-SK */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = "sk-SK"; path = "Resources/sk-SK.lproj/JRFeedbackProvider.strings"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		57A9248D13AFE63E0038C76C /* de-CH */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = "de-CH"; path = "Resources/de-CH.lproj/JRFeedbackProvider.strings"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		57A9248E13AFE63F0038C76C /* eu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = eu; path = Resources/eu.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		57C712BE139811F50045361A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		57D19A1313AEF44A00BDE873 /* LRFilterBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LRFilterBar.h; sourceTree = "<group>"; };
 		57D19A1413AEF44A00BDE873 /* LRFilterBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LRFilterBar.m; sourceTree = "<group>"; };
@@ -1144,6 +1153,10 @@
 				ru,
 				tr,
 				"pt-BR",
+				af,
+				eu,
+				"de-CH",
+				"sk-SK",
 			);
 			mainGroup = 089C166AFE841209C02AAC07 /* TVShows */;
 			projectDirPath = "";
@@ -1449,6 +1462,10 @@
 				5793D8191369569F00BFF6B0 /* el */,
 				57E4EB3E136B9A23003E59E5 /* pt-PT */,
 				57E4EB3F136B9A32003E59E5 /* pt-BR */,
+				57A9248713AFE5600038C76C /* af */,
+				57A9248813AFE5780038C76C /* eu */,
+				57A9248913AFE5830038C76C /* de-CH */,
+				57A9248A13AFE5FF0038C76C /* sk-SK */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1487,6 +1504,10 @@
 				5793D8181369569F00BFF6B0 /* el */,
 				57E4EB40136B9A57003E59E5 /* pt-PT */,
 				57E4EB41136B9A57003E59E5 /* pt-BR */,
+				57A9248B13AFE63E0038C76C /* af */,
+				57A9248C13AFE63E0038C76C /* sk-SK */,
+				57A9248D13AFE63E0038C76C /* de-CH */,
+				57A9248E13AFE63F0038C76C /* eu */,
 			);
 			name = JRFeedbackProvider.strings;
 			sourceTree = "<group>";
