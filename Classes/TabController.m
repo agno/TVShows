@@ -656,11 +656,16 @@
         
         [fileContents writeToFile:saveLocation atomically:YES];
         
+        // Bounce the downloads stack!
+        [[NSDistributedNotificationCenter defaultCenter]
+            postNotificationName:@"com.apple.DownloadFileFinished" object:saveLocation];
+        
         // Check to see if the user wants to automatically open new downloads
         if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
             [[NSWorkspace sharedWorkspace] openFile:saveLocation withApplication:nil andDeactivate:NO];
         }
         
+        // Notify to the process that a download was done (to check-in in Miso)
         [[NSNotificationCenter defaultCenter] postNotificationName:@"TSDownloadEpisode"
                                                             object:nil
                                                           userInfo:[NSDictionary dictionaryWithObjectsAndKeys:

@@ -822,6 +822,10 @@
         
         [fileContents writeToFile:saveLocation atomically:YES];
         
+        // Bounce the downloads stack!
+        [[NSDistributedNotificationCenter defaultCenter]
+            postNotificationName:@"com.apple.DownloadFileFinished" object:saveLocation];
+        
         // Check to see if the user wants to automatically open new downloads
         if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
             [[NSWorkspace sharedWorkspace] openFile:saveLocation withApplication:nil andDeactivate:NO];
