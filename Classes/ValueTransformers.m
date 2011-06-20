@@ -37,7 +37,7 @@
     NSImage *showPoster = [TheTVDB getPosterForShow:[value valueForKey:@"name"]
                                          withShowID:[NSString stringWithFormat:@"%@",
                                                      [value valueForKey:@"tvdbID"]]
-                                         withHeight:96
+                                         withHeight:94
                                           withWidth:66];
     return showPoster;
 }

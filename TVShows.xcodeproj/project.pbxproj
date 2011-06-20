@@ -196,6 +196,8 @@
 		57D19A2C13AEF48700BDE873 /* OverflowDivider.png in Resources */ = {isa = PBXBuildFile; fileRef = 57D19A2813AEF48700BDE873 /* OverflowDivider.png */; };
 		57D41B921370AFF100AB0048 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3424AF1F11EF6432009C49DD /* Localizable.strings */; };
 		57F33F891376FE4C00270A75 /* TorrentzParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 573ABCC713734E9B0018F6F3 /* TorrentzParser.m */; };
+		57F7062B13AF32E5002A83E4 /* Cover-DVD.png in Resources */ = {isa = PBXBuildFile; fileRef = 57F7062913AF32E5002A83E4 /* Cover-DVD.png */; };
+		57F7062D13AF3798002A83E4 /* Cover-Bluray.png in Resources */ = {isa = PBXBuildFile; fileRef = 57F7062C13AF3798002A83E4 /* Cover-Bluray.png */; };
 		57FDFEBB13A94E310019EDB6 /* TheTVDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 347B35D51210DB6000F4BFF0 /* TheTVDB.m */; };
 		8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F506C035013D953901CA16C8 /* PreferencePanes.framework */; };
@@ -503,6 +505,8 @@
 		57E4EB3F136B9A32003E59E5 /* pt-BR */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "Resources/pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		57E4EB40136B9A57003E59E5 /* pt-PT */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = "pt-PT"; path = "Resources/pt-PT.lproj/JRFeedbackProvider.strings"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		57E4EB41136B9A57003E59E5 /* pt-BR */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = "pt-BR"; path = "Resources/pt-BR.lproj/JRFeedbackProvider.strings"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		57F7062913AF32E5002A83E4 /* Cover-DVD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cover-DVD.png"; sourceTree = "<group>"; };
+		57F7062C13AF3798002A83E4 /* Cover-Bluray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cover-Bluray.png"; sourceTree = "<group>"; };
 		8D202CF80486D31800D8A456 /* TVShows.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVShows.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
 		F506C035013D953901CA16C8 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = /System/Library/Frameworks/PreferencePanes.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -851,6 +855,8 @@
 		349FEE021183590500D24FC9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				57F7062C13AF3798002A83E4 /* Cover-Bluray.png */,
+				57F7062913AF32E5002A83E4 /* Cover-DVD.png */,
 				57D19A2513AEF48700BDE873 /* FilterBarBackground.png */,
 				57D19A2613AEF48700BDE873 /* OverflowButton.tif */,
 				57D19A2713AEF48700BDE873 /* OverflowButtonPressed.tif */,
@@ -1200,6 +1206,8 @@
 				57D19A2A13AEF48700BDE873 /* OverflowButton.tif in Resources */,
 				57D19A2B13AEF48700BDE873 /* OverflowButtonPressed.tif in Resources */,
 				57D19A2C13AEF48700BDE873 /* OverflowDivider.png in Resources */,
+				57F7062B13AF32E5002A83E4 /* Cover-DVD.png in Resources */,
+				57F7062D13AF3798002A83E4 /* Cover-Bluray.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

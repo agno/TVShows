@@ -166,9 +166,11 @@
 
 - (void) refreshShowList:(NSNotification *)inNotification
 {
+    [filterBar selectIndex:0 inSegment:0];
+    [filterBar selectIndex:0 inSegment:1];
+    [filterField setStringValue:@""];
     [subscriptionsDelegate refresh];
     [SBArrayController setManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
-    [self filterSubscriptions:nil];
 }
 
 - (void) animateDonateButton
@@ -213,7 +215,7 @@
     
     // newWinHeight should be equal to the wanted window size (in Interface Builder) + 54 (title bar height)
     if ([[tabViewItem identifier] isEqualTo:@"tabItemSubscriptions"]) {
-        newWinHeight = 588;
+        newWinHeight = 597;
     } else if ([[tabViewItem identifier] isEqualTo:@"tabItemSync"]) {
         newWinHeight = 396;
     } else if ([[tabViewItem identifier] isEqualTo:@"tabItemPreferences"]) {
@@ -221,7 +223,7 @@
     }  else if ([[tabViewItem identifier] isEqualTo:@"tabItemAbout"]) {
         newWinHeight = 500;
     } else {
-        newWinHeight = 588;
+        newWinHeight = 610;
     }
     
     tabFrame = NSMakeRect(tabFrame.origin.x, tabFrame.origin.y - (newWinHeight - (int)(NSHeight(tabFrame))), (int)(NSWidth(tabFrame)), newWinHeight);
