@@ -15,14 +15,12 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface WebsiteFunctions : NSObject
-{
-
+@interface TSTorrentFunctions : NSObject {
 }
 
-+ (BOOL) canConnectToHostname:(NSString *)hostName;
-+ (BOOL) canConnectToURL:(NSString *)url;
-+ (NSData *) downloadDataFrom:(NSString *)url;
-+ (NSString *) downloadStringFrom:(NSString *)url;
++ (BOOL) dataIsValidTorrent:(NSData *)data;
++ (BOOL) downloadEpisode:(NSObject *)episode ofShow:(NSObject *)show;
++ (BOOL) shouldDownloadSDForEpisode:(NSString *)episodeName;
++ (NSString *) saveLocationForEpisode:(NSObject *)episode ofShow:(NSString *)showName;
 
 @end

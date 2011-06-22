@@ -132,17 +132,15 @@
 - (void) refresh
 {
     // Delete the data
-    if (managedObjectContext) {
-        [managedObjectContext release];
-        managedObjectContext = nil;
-    }
     if (persistentStoreCoordinator) {
         [persistentStoreCoordinator release];
         persistentStoreCoordinator = nil;
     }
     
-    // This forces the reload
-    [self managedObjectContext];
+    if (managedObjectContext) {
+        [managedObjectContext release];
+        managedObjectContext = nil;
+    }
 }
 
 // Implementation of dealloc, to release the retained variables.

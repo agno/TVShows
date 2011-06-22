@@ -65,10 +65,6 @@
 - (IBAction) quitHelper:(id)sender;
 
 #pragma mark -
-#pragma mark Download Methods
-- (BOOL) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName andShowName:(NSString *)show;
-
-#pragma mark -
 #pragma mark Sparkle Delegate Methods
 - (void) updater:(SUUpdater *)updater didFindValidUpdate:(SUAppcastItem *)update;
 

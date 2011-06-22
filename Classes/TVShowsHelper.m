@@ -19,10 +19,10 @@
 #import "TSParseXMLFeeds.h"
 #import "TSUserDefaults.h"
 #import "SUUpdaterSubclass.h"
-#import "WebsiteFunctions.h"
 #import "RegexKitLite.h"
 #import "TSRegexFun.h"
 #import "TheTVDB.h"
+#import "TSTorrentFunctions.h"
 
 @implementation TVShowsHelper
 
@@ -320,6 +320,38 @@
     [misoBackend authorizeWithKey:MISO_API_KEY secret:MISO_API_SECRET];
 }
 
+- (void)checkinEpisode:(NSString *)episodeName ofShow:(NSString *)showName
+{
+    if ([TSUserDefaults getBoolFromKey:@"MisoEnabled" withDefault:NO] &&
+        [TSUserDefaults getBoolFromKey:@"MisoCheckInEnabled" withDefault:NO]) {
+        
+        NSArray *seasonAndEpisode = [TSRegexFun parseSeasonAndEpisode:episodeName];
+        
+        if ([seasonAndEpisode count] == 3) {
+            
+            // Search for it on Miso
+            NSDictionary *results = [misoBackend showWithQuery:showName];
+            
+            NSObject *show = nil;
+            
+            // Just pick the first show (too late, I cannot even think anymore)
+            for (NSObject *result in results) {
+                show = result;
+                break;
+            }
+            
+            // At this point, it should be a valid show, but maybe it is not on the Miso database yet
+            if (show) {
+                LogInfo(@"Adding check-in for %@ on Miso.", episodeName);
+                
+                [misoBackend addCheckingForShow:[[[show valueForKey:@"media"] valueForKey:@"id"] description]
+                                  withSeasonNum:[TSRegexFun removeLeadingZero:[seasonAndEpisode objectAtIndex:1]]
+                                     episodeNum:[TSRegexFun removeLeadingZero:[seasonAndEpisode objectAtIndex:2]]];
+            }
+        }
+    }
+}
+
 - (void) runLoop
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
@@ -523,16 +555,25 @@
                  ![[episode valueForKey:@"isHD"] boolValue]) ||
                 chooseAnyVersion) {
                 
+                BOOL downloaded = NO;
+                
                 // If the user has Miso enabled, check if there is a check-in for that episode
-                // Otherwise download the episode
-                if ([self hasCheckInForShow:show andEpisode:episode] ||
-                    [self startDownloadingURL:[episode valueForKey:@"link"]
-                                 withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
-                                  andShowName:[show valueForKey:@"name"]]) {
-                    // Update the last downloaded episode name only if it was aired after the previous stored one
+                if ([self hasCheckInForShow:show andEpisode:episode]) {
+                    downloaded = YES;
+                }
+                
+                // Otherwise download the episode! With mirrors (they are stored in a string separated by #)
+                if (!downloaded && [TSTorrentFunctions downloadEpisode:episode ofShow:show]) {
+                    downloaded = YES;
+                    
+                    // Checkin the episode on Miso
+                    [self checkinEpisode:[episode valueForKey:@"episodeName"] ofShow:[show valueForKey:@"name"]];
+                }
+                
+                // Update the last downloaded episode name only if it was aired after the previous stored one
+                if (downloaded) {
                     if ([TSRegexFun wasThisEpisode:episodeName
                                  airedAfterThisOne:[show valueForKey:@"sortName"]]) {
-                        // Update when the show was last downloaded
                         [show setValue:pubDate forKey:@"lastDownloaded"];
                         [show setValue:episodeName forKey:@"sortName"];
                         [[subscriptionsDelegate managedObjectContext] processPendingChanges];
@@ -707,131 +748,6 @@
     [NSApp terminate];
 }
 
-- (void)checkinEpisode:(NSString *)episodeName ofShow:(NSString *)showName
-{
-    if ([TSUserDefaults getBoolFromKey:@"MisoEnabled" withDefault:NO] &&
-        [TSUserDefaults getBoolFromKey:@"MisoCheckInEnabled" withDefault:NO]) {
-        
-        NSArray *seasonAndEpisode = [TSRegexFun parseSeasonAndEpisode:episodeName];
-        
-        if ([seasonAndEpisode count] == 3) {
-            
-            // Search for it on Miso
-            NSDictionary *results = [misoBackend showWithQuery:showName];
-            
-            NSObject *show = nil;
-            
-            // Just pick the first show (too late, I cannot even think anymore)
-            for (NSObject *result in results) {
-                show = result;
-                break;
-            }
-            
-            // At this point, it should be a valid show, but maybe it is not on the Miso database yet
-            if (show) {
-                LogInfo(@"Adding check-in for %@ on Miso.", episodeName);
-                
-                [misoBackend addCheckingForShow:[[[show valueForKey:@"media"] valueForKey:@"id"] description]
-                                  withSeasonNum:[TSRegexFun removeLeadingZero:[seasonAndEpisode objectAtIndex:1]]
-                                     episodeNum:[TSRegexFun removeLeadingZero:[seasonAndEpisode objectAtIndex:2]]];
-            }
-        }
-    }
-}
-
-#pragma mark -
-#pragma mark Download Methods
-- (BOOL) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName andShowName:(NSString *)show
-{
-    // Process the URL if the is not found
-    if ([url rangeOfString:@"http"].location == NSNotFound) {
-        LogInfo(@"Retrieving an HD torrent file from Torrentz of: %@", url);
-        url = [TorrentzParser getAlternateTorrentForEpisode:url];
-        if (url == nil) {
-            LogError(@"Unable to find an HD torrent file for: %@", fileName);
-            return NO;
-        }
-    }
-    
-    // Build the saving folder
-    NSString *saveLocation = [TSUserDefaults getStringFromKey:@"downloadFolder"];
-    
-    // Check if we have to sort shows by folders or not
-    if ([TSUserDefaults getBoolFromKey:@"SortInFolders" withDefault:NO]) {
-        saveLocation = [saveLocation stringByAppendingPathComponent:show];
-        if (![[NSFileManager defaultManager] createDirectoryAtPath:saveLocation
-                                       withIntermediateDirectories:YES
-                                                        attributes:nil
-                                                             error:nil]) {
-            LogError(@"Unable to create the folder: %@", saveLocation);
-            return NO;
-        }
-        // And check if we have to go deeper (sorting by season)
-        if ([TSUserDefaults getBoolFromKey:@"SeasonSubfolders" withDefault:NO]) {
-            NSArray *seasonAndEpisode = [TSRegexFun parseSeasonAndEpisode:fileName];
-            if ([seasonAndEpisode count] == 3) {
-                saveLocation = [saveLocation stringByAppendingPathComponent:
-                                [NSString stringWithFormat:@"Season %@",
-                                 [TSRegexFun removeLeadingZero:[seasonAndEpisode objectAtIndex:1]]]];
-                if (![[NSFileManager defaultManager] createDirectoryAtPath:saveLocation
-                                               withIntermediateDirectories:YES
-                                                                attributes:nil
-                                                                     error:nil]) {
-                    LogError(@"Unable to create the folder: %@", saveLocation);
-                    return NO;
-                }
-            }
-        }
-    }
-    
-    // Add the filename
-    saveLocation = [saveLocation stringByAppendingPathComponent:fileName];
-    
-    LogInfo(@"Attempting to download new episode: %@", fileName);
-    NSData *fileContents = [WebsiteFunctions downloadDataFrom:url];
-    
-    // Check if the download was right
-    if (!fileContents || ![WebsiteFunctions dataIsValidTorrent:fileContents]) {
-        LogError(@"Unable to download file: %@ <%@>", fileName, url);
-        
-        // Failure!
-        return NO;
-    } else {
-        // The file downloaded successfully, continuing...
-        LogInfo(@"Episode downloaded successfully.");
-        
-        [fileContents writeToFile:saveLocation atomically:YES];
-        
-        // Bounce the downloads stack!
-        [[NSDistributedNotificationCenter defaultCenter]
-            postNotificationName:@"com.apple.DownloadFileFinished" object:saveLocation];
-        
-        // Check to see if the user wants to automatically open new downloads
-        if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
-            [[NSWorkspace sharedWorkspace] openFile:saveLocation withApplication:nil andDeactivate:NO];
-        }
-        
-        if([TSUserDefaults getBoolFromKey:@"GrowlOnNewEpisode" withDefault:1]) {
-            NSData *cover = [[NSData alloc] initWithData:[[TheTVDB getPosterForShow:show withShowID:@"0" withHeight:96 withWidth:66] TIFFRepresentation]];
-            
-            [GrowlApplicationBridge notifyWithTitle:[NSString stringWithFormat:@"%@", show]
-                                    description:[NSString stringWithFormat:TSLocalizeString(@"A new episode of %@ is being downloaded."), show]
-                               notificationName:@"New Episode Downloaded"
-                                       iconData:cover
-                                       priority:0
-                                       isSticky:0
-                                   clickContext:nil];
-            [cover autorelease];
-        }
-        
-        // Checkin the episode on Miso
-        [self checkinEpisode:fileName ofShow:show];
-        
-        // Success!
-        return YES;
-    }
-}
-
 #pragma mark -
 #pragma mark Sparkle Delegate Methods
 - (void) updater:(SUUpdater *)updater didFindValidUpdate:(SUAppcastItem *)update
@@ -861,7 +777,7 @@
                                notificationName:@"TVShows Update Available"
                                        iconData:TVShowsHelperIcon
                                        priority:0
-                                       isSticky:0
+                                       isSticky:YES
                                    clickContext:nil];
     }
 }

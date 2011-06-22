@@ -97,7 +97,6 @@
 #pragma mark -
 #pragma mark Subscription Methods
 - (IBAction) subscribeToShow:(id)sender;
-- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName andShowName:(NSString *)show;
 - (BOOL) userIsSubscribedToShow:(NSString*)showName;
 
 @end

@@ -69,17 +69,4 @@
     return content;
 }
 
-+ (BOOL) dataIsValidTorrent:(NSData *) data
-{
-    NSString *string = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-    
-    if ([[string substringToIndex:11] isEqualToString:@"d8:announce"]) {
-        [string release];
-        return YES;
-    } else {
-        [string release];
-        return NO;
-    }
-}
-
 @end

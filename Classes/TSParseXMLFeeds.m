@@ -97,8 +97,9 @@
     [episodeArray release];
 }
 
-+ (BOOL) getEpisode:(NSMutableDictionary *)episode fromArray:(NSArray *)episodes
++ (NSInteger) getEpisode:(NSMutableDictionary *)episode fromArray:(NSArray *)episodes
 {
+    NSInteger i = 0;
     for (NSMutableDictionary *ep in episodes) {
         if ([[[[[[[episode valueForKey:@"episodeName"] lowercaseString]
                  stringByReplacingOccurrencesOfRegex:@"\\s+us\\s+" withString:@" "]
@@ -112,13 +113,51 @@
                stringByReplacingOccurrencesOfRegex:@"\\s+and\\s+" withString:@" "]
               stringByReplacingOccurrencesOfRegex:@"\\s+&\\s+" withString:@" "]] &&
             [[episode valueForKey:@"isHD"] boolValue] == [[ep valueForKey:@"isHD"] boolValue]) {
-            return YES;
+            return i;
         }
-        if ([[episode valueForKey:@"episodeName"] isEqualToString:@""]) {
-            return YES;
-        }
+        i++;
     }
-    return NO;
+    return NSNotFound;
+}
+
++ (NSMutableArray *) fakeEpisodes:(NSMutableArray *)episodes
+{
+    NSMutableArray *fakeEpisodes = [[NSMutableArray alloc] init];
+    
+    for (NSMutableDictionary *realEpisode in episodes) {
+        
+        [fakeEpisodes addObject:realEpisode];
+        
+        // Ignore this episode if it is a daily show
+        // The scene does not release late nights regularly
+        // Also ignore episodes that are already in HD
+        if ([[realEpisode valueForKey:@"episodeSeason"] isEqualToString:@"-"] ||
+            [[realEpisode valueForKey:@"isHD"] isEqualToString:[NSString stringWithFormat:@"%d", YES]]) {
+            continue;
+        }
+        
+        NSMutableDictionary *fakeEpisode = [[NSMutableDictionary alloc] init];
+        
+        [fakeEpisode setValue:[realEpisode valueForKey:@"episodeName"]     forKey:@"episodeName"];
+        [fakeEpisode setValue:[realEpisode valueForKey:@"pubDate"]         forKey:@"pubDate"];
+        // Append the name as first link, that will tell the TorrentzParser to search for an HD torrent
+        [fakeEpisode setValue:[[realEpisode valueForKey:@"episodeName"]
+                               stringByAppendingFormat:@"#%@", [realEpisode valueForKey:@"link"]]
+                       forKey:@"link"];
+        [fakeEpisode setValue:[realEpisode valueForKey:@"episodeSeason"]   forKey:@"episodeSeason"];
+        [fakeEpisode setValue:[realEpisode valueForKey:@"episodeNumber"]   forKey:@"episodeNumber"];
+        [fakeEpisode setValue:[NSString stringWithFormat:@"%d", YES]       forKey:@"isHD"];
+        [fakeEpisode setValue:@"✓"                                         forKey:@"qualityString"];
+        
+        // Check if the episode is already in HD
+        if ([self getEpisode:fakeEpisode fromArray:episodes] == NSNotFound) {
+            [fakeEpisodes addObject:fakeEpisode];
+        }
+        
+        [fakeEpisode autorelease];
+    }
+    
+    return fakeEpisodes;
 }
 
 + (NSArray *) parseEpisodesFromFeeds:(NSArray *)urls maxItems:(int)maxItems
@@ -129,49 +168,24 @@
     for (NSString *url in urls) {
         for (NSMutableDictionary *episode in [self parseEpisodesFromFeed:url maxItems:maxItems]) {
             // For each episode add it to the results if the episode is not already in the results
-            if (![self getEpisode:episode fromArray:episodes]) {
-                [episodes addObject:episode];
+            NSInteger mirrorIndex = [self getEpisode:episode fromArray:episodes];
+            // If the episode already exists, add the episode
+            if (mirrorIndex != NSNotFound) {
+                [[episodes objectAtIndex:mirrorIndex]
+                 setValue:[[[episodes objectAtIndex:mirrorIndex] valueForKey:@"link"]
+                           stringByAppendingFormat:@"#%@", [episode valueForKey:@"link"]]
+                   forKey:@"link"];
+            } else {
+                if (![[episode valueForKey:@"episodeName"] isEqualToString:@""]) {
+                    [episodes addObject:episode];
+                }
             }
         }
     }
     
     // Fake HD episodes!
     if ([TSUserDefaults getBoolFromKey:@"UseAdditionalSourcesHD" withDefault:YES]) {
-        
-        // We are going to populate an array with both fake and real episodes
-        NSMutableArray *fakeEpisodes = [[[NSMutableArray alloc] init] autorelease];
-        
-        for (NSMutableDictionary *realEpisode in episodes) {
-            // Add the real episode to the temporal array
-            [fakeEpisodes addObject:realEpisode];
-            
-            // Ignore this episode if it is a daily show
-            // The scene does not release late nights regularly
-            // Also check that the show is not in the array
-            if ([[realEpisode valueForKey:@"episodeSeason"] isEqualToString:@"-"]) {
-                continue;
-            }
-            
-            NSMutableDictionary *fakeEpisode = [[NSMutableDictionary alloc] init];
-            
-            [fakeEpisode setValue:[realEpisode valueForKey:@"episodeName"]     forKey:@"episodeName"];
-            [fakeEpisode setValue:[realEpisode valueForKey:@"pubDate"]         forKey:@"pubDate"];
-            [fakeEpisode setValue:[realEpisode valueForKey:@"episodeName"]     forKey:@"link"];
-            [fakeEpisode setValue:[realEpisode valueForKey:@"episodeSeason"]   forKey:@"episodeSeason"];
-            [fakeEpisode setValue:[realEpisode valueForKey:@"episodeNumber"]   forKey:@"episodeNumber"];
-            [fakeEpisode setValue:[NSString stringWithFormat:@"%d", YES]       forKey:@"isHD"];
-            [fakeEpisode setValue:@"✓"                                         forKey:@"qualityString"];
-            
-            // Check if the episode is already in HD
-            if (![self getEpisode:fakeEpisode fromArray:episodes]) {
-                [fakeEpisodes addObject:fakeEpisode];
-            }
-            
-            [fakeEpisode release];
-        }
-        
-        // Release the old copy and update it with the one with all episodes
-        episodes = fakeEpisodes;        
+        episodes = [self fakeEpisodes:episodes];
     }
     
     // Sort results by date

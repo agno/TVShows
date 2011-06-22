@@ -21,6 +21,7 @@
 #import "TSParseXMLFeeds.h"
 #import "TSUserDefaults.h"
 #import "TSRegexFun.h"
+#import "TSTorrentFunctions.h"
 
 #import "TorrentzParser.h"
 #import "TheTVDB.h"
@@ -630,102 +631,10 @@
     }
 }
 
-- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName andShowName:(NSString *)show
-{
-    // Process the URL if the is not found
-    if ([url rangeOfString:@"http"].location == NSNotFound) {
-        LogInfo(@"Retrieving an HD torrent file from Torrentz of: %@", url);
-        url = [TorrentzParser getAlternateTorrentForEpisode:url];
-        if (url == nil) {
-            LogError(@"Unable to find an HD torrent file for: %@", fileName);
-            
-            // Display the error
-            NSRunCriticalAlertPanel([NSString stringWithFormat:TSLocalizeString(@"Unable to find an HD torrent for %@"), fileName],
-                                    TSLocalizeString(@"The file may not be released yet. Please try again later or check your internet connection. Alternatively you can download the SD version."),
-                                    TSLocalizeString(@"Ok"),
-                                    nil,
-                                    nil);
-            
-            return;
-        }
-    }
-    
-    // Build the saving folder
-    NSString *saveLocation = [TSUserDefaults getStringFromKey:@"downloadFolder"];
-    
-    // Check if we have to sort shows by folders or not
-    if ([TSUserDefaults getBoolFromKey:@"SortInFolders" withDefault:NO]) {
-        saveLocation = [saveLocation stringByAppendingPathComponent:show];
-        if (![[NSFileManager defaultManager] createDirectoryAtPath:saveLocation
-                                       withIntermediateDirectories:YES
-                                                        attributes:nil
-                                                             error:nil]) {
-            LogError(@"Unable to create the folder: %@", saveLocation);
-            return;
-        }
-        // And check if we have to go deeper (sorting by season)
-        if ([TSUserDefaults getBoolFromKey:@"SeasonSubfolders" withDefault:NO]) {
-            NSArray *seasonAndEpisode = [TSRegexFun parseSeasonAndEpisode:fileName];
-            if ([seasonAndEpisode count] == 3) {
-                saveLocation = [saveLocation stringByAppendingPathComponent:
-                                [NSString stringWithFormat:@"Season %@",
-                                 [TSRegexFun removeLeadingZero:[seasonAndEpisode objectAtIndex:1]]]];
-                if (![[NSFileManager defaultManager] createDirectoryAtPath:saveLocation
-                                               withIntermediateDirectories:YES
-                                                                attributes:nil
-                                                                     error:nil]) {
-                    LogError(@"Unable to create the folder: %@", saveLocation);
-                    return;
-                }
-            }
-        }
-    }
-    
-    // Add the filename
-    saveLocation = [saveLocation stringByAppendingPathComponent:fileName];
-    
-    // Method copied from TVShowsHelper.m
-    LogInfo(@"Attempting to download new episode: %@", fileName);
-    NSData *fileContents = [WebsiteFunctions downloadDataFrom:url];
-    
-    if (!fileContents || ![WebsiteFunctions dataIsValidTorrent:fileContents]) {
-        LogError(@"Unable to download file: %@ <%@>",fileName, url);
-        
-        // Display the error
-        NSRunCriticalAlertPanel([NSString stringWithFormat:TSLocalizeString(@"Unable to download %@"), fileName],
-                                TSLocalizeString(@"Cannot connect. Please try again later or check your internet connection"),
-                                TSLocalizeString(@"Ok"),
-                                nil,
-                                nil);
-        
-    } else {
-        // The file downloaded successfully, continuing...
-        LogInfo(@"Episode downloaded successfully.");
-        
-        [fileContents writeToFile:saveLocation atomically:YES];
-        
-        // Bounce the downloads stack!
-        [[NSDistributedNotificationCenter defaultCenter]
-            postNotificationName:@"com.apple.DownloadFileFinished" object:saveLocation];
-        
-        // Check to see if the user wants to automatically open new downloads
-        if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
-            [[NSWorkspace sharedWorkspace] openFile:saveLocation withApplication:nil andDeactivate:NO];
-        }
-        
-        // Notify to the process that a download was done (to check-in in Miso)
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"TSDownloadEpisode"
-                                                            object:nil
-                                                          userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                    fileName, @"fileName",
-                                                                    show, @"showName", nil]];
-    }
-}
-
 - (BOOL) tableView:(NSTableView *)aTableView shouldSelectRow:(NSInteger)rowIndex
 {
     // Check to see whether or not this is the GET button or not.
-
+    
     // Which column and row was clicked?
     NSInteger clickedCol = [episodeTableView clickedColumn];
     NSInteger clickedRow = [episodeTableView clickedRow];
@@ -739,9 +648,26 @@
             // This currently only returns a Torrent file and should eventually regex
             // out the actual file extension of the item we're downloading.
             NSObject *episode = [[episodeArrayController arrangedObjects] objectAtIndex:clickedRow];
-            [self startDownloadingURL:[episode valueForKey:@"link"]
-                         withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
-                          andShowName:[selectedShow valueForKey:@"name"]];
+            
+            // If correctly download, check-in on Miso
+            if ([TSTorrentFunctions downloadEpisode:episode ofShow:selectedShow]) {
+                // Notify to the process that a download was done (to check-in in Miso)
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"TSDownloadEpisode"
+                                                                    object:nil
+                                                                  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                            [episode valueForKey:@"episodeName"],
+                                                                            @"episodeName",
+                                                                            [selectedShow valueForKey:@"name"],
+                                                                            @"showName", nil]];
+            } else {
+                // Display the error
+                NSRunCriticalAlertPanel([NSString stringWithFormat:TSLocalizeString(@"Unable to download %@"),
+                                         [episode valueForKey:@"episodeName"]],
+                                        TSLocalizeString(@"Cannot connect. Please try again later or check your internet connection"),
+                                        TSLocalizeString(@"Ok"),
+                                        nil,
+                                        nil);
+            }
         }
     }
 

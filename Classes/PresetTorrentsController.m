@@ -20,9 +20,10 @@
 #import "TSUserDefaults.h"
 #import "TSParseXMLFeeds.h"
 #import "TSRegexFun.h"
+#import "TSTorrentFunctions.h"
+#import "WebsiteFunctions.h"
 
 #import "RegexKitLite.h"
-#import "WebsiteFunctions.h"
 #import "TheTVDB.h"
 #import "TorrentzParser.h"
 #import "NSXMLNode-utils.h"
@@ -231,8 +232,6 @@
 
 - (void) updateSubscriptions
 {
-    NSString *name;
-    
     // Update all subscriptions
     for (NSManagedObject *show in [SBArrayController arrangedObjects]) {
         
@@ -244,7 +243,7 @@
             
             // Search in every known show
             for (NSMutableDictionary *showDict in [PTArrayController arrangedObjects]) {
-                name = [show valueForKey:@"name"];
+                NSString *name = [show valueForKey:@"name"];
                 
                 // Fix some shows that changed their names
                 if ([name isEqualToString:@"30 Seconds AU"]) name = @"30 Seconds";
@@ -274,7 +273,7 @@
                     [show setValue:[showDict valueForKey:@"displayName"] forKey:@"name"];
                     if (cleanSortName) [show setValue:[showDict valueForKey:@"sortName"] forKey:@"sortName"];
                     [show setValue:[showDict valueForKey:@"tvdbID"] forKey:@"tvdbID"];
-                    [show setValue:[showDict valueForKey:@"name"] forKey:@"url"];
+                    if ([showDict valueForKey:@"name"]) [show setValue:[showDict valueForKey:@"name"] forKey:@"url"];
                     
                     // Great, so it is not cancelled
                     cancelled = NO;
@@ -309,10 +308,6 @@
     }
     
     LogInfo(@"Downloading an updated show list.");
-    
-    NSString *displayName, *sortName;
-    NSMutableString *name;
-    int tvdbID;
     
     // The rest of this method is extremely messy but it works for the time being
     // Feel free to improve it if you find a way
@@ -356,26 +351,31 @@
             NSManagedObject *showObj = [NSEntityDescription insertNewObjectForEntityForName:@"Show"
                                                                      inManagedObjectContext:[presetsDelegate managedObjectContext]];
             
-            displayName = [[show childNamed:@"name"] stringValue];
-            sortName = [displayName stringByReplacingOccurrencesOfRegex:@"^The[[:space:]]" withString:@""];
-            tvdbID = [[[show childNamed:@"tvdbid"] stringValue] intValue];
+            NSString *displayName = [[show childNamed:@"name"] stringValue];
+            NSString *sortName = [displayName stringByReplacingOccurrencesOfRegex:@"^The[[:space:]]" withString:@""];
+            int tvdbID = [[[show childNamed:@"tvdbid"] stringValue] intValue];
             
             // Now we get to the really tricky part. We are going to use the name to store
             // all the feed urls for this tv show. WHY? Because we cannot change the
             // CoreData store until we moved this preference pane to an app
-            name = [[[NSMutableString alloc] init] autorelease];
+            NSMutableString *name = [[NSMutableString alloc] init];
+            
+            NSArray *array = [[show childNamed:@"mirrors"] childrenAsStrings];
             
             // We concatenate every feed separating them with #
-            for (NSString *feed in [[show childNamed:@"mirrors"] childrenAsStrings]) {
+            for (NSString *feed in array) {
                 [name appendFormat:@"%@#", feed];
             }
             
             [showObj setValue:displayName forKey:@"displayName"];
-            [showObj setValue:name forKey:@"name"];
+            [showObj setValue:[name description] forKey:@"name"];
             [showObj setValue:sortName forKey:@"sortName"];
             [showObj setValue:[NSDate date] forKey:@"dateAdded"];
             [showObj setValue:[NSNumber numberWithInt:tvdbID] forKey:@"tvdbID"];
             [showObj setValue:[NSNumber numberWithInt:tvdbID] forKey:@"showrssID"];
+            
+            [array release];
+            [name release];
             
             [PTArrayController addObject:showObj];
         }
@@ -742,93 +742,16 @@
     if ([otherEpisodeButton state]) {
         for (int i = 0; i <= [episodeTableView selectedRow]; i++) {
             NSObject *episode = [[episodeArrayController arrangedObjects] objectAtIndex:i];
-            [self startDownloadingURL:[episode valueForKey:@"link"]
-                         withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
-                          andShowName:[selectedShow valueForKey:@"displayName"]];
-        }
-    }
-}
-
-- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName andShowName:(NSString *)show
-{
-    // Process the URL if the is not found
-    if ([url rangeOfString:@"http"].location == NSNotFound) {
-        LogInfo(@"Retrieving an HD torrent file from Torrentz of: %@", url);
-        url = [TorrentzParser getAlternateTorrentForEpisode:url];
-        if (url == nil) {
-            LogError(@"Unable to find an HD torrent file for: %@", fileName);
-            
-            // Display the error
-            NSRunCriticalAlertPanel([NSString stringWithFormat:TSLocalizeString(@"Unable to find an HD torrent for %@"), fileName],
-                                    TSLocalizeString(@"The file may not be released yet. Please try again later or check your internet connection. Alternatively you can download the SD version."),
-                                    TSLocalizeString(@"Ok"),
-                                    nil,
-                                    nil);
-            
-            return;
-        }
-    }
-    
-    // Build the saving folder
-    NSString *saveLocation = [TSUserDefaults getStringFromKey:@"downloadFolder"];
-    
-    // Check if we have to sort shows by folders or not
-    if ([TSUserDefaults getBoolFromKey:@"SortInFolders" withDefault:NO]) {
-        saveLocation = [saveLocation stringByAppendingPathComponent:show];
-        if (![[NSFileManager defaultManager] createDirectoryAtPath:saveLocation
-                                       withIntermediateDirectories:YES
-                                                        attributes:nil
-                                                             error:nil]) {
-            LogError(@"Unable to create the folder: %@", saveLocation);
-            return;
-        }
-        // And check if we have to go deeper (sorting by season)
-        if ([TSUserDefaults getBoolFromKey:@"SeasonSubfolders" withDefault:NO]) {
-            NSArray *seasonAndEpisode = [TSRegexFun parseSeasonAndEpisode:fileName];
-            if ([seasonAndEpisode count] == 3) {
-                saveLocation = [saveLocation stringByAppendingPathComponent:
-                                [NSString stringWithFormat:@"Season %@",
-                                 [TSRegexFun removeLeadingZero:[seasonAndEpisode objectAtIndex:1]]]];
-                if (![[NSFileManager defaultManager] createDirectoryAtPath:saveLocation
-                                               withIntermediateDirectories:YES
-                                                                attributes:nil
-                                                                     error:nil]) {
-                    LogError(@"Unable to create the folder: %@", saveLocation);
-                    return;
-                }
+            if (![TSTorrentFunctions downloadEpisode:episode
+                                              ofShow:newSubscription]) {
+                // Display the error
+                NSRunCriticalAlertPanel([NSString stringWithFormat:TSLocalizeString(@"Unable to download %@"),
+                                         [episode valueForKey:@"episodeName"]],
+                                        TSLocalizeString(@"Cannot connect. Please try again later or check your internet connection"),
+                                        TSLocalizeString(@"Ok"),
+                                        nil,
+                                        nil);
             }
-        }
-    }
-    
-    // Add the filename
-    saveLocation = [saveLocation stringByAppendingPathComponent:fileName];
-    
-    // Method copied from TVShowsHelper.m
-    LogInfo(@"Attempting to download new episode: %@", fileName);
-    NSData *fileContents = [WebsiteFunctions downloadDataFrom:url];
-    
-    if (!fileContents || ![WebsiteFunctions dataIsValidTorrent:fileContents]) {
-        LogError(@"Unable to download file: %@ <%@>",fileName, url);
-        
-        // Display the error
-        NSRunCriticalAlertPanel([NSString stringWithFormat:TSLocalizeString(@"Unable to download %@"), fileName],
-                                TSLocalizeString(@"Cannot connect. Please try again later or check your internet connection"),
-                                TSLocalizeString(@"Ok"),
-                                nil,
-                                nil);
-    } else {
-        // The file downloaded successfully, continuing...
-        LogInfo(@"Episode downloaded successfully.");
-        
-        [fileContents writeToFile:saveLocation atomically:YES];
-        
-        // Bounce the downloads stack!
-        [[NSDistributedNotificationCenter defaultCenter]
-            postNotificationName:@"com.apple.DownloadFileFinished" object:saveLocation];
-        
-        // Check to see if the user wants to automatically open new downloads
-        if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
-            [[NSWorkspace sharedWorkspace] openFile:saveLocation withApplication:nil andDeactivate:NO];
         }
     }
 }

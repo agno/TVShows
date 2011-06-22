@@ -167,6 +167,8 @@
 		575C0D59136A487A005DE73D /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = 575C0D58136A487A005DE73D /* VERSION */; };
 		575C0D5A136A487A005DE73D /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = 575C0D58136A487A005DE73D /* VERSION */; };
 		577322A613ACC608002F0926 /* PresetShowsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 347F1E6711AA090D005A40AA /* PresetShowsDelegate.m */; };
+		5786454E13B1380900C840C3 /* TSTorrentFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5786454D13B1380900C840C3 /* TSTorrentFunctions.m */; };
+		5786454F13B1380900C840C3 /* TSTorrentFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5786454D13B1380900C840C3 /* TSTorrentFunctions.m */; };
 		578A8B9E137048E500786FB8 /* TVShows-Beta-Large.icns in Resources */ = {isa = PBXBuildFile; fileRef = 349FEE031183590500D24FC9 /* TVShows-Beta-Large.icns */; };
 		5791A5F013A925890038A638 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5791A5E713A925890038A638 /* NSObject+SBJSON.m */; };
 		5791A5F113A925890038A638 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5791A5E713A925890038A638 /* NSObject+SBJSON.m */; };
@@ -273,7 +275,6 @@
 		3424AF2111EF643A009C49DD /* ca */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ca; path = Resources/ca.lproj/Localizable.strings; sourceTree = "<group>"; wrapsLines = 1; };
 		3424AF2211EF643C009C49DD /* da */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = da; path = Resources/da.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3424AF2311EF6442009C49DD /* es */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = es; path = Resources/es.lproj/Localizable.strings; sourceTree = "<group>"; };
-		3424AF2B11EF6475009C49DD /* es */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = es; path = Resources/es.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		3424AF2411EF6445009C49DD /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = Resources/fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3424AF2511EF644C009C49DD /* ja */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ja; path = Resources/ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3424AF2611EF644D009C49DD /* nb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nb; path = Resources/nb.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -462,6 +463,8 @@
 		5755750D136DC9E5006D1FC9 /* TVShows-Menu-Icon-White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TVShows-Menu-Icon-White.png"; sourceTree = "<group>"; };
 		5755750E136DC9E5006D1FC9 /* TVShows-Menu-Icon-Black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TVShows-Menu-Icon-Black.png"; sourceTree = "<group>"; };
 		575C0D58136A487A005DE73D /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
+		5786454C13B1380900C840C3 /* TSTorrentFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; path = TSTorrentFunctions.h; sourceTree = "<group>"; };
+		5786454D13B1380900C840C3 /* TSTorrentFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTorrentFunctions.m; sourceTree = "<group>"; };
 		5791A5E513A925890038A638 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		5791A5E613A925890038A638 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		5791A5E713A925890038A638 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -931,6 +934,8 @@
 				345EC8ED13235E4800F36BFF /* ValueTransformers.m */,
 				57A82B0F13953A3500E71F7F /* NSXMLNode-utils.h */,
 				57A82B1013953A3500E71F7F /* NSXMLNode-utils.m */,
+				5786454C13B1380900C840C3 /* TSTorrentFunctions.h */,
+				5786454D13B1380900C840C3 /* TSTorrentFunctions.m */,
 			);
 			name = "Helper Classes";
 			sourceTree = "<group>";
@@ -1326,6 +1331,7 @@
 				5791A5FE13A926D80038A638 /* Miso.m in Sources */,
 				57FDFEBB13A94E310019EDB6 /* TheTVDB.m in Sources */,
 				577322A613ACC608002F0926 /* PresetShowsDelegate.m in Sources */,
+				5786454F13B1380900C840C3 /* TSTorrentFunctions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1409,6 +1415,7 @@
 				57D19A2013AEF44B00BDE873 /* LRFilterButton.m in Sources */,
 				57D19A2113AEF44B00BDE873 /* LRFilterButtonCell.m in Sources */,
 				57D19A2413AEF44B00BDE873 /* LROverflowButton.m in Sources */,
+				5786454E13B1380900C840C3 /* TSTorrentFunctions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
