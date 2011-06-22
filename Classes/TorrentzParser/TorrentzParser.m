@@ -105,10 +105,11 @@
             torrent = [TorrentzParser getTorrentFromTracker:tracker
                                             withLinkMatcher:@"/([^\"]*)\\.torrent"
                                                   appending:@"http://www.btmon.com"];
-        } else if([tracker hasPrefix:@"http://www.torrenthound.com"]) {
-            torrent = [TorrentzParser getTorrentFromTracker:tracker
-                                            withLinkMatcher:@"/torrent/([^\"]*)"
-                                                  appending:@"http://www.torrenthound.com"];
+// Not trustworthy enough
+//        } else if([tracker hasPrefix:@"http://www.torrenthound.com"]) {
+//            torrent = [TorrentzParser getTorrentFromTracker:tracker
+//                                            withLinkMatcher:@"/torrent/([^\"]*)"
+//                                                  appending:@"http://www.torrenthound.com"];
         }
         
         if (torrent != nil) {
