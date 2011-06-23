@@ -129,15 +129,13 @@
     [self drawAboutBox];
     
     // Start the animation about one second after loading this
-    [self performSelector:@selector(filterSubscriptions:) withObject:nil afterDelay:0.5];
-    
-    // Start the animation about one second after loading this
     [self performSelector:@selector(animateDonateButton) withObject:nil afterDelay:1];
 }
 
 - (IBAction) filterSubscriptions:(id)sender
 {
     NSMutableArray *filters = [[NSMutableArray alloc] initWithCapacity:3];
+    
     switch ([filterBar getSelectedIndexInSegment:0]) {
         case 1:
             [filters addObject:[NSPredicate predicateWithFormat:@"isEnabled = 1"]];
@@ -161,17 +159,24 @@
     if ([[filterField stringValue] length] > 0) {
         [filters addObject:[NSPredicate predicateWithFormat:@"name contains[cd] %@", [filterField stringValue]]];
     }
-    [SBArrayController setFilterPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:
-                                           filters]];
+    [SBArrayController setFilterPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:filters]];
+    [filters autorelease];
 }
 
-- (void) refreshShowList:(NSNotification *)inNotification
+- (void) resetFilters
 {
     [filterBar selectIndex:0 inSegment:0];
     [filterBar selectIndex:0 inSegment:1];
     [filterField setStringValue:@""];
+}
+
+- (void) refreshShowList:(NSNotification *)inNotification
+{
     [subscriptionsDelegate refresh];
     [SBArrayController setManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
+    [SBArrayController fetch:nil];
+    [SBArrayController rearrangeObjects];
+    [self resetFilters];
 }
 
 - (void) animateDonateButton
@@ -595,21 +600,40 @@
     [NSApp stopModal];
     [showInfoWindow orderOut: self];
     
-    if (selectedShow != nil) {
-        // NSManagedContext objectWithID is required for it to save changes to the disk.
-        // We also need to update the original selectedShow NSManagedObject so that the
-        // interface displays any changes when the window is opened multiple times a session.
-        NSManagedObject *selectedShowObj = [[subscriptionsDelegate managedObjectContext] objectWithID:[selectedShow objectID]];
+    if (selectedShow != nil && [selectedShow respondsToSelector:@selector(objectID)]) {
         
-        // Update the per-show preferences
-        [selectedShow setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
-        [selectedShow setValue:[NSNumber numberWithBool:[showIsEnabled state]] forKey:@"isEnabled"];
-        [selectedShowObj setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
-        [selectedShowObj setValue:[NSNumber numberWithBool:[showIsEnabled state]] forKey:@"isEnabled"];
-        
-        // Be sure to process pending changes before saving or it won't save correctly.
-        [[subscriptionsDelegate managedObjectContext] processPendingChanges];
-        [subscriptionsDelegate saveAction];
+        // Check if there are changes
+        if (![[selectedShow valueForKey:@"quality"] isEqual:[NSNumber numberWithBool:[showQuality state]]] ||
+            ![[selectedShow valueForKey:@"isEnabled"] isEqual:[NSNumber numberWithBool:[showIsEnabled state]]]) {
+            
+            NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[selectedShow objectID], @"showID",
+                                      [NSNumber numberWithBool:[showQuality state]], @"quality",
+                                      [NSNumber numberWithBool:[showIsEnabled state]], @"isEnabled", nil];
+             
+            // Notify the helper
+            [[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"TSEditSubscription"
+                                                                           object:nil
+                                                                         userInfo:userInfo];
+            
+            // NSManagedContext objectWithID is required for it to save changes to the disk.
+            // We also need to update the original selectedShow NSManagedObject so that the
+            // interface displays any changes when the window is opened multiple times a session.
+            NSManagedObject *selectedShowObj = [[subscriptionsDelegate managedObjectContext] objectWithID:[selectedShow objectID]];
+            // Refresh the show from the subscriptions (it may have changed)
+            [[subscriptionsDelegate managedObjectContext] refreshObject:selectedShowObj mergeChanges:YES];
+            
+            // Update the per-show preferences
+            [selectedShow setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
+            [selectedShow setValue:[NSNumber numberWithBool:[showIsEnabled state]] forKey:@"isEnabled"];
+            [selectedShowObj setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
+            [selectedShowObj setValue:[NSNumber numberWithBool:[showIsEnabled state]] forKey:@"isEnabled"];
+            
+            // Be sure to process pending changes before saving or it won't save correctly.
+            [[subscriptionsDelegate managedObjectContext] processPendingChanges];
+            [subscriptionsDelegate saveAction];
+            
+            [self filterSubscriptions:nil];
+        }
         
         // Reset the selected show
         selectedShow = nil;
@@ -705,21 +729,27 @@
         return;
     }
     
-    // Reload the data (it may have changed)
-    [subscriptionsDelegate refresh];
+    // Notify the helper
+//    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[selectedShow objectID], @"showID", nil];
+//    
+//    [[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"TSRemoveSubscription"
+//                                                                   object:nil
+//                                                                 userInfo:userInfo];
     
+    // And update our "copy"
     NSManagedObject *selectedShowObj = [[subscriptionsDelegate managedObjectContext] objectWithID:[selectedShow objectID]];
+    // Refresh the show from the subscriptions (it may have changed)
+    [[subscriptionsDelegate managedObjectContext] refreshObject:selectedShowObj mergeChanges:YES];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"TSRemoveSubscription"
                                                         object:nil
-                                                      userInfo:(NSDictionary *)selectedShowObj];
+                                                      userInfo:(NSDictionary *)selectedShow];
     
     [[subscriptionsDelegate managedObjectContext] deleteObject:selectedShowObj];
     
     // Be sure to process pending changes before saving or it won't save correctly
     [[subscriptionsDelegate managedObjectContext] processPendingChanges];
     [subscriptionsDelegate saveAction];
-    [SBArrayController setManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
     
     selectedShow = nil;
     

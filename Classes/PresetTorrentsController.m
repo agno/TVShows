@@ -268,6 +268,9 @@
                 
                 // And finally update all the info!
                 if ([name isEqualToString:[showDict valueForKey:@"displayName"]]) {
+                    // Refresh the show from the subscriptions (it may have changed)
+                    [[subscriptionsDelegate managedObjectContext] refreshObject:show mergeChanges:YES];
+                    
                     bool cleanSortName = ([TSRegexFun parseSeasonAndEpisode:[show valueForKey:@"sortName"]] == nil);
                     
                     [show setValue:[showDict valueForKey:@"displayName"] forKey:@"name"];
@@ -277,6 +280,10 @@
                     
                     // Great, so it is not cancelled
                     cancelled = NO;
+                    
+                    // Be sure to process pending changes before saving or it won't save correctly.
+                    [[subscriptionsDelegate managedObjectContext] processPendingChanges];
+                    [subscriptionsDelegate saveAction];
                     
                     break;
                 }
@@ -289,10 +296,6 @@
             }
         }
     }
-    
-    // Be sure to process pending changes before saving or it won't save correctly.
-    [[subscriptionsDelegate managedObjectContext] processPendingChanges];
-    [subscriptionsDelegate saveAction];
 }
 
 - (void) downloadTorrentShowList
@@ -346,8 +349,6 @@
         NSArray *shows = [rootNode children];
         
         for (NSXMLNode *show in shows) {
-            // Yes, it's extremely messy to be adding it to the array controller and to
-            // the MOC separately but I don't have time to debug the issue with 32bit.
             NSManagedObject *showObj = [NSEntityDescription insertNewObjectForEntityForName:@"Show"
                                                                      inManagedObjectContext:[presetsDelegate managedObjectContext]];
             
@@ -358,24 +359,14 @@
             // Now we get to the really tricky part. We are going to use the name to store
             // all the feed urls for this tv show. WHY? Because we cannot change the
             // CoreData store until we moved this preference pane to an app
-            NSMutableString *name = [[NSMutableString alloc] init];
-            
             NSArray *array = [[show childNamed:@"mirrors"] childrenAsStrings];
             
-            // We concatenate every feed separating them with #
-            for (NSString *feed in array) {
-                [name appendFormat:@"%@#", feed];
-            }
-            
             [showObj setValue:displayName forKey:@"displayName"];
-            [showObj setValue:[name description] forKey:@"name"];
+            [showObj setValue:[array componentsJoinedByString:@"#"] forKey:@"name"];
             [showObj setValue:sortName forKey:@"sortName"];
             [showObj setValue:[NSDate date] forKey:@"dateAdded"];
             [showObj setValue:[NSNumber numberWithInt:tvdbID] forKey:@"tvdbID"];
             [showObj setValue:[NSNumber numberWithInt:tvdbID] forKey:@"showrssID"];
-            
-            [array release];
-            [name release];
             
             [PTArrayController addObject:showObj];
         }
@@ -712,9 +703,6 @@
     // Close the modal dialog box
     [self closePresetTorrentsWindow:(id)sender];
     
-    // Reload the data (it may have changed)
-    [subscriptionsDelegate refresh];
-    
     NSManagedObject *newSubscription = [NSEntityDescription insertNewObjectForEntityForName:@"Subscription"
                                                                      inManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
     
@@ -729,31 +717,44 @@
     [newSubscription setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
     [newSubscription setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"TSAddSubscription"
-                                                        object:nil
-                                                      userInfo:(NSDictionary *)newSubscription];
-    
     // Be sure to process pending changes before saving or it won't save correctly
     [[subscriptionsDelegate managedObjectContext] processPendingChanges];
     [subscriptionsDelegate saveAction];
-    [SBArrayController setManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
+    [SBArrayController fetch:nil];
     
-    // If other episode is selected, start with it
+    // If other episode is selected, start with it (spawn background process)
     if ([otherEpisodeButton state]) {
+        NSMutableArray *arguments = [NSMutableArray arrayWithObject:newSubscription];
         for (int i = 0; i <= [episodeTableView selectedRow]; i++) {
-            NSObject *episode = [[episodeArrayController arrangedObjects] objectAtIndex:i];
-            if (![TSTorrentFunctions downloadEpisode:episode
-                                              ofShow:newSubscription]) {
-                // Display the error
-                NSRunCriticalAlertPanel([NSString stringWithFormat:TSLocalizeString(@"Unable to download %@"),
-                                         [episode valueForKey:@"episodeName"]],
-                                        TSLocalizeString(@"Cannot connect. Please try again later or check your internet connection"),
-                                        TSLocalizeString(@"Ok"),
-                                        nil,
-                                        nil);
-            }
+            [arguments addObject:[[episodeArrayController arrangedObjects] objectAtIndex:i]];
+        }
+        [self performSelectorInBackground:@selector(downloadEpisodes:) withObject:arguments];
+    }
+    
+    // Notify Miso to add this subscription :)
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"TSAddSubscription"
+                                                        object:nil
+                                                      userInfo:(NSDictionary *)newSubscription];
+}
+
+- (void) downloadEpisodes:(NSArray *)arguments
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    for (int i = 1; i < [arguments count]; i++) {
+        if (![TSTorrentFunctions downloadEpisode:[arguments objectAtIndex:i]
+                                          ofShow:[arguments objectAtIndex:0]]) {
+            // Display the error
+            NSRunCriticalAlertPanel([NSString stringWithFormat:TSLocalizeString(@"Unable to download %@"),
+                                     [[arguments objectAtIndex:i] valueForKey:@"episodeName"]],
+                                    TSLocalizeString(@"Cannot connect. Please try again later or check your internet connection"),
+                                    TSLocalizeString(@"Ok"),
+                                    nil,
+                                    nil);
         }
     }
+    
+    [pool drain];
 }
 
 - (BOOL) userIsSubscribedToShow:(NSString*)showName

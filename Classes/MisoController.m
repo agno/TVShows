@@ -257,6 +257,8 @@
 
 - (void)followShow:(NSDictionary *)show
 {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
     // Search for it on Miso
     NSDictionary *results = [misoBackend showWithQuery:[show valueForKey:@"name"]];
     
@@ -282,6 +284,8 @@
         
         [misoBackend favoriteShow:[[[newShow valueForKey:@"media"] valueForKey:@"id"] description]];
     }
+    
+    [pool drain];
 }
 
 - (void)followSubscriptions:(NSDictionary *)followedShows
@@ -301,6 +305,8 @@
 
 - (void)unfollowShow:(NSDictionary *)show
 {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
     // Search for it on Miso
     NSDictionary *results = [misoBackend showWithQuery:[show valueForKey:@"name"]];
     
@@ -326,6 +332,8 @@
         
         [misoBackend unfavoriteShow:[[[newShow valueForKey:@"media"] valueForKey:@"id"] description]];
     }
+    
+    [pool drain];
 }
 
 - (void)syncShows
@@ -347,7 +355,7 @@
     if ([TSUserDefaults getBoolFromKey:@"MisoEnabled" withDefault:NO] &&
         [TSUserDefaults getBoolFromKey:@"MisoSyncEnabled" withDefault:YES]) {
         // Retrieve the show data and follow the leader, leader, leader
-        [self followShow:[inNotification userInfo]];
+        [self performSelectorInBackground:@selector(followShow:) withObject:[inNotification userInfo]];
     }
 }
 
@@ -355,12 +363,13 @@
 {
     if ([TSUserDefaults getBoolFromKey:@"MisoEnabled" withDefault:NO] &&
         [TSUserDefaults getBoolFromKey:@"MisoSyncEnabled" withDefault:YES]) {
-        // Get the show data
-        NSDictionary *show = [inNotification userInfo];
-        
         // Disregard custom RSS
-        if (![show valueForKey:@"filters"]) {
-            [self unfollowShow:show];
+        if (![[inNotification userInfo] valueForKey:@"filters"]) {
+            // Copy the data of the show because, in the background, the object will not exists :(
+            NSDictionary *show = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  [[inNotification userInfo] valueForKey:@"name"], @"name",
+                                  [[inNotification userInfo] valueForKey:@"tvdbID"], @"tvdbID", nil];
+            [self performSelectorInBackground:@selector(unfollowShow:) withObject:show];
         }
     }
 }

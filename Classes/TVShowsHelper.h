@@ -22,6 +22,7 @@
 @interface TVShowsHelper : NSObject <GrowlApplicationBridgeDelegate, MisoDelegate>
 {
     BOOL manually;
+    BOOL changed;
     NSThread *checkerThread;
     NSTimer *checkerLoop;
     NSData *TVShowsHelperIcon;

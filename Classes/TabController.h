@@ -86,6 +86,8 @@
 
 - (void) awakeFromNib;
 - (IBAction) filterSubscriptions:(id)sender;
+- (void) resetFilters;
+- (void) refreshShowList:(NSNotification *)inNotification;
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
 - (IBAction) showFeedbackWindow:(id)sender;
 

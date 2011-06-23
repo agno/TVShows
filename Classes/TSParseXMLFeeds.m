@@ -157,7 +157,7 @@
         [fakeEpisode autorelease];
     }
     
-    return fakeEpisodes;
+    return [fakeEpisodes autorelease];
 }
 
 + (NSArray *) parseEpisodesFromFeeds:(NSArray *)urls maxItems:(int)maxItems

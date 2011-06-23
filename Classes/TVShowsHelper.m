@@ -161,6 +161,8 @@
             
             [[subscriptionsDelegate managedObjectContext] processPendingChanges];
             [subscriptionsDelegate saveAction];
+            
+            changed = YES;
         }
     }
 }
@@ -236,6 +238,8 @@
             
             [[subscriptionsDelegate managedObjectContext] processPendingChanges];
             [subscriptionsDelegate saveAction];
+            
+            changed = YES;
         }
     }
 }
@@ -246,10 +250,17 @@
     NSDictionary *followedShows = [misoBackend favoritedShows];
     
     if (followedShows) {
+        changed = NO;
         presetShowsDelegate = [[PresetShowsDelegate alloc] init];
         [self unsubscribeFromUnfollowedShows:followedShows];
         [self subscribeToFollowedShows:followedShows];
         [presetShowsDelegate release];
+        presetShowsDelegate = nil;
+        // Warn the pref pane
+        if (changed) {
+            [[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"TSUpdatedShows" object:nil];
+            changed = NO;
+        }
     }
 }
 
@@ -440,6 +451,9 @@
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
+    // This is to track changes in the Core Data
+    changed = NO;
+    
     // Reload the delegate
     subscriptionsDelegate = [[SubscriptionsDelegate alloc] init];
     
@@ -447,9 +461,6 @@
     if ([TSUserDefaults getBoolFromKey:@"MisoEnabled" withDefault:NO] &&
         [TSUserDefaults getBoolFromKey:@"MisoSyncEnabled" withDefault:YES]) {
         [self syncShows];
-        
-        // Warn the pref pane
-        [[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"TSUpdatedShows" object:nil];
     }
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Subscription"
@@ -481,6 +492,11 @@
     
     // And update the menu to reflect the date
     [self performSelectorOnMainThread:@selector(updateLastCheckedItem) withObject:nil waitUntilDone:NO];
+    
+    // And warn the prefpane if needed
+    if (changed) {
+        [[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"TSUpdatedShows" object:nil];
+    }
     
     [pool drain];
 }
@@ -532,8 +548,7 @@
             // Detect if the last downloaded episode was aired after this one (so do not download it!)
             // Use a cache version (lastEpisodename) because we could have download it several episodes
             // in this session, for example if the show aired two episodes in the same day
-            if (![TSRegexFun wasThisEpisode:episodeName
-                          airedAfterThisOne:lastEpisodeName]) {
+            if (![TSRegexFun wasThisEpisode:episodeName airedAfterThisOne:lastEpisodeName]) {
                 [pool drain];
                 return;
             }
@@ -578,6 +593,7 @@
                         [show setValue:episodeName forKey:@"sortName"];
                         [[subscriptionsDelegate managedObjectContext] processPendingChanges];
                         [subscriptionsDelegate saveAction];
+                        changed = YES;
                     }
                 }
             }

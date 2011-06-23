@@ -74,7 +74,6 @@
                 NSMutableArray *copy = [NSMutableArray arrayWithArray:urls];
                 [copy removeObjectAtIndex:0];
                 urls = copy;
-                [copy autorelease];
             }
 #else
             return NO;
@@ -84,7 +83,6 @@
             NSMutableArray *copy = [NSMutableArray arrayWithArray:urls];
             [copy replaceObjectAtIndex:0 withObject:url];
             urls = copy;
-            [copy autorelease];
         }
     }
     
@@ -94,6 +92,11 @@
     
     // Process all url until the torrent is properly downloaded
     for (NSString *url in urls) {
+        // Fix BT-chat Links
+        if ([url rangeOfString:@"bt-chat"].location != NSNotFound) {
+            url = [url stringByAppendingString:@"&type=torrent"];
+        }
+        
         // Download the file
         NSData *fileContents = [WebsiteFunctions downloadDataFrom:url];
         
@@ -102,7 +105,7 @@
             LogError(@"Unable to download file: %@ <%@>", episodeName, url);
         } else {
             // The file downloaded successfully, continuing...
-            LogInfo(@"Episode downloaded successfully.");
+            LogInfo(@"Episode downloaded successfully: %@ <%@>", episodeName, url);
             
             // Write the data into a .torrent file
             [fileContents writeToFile:saveLocation atomically:YES];
@@ -167,6 +170,7 @@
         if ([[alert suppressionButton] state]) {
             [TSUserDefaults setKey:@"AutoDownloadFallbackSD" fromBool:shouldDownloadSD];
         }
+        [alert release];
     }
     
     return shouldDownloadSD;

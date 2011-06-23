@@ -23,7 +23,7 @@
 @implementation MPOAuthAuthenticationMethodAuthExchange
 
 - (id)initWithAPI:(MPOAuthAPI *)inAPI forURL:(NSURL *)inURL withConfiguration:(NSDictionary *)inConfig {
-	if (self = [super initWithAPI:inAPI forURL:inURL withConfiguration:inConfig]) {
+	if ((self = [super initWithAPI:inAPI forURL:inURL withConfiguration:inConfig])) {
 		self.oauthGetAccessTokenURL = [NSURL URLWithString:[inConfig objectForKey:MPOAuthAccessTokenURLKey]];
 	}
 	return self;
@@ -47,6 +47,9 @@
 						  withParameters:[NSArray arrayWithObjects:usernameParameter, passwordParameter, nil]
 							  withTarget:self
 							   andAction:nil];
+        
+        [usernameParameter autorelease];
+        [passwordParameter autorelease];
 	} else if (credentials.accessToken && credentials.accessTokenSecret) {
 		NSTimeInterval expiryDateInterval = [[NSUserDefaults standardUserDefaults] doubleForKey:MPOAuthTokenRefreshDateDefaultsKey];
 		NSDate *tokenExpiryDate = [NSDate dateWithTimeIntervalSinceReferenceDate:expiryDateInterval];

@@ -349,9 +349,6 @@
     // Close the modal dialog box
     [self closeCustomRSSWindow:(id)sender];
     
-    // Reload the data (it may have changed)
-    [subscriptionsDelegate refresh];
-    
     // Calculate the sort name, i.e. remove "The"
     NSString *sortName = [[nameValue stringValue] stringByReplacingOccurrencesOfRegex:@"^The[[:space:]]"
                                                                            withString:@""];
@@ -366,6 +363,8 @@
     // Depending on which the show is new or we were editing the show, retrieve it from Core Data
     if (selectedShow != nil) {
         subscription = [[subscriptionsDelegate managedObjectContext] objectWithID:[selectedShow objectID]];
+        // Refresh the show from the subscriptions (it may have changed)
+        [[subscriptionsDelegate managedObjectContext] refreshObject:subscription mergeChanges:YES];
     } else {
         subscription = [NSEntityDescription insertNewObjectForEntityForName:@"Subscription"
                                                      inManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
@@ -385,7 +384,6 @@
     // Be sure to process pending changes before saving or it won't save correctly
     [[subscriptionsDelegate managedObjectContext] processPendingChanges];
     [subscriptionsDelegate saveAction];
-    [SBArrayController setManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
 }
 
 - (void)dealloc
