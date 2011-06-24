@@ -52,6 +52,11 @@
                                                             selector:@selector(authenticatedOnMiso:)
                                                                 name:@"TSMisoAuthenticated"
                                                               object:nil];
+        
+        [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self
+                                                               selector:@selector(awakeFromSleep)
+                                                                   name:NSWorkspaceDidWakeNotification
+                                                                 object:nil];
     }
     
     return self;
@@ -363,11 +368,8 @@
     }
 }
 
-- (void) runLoop
+- (NSTimeInterval) userDelay
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    NSRunLoop* threadLoop = [NSRunLoop currentRunLoop];
-    
     NSInteger delay;
     NSTimeInterval seconds;
     delay = [TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:1];
@@ -407,16 +409,76 @@
             seconds = 1*60;
     }
     
+    return seconds;
+}
+
+- (void) runLoop
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    NSRunLoop* threadLoop = [NSRunLoop currentRunLoop];
+    
+    LogInfo(@"%d seconds", [self userDelay]);
+    
     checkerLoop = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:0.1]
-                                        interval:seconds
-                                          target:self
-                                        selector:@selector(checkAllShows)
-                                        userInfo:nil
-                                         repeats:YES];
+                                           interval:[self userDelay]
+                                             target:self
+                                           selector:@selector(checkAllShows)
+                                           userInfo:nil
+                                            repeats:YES];
     
     [threadLoop addTimer:checkerLoop forMode:NSDefaultRunLoopMode];
     [threadLoop run];
     [pool drain];
+}
+
+- (void) runLoopAfterAwake
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    NSRunLoop* threadLoop = [NSRunLoop currentRunLoop];
+    
+    // Calculate how many seconds do we have to wait until the next check
+    NSTimeInterval nextCheck = [self userDelay] - [[NSDate date] timeIntervalSinceDate:
+                                                   [TSUserDefaults getDateFromKey:@"lastCheckedForEpisodes"]];
+    
+    // If the next should already be done, do it now
+    if (nextCheck < 0.1) {
+        // Wait a little for connecting to the network
+        nextCheck = 60;
+        // Notify the user to give him some feedback
+        [GrowlApplicationBridge notifyWithTitle:@"TVShows"
+                                    description:TSLocalizeString(@"Checking for new episodes...")
+                               notificationName:@"Checking For New Episodes"
+                                       iconData:TVShowsHelperIcon
+                                       priority:0
+                                       isSticky:0
+                                   clickContext:nil];
+    }
+    
+    checkerLoop = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:nextCheck]
+                                           interval:[self userDelay]
+                                             target:self
+                                           selector:@selector(checkAllShows)
+                                           userInfo:nil
+                                            repeats:YES];
+    
+    [threadLoop addTimer:checkerLoop forMode:NSDefaultRunLoopMode];
+    [threadLoop run];
+    [pool drain];
+}
+
+- (void) awakeFromSleep
+{
+    LogInfo(@"Awaked!");
+    if (checkerLoop != nil) {
+        [checkerLoop performSelector:@selector(invalidate) onThread:checkerThread withObject:nil waitUntilDone:YES];
+        checkerLoop = nil;
+        [checkerThread release];
+        checkerThread = nil;
+    }
+    
+    // And start the thread
+    checkerThread = [[NSThread alloc] initWithTarget:self selector:@selector(runLoop) object:nil];
+    [checkerThread start];
 }
 
 - (IBAction) checkNow:(id)sender
@@ -438,10 +500,6 @@
         }
     }
     
-    // First disable the menubar option
-    [checkShowsItem setAction:nil];
-    [checkShowsItem setTitle:TSLocalizeString(@"Checking now, please wait...")];
-    
     // And start the thread
     checkerThread = [[NSThread alloc] initWithTarget:self selector:@selector(runLoop) object:nil];
     [checkerThread start];
@@ -450,6 +508,9 @@
 - (void) checkAllShows
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    // First disable the menubar option
+    [self performSelectorOnMainThread:@selector(disableLastCheckedItem) withObject:nil waitUntilDone:NO];
     
     // This is to track changes in the Core Data
     changed = NO;
@@ -634,6 +695,13 @@
     [disableItem setTitle:TSLocalizeString(@"Disable TVShows")];
 }
 
+- (void) disableLastCheckedItem
+{
+    // Disable the menubar option
+    [checkShowsItem setAction:nil];
+    [checkShowsItem setTitle:TSLocalizeString(@"Checking now, please wait...")];
+}
+
 - (void) updateLastCheckedItem
 {
     // We have to build a localized string with the date info
@@ -663,80 +731,43 @@
     }
 }
 
-- (IBAction) showSubscriptions:(id)sender
+- (void) openTab:(NSInteger)tabNumber
 {
-    NSString *command =
+    NSString *command = [NSString stringWithFormat:
     @"tell application \"System Preferences\"                               \n"
     @"   activate                                                           \n"
     @"   set the current pane to pane id \"com.victorpimentel.TVShows2\"    \n"
     @"end tell                                                              \n"
     @"tell application \"System Events\"                                    \n"
     @"    tell process \"System Preferences\"                               \n"
-    @"        click radio button 1 of tab group 1 of window \"TVShows\"     \n"
+    @"        click radio button %d of tab group 1 of window \"TVShows\"    \n"
     @"    end tell                                                          \n"
-    @"end tell                                                              ";
+    @"end tell                                                    ", tabNumber];
     
     NSTask *task = [[[NSTask alloc] init] autorelease];
     [task setLaunchPath:@"/usr/bin/osascript"];
     [task setArguments:[NSMutableArray arrayWithObjects:@"-e", command, nil]];
     [task launch];
+}
+
+- (IBAction) showSubscriptions:(id)sender
+{
+    [self openTab:1];
 }
 
 - (IBAction) showSync:(id)sender
 {
-    NSString *command =
-    @"tell application \"System Preferences\"                               \n"
-    @"   activate                                                           \n"
-    @"   set the current pane to pane id \"com.victorpimentel.TVShows2\"    \n"
-    @"end tell                                                              \n"
-    @"tell application \"System Events\"                                    \n"
-    @"    tell process \"System Preferences\"                               \n"
-    @"        click radio button 2 of tab group 1 of window \"TVShows\"     \n"
-    @"    end tell                                                          \n"
-    @"end tell                                                              ";
-    
-    NSTask *task = [[[NSTask alloc] init] autorelease];
-    [task setLaunchPath:@"/usr/bin/osascript"];
-    [task setArguments:[NSMutableArray arrayWithObjects:@"-e", command, nil]];
-    [task launch];
+    [self openTab:2];
 }
 
 - (IBAction) showPreferences:(id)sender
 {
-    NSString *command =
-    @"tell application \"System Preferences\"                               \n"
-    @"   activate                                                           \n"
-    @"   set the current pane to pane id \"com.victorpimentel.TVShows2\"    \n"
-    @"end tell                                                              \n"
-    @"tell application \"System Events\"                                    \n"
-    @"    tell process \"System Preferences\"                               \n"
-    @"        click radio button 3 of tab group 1 of window \"TVShows\"     \n"
-    @"    end tell                                                          \n"
-    @"end tell                                                              ";
-    
-    NSTask *task = [[[NSTask alloc] init] autorelease];
-    [task setLaunchPath:@"/usr/bin/osascript"];
-    [task setArguments:[NSMutableArray arrayWithObjects:@"-e", command, nil]];
-    [task launch];
+    [self openTab:3];
 }
 
 - (IBAction) showAbout:(id)sender
 {
-    NSString *command =
-    @"tell application \"System Preferences\"                               \n"
-    @"   activate                                                           \n"
-    @"   set the current pane to pane id \"com.victorpimentel.TVShows2\"    \n"
-    @"end tell                                                              \n"
-    @"tell application \"System Events\"                                    \n"
-    @"    tell process \"System Preferences\"                               \n"
-    @"        click radio button 4 of tab group 1 of window \"TVShows\"     \n"
-    @"    end tell                                                          \n"
-    @"end tell                                                              ";
-    
-    NSTask *task = [[[NSTask alloc] init] autorelease];
-    [task setLaunchPath:@"/usr/bin/osascript"];
-    [task setArguments:[NSMutableArray arrayWithObjects:@"-e", command, nil]];
-    [task launch];
+    [self openTab:4];
 }
 
 - (IBAction) showFeedback:(id)sender
