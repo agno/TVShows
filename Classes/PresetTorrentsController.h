@@ -61,6 +61,11 @@
     IBOutlet NSTabView *prefTabView;
 }
 
+@property (retain) SubscriptionsDelegate *subscriptionsDelegate;
+@property (retain) PresetShowsDelegate *presetsDelegate;
+@property (retain) NSArrayController *SBArrayController;
+@property (retain) NSArrayController *PTArrayController;
+
 #pragma mark -
 #pragma mark Preset Torrents Window
 - (IBAction) displayPresetTorrentsWindow:(id)sender;

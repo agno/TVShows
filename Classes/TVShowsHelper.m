@@ -15,6 +15,7 @@
 #import "AppInfoConstants.h"
 #import "TVShowsHelper.h"
 #import "PreferencesController.h"
+#import "PresetTorrentsController.h"
 #import "TorrentzParser.h"
 #import "TSParseXMLFeeds.h"
 #import "TSUserDefaults.h"
@@ -256,11 +257,8 @@
     
     if (followedShows) {
         changed = NO;
-        presetShowsDelegate = [[PresetShowsDelegate alloc] init];
         [self unsubscribeFromUnfollowedShows:followedShows];
         [self subscribeToFollowedShows:followedShows];
-        [presetShowsDelegate release];
-        presetShowsDelegate = nil;
         // Warn the pref pane
         if (changed) {
             [[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"TSUpdatedShows" object:nil];
@@ -417,8 +415,6 @@
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     NSRunLoop* threadLoop = [NSRunLoop currentRunLoop];
     
-    LogInfo(@"%d seconds", [self userDelay]);
-    
     checkerLoop = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:0.1]
                                            interval:[self userDelay]
                                              target:self
@@ -505,6 +501,31 @@
     [checkerThread start];
 }
 
+- (void) updateShowList
+{
+    // Create the Preset Torrents Controller and set it with the correct delegates
+    PresetTorrentsController *controller = [[PresetTorrentsController alloc] init];
+    
+    [controller setSubscriptionsDelegate:subscriptionsDelegate];
+    [controller setPresetsDelegate:presetShowsDelegate];
+    
+    NSArrayController *SBArrayController = [[NSArrayController alloc] init];
+    NSArrayController *PTArrayController = [[NSArrayController alloc] init];
+    
+    [SBArrayController setManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
+    [PTArrayController setManagedObjectContext:[presetShowsDelegate managedObjectContext]];
+    
+    [controller setSBArrayController:SBArrayController];
+    [controller setPTArrayController:PTArrayController];
+    
+    // We can now safely download the torrent show list :)
+    [controller downloadTorrentShowList];
+    
+    [SBArrayController release];
+    [PTArrayController release];
+    [controller release];
+}
+
 - (void) checkAllShows
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
@@ -515,8 +536,12 @@
     // This is to track changes in the Core Data
     changed = NO;
     
-    // Reload the delegate
+    // Reload the delegates
     subscriptionsDelegate = [[SubscriptionsDelegate alloc] init];
+    presetShowsDelegate = [[PresetShowsDelegate alloc] init];
+    
+    // Update the showlist
+    [self updateShowList];
     
     // Sync shows with Miso
     if ([TSUserDefaults getBoolFromKey:@"MisoEnabled" withDefault:NO] &&
@@ -545,8 +570,11 @@
         }
     }
     
-    // And free the delegate
+    // And free the delegates
     [subscriptionsDelegate release];
+    [presetShowsDelegate release];
+    subscriptionsDelegate = nil;
+    presetShowsDelegate = nil;
     
     // Now that everything is done, update the time our last check was made.
     [TSUserDefaults setKey:@"lastCheckedForEpisodes" fromDate:[NSDate date]];

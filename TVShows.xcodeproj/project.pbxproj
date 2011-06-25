@@ -161,6 +161,7 @@
 		571D4FCE13A91DD500EBD5EA /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 571D4E4513A90A7900EBD5EA /* libxml2.dylib */; };
 		571D4FCF13A91DDE00EBD5EA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 571D4E4713A90A8D00EBD5EA /* Security.framework */; };
 		571D4FD013A91DE100EBD5EA /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 571D4E4513A90A7900EBD5EA /* libxml2.dylib */; };
+		5737D1BD13B4A5670092359C /* PresetTorrentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 347F1E6B11AA093C005A40AA /* PresetTorrentsController.m */; };
 		573ABCC813734E9B0018F6F3 /* TorrentzParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 573ABCC713734E9B0018F6F3 /* TorrentzParser.m */; };
 		5755750F136DC9E5006D1FC9 /* TVShows-Menu-Icon-White.png in Resources */ = {isa = PBXBuildFile; fileRef = 5755750D136DC9E5006D1FC9 /* TVShows-Menu-Icon-White.png */; };
 		57557510136DC9E5006D1FC9 /* TVShows-Menu-Icon-Black.png in Resources */ = {isa = PBXBuildFile; fileRef = 5755750E136DC9E5006D1FC9 /* TVShows-Menu-Icon-Black.png */; };
@@ -200,6 +201,7 @@
 		57F33F891376FE4C00270A75 /* TorrentzParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 573ABCC713734E9B0018F6F3 /* TorrentzParser.m */; };
 		57F7062B13AF32E5002A83E4 /* Cover-DVD.png in Resources */ = {isa = PBXBuildFile; fileRef = 57F7062913AF32E5002A83E4 /* Cover-DVD.png */; };
 		57F7062D13AF3798002A83E4 /* Cover-Bluray.png in Resources */ = {isa = PBXBuildFile; fileRef = 57F7062C13AF3798002A83E4 /* Cover-Bluray.png */; };
+		57FBDC4D13B4C5B6006E0617 /* NSXMLNode-utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A82B1013953A3500E71F7F /* NSXMLNode-utils.m */; };
 		57FDFEBB13A94E310019EDB6 /* TheTVDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 347B35D51210DB6000F4BFF0 /* TheTVDB.m */; };
 		8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F506C035013D953901CA16C8 /* PreferencePanes.framework */; };
@@ -1332,6 +1334,8 @@
 				57FDFEBB13A94E310019EDB6 /* TheTVDB.m in Sources */,
 				577322A613ACC608002F0926 /* PresetShowsDelegate.m in Sources */,
 				5786454F13B1380900C840C3 /* TSTorrentFunctions.m in Sources */,
+				5737D1BD13B4A5670092359C /* PresetTorrentsController.m in Sources */,
+				57FBDC4D13B4C5B6006E0617 /* NSXMLNode-utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

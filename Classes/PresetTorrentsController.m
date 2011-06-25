@@ -45,6 +45,8 @@
 #pragma mark Preset Torrents Window
 @implementation PresetTorrentsController
 
+@synthesize subscriptionsDelegate, presetsDelegate, PTArrayController, SBArrayController;
+
 - init
 {
     if((self = [super init])) {
@@ -303,8 +305,8 @@
     // First check if we need to update the show list
     NSDate *lastChecked = [TSUserDefaults getDateFromKey:@"LastDownloadedShowList"];
     
-    // If three days did not pass since the last check, do not update the show list
-    if (lastChecked != nil && [[NSDate date] timeIntervalSinceDate:lastChecked] < 3*24*60*60) {
+    // If seven days did not pass since the last check, do not update the show list
+    if (lastChecked != nil && [[NSDate date] timeIntervalSinceDate:lastChecked] < 7*24*60*60) {
         LogInfo(@"Using a cached show list.");
         hasDownloadedList = YES;
         return;
@@ -325,8 +327,8 @@
     }
     
     NSXMLDocument *doc = [[[NSXMLDocument alloc] initWithXMLString:showListContents
-                                                          options:NSXMLDocumentTidyXML
-                                                            error:nil] autorelease];
+                                                           options:NSXMLDocumentTidyXML
+                                                             error:nil] autorelease];
     NSXMLNode *rootNode = nil;
     
     if (doc != nil) {
@@ -335,9 +337,13 @@
     
     // Check to make sure the website is loading and that the root node isn't nil
     if (showListContents && [showListContents length] < 1000) {
+#if PREFPANE
         [self errorWindowWithStatusCode:102];
+#endif
     } else if (rootNode == nil) {
+#if PREFPANE
         [self errorWindowWithStatusCode:101];
+#endif
     } else {
         // Reset the existing show list before continuing. In a perfect world we'd
         // only be adding shows that didn't already exist, instead of deleting
