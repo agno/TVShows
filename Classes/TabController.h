@@ -34,6 +34,7 @@
     IBOutlet NSTextView *textView_aboutBox;
     IBOutlet NSButton *websiteButton;
     IBOutlet NSButton *donateButton;
+    IBOutlet NSButton *resetWarningsButton;
     IBOutlet NSButton *viewLogsButton;
     IBOutlet NSButton *uninstallButton;
     IBOutlet NSTextField *disclaimer;
@@ -97,6 +98,7 @@
 - (IBAction) openBlog:(id)sender;
 - (IBAction) openTwitter:(id)sender;
 - (IBAction) openPaypal:(id)sender;
+- (IBAction) resetWarnings:(id)sender;
 - (IBAction) openUninstaller:(id)sender;
 - (void) drawAboutBox;
 
@@ -120,5 +122,6 @@
 - (IBAction) showQualityDidChange:(id)sender;
 - (void) sortSubscriptionList;
 - (IBAction) unsubscribeFromShow:(id)sender;
+- (BOOL) shouldUnsubscribeFromShow;
 
 @end

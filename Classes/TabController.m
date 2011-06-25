@@ -96,6 +96,7 @@
     
     [websiteButton setTitle: TSLocalizeString(@"Website")];
     [donateButton setTitle: TSLocalizeString(@"Donate")];
+    [resetWarningsButton setTitle: TSLocalizeString(@"Reset Warn.")];
     [viewLogsButton setTitle: TSLocalizeString(@"View Logs")];
     [uninstallButton setTitle: TSLocalizeString(@"Uninstall")];
     [disclaimer setStringValue: TSLocalizeString(@"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country.")];
@@ -290,6 +291,22 @@
     
     NSString *donationURL = [NSString stringWithFormat:TVShowsDonations, currencyCode, countryCode];
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:donationURL]];
+}
+
+- (IBAction) resetWarnings:(id)sender {
+    // Set all keys to "please asks me"
+    [TSUserDefaults setKey:@"AutoDownloadFallbackSD" fromInt:ShowWarning];
+    [TSUserDefaults setKey:@"AutoDeleteSubscription" fromInt:ShowWarning];
+    
+    // Alert the user that the operation was done
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle: TSLocalizeString(@"Ok")];
+    [alert setMessageText: TSLocalizeString(@"Warnings restored")];
+    [alert setInformativeText: TSLocalizeString(@"Your preferences about warnings were restored. If needed, next time TVShows will ask for your confirmation to complete a sensitive operation.")];
+    [alert setAlertStyle:NSInformationalAlertStyle];
+    [alert runModal];
+    
+    [alert release];
 }
 
 - (IBAction) openUninstaller:(id)sender
@@ -720,12 +737,7 @@
 - (IBAction) unsubscribeFromShow:(id)sender
 {
     // Ask for confirmation to the user
-    if (NSRunCriticalAlertPanel([NSString stringWithFormat:TSLocalizeString(@"Are you sure you want to unsubscribe from %@?"),
-                                 [selectedShow valueForKey:@"name"]],
-                                TSLocalizeString(@"This action cannot be undone."),
-                                TSLocalizeString(@"Unsubscribe"),
-                                TSLocalizeString(@"Cancel"),
-                                nil) != NSAlertDefaultReturn) { 
+    if (![self shouldUnsubscribeFromShow]) {
         return;
     }
     
@@ -754,6 +766,37 @@
     selectedShow = nil;
     
     [self closeShowInfoWindow:(id)sender];
+}
+
+- (BOOL) shouldUnsubscribeFromShow
+{
+    // Get the user default. If there is no preference, use a "third" value
+    BOOL shouldDownloadSD = [TSUserDefaults getFloatFromKey:@"AutoDeleteSubscription" withDefault:ShowWarning];
+    
+    // Display the warning if the user did not want to hide it
+    if (shouldDownloadSD == ShowWarning) {
+        // Display the warning
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:TSLocalizeString(@"Unsubscribe")];
+        [alert addButtonWithTitle:TSLocalizeString(@"Cancel")];
+        [alert setShowsSuppressionButton:YES];
+        [alert setMessageText:[NSString stringWithFormat:
+                               TSLocalizeString(@"Are you sure you want to unsubscribe from %@?"),
+                               [selectedShow valueForKey:@"name"]]];
+        [alert setInformativeText:TSLocalizeString(@"This action cannot be undone.")];
+        [alert setAlertStyle:NSCriticalAlertStyle];
+        
+        // Run the alert and then wait for user input.
+        shouldDownloadSD = ([alert runModal] == NSAlertFirstButtonReturn);
+        
+        // Remember the selected option for next time if the user wants to hide the warning
+        if ([[alert suppressionButton] state]) {
+            [TSUserDefaults setKey:@"AutoDeleteSubscription" fromInt:YES];
+        }
+        [alert release];
+    }
+    
+    return shouldDownloadSD;
 }
 
 - (void) dealloc

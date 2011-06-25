@@ -149,10 +149,10 @@
 + (BOOL) shouldDownloadSDForEpisode:(NSString *)episodeName
 {
     // Get the user default. If there is no preference, use a "third" value
-    BOOL shouldDownloadSD = [TSUserDefaults getBoolFromKey:@"AutoDownloadFallbackSD" withDefault:2];
+    BOOL shouldDownloadSD = [TSUserDefaults getFloatFromKey:@"AutoDownloadFallbackSD" withDefault:ShowWarning];
     
     // Display the warning if the user did not want to hide it
-    if (shouldDownloadSD == 2) {
+    if (shouldDownloadSD == ShowWarning) {
         // Display the error
         NSAlert *alert = [[NSAlert alloc] init];
         [alert addButtonWithTitle:TSLocalizeString(@"Download SD")];
@@ -168,7 +168,7 @@
         
         // Remember the selected option for next time if the user wants to hide the warning
         if ([[alert suppressionButton] state]) {
-            [TSUserDefaults setKey:@"AutoDownloadFallbackSD" fromBool:shouldDownloadSD];
+            [TSUserDefaults setKey:@"AutoDownloadFallbackSD" fromInt:shouldDownloadSD];
         }
         [alert release];
     }

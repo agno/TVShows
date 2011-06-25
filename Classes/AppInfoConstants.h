@@ -33,3 +33,7 @@
 #elif HELPER_APP
     #define CurrentBundleDomain     @"com.victorpimentel.TVShowsHelper"
 #endif
+
+// This is for deciding whether to hide a warning or not
+// If the user default is this, the warning will be shown
+#define ShowWarning                 -1
