@@ -20,15 +20,15 @@ Help localize TVShows 2 into your native language! [Click here][translate] to be
 ## Collaboration Instructions
 1. Checkout the repository and all submodules:
 
-    $ git clone --recursive http://github.com/victorpimentel/TVShows.git
+    `$ git clone --recursive http://github.com/victorpimentel/TVShows.git`
 
 2. The `master` branch contains the public beta codebase. Change to the `develop` branch to get the edge codebase:
 
-    $ git checkout develop
+    `$ git checkout develop`
 
 3. Open the Xcode project or compile it from the terminal:
 
-    $ xcodebuild
+    `$ xcodebuild`
 
 ## Collaboration Notes
 * You can use GitHub's forking feature to make changes and then send me a pull request. Patches or anything else also works.
