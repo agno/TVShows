@@ -20,6 +20,8 @@
 
 #import "TSParseXMLFeeds.h"
 #import "TSUserDefaults.h"
+#import "TSRegexFun.h"
+#import "TSTorrentFunctions.h"
 
 #import "TorrentzParser.h"
 #import "TheTVDB.h"
@@ -28,12 +30,27 @@
 
 @implementation TabController
 
-@synthesize selectedShow, subscriptionsDelegate;
+@synthesize selectedShow;
 
 - (void) awakeFromNib
 {
-    // Init the subscriptions delegate
-    subscriptionsDelegate = [[SubscriptionsDelegate alloc] init];
+    // Register the app for this notification
+    [[NSDistributedNotificationCenter defaultCenter] addObserver:self
+                                                        selector:@selector(refreshShowList:)
+                                                            name:@"TSUpdatedShows"
+                                                          object:nil];
+    
+    // Filter bar
+    [filterBar addItemsWithTitles:[NSArray arrayWithObjects:
+                                   TSLocalizeString(@"All"),
+                                   TSLocalizeString(@"Enabled"),
+                                   TSLocalizeString(@"Disabled"),
+                                   @"DIVIDER",
+                                   TSLocalizeString(@"All"),
+                                   TSLocalizeString(@"Preset"),
+                                   TSLocalizeString(@"Custom"), nil]
+                     withSelector:@selector(filterSubscriptions:)
+                       withTarget:self];
     
     // Set displayed version information
     NSString *bundleVersion = [[[NSBundle bundleWithIdentifier: TVShowsAppDomain] infoDictionary] 
@@ -67,8 +84,9 @@
     
     // Localize everything
     [[prefTabView tabViewItemAtIndex:0] setLabel: TSLocalizeString(@"Subscriptions")];
-    [[prefTabView tabViewItemAtIndex:1] setLabel: TSLocalizeString(@"Preferences")];
-    [[prefTabView tabViewItemAtIndex:2] setLabel: TSLocalizeString(@"About")];
+    [[prefTabView tabViewItemAtIndex:1] setLabel: TSLocalizeString(@"Sync")];
+    [[prefTabView tabViewItemAtIndex:2] setLabel: TSLocalizeString(@"Preferences")];
+    [[prefTabView tabViewItemAtIndex:3] setLabel: TSLocalizeString(@"About")];
     
     [feedbackButton setTitle: TSLocalizeString(@"Submit Feedback")];
     
@@ -78,6 +96,7 @@
     
     [websiteButton setTitle: TSLocalizeString(@"Website")];
     [donateButton setTitle: TSLocalizeString(@"Donate")];
+    [resetWarningsButton setTitle: TSLocalizeString(@"Reset Warn.")];
     [viewLogsButton setTitle: TSLocalizeString(@"View Logs")];
     [uninstallButton setTitle: TSLocalizeString(@"Uninstall")];
     [disclaimer setStringValue: TSLocalizeString(@"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country.")];
@@ -112,6 +131,53 @@
     
     // Start the animation about one second after loading this
     [self performSelector:@selector(animateDonateButton) withObject:nil afterDelay:1];
+}
+
+- (IBAction) filterSubscriptions:(id)sender
+{
+    NSMutableArray *filters = [[NSMutableArray alloc] initWithCapacity:3];
+    
+    switch ([filterBar getSelectedIndexInSegment:0]) {
+        case 1:
+            [filters addObject:[NSPredicate predicateWithFormat:@"isEnabled = 1"]];
+            break;
+        case 2:
+            [filters addObject:[NSPredicate predicateWithFormat:@"isEnabled = 0"]];
+            break;
+        default:
+            break;
+    }
+    switch ([filterBar getSelectedIndexInSegment:1]) {
+        case 1:
+            [filters addObject:[NSPredicate predicateWithFormat:@"filters = nil"]];
+            break;
+        case 2:
+            [filters addObject:[NSPredicate predicateWithFormat:@"filters != nil"]];
+            break;
+        default:
+            break;
+    }
+    if ([[filterField stringValue] length] > 0) {
+        [filters addObject:[NSPredicate predicateWithFormat:@"name contains[cd] %@", [filterField stringValue]]];
+    }
+    [SBArrayController setFilterPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:filters]];
+    [filters autorelease];
+}
+
+- (void) resetFilters
+{
+    [filterBar selectIndex:0 inSegment:0];
+    [filterBar selectIndex:0 inSegment:1];
+    [filterField setStringValue:@""];
+}
+
+- (void) refreshShowList:(NSNotification *)inNotification
+{
+    [subscriptionsDelegate refresh];
+    [SBArrayController setManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
+    [SBArrayController fetch:nil];
+    [SBArrayController rearrangeObjects];
+    [self resetFilters];
 }
 
 - (void) animateDonateButton
@@ -155,14 +221,16 @@
     tabFrame = [[tabView window] frame];
     
     // newWinHeight should be equal to the wanted window size (in Interface Builder) + 54 (title bar height)
-    if ([[tabViewItem identifier] isEqualTo:@"tabItemPreferences"]) {
-        newWinHeight = 617;
-    } else if ([[tabViewItem identifier] isEqualTo:@"tabItemSubscriptions"]) {
-        newWinHeight = 617;
+    if ([[tabViewItem identifier] isEqualTo:@"tabItemSubscriptions"]) {
+        newWinHeight = 597;
+    } else if ([[tabViewItem identifier] isEqualTo:@"tabItemSync"]) {
+        newWinHeight = 396;
+    } else if ([[tabViewItem identifier] isEqualTo:@"tabItemPreferences"]) {
+        newWinHeight = 670;
     }  else if ([[tabViewItem identifier] isEqualTo:@"tabItemAbout"]) {
         newWinHeight = 500;
     } else {
-        newWinHeight = 617;
+        newWinHeight = 610;
     }
     
     tabFrame = NSMakeRect(tabFrame.origin.x, tabFrame.origin.y - (newWinHeight - (int)(NSHeight(tabFrame))), (int)(NSWidth(tabFrame)), newWinHeight);
@@ -223,6 +291,22 @@
     
     NSString *donationURL = [NSString stringWithFormat:TVShowsDonations, currencyCode, countryCode];
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:donationURL]];
+}
+
+- (IBAction) resetWarnings:(id)sender {
+    // Set all keys to "please asks me"
+    [TSUserDefaults setKey:@"AutoDownloadFallbackSD" fromInt:ShowWarning];
+    [TSUserDefaults setKey:@"AutoDeleteSubscription" fromInt:ShowWarning];
+    
+    // Alert the user that the operation was done
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle: TSLocalizeString(@"Ok")];
+    [alert setMessageText: TSLocalizeString(@"Warnings restored")];
+    [alert setInformativeText: TSLocalizeString(@"Your preferences about warnings were restored. If needed, next time TVShows will ask for your confirmation to complete a sensitive operation.")];
+    [alert setAlertStyle:NSInformationalAlertStyle];
+    [alert runModal];
+    
+    [alert release];
 }
 
 - (IBAction) openUninstaller:(id)sender
@@ -530,28 +614,47 @@
 - (IBAction) closeShowInfoWindow:(id)sender
 {
     // Close the window first
-    // The following code has a bug in Intel 32-bit that I couldn't fix,
-    // so I prefer not to save that information rather than not be able to close the app
     [NSApp stopModal];
     [showInfoWindow orderOut: self];
     
-    // NSManagedContext objectWithID is required for it to save changes to the disk.
-    // We also need to update the original selectedShow NSManagedObject so that the
-    // interface displays any changes when the window is opened multiple times a session.
-    NSManagedObject *selectedShowObj = [[subscriptionsDelegate managedObjectContext] objectWithID:[selectedShow objectID]];
-    
-    // Update the per-show preferences
-    [selectedShow setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
-    [selectedShow setValue:[NSNumber numberWithBool:[showIsEnabled state]] forKey:@"isEnabled"];
-    [selectedShowObj setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
-    [selectedShowObj setValue:[NSNumber numberWithBool:[showIsEnabled state]] forKey:@"isEnabled"];
-    
-    // Be sure to process pending changes before saving or it won't save correctly.
-    [[subscriptionsDelegate managedObjectContext] processPendingChanges];
-    [subscriptionsDelegate saveAction];
-    
-    // Reset the selected show
-    selectedShow = nil;
+    if (selectedShow != nil && [selectedShow respondsToSelector:@selector(objectID)]) {
+        
+        // Check if there are changes
+        if (![[selectedShow valueForKey:@"quality"] isEqual:[NSNumber numberWithBool:[showQuality state]]] ||
+            ![[selectedShow valueForKey:@"isEnabled"] isEqual:[NSNumber numberWithBool:[showIsEnabled state]]]) {
+            
+            NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[selectedShow objectID], @"showID",
+                                      [NSNumber numberWithBool:[showQuality state]], @"quality",
+                                      [NSNumber numberWithBool:[showIsEnabled state]], @"isEnabled", nil];
+             
+            // Notify the helper
+            [[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"TSEditSubscription"
+                                                                           object:nil
+                                                                         userInfo:userInfo];
+            
+            // NSManagedContext objectWithID is required for it to save changes to the disk.
+            // We also need to update the original selectedShow NSManagedObject so that the
+            // interface displays any changes when the window is opened multiple times a session.
+            NSManagedObject *selectedShowObj = [[subscriptionsDelegate managedObjectContext] objectWithID:[selectedShow objectID]];
+            // Refresh the show from the subscriptions (it may have changed)
+            [[subscriptionsDelegate managedObjectContext] refreshObject:selectedShowObj mergeChanges:YES];
+            
+            // Update the per-show preferences
+            [selectedShow setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
+            [selectedShow setValue:[NSNumber numberWithBool:[showIsEnabled state]] forKey:@"isEnabled"];
+            [selectedShowObj setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
+            [selectedShowObj setValue:[NSNumber numberWithBool:[showIsEnabled state]] forKey:@"isEnabled"];
+            
+            // Be sure to process pending changes before saving or it won't save correctly.
+            [[subscriptionsDelegate managedObjectContext] processPendingChanges];
+            [subscriptionsDelegate saveAction];
+            
+            [self filterSubscriptions:nil];
+        }
+        
+        // Reset the selected show
+        selectedShow = nil;
+    }
 }
 
 - (IBAction) showQualityDidChange:(id)sender
@@ -569,76 +672,9 @@
     }
 }
 
-- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName andShowName:(NSString *)show
-{
-    // Process the URL if the is not found
-    if ([url rangeOfString:@"http"].location == NSNotFound) {
-        LogInfo(@"Retrieving an HD torrent file from Torrentz of: %@", url);
-        url = [TorrentzParser getAlternateTorrentForEpisode:url];
-        if (url == nil) {
-            LogError(@"Unable to find an HD torrent file for: %@", fileName);
-            
-            // Display the error
-            NSRunCriticalAlertPanel([NSString stringWithFormat:TSLocalizeString(@"Unable to find an HD torrent for %@"), fileName],
-                                    TSLocalizeString(@"The file may not be released yet. Please try again later or check your internet connection. Alternatively you can download the SD version."),
-                                    TSLocalizeString(@"Ok"),
-                                    nil,
-                                    nil);
-            
-            return;
-        }
-    }
-    
-    // Build the saving folder
-    NSString *saveLocation = [TSUserDefaults getStringFromKey:@"downloadFolder"];
-    
-    // Check if we have to sort shows by folders or not
-    if ([TSUserDefaults getBoolFromKey:@"SortInFolders" withDefault:NO]) {
-        saveLocation = [saveLocation stringByAppendingPathComponent:show];
-        if (![[NSFileManager defaultManager] createDirectoryAtPath:saveLocation
-                                       withIntermediateDirectories:YES
-                                                        attributes:nil
-                                                             error:nil]) {
-            LogError(@"Unable to create the folder: %@", saveLocation);
-            return;
-        }
-    }
-    
-    // Add the filename
-    saveLocation = [saveLocation stringByAppendingPathComponent:fileName];
-    
-    // Method copied from TVShowsHelper.m
-    LogInfo(@"Attempting to download new episode: %@", fileName);
-    NSData *fileContents = [WebsiteFunctions downloadDataFrom:url];
-    
-    if (!fileContents || [fileContents length] < 100) {
-        LogError(@"Unable to download file: %@ <%@>",fileName, url);
-        
-        // Display the error
-        NSRunCriticalAlertPanel([NSString stringWithFormat:TSLocalizeString(@"Unable to download %@"), fileName],
-                                TSLocalizeString(@"Cannot connect. Please try again later or check your internet connection"),
-                                TSLocalizeString(@"Ok"),
-                                nil,
-                                nil);
-        
-    } else {
-        // The file downloaded successfully, continuing...
-        LogInfo(@"Episode downloaded successfully.");
-        
-        [fileContents writeToFile:saveLocation atomically:YES];
-        
-        // Check to see if the user wants to automatically open new downloads
-        if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
-            [[NSWorkspace sharedWorkspace] openFile:saveLocation withApplication:nil andDeactivate:NO];
-        }
-    }
-}
-
 - (BOOL) tableView:(NSTableView *)aTableView shouldSelectRow:(NSInteger)rowIndex
 {
     // Check to see whether or not this is the GET button or not.
-    // If it's not, then return YES for shouldSelectRow.
-    BOOL result = YES;
     
     // Which column and row was clicked?
     NSInteger clickedCol = [episodeTableView clickedColumn];
@@ -650,19 +686,34 @@
         
         // If the cell is an NSButtonCell and it's enabled...
         if ([cell isKindOfClass:[NSButtonCell class]] && [cell isEnabled]) {
-            // Don't select the row
-            result = NO;
-            
             // This currently only returns a Torrent file and should eventually regex
             // out the actual file extension of the item we're downloading.
             NSObject *episode = [[episodeArrayController arrangedObjects] objectAtIndex:clickedRow];
-            [self startDownloadingURL:[episode valueForKey:@"link"]
-                         withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
-                          andShowName:[selectedShow valueForKey:@"name"]];
+            
+            // If correctly download, check-in on Miso
+            if ([TSTorrentFunctions downloadEpisode:episode ofShow:selectedShow]) {
+                // Notify to the process that a download was done (to check-in in Miso)
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"TSDownloadEpisode"
+                                                                    object:nil
+                                                                  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                            [episode valueForKey:@"episodeName"],
+                                                                            @"episodeName",
+                                                                            [selectedShow valueForKey:@"name"],
+                                                                            @"showName", nil]];
+            } else {
+                // Display the error
+                NSRunCriticalAlertPanel([NSString stringWithFormat:TSLocalizeString(@"Unable to download %@"),
+                                         [episode valueForKey:@"episodeName"]],
+                                        TSLocalizeString(@"Cannot connect. Please try again later or check your internet connection"),
+                                        TSLocalizeString(@"Ok"),
+                                        nil,
+                                        nil);
+            }
         }
     }
-    
-    return result;
+
+    // Don't select the row
+    return NO;
 }
 
 - (void) sortSubscriptionList
@@ -686,32 +737,71 @@
 - (IBAction) unsubscribeFromShow:(id)sender
 {
     // Ask for confirmation to the user
-    if (NSRunCriticalAlertPanel([NSString stringWithFormat:TSLocalizeString(@"Are you sure you want to unsubscribe from %@?"),
-                                 [selectedShow valueForKey:@"name"]],
-                                TSLocalizeString(@"This action cannot be undone."),
-                                TSLocalizeString(@"Unsubscribe"),
-                                TSLocalizeString(@"Cancel"),
-                                nil) != NSAlertDefaultReturn) { 
+    if (![self shouldUnsubscribeFromShow]) {
         return;
     }
     
-    NSManagedObject *selectedShowObj = [[subscriptionsDelegate managedObjectContext] objectWithID:[selectedShow objectID]];
+    // Notify the helper
+//    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[selectedShow objectID], @"showID", nil];
+//    
+//    [[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"TSRemoveSubscription"
+//                                                                   object:nil
+//                                                                 userInfo:userInfo];
     
-    // I don't understand why I have to remove the object from both locations
-    // but it works so I won't question it.
-    [SBArrayController removeObject:selectedShow];
+    // And update our "copy"
+    NSManagedObject *selectedShowObj = [[subscriptionsDelegate managedObjectContext] objectWithID:[selectedShow objectID]];
+    // Refresh the show from the subscriptions (it may have changed)
+    [[subscriptionsDelegate managedObjectContext] refreshObject:selectedShowObj mergeChanges:YES];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"TSRemoveSubscription"
+                                                        object:nil
+                                                      userInfo:(NSDictionary *)selectedShow];
+    
     [[subscriptionsDelegate managedObjectContext] deleteObject:selectedShowObj];
     
-    [self closeShowInfoWindow:(id)sender];
-    
+    // Be sure to process pending changes before saving or it won't save correctly
     [[subscriptionsDelegate managedObjectContext] processPendingChanges];
     [subscriptionsDelegate saveAction];
+    
+    selectedShow = nil;
+    
+    [self closeShowInfoWindow:(id)sender];
+}
+
+- (BOOL) shouldUnsubscribeFromShow
+{
+    // Get the user default. If there is no preference, use a "third" value
+    BOOL shouldDownloadSD = [TSUserDefaults getFloatFromKey:@"AutoDeleteSubscription" withDefault:ShowWarning];
+    
+    // Display the warning if the user did not want to hide it
+    if (shouldDownloadSD == ShowWarning) {
+        // Display the warning
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:TSLocalizeString(@"Unsubscribe")];
+        [alert addButtonWithTitle:TSLocalizeString(@"Cancel")];
+        [alert setShowsSuppressionButton:YES];
+        [alert setMessageText:[NSString stringWithFormat:
+                               TSLocalizeString(@"Are you sure you want to unsubscribe from %@?"),
+                               [selectedShow valueForKey:@"name"]]];
+        [alert setInformativeText:TSLocalizeString(@"This action cannot be undone.")];
+        [alert setAlertStyle:NSCriticalAlertStyle];
+        
+        // Run the alert and then wait for user input.
+        shouldDownloadSD = ([alert runModal] == NSAlertFirstButtonReturn);
+        
+        // Remember the selected option for next time if the user wants to hide the warning
+        if ([[alert suppressionButton] state]) {
+            [TSUserDefaults setKey:@"AutoDeleteSubscription" fromInt:YES];
+        }
+        [alert release];
+    }
+    
+    return shouldDownloadSD;
 }
 
 - (void) dealloc
 {
     [selectedShow release];
-    [subscriptionsDelegate release];
     [super dealloc];
 }
 

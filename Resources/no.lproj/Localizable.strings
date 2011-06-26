@@ -33,6 +33,9 @@
 "Add a custom RSS source" = "Legg til RSS-kilde";
 
 /* This string is on a button. */
+"Add Custom RSS" = "Legg til RSS-kilde";
+
+/* This string is on a button. */
 "Add Show" = "Legg til serie";
 
 /* Title of an error message or Growl notification. */
@@ -51,6 +54,9 @@
 "Automatically open each file after download" = "Åpne nedlastede filer automatisk";
 
 "Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "Er du sikker på at du vil fjerne TVShows? \nOBS: Alle innstillinger og abonnement blir også fjernet. ";
+
+/* The %@ will be replaced by the name of the show. */
+"Are you sure you want to unsubscribe from %@?" = "Sikker på at du vil slutte abonnementet på %@?";
 
 /* This string is on a button. */
 "Cancel" = "Avbryt";
@@ -98,12 +104,17 @@
 
 "Download Preferences" = "Innstillinger for nedlasting";
 
+/* This string is on a button. */
+"Edit" = "Rediger";
+
 /* Title of a column in a table. */
 "Episode Name" = "Episodetittel";
 
 "Episode save location:" = "Velg sted for lagring av episoder :";
 
 "Feed" = "Feed";
+
+"Feed URLs" = "Abonnements adresser";
 
 "Download HD versions by default" = "Last ned HD-versjon";
 
@@ -160,9 +171,19 @@
 
 "Rating:" = "Vurdering:";
 
+"Save each show in its own folder" = "Lagre hvert show i en egen mappe";
+
+/* This string is on a button. */
+"Save" = "Lagre";
+
 "Search" = "Søk etter";
 
 "Never" = "Aldri";
+
+"Next Episode" = "Neste Episode";
+
+/* This string is split, the full version is "Start subscription with: Next aired episode" */
+"Next aired episode" = "Neste nye episode";
 
 /* Title of a column in a table. */
 "Season" = "Sesong";
@@ -191,11 +212,30 @@
 
 "Subscriptions" = "Abonnementer";
 
+/* This string is split, the full version is "Start subscription with: Next aired episode" or "Start subscription with: This episode: My Show S01E01" */
+"Start subscription with:" = "Start abonnement med:";
+
+"The file may not be released yet. Please try again later or check your internet connection. Alternatively you can download the SD version." = "Filen er kanskje ikke utgitt ennå. Vennligst prøv igjen senere eller sjekk din Internettforbindelse. Alternativt kan du laste ned SD versjonen.";
+
+/* Disclaimer for a destructive action */
+"This action cannot be undone." = "Denne handlingen kan ikke angres.";
+
+/* This string is split, the full version is "Start subscription with: This episode: My Show S01E01" */
+"This episode:" = "Denne episoden:";
+
+"TVDB id" = "TVDB id";
+
 /* Title of an error message or Growl notification. */
 "TVShows Update Available" = "En ny versjon av TVShows er tilgjengelig";
 
 /* Title of an error message or Growl notification. */
 "TVShows Update Downloading" = "En ny versjon av TVShows lastes ned";
+
+/* The %@ will be replaced by the name of the torrent file. */
+"Unable to download %@" = "Kan ikke laste ned %@";
+
+/* The %@ will be replaced by the name of the torrent file. */
+"Unable to find an HD torrent for %@" = "Fant ingen HD-torrent for %@";
 
 /* Title of an error message or Growl notification. */
 "Unable to Update the Show List" = "Kunne ikke oppdatere programlisten";
@@ -228,6 +268,8 @@
 "Unknown" = "Ukjent";
 
 "Updating Show Information…" = "Oppdaterer informasjon om serien...";
+
+"Use additional sources for HD (may contain rars)" = "Benytt andre kilder for HD (kan inneholde .rar arkiverte filer)";
 
 "View Logs" = "Vis logger";
 

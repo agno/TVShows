@@ -15,13 +15,15 @@
 #import <PreferencePanes/PreferencePanes.h>
 #import <Cocoa/Cocoa.h>
 #import "SubscriptionsDelegate.h"
+#import "LRFilterBar.h"
 
 @interface TabController : NSPreferencePane
 {
     IBOutlet NSTabView *prefTabView;
     IBOutlet NSButton *feedbackButton;
     NSManagedObject *selectedShow;
-    SubscriptionsDelegate *subscriptionsDelegate;
+    
+    IBOutlet SubscriptionsDelegate *subscriptionsDelegate;
     
     // Version information
     IBOutlet NSTextField *sidebarHeader;
@@ -32,6 +34,7 @@
     IBOutlet NSTextView *textView_aboutBox;
     IBOutlet NSButton *websiteButton;
     IBOutlet NSButton *donateButton;
+    IBOutlet NSButton *resetWarningsButton;
     IBOutlet NSButton *viewLogsButton;
     IBOutlet NSButton *uninstallButton;
     IBOutlet NSTextField *disclaimer;
@@ -45,6 +48,8 @@
     IBOutlet NSButton *closeLogButton;
     
     // Subscriptions tab
+    IBOutlet LRFilterBar *filterBar;
+    IBOutlet NSSearchField *filterField;
     IBOutlet NSArrayController *SBArrayController;
     IBOutlet NSWindow *showInfoWindow;
     IBOutlet NSTextField *lastCheckedText;
@@ -79,9 +84,11 @@
 }
 
 @property (retain) NSManagedObject *selectedShow;
-@property (retain) SubscriptionsDelegate *subscriptionsDelegate;
 
 - (void) awakeFromNib;
+- (IBAction) filterSubscriptions:(id)sender;
+- (void) resetFilters;
+- (void) refreshShowList:(NSNotification *)inNotification;
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
 - (IBAction) showFeedbackWindow:(id)sender;
 
@@ -91,6 +98,7 @@
 - (IBAction) openBlog:(id)sender;
 - (IBAction) openTwitter:(id)sender;
 - (IBAction) openPaypal:(id)sender;
+- (IBAction) resetWarnings:(id)sender;
 - (IBAction) openUninstaller:(id)sender;
 - (void) drawAboutBox;
 
@@ -112,8 +120,8 @@
 - (void) updatePoster:(NSArray *)data;
 - (IBAction) closeShowInfoWindow:(id)sender;
 - (IBAction) showQualityDidChange:(id)sender;
-- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName andShowName:(NSString *)show;
 - (void) sortSubscriptionList;
 - (IBAction) unsubscribeFromShow:(id)sender;
+- (BOOL) shouldUnsubscribeFromShow;
 
 @end

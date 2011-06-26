@@ -125,7 +125,7 @@
     // A quick and dirty fix is deceiving System Preferences.app by linking the missing localization to a fallback language
     // Then the panel is shown in this fallback localization (as before), but our app is shown in this other language
     // The only problem with this solution is that we have to ask for admin privileges
-    NSString *locale = [[[NSLocale currentLocale] localeIdentifier] substringToIndex:2];
+    NSString *locale = [[[NSLocale preferredLanguages] objectAtIndex:0] substringToIndex:2];
     
     if ([locale isEqualToString:@"ca"]) {
         return [self fixUnsupportedLanguage:@"ca" withFallback:@"Spanish" withMessage:@"La aplicación Preferencias del Sistema no está traducida al Catalán, así que TVShows necesita arreglarla para que se pueda mostrar en tu idioma.\n\nPor favor introduce tu contraseña en la siguiente ventana para que podamos arreglarla."];

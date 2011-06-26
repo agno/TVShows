@@ -25,6 +25,11 @@
     IBOutlet NSBox *growlBoxTitle;
     IBOutlet NSBox *updateBoxTitle;
     
+    // General Settings
+    IBOutlet NSTextField *namingConventionText;
+    IBOutlet NSPopUpButton *namingConventionMenu;
+    IBOutlet NSButton *showMenuBarIcon;
+    
     // Download Preferences
     IBOutlet MBSliderButton *isEnabledControl;
     IBOutlet NSImageView *TVShowsAppImage;
@@ -35,9 +40,9 @@
     IBOutlet NSTextField *downloadLocationText;
     IBOutlet NSPopUpButton *downloadLocationMenu;
     
-    IBOutlet NSButton *showMenuBarIcon;
     IBOutlet NSButton *autoOpenDownloadedFiles;
     IBOutlet NSButton *sortInFolders;
+    IBOutlet NSButton *sortInSeasonFolders;
     IBOutlet NSButton *autoSelectHDVersion;
     IBOutlet NSButton *useAdditionalSourcesHD;
     
@@ -61,6 +66,7 @@
 - (void) setDefaultUserDefaults;
 - (void) loadSavedDefaults;
 - (IBAction) showMenuBarIconDidChange:(id)sender;
+- (IBAction) namingConventionDidChange:(id)sender;
 
 #pragma mark -
 #pragma mark Download Preferences
@@ -72,6 +78,7 @@
 - (void) openPanelDidEnd:(NSOpenPanel *)openPanel returnCode:(int)returnCode contextInfo:(void *)contextInfo;
 - (IBAction) autoOpenDownloadedFilesDidChange:(id)sender;
 - (IBAction) sortInFoldersDidChange:(id)sender;
+- (IBAction) sortInSeasonFoldersDidChange:(id)sender;
 - (IBAction) autoSelectHDVersionDidChange:(id)sender;
 - (IBAction) useAdditionalSourcesHDDidChange:(id)sender;
 

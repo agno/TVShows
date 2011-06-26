@@ -16,19 +16,26 @@
 #import <Sparkle/SUUpdater.h>
 #import <Growl/GrowlApplicationBridge.h>
 #import "SubscriptionsDelegate.h"
+#import "PresetShowsDelegate.h"
+#import "Miso.h"
 
-@interface TVShowsHelper : NSObject <GrowlApplicationBridgeDelegate>
+@interface TVShowsHelper : NSObject <GrowlApplicationBridgeDelegate, MisoDelegate>
 {
+    BOOL manually;
+    BOOL changed;
     NSThread *checkerThread;
     NSTimer *checkerLoop;
     NSData *TVShowsHelperIcon;
+    Miso *misoBackend;
     SubscriptionsDelegate *subscriptionsDelegate;
+    PresetShowsDelegate *presetShowsDelegate;
     
     IBOutlet NSStatusItem *statusItem;
     IBOutlet NSMenu *statusMenu;
     IBOutlet NSMenuItem *lastUpdateItem;
     IBOutlet NSMenuItem *checkShowsItem;
     IBOutlet NSMenuItem *subscriptionsItem;
+    IBOutlet NSMenuItem *syncItem;
     IBOutlet NSMenuItem *preferencesItem;
     IBOutlet NSMenuItem *feedbackItem;
     IBOutlet NSMenuItem *aboutItem;
@@ -38,6 +45,7 @@
 @property (retain) NSTimer *checkerLoop;
 @property (retain) NSData *TVShowsHelperIcon;
 @property (retain) SubscriptionsDelegate *subscriptionsDelegate;
+@property (retain) PresetShowsDelegate *presetShowsDelegate;
 
 - (void) runLoop;
 - (void) checkAllShows;
@@ -51,14 +59,11 @@
 - (IBAction) checkNow:(id)sender;
 - (IBAction) openApplication:(id)sender;
 - (IBAction) showSubscriptions:(id)sender;
+- (IBAction) showSync:(id)sender;
 - (IBAction) showPreferences:(id)sender;
 - (IBAction) showAbout:(id)sender;
 - (IBAction) showFeedback:(id)sender;
 - (IBAction) quitHelper:(id)sender;
-
-#pragma mark -
-#pragma mark Download Methods
-- (BOOL) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName andShowName:(NSString *)show;
 
 #pragma mark -
 #pragma mark Sparkle Delegate Methods

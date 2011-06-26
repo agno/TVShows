@@ -15,6 +15,9 @@
 
 "6 hours" = "6 horas";
 
+/* This refers to "All shows" */
+"All" = "Todos";
+
 "A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "En cada comprobación de episodios se registra un mensaje. Salvo que se indique lo contrario, no hay nuevos episodios.";
 
 /* The %@ will be replaced by the name of the show. */
@@ -47,11 +50,13 @@
 
 "Application Update Preferences" = "Preferencias de actualización de la aplicación";
 
+"Automatic check-in when an episode is downloaded" = "Check-in automático al descargar un episodio";
+
 "Automatically check for updates" = "Buscar actualizaciones automáticamente";
 
 "Automatically install new updates" = "Instalar nuevas actualizaciones automáticamente";
 
-"Automatically open each file after download" = "Abrir automáticamente los archivos al terminar la descarga";
+"Automatically open each file after download" = "Abrir automáticamente los archivos Torrent al terminar la descarga";
 
 "Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "¿Seguro que desea desinstalar TVShows? Se borrarán todas sus preferencias y suscripciones.";
 
@@ -82,6 +87,11 @@
 /* This string is on a button. */
 "Close" = "Cerrar";
 
+/* This string is on a button. */
+"Create New Account" = "Crear nueva cuenta";
+
+"Create season subfolders" = "Crear subcarpetas por temporadas";
+
 "Disable TVShows" = "Deshabilitar TVShows";
 
 "Download beta versions when available" = "Descargar versiones beta cuando estén disponibles";
@@ -92,13 +102,22 @@
 
 "Enable downloading new episodes" = "Habilitar descarga de nuevos episodios";
 
+/* This refers to "Enabled shows" */
+"Enabled" = "Habil.";
+
 /* Status of the current show when it is airing. It is shown in a label as "Status: Continuing" */
 "Continuing" = "En emisión";
+
+/* This refers to "Custom shows" */
+"Custom" = "Person.";
 
 /* Title of a column in a table. */
 "Episode" = "Episodio";
 
 "Default video quality:" = "Calidad de video predeterminada:";
+
+/* This refers to "Disabled shows" */
+"Disabled" = "Deshabil.";
 
 "Donate" = "Donar";
 
@@ -109,6 +128,8 @@
 
 /* Title of a column in a table. */
 "Episode Name" = "Nombre del Episodio";
+
+"Episode naming convention:" = "Convención de nombrado:";
 
 "Episode save location:" = "Guardar los episodios en:";
 
@@ -122,6 +143,8 @@
 
 "Growl Settings" = "Preferencias de Growl";
 
+"I am already a Miso user" = "Ya soy usuario de Miso";
+
 "Include anonymous system information" = "Incluir información anónima del sistema";
 
 "Info" = "Información";
@@ -132,8 +155,13 @@
 
 "Last Downloaded" = "Último descargado";
 
+"Miso is a social network made for people that love watching TV shows." = "Miso es una red social diseñada para entusiastas de las series y la televisión.";
+
 /* This string is on a button. */
 "More Info" = "Más información";
+
+/* This string is on a button. */
+"More Shows" = "Más series";
 
 "Getting Started" = "Primeros pasos";
 
@@ -156,11 +184,16 @@
 /* To select a custom folder not listed. */
 "Other..." = "Otro...";
 
+"Password:" = "Contraseña:";
+
 "Please Select a Show:" = "Por favor, elija una serie:";
 
 "Last Checked:" = "Última actualización:";
 
 "Preferences" = "Preferencias";
+
+/* This refers to "Preset shows" */
+"Preset" = "Predef.";
 
 /* Title of a column in a table. */
 "Published Date" = "Fecha de emisión";
@@ -171,12 +204,21 @@
 
 "Rating:" = "Valoración:";
 
+/* This string is on a small button, it stands for "Reset Warnings" */
+"Reset Warn." = "Rest. advert.";
+
 /* This string is on a button. */
 "Save" = "Guardar";
 
 "Save each show in its own folder" = "Guardar cada serie en su propia carpeta";
 
 "Search" = "Buscar";
+
+/* This string is on a button. */
+"Sign In" = "Entrar";
+
+/* This string is on a button. */
+"Sign Out" = "Salir";
 
 "Never" = "Nunca";
 
@@ -215,6 +257,12 @@
 /* This string is split, the full version is "Start subscription with: Next aired episode" or "Start subscription with: This episode: My Show S01E01" */
 "Start subscription with:" = "Empezar subscripción con:";
 
+"Sync" = "Sincronizar";
+
+"Sync shows between Miso and TVShows" = "Sincronizar series entre Miso y TVShows";
+
+"The check-in will be made when the download starts. This is not advisable, but it could allow you to sync episode downloads across several computers." = "Los check-in se harán cuando empiece la descarga. No es recomendable, pero si lo marcas te permitirá sincronizar episodios entre varios ordenadores.";
+
 "The file may not be released yet. Please try again later or check your internet connection. Alternatively you can download the SD version." = "Puede que el archivo aún no haya sido publicado. Inténtelo de nuevo más tarde o compruebe su conexión a internet. Alternativamente puede descargar la versión en calidad normal.";
 
 /* Disclaimer for a destructive action */
@@ -246,6 +294,8 @@
 /* Title of an error message or Growl notification. */
 "Update Installed Automatically" = "Actualización instalada automáticamente.";
 
+"User Name:" = "Usuario:";
+
 "Show TVShows status in the menu bar" = "Mostrar estado de TVShows en la barra de menús";
 
 /* This string refers to the default episode quality to download (Standard/High Definition). */
@@ -273,7 +323,19 @@
 
 "View Logs" = "Ver logs";
 
+"Visit Miso" = "Visitar Miso";
+
+"Warnings restored" = "Advertencias restablecidas";
+
 "Website" = "Sitio web";
 
-"Yes" = "Si";
+"Why try it?" = "¿Para qué me sirve?";
+
+"Yes" = "Sí";
+
+"Your preferences about warnings were restored. If needed, next time TVShows will ask for your confirmation to complete a sensitive operation." = "Tus preferencias sobre advertencias han sido restablecidas. Cuando sea necesario, la próxima vez TVShows te pedirá confirmación para completar una operación sensible.";
+
+"Your subscriptions will be backed up in the cloud and they can be synced between different computers." = "Tus suscripciones se guardarán en la nube y podrán ser sincronizadas entre varios ordenadores.";
+
+"Your TVShows subscriptions will be automatically synced with your followed shows on Miso. Only airings shows known by TVShows will be synced." = "Tus suscripciones de TVShows se sincronizarán con las series que sigas en Miso. Solo lo harán las series en emisión conocidas por TVShows.";
 

@@ -54,8 +54,10 @@
 - (void) setDefaultUserDefaults
 {
     [TSUserDefaults setKey:@"ShowMenuBarIcon"           fromBool:YES];
+    [TSUserDefaults setKey:@"NamingConvention"          fromFloat:0];
     [TSUserDefaults setKey:@"AutoOpenDownloadedFiles"   fromBool:YES];
     [TSUserDefaults setKey:@"SortInFolders"             fromBool:NO];
+    [TSUserDefaults setKey:@"SeasonSubfolders"          fromBool:NO];
     [TSUserDefaults setKey:@"AutoSelectHDVersion"       fromBool:YES];
     [TSUserDefaults setKey:@"UseAdditionalSourcesHD"    fromBool:YES];
     [TSUserDefaults setKey:@"checkDelay"                fromFloat:1];
@@ -69,6 +71,9 @@
     [TSUserDefaults setKey:@"SUEnableAutomaticChecks"   fromBool:YES];
     [TSUserDefaults setKey:@"SUFeedURL"                 fromString:TVShowsAppcastURL];
     [TSUserDefaults setKey:@"SUSendProfileInfo"         fromBool:YES];
+    [TSUserDefaults setKey:@"MisoEnabled"               fromBool:NO];
+    [TSUserDefaults setKey:@"MisoSyncEnabled"           fromBool:YES];
+    [TSUserDefaults setKey:@"MisoCheckInEnabled"        fromBool:NO];
 }
 
 - (void) loadSavedDefaults
@@ -90,6 +95,10 @@
     [showMenuBarIcon setTitle:TSLocalizeString(@"Show TVShows status in the menu bar")];
     [showMenuBarIcon setState:[TSUserDefaults getBoolFromKey:@"ShowMenuBarIcon" withDefault:YES]];
     
+    // Episode naming convention
+    [namingConventionText setStringValue:TSLocalizeString(@"Episode naming convention:")];
+    [namingConventionMenu selectItemAtIndex:[TSUserDefaults getFloatFromKey:@"NamingConvention" withDefault:0]];
+    
     // Automatically open downloaded files
     [autoOpenDownloadedFiles setTitle:TSLocalizeString(@"Automatically open each file after download")];
     [autoOpenDownloadedFiles setState:[TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:YES]];
@@ -97,6 +106,11 @@
     // Sort episodes in folders using the show name
     [sortInFolders setTitle:TSLocalizeString(@"Save each show in its own folder")];
     [sortInFolders setState:[TSUserDefaults getBoolFromKey:@"SortInFolders" withDefault:NO]];
+    
+    // Create subfolders for every season (this depends on the previous option)
+    [sortInSeasonFolders setTitle:TSLocalizeString(@"Create season subfolders")];
+    [sortInSeasonFolders setState:[TSUserDefaults getBoolFromKey:@"SeasonSubfolders" withDefault:NO]];
+    [sortInSeasonFolders setEnabled:[TSUserDefaults getBoolFromKey:@"SortInFolders" withDefault:NO]];
     
     // Automatically select HD version by default
     [autoSelectHDVersion setTitle:TSLocalizeString(@"Download HD versions by default")];
@@ -157,6 +171,10 @@
 {
     [TSUserDefaults setKey:@"ShowMenuBarIcon" fromBool:[showMenuBarIcon state]];
     [self updateLaunchAgent];
+}
+
+- (IBAction) namingConventionDidChange:(id)sender {
+    [TSUserDefaults setKey:@"NamingConvention" fromFloat:[namingConventionMenu indexOfSelectedItem]];
 }
 
 #pragma mark -
@@ -259,6 +277,11 @@
 - (IBAction) sortInFoldersDidChange:(id)sender
 {
     [TSUserDefaults setKey:@"SortInFolders" fromBool:[sortInFolders state]];
+    [sortInSeasonFolders setEnabled:[sortInFolders state]];
+}
+
+- (IBAction) sortInSeasonFoldersDidChange:(id)sender {
+    [TSUserDefaults setKey:@"SeasonSubfolders" fromBool:[sortInSeasonFolders state]];
 }
 
 - (IBAction) autoSelectHDVersionDidChange:(id)sender

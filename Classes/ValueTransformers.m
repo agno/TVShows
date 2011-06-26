@@ -34,11 +34,11 @@
     // Those will crash the program if we aren't careful.
     if (value == nil) return nil;
     
-    NSImage *showPoster = [[TheTVDB class] getPosterForShow:[value valueForKey:@"name"]
-                                                 withShowID:[NSString stringWithFormat:@"%@",
-                                                             [value valueForKey:@"tvdbID"]]
-                                                 withHeight:96
-                                                  withWidth:66];
+    NSImage *showPoster = [TheTVDB getPosterForShow:[value valueForKey:@"name"]
+                                         withShowID:[NSString stringWithFormat:@"%@",
+                                                     [value valueForKey:@"tvdbID"]]
+                                         withHeight:94
+                                          withWidth:66];
     return showPoster;
 }
 

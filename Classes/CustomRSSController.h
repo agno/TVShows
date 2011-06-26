@@ -17,9 +17,10 @@
 
 @interface CustomRSSController : NSWindowController
 {
-    Boolean isTranslated;
+    BOOL isTranslated;
     NSManagedObject *selectedShow;
-    SubscriptionsDelegate *subscriptionsDelegate;
+    
+    IBOutlet SubscriptionsDelegate *subscriptionsDelegate;
     
     IBOutlet NSWindow *CustomRSSWindow;
     
@@ -52,7 +53,6 @@
 }
 
 @property (retain) NSManagedObject *selectedShow;
-@property (retain) SubscriptionsDelegate *subscriptionsDelegate;
 
 - (IBAction) displayCustomRSSWindow:(id)sender;
 - (IBAction) displayEditWindow:(id)sender;

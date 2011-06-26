@@ -19,16 +19,17 @@
 @interface PresetTorrentsController : NSWindowController
 {
     // Preset Torrents window
-    Boolean errorHasOccurred;
-    Boolean hasDownloadedList;
-    Boolean isTranslated;
-    SubscriptionsDelegate *subscriptionsDelegate;
-    PresetShowsDelegate *presetsDelegate;
+    BOOL errorHasOccurred;
+    BOOL hasDownloadedList;
+    BOOL isTranslated;
+    IBOutlet SubscriptionsDelegate *subscriptionsDelegate;
+    IBOutlet PresetShowsDelegate *presetsDelegate;
     
     IBOutlet NSWindow *PTWindow;
     IBOutlet NSTableView *PTTableView;
     IBOutlet NSArrayController *PTArrayController;
     IBOutlet NSSearchField *PTSearchField;
+    IBOutlet NSButton *moreShowsButton;
     IBOutlet NSButton *showQuality;
     IBOutlet NSButton *cancelButton;
     IBOutlet NSButton *subscribeButton;
@@ -62,6 +63,8 @@
 
 @property (retain) SubscriptionsDelegate *subscriptionsDelegate;
 @property (retain) PresetShowsDelegate *presetsDelegate;
+@property (retain) NSArrayController *SBArrayController;
+@property (retain) NSArrayController *PTArrayController;
 
 #pragma mark -
 #pragma mark Preset Torrents Window
@@ -70,6 +73,7 @@
 - (IBAction) showQualityDidChange:(id)sender;
 - (void) sortTorrentShowList;
 - (IBAction) reloadShowList:(id)sender;
+- (IBAction) visitInstructionsButton:(id)sender;
 - (void) downloadTorrentShowList;
 - (void) tableViewSelectionDidChange:(NSNotification *)notification;
 - (void) resetShowView;
@@ -98,7 +102,6 @@
 #pragma mark -
 #pragma mark Subscription Methods
 - (IBAction) subscribeToShow:(id)sender;
-- (void) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName andShowName:(NSString *)show;
 - (BOOL) userIsSubscribedToShow:(NSString*)showName;
 
 @end

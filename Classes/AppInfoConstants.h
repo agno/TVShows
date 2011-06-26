@@ -12,6 +12,9 @@
  *
  */
 
+// Import the "secrets"
+#import "AppSecretConstants.h"
+
 #define TVShowsAppDomain            @"com.victorpimentel.TVShows2"
 #define TVShowsHelperDomain         @"com.victorpimentel.TVShowsHelper"
 
@@ -19,13 +22,10 @@
 #define TVShowsBlog                 @"http://blog.tvshowsapp.com/"
 #define TVShowsTwitter              @"http://twitter.com/TVShows2/"
 #define TVShowsDonations            @"https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=2PARRGESKRQJ6&item_name=TVShows2&item_number=TVShows2&currency_code=%@&lc=%@&bn=PP%%2dDonationsBF%%3abtn_donateCC_LG%%2egif%%3aNonHosted"
+#define MisoWebsite                 @"http://gomiso.com/"
 
 #define TVShowsAppcastURL           @"http://tvshowsapp.com/tvshows.xml"
 #define TVShowsBetaAppcastURL       @"http://tvshowsapp.com/tvshows-beta.xml"
-
-// This is a TVShows specific API key. Please DO NOT reuse it.
-// You can get your own at http://thetvdb.com/?tab=apiregister
-#define API_KEY                     @"BB420D2FDA505290"
 
 // Used in the Delegate methods so that we don't have to duplicate files.
 #if PREFPANE
@@ -33,3 +33,7 @@
 #elif HELPER_APP
     #define CurrentBundleDomain     @"com.victorpimentel.TVShowsHelper"
 #endif
+
+// This is for deciding whether to hide a warning or not
+// If the user default is this, the warning will be shown
+#define ShowWarning                 -1

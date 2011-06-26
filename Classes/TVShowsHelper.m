@@ -15,23 +15,26 @@
 #import "AppInfoConstants.h"
 #import "TVShowsHelper.h"
 #import "PreferencesController.h"
+#import "PresetTorrentsController.h"
 #import "TorrentzParser.h"
 #import "TSParseXMLFeeds.h"
 #import "TSUserDefaults.h"
 #import "SUUpdaterSubclass.h"
-#import "WebsiteFunctions.h"
 #import "RegexKitLite.h"
 #import "TSRegexFun.h"
+#import "TheTVDB.h"
+#import "TSTorrentFunctions.h"
 
 @implementation TVShowsHelper
 
-@synthesize checkerLoop, TVShowsHelperIcon, subscriptionsDelegate;
+@synthesize checkerLoop, TVShowsHelperIcon, subscriptionsDelegate, presetShowsDelegate;
 
 - init
 {
     if((self = [super init])) {
         checkerThread = nil;
         checkerLoop = nil;
+        manually = NO;
         
         NSMutableString *appPath = [NSMutableString stringWithString:[[NSBundle bundleForClass:[self class]] bundlePath] ];
         [appPath replaceOccurrencesOfString:@"TVShowsHelper.app"
@@ -42,7 +45,19 @@
         TVShowsHelperIcon = [[NSData alloc] initWithContentsOfFile:
                              [appPath stringByAppendingPathComponent:@"TVShows-On-Large.icns"]];
         
-        subscriptionsDelegate = [[SubscriptionsDelegate alloc] init];
+        misoBackend = [[Miso alloc] init];
+        
+        [misoBackend setDelegate:self];
+        
+        [[NSDistributedNotificationCenter defaultCenter] addObserver:self
+                                                            selector:@selector(authenticatedOnMiso:)
+                                                                name:@"TSMisoAuthenticated"
+                                                              object:nil];
+        
+        [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self
+                                                               selector:@selector(awakeFromSleep)
+                                                                   name:NSWorkspaceDidWakeNotification
+                                                                 object:nil];
     }
     
     return self;
@@ -61,7 +76,14 @@
             [self activateStatusMenu];
         }
         
-        [self checkNow:nil];
+        // Check first if we have to add or delete subscriptions because of Miso
+        if ([TSUserDefaults getBoolFromKey:@"MisoEnabled" withDefault:NO]) {
+            // Try to login in Miso
+            manually = NO;
+            [misoBackend authorizeWithKey:MISO_API_KEY secret:MISO_API_SECRET];
+        } else {
+            [self checkNow:nil];
+        }
         
     } else {
         // TVShows is not enabled.
@@ -70,11 +92,282 @@
     }
 }
 
-- (void) runLoop
+- (NSObject *)getShow:(NSString *)showId fromArray:(NSArray *)array
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    NSRunLoop* threadLoop = [NSRunLoop currentRunLoop];
+    for (NSObject *show in array) {
+        if ([[[show valueForKey:@"tvdbID"] description] isEqualToString:showId]) {
+            return show;
+        }
+    }
     
+    return nil;
+}
+
+- (NSObject *)getShow:(NSString *)showId fromDictionary:(NSDictionary *)dict
+{
+    for (NSObject *show in dict) {
+        if ([[[[show valueForKey:@"media"] valueForKey:@"tvdb_id"] description] isEqualToString:showId]) {
+            return show;
+        }
+    }
+    
+    return nil;
+}
+
+- (void)unsubscribeFromUnfollowedShows:(NSDictionary *)followedShows
+{
+    // Fetch subscriptions
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Subscription"
+                                              inManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
+    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+    [request setEntity:entity];
+    
+    NSError *error = nil;
+    NSArray *subscriptions = [[subscriptionsDelegate managedObjectContext] executeFetchRequest:request error:&error];
+    
+    // Delete from our subscriptions unfollowed shows on Miso
+    for (NSManagedObject *show in subscriptions) {
+        // Get the TVDB id
+        NSString *showID = [[show valueForKey:@"tvdbID"] description];
+        NSString *seriesName = [show valueForKey:@"name"];
+        
+        // Check if the show is been followed and if it is a custom RSS (if it has some filters)
+        if (![show valueForKey:@"filters"] &&
+            ![self getShow:showID fromDictionary:followedShows]) {
+            
+            // Some shows do not have TVDB ids yet; search for it on Miso to see if they are favorited
+            NSDictionary *results = [misoBackend showWithQuery:seriesName];
+            
+            // Let's see if the show has id
+            if (![self getShow:showID fromDictionary:results]) {
+                
+                NSObject *newShow = nil;
+                
+                // Just pick the first show (too late, I cannot even think anymore)
+                for (NSObject *result in results) {
+                    newShow = result;
+                    break;
+                }
+                
+                // If the name is not equal... do not remove
+                if (newShow && ![[[newShow valueForKey:@"media"] valueForKey:@"title"] isEqualToString:seriesName]) {
+                    continue;
+                }
+                
+                // Or if this show is favorited... do it
+                if (newShow && [[[newShow valueForKey:@"media"] valueForKey:@"currently_favorited"] boolValue]) {
+                    continue;
+                }
+            }
+            
+            LogInfo(@"Unsubscribe show %@ because of Miso.", seriesName);
+            NSManagedObject *selectedShow = [[subscriptionsDelegate managedObjectContext] objectWithID:[show objectID]];
+            
+            [[subscriptionsDelegate managedObjectContext] deleteObject:selectedShow];
+            
+            [[subscriptionsDelegate managedObjectContext] processPendingChanges];
+            [subscriptionsDelegate saveAction];
+            
+            changed = YES;
+        }
+    }
+}
+
+- (void)subscribeToFollowedShows:(NSDictionary *)followedShows
+{
+    // Fetch subscriptions
+    NSEntityDescription *entitySubscriptions = [NSEntityDescription entityForName:@"Subscription"
+                                                           inManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
+    NSFetchRequest *requestSubscriptions = [[[NSFetchRequest alloc] init] autorelease];
+    [requestSubscriptions setEntity:entitySubscriptions];
+    
+    NSError *error = nil;
+    NSArray *subscriptions = [[subscriptionsDelegate managedObjectContext]
+                              executeFetchRequest:requestSubscriptions error:&error];
+    
+    // Fetch subscriptions
+    NSEntityDescription *entityPresets = [NSEntityDescription entityForName:@"Show"
+                                                     inManagedObjectContext:[presetShowsDelegate managedObjectContext]];
+    NSFetchRequest *requestPresets = [[[NSFetchRequest alloc] init] autorelease];
+    [requestPresets setEntity:entityPresets];
+    
+    NSArray *presets = [[presetShowsDelegate managedObjectContext]
+                        executeFetchRequest:requestPresets error:&error];
+    
+    // The other way around, update our subscriptions with the followed shows on Miso
+    for (NSDictionary *show in followedShows) {
+        // Get the precious data for that show
+        NSString *showID = [[[show valueForKey:@"media"] valueForKey:@"tvdb_id"] description];
+        NSString *seriesName = [[show valueForKey:@"media"] valueForKey:@"title"];
+        
+        // Let's check that the show is in the preset show list
+        NSObject *selectedShow = [self getShow:showID fromArray:presets];
+        // Some shows do not have TVDB ids yet; try to map them together
+        if (!selectedShow && (!showID || [showID isEqualToString:@"<null>"] || [showID length] == 0)) {
+            // Just pick the first show with that name, if there is any
+            for (NSObject *presetShow in presets) {
+                if ([[presetShow valueForKey:@"displayName"] isEqualToString:seriesName]) {
+                    selectedShow = presetShow;
+                    showID = [[presetShow valueForKey:@"tvdbID"] description];
+                    break;
+                }
+            }
+        }
+        
+        // If the user is not subscribed to this show and the show is still airing, add to the subscriptions
+        if (selectedShow && ![self getShow:showID fromArray:subscriptions] &&
+            ![[TheTVDB getShowStatus:seriesName withShowID:showID] isEqualToString:@"Ended"]) {
+            
+            LogInfo(@"Adding show %@ from Miso.", seriesName);
+            
+            NSManagedObject *newSubscription = [NSEntityDescription insertNewObjectForEntityForName:@"Subscription"
+                                                                             inManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
+            
+            // Set the information about the new show
+            [newSubscription setValue:[selectedShow valueForKey:@"displayName"] forKey:@"name"];
+            [newSubscription setValue:[selectedShow valueForKey:@"sortName"] forKey:@"sortName"];
+            [newSubscription setValue:[selectedShow valueForKey:@"tvdbID"] forKey:@"tvdbID"];
+            [newSubscription setValue:[selectedShow valueForKey:@"name"] forKey:@"url"];
+            [newSubscription setValue:[NSNumber numberWithBool:[TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:YES]]
+                               forKey:@"quality"];
+            [newSubscription setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
+            
+            // OK, so we know that the user has Miso.
+            // And that the user has followed a "new" show.
+            // So let's go back in time thirteen days so that the last episodes
+            // will be downloaded. So that user can leverage this Miso synchronization.
+            // If the user does not want to download an episode he can cancel,
+            // but the other user case is more cumbersome.
+            // Anyway, if the user did a check-in for th(at/ose) episode(s)
+            // it will not be downloaded (and again, the user is Miso synced)
+            [newSubscription setValue:[NSDate dateWithTimeIntervalSinceNow:-6*24*60*60] forKey:@"lastDownloaded"];
+            
+            [[subscriptionsDelegate managedObjectContext] processPendingChanges];
+            [subscriptionsDelegate saveAction];
+            
+            changed = YES;
+        }
+    }
+}
+
+- (void)syncShows
+{
+    // Check the followed shows and process them
+    NSDictionary *followedShows = [misoBackend favoritedShows];
+    
+    if (followedShows) {
+        changed = NO;
+        [self unsubscribeFromUnfollowedShows:followedShows];
+        [self subscribeToFollowedShows:followedShows];
+        // Warn the pref pane
+        if (changed) {
+            [[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"TSUpdatedShows" object:nil];
+            changed = NO;
+        }
+    }
+}
+
+- (BOOL)hasCheckInForShow:(NSObject *)show andEpisode:(NSObject *)episode
+{
+    // If the user did not enable check-ins, obviously we cannot know if there is a check-in
+    if (![TSUserDefaults getBoolFromKey:@"MisoEnabled" withDefault:NO] ||
+        ![TSUserDefaults getBoolFromKey:@"MisoCheckInEnabled" withDefault:NO]) {
+        return NO;
+    }
+    
+    // Only check check-ins for normal shows
+    if ([[episode valueForKey:@"episodeSeason"] isEqualToString:@"-"] ||
+        [[episode valueForKey:@"episodeNumber"] isEqualToString:@"-"] ||
+        [show valueForKey:@"filters"]) {
+        return NO;
+    }
+    
+    // Retrieve the user id
+    NSDictionary *userDetails = [misoBackend userDetails];
+    if (!userDetails) {
+        return NO;
+    }
+    
+    // Search for it on Miso
+    NSDictionary *results = [misoBackend showWithQuery:[show valueForKey:@"name"]];
+    NSObject *showData = nil;
+    
+    // Just pick the first show (too late, I cannot even think anymore)
+    for (NSObject *result in results) {
+        showData = result;
+        break;
+    }
+    if (!showData) {
+        return NO;
+    }
+    
+    // We have all the data, so search for checkins of that show!
+    NSDictionary *checkins = [misoBackend checkingsForUser:[[[userDetails valueForKey:@"user"] valueForKey:@"id"] description]
+                                                   andShow:[[[showData valueForKey:@"media"] valueForKey:@"id"] description]];
+    
+    // So check if the checkin was done
+    for (NSObject *checkin in checkins) {
+        if ([[[[checkin valueForKey:@"checkin"] valueForKey:@"episode_season_num"] description]
+             isEqualToString:[episode valueForKey:@"episodeSeason"]] &&
+            [[[[checkin valueForKey:@"checkin"] valueForKey:@"episode_num"] description]
+             isEqualToString:[episode valueForKey:@"episodeNumber"]]) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+- (void)authenticationEnded:(BOOL)authenticated
+{
+    // If the shows were updated in the prefpane, we don't need to update them again
+    if (!manually) {
+        // Now we can check the new episodes!
+        [self checkNow:nil];
+    }
+}
+
+- (void)authenticatedOnMiso:(NSNotification *)inNotification
+{
+    // The user just login with the prefpane, so we have the credentials now!
+    manually = YES;
+    [misoBackend authorizeWithKey:MISO_API_KEY secret:MISO_API_SECRET];
+}
+
+- (void)checkinEpisode:(NSString *)episodeName ofShow:(NSString *)showName
+{
+    if ([TSUserDefaults getBoolFromKey:@"MisoEnabled" withDefault:NO] &&
+        [TSUserDefaults getBoolFromKey:@"MisoCheckInEnabled" withDefault:NO]) {
+        
+        NSArray *seasonAndEpisode = [TSRegexFun parseSeasonAndEpisode:episodeName];
+        
+        if ([seasonAndEpisode count] == 3) {
+            
+            // Search for it on Miso
+            NSDictionary *results = [misoBackend showWithQuery:showName];
+            
+            NSObject *show = nil;
+            
+            // Just pick the first show (too late, I cannot even think anymore)
+            for (NSObject *result in results) {
+                show = result;
+                break;
+            }
+            
+            // At this point, it should be a valid show, but maybe it is not on the Miso database yet
+            if (show) {
+                LogInfo(@"Adding check-in for %@ on Miso.", episodeName);
+                
+                [misoBackend addCheckingForShow:[[[show valueForKey:@"media"] valueForKey:@"id"] description]
+                                  withSeasonNum:[TSRegexFun removeLeadingZero:[seasonAndEpisode objectAtIndex:1]]
+                                     episodeNum:[TSRegexFun removeLeadingZero:[seasonAndEpisode objectAtIndex:2]]];
+            }
+        }
+    }
+}
+
+- (NSTimeInterval) userDelay
+{
     NSInteger delay;
     NSTimeInterval seconds;
     delay = [TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:1];
@@ -114,25 +407,39 @@
             seconds = 1*60;
     }
     
+    return seconds;
+}
+
+- (void) runLoop
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    NSRunLoop* threadLoop = [NSRunLoop currentRunLoop];
+    
     checkerLoop = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:0.1]
-                                        interval:seconds
-                                          target:self
-                                        selector:@selector(checkAllShows)
-                                        userInfo:nil
-                                         repeats:YES];
+                                           interval:[self userDelay]
+                                             target:self
+                                           selector:@selector(checkAllShows)
+                                           userInfo:nil
+                                            repeats:YES];
     
     [threadLoop addTimer:checkerLoop forMode:NSDefaultRunLoopMode];
     [threadLoop run];
     [pool drain];
 }
 
-- (IBAction) checkNow:(id)sender
+- (void) runLoopAfterAwake
 {
-    if (checkerLoop != nil) {
-        [checkerLoop performSelector:@selector(invalidate) onThread:checkerThread withObject:nil waitUntilDone:YES];
-        checkerLoop = nil;
-        [checkerThread release];
-        checkerThread = nil;
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    NSRunLoop* threadLoop = [NSRunLoop currentRunLoop];
+    
+    // Calculate how many seconds do we have to wait until the next check
+    NSTimeInterval nextCheck = [self userDelay] - [[NSDate date] timeIntervalSinceDate:
+                                                   [TSUserDefaults getDateFromKey:@"lastCheckedForEpisodes"]];
+    
+    // If the next should already be done, do it now
+    if (nextCheck < 0.1) {
+        // Wait a little for connecting to the network
+        nextCheck = 60;
         // Notify the user to give him some feedback
         [GrowlApplicationBridge notifyWithTitle:@"TVShows"
                                     description:TSLocalizeString(@"Checking for new episodes...")
@@ -143,18 +450,104 @@
                                    clickContext:nil];
     }
     
-    // First disable the menubar option
-    [checkShowsItem setAction:nil];
-    [checkShowsItem setTitle:TSLocalizeString(@"Checking now, please wait...")];
+    checkerLoop = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:nextCheck]
+                                           interval:[self userDelay]
+                                             target:self
+                                           selector:@selector(checkAllShows)
+                                           userInfo:nil
+                                            repeats:YES];
+    
+    [threadLoop addTimer:checkerLoop forMode:NSDefaultRunLoopMode];
+    [threadLoop run];
+    [pool drain];
+}
+
+- (void) awakeFromSleep
+{
+    LogInfo(@"Awaked!");
+    if (checkerLoop != nil) {
+        [checkerLoop performSelector:@selector(invalidate) onThread:checkerThread withObject:nil waitUntilDone:YES];
+        checkerLoop = nil;
+        [checkerThread release];
+        checkerThread = nil;
+    }
     
     // And start the thread
     checkerThread = [[NSThread alloc] initWithTarget:self selector:@selector(runLoop) object:nil];
     [checkerThread start];
 }
 
+- (IBAction) checkNow:(id)sender
+{
+    if (checkerLoop != nil) {
+        [checkerLoop performSelector:@selector(invalidate) onThread:checkerThread withObject:nil waitUntilDone:YES];
+        checkerLoop = nil;
+        [checkerThread release];
+        checkerThread = nil;
+        if (sender != nil) {
+            // Notify the user to give him some feedback
+            [GrowlApplicationBridge notifyWithTitle:@"TVShows"
+                                        description:TSLocalizeString(@"Checking for new episodes...")
+                                   notificationName:@"Checking For New Episodes"
+                                           iconData:TVShowsHelperIcon
+                                           priority:0
+                                           isSticky:0
+                                       clickContext:nil];
+        }
+    }
+    
+    // And start the thread
+    checkerThread = [[NSThread alloc] initWithTarget:self selector:@selector(runLoop) object:nil];
+    [checkerThread start];
+}
+
+- (void) updateShowList
+{
+    // Create the Preset Torrents Controller and set it with the correct delegates
+    PresetTorrentsController *controller = [[PresetTorrentsController alloc] init];
+    
+    [controller setSubscriptionsDelegate:subscriptionsDelegate];
+    [controller setPresetsDelegate:presetShowsDelegate];
+    
+    NSArrayController *SBArrayController = [[NSArrayController alloc] init];
+    NSArrayController *PTArrayController = [[NSArrayController alloc] init];
+    
+    [SBArrayController setManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
+    [PTArrayController setManagedObjectContext:[presetShowsDelegate managedObjectContext]];
+    
+    [controller setSBArrayController:SBArrayController];
+    [controller setPTArrayController:PTArrayController];
+    
+    // We can now safely download the torrent show list :)
+    [controller downloadTorrentShowList];
+    
+    [SBArrayController release];
+    [PTArrayController release];
+    [controller release];
+}
+
 - (void) checkAllShows
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    // First disable the menubar option
+    [self performSelectorOnMainThread:@selector(disableLastCheckedItem) withObject:nil waitUntilDone:NO];
+    
+    // This is to track changes in the Core Data
+    changed = NO;
+    
+    // Reload the delegates
+    subscriptionsDelegate = [[SubscriptionsDelegate alloc] init];
+    presetShowsDelegate = [[PresetShowsDelegate alloc] init];
+    
+    // Update the showlist
+    [self updateShowList];
+    
+    // Sync shows with Miso
+    if ([TSUserDefaults getBoolFromKey:@"MisoEnabled" withDefault:NO] &&
+        [TSUserDefaults getBoolFromKey:@"MisoSyncEnabled" withDefault:YES]) {
+        [self syncShows];
+    }
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Subscription"
                                               inManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
@@ -167,27 +560,21 @@
     if (error != nil) {
         LogError(@"%@",[error description]);
     } else {
-        
         // No error occurred so check for new episodes
         LogInfo(@"Checking for new episodes.");
         for (NSArray *show in results) {
-            
-            // Don't download unless it's been at least 15minutes (or close to it)
-            //              NSNumber *lastDownloaded = [NSNumber numberWithDouble:[[show valueForKey:@"lastDownloaded"] timeIntervalSinceNow]];
-            //              NSNumber *timeLimit = [NSNumber numberWithInt:-15*60+10];
-            
-            //              if ([lastDownloaded compare:timeLimit] == NSOrderedAscending) {
-            
             // Only check for new episodes if it's enabled.
             if ([[show valueForKey:@"isEnabled"] boolValue]) {
-                //LogDebug(@"Checking for new episodes of %@.", [show valueForKey:@"name"]);
                 [self checkForNewEpisodes:show];
             }
-            //              }
-            
         }
-        
     }
+    
+    // And free the delegates
+    [subscriptionsDelegate release];
+    [presetShowsDelegate release];
+    subscriptionsDelegate = nil;
+    presetShowsDelegate = nil;
     
     // Now that everything is done, update the time our last check was made.
     [TSUserDefaults setKey:@"lastCheckedForEpisodes" fromDate:[NSDate date]];
@@ -195,14 +582,20 @@
     // And update the menu to reflect the date
     [self performSelectorOnMainThread:@selector(updateLastCheckedItem) withObject:nil waitUntilDone:NO];
     
-    [[subscriptionsDelegate managedObjectContext] processPendingChanges];
-    [subscriptionsDelegate saveAction];
+    // And warn the prefpane if needed
+    if (changed) {
+        [[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"TSUpdatedShows" object:nil];
+    }
     
     [pool drain];
 }
 
 - (void) checkForNewEpisodes:(NSArray *)show
 {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    LogDebug(@"Checking episodes for %@.", [show valueForKey:@"name"]);
+    
     NSDate *pubDate, *lastDownloaded, *lastChecked;
     NSArray *episodes = [TSParseXMLFeeds parseEpisodesFromFeeds:
                          [[show valueForKey:@"url"] componentsSeparatedByString:@"#"]
@@ -244,8 +637,8 @@
             // Detect if the last downloaded episode was aired after this one (so do not download it!)
             // Use a cache version (lastEpisodename) because we could have download it several episodes
             // in this session, for example if the show aired two episodes in the same day
-            if (![TSRegexFun wasThisEpisode:episodeName
-                          airedAfterThisOne:lastEpisodeName]) {
+            if (![TSRegexFun wasThisEpisode:episodeName airedAfterThisOne:lastEpisodeName]) {
+                [pool drain];
                 return;
             }
             
@@ -266,25 +659,42 @@
                  ![[episode valueForKey:@"isHD"] boolValue]) ||
                 chooseAnyVersion) {
                 
-                if ([self startDownloadingURL:[episode valueForKey:@"link"]
-                                 withFileName:[[episode valueForKey:@"episodeName"] stringByAppendingString:@".torrent"]
-                                  andShowName:[show valueForKey:@"name"]]) {
-                    // Update the last downloaded episode name only if it was aired after the previous stored one
-                    if ([TSRegexFun wasThisEpisode:episodeName
-                                 airedAfterThisOne:[show valueForKey:@"sortName"]]) {
-                        // Update when the show was last downloaded
-                        [show setValue:pubDate forKey:@"lastDownloaded"];
-                        [show setValue:episodeName forKey:@"sortName"];
-                    }
+                BOOL downloaded = NO;
+                
+                // If the user has Miso enabled, check if there is a check-in for that episode
+                if ([self hasCheckInForShow:show andEpisode:episode]) {
+                    downloaded = YES;
                 }
                 
+                // Otherwise download the episode! With mirrors (they are stored in a string separated by #)
+                if (!downloaded && [TSTorrentFunctions downloadEpisode:episode ofShow:show]) {
+                    downloaded = YES;
+                    
+                    // Checkin the episode on Miso
+                    [self checkinEpisode:[episode valueForKey:@"episodeName"] ofShow:[show valueForKey:@"name"]];
+                }
+                
+                // Update the last downloaded episode name only if it was aired after the previous stored one
+                if (downloaded) {
+                    if ([TSRegexFun wasThisEpisode:episodeName
+                                 airedAfterThisOne:[show valueForKey:@"sortName"]]) {
+                        [show setValue:pubDate forKey:@"lastDownloaded"];
+                        [show setValue:episodeName forKey:@"sortName"];
+                        [[subscriptionsDelegate managedObjectContext] processPendingChanges];
+                        [subscriptionsDelegate saveAction];
+                        changed = YES;
+                    }
+                }
             }
         } else {
             // The rest is not important because it is even before the previous entry
+            [pool drain];
             return;
         }
         
     }
+    
+    [pool drain];
 }
 
 #pragma mark -
@@ -306,10 +716,18 @@
     [lastUpdateItem setTitle:[NSString stringWithFormat:@"%@ %@", TSLocalizeString(@"Last Checked:"), TSLocalizeString(@"Never")]];
     [checkShowsItem setTitle:TSLocalizeString(@"Checking now, please wait...")];
     [subscriptionsItem setTitle:[NSString stringWithFormat:@"%@...", TSLocalizeString(@"Subscriptions")]];
+    [syncItem setTitle:[NSString stringWithFormat:@"%@...", TSLocalizeString(@"Sync")]];
     [preferencesItem setTitle:[NSString stringWithFormat:@"%@...", TSLocalizeString(@"Preferences")]];
     [feedbackItem setTitle:[NSString stringWithFormat:@"%@...", TSLocalizeString(@"Submit Feedback")]];
     [aboutItem setTitle:[NSString stringWithFormat:@"%@ TVShows", TSLocalizeString(@"About")]];
     [disableItem setTitle:TSLocalizeString(@"Disable TVShows")];
+}
+
+- (void) disableLastCheckedItem
+{
+    // Disable the menubar option
+    [checkShowsItem setAction:nil];
+    [checkShowsItem setTitle:TSLocalizeString(@"Checking now, please wait...")];
 }
 
 - (void) updateLastCheckedItem
@@ -341,61 +759,43 @@
     }
 }
 
-- (IBAction) showSubscriptions:(id)sender
+- (void) openTab:(NSInteger)tabNumber
 {
-    NSString *command =
+    NSString *command = [NSString stringWithFormat:
     @"tell application \"System Preferences\"                               \n"
     @"   activate                                                           \n"
     @"   set the current pane to pane id \"com.victorpimentel.TVShows2\"    \n"
     @"end tell                                                              \n"
     @"tell application \"System Events\"                                    \n"
     @"    tell process \"System Preferences\"                               \n"
-    @"        click radio button 1 of tab group 1 of window \"TVShows\"     \n"
+    @"        click radio button %d of tab group 1 of window \"TVShows\"    \n"
     @"    end tell                                                          \n"
-    @"end tell                                                              ";
+    @"end tell                                                    ", tabNumber];
     
     NSTask *task = [[[NSTask alloc] init] autorelease];
     [task setLaunchPath:@"/usr/bin/osascript"];
     [task setArguments:[NSMutableArray arrayWithObjects:@"-e", command, nil]];
     [task launch];
+}
+
+- (IBAction) showSubscriptions:(id)sender
+{
+    [self openTab:1];
+}
+
+- (IBAction) showSync:(id)sender
+{
+    [self openTab:2];
 }
 
 - (IBAction) showPreferences:(id)sender
 {
-    NSString *command =
-    @"tell application \"System Preferences\"                               \n"
-    @"   activate                                                           \n"
-    @"   set the current pane to pane id \"com.victorpimentel.TVShows2\"    \n"
-    @"end tell                                                              \n"
-    @"tell application \"System Events\"                                    \n"
-    @"    tell process \"System Preferences\"                               \n"
-    @"        click radio button 2 of tab group 1 of window \"TVShows\"     \n"
-    @"    end tell                                                          \n"
-    @"end tell                                                              ";
-    
-    NSTask *task = [[[NSTask alloc] init] autorelease];
-    [task setLaunchPath:@"/usr/bin/osascript"];
-    [task setArguments:[NSMutableArray arrayWithObjects:@"-e", command, nil]];
-    [task launch];
+    [self openTab:3];
 }
 
 - (IBAction) showAbout:(id)sender
 {
-    NSString *command =
-    @"tell application \"System Preferences\"                               \n"
-    @"   activate                                                           \n"
-    @"   set the current pane to pane id \"com.victorpimentel.TVShows2\"    \n"
-    @"end tell                                                              \n"
-    @"tell application \"System Events\"                                    \n"
-    @"    tell process \"System Preferences\"                               \n"
-    @"        click radio button 3 of tab group 1 of window \"TVShows\"     \n"
-    @"    end tell                                                          \n"
-    @"end tell                                                              ";
-    
-    NSTask *task = [[[NSTask alloc] init] autorelease];
-    [task setLaunchPath:@"/usr/bin/osascript"];
-    [task setArguments:[NSMutableArray arrayWithObjects:@"-e", command, nil]];
-    [task launch];
+    [self openTab:4];
 }
 
 - (IBAction) showFeedback:(id)sender
@@ -421,74 +821,6 @@
 {
     [[[PreferencesController new] autorelease] enabledControlDidChange:NO];
     [NSApp terminate];
-}
-
-#pragma mark -
-#pragma mark Download Methods
-- (BOOL) startDownloadingURL:(NSString *)url withFileName:(NSString *)fileName andShowName:(NSString *)show
-{
-    // Process the URL if the is not found
-    if ([url rangeOfString:@"http"].location == NSNotFound) {
-        LogInfo(@"Retrieving an HD torrent file from Torrentz of: %@", url);
-        url = [TorrentzParser getAlternateTorrentForEpisode:url];
-        if (url == nil) {
-            LogError(@"Unable to find an HD torrent file for: %@", fileName);
-            return NO;
-        }
-    }
-    
-    // Build the saving folder
-    NSString *saveLocation = [TSUserDefaults getStringFromKey:@"downloadFolder"];
-    
-    // Check if we have to sort shows by folders or not
-    if ([TSUserDefaults getBoolFromKey:@"SortInFolders" withDefault:NO]) {
-        saveLocation = [saveLocation stringByAppendingPathComponent:show];
-        if (![[NSFileManager defaultManager] createDirectoryAtPath:saveLocation
-                                       withIntermediateDirectories:YES
-                                                        attributes:nil
-                                                             error:nil]) {
-            LogError(@"Unable to create the folder: %@", saveLocation);
-            return NO;
-        }
-    }
-    
-    // Add the filename
-    saveLocation = [saveLocation stringByAppendingPathComponent:fileName];
-    
-    LogInfo(@"Attempting to download new episode: %@", fileName);
-    NSData *fileContents = [WebsiteFunctions downloadDataFrom:url];
-    
-    // Check if the download was right
-    if (!fileContents || [fileContents length] < 100) {
-        LogError(@"Unable to download file: %@ <%@>", fileName, url);
-        
-        // Failure!
-        return NO;
-    } else {
-        // The file downloaded successfully, continuing...
-        LogInfo(@"Episode downloaded successfully.");
-        
-        [fileContents writeToFile:saveLocation atomically:YES];
-        
-        // Check to see if the user wants to automatically open new downloads
-        if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
-            [[NSWorkspace sharedWorkspace] openFile:saveLocation withApplication:nil andDeactivate:NO];
-        }
-        
-        if([TSUserDefaults getBoolFromKey:@"GrowlOnNewEpisode" withDefault:1]) {
-        // In the future this may display the show's poster instead of our app icon.
-        [GrowlApplicationBridge notifyWithTitle:[NSString stringWithFormat:@"%@", show]
-                                    description:[NSString stringWithFormat:TSLocalizeString(@"A new episode of %@ is being downloaded."), show]
-                               notificationName:@"New Episode Downloaded"
-                                       iconData:TVShowsHelperIcon
-                                       priority:0
-                                       isSticky:0
-                                   clickContext:nil];
-        }
-        
-        // Success!
-        return YES;
-    }
 }
 
 #pragma mark -
@@ -520,17 +852,20 @@
                                notificationName:@"TVShows Update Available"
                                        iconData:TVShowsHelperIcon
                                        priority:0
-                                       isSticky:0
+                                       isSticky:YES
                                    clickContext:nil];
     }
 }
 
 - (void) dealloc
 {
+    [[NSDistributedNotificationCenter defaultCenter] removeObserver:self];
     [checkerLoop invalidate];
     [checkerLoop release];
     [TVShowsHelperIcon release];
+    [misoBackend release];
     [subscriptionsDelegate release];
+    [presetShowsDelegate release];
     [super dealloc];
 }
 

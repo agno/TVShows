@@ -33,6 +33,9 @@
 "Add a custom RSS source" = "Добавить пользовательский источник RSS";
 
 /* This string is on a button. */
+"Add Custom RSS" = "Добавить свой RSS";
+
+/* This string is on a button. */
 "Add Show" = "Добавить шоу";
 
 /* Title of an error message or Growl notification. */
@@ -44,13 +47,16 @@
 
 "Application Update Preferences" = "Настройки обновлений";
 
-"Automatically check for updates" = "Автоматически искать обновления";
+"Automatically check for updates" = "Автоматически проверять обновления";
 
 "Automatically install new updates" = "Устанавливать обновления автоматически";
 
 "Automatically open each file after download" = "Автоматически открывать файл после окончания загрузки";
 
 "Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "Вы уверены, что хотите удалить TVShows? Это также удалит все настройки и подписки";
+
+/* The %@ will be replaced by the name of the show. */
+"Are you sure you want to unsubscribe from %@?" = "Вы уверены, что хотите отписаться от %@?";
 
 /* This string is on a button. */
 "Cancel" = "Отмена";
@@ -98,12 +104,17 @@
 
 "Download Preferences" = "Настройки закачки";
 
+/* This string is on a button. */
+"Edit" = "Изменить";
+
 /* Title of a column in a table. */
 "Episode Name" = "Название серии";
 
 "Episode save location:" = "Сохранять серии в папке:";
 
 "Feed" = "Лента";
+
+"Feed URLs" = "Адреса подписки";
 
 "Download HD versions by default" = "Скачивать в HD по умолчанию";
 
@@ -160,9 +171,19 @@
 
 "Rating:" = "Рейтинг:";
 
+"Save each show in its own folder" = "Сохранять шоу в отдельных папках";
+
+/* This string is on a button. */
+"Save" = "Сохранить";
+
 "Search" = "Поиск";
 
 "Never" = "Никогда";
+
+"Next Episode" = "Следующий эпизод";
+
+/* This string is split, the full version is "Start subscription with: Next aired episode" */
+"Next aired episode" = "Следующий вышедший эпизод";
 
 /* Title of a column in a table. */
 "Season" = "Сезон";
@@ -191,11 +212,30 @@
 
 "Subscriptions" = "Подписки";
 
+/* This string is split, the full version is "Start subscription with: Next aired episode" or "Start subscription with: This episode: My Show S01E01" */
+"Start subscription with:" = "Начать подписку с:";
+
+"The file may not be released yet. Please try again later or check your internet connection. Alternatively you can download the SD version." = "Файл не доступен. Пожалуйста, повторите попытку позже или проверить подключение к Интернету. Или же вы можете скачать версию в стандартном разрешении.";
+
+/* Disclaimer for a destructive action */
+"This action cannot be undone." = "Это действие не может быть отменено.";
+
+/* This string is split, the full version is "Start subscription with: This episode: My Show S01E01" */
+"This episode:" = "Этот эпизод:";
+
+"TVDB id" = "TVDB ID";
+
 /* Title of an error message or Growl notification. */
 "TVShows Update Available" = "Доступно обновление TVShows";
 
 /* Title of an error message or Growl notification. */
 "TVShows Update Downloading" = "Скачивается обновление TVShows";
+
+/* The %@ will be replaced by the name of the torrent file. */
+"Unable to download %@" = "Не удается загрузить %@";
+
+/* The %@ will be replaced by the name of the torrent file. */
+"Unable to find an HD torrent for %@" = "Не удалось найти торрент HD для %@";
 
 /* Title of an error message or Growl notification. */
 "Unable to Update the Show List" = "Невозможно обновить список телешоу.";
@@ -228,6 +268,8 @@
 "Unknown" = "Неизвестно";
 
 "Updating Show Information…" = "Обновление информации о телешоу...";
+
+"Use additional sources for HD (may contain rars)" = "Использовать дополнительные источники для HD (может содержать архивы)";
 
 "View Logs" = "Активность";
 

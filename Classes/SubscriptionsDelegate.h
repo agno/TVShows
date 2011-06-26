@@ -30,5 +30,6 @@
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 
 - (void) saveAction;
+- (void) refresh;
 
 @end

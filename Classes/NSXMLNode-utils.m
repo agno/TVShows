@@ -19,12 +19,10 @@
 
 - (NSXMLNode *)childNamed:(NSString *)name
 {
-    NSEnumerator *e = [[self children] objectEnumerator];
-    
-    NSXMLNode *node;
-    while ((node = [e nextObject]))
+    for (NSXMLNode *node in [self children]) {
         if ([[node name] isEqualToString:name])
             return node;
+    }
     
     return nil;
 }
@@ -32,10 +30,9 @@
 - (NSArray *)childrenAsStrings
 {
     NSMutableArray *ret = [NSMutableArray arrayWithCapacity:[[self children] count]];
-    NSEnumerator *e = [[self children] objectEnumerator];
-    NSXMLNode *node;
-    while ((node = [e nextObject]))
+    for (NSXMLNode *node in [self children]) {
         [ret addObject:[node stringValue]];
+    }
     
     return ret;
 }
