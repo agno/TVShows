@@ -413,6 +413,10 @@
 		34F6EA64119BCBA200F8AD4C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34FBC5E111C0B3C2005D290B /* TVShowsHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShowsHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34FBC62D11C0B567005D290B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		570CB2AE13B76209000A651F /* fi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = fi; path = Resources/fi.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		570CB2AF13B76233000A651F /* ro */ = {isa = PBXFileReference; lastKnownFileType = file; name = ro; path = ro.lproj/Localizable.strings; sourceTree = "<group>"; };
+		570CB2B013B7623C000A651F /* ro */ = {isa = PBXFileReference; lastKnownFileType = file; name = ro; path = ro.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; };
+		570CB2B113B7623C000A651F /* fi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = fi; path = Resources/fi.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		571C60E2139905320072D921 /* ribbon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ribbon.png; sourceTree = "<group>"; };
 		571D4E4513A90A7900EBD5EA /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		571D4E4713A90A8D00EBD5EA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -1164,6 +1168,8 @@
 				eu,
 				"de-CH",
 				"sk-SK",
+				fi,
+				ro,
 			);
 			mainGroup = 089C166AFE841209C02AAC07 /* TVShows */;
 			projectDirPath = "";
@@ -1477,6 +1483,8 @@
 				57A9248813AFE5780038C76C /* eu */,
 				57A9248913AFE5830038C76C /* de-CH */,
 				57A9248A13AFE5FF0038C76C /* sk-SK */,
+				570CB2AE13B76209000A651F /* fi */,
+				570CB2AF13B76233000A651F /* ro */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1519,6 +1527,8 @@
 				57A9248C13AFE63E0038C76C /* sk-SK */,
 				57A9248D13AFE63E0038C76C /* de-CH */,
 				57A9248E13AFE63F0038C76C /* eu */,
+				570CB2B013B7623C000A651F /* ro */,
+				570CB2B113B7623C000A651F /* fi */,
 			);
 			name = JRFeedbackProvider.strings;
 			sourceTree = "<group>";

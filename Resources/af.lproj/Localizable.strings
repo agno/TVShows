@@ -33,6 +33,9 @@
 "Add a custom RSS source" = "Voeg 'n pasgemaakte RSS bron";
 
 /* This string is on a button. */
+"Add Custom RSS" = "Eigener RSS-Feed";
+
+/* This string is on a button. */
 "Add Show" = "Voeg Show";
 
 /* Title of an error message or Growl notification. */
@@ -51,6 +54,9 @@
 "Automatically open each file after download" = "Outomaties oop elke lêer na aflaai";
 
 "Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "Is jy seker jy wil TVShows te verwyder? Dit sal ook al voorkeure en ledegelde.";
+
+/* The %@ will be replaced by the name of the show. */
+"Are you sure you want to unsubscribe from %@?" = "Wollen Sie %@ wirklich abbestellen?";
 
 /* This string is on a button. */
 "Cancel" = "Kanselleer";
@@ -98,12 +104,17 @@
 
 "Download Preferences" = "Voorkeure vir Downloads";
 
+/* This string is on a button. */
+"Edit" = "Bearbeiten";
+
 /* Title of a column in a table. */
 "Episode Name" = "Naam van die episode";
 
 "Episode save location:" = "Episode stoor plek:";
 
 "Feed" = "Feed";
+
+"Feed URLs" = "Feed URLs";
 
 "Download HD versions by default" = "Alfaai op HD weergawes by verstek";
 
@@ -160,9 +171,19 @@
 
 "Rating:" = "Gradering";
 
+"Save each show in its own folder" = "Jede Folge in einem eigenen Ordner speichern";
+
+/* This string is on a button. */
+"Save" = "Sichern";
+
 "Search" = "Soek";
 
 "Never" = "Nooit";
+
+"Next Episode" = "Nächste Folge";
+
+/* This string is split, the full version is "Start subscription with: Next aired episode" */
+"Next aired episode" = "Nächste ausgestrahlte Folge";
 
 /* Title of a column in a table. */
 "Season" = "Seisoen";
@@ -191,11 +212,25 @@
 
 "Subscriptions" = "Subskripsies";
 
+/* This string is split, the full version is "Start subscription with: Next aired episode" or "Start subscription with: This episode: My Show S01E01" */
+"Start subscription with:" = "Beginne das Abo mit: ";
+
+"The file may not be released yet. Please try again later or check your internet connection. Alternatively you can download the SD version." = "Die Datei ist derzeit nicht verfügbar. Bitte versuchen Sie es zu einem späteren Zeitpunkt erneut oder überprüfen Sie Ihre Internetverbindung. Alternativ können Sie die SD Version herunterladen.";
+
+/* Disclaimer for a destructive action */
+"This action cannot be undone." = "Diese Auswahl kann nicht widerrufen werden";
+
 /* Title of an error message or Growl notification. */
 "TVShows Update Available" = "TVShows update beskikbaar";
 
 /* Title of an error message or Growl notification. */
 "TVShows Update Downloading" = "TVShows update laai";
+
+/* The %@ will be replaced by the name of the torrent file. */
+"Unable to download %@" = "%@ konnte nicht heruntergeladen werden";
+
+/* The %@ will be replaced by the name of the torrent file. */
+"Unable to find an HD torrent for %@" = "Es konnte kein HD torrent für %@ gefunden werden";
 
 /* Title of an error message or Growl notification. */
 "Unable to Update the Show List" = "Nie kan die Show Lys te verander";
@@ -228,6 +263,8 @@
 "Unknown" = "Onbekend";
 
 "Updating Show Information…" = "Opdatering Wys Inligting ...";
+
+"Use additional sources for HD (may contain rars)" = "Weitere Quellen für HD nutzen (könnte rar-Dateien beinhalten)";
 
 "View Logs" = "Kyk na Logs";
 
