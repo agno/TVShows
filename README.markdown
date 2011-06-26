@@ -19,11 +19,16 @@ Help localize TVShows 2 into your native language! [Click here][translate] to be
 
 ## Collaboration Instructions
 1. Checkout the repository and all submodules:
-    * `$ git clone --recursive http://github.com/victorpimentel/TVShows.git`
-1. Change to the develop branch:
-    * `$ git checkout develop`
-1. Open the Xcode project or compile it from the terminal:
-    * `$ xcodebuild`
+
+    $ git clone --recursive http://github.com/victorpimentel/TVShows.git
+
+2. The `master` branch contains the public beta codebase. Change to the `develop` branch to get the edge codebase:
+
+    $ git checkout develop
+
+3. Open the Xcode project or compile it from the terminal:
+
+    $ xcodebuild
 
 ## Collaboration Notes
 * You can use GitHub's forking feature to make changes and then send me a pull request. Patches or anything else also works.
@@ -32,22 +37,16 @@ Help localize TVShows 2 into your native language! [Click here][translate] to be
 * Xcode 4 users will need to make sure the 10.5 SDK is in `/Developer/SDKs/`. Also, some things needs to be changed to add PPC support, [see the instructions][xcode4-instructions]. If you don't want/need to add that, change the target OS version and SDK in the project settings (some warnings may appear).
 
 ## Roadmap
-### Beta 8 (last 2.0 beta)
-* <strike>Add more sources for the RSS feeds.</strike>
-* <strike>Mark subscribed shows from the show list.</strike>
-* <strike>Add support for customized RSS feeds.</strike>
-* <strike>Allow the edition of a subscription.</strike>
-* <strike>Show date for next aired episode.</strike>
-* <strike>Option to store episodes in its own folders.</strike>
-* <strike>Start a subscription from a previous episode (so downloading every show since then).</strike>
+### 2.0 Final
+* Just test it, polish it and fix bugs, no new features.
 
-### 3.0 (future)
+### 3.0
 * Convert the preference pane in a standalone app.
   * This is a final decision, it is needed for technical reasons.
   * PPC support will be removed. Leopard and Intel 32 bits support will be probably removed.
 * Option to download subtitles automatically.
 * Option to unrar episodes when the download is finished.
-* Choose format for episode names (s01e01 or 1x01).
+* Option to update the XBMC/Plex database when the download is finished.
 * Download episode names.
 * Add a list view to the Subscriptions tab.
 

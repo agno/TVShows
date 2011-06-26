@@ -33,6 +33,9 @@
 "Add a custom RSS source" = "Adicionar uma fonte RSS personalizada";
 
 /* This string is on a button. */
+"Add Custom RSS" = "Adicionar RSS";
+
+/* This string is on a button. */
 "Add Show" = "Adicionar série";
 
 /* Title of an error message or Growl notification. */
@@ -51,6 +54,9 @@
 "Automatically open each file after download" = "Abrir automaticamente cada ficheiro descarregado";
 
 "Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "Tem a certeza que deseja remover o TVShows? Esta acção também irá remover todas as suas preferências e subscrições.";
+
+/* The %@ will be replaced by the name of the show. */
+"Are you sure you want to unsubscribe from %@?" = "Tens a certeza de que queres interromper a subscrição de %@?";
 
 /* This string is on a button. */
 "Cancel" = "Cancelar";
@@ -98,12 +104,17 @@
 
 "Download Preferences" = "Preferências de descargas";
 
+/* This string is on a button. */
+"Edit" = "Editar";
+
 /* Title of a column in a table. */
 "Episode Name" = "Nome do episódio";
 
 "Episode save location:" = "Guardar episódios em:";
 
 "Feed" = "Feed";
+
+"Feed URLs" = "Endereço da Feed";
 
 "Download HD versions by default" = "Transferir versão em HD por predefinição";
 
@@ -160,9 +171,19 @@
 
 "Rating:" = "Classificação:";
 
+"Save each show in its own folder" = "Guardar ficheiros em pastas segundo a série a que pertencem";
+
+/* This string is on a button. */
+"Save" = "Guardar";
+
 "Search" = "Pesquisar";
 
 "Never" = "Nunca";
+
+"Next Episode" = "Próximo Episódio";
+
+/* This string is split, the full version is "Start subscription with: Next aired episode" */
+"Next aired episode" = "O próximo episódio exibido";
 
 /* Title of a column in a table. */
 "Season" = "Temporada";
@@ -191,11 +212,30 @@
 
 "Subscriptions" = "Subscrições";
 
+/* This string is split, the full version is "Start subscription with: Next aired episode" or "Start subscription with: This episode: My Show S01E01" */
+"Start subscription with:" = "Começar a subscrição com:";
+
+"The file may not be released yet. Please try again later or check your internet connection. Alternatively you can download the SD version." = "O ficheiro pode ainda não ter sido publicado. Por favor, tenta outra vez mais tarde ou verifica se tens ligação à internet. Como alternativa podes fazer download da versão SD.";
+
+/* Disclaimer for a destructive action */
+"This action cannot be undone." = "Aviso: Não poderás voltar atras.";
+
+/* This string is split, the full version is "Start subscription with: This episode: My Show S01E01" */
+"This episode:" = "Com o episódio seleccionado:";
+
+"TVDB id" = "ID TVDB";
+
 /* Title of an error message or Growl notification. */
 "TVShows Update Available" = "Está disponível uma actualização do TVShows";
 
 /* Title of an error message or Growl notification. */
 "TVShows Update Downloading" = "A descarregar actualização do TVShows";
+
+/* The %@ will be replaced by the name of the torrent file. */
+"Unable to download %@" = "Ocorreu um erro e não foi possível fazer download de %@";
+
+/* The %@ will be replaced by the name of the torrent file. */
+"Unable to find an HD torrent for %@" = "Não foi possível encontrar um torrent em HD de %@";
 
 /* Title of an error message or Growl notification. */
 "Unable to Update the Show List" = "Não foi possível actualizar a lista de séries";
@@ -214,11 +254,11 @@
 /* This string is on a button. */
 "View on TV.com" = "Ver no TV.com";
 
-"… a new episode is downloaded." = "… um novo episódio for descarregado.";
+"… a new episode is downloaded." = "…um novo episódio for descarregado.";
 
 "Recently Logged Activity" = "Actividade registada recentemente";
 
-"… a new version of TVShows is released." = "… uma nova versão do TVShows for lançada.";
+"… a new version of TVShows is released." = "…uma nova versão do TVShows for lançada.";
 
 /* This string is on a button. */
 "Uninstall" = "Remover";
@@ -228,6 +268,8 @@
 "Unknown" = "Desconhecido";
 
 "Updating Show Information…" = "A actualizar informação sobre a série...";
+
+"Use additional sources for HD (may contain rars)" = "Usar fontes adicionais para procurar episódios em HD (podem conter rars)";
 
 "View Logs" = "Ver logs";
 
