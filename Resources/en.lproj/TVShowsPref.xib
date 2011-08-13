@@ -1838,6 +1838,7 @@
 												<int key="NSvFlags">290</int>
 												<string key="NSFrame">{{5, 3}, {478, 35}}</string>
 												<reference key="NSSuperview" ref="1002750166"/>
+												<reference key="NSNextKeyView"/>
 												<int key="NSViewLayerContentsRedrawPolicy">2</int>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="474229197">
@@ -1867,9 +1868,9 @@
 															<object class="NSTextView" id="1037992502">
 																<reference key="NSNextResponder" ref="445684699"/>
 																<int key="NSvFlags">2322</int>
-																<string key="NSFrameSize">{10, 14}</string>
+																<string key="NSFrameSize">{0, 0}</string>
 																<reference key="NSSuperview" ref="445684699"/>
-																<reference key="NSNextKeyView" ref="829580114"/>
+																<reference key="NSNextKeyView" ref="491914073"/>
 																<int key="NSViewLayerContentsRedrawPolicy">2</int>
 																<object class="NSTextContainer" key="NSTextContainer" id="612145051">
 																	<object class="NSLayoutManager" key="NSLayoutManager">
@@ -1887,7 +1888,7 @@
 																		<nil key="NSDelegate"/>
 																	</object>
 																	<reference key="NSTextView" ref="1037992502"/>
-																	<double key="NSWidth">10</double>
+																	<double key="NSWidth">0.0</double>
 																	<int key="NSTCFlags">1</int>
 																</object>
 																<object class="NSTextViewSharedData" key="NSSharedData">
@@ -1946,7 +1947,6 @@
 																</object>
 																<int key="NSTVFlags">7</int>
 																<string key="NSMaxSize">{1940, 10000000}</string>
-																<string key="NSMinize">{0, 0}</string>
 																<nil key="NSDelegate"/>
 															</object>
 														</object>
@@ -2002,7 +2002,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 														<reference key="NSSuperview" ref="786896441"/>
 														<reference key="NSNextKeyView" ref="445684699"/>
 														<int key="NSViewLayerContentsRedrawPolicy">2</int>
-														<bool key="NSEnabled">YES</bool>
 														<int key="NSsFlags">1</int>
 														<reference key="NSTarget" ref="786896441"/>
 														<string key="NSAction">_doScroller:</string>
@@ -2012,9 +2011,9 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 												</object>
 												<string key="NSFrame">{{8, 46}, {385, 432}}</string>
 												<reference key="NSSuperview" ref="1002750166"/>
-												<reference key="NSNextKeyView" ref="445684699"/>
+												<reference key="NSNextKeyView" ref="829580114"/>
 												<int key="NSViewLayerContentsRedrawPolicy">2</int>
-												<int key="NSsFlags">133266</int>
+												<int key="NSsFlags">133138</int>
 												<reference key="NSVScroller" ref="491914073"/>
 												<reference key="NSHScroller" ref="829580114"/>
 												<reference key="NSContentView" ref="445684699"/>
@@ -2278,14 +2277,13 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<bool key="NSViewIsLayerTreeHost">YES</bool>
 							<object class="NSArray" key="NSViewContentFilters">
 								<bool key="EncodedWithXMLCoder">YES</bool>
-								<object class="CIColorMonochrome">
+								<object class="CIWhitePointAdjust">
 									<object class="CIColor" key="CI_inputColor">
-										<float key="red">0.57585495710372925</float>
-										<float key="green">0.7181020975112915</float>
-										<float key="blue">0.84347403049468994</float>
+										<float key="red">1</float>
+										<float key="green">0.89999997615814209</float>
+										<float key="blue">0.80000001192092896</float>
 										<float key="alpha">1</float>
 									</object>
-									<real value="1" key="CI_inputIntensity"/>
 									<bool key="CIEnabled">YES</bool>
 								</object>
 								<object class="CIHueAdjust">
