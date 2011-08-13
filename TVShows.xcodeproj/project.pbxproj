@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -30,9 +30,6 @@
 		344A204211F5470B00026735 /* MBSliderButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 344A204111F5470B00026735 /* MBSliderButton.m */; };
 		344A205A11F5485900026735 /* Toggle-Knob.png in Resources */ = {isa = PBXBuildFile; fileRef = 344A205811F5485900026735 /* Toggle-Knob.png */; };
 		344A205B11F5485900026735 /* Toggle-Slider.png in Resources */ = {isa = PBXBuildFile; fileRef = 344A205911F5485900026735 /* Toggle-Slider.png */; };
-		344AFA3011A4C58D00D9C4E9 /* ESiTunesScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 344AFA2C11A4C58D00D9C4E9 /* ESiTunesScroller.m */; };
-		344AFA3211A4C58D00D9C4E9 /* ESScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 344AFA2E11A4C58D00D9C4E9 /* ESScroller.m */; };
-		344AFA8611A4D19C00D9C4E9 /* ESScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 344AFA8411A4D19C00D9C4E9 /* ESScrollView.m */; };
 		3452AB2911DADEFB000C3AA7 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3452AB2711DADEFB000C3AA7 /* Growl.framework */; };
 		3452ABE111DADF0F000C3AA7 /* Growl.framework in Copy Linked Libraries */ = {isa = PBXBuildFile; fileRef = 3452AB2711DADEFB000C3AA7 /* Growl.framework */; };
 		3452ABE211DADF22000C3AA7 /* Growl.framework in Copy Linked Libraries */ = {isa = PBXBuildFile; fileRef = 3452AB2711DADEFB000C3AA7 /* Growl.framework */; };
@@ -315,12 +312,6 @@
 		344A205811F5485900026735 /* Toggle-Knob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Toggle-Knob.png"; sourceTree = "<group>"; };
 		344A205911F5485900026735 /* Toggle-Slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Toggle-Slider.png"; sourceTree = "<group>"; };
 		344A637213330E960076FC2F /* LCLLogFileConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLLogFileConfig.h; path = LCLLogFile/LCLLogFileConfig.h; sourceTree = "<group>"; };
-		344AFA2B11A4C58D00D9C4E9 /* ESiTunesScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESiTunesScroller.h; sourceTree = "<group>"; };
-		344AFA2C11A4C58D00D9C4E9 /* ESiTunesScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESiTunesScroller.m; sourceTree = "<group>"; };
-		344AFA2D11A4C58D00D9C4E9 /* ESScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESScroller.h; sourceTree = "<group>"; };
-		344AFA2E11A4C58D00D9C4E9 /* ESScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESScroller.m; sourceTree = "<group>"; };
-		344AFA8311A4D19C00D9C4E9 /* ESScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESScrollView.h; sourceTree = "<group>"; };
-		344AFA8411A4D19C00D9C4E9 /* ESScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESScrollView.m; sourceTree = "<group>"; };
 		3452AB2711DADEFB000C3AA7 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = Frameworks/Growl.framework; sourceTree = "<group>"; };
 		345BE412119344E10016EA2D /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = Resources/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		345CE34E11D9712200C03A9F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -715,19 +706,6 @@
 			name = LCLLogFile;
 			sourceTree = "<group>";
 		};
-		344AFA2A11A4C58D00D9C4E9 /* iTunesScroller */ = {
-			isa = PBXGroup;
-			children = (
-				344AFA2B11A4C58D00D9C4E9 /* ESiTunesScroller.h */,
-				344AFA2C11A4C58D00D9C4E9 /* ESiTunesScroller.m */,
-				344AFA2D11A4C58D00D9C4E9 /* ESScroller.h */,
-				344AFA2E11A4C58D00D9C4E9 /* ESScroller.m */,
-				344AFA8311A4D19C00D9C4E9 /* ESScrollView.h */,
-				344AFA8411A4D19C00D9C4E9 /* ESScrollView.m */,
-			);
-			path = iTunesScroller;
-			sourceTree = "<group>";
-		};
 		347AFB0E1191153B00393565 /* JRFeedbackProvider */ = {
 			isa = PBXGroup;
 			children = (
@@ -797,7 +775,6 @@
 				347B35CC1210D80400F4BFF0 /* The TVDB */,
 				342A5427132D4C9500FB526F /* BWToolkit */,
 				349F2F6211B2E7DB00D10D96 /* FeedParser */,
-				344AFA2A11A4C58D00D9C4E9 /* iTunesScroller */,
 				347AFB0E1191153B00393565 /* JRFeedbackProvider */,
 				344A6367133307970076FC2F /* LCLLogFile */,
 				344A203F11F5470B00026735 /* MBSliderButton */,
@@ -1131,10 +1108,11 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0410;
 				ORGANIZATIONNAME = "Víctor Pimentel";
 			};
 			buildConfigurationList = 1DBD214C08BA80EA00186707 /* Build configuration list for PBXProject "TVShows" */;
-			compatibilityVersion = "Xcode 3.1";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -1357,9 +1335,6 @@
 				347AFB181191157700393565 /* NSURLRequestPostForm.m in Sources */,
 				34A91895119E2F83004B339D /* RegexKitLite.m in Sources */,
 				3419982911A07913003768D5 /* WebsiteFunctions.m in Sources */,
-				344AFA3011A4C58D00D9C4E9 /* ESiTunesScroller.m in Sources */,
-				344AFA3211A4C58D00D9C4E9 /* ESScroller.m in Sources */,
-				344AFA8611A4D19C00D9C4E9 /* ESScrollView.m in Sources */,
 				34EBF4F211A8501A00962FE5 /* SubscriptionsDelegate.m in Sources */,
 				347F1E6511A9FA96005A40AA /* PresetShows.xcdatamodel in Sources */,
 				347F1E6911AA090D005A40AA /* PresetShowsDelegate.m in Sources */,
@@ -1619,7 +1594,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
-				GCC_VERSION = 4.2;
+				GCC_VERSION = 4.0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
@@ -1648,7 +1623,7 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_VERSION = 4.2;
+				GCC_VERSION = 4.0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
