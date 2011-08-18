@@ -15,6 +15,9 @@
 
 "6 hours" = "6 hodín";
 
+/* This refers to "All shows" */
+"All" = "Všetky";
+
 "A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "Pri každom overovaní dostupnosti novej epizódy sa vytvára záznam. Pokiaľ nieje uvedené inak, neboly nájdené žiadne nové epizódy.";
 
 /* The %@ will be replaced by the name of the show. */
@@ -33,6 +36,9 @@
 "Add a custom RSS source" = "Pridať vlastný zdroj RSS";
 
 /* This string is on a button. */
+"Add Custom RSS" = "Pridať vlastné RSS";
+
+/* This string is on a button. */
 "Add Show" = "Pridať seriál";
 
 /* Title of an error message or Growl notification. */
@@ -44,6 +50,8 @@
 
 "Application Update Preferences" = "Nastavenia aktualizácie aplikácie";
 
+"Automatic check-in when an episode is downloaded" = "Automatický check-in vo chvíli, keď je stiahnutá nová epizóda";
+
 "Automatically check for updates" = "Kontrolovať aktualizácie automaticky";
 
 "Automatically install new updates" = "Inštalovať nové aktualizácie automaticky";
@@ -51,6 +59,9 @@
 "Automatically open each file after download" = "Po stiahnutí každý súbor automaticky otvoriť";
 
 "Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "Ste si istí, že chcete odinštalovať TVShows? Odstránia sa tým tiež všetky nastavenia a odbery.";
+
+/* The %@ will be replaced by the name of the show. */
+"Are you sure you want to unsubscribe from %@?" = "Naozaj chcete zrušiť odber %@?";
 
 /* This string is on a button. */
 "Cancel" = "Zrušiť";
@@ -76,6 +87,11 @@
 /* This string is on a button. */
 "Close" = "Zavrieť";
 
+/* This string is on a button. */
+"Create New Account" = "Nový účet";
+
+"Create season subfolders" = "Vytvárať podadresáre jednotlivých serií";
+
 "Disable TVShows" = "Zakázať TVShows";
 
 "Download beta versions when available" = "V prípade dostupnosti sťahovať betaverzie";
@@ -86,30 +102,48 @@
 
 "Enable downloading new episodes" = "Povoliť sťahovanie nových epizód";
 
+/* This refers to "Enabled shows" */
+"Enabled" = "Povolené";
+
 /* Status of the current show when it is airing. It is shown in a label as "Status: Continuing" */
 "Continuing" = "Pokračuje";
+
+/* This refers to "Custom shows" */
+"Custom" = "Vlastné";
 
 /* Title of a column in a table. */
 "Episode" = "Epizóda";
 
 "Default video quality:" = "Predvolená kvalita videa:";
 
+/* This refers to "Disabled shows" */
+"Disabled" = "Zakázané";
+
 "Donate" = "Prispieť finančne";
 
 "Download Preferences" = "Nastavenia sťahovania";
 
+/* This string is on a button. */
+"Edit" = "Upraviť";
+
 /* Title of a column in a table. */
 "Episode Name" = "Názov epizódy";
+
+"Episode naming convention:" = "Vzor pomenovania epizód:";
 
 "Episode save location:" = "Miesto uloženia epizód:";
 
 "Feed" = "Kanál";
+
+"Feed URLs" = "Adresy odberov";
 
 "Download HD versions by default" = "Sťahovať HD verzie v predvolenom nastavení";
 
 "General Settings" = "Obecné nastavenia";
 
 "Growl Settings" = "Nastavenia Growl";
+
+"I am already a Miso user" = "Používam Miso";
 
 "Include anonymous system information" = "Pripojiť anonymné systémové informácie";
 
@@ -121,8 +155,13 @@
 
 "Last Downloaded" = "Naposledy stiahnuté";
 
+"Miso is a social network made for people that love watching TV shows." = "Miso je sociálna sieť určená ľuďom, ktorí zbožňujú sledovanie seriálov.";
+
 /* This string is on a button. */
 "More Info" = "Podrobnosti";
+
+/* This string is on a button. */
+"More Shows" = "Ďalšie seriály";
 
 "Getting Started" = "Začíname";
 
@@ -145,11 +184,16 @@
 /* To select a custom folder not listed. */
 "Other..." = "Iný...";
 
+"Password:" = "Heslo:";
+
 "Please Select a Show:" = "Prosím vyberte seriál:";
 
 "Last Checked:" = "Naposledy skontrolované:";
 
 "Preferences" = "Nastavenia";
+
+/* This refers to "Preset shows" */
+"Preset" = "Prednastavené";
 
 /* Title of a column in a table. */
 "Published Date" = "Dátum publikácie";
@@ -160,9 +204,28 @@
 
 "Rating:" = "Hodnotenie:";
 
+/* This string is on a small button, it stands for "Reset Warnings" */
+"Reset Warn." = "Reset správ";
+
+/* This string is on a button. */
+"Save" = "Uložiť";
+
+"Save each show in its own folder" = "Ukladať každý seriál do vlastnej zložky";
+
 "Search" = "Hľadať";
 
+/* This string is on a button. */
+"Sign In" = "Prihlásiť";
+
+/* This string is on a button. */
+"Sign Out" = "Odhlásiť";
+
 "Never" = "Nikdy";
+
+"Next Episode" = "Ďalšia epizóda";
+
+/* This string is split, the full version is "Start subscription with: Next aired episode" */
+"Next aired episode" = "ďaľšiou vysielanou epizódou";
 
 /* Title of a column in a table. */
 "Season" = "Séria";
@@ -191,11 +254,36 @@
 
 "Subscriptions" = "Odbery";
 
+/* This string is split, the full version is "Start subscription with: Next aired episode" or "Start subscription with: This episode: My Show S01E01" */
+"Start subscription with:" = "Začať odber:";
+
+"Sync" = "Synchronizovať";
+
+"Sync shows between Miso and TVShows" = "Synchronizovať seriály medzi Miso a TVShows";
+
+"The check-in will be made when the download starts. This is not advisable, but it could allow you to sync episode downloads across several computers." = "Check-in sa uskutoční vo chvíli, keď sa spustí sťahovanie. Toto nastavenie neodporúčame, ale umožní vám synchronizovať sťahovanie epizód naprieč niekoľkými počítačmi.";
+
+"The file may not be released yet. Please try again later or check your internet connection. Alternatively you can download the SD version." = "Súbor ešte nemusel byť zverejnený. Skúste to znova neskôr, alebo skontrolujte svoje pripojenie k internetu. Prípadne môžete stiahnuť SD verziu.";
+
+/* Disclaimer for a destructive action */
+"This action cannot be undone." = "Tento úkon nemožno vziať späť.";
+
+/* This string is split, the full version is "Start subscription with: This episode: My Show S01E01" */
+"This episode:" = "epizódou:";
+
+"TVDB id" = "TVDB id";
+
 /* Title of an error message or Growl notification. */
 "TVShows Update Available" = "Je dostupná aktualizácia TVShows";
 
 /* Title of an error message or Growl notification. */
 "TVShows Update Downloading" = "Sťahuje sa aktualizácia TVShows";
+
+/* The %@ will be replaced by the name of the torrent file. */
+"Unable to download %@" = "Nemožno stiahnuť %@";
+
+/* The %@ will be replaced by the name of the torrent file. */
+"Unable to find an HD torrent for %@" = "Nemožno nájsť HD torrent% @";
 
 /* Title of an error message or Growl notification. */
 "Unable to Update the Show List" = "Zoznam seriálov sa nepodarilo aktualizovať";
@@ -205,6 +293,8 @@
 
 /* Title of an error message or Growl notification. */
 "Update Installed Automatically" = "Aktualizácia bola nainštalovaná automaticky";
+
+"User Name:" = "Užívateľské meno:";
 
 "Show TVShows status in the menu bar" = "Zobrazovať stav TVShows v hornej lište";
 
@@ -229,9 +319,22 @@
 
 "Updating Show Information…" = "Aktualizujem údaje o seriáli...";
 
+"Use additional sources for HD (may contain rars)" = "Používať ďalšie zdroje pre HD (môžu obsahovať súbory RAR)";
+
 "View Logs" = "Záznamy (logy)";
+
+"Visit Miso" = "Otvoriť Miso";
+
+"Warnings restored" = "Upozornenia obnovené";
 
 "Website" = "Web";
 
+"Why try it?" = "Prečo to vyskúšať?";
+
 "Yes" = "Áno";
 
+"Your preferences about warnings were restored. If needed, next time TVShows will ask for your confirmation to complete a sensitive operation." = "Nastavenie vašich upozornení bolo obnovené. Ak to bude potrebné, TVShows vás nabudúce požiada o povolenie na dokončenie citlivých úkonov.";
+
+"Your subscriptions will be backed up in the cloud and they can be synced between different computers." = "Vaše odbery budú zálohované v cloude a možno ich synchronizovať naprieč rôznymi počítačmi.";
+
+"Your TVShows subscriptions will be automatically synced with your followed shows on Miso. Only airings shows known by TVShows will be synced." = "Vaše odbery v TVShows budú automaticky synchronizované s vašimi seriálmi na Miso. Synchronizovať sa budú iba vysielané seriály, ktoré TVShows pozná.";
