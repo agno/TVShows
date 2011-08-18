@@ -9,7 +9,7 @@ The latest build is always available in the official site:
 
 [http://tvshowsapp.com/][tvshows]
 
-The preference pane works in Leopard and Snow Leopard, both Intel and PPC.
+The preference pane works in Leopard, Snow Leopard and Lion, both Intel and PPC.
 
 ## Screenshots
 <a href="http://tvshowsapp.com/img/tvshows2-addshow.png">![Show List][preview-1]</a>&nbsp;&nbsp;<a href="http://tvshowsapp.com/img/tvshows2-subscriptions.png">![Subscriptions][preview-2]</a>&nbsp;&nbsp;<a href="http://tvshowsapp.com/img/tvshows2-preferences.png">![Preferences][preview-3]</a>&nbsp;&nbsp;<a href="http://tvshowsapp.com/img/tvshows2-custom.png">![Custom RSS][preview-4]</a>
@@ -34,7 +34,7 @@ Help localize TVShows 2 into your native language! [Click here][translate] to be
 * You can use GitHub's forking feature to make changes and then send me a pull request. Patches or anything else also works.
 * By default, the Debug configuration automatically installs TVShows into `~/Library/PreferencePanes/` each time it's built.
 * Xcode 4 is preferred over Xcode 3, but it should work on both.
-* Xcode 4 users will need to make sure the 10.5 SDK is in `/Developer/SDKs/`. Also, some things needs to be changed to add PPC support, [see the instructions][xcode4-instructions]. If you don't want/need to add that, change the target OS version and SDK in the project settings (some warnings may appear).
+* Xcode 4 users will need to install first Xcode 3, then install Xcode 4 in other location. After the install, some things needs to be changed to add PPC support, [follow all these instructions][xcode4-instructions]. If you don't want/need to add that, change the target OS version and SDK in the project settings (some warnings may appear).
 
 ## Roadmap
 ### 2.0 Final
@@ -43,12 +43,13 @@ Help localize TVShows 2 into your native language! [Click here][translate] to be
 ### 3.0
 * Convert the preference pane in a standalone app.
   * This is a final decision, it is needed for technical reasons.
-  * PPC support will be removed. Leopard and Intel 32 bits support will be probably removed.
+  * PPC support will be removed. Leopard and therefore Intel 32 bits support will be probably removed.
 * Option to download subtitles automatically.
 * Option to unrar episodes when the download is finished.
 * Option to update the XBMC/Plex database when the download is finished.
 * Download episode names.
 * Add a list view to the Subscriptions tab.
+* Add a store-like view to discover new shows more easily.
 
 ## License
 TVShows is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
