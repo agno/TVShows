@@ -1,7 +1,7 @@
 "1 day" = "1 jour";
 
 /* This string is used between a date and a time, e.g, 1/1/1 at 01:01am. */
-" at " = " à ";
+" at " = "à";
 
 "1 hour" = "1 heure";
 
@@ -33,6 +33,9 @@
 "Add a custom RSS source" = "Ajouter une source RSS personnalisée";
 
 /* This string is on a button. */
+"Add Custom RSS" = "Ajouter un flux RSS";
+
+/* This string is on a button. */
 "Add Show" = "Ajouter une Série";
 
 /* Title of an error message or Growl notification. */
@@ -52,6 +55,9 @@
 
 "Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "Êtes-vous certain de vouloir désinstaller TVShows ? Cette action effacera aussi toutes vos préférences et souscriptions.";
 
+/* The %@ will be replaced by the name of the show. */
+"Are you sure you want to unsubscribe from %@?" = "Etes-vous sûr de vouloir supprimer %@?";
+
 /* This string is on a button. */
 "Cancel" = "Annuler";
 
@@ -62,14 +68,14 @@
 "Check for episodes every:" = "Vérifier toutes les :";
 
 /* This string is on a button. */
-"Check for new episodes now" = "Vérifiez les nouveaux épisodes maintenant";
+"Check for new episodes now" = "Vérifiez les nouveaux épisodes";
 
 /* This string is on a button. */
 "Check Now" = "Vérifier";
 
 "Checking for new episodes..." = "Vérification de nouveaux épisodes ...";
 
-"Checking now, please wait..." = "Vérification maintenant, s'il vous plaît attendre ...";
+"Checking now, please wait..." = "Vérification, patientez...";
 
 "Choose this to download torrent files from a list of preset shows." = "Télécharger des fichiers torrent à partir d'une liste prédéfinie.";
 
@@ -98,12 +104,17 @@
 
 "Download Preferences" = "Préférences de téléchargement";
 
+/* This string is on a button. */
+"Edit" = "Modifier";
+
 /* Title of a column in a table. */
 "Episode Name" = "Nom de l'épisode";
 
 "Episode save location:" = "Dossier de téléchargement :";
 
 "Feed" = "Flux RSS";
+
+"Feed URLs" = "URL du flux";
 
 "Download HD versions by default" = "Télécharger les versions HD par défaut";
 
@@ -140,6 +151,9 @@
 
 "Only download items matching the following rules:" = "Ne télécharger que si :";
 
+/* To select a custom folder not listed. */
+"Other..." = "Autre...";
+
 "Please Select a Show:" = "Sélectionnez une série :";
 
 "Last Checked:" = "Dernière vérification:";
@@ -154,6 +168,8 @@
 "RSS Feed Information:" = "Information du Flux RSS :";
 
 "Rating:" = "Évaluation :";
+
+"Save each show in its own folder" = "Enregistrer chaque séries dans son propre dossier";
 
 "Search" = "Rechercher";
 
@@ -200,6 +216,8 @@
 
 /* Title of an error message or Growl notification. */
 "Update Installed Automatically" = "Mise à jour installée automatiquement";
+
+"Show TVShows status in the menu bar" = "Afficher TVShows dans la barre de menu";
 
 /* This string refers to the default episode quality to download (Standard/High Definition). */
 "Standard" = "Standard";

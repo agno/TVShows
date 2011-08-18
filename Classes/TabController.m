@@ -39,6 +39,14 @@
                                                         selector:@selector(refreshShowList:)
                                                             name:@"TSUpdatedShows"
                                                           object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshShowList:)
+                                                 name:@"TSUpdatedShows"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshShowList:)
+                                                 name:@"TSAddSubscription"
+                                               object:nil];
     
     // Filter bar
     [filterBar addItemsWithTitles:[NSArray arrayWithObjects:
@@ -129,8 +137,8 @@
     [self sortSubscriptionList];
     [self drawAboutBox];
     
-    // Start the animation about one second after loading this
-    [self performSelector:@selector(animateDonateButton) withObject:nil afterDelay:1];
+    // Add color to the donate button
+    [self performSelector:@selector(colorDonateButton)];
 }
 
 - (IBAction) filterSubscriptions:(id)sender
@@ -180,37 +188,19 @@
     [self resetFilters];
 }
 
-- (void) animateDonateButton
+- (void) colorDonateButton
 {
-    // Each animation step is a full second
-    CATransition *presentAnimation = [CATransition animation];
-    [presentAnimation setDuration:1];
-    [presentAnimation setDelegate:self];
+    // Get the content filters for the button (there are two, one to add color and another one to change the hue)
+    CIFilter *colorAdjust = [[donateButton contentFilters] objectAtIndex:0];
     
-    // Animate the Core Animation content filters
-    [donateButton setAnimations:[NSDictionary dictionaryWithObject:presentAnimation forKey:@"contentFilters"]];
+    // Randomly select a hue (in radians, max is 2*PI because it is a circle)
+    double hue = ((double) arc4random() / RAND_MAX) * (2 * M_PI);
     
-    [self animationDidStop:nil finished:YES];
-}
-
-- (void) animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)finished
-{
-    if (finished) {
-        // Get the content filters for the button (there are two, one to add color and another one to change the hue)
-        CIFilter *colorAdjust = [[donateButton contentFilters] objectAtIndex:0];
-        CIFilter *hueAdjustOld = [[donateButton contentFilters] objectAtIndex:1];
-        
-        float hue = [[hueAdjustOld valueForKey:@"inputAngle"] floatValue];
-        
-        // Slowly change the hue (in radians, max is 2*PI because it is a circle)
-        hue += (2 * M_PI) / 100;
-        
-        CIFilter *hueAdjust = [CIFilter filterWithName:@"CIHueAdjust"];
-        [hueAdjust setDefaults];
-        [hueAdjust setValue:[NSNumber numberWithFloat:hue] forKey:@"inputAngle"];
-        
-        [[donateButton animator] setContentFilters:[NSArray arrayWithObjects:colorAdjust, hueAdjust, nil]];
-    }
+    CIFilter *hueAdjust = [CIFilter filterWithName:@"CIHueAdjust"];
+    [hueAdjust setDefaults];
+    [hueAdjust setValue:[NSNumber numberWithDouble:hue] forKey:@"inputAngle"];
+    
+    [donateButton setContentFilters:[NSArray arrayWithObjects:colorAdjust, hueAdjust, nil]];
 }
 
 - (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
@@ -765,6 +755,8 @@
     
     selectedShow = nil;
     
+    [self resetFilters];
+    
     [self closeShowInfoWindow:(id)sender];
 }
 
@@ -801,6 +793,8 @@
 
 - (void) dealloc
 {
+    [[NSDistributedNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [selectedShow release];
     [super dealloc];
 }

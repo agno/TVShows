@@ -26,7 +26,7 @@
 + (NSArray *) parseEpisodesFromFeed:(NSString *)url maxItems:(int)maxItems
 {
     // Begin parsing the feed
-    NSString *episodeTitle = @"", *lastEpisodeTitle = @"", *episodeSeason = @"", *episodeNumber = @"", *episodeQuality = @"", *lastEpisodeQuality = @"", *qualityString = @"";
+    NSString *episodeTitle = @"", *lastEpisodeTitle = @"", *episodeSeason = @"", *episodeNumber = @"", *episodeQuality = @"", *lastEpisodeQuality = @"", *qualityString = @"", *link = @"";
     NSError *error;
     NSMutableArray *episodeArray = [NSMutableArray array];
     NSData *feedData = [WebsiteFunctions downloadDataFrom:url];
@@ -71,9 +71,15 @@
                 qualityString = @"";
             }
             
+            if ([item enclosures] && [[item enclosures] count] > 0) {
+                link = [[[item enclosures] objectAtIndex:0] url];
+            } else {
+                link = [[item link] href];
+            }
+            
             [Episode setValue:episodeTitle          forKey:@"episodeName"];
             [Episode setValue:[item pubDate]        forKey:@"pubDate"];
-            [Episode setValue:[[item link] href]    forKey:@"link"];
+            [Episode setValue:link                  forKey:@"link"];
             [Episode setValue:episodeSeason         forKey:@"episodeSeason"];
             [Episode setValue:episodeNumber         forKey:@"episodeNumber"];
             [Episode setValue:episodeQuality        forKey:@"isHD"];
