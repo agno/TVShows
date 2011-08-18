@@ -408,6 +408,8 @@
 		570CB2AF13B76233000A651F /* ro */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = ro; path = Resources/ro.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		570CB2B013B7623C000A651F /* ro */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = ro; path = Resources/ro.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		570CB2B113B7623C000A651F /* fi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = fi; path = Resources/fi.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		57173C1D13FD49B300730FEF /* he */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = he; path = Resources/he.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		57173C1E13FD49B300730FEF /* he */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = he; path = Resources/he.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		571C60E2139905320072D921 /* ribbon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ribbon.png; sourceTree = "<group>"; };
 		571D4E4513A90A7900EBD5EA /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		571D4E4713A90A8D00EBD5EA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -1460,6 +1462,7 @@
 				57A9248A13AFE5FF0038C76C /* sk-SK */,
 				570CB2AE13B76209000A651F /* fi */,
 				570CB2AF13B76233000A651F /* ro */,
+				57173C1D13FD49B300730FEF /* he */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1504,6 +1507,7 @@
 				57A9248E13AFE63F0038C76C /* eu */,
 				570CB2B013B7623C000A651F /* ro */,
 				570CB2B113B7623C000A651F /* fi */,
+				57173C1E13FD49B300730FEF /* he */,
 			);
 			name = JRFeedbackProvider.strings;
 			sourceTree = "<group>";

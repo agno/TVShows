@@ -15,6 +15,9 @@
 
 "6 hours" = "6 saatte bir";
 
+/* This refers to "All shows" */
+"All" = "Tümü";
+
 "A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "Her yeni bölüm aramada günlüğe bir kayıt eklenir. Aksi belirtilmedikçe, yeni bölüm bulunmadı demektir.";
 
 /* The %@ will be replaced by the name of the show. */
@@ -33,6 +36,9 @@
 "Add a custom RSS source" = "Kendi RSS kaynağını ekle";
 
 /* This string is on a button. */
+"Add Custom RSS" = "RSS Ekle";
+
+/* This string is on a button. */
 "Add Show" = "Dizi Ekle";
 
 /* Title of an error message or Growl notification. */
@@ -44,6 +50,8 @@
 
 "Application Update Preferences" = "Uygulama Güncelleme Tercihleri";
 
+"Automatic check-in when an episode is downloaded" = "Bir bölümün indirilmesi tamamlandığında otomatik olarak check-in yapılsın";
+
 "Automatically check for updates" = "Otomatik güncelle";
 
 "Automatically install new updates" = "Yeni güncellemeleri otomatik kur";
@@ -51,6 +59,9 @@
 "Automatically open each file after download" = "İndirme sonrası dosyayı otomatik olarak çalıştır";
 
 "Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "TVShows uygulamasını kaldırmak istediğinden emin misin? Bu eylem tüm ayarları ve abonelikleri de kaldıracaktır.";
+
+/* The %@ will be replaced by the name of the show. */
+"Are you sure you want to unsubscribe from %@?" = "%@ aboneliğini bitirmek istediğine emin misin?";
 
 /* This string is on a button. */
 "Cancel" = "Geri";
@@ -76,6 +87,11 @@
 /* This string is on a button. */
 "Close" = "Kapat";
 
+/* This string is on a button. */
+"Create New Account" = "Yeni Hesap Yarat";
+
+"Create season subfolders" = "Sezon klasörü oluştur";
+
 "Disable TVShows" = "TVShows'u devre dışı bırak";
 
 "Download beta versions when available" = "Beta sürüm çıkarsa indir";
@@ -86,30 +102,48 @@
 
 "Enable downloading new episodes" = "Yeni bölümlerin indirilmesine izin ver";
 
+/* This refers to "Enabled shows" */
+"Enabled" = "Aktif";
+
 /* Status of the current show when it is airing. It is shown in a label as "Status: Continuing" */
 "Continuing" = "Devam ediyor";
+
+/* This refers to "Custom shows" */
+"Custom" = "Özel";
 
 /* Title of a column in a table. */
 "Episode" = "Bölüm";
 
 "Default video quality:" = "Seçili görüntü kalitesi:";
 
+/* This refers to "Disabled shows" */
+"Disabled" = "İnaktif";
+
 "Donate" = "Bağış yap";
 
 "Download Preferences" = "İndirme Tercihleri";
 
+/* This string is on a button. */
+"Edit" = "Düzenle";
+
 /* Title of a column in a table. */
 "Episode Name" = "Bölüm Adı";
+
+"Episode naming convention:" = "Bölüm adlandırma kuralı:";
 
 "Episode save location:" = "Bölüm kaydetme yeri:";
 
 "Feed" = "Akış";
+
+"Feed URLs" = "Akış URL'i";
 
 "Download HD versions by default" = "Varsayılan olarak Yüksek Çözünülüklü (HD) versiyonları indir";
 
 "General Settings" = "Genel Ayarlar";
 
 "Growl Settings" = "Growl Ayarları";
+
+"I am already a Miso user" = "Ben zaten Miso'ya üyeyim";
 
 "Include anonymous system information" = "Anonim sistem bilgisi ilet";
 
@@ -121,8 +155,13 @@
 
 "Last Downloaded" = "Son İndirilme Tarihi";
 
+"Miso is a social network made for people that love watching TV shows." = "Miso, dizi izlemeyi seven insanların sosyal ağıdır.";
+
 /* This string is on a button. */
 "More Info" = "Ek Bilgi";
+
+/* This string is on a button. */
+"More Shows" = "Başka Diziler";
 
 "Getting Started" = "Buradan Başla";
 
@@ -145,11 +184,16 @@
 /* To select a custom folder not listed. */
 "Other..." = "Diğer...";
 
+"Password:" = "Şifre:";
+
 "Please Select a Show:" = "Lütfen Bir Dizi Seç:";
 
 "Last Checked:" = "Son Denetleme:";
 
 "Preferences" = "Tercihler";
+
+/* This refers to "Preset shows" */
+"Preset" = "Kayıtlı";
 
 /* Title of a column in a table. */
 "Published Date" = "Çıkış Tarihi";
@@ -160,9 +204,28 @@
 
 "Rating:" = "Puanlama:";
 
+/* This string is on a small button, it stands for "Reset Warnings" */
+"Reset Warn." = "Uyarı Sil";
+
+/* This string is on a button. */
+"Save" = "Kaydet";
+
+"Save each show in its own folder" = "Her dizi kendi klasöründe saklansın";
+
 "Search" = "Ara";
 
+/* This string is on a button. */
+"Sign In" = "Giriş Yap";
+
+/* This string is on a button. */
+"Sign Out" = "Çıkış Yap";
+
 "Never" = "Hiçbir zaman";
+
+"Next Episode" = "Sonraki Bölüm";
+
+/* This string is split, the full version is "Start subscription with: Next aired episode" */
+"Next aired episode" = "Yayımlanacak ilk bölümden itibaren";
 
 /* Title of a column in a table. */
 "Season" = "Sezon";
@@ -175,7 +238,7 @@
 
 "Please choose one of the following actions:" = "Lütfen aşağıdaki eylemlerden birini seç:";
 
-"Send Growl notifications when…" = "Growl mesajlar gönderme zamanlaması:";
+"Send Growl notifications when…" = "Growl mesajı gönderme zamanlaması:";
 
 "No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country." = "TVShows ile film dosyaları indirilmez, başka yazılımların kullandığı yığın dosyaları indirilir. Bu uygulamanın indirdiği dosyalarla ne yapılacağı kararı, bulunulan ülkenin telif kanunlarınla uyumlu olmak kaydıyla, tamamen kullanıcıya aittir. ";
 
@@ -191,20 +254,47 @@
 
 "Subscriptions" = "Abonelikler";
 
+/* This string is split, the full version is "Start subscription with: Next aired episode" or "Start subscription with: This episode: My Show S01E01" */
+"Start subscription with:" = "Abonelik başlangıcı:";
+
+"Sync" = "Eşleştir";
+
+"Sync shows between Miso and TVShows" = "Miso ve TVShows arasında eşleştirme yap";
+
+"The check-in will be made when the download starts. This is not advisable, but it could allow you to sync episode downloads across several computers." = "Check-in işlemi, indirme başladığında gerçekleşecek. Bu seçeneği önermiyoruz ama birden fazla bilgisayar kullanıyorsan, aynı bölümün tekrar tekrar indirilmesini engelleyecektir.";
+
+"The file may not be released yet. Please try again later or check your internet connection. Alternatively you can download the SD version." = "Dosya henüz nete düşmemiş olabilir. Ya daha sonra dene ya da internet bağlantına göz at. Alternatif olarak SD versiyonunu indirebilirsin.";
+
+/* Disclaimer for a destructive action */
+"This action cannot be undone." = "Bu eylem geri alınamaz.";
+
+/* This string is split, the full version is "Start subscription with: This episode: My Show S01E01" */
+"This episode:" = "Bu bölüm:";
+
+"TVDB id" = "TVDB kimliği";
+
 /* Title of an error message or Growl notification. */
 "TVShows Update Available" = "Hazırda TVShows Güncellemesi Var";
 
 /* Title of an error message or Growl notification. */
 "TVShows Update Downloading" = "TVShows Güncellemesi İndiriliyor";
 
+/* The %@ will be replaced by the name of the torrent file. */
+"Unable to download %@" = "%@ indirilemiyor";
+
+/* The %@ will be replaced by the name of the torrent file. */
+"Unable to find an HD torrent for %@" = "%@ için HD torrent bulunamadı";
+
 /* Title of an error message or Growl notification. */
 "Unable to Update the Show List" = "Dizi Listesi Güncellenemiyor";
 
 /* This string is on a button. */
-"Unsubscribe" = "Abonelikten Çık";
+"Unsubscribe" = "Abonelik Bitir";
 
 /* Title of an error message or Growl notification. */
 "Update Installed Automatically" = "Güncelleme Otomatik Kuruldu";
+
+"User Name:" = "Kullanıcı Adı:";
 
 "Show TVShows status in the menu bar" = "TVShows menü çubuğunda gösterilsin";
 
@@ -225,13 +315,24 @@
 
 "Uninstall TVShows" = "TVShows'u kaldır";
 
-"Unknown" = "Bilinmeyen";
+"Unknown" = "Bilinmiyor";
 
 "Updating Show Information…" = "Dizi Bilgisi Güncelleniyor...";
 
+"Use additional sources for HD (may contain rars)" = "HD için ek kaynaklar kullan (sıkıştırılmış rar dosyası içerebilir)";
+
 "View Logs" = "Günlük";
+
+"Visit Miso" = "Miso'ya git";
+
+"Warnings restored" = "Uyarılar ilk haline döndürüldü";
 
 "Website" = "Web sitesi";
 
 "Yes" = "Evet";
 
+"Your preferences about warnings were restored. If needed, next time TVShows will ask for your confirmation to complete a sensitive operation." = "Uyarılarla ilgili tercihlerin sıfırlandı. TVShows kritik bir işlem yapması gerektiğinde senin onayını alacak. ";
+
+"Your subscriptions will be backed up in the cloud and they can be synced between different computers." = "Aboneliklerin bulutta saklanacak ve farklı bilgisayarlar arasında eşleştirilecek.";
+
+"Your TVShows subscriptions will be automatically synced with your followed shows on Miso. Only airings shows known by TVShows will be synced." = "TVShows'daki aboneliklerin Miso'dakilerle otomatik olarak eşleştirilecek. Bu işlem sadece TVShows'un tanıdığı diziler için geçerlidir. ";

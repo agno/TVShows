@@ -15,6 +15,9 @@
 
 "6 hours" = "Hver 6. time";
 
+/* This refers to "All shows" */
+"All" = "Alle";
+
 "A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "Det logges hver gang det sjekkes etter nye episoder. Om ikke annen beskjed kommer opp, ble det ikke funnet noen nye episoder.";
 
 /* The %@ will be replaced by the name of the show. */
@@ -46,6 +49,8 @@
 "An update for TVShows has been installed automatically. To disable this feature go to the Preferences tab and uncheck 'Automatically install new updates.'" = "En ny versjon av TVShows har blitt installert. For å skru av denne funksjonen, gå til Innstillinger og fjern avkrysningen for 'Installer nye versjoner automatisk'.";
 
 "Application Update Preferences" = "Innstillinger for automatisk programvareoppdatering";
+
+"Automatic check-in when an episode is downloaded" = "Sjekk-inn automatisk når en episode er lastet ned";
 
 "Automatically check for updates" = "Søk automatisk etter nye versjoner";
 
@@ -82,6 +87,11 @@
 /* This string is on a button. */
 "Close" = "Lukk";
 
+/* This string is on a button. */
+"Create New Account" = "Opprett ny konto";
+
+"Create season subfolders" = "Lag sesong undermapper";
+
 "Disable TVShows" = "Deaktiver TVShows";
 
 "Download beta versions when available" = "Last ned betaversjoner når tilgjengelige";
@@ -92,13 +102,22 @@
 
 "Enable downloading new episodes" = "Nye episoder lastes ned når tilgjengelige";
 
+/* This refers to "Enabled shows" */
+"Enabled" = "Aktive";
+
 /* Status of the current show when it is airing. It is shown in a label as "Status: Continuing" */
 "Continuing" = "Fortsetter";
+
+/* This refers to "Custom shows" */
+"Custom" = "Tilpassede";
 
 /* Title of a column in a table. */
 "Episode" = "Episode";
 
 "Default video quality:" = "Foretrukket videokvalitet:";
+
+/* This refers to "Disabled shows" */
+"Disabled" = "Passive";
 
 "Donate" = "Donér";
 
@@ -109,6 +128,8 @@
 
 /* Title of a column in a table. */
 "Episode Name" = "Episodetittel";
+
+"Episode naming convention:" = "Episode navngiving:";
 
 "Episode save location:" = "Velg sted for lagring av episoder :";
 
@@ -122,6 +143,8 @@
 
 "Growl Settings" = "Innstillinger for Growl";
 
+"I am already a Miso user" = "Jeg bruker allerede Miso";
+
 "Include anonymous system information" = "Send anonymisert systeminformasjon";
 
 "Info" = "Info";
@@ -132,8 +155,13 @@
 
 "Last Downloaded" = "Sist nedlastet";
 
+"Miso is a social network made for people that love watching TV shows." = "Miso er et sosialt nettverk for alle som elsker TV serier.";
+
 /* This string is on a button. */
 "More Info" = "Mer informasjon";
+
+/* This string is on a button. */
+"More Shows" = "Flere serier";
 
 "Getting Started" = "Komme i gang";
 
@@ -156,11 +184,16 @@
 /* To select a custom folder not listed. */
 "Other..." = "Annen...";
 
+"Password:" = "Passord:";
+
 "Please Select a Show:" = "Vennligst velg serie:";
 
 "Last Checked:" = "Sist sjekket:";
 
 "Preferences" = "Innstillinger";
+
+/* This refers to "Preset shows" */
+"Preset" = "Utvalgte";
 
 /* Title of a column in a table. */
 "Published Date" = "Publisert dato";
@@ -171,12 +204,21 @@
 
 "Rating:" = "Vurdering:";
 
-"Save each show in its own folder" = "Lagre hvert show i en egen mappe";
+/* This string is on a small button, it stands for "Reset Warnings" */
+"Reset Warn." = "Nullstill varsel.";
 
 /* This string is on a button. */
 "Save" = "Lagre";
 
+"Save each show in its own folder" = "Lagre hvert show i en egen mappe";
+
 "Search" = "Søk etter";
+
+/* This string is on a button. */
+"Sign In" = "Logg inn";
+
+/* This string is on a button. */
+"Sign Out" = "Logg ut";
 
 "Never" = "Aldri";
 
@@ -190,7 +232,7 @@
 
 "No" = "Nei";
 
-"Select a preset show from showRSS" = "Velg program fra showRSS";
+"Select a preset show from showRSS" = "Velg serie fra showRSS";
 
 "No activity has been logged yet. Have you recently installed TVShows?" = "Ingen aktivitet har blitt logget ennå. Har du nettopp installert TVShows?";
 
@@ -214,6 +256,12 @@
 
 /* This string is split, the full version is "Start subscription with: Next aired episode" or "Start subscription with: This episode: My Show S01E01" */
 "Start subscription with:" = "Start abonnement med:";
+
+"Sync" = "Synkroniser";
+
+"Sync shows between Miso and TVShows" = "Synkroniser serier mellom Miso og TVShows";
+
+"The check-in will be made when the download starts. This is not advisable, but it could allow you to sync episode downloads across several computers." = "Skjekk-inn vil bli utført i det en nedlastning starter. Dette er ikke anbefalt, men dette kan gjøre slik at du kan synkronisere nedlastingen av episoder mellom flere maskiner.";
 
 "The file may not be released yet. Please try again later or check your internet connection. Alternatively you can download the SD version." = "Filen er kanskje ikke utgitt ennå. Vennligst prøv igjen senere eller sjekk din Internettforbindelse. Alternativt kan du laste ned SD versjonen.";
 
@@ -241,10 +289,12 @@
 "Unable to Update the Show List" = "Kunne ikke oppdatere programlisten";
 
 /* This string is on a button. */
-"Unsubscribe" = "Si opp abonnement";
+"Unsubscribe" = "Stopp abonnement";
 
 /* Title of an error message or Growl notification. */
 "Update Installed Automatically" = "En ny versjon har blitt installert";
+
+"User Name:" = "Brukernavn:";
 
 "Show TVShows status in the menu bar" = "Vis status for TVShows i menylinjen";
 
@@ -273,7 +323,19 @@
 
 "View Logs" = "Vis logger";
 
+"Visit Miso" = "Besøk Miso";
+
+"Warnings restored" = "Varsler er tilbakestilt";
+
 "Website" = "Webside";
 
+"Why try it?" = "Hvorfor prøve det?";
+
 "Yes" = "Ja";
+
+"Your preferences about warnings were restored. If needed, next time TVShows will ask for your confirmation to complete a sensitive operation." = "Dine valg om varsler er tilbakestilt. Neste gang det vil være et behovet vil TVShows spørre etter din bekreftelse for å utføre enkelte oppgaver.";
+
+"Your subscriptions will be backed up in the cloud and they can be synced between different computers." = "Dine abonnementer vil bli lagret i skyen, slik at de kan bli synkronisert mellom andre maskiner.";
+
+"Your TVShows subscriptions will be automatically synced with your followed shows on Miso. Only airings shows known by TVShows will be synced." = "Dine TVShows abonnementer vil automagisk bli synkronisert med de seriene du følger på Miso. Kun sendte episoder som TVShows kjenner til vil bli synkronisert. ";
 
