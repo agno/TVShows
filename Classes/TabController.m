@@ -39,6 +39,14 @@
                                                         selector:@selector(refreshShowList:)
                                                             name:@"TSUpdatedShows"
                                                           object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshShowList:)
+                                                 name:@"TSUpdatedShows"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshShowList:)
+                                                 name:@"TSAddSubscription"
+                                               object:nil];
     
     // Filter bar
     [filterBar addItemsWithTitles:[NSArray arrayWithObjects:
@@ -747,6 +755,8 @@
     
     selectedShow = nil;
     
+    [self resetFilters];
+    
     [self closeShowInfoWindow:(id)sender];
 }
 
@@ -783,6 +793,8 @@
 
 - (void) dealloc
 {
+    [[NSDistributedNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [selectedShow release];
     [super dealloc];
 }

@@ -384,6 +384,10 @@
     // Be sure to process pending changes before saving or it won't save correctly
     [[subscriptionsDelegate managedObjectContext] processPendingChanges];
     [subscriptionsDelegate saveAction];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"TSUpdatedShows"
+                                                        object:nil
+                                                      userInfo:(NSDictionary *)subscription];
 }
 
 - (void)dealloc
