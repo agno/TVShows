@@ -457,6 +457,8 @@
 		571D4FA213A9188100EBD5EA /* NSURL+MPURLParameterAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+MPURLParameterAdditions.m"; sourceTree = "<group>"; };
 		571D4FA313A9188100EBD5EA /* NSURLResponse+Encoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLResponse+Encoding.h"; sourceTree = "<group>"; };
 		571D4FA413A9188100EBD5EA /* NSURLResponse+Encoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLResponse+Encoding.m"; sourceTree = "<group>"; };
+		572EAD5414096F7F00AD1CA0 /* ar */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ar; path = Resources/ar.lproj/JRFeedbackProvider.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		573210E914096F2D00497D44 /* ar */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ar; path = Resources/ar.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		573ABCC613734E9B0018F6F3 /* TorrentzParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TorrentzParser.h; path = TorrentzParser/TorrentzParser.h; sourceTree = "<group>"; };
 		573ABCC713734E9B0018F6F3 /* TorrentzParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TorrentzParser.m; path = TorrentzParser/TorrentzParser.m; sourceTree = "<group>"; };
 		5755750D136DC9E5006D1FC9 /* TVShows-Menu-Icon-White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TVShows-Menu-Icon-White.png"; sourceTree = "<group>"; };
@@ -1150,6 +1152,7 @@
 				"sk-SK",
 				fi,
 				ro,
+				ar,
 			);
 			mainGroup = 089C166AFE841209C02AAC07 /* TVShows */;
 			projectDirPath = "";
@@ -1463,6 +1466,7 @@
 				570CB2AE13B76209000A651F /* fi */,
 				570CB2AF13B76233000A651F /* ro */,
 				57173C1D13FD49B300730FEF /* he */,
+				573210E914096F2D00497D44 /* ar */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1508,6 +1512,7 @@
 				570CB2B013B7623C000A651F /* ro */,
 				570CB2B113B7623C000A651F /* fi */,
 				57173C1E13FD49B300730FEF /* he */,
+				572EAD5414096F7F00AD1CA0 /* ar */,
 			);
 			name = JRFeedbackProvider.strings;
 			sourceTree = "<group>";

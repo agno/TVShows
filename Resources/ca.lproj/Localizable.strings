@@ -1,7 +1,7 @@
 "1 day" = "1 dia";
 
 /* This string is used between a date and a time, e.g, 1/1/1 at 01:01am. */
-" at " = " a les ";
+" at " = "a les";
 
 "1 hour" = "1 hora";
 
@@ -14,6 +14,9 @@
 "30 minutes" = "30 minuts";
 
 "6 hours" = "6 hores";
+
+/* This refers to "All shows" */
+"All" = "Tots";
 
 "A message is logged each time new episodes are checked for. Unless noted otherwise, no new episodes were found." = "Es guarda un missatge al fitxer de registre cada vegada que es busquen nous episodis. Mentre no s'indiqui el contrari, no s'han trobat episodis.";
 
@@ -31,6 +34,9 @@
 "About" = "Quant a";
 
 "Add a custom RSS source" = "Afegiu una font RSS personalitzada.";
+
+/* This string is on a button. */
+"Add Custom RSS" = "Afegeix una font RSS";
 
 /* This string is on a button. */
 "Add Show" = "Nou programa";
@@ -51,6 +57,9 @@
 "Automatically open each file after download" = "Obre automàticament tots els arxius després de la baixada.";
 
 "Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "Esteu segur que voleu desinstal·lar el TVShows? També s'eliminaran les preferències i les subscripcions.";
+
+/* The %@ will be replaced by the name of the show. */
+"Are you sure you want to unsubscribe from %@?" = "Esteu segur que voleu cancel·lar la subscripció a %@?";
 
 /* This string is on a button. */
 "Cancel" = "Cancel·la";
@@ -76,6 +85,11 @@
 /* This string is on a button. */
 "Close" = "Tanca";
 
+/* This string is on a button. */
+"Create New Account" = "Crea un nou compte";
+
+"Create season subfolders" = "Crea carpetes per temporada";
+
 "Disable TVShows" = "Deshabilita el TVShows";
 
 "Download beta versions when available" = "Baixa versions beta quan estiguin disponibles.";
@@ -86,30 +100,48 @@
 
 "Enable downloading new episodes" = "Habilita la baixada de nous episodis.";
 
+/* This refers to "Enabled shows" */
+"Enabled" = "Activats";
+
 /* Status of the current show when it is airing. It is shown in a label as "Status: Continuing" */
 "Continuing" = "En emissió";
+
+/* This refers to "Custom shows" */
+"Custom" = "Personalitzats";
 
 /* Title of a column in a table. */
 "Episode" = "Episodi";
 
 "Default video quality:" = "Qualitat de vídeo per defecte:";
 
+/* This refers to "Disabled shows" */
+"Disabled" = "Desactivats";
+
 "Donate" = "Dóna";
 
 "Download Preferences" = "Preferències de baixada.";
 
+/* This string is on a button. */
+"Edit" = "Edita";
+
 /* Title of a column in a table. */
 "Episode Name" = "Nom de l'episodi";
+
+"Episode naming convention:" = "Nomenclatura d'episodis:";
 
 "Episode save location:" = "Lloc on guardar els episodis:";
 
 "Feed" = "Feed";
+
+"Feed URLs" = "URL del feed";
 
 "Download HD versions by default" = "Descarrega versions HD per defecte";
 
 "General Settings" = "Configuració general";
 
 "Growl Settings" = "Configuració de Growl";
+
+"I am already a Miso user" = "Ja sóc usuari de Miso";
 
 "Include anonymous system information" = "Inclou informació anònima del sistema.";
 
@@ -121,8 +153,13 @@
 
 "Last Downloaded" = "Última baixada";
 
+"Miso is a social network made for people that love watching TV shows." = "Miso és una xarxa social per a la gent a qui li encanta mirar programes de TV.";
+
 /* This string is on a button. */
 "More Info" = "Més informació";
+
+/* This string is on a button. */
+"More Shows" = "Més programes";
 
 "Getting Started" = "Per començar";
 
@@ -145,11 +182,16 @@
 /* To select a custom folder not listed. */
 "Other..." = "Un altre...";
 
+"Password:" = "Contrasenya:";
+
 "Please Select a Show:" = "Seleccioneu un programa:";
 
 "Last Checked:" = "Última comprovació:";
 
 "Preferences" = "Preferències";
+
+/* This refers to "Preset shows" */
+"Preset" = "Predefinits";
 
 /* Title of a column in a table. */
 "Published Date" = "Data de publicació";
@@ -160,9 +202,28 @@
 
 "Rating:" = "Puntuació:";
 
+/* This string is on a small button, it stands for "Reset Warnings" */
+"Reset Warn." = "Reiniciar avisos";
+
+/* This string is on a button. */
+"Save" = "Guarda";
+
+"Save each show in its own folder" = "Desa cada programa en la seva pròpia carpeta";
+
 "Search" = "Cerca";
 
+/* This string is on a button. */
+"Sign In" = "Inicia sessió";
+
+/* This string is on a button. */
+"Sign Out" = "Tanca sessió";
+
 "Never" = "Mai";
+
+"Next Episode" = "Proper episodi";
+
+/* This string is split, the full version is "Start subscription with: Next aired episode" */
+"Next aired episode" = "Proper episodi emès";
 
 /* Title of a column in a table. */
 "Season" = "Temporada";
@@ -191,11 +252,31 @@
 
 "Subscriptions" = "Subscripcions";
 
+/* This string is split, the full version is "Start subscription with: Next aired episode" or "Start subscription with: This episode: My Show S01E01" */
+"Start subscription with:" = "Comença la subscripció amb:";
+
+"Sync" = "Sincronització";
+
+"Sync shows between Miso and TVShows" = "Sincronitza programes entre Miso i el TVShows";
+
+"The file may not be released yet. Please try again later or check your internet connection. Alternatively you can download the SD version." = "Potser encara no s'ha publicat l'arxiu. Torneu-ho a provar més tard o reviseu la connexió a internet. O si no, podeu baixar la versió SD.";
+
+/* This string is split, the full version is "Start subscription with: This episode: My Show S01E01" */
+"This episode:" = "Aquest episodi:";
+
+"TVDB id" = "ID de TVDB";
+
 /* Title of an error message or Growl notification. */
 "TVShows Update Available" = "Nova versió del TVShows disponible.";
 
 /* Title of an error message or Growl notification. */
 "TVShows Update Downloading" = "Baixant una nova versió del TVShows.";
+
+/* The %@ will be replaced by the name of the torrent file. */
+"Unable to download %@" = "No es pot baixar %@";
+
+/* The %@ will be replaced by the name of the torrent file. */
+"Unable to find an HD torrent for %@" = "No es pot trobar un torrent HD per %@";
 
 /* Title of an error message or Growl notification. */
 "Unable to Update the Show List" = "No es pot descarregar la llista de programes.";
@@ -205,6 +286,8 @@
 
 /* Title of an error message or Growl notification. */
 "Update Installed Automatically" = "S'ha instal·lat automàticament la nova versió.";
+
+"User Name:" = "Usuari:";
 
 "Show TVShows status in the menu bar" = "Mostra l'estat del TVShows a la barra de menús.";
 
@@ -229,7 +312,11 @@
 
 "Updating Show Information…" = "Actualitzant la informació del programa...";
 
+"Use additional sources for HD (may contain rars)" = "Utilitza fonts addicionals per HD (poden contenir fitxers .rar)";
+
 "View Logs" = "Mostra log";
+
+"Visit Miso" = "Visita Miso";
 
 "Website" = "Lloc web";
 
