@@ -157,6 +157,7 @@
     [TSUserDefaults setKey:@"MisoSyncEnabled" fromBool:[syncCheck state]];
     
     if ([syncCheck state]) {
+        [TSUserDefaults setKey:@"MisoSyncInProgress" fromBool:YES];
         [loading startAnimation:nil];
         [self performSelector:@selector(syncShows) withObject:nil afterDelay:0.5];
     }
@@ -344,6 +345,7 @@
     // Only try to add shows, do not remove them!
     [self followSubscriptions:followedShows];
     [self subscribeToFollowedShows:followedShows];
+    [TSUserDefaults setKey:@"MisoSyncInProgress" fromBool:NO];
     
     [SBArrayController setManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
     

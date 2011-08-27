@@ -114,6 +114,55 @@
     return nil;
 }
 
+- (void)followSubscriptions:(NSDictionary *)followedShows
+{
+    // Fetch subscriptions
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Subscription"
+                                              inManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
+    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+    [request setEntity:entity];
+    
+    NSError *error = nil;
+    NSArray *subscriptions = [[subscriptionsDelegate managedObjectContext] executeFetchRequest:request error:&error];
+    
+    // Follow on Miso our (this is made only when the user manually enter the credentials)
+    for (NSDictionary *show in subscriptions) {
+        // Get the TVDB id
+        NSString *showID = [[show valueForKey:@"tvdbID"] description];
+        
+        // Disregard custom RSS and check if the show is been already followed
+        if (showID && ![show valueForKey:@"filters"] &&
+            ![self getShow:showID fromDictionary:followedShows]) {
+            
+            // Search for it on Miso
+            NSDictionary *results = [misoBackend showWithQuery:[show valueForKey:@"name"]];
+            
+            // Filter those results by TVDB id
+            NSObject *newShow = [self getShow:[[show valueForKey:@"tvdbID"] description] fromDictionary:results];
+            
+            // Some shows do not have TVDB ids yet; try to map them together
+            if (!newShow) {
+                // Just pick the first show (too late, I cannot even think anymore)
+                for (NSObject *result in results) {
+                    newShow = result;
+                    break;
+                }
+                // If the name is not equal... go back
+                if (newShow && ![[[newShow valueForKey:@"media"] valueForKey:@"title"] isEqualToString:[show valueForKey:@"name"]]) {
+                    newShow = nil;
+                }
+            }
+            
+            // At this point, it should be a valid show, but maybe it is not on the Miso database yet
+            if (newShow && ![[[newShow valueForKey:@"media"] valueForKey:@"currently_favorited"] boolValue]) {
+                LogInfo(@"Adding show %@ on Miso.", [show valueForKey:@"name"]);
+                
+                [misoBackend favoriteShow:[[[newShow valueForKey:@"media"] valueForKey:@"id"] description]];
+            }
+        }
+    }
+}
+
 - (void)unsubscribeFromUnfollowedShows:(NSDictionary *)followedShows
 {
     // Fetch subscriptions
@@ -257,7 +306,12 @@
     
     if (followedShows) {
         changed = NO;
-        [self unsubscribeFromUnfollowedShows:followedShows];
+        if ([TSUserDefaults getBoolFromKey:@"MisoSyncInProgress" withDefault:NO]) {
+            [self followSubscriptions:followedShows];
+            [TSUserDefaults setKey:@"MisoSyncInProgress" fromBool:NO];
+        } else {
+            [self unsubscribeFromUnfollowedShows:followedShows];
+        }
         [self subscribeToFollowedShows:followedShows];
         // Warn the pref pane
         if (changed) {
