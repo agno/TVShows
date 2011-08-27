@@ -52,11 +52,10 @@
     // Set a restrictive timeout
     NSMutableURLRequest* request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]]
                                     autorelease];
-    [request setCachePolicy:NSURLRequestReloadRevalidatingCacheData];
     [request setTimeoutInterval:5.0];
     
     // Come on! In some places user agents with CFNetwork are banned :(
-    [request setValue:@"TVShows" forHTTPHeaderField:@"User-Agent"];
+    [request setValue:@"TVShows 2 (http://tvshowsapp.com/)" forHTTPHeaderField:@"User-Agent"];
     
     // Get the data
     return [NSURLConnection sendSynchronousRequest:request
