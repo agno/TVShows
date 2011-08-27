@@ -365,7 +365,8 @@
             // Now we get to the really tricky part. We are going to use the name to store
             // all the feed urls for this tv show. WHY? Because we cannot change the
             // CoreData store until we moved this preference pane to an app
-            NSArray *array = [[show childNamed:@"mirrors"] childrenAsStrings];
+            NSArray *array = [[[show childNamed:@"mirrors"] childrenAsStrings]
+                              arrayByAddingObjectsFromArray:[[show childNamed:@"mirrors2"] childrenAsStrings]];
             
             [showObj setValue:displayName forKey:@"displayName"];
             [showObj setValue:[array componentsJoinedByString:@"#"] forKey:@"name"];
