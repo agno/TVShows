@@ -28,7 +28,8 @@
                                                     @"DAY-([0-9]{4})([0-9]{2})([0-9]{2})", // DAY-20110115 (Hamsterpit)
                                                     @"Episode ([0-9]+).([0-9]+)", // Episode 1.1 (BitSnoop)
                                                     @"([0-9]{4})(?:[[:space:]]|[.-])([0-9]{2})(?:[[:space:]]|[.-])([0-9]{2})", // YYYY MM DD
-                                                    @"([0-9]{2})(?:[[:space:]]|[.-])([0-9]{2})(?:[[:space:]]|[.-])([0-9]{4})",nil]; // MM DD YYYY
+                                                    @"([0-9]{2})(?:[[:space:]]|[.-])([0-9]{2})(?:[[:space:]]|[.-])([0-9]{4})", // MM DD YYYY
+                                                    @"[^xX]([0-9]?[0-9])([0-9][0-9])[^Pp]", nil]; // 101
     
     // Run through each of the regex strings we've listed above.
     for (NSString *regex in parseTypes) {
