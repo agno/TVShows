@@ -26,6 +26,7 @@
                                                     @"([0-9]+)(?:[[:space:]]*x[[:space:]]*)([0-9]+)", // 01x01
                                                     @"EPI-([0-9]+)-([0-9]+)", // EPI-1-1 (Hamsterpit)
                                                     @"DAY-([0-9]{4})([0-9]{2})([0-9]{2})", // DAY-20110115 (Hamsterpit)
+                                                    @"Episode ([0-9]+).([0-9]+)", // Episode 1.1 (BitSnoop)
                                                     @"([0-9]{4})(?:[[:space:]]|[.-])([0-9]{2})(?:[[:space:]]|[.-])([0-9]{2})", // YYYY MM DD
                                                     @"([0-9]{2})(?:[[:space:]]|[.-])([0-9]{2})(?:[[:space:]]|[.-])([0-9]{4})",nil]; // MM DD YYYY
     
@@ -65,6 +66,7 @@
     
     showTitle = [showTitle stringByReplacingOccurrencesOfRegex:@"[\\._ ]+([\\[-].*)?[sS]?\\d.*" withString:@""];
     showTitle = [showTitle stringByReplacingOccurrencesOfRegex:@"[\\._ ]+" withString:@" "];
+    showTitle = [showTitle stringByReplacingOccurrencesOfRegex:@": Episode" withString:@""];
     
     if (type == @"episode") {
         
