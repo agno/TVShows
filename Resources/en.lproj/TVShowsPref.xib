@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
-		<string key="IBDocument.SystemVersion">11A511</string>
+		<string key="IBDocument.SystemVersion">11B26</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1617</string>
 		<string key="IBDocument.AppKitVersion">1138</string>
 		<string key="IBDocument.HIToolboxVersion">566.00</string>
@@ -130,7 +130,6 @@
 							<string key="NSFrame">{{146, 10}, {509, 527}}</string>
 							<reference key="NSSuperview" ref="1037298196"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="1035194241"/>
 							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<object class="NSMutableArray" key="NSTabViewItems">
 								<bool key="EncodedWithXMLCoder">YES</bool>
@@ -254,6 +253,7 @@
 														<string key="NSAction">_doScroller:</string>
 														<double key="NSCurValue">1</double>
 														<double key="NSPercent">0.89655172824859619</double>
+														<int key="NSKnobStyle">2</int>
 													</object>
 													<object class="NSScroller" id="386281777">
 														<reference key="NSNextResponder" ref="325784506"/>
@@ -267,6 +267,7 @@
 														<reference key="NSTarget" ref="325784506"/>
 														<string key="NSAction">_doScroller:</string>
 														<double key="NSPercent">0.63157892227172852</double>
+														<int key="NSKnobStyle">2</int>
 													</object>
 												</object>
 												<string key="NSFrame">{{10, 45}, {469, 407}}</string>
@@ -278,6 +279,7 @@
 												<reference key="NSVScroller" ref="813474239"/>
 												<reference key="NSHScroller" ref="386281777"/>
 												<reference key="NSContentView" ref="454151064"/>
+												<int key="NSScrollerKnobStyle">2</int>
 											</object>
 											<object class="NSCustomView" id="364999257">
 												<reference key="NSNextResponder" ref="1035194241"/>
@@ -499,7 +501,6 @@
 												<string key="NSFrame">{{269, 14}, {207, 14}}</string>
 												<reference key="NSSuperview" ref="1035194241"/>
 												<reference key="NSWindow"/>
-												<reference key="NSNextKeyView"/>
 												<int key="NSViewLayerContentsRedrawPolicy">2</int>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="224924987">
@@ -1838,7 +1839,6 @@
 												<int key="NSvFlags">290</int>
 												<string key="NSFrame">{{5, 3}, {478, 35}}</string>
 												<reference key="NSSuperview" ref="1002750166"/>
-												<reference key="NSNextKeyView"/>
 												<int key="NSViewLayerContentsRedrawPolicy">2</int>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="474229197">
@@ -1870,7 +1870,7 @@
 																<int key="NSvFlags">2322</int>
 																<string key="NSFrameSize">{0, 0}</string>
 																<reference key="NSSuperview" ref="445684699"/>
-																<reference key="NSNextKeyView" ref="491914073"/>
+																<reference key="NSNextKeyView" ref="829580114"/>
 																<int key="NSViewLayerContentsRedrawPolicy">2</int>
 																<object class="NSTextContainer" key="NSTextContainer" id="612145051">
 																	<object class="NSLayoutManager" key="NSLayoutManager">
@@ -2011,7 +2011,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 												</object>
 												<string key="NSFrame">{{8, 46}, {385, 432}}</string>
 												<reference key="NSSuperview" ref="1002750166"/>
-												<reference key="NSNextKeyView" ref="829580114"/>
+												<reference key="NSNextKeyView" ref="445684699"/>
 												<int key="NSViewLayerContentsRedrawPolicy">2</int>
 												<int key="NSsFlags">133138</int>
 												<reference key="NSVScroller" ref="491914073"/>
