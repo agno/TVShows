@@ -27,6 +27,7 @@
 {
     // Begin parsing the feed
     NSString *episodeTitle = @"", *lastEpisodeTitle = @"", *episodeSeason = @"", *episodeNumber = @"", *episodeQuality = @"", *lastEpisodeQuality = @"", *qualityString = @"", *link = @"";
+    NSDate *episodeDate;
     NSError *error;
     NSMutableArray *episodeArray = [NSMutableArray array];
     NSData *feedData = [WebsiteFunctions downloadDataFrom:url];
@@ -71,14 +72,22 @@
                 qualityString = @"";
             }
             
+            // Support both enclosures and links
             if ([item enclosures] && [[item enclosures] count] > 0) {
                 link = [[[item enclosures] objectAtIndex:0] url];
             } else {
                 link = [[item link] href];
             }
             
+            // RSS that have no dates. I hate it
+            if ([item pubDate]) {
+                episodeDate = [item pubDate];
+            } else {
+                episodeDate = [NSDate dateWithTimeIntervalSinceNow:-3*60];
+            }
+            
             [Episode setValue:episodeTitle          forKey:@"episodeName"];
-            [Episode setValue:[item pubDate]        forKey:@"pubDate"];
+            [Episode setValue:episodeDate           forKey:@"pubDate"];
             [Episode setValue:link                  forKey:@"link"];
             [Episode setValue:episodeSeason         forKey:@"episodeSeason"];
             [Episode setValue:episodeNumber         forKey:@"episodeNumber"];
@@ -137,8 +146,11 @@
         // Ignore this episode if it is a daily show
         // The scene does not release late nights regularly
         // Also ignore episodes that are already in HD
+        // And do not search for episodes until there has been
+        // two hours since the SD episode was released
         if ([[realEpisode valueForKey:@"episodeSeason"] isEqualToString:@"-"] ||
-            [[realEpisode valueForKey:@"isHD"] isEqualToString:[NSString stringWithFormat:@"%d", YES]]) {
+            [[realEpisode valueForKey:@"isHD"] isEqualToString:[NSString stringWithFormat:@"%d", YES]] ||
+            [[realEpisode valueForKey:@"pubDate"] compare:[NSDate dateWithTimeIntervalSinceNow:-2*60]] == NSOrderedDescending) {
             continue;
         }
         
