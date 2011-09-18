@@ -23,6 +23,26 @@
 
 @implementation TSParseXMLFeeds
 
++ (NSString *) getMagnetLink:(FPItem *)item
+{
+    for (FPExtensionNode *node in item.extensionElements) {
+		if ([node.name isEqualToString:@"torrent"]) {
+			for (FPExtensionNode *subnode in [node children]) {
+                if ([subnode.name isEqualToString:@"magnetURI"]) {
+                    return subnode.stringValue;
+                }
+            }
+		}
+	}
+    
+    // Check if the permalink is a magnet URI
+    if ([item.guid rangeOfString:@"magnet:"].location != NSNotFound) {
+        return item.guid;
+    }
+    
+    return nil;
+}
+
 + (NSArray *) parseEpisodesFromFeed:(NSString *)url maxItems:(int)maxItems
 {
     // Begin parsing the feed
@@ -72,11 +92,20 @@
                 qualityString = @"";
             }
             
-            // Support both enclosures and links
-            if ([item enclosures] && [[item enclosures] count] > 0) {
-                link = [[[item enclosures] objectAtIndex:0] url];
+            // Try Magnet links
+            if ([TSUserDefaults getBoolFromKey:@"PreferMagnets" withDefault:NO]) {
+                link = [TSParseXMLFeeds getMagnetLink:item];
             } else {
-                link = [[item link] href];
+                link = nil;
+            }
+            
+            // If no magnets, try enclosures and links
+            if (link == nil) {
+                if ([item enclosures] && [[item enclosures] count] > 0) {
+                    link = [[[item enclosures] objectAtIndex:0] url];
+                } else {
+                    link = [[item link] href];
+                }
             }
             
             // RSS that have no dates. I hate it

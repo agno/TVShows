@@ -318,7 +318,7 @@
 }
 
 - (void) setUserDefinedShowQuality {
-    [showQuality setState: [TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:1]];
+    [showQuality setState: [TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:NO]];
 }
 
 - (IBAction) showQualityDidChange:(id)sender

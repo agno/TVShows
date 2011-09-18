@@ -232,7 +232,7 @@
             [newSubscription setValue:[selectedShow valueForKey:@"sortName"] forKey:@"sortName"];
             [newSubscription setValue:[selectedShow valueForKey:@"tvdbID"] forKey:@"tvdbID"];
             [newSubscription setValue:[selectedShow valueForKey:@"name"] forKey:@"url"];
-            [newSubscription setValue:[NSNumber numberWithBool:[TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:YES]]
+            [newSubscription setValue:[NSNumber numberWithBool:[TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:NO]]
                                forKey:@"quality"];
             [newSubscription setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
             

@@ -115,7 +115,7 @@
     }
     
     // Always remember the user preference
-    [showQuality setState:[TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:1]];
+    [showQuality setState:[TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:NO]];
     
     // Grab the list of episodes
     [episodeArrayController removeObjects:[episodeArrayController content]];
@@ -470,7 +470,7 @@
 }
 
 - (void) setUserDefinedShowQuality {
-    [showQuality setState:[TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:1]];
+    [showQuality setState:[TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:NO]];
 }
 
 - (void) showLoadingThrobber {

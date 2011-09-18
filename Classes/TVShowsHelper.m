@@ -234,7 +234,7 @@
     NSArray *subscriptions = [[subscriptionsDelegate managedObjectContext]
                               executeFetchRequest:requestSubscriptions error:&error];
     
-    // Fetch subscriptions
+    // Fetch presets
     NSEntityDescription *entityPresets = [NSEntityDescription entityForName:@"Show"
                                                      inManagedObjectContext:[presetShowsDelegate managedObjectContext]];
     NSFetchRequest *requestPresets = [[[NSFetchRequest alloc] init] autorelease];
@@ -277,7 +277,7 @@
             [newSubscription setValue:[selectedShow valueForKey:@"sortName"] forKey:@"sortName"];
             [newSubscription setValue:[selectedShow valueForKey:@"tvdbID"] forKey:@"tvdbID"];
             [newSubscription setValue:[selectedShow valueForKey:@"name"] forKey:@"url"];
-            [newSubscription setValue:[NSNumber numberWithBool:[TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:YES]]
+            [newSubscription setValue:[NSNumber numberWithBool:[TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:NO]]
                                forKey:@"quality"];
             [newSubscription setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
             
@@ -600,6 +600,7 @@
     // Sync shows with Miso
     if ([TSUserDefaults getBoolFromKey:@"MisoEnabled" withDefault:NO] &&
         [TSUserDefaults getBoolFromKey:@"MisoSyncEnabled" withDefault:YES]) {
+        
         [self syncShows];
     }
     
@@ -656,7 +657,9 @@
                                                        maxItems:50];
     
     if ([episodes count] == 0) {
-        LogError(@"Could not download/parse feed for %@ <%@>", [show valueForKey:@"name"], [show valueForKey:@"url"]);
+        LogDebug(@"No episodes for %@ <%@>", [show valueForKey:@"name"], [show valueForKey:@"url"]);
+        [pool drain];
+        return;
     }
     
     BOOL chooseAnyVersion = NO;
@@ -717,6 +720,7 @@
                 
                 // If the user has Miso enabled, check if there is a check-in for that episode
                 if ([self hasCheckInForShow:show andEpisode:episode]) {
+                    LogInfo(@"There is already a checkin for this episode, so it will not be downloaded.");
                     downloaded = YES;
                 }
                 

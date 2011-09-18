@@ -48,7 +48,8 @@
     NSString *episodeName = [episode valueForKey:@"episodeName"];
     NSArray *urls = [[episode valueForKey:@"link"] componentsSeparatedByString:@"#"];
     NSString *showName = nil;
-    
+    LogInfo(@"Downloading %@.", [episode valueForKey:@"link"]);
+
     // Choose the show name (it can be in two keys depending if the show is a preset or a subscription)
     if ([[show valueForKey:@"name"] rangeOfString:@"http"].location == NSNotFound) {
         showName = [show valueForKey:@"name"];
@@ -57,7 +58,8 @@
     }
     
     // Look for the torrent in Torrentz if it is not found
-    if ([[urls objectAtIndex:0] rangeOfString:@"http"].location == NSNotFound) {
+    if ([[urls objectAtIndex:0] rangeOfString:@"http"].location == NSNotFound &&
+        [[urls objectAtIndex:0] rangeOfString:@"magnet:"].location == NSNotFound) {
         LogInfo(@"Retrieving an HD torrent file from Torrentz of: %@", episodeName);
         NSString *url = [TorrentzParser getAlternateTorrentForEpisode:episodeName];
         if (url == nil) {
@@ -90,8 +92,38 @@
     
     LogInfo(@"Attempting to download new episode: %@", episodeName);
     
-    // Process all url until the torrent is properly downloaded
+    // Process all urls until the torrent is properly downloaded
     for (NSString *url in urls) {
+        
+        // First try magnets
+        if ([url rangeOfString:@"magnet:"].location != NSNotFound) {
+            
+            // Just open it
+            [[NSWorkspace sharedWorkspace] openURL:
+             [NSURL URLWithString:[url stringByReplacingOccurrencesOfString:@" " withString:@"%20"]]];
+            
+#if HELPER_APP
+            if([TSUserDefaults getBoolFromKey:@"GrowlOnNewEpisode" withDefault:1]) {
+                NSData *cover = [[NSData alloc] initWithData:
+                                 [[TheTVDB getPosterForShow:showName
+                                                 withShowID:[[show valueForKey:@"tvdbID"] description]
+                                                 withHeight:96 withWidth:66] TIFFRepresentation]];
+                
+                [GrowlApplicationBridge notifyWithTitle:[NSString stringWithFormat:@"%@", showName]
+                                            description:[NSString stringWithFormat:TSLocalizeString(@"A new episode of %@ is being downloaded."), showName]
+                                       notificationName:@"New Episode Downloaded"
+                                               iconData:cover
+                                               priority:0
+                                               isSticky:0
+                                           clickContext:nil];
+                [cover autorelease];
+            }
+#endif
+            
+            // Success!
+            return YES;
+        }
+        
         // Fix BT-chat Links
         if ([url rangeOfString:@"bt-chat"].location != NSNotFound) {
             url = [url stringByAppendingString:@"&type=torrent"];
@@ -115,12 +147,12 @@
              postNotificationName:@"com.apple.DownloadFileFinished" object:saveLocation];
             
             // Check to see if the user wants to automatically open new downloads
-            if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:1]) {
+            if([TSUserDefaults getBoolFromKey:@"AutoOpenDownloadedFiles" withDefault:YES]) {
                 [[NSWorkspace sharedWorkspace] openFile:saveLocation withApplication:nil andDeactivate:NO];
             }
             
 #if HELPER_APP
-            if([TSUserDefaults getBoolFromKey:@"GrowlOnNewEpisode" withDefault:1]) {
+            if([TSUserDefaults getBoolFromKey:@"GrowlOnNewEpisode" withDefault:YES]) {
                 NSData *cover = [[NSData alloc] initWithData:
                                  [[TheTVDB getPosterForShow:showName
                                                  withShowID:[[show valueForKey:@"tvdbID"] description]

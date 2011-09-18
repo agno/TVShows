@@ -58,8 +58,9 @@
     [TSUserDefaults setKey:@"AutoOpenDownloadedFiles"   fromBool:YES];
     [TSUserDefaults setKey:@"SortInFolders"             fromBool:NO];
     [TSUserDefaults setKey:@"SeasonSubfolders"          fromBool:NO];
-    [TSUserDefaults setKey:@"AutoSelectHDVersion"       fromBool:YES];
+    [TSUserDefaults setKey:@"AutoSelectHDVersion"       fromBool:NO];
     [TSUserDefaults setKey:@"UseAdditionalSourcesHD"    fromBool:YES];
+    [TSUserDefaults setKey:@"PreferMagnets"             fromBool:NO];
     [TSUserDefaults setKey:@"checkDelay"                fromFloat:1];
     [TSUserDefaults setKey:@"downloadFolder"            fromString:[NSHomeDirectory() stringByAppendingPathComponent:@"Downloads"]];
     [TSUserDefaults setKey:@"GrowlOnAppUpdate"          fromBool:YES];
@@ -114,11 +115,15 @@
     
     // Automatically select HD version by default
     [autoSelectHDVersion setTitle:TSLocalizeString(@"Download HD versions by default")];
-    [autoSelectHDVersion setState:[TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:YES]];
+    [autoSelectHDVersion setState:[TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:NO]];
     
     // Use additional sources (i.e. Torrentz) when HD is not available
     [useAdditionalSourcesHD setTitle:TSLocalizeString(@"Use additional sources for HD (may contain rars)")];
     [useAdditionalSourcesHD setState:[TSUserDefaults getBoolFromKey:@"UseAdditionalSourcesHD" withDefault:YES]];
+    
+    // Prefer magnet links
+    [preferMagnets setTitle:TSLocalizeString(@"Prioritize Magnet links (select this if The Pirate Bay is blocked)")];
+    [preferMagnets setState:[TSUserDefaults getBoolFromKey:@"PreferMagnets" withDefault:NO]];
     
     // Check for new episodes every...
     [episodeCheckText setStringValue:TSLocalizeString(@"Check for episodes every:")];
@@ -292,6 +297,11 @@
 - (IBAction) useAdditionalSourcesHDDidChange:(id)sender
 {
     [TSUserDefaults setKey:@"UseAdditionalSourcesHD" fromBool:[useAdditionalSourcesHD state]];
+}
+
+- (IBAction) preferMagnetsDidChange:(id)sender
+{
+    [TSUserDefaults setKey:@"PreferMagnets" fromBool:[preferMagnets state]];
 }
 
 #pragma mark -

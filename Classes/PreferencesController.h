@@ -45,6 +45,7 @@
     IBOutlet NSButton *sortInSeasonFolders;
     IBOutlet NSButton *autoSelectHDVersion;
     IBOutlet NSButton *useAdditionalSourcesHD;
+    IBOutlet NSButton *preferMagnets;
     
     // Growl Settings
     IBOutlet NSTextField *growlNotifyText;
@@ -81,6 +82,7 @@
 - (IBAction) sortInSeasonFoldersDidChange:(id)sender;
 - (IBAction) autoSelectHDVersionDidChange:(id)sender;
 - (IBAction) useAdditionalSourcesHDDidChange:(id)sender;
+- (IBAction) preferMagnetsDidChange:(id)sender;
 
 #pragma mark -
 #pragma mark Growl Notification Preferences

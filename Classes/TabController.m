@@ -216,7 +216,7 @@
     } else if ([[tabViewItem identifier] isEqualTo:@"tabItemSync"]) {
         newWinHeight = 396;
     } else if ([[tabViewItem identifier] isEqualTo:@"tabItemPreferences"]) {
-        newWinHeight = 670;
+        newWinHeight = 698;
     }  else if ([[tabViewItem identifier] isEqualTo:@"tabItemAbout"]) {
         newWinHeight = 500;
     } else {
