@@ -142,7 +142,6 @@
         [PTSearchField setEnabled:YES];
         [PTTableView setEnabled:YES];
         [cancelButton setEnabled:YES];
-        [subscribeButton setEnabled:YES];
         [showQuality setEnabled:YES];
         [moreInfoButton setEnabled:YES];
         [nextAiredButton setEnabled:YES];
@@ -457,6 +456,7 @@
     [otherEpisodeButton setEnabled:NO];
     [otherEpisodeButton setState:NO];
     [episodeTableView setEnabled:NO];
+    [subscribeButton setEnabled:NO];
     [self setDefaultPoster];
     [self setUserDefinedShowQuality];
 }
@@ -578,12 +578,12 @@
         [episodeArrayController addObjects:results];
         
         // Check if there are HD episodes, if so enable the "Download in HD" checkbox
-        BOOL feedHasHDEpisodes = [TSParseXMLFeeds feedHasHDEpisodes:results];
+//        BOOL feedHasHDEpisodes = [TSParseXMLFeeds feedHasHDEpisodes:results];
         
-        if (!feedHasHDEpisodes) {
-            [showQuality setState:NO];
-        }
-        [showQuality setEnabled:feedHasHDEpisodes];
+//        if (!feedHasHDEpisodes) {
+//            [showQuality setState:NO];
+//        }
+//        [showQuality setEnabled:feedHasHDEpisodes];
         
         // Update the filter predicate to only display the correct quality.
         [self showQualityDidChange:nil];
