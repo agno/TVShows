@@ -213,7 +213,9 @@
     
     // Parse and store all results
     for (NSString *url in urls) {
-        for (NSMutableDictionary *episode in [self parseEpisodesFromFeed:url maxItems:maxItems]) {
+        // Deal with "feed://" protocol that Safari puts in there
+        for (NSMutableDictionary *episode in [self parseEpisodesFromFeed:
+              [url stringByReplacingOccurrencesOfString:@"feed://" withString:@"http://"] maxItems:maxItems]) {
             // For each episode add it to the results if the episode is not already in the results
             NSInteger mirrorIndex = [self getEpisode:episode fromArray:episodes];
             // If the episode already exists, add the episode
