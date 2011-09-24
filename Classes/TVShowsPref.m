@@ -51,6 +51,9 @@
     // Check to see if we installed a different version, both updates and rollbacks.
     if (![buildVersion isEqualToString:installedBuild]) {
         
+        // Force updating the show list
+        [TSUserDefaults setKey:@"LastDownloadedShowList" fromDate:[NSDate dateWithTimeIntervalSinceNow:-365*24*60*60]];
+        
         // Update the application build number in installedBuild
         [TSUserDefaults setKey:@"installedBuild" fromString:buildVersion];
         

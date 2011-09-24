@@ -87,7 +87,7 @@
         
     } else {
         // TVShows is not enabled.
-        LogWarning(@"The TVShowsHelper was run even though TVShows is not enabled. Quitting.");
+        LogWarning(@"The TVShowsHelper was running even though TVShows is not enabled. Quitting.");
         [self quitHelper:nil];
     }
 }

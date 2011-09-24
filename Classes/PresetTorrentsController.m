@@ -268,11 +268,21 @@
                 if ([name isEqualToString:@"Who Do You Think You Are"]) name = @"Who Do You Think You Are (US)";
                 
                 // And finally update all the info!
-                if ([name isEqualToString:[showDict valueForKey:@"displayName"]]) {
+                if ([name isEqualToString:[showDict valueForKey:@"displayName"]] ||
+                    [[show valueForKey:@"tvdbID"] isEqualTo:[showDict valueForKey:@"tvdbID"]]) {
                     // Refresh the show from the subscriptions (it may have changed)
                     [[subscriptionsDelegate managedObjectContext] refreshObject:show mergeChanges:YES];
                     
-                    bool cleanSortName = ([TSRegexFun parseSeasonAndEpisode:[show valueForKey:@"sortName"]] == nil);
+                    bool cleanSortName = YES;
+                    
+                    NSArray *lastEpisode = [TSRegexFun parseSeasonAndEpisode:[show valueForKey:@"sortName"]];
+                    
+                    // In the past the app could have downloaded some movies instead of the episodes, fix that
+                    if (lastEpisode != nil &&
+                        ([lastEpisode count] == 4 ||
+                         ([lastEpisode count] == 3 && [[lastEpisode objectAtIndex:1] integerValue] != 20))) {
+                        cleanSortName = NO;
+                    }
                     
                     [show setValue:[showDict valueForKey:@"displayName"] forKey:@"name"];
                     if (cleanSortName) [show setValue:[showDict valueForKey:@"sortName"] forKey:@"sortName"];
@@ -306,7 +316,7 @@
     
     // If seven days did not pass since the last check, do not update the show list
     if (lastChecked != nil && [[NSDate date] timeIntervalSinceDate:lastChecked] < 7*24*60*60) {
-        LogInfo(@"Using a cached show list.");
+        LogInfo(@"Using a cached show list (%@).", lastChecked);
         hasDownloadedList = YES;
         return;
     }
