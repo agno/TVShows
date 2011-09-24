@@ -215,7 +215,9 @@
     
     // Check if we have to sort shows by folders or not
     if ([TSUserDefaults getBoolFromKey:@"SortInFolders" withDefault:NO]) {
-        saveLocation = [saveLocation stringByAppendingPathComponent:showName];
+        saveLocation = [saveLocation stringByAppendingPathComponent:
+                        [[showName stringByReplacingOccurrencesOfString:@": " withString:@" "]
+                         stringByReplacingOccurrencesOfString:@":" withString:@" "]];
         if (![[NSFileManager defaultManager] createDirectoryAtPath:saveLocation
                                        withIntermediateDirectories:YES
                                                         attributes:nil
@@ -242,7 +244,10 @@
     
     // Add the filename
     saveLocation = [saveLocation stringByAppendingPathComponent:
-                    [NSString stringWithFormat:@"%@.torrent", [episode valueForKey:@"episodeName"]]];
+                    [NSString stringWithFormat:@"%@.torrent",
+                     [[[episode valueForKey:@"episodeName"]
+                       stringByReplacingOccurrencesOfString:@": " withString:@" "]
+                      stringByReplacingOccurrencesOfString:@":" withString:@" "]]];
     
     return saveLocation;
 }
