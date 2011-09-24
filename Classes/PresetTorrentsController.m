@@ -734,14 +734,17 @@
     [newSubscription setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
     [newSubscription setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
     
+    NSDictionary *subscriptionDictionary = [newSubscription dictionaryWithValuesForKeys:
+                                            [NSArray arrayWithObjects:@"name", @"sortName", @"tvdbID",
+                                             @"url", @"lastDownloaded", @"quality", @"isEnabled", nil]];
+    
     // Be sure to process pending changes before saving or it won't save correctly
     [[subscriptionsDelegate managedObjectContext] processPendingChanges];
     [subscriptionsDelegate saveAction];
-    [SBArrayController fetch:nil];
     
     // If other episode is selected, start with it (spawn background process)
     if ([otherEpisodeButton state]) {
-        NSMutableArray *arguments = [NSMutableArray arrayWithObject:newSubscription];
+        NSMutableArray *arguments = [NSMutableArray arrayWithObject:subscriptionDictionary];
         for (int i = 0; i <= [episodeTableView selectedRow]; i++) {
             [arguments addObject:[[episodeArrayController arrangedObjects] objectAtIndex:i]];
         }
@@ -751,7 +754,7 @@
     // Notify Miso to add this subscription :)
     [[NSNotificationCenter defaultCenter] postNotificationName:@"TSAddSubscription"
                                                         object:nil
-                                                      userInfo:(NSDictionary *)newSubscription];
+                                                      userInfo:subscriptionDictionary];
 }
 
 - (void) downloadEpisodes:(NSArray *)arguments

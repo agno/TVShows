@@ -28,25 +28,32 @@
 #import "LCLLogFile.h"
 #import "WebsiteFunctions.h"
 
+#ifndef NSAppKitVersionNumber10_5
+#define NSAppKitVersionNumber10_5   949
+#endif
+
 @implementation TabController
 
 @synthesize selectedShow;
 
 - (void) awakeFromNib
 {
-    // Register the app for this notification
-    [[NSDistributedNotificationCenter defaultCenter] addObserver:self
-                                                        selector:@selector(refreshShowList:)
-                                                            name:@"TSUpdatedShows"
-                                                          object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(refreshShowList:)
-                                                 name:@"TSUpdatedShows"
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(refreshShowList:)
-                                                 name:@"TSAddSubscription"
-                                               object:nil];
+    // Avoid this on Leopard
+    if (floor(NSAppKitVersionNumber) > NSAppKitVersionNumber10_5) {
+        // Register the app for this notification
+        [[NSDistributedNotificationCenter defaultCenter] addObserver:self
+                                                            selector:@selector(refreshShowList:)
+                                                                name:@"TSUpdatedShows"
+                                                              object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(refreshShowList:)
+                                                     name:@"TSUpdatedShows"
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(refreshShowList:)
+                                                     name:@"TSAddSubscription"
+                                                   object:nil];
+    }
     
     // Filter bar
     [filterBar addItemsWithTitles:[NSArray arrayWithObjects:
