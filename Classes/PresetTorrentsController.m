@@ -92,6 +92,7 @@
     [PTTableView setEnabled:NO];
     [cancelButton setEnabled:NO];
     [subscribeButton setEnabled:NO];
+    [subscribeButton setTitle: TSLocalizeString(@"Subscribe")];
     [showQuality setEnabled:NO];
     [moreInfoButton setEnabled:NO];
     [nextAiredButton setEnabled:NO];
@@ -426,8 +427,10 @@
             if ([[PTArrayController selectedObjects] count] != 0) {
                 if ([self userIsSubscribedToShow:[[[PTArrayController selectedObjects] objectAtIndex:0] valueForKey:@"displayName"]]) {
                     [subscribeButton setEnabled:NO];
+                    [subscribeButton setTitle: TSLocalizeString(@"Subscribed")];
                 } else {
                     [subscribeButton setEnabled:YES];
+                    [subscribeButton setTitle: TSLocalizeString(@"Subscribe")];
                 }
                 
                 showFeeds = [[[PTArrayController selectedObjects] objectAtIndex:0] valueForKey:@"name"];
