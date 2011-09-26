@@ -58,7 +58,7 @@
 
 "Automatically open each file after download" = "Åpne nedlastede filer automatisk";
 
-"Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "Er du sikker på at du vil fjerne TVShows? \nOBS: Alle innstillinger og abonnement blir også fjernet. ";
+"Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "Er du sikker på at du vil fjerne TVShows? Alle innstillinger og abonnementer blir også fjernet.";
 
 /* The %@ will be replaced by the name of the show. */
 "Are you sure you want to unsubscribe from %@?" = "Sikker på at du vil slutte abonnementet på %@?";
@@ -90,7 +90,7 @@
 /* This string is on a button. */
 "Create New Account" = "Opprett ny konto";
 
-"Create season subfolders" = "Lag sesong undermapper";
+"Create season subfolders" = "Lag undermapper for sesonger";
 
 "Disable TVShows" = "Deaktiver TVShows";
 
@@ -98,7 +98,7 @@
 
 "Download in HD" = "Last ned i HD-kvalitet";
 
-"Choose this to input your own RSS feed." = "Velg denne for å legge til din egen RSS-feed.";
+"Choose this to input your own RSS feed." = "Velg denne for å legge til din egen RSS-kilde.";
 
 "Enable downloading new episodes" = "Nye episoder lastes ned når tilgjengelige";
 
@@ -129,13 +129,13 @@
 /* Title of a column in a table. */
 "Episode Name" = "Episodetittel";
 
-"Episode naming convention:" = "Episode navngiving:";
+"Episode naming convention:" = "Navneformat for episoder:";
 
 "Episode save location:" = "Velg sted for lagring av episoder :";
 
-"Feed" = "Feed";
+"Feed" = "Kilde";
 
-"Feed URLs" = "Abonnements adresser";
+"Feed URLs" = "Kildeadresser";
 
 "Download HD versions by default" = "Last ned HD-versjon";
 
@@ -179,12 +179,10 @@
 /* This string is on a very narrow button, max 3 charaters (use a dot after that like "Act." in Spanish instead of "Activado") */
 "On" = "På";
 
-"Only download items matching the following rules:" = "Bare last ned episoder som følger disse reglene:";
+"Only download items matching the following rules:" = "Last kun ned episoder som følger disse reglene:";
 
 /* To select a custom folder not listed. */
 "Other..." = "Annen...";
-
-"Password:" = "Passord:";
 
 "Please Select a Show:" = "Vennligst velg serie:";
 
@@ -205,12 +203,12 @@
 "Rating:" = "Vurdering:";
 
 /* This string is on a small button, it stands for "Reset Warnings" */
-"Reset Warn." = "Nullstill varsel.";
+"Reset Warn." = "Nullst. varsler";
+
+"Save each show in its own folder" = "Lagre hvert show i en egen mappe";
 
 /* This string is on a button. */
 "Save" = "Lagre";
-
-"Save each show in its own folder" = "Lagre hvert show i en egen mappe";
 
 "Search" = "Søk etter";
 
@@ -236,11 +234,13 @@
 
 "No activity has been logged yet. Have you recently installed TVShows?" = "Ingen aktivitet har blitt logget ennå. Har du nettopp installert TVShows?";
 
+"Password:" = "Passord:";
+
 "Please choose one of the following actions:" = "Vennligst velg en av følgende handlinger:";
 
 "Send Growl notifications when…" = "La Growl varsle når…";
 
-"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country." = "Ingen videoer lastes ned med TVShows, bare torrent-filer som man kan bruke videre gjennom andre programmer. Det er opp til brukeren å avgjøre lovligheten i det å bruke torrent-filene som lastes ned via dette programmet videre ift. gjeldende lover og bestemmelser med kopibeskyttet materiale.";
+"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country." = "Ingen videoer lastes ned med TVShows, kun torrent-filer som man kan bruke videre gjennom andre programmer. Det er opp til brukeren å avgjøre lovligheten i det å bruke torrent-filene som lastes ned via dette programmet videre ift. gjeldende lover og bestemmelser med kopibeskyttet materiale.";
 
 "Status" = "Status";
 
@@ -261,7 +261,7 @@
 
 "Sync shows between Miso and TVShows" = "Synkroniser serier mellom Miso og TVShows";
 
-"The check-in will be made when the download starts. This is not advisable, but it could allow you to sync episode downloads across several computers." = "Skjekk-inn vil bli utført i det en nedlastning starter. Dette er ikke anbefalt, men dette kan gjøre slik at du kan synkronisere nedlastingen av episoder mellom flere maskiner.";
+"The check-in will be made when the download starts. This is not advisable, but it could allow you to sync episode downloads across several computers." = "Sjekk-inn vil bli utført når en nedlastning starter. Dette er ikke anbefalt, men dette kan gjøre slik at du kan synkronisere nedlastingen av episoder mellom flere maskiner.";
 
 "The file may not be released yet. Please try again later or check your internet connection. Alternatively you can download the SD version." = "Filen er kanskje ikke utgitt ennå. Vennligst prøv igjen senere eller sjekk din Internettforbindelse. Alternativt kan du laste ned SD versjonen.";
 
@@ -327,15 +327,14 @@
 
 "Warnings restored" = "Varsler er tilbakestilt";
 
-"Website" = "Webside";
+"Website" = "Nettsted";
 
 "Why try it?" = "Hvorfor prøve det?";
 
 "Yes" = "Ja";
 
-"Your preferences about warnings were restored. If needed, next time TVShows will ask for your confirmation to complete a sensitive operation." = "Dine valg om varsler er tilbakestilt. Neste gang det vil være et behovet vil TVShows spørre etter din bekreftelse for å utføre enkelte oppgaver.";
+"Your preferences about warnings were restored. If needed, next time TVShows will ask for your confirmation to complete a sensitive operation." = "Dine valg om advarsler er gjenopprettet. Hvis det trengs, vil TVShows senere be om bekreftelse for å utføre enkelte oppgaver.";
 
 "Your subscriptions will be backed up in the cloud and they can be synced between different computers." = "Dine abonnementer vil bli lagret i skyen, slik at de kan bli synkronisert mellom andre maskiner.";
 
-"Your TVShows subscriptions will be automatically synced with your followed shows on Miso. Only airings shows known by TVShows will be synced." = "Dine TVShows abonnementer vil automagisk bli synkronisert med de seriene du følger på Miso. Kun sendte episoder som TVShows kjenner til vil bli synkronisert. ";
-
+"Your TVShows subscriptions will be automatically synced with your followed shows on Miso. Only airings shows known by TVShows will be synced." = "Dine TVShows-abonnementer vil automatisk bli synkronisert med serier du følger på Miso. Kun pågående serier som TVShows kjenner til vil bli synkronisert.";

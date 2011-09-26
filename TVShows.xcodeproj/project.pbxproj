@@ -464,6 +464,8 @@
 		5755750D136DC9E5006D1FC9 /* TVShows-Menu-Icon-White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TVShows-Menu-Icon-White.png"; sourceTree = "<group>"; };
 		5755750E136DC9E5006D1FC9 /* TVShows-Menu-Icon-Black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TVShows-Menu-Icon-Black.png"; sourceTree = "<group>"; };
 		575C0D58136A487A005DE73D /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
+		576173251430BFAC005AF776 /* sl-SI */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "sl-SI"; path = "Resources/sl-SI.lproj/Localizable.strings"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		576173261430BFC8005AF776 /* sl-SI */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "sl-SI"; path = "Resources/sl-SI.lproj/JRFeedbackProvider.strings"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		5786454C13B1380900C840C3 /* TSTorrentFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTorrentFunctions.h; sourceTree = "<group>"; };
 		5786454D13B1380900C840C3 /* TSTorrentFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTorrentFunctions.m; sourceTree = "<group>"; };
 		5791A5E513A925890038A638 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
@@ -1153,6 +1155,7 @@
 				fi,
 				ro,
 				ar,
+				"sl-SI",
 			);
 			mainGroup = 089C166AFE841209C02AAC07 /* TVShows */;
 			projectDirPath = "";
@@ -1467,6 +1470,7 @@
 				570CB2AF13B76233000A651F /* ro */,
 				57173C1D13FD49B300730FEF /* he */,
 				573210E914096F2D00497D44 /* ar */,
+				576173251430BFAC005AF776 /* sl-SI */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1513,6 +1517,7 @@
 				570CB2B113B7623C000A651F /* fi */,
 				57173C1E13FD49B300730FEF /* he */,
 				572EAD5414096F7F00AD1CA0 /* ar */,
+				576173261430BFC8005AF776 /* sl-SI */,
 			);
 			name = JRFeedbackProvider.strings;
 			sourceTree = "<group>";
