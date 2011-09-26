@@ -51,6 +51,9 @@
     // Check to see if we installed a different version, both updates and rollbacks.
     if (![buildVersion isEqualToString:installedBuild]) {
         
+        // Force updating the show list
+        [TSUserDefaults setKey:@"LastDownloadedShowList" fromDate:[NSDate dateWithTimeIntervalSinceNow:-365*24*60*60]];
+        
         // Update the application build number in installedBuild
         [TSUserDefaults setKey:@"installedBuild" fromString:buildVersion];
         
@@ -137,12 +140,20 @@
         return [self fixUnsupportedLanguage:@"af" withFallback:@"English" withMessage:@"System Preferences is not translated to Afrikaans, so TVShows needs to fix it to be able to show the application in your language.\n\nPlease provide your password in the next window so we can fix it."];
     } else if ([locale isEqualToString:@"cs"]) {
         return [self fixUnsupportedLanguage:@"cs" withFallback:@"English" withMessage:@"System Preferences is not translated to Czech, so TVShows needs to fix it to be able to show the application in your language.\n\nPlease provide your password in the next window so we can fix it."];
+    } else if ([locale isEqualToString:@"el"]) {
+        return [self fixUnsupportedLanguage:@"el" withFallback:@"English" withMessage:@"System Preferences is not translated to Greek, so TVShows needs to fix it to be able to show the application in your language.\n\nPlease provide your password in the next window so we can fix it."];
     } else if ([locale isEqualToString:@"et"]) {
         return [self fixUnsupportedLanguage:@"et" withFallback:@"English" withMessage:@"System Preferences is not translated to Estonian, so TVShows needs to fix it to be able to show the application in your language.\n\nPlease provide your password in the next window so we can fix it."];
+    } else if ([locale isEqualToString:@"he"]) {
+        return [self fixUnsupportedLanguage:@"he" withFallback:@"English" withMessage:@"System Preferences is not translated to Hebrew, so TVShows needs to fix it to be able to show the application in your language.\n\nPlease provide your password in the next window so we can fix it."];
     } else if ([locale isEqualToString:@"is"]) {
         return [self fixUnsupportedLanguage:@"is" withFallback:@"English" withMessage:@"System Preferences is not translated to Icelandic, so TVShows needs to fix it to be able to show the application in your language.\n\nPlease provide your password in the next window so we can fix it."];
+    } else if ([locale isEqualToString:@"ro"]) {
+        return [self fixUnsupportedLanguage:@"ro" withFallback:@"English" withMessage:@"System Preferences is not translated to Romanian, so TVShows needs to fix it to be able to show the application in your language.\n\nPlease provide your password in the next window so we can fix it."];
     } else if ([locale isEqualToString:@"sk"]) {
         return [self fixUnsupportedLanguage:@"sk-SK" withFallback:@"English" withMessage:@"System Preferences is not translated to Slovak, so TVShows needs to fix it to be able to show the application in your language.\n\nPlease provide your password in the next window so we can fix it."];
+    } else if ([locale isEqualToString:@"sl"]) {
+        return [self fixUnsupportedLanguage:@"sl-SI" withFallback:@"English" withMessage:@"System Preferences is not translated to Slovenian, so TVShows needs to fix it to be able to show the application in your language.\n\nPlease provide your password in the next window so we can fix it."];
     } else if ([locale isEqualToString:@"tr"]) {
         return [self fixUnsupportedLanguage:@"tr" withFallback:@"English" withMessage:@"System Preferences is not translated to Turkish, so TVShows needs to fix it to be able to show the application in your language.\n\nPlease provide your password in the next window so we can fix it."];
     }

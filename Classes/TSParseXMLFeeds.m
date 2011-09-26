@@ -23,10 +23,31 @@
 
 @implementation TSParseXMLFeeds
 
++ (NSString *) getMagnetLink:(FPItem *)item
+{
+    for (FPExtensionNode *node in item.extensionElements) {
+		if ([node.name isEqualToString:@"torrent"]) {
+			for (FPExtensionNode *subnode in [node children]) {
+                if ([subnode.name isEqualToString:@"magnetURI"]) {
+                    return subnode.stringValue;
+                }
+            }
+		}
+	}
+    
+    // Check if the permalink is a magnet URI
+    if ([item.guid rangeOfString:@"magnet:"].location != NSNotFound) {
+        return item.guid;
+    }
+    
+    return nil;
+}
+
 + (NSArray *) parseEpisodesFromFeed:(NSString *)url maxItems:(int)maxItems
 {
     // Begin parsing the feed
     NSString *episodeTitle = @"", *lastEpisodeTitle = @"", *episodeSeason = @"", *episodeNumber = @"", *episodeQuality = @"", *lastEpisodeQuality = @"", *qualityString = @"", *link = @"";
+    NSDate *episodeDate;
     NSError *error;
     NSMutableArray *episodeArray = [NSMutableArray array];
     NSData *feedData = [WebsiteFunctions downloadDataFrom:url];
@@ -71,14 +92,31 @@
                 qualityString = @"";
             }
             
-            if ([item enclosures] && [[item enclosures] count] > 0) {
-                link = [[[item enclosures] objectAtIndex:0] url];
+            // Try Magnet links
+            if ([TSUserDefaults getBoolFromKey:@"PreferMagnets" withDefault:NO]) {
+                link = [TSParseXMLFeeds getMagnetLink:item];
             } else {
-                link = [[item link] href];
+                link = nil;
+            }
+            
+            // If no magnets, try enclosures and links
+            if (link == nil) {
+                if ([item enclosures] && [[item enclosures] count] > 0) {
+                    link = [[[item enclosures] objectAtIndex:0] url];
+                } else {
+                    link = [[item link] href];
+                }
+            }
+            
+            // RSS that have no dates. I hate it
+            if ([item pubDate]) {
+                episodeDate = [item pubDate];
+            } else {
+                episodeDate = [NSDate dateWithTimeIntervalSinceNow:-3*60];
             }
             
             [Episode setValue:episodeTitle          forKey:@"episodeName"];
-            [Episode setValue:[item pubDate]        forKey:@"pubDate"];
+            [Episode setValue:episodeDate           forKey:@"pubDate"];
             [Episode setValue:link                  forKey:@"link"];
             [Episode setValue:episodeSeason         forKey:@"episodeSeason"];
             [Episode setValue:episodeNumber         forKey:@"episodeNumber"];
@@ -137,8 +175,11 @@
         // Ignore this episode if it is a daily show
         // The scene does not release late nights regularly
         // Also ignore episodes that are already in HD
+        // And do not search for episodes until there has been
+        // two hours since the SD episode was released
         if ([[realEpisode valueForKey:@"episodeSeason"] isEqualToString:@"-"] ||
-            [[realEpisode valueForKey:@"isHD"] isEqualToString:[NSString stringWithFormat:@"%d", YES]]) {
+            [[realEpisode valueForKey:@"isHD"] isEqualToString:[NSString stringWithFormat:@"%d", YES]] ||
+            [[realEpisode valueForKey:@"pubDate"] compare:[NSDate dateWithTimeIntervalSinceNow:-2*60]] == NSOrderedDescending) {
             continue;
         }
         
@@ -172,7 +213,9 @@
     
     // Parse and store all results
     for (NSString *url in urls) {
-        for (NSMutableDictionary *episode in [self parseEpisodesFromFeed:url maxItems:maxItems]) {
+        // Deal with "feed://" protocol that Safari puts in there
+        for (NSMutableDictionary *episode in [self parseEpisodesFromFeed:
+              [url stringByReplacingOccurrencesOfString:@"feed://" withString:@"http://"] maxItems:maxItems]) {
             // For each episode add it to the results if the episode is not already in the results
             NSInteger mirrorIndex = [self getEpisode:episode fromArray:episodes];
             // If the episode already exists, add the episode

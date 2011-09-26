@@ -121,7 +121,7 @@
     [nameValue setStringValue:[selectedShow valueForKey:@"name"]];
     [tvdbValue setStringValue:[NSString stringWithFormat:@"%@", [selectedShow valueForKey:@"tvdbID"]]];
     [showQuality setState:[[selectedShow valueForKey:@"quality"] intValue]];
-    [showQuality setEnabled:YES];
+//    [showQuality setEnabled:YES];
     [subscribeButton setEnabled:YES];
     [self showQualityDidChange:nil];
     
@@ -203,11 +203,11 @@
         // Enable the subscription if there is a name and there are episodes
         if (![cleanName isEqualToString:@""]) {
             [subscribeButton setEnabled:YES];
-            [showQuality setEnabled:YES];
-            [showQuality setState:NO];
+//            [showQuality setEnabled:YES];
+//            [showQuality setState:NO];
             
             // Update the filter predicate to only display the correct quality.
-            [self showQualityDidChange:nil];
+//            [self showQualityDidChange:nil];
         } else {
             // Otherwise disallow the subscription to this invalid show
             [subscribeButton setEnabled:NO];
@@ -252,10 +252,12 @@
                                    [NSCharacterSet whitespaceAndNewlineCharacterSet]];
             
             // Enable the subscription if there is a name and there are episodes
-            if (![cleanName isEqualToString:@""]) {
+            if (![cleanName isEqualToString:@""] &&
+                ![[copy objectAtIndex:0] isEqualToString:@""] &&
+                ![[copy objectAtIndex:0] isEqualToString:@"http://"]) {
                 [subscribeButton setEnabled:YES];
-                [showQuality setEnabled:YES];
-                [showQuality setState:NO];
+//                [showQuality setEnabled:YES];
+//                [showQuality setState:NO];
                 
                 // Update the filter predicate to only display the correct quality.
                 [self showQualityDidChange:nil];
@@ -264,13 +266,13 @@
             [episodeArrayController addObjects:results];
             
             // Check if there are HD episodes, if so enable the "Download in HD" checkbox
-            BOOL feedHasHDEpisodes = [TSParseXMLFeeds feedHasHDEpisodes:results];
+//            BOOL feedHasHDEpisodes = [TSParseXMLFeeds feedHasHDEpisodes:results];
             
-            if (feedHasHDEpisodes) {
-                [showQuality setEnabled:YES];
-            } else {
-                [showQuality setState:NO];
-            }
+//            if (feedHasHDEpisodes) {
+//                [showQuality setEnabled:YES];
+//            } else {
+//                [showQuality setState:NO];
+//            }
             
             // Update the filter predicate to only display the correct quality.
             [self showQualityDidChange:nil];
@@ -313,12 +315,12 @@
     [nameValue setStringValue:@""];
     [tvdbValue setStringValue:@""];
     [self setUserDefinedShowQuality];
-    [showQuality setEnabled:NO];
+//    [showQuality setEnabled:NO];
     [subscribeButton setEnabled:NO];
 }
 
 - (void) setUserDefinedShowQuality {
-    [showQuality setState: [TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:1]];
+    [showQuality setState: [TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:NO]];
 }
 
 - (IBAction) showQualityDidChange:(id)sender

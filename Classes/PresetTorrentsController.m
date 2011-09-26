@@ -92,6 +92,7 @@
     [PTTableView setEnabled:NO];
     [cancelButton setEnabled:NO];
     [subscribeButton setEnabled:NO];
+    [subscribeButton setTitle: TSLocalizeString(@"Subscribe")];
     [showQuality setEnabled:NO];
     [moreInfoButton setEnabled:NO];
     [nextAiredButton setEnabled:NO];
@@ -115,7 +116,7 @@
     }
     
     // Always remember the user preference
-    [showQuality setState:[TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:1]];
+    [showQuality setState:[TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:NO]];
     
     // Grab the list of episodes
     [episodeArrayController removeObjects:[episodeArrayController content]];
@@ -142,7 +143,6 @@
         [PTSearchField setEnabled:YES];
         [PTTableView setEnabled:YES];
         [cancelButton setEnabled:YES];
-        [subscribeButton setEnabled:YES];
         [showQuality setEnabled:YES];
         [moreInfoButton setEnabled:YES];
         [nextAiredButton setEnabled:YES];
@@ -269,11 +269,21 @@
                 if ([name isEqualToString:@"Who Do You Think You Are"]) name = @"Who Do You Think You Are (US)";
                 
                 // And finally update all the info!
-                if ([name isEqualToString:[showDict valueForKey:@"displayName"]]) {
+                if ([name isEqualToString:[showDict valueForKey:@"displayName"]] ||
+                    [[show valueForKey:@"tvdbID"] isEqualTo:[showDict valueForKey:@"tvdbID"]]) {
                     // Refresh the show from the subscriptions (it may have changed)
                     [[subscriptionsDelegate managedObjectContext] refreshObject:show mergeChanges:YES];
                     
-                    bool cleanSortName = ([TSRegexFun parseSeasonAndEpisode:[show valueForKey:@"sortName"]] == nil);
+                    bool cleanSortName = YES;
+                    
+                    NSArray *lastEpisode = [TSRegexFun parseSeasonAndEpisode:[show valueForKey:@"sortName"]];
+                    
+                    // In the past the app could have downloaded some movies instead of the episodes, fix that
+                    if (lastEpisode != nil &&
+                        ([lastEpisode count] == 4 ||
+                         ([lastEpisode count] == 3 && [[lastEpisode objectAtIndex:1] integerValue] != 20))) {
+                        cleanSortName = NO;
+                    }
                     
                     [show setValue:[showDict valueForKey:@"displayName"] forKey:@"name"];
                     if (cleanSortName) [show setValue:[showDict valueForKey:@"sortName"] forKey:@"sortName"];
@@ -307,7 +317,7 @@
     
     // If seven days did not pass since the last check, do not update the show list
     if (lastChecked != nil && [[NSDate date] timeIntervalSinceDate:lastChecked] < 7*24*60*60) {
-        LogInfo(@"Using a cached show list.");
+        LogInfo(@"Using a cached show list (%@).", lastChecked);
         hasDownloadedList = YES;
         return;
     }
@@ -417,8 +427,10 @@
             if ([[PTArrayController selectedObjects] count] != 0) {
                 if ([self userIsSubscribedToShow:[[[PTArrayController selectedObjects] objectAtIndex:0] valueForKey:@"displayName"]]) {
                     [subscribeButton setEnabled:NO];
+                    [subscribeButton setTitle: TSLocalizeString(@"Subscribed")];
                 } else {
                     [subscribeButton setEnabled:YES];
+                    [subscribeButton setTitle: TSLocalizeString(@"Subscribe")];
                 }
                 
                 showFeeds = [[[PTArrayController selectedObjects] objectAtIndex:0] valueForKey:@"name"];
@@ -457,6 +469,7 @@
     [otherEpisodeButton setEnabled:NO];
     [otherEpisodeButton setState:NO];
     [episodeTableView setEnabled:NO];
+    [subscribeButton setEnabled:NO];
     [self setDefaultPoster];
     [self setUserDefinedShowQuality];
 }
@@ -470,7 +483,7 @@
 }
 
 - (void) setUserDefinedShowQuality {
-    [showQuality setState:[TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:1]];
+    [showQuality setState:[TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:NO]];
 }
 
 - (void) showLoadingThrobber {
@@ -578,12 +591,12 @@
         [episodeArrayController addObjects:results];
         
         // Check if there are HD episodes, if so enable the "Download in HD" checkbox
-        BOOL feedHasHDEpisodes = [TSParseXMLFeeds feedHasHDEpisodes:results];
+//        BOOL feedHasHDEpisodes = [TSParseXMLFeeds feedHasHDEpisodes:results];
         
-        if (!feedHasHDEpisodes) {
-            [showQuality setState:NO];
-        }
-        [showQuality setEnabled:feedHasHDEpisodes];
+//        if (!feedHasHDEpisodes) {
+//            [showQuality setState:NO];
+//        }
+//        [showQuality setEnabled:feedHasHDEpisodes];
         
         // Update the filter predicate to only display the correct quality.
         [self showQualityDidChange:nil];
@@ -724,14 +737,17 @@
     [newSubscription setValue:[NSNumber numberWithInt:[showQuality state]] forKey:@"quality"];
     [newSubscription setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
     
+    NSDictionary *subscriptionDictionary = [newSubscription dictionaryWithValuesForKeys:
+                                            [NSArray arrayWithObjects:@"name", @"sortName", @"tvdbID",
+                                             @"url", @"lastDownloaded", @"quality", @"isEnabled", nil]];
+    
     // Be sure to process pending changes before saving or it won't save correctly
     [[subscriptionsDelegate managedObjectContext] processPendingChanges];
     [subscriptionsDelegate saveAction];
-    [SBArrayController fetch:nil];
     
     // If other episode is selected, start with it (spawn background process)
     if ([otherEpisodeButton state]) {
-        NSMutableArray *arguments = [NSMutableArray arrayWithObject:newSubscription];
+        NSMutableArray *arguments = [NSMutableArray arrayWithObject:subscriptionDictionary];
         for (int i = 0; i <= [episodeTableView selectedRow]; i++) {
             [arguments addObject:[[episodeArrayController arrangedObjects] objectAtIndex:i]];
         }
@@ -741,7 +757,7 @@
     // Notify Miso to add this subscription :)
     [[NSNotificationCenter defaultCenter] postNotificationName:@"TSAddSubscription"
                                                         object:nil
-                                                      userInfo:(NSDictionary *)newSubscription];
+                                                      userInfo:subscriptionDictionary];
 }
 
 - (void) downloadEpisodes:(NSArray *)arguments

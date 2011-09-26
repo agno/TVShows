@@ -87,7 +87,7 @@
         
     } else {
         // TVShows is not enabled.
-        LogWarning(@"The TVShowsHelper was run even though TVShows is not enabled. Quitting.");
+        LogWarning(@"The TVShowsHelper was running even though TVShows is not enabled. Quitting.");
         [self quitHelper:nil];
     }
 }
@@ -103,10 +103,11 @@
     return nil;
 }
 
-- (NSObject *)getShow:(NSString *)showId fromDictionary:(NSDictionary *)dict
+- (NSObject *)getShow:(NSString *)showId withName:(NSString *)seriesName fromDictionary:(NSDictionary *)dict
 {
     for (NSObject *show in dict) {
-        if ([[[[show valueForKey:@"media"] valueForKey:@"tvdb_id"] description] isEqualToString:showId]) {
+        if ([[[[show valueForKey:@"media"] valueForKey:@"tvdb_id"] description] isEqualToString:showId] ||
+            [[[[show valueForKey:@"media"] valueForKey:@"title"] description] isEqualToString:seriesName]) {
             return show;
         }
     }
@@ -132,13 +133,14 @@
         
         // Disregard custom RSS and check if the show is been already followed
         if (showID && ![show valueForKey:@"filters"] &&
-            ![self getShow:showID fromDictionary:followedShows]) {
+            ![self getShow:showID withName:[show valueForKey:@"name"] fromDictionary:followedShows]) {
             
             // Search for it on Miso
             NSDictionary *results = [misoBackend showWithQuery:[show valueForKey:@"name"]];
             
             // Filter those results by TVDB id
-            NSObject *newShow = [self getShow:[[show valueForKey:@"tvdbID"] description] fromDictionary:results];
+            NSObject *newShow = [self getShow:[[show valueForKey:@"tvdbID"] description]
+                                     withName:[show valueForKey:@"name"] fromDictionary:results];
             
             // Some shows do not have TVDB ids yet; try to map them together
             if (!newShow) {
@@ -182,13 +184,14 @@
         
         // Check if the show is been followed and if it is a custom RSS (if it has some filters)
         if (![show valueForKey:@"filters"] &&
-            ![self getShow:showID fromDictionary:followedShows]) {
+            ![self getShow:showID withName:seriesName fromDictionary:followedShows] &&
+            followedShows != nil && [followedShows count] > 0) {
             
             // Some shows do not have TVDB ids yet; search for it on Miso to see if they are favorited
             NSDictionary *results = [misoBackend showWithQuery:seriesName];
             
             // Let's see if the show has id
-            if (![self getShow:showID fromDictionary:results]) {
+            if (![self getShow:showID withName:(NSString *)seriesName fromDictionary:results]) {
                 
                 NSObject *newShow = nil;
                 
@@ -234,7 +237,7 @@
     NSArray *subscriptions = [[subscriptionsDelegate managedObjectContext]
                               executeFetchRequest:requestSubscriptions error:&error];
     
-    // Fetch subscriptions
+    // Fetch presets
     NSEntityDescription *entityPresets = [NSEntityDescription entityForName:@"Show"
                                                      inManagedObjectContext:[presetShowsDelegate managedObjectContext]];
     NSFetchRequest *requestPresets = [[[NSFetchRequest alloc] init] autorelease];
@@ -277,7 +280,7 @@
             [newSubscription setValue:[selectedShow valueForKey:@"sortName"] forKey:@"sortName"];
             [newSubscription setValue:[selectedShow valueForKey:@"tvdbID"] forKey:@"tvdbID"];
             [newSubscription setValue:[selectedShow valueForKey:@"name"] forKey:@"url"];
-            [newSubscription setValue:[NSNumber numberWithBool:[TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:YES]]
+            [newSubscription setValue:[NSNumber numberWithBool:[TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:NO]]
                                forKey:@"quality"];
             [newSubscription setValue:[NSNumber numberWithBool:YES] forKey:@"isEnabled"];
             
@@ -378,6 +381,7 @@
     if (!manually) {
         // Now we can check the new episodes!
         [self checkNow:nil];
+        manually = YES;
     }
 }
 
@@ -565,15 +569,17 @@
     
     NSArrayController *SBArrayController = [[NSArrayController alloc] init];
     NSArrayController *PTArrayController = [[NSArrayController alloc] init];
-    
     [SBArrayController setManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
     [PTArrayController setManagedObjectContext:[presetShowsDelegate managedObjectContext]];
+    [SBArrayController setEntityName:@"Subscription"];
     
-    [controller setSBArrayController:SBArrayController];
-    [controller setPTArrayController:PTArrayController];
-    
-    // We can now safely download the torrent show list :)
-    [controller downloadTorrentShowList];
+    if ([SBArrayController fetchWithRequest:nil merge:YES error:nil]) {
+        [controller setSBArrayController:SBArrayController];
+        [controller setPTArrayController:PTArrayController];
+        
+        // We can now safely download the torrent show list :)
+        [controller downloadTorrentShowList];
+    }
     
     [SBArrayController release];
     [PTArrayController release];
@@ -600,6 +606,7 @@
     // Sync shows with Miso
     if ([TSUserDefaults getBoolFromKey:@"MisoEnabled" withDefault:NO] &&
         [TSUserDefaults getBoolFromKey:@"MisoSyncEnabled" withDefault:YES]) {
+        
         [self syncShows];
     }
     
@@ -656,7 +663,9 @@
                                                        maxItems:50];
     
     if ([episodes count] == 0) {
-        LogError(@"Could not download/parse feed for %@ <%@>", [show valueForKey:@"name"], [show valueForKey:@"url"]);
+        LogDebug(@"No episodes for %@ <%@>", [show valueForKey:@"name"], [show valueForKey:@"url"]);
+        [pool drain];
+        return;
     }
     
     BOOL chooseAnyVersion = NO;
@@ -717,6 +726,7 @@
                 
                 // If the user has Miso enabled, check if there is a check-in for that episode
                 if ([self hasCheckInForShow:show andEpisode:episode]) {
+                    LogInfo(@"There is already a checkin for this episode, so it will not be downloaded.");
                     downloaded = YES;
                 }
                 

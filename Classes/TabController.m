@@ -28,25 +28,32 @@
 #import "LCLLogFile.h"
 #import "WebsiteFunctions.h"
 
+#ifndef NSAppKitVersionNumber10_5
+#define NSAppKitVersionNumber10_5   949
+#endif
+
 @implementation TabController
 
 @synthesize selectedShow;
 
 - (void) awakeFromNib
 {
-    // Register the app for this notification
-    [[NSDistributedNotificationCenter defaultCenter] addObserver:self
-                                                        selector:@selector(refreshShowList:)
-                                                            name:@"TSUpdatedShows"
-                                                          object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(refreshShowList:)
-                                                 name:@"TSUpdatedShows"
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(refreshShowList:)
-                                                 name:@"TSAddSubscription"
-                                               object:nil];
+    // Avoid this on Leopard
+    if (floor(NSAppKitVersionNumber) > NSAppKitVersionNumber10_5) {
+        // Register the app for this notification
+        [[NSDistributedNotificationCenter defaultCenter] addObserver:self
+                                                            selector:@selector(refreshShowList:)
+                                                                name:@"TSUpdatedShows"
+                                                              object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(refreshShowList:)
+                                                     name:@"TSUpdatedShows"
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(refreshShowList:)
+                                                     name:@"TSAddSubscription"
+                                                   object:nil];
+    }
     
     // Filter bar
     [filterBar addItemsWithTitles:[NSArray arrayWithObjects:
@@ -216,7 +223,7 @@
     } else if ([[tabViewItem identifier] isEqualTo:@"tabItemSync"]) {
         newWinHeight = 396;
     } else if ([[tabViewItem identifier] isEqualTo:@"tabItemPreferences"]) {
-        newWinHeight = 670;
+        newWinHeight = 698;
     }  else if ([[tabViewItem identifier] isEqualTo:@"tabItemAbout"]) {
         newWinHeight = 500;
     } else {
@@ -519,12 +526,12 @@
         [episodeArrayController addObjects:results];
         
         // Check if there are HD episodes, if so enable the "Download in HD" checkbox
-        BOOL feedHasHDEpisodes = [TSParseXMLFeeds feedHasHDEpisodes:results];
+//        BOOL feedHasHDEpisodes = [TSParseXMLFeeds feedHasHDEpisodes:results];
         
-        if (!feedHasHDEpisodes) {
-            [showQuality setState:NO];
-        }
-        [showQuality setEnabled:feedHasHDEpisodes];
+//        if (!feedHasHDEpisodes) {
+//            [showQuality setState:NO];
+//        }
+//        [showQuality setEnabled:feedHasHDEpisodes];
         
         // Update the filter predicate to only display the correct quality.
         [self showQualityDidChange:nil];
