@@ -50,8 +50,20 @@
     NSDate *episodeDate;
     NSError *error;
     NSMutableArray *episodeArray = [NSMutableArray array];
-    NSData *feedData = [WebsiteFunctions downloadDataFrom:url];
-    FPFeed *parsedData = [FPParser parsedFeedWithData:feedData error:&error];
+    NSData *feedData;
+    FPFeed *parsedData;
+    
+    // Depending on the user preference, choose a pipe with additional sources or not
+    if (![TSUserDefaults getBoolFromKey:@"UseAdditionalSourcesHD" withDefault:YES] &&
+        [url rangeOfString:@"tvshowsapp"].location != NSNotFound &&
+        ([url rangeOfString:@"eztv"].location != NSNotFound ||
+         [url rangeOfString:@"vtv"].location != NSNotFound)) {
+        feedData = [WebsiteFunctions downloadDataFrom:[url stringByAppendingString:@"&strict=1"]];
+    } else {
+        feedData = [WebsiteFunctions downloadDataFrom:url];
+    }
+    
+    parsedData = [FPParser parsedFeedWithData:feedData error:&error];
     
     int i=0;
     lastEpisodeTitle = lastEpisodeQuality = @"";
