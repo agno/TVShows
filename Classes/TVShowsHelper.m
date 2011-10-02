@@ -705,10 +705,12 @@
                 return;
             }
             
-            // If it has been 15 hours since the episode was aired attempt the download of any version
+            // If it has been 18 hours since the episode was aired attempt the download of any version
             // Also check that we have checked for episodes at least once in the last day
-            if ([[NSDate date] timeIntervalSinceDate:pubDate] > 15*60*60 &&
-                [[NSDate date] timeIntervalSinceDate:lastChecked] < 15*60*60) {
+            if (([[NSDate date] timeIntervalSinceDate:pubDate] > 18*60*60 &&
+                 [[NSDate date] timeIntervalSinceDate:lastChecked] < 13*60*60) ||
+                ([[NSDate date] timeIntervalSinceDate:pubDate] > 28*60*60 &&
+                 [[NSDate date] timeIntervalSinceDate:lastChecked] < 25*60*60)) {
                 chooseAnyVersion = YES;
             } else {
                 chooseAnyVersion = NO;
