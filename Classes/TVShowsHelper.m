@@ -461,7 +461,7 @@
             [TSUserDefaults setKey:@"checkDelay" fromFloat:5];
             break;
         default:
-            // 15 minutes
+            // 1 hour
             seconds = 1*60;
     }
     
@@ -705,10 +705,10 @@
                 return;
             }
             
-            // If it has been two full days since the episode was aired attempt the download of any version
+            // If it has been 15 hours since the episode was aired attempt the download of any version
             // Also check that we have checked for episodes at least once in the last day
-            if ([pubDate timeIntervalSinceDate:[NSDate date]] > 2*24*60*60 &&
-                [[NSDate date] timeIntervalSinceDate:lastChecked] < 25*60*60) {
+            if ([[NSDate date] timeIntervalSinceDate:pubDate] > 15*60*60 &&
+                [[NSDate date] timeIntervalSinceDate:lastChecked] < 15*60*60) {
                 chooseAnyVersion = YES;
             } else {
                 chooseAnyVersion = NO;
