@@ -531,7 +531,7 @@
     }
     
     // And start the thread
-    checkerThread = [[NSThread alloc] initWithTarget:self selector:@selector(runLoop) object:nil];
+    checkerThread = [[NSThread alloc] initWithTarget:self selector:@selector(runLoopAfterAwake) object:nil];
     [checkerThread start];
 }
 
@@ -826,15 +826,15 @@
 - (void) openTab:(NSInteger)tabNumber
 {
     NSString *command = [NSString stringWithFormat:
-    @"tell application \"System Preferences\"                               \n"
-    @"   activate                                                           \n"
-    @"   set the current pane to pane id \"com.victorpimentel.TVShows2\"    \n"
-    @"end tell                                                              \n"
-    @"tell application \"System Events\"                                    \n"
-    @"    tell process \"System Preferences\"                               \n"
-    @"        click radio button %d of tab group 1 of window \"TVShows\"    \n"
-    @"    end tell                                                          \n"
-    @"end tell                                                    ", tabNumber];
+                         @"tell application \"System Preferences\"                               \n"
+                         @"   activate                                                           \n"
+                         @"   set the current pane to pane id \"com.victorpimentel.TVShows2\"    \n"
+                         @"end tell                                                              \n"
+                         @"tell application \"System Events\"                                    \n"
+                         @"    tell process \"System Preferences\"                               \n"
+                         @"        click radio button %d of tab group 1 of window \"TVShows\"    \n"
+                         @"    end tell                                                          \n"
+                         @"end tell                                                    ", tabNumber];
     
     NSTask *task = [[[NSTask alloc] init] autorelease];
     [task setLaunchPath:@"/usr/bin/osascript"];
