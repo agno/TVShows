@@ -50,52 +50,51 @@
     NSDate *episodeDate;
     NSError *error;
     NSMutableArray *episodeArray = [NSMutableArray array];
-    NSData *feedData;
-    FPFeed *parsedData;
-    
-    // Depending on the user preference, choose a pipe with additional sources or not
-    if (![TSUserDefaults getBoolFromKey:@"UseAdditionalSourcesHD" withDefault:YES] &&
-        [url rangeOfString:@"tvshowsapp"].location != NSNotFound &&
-        ([url rangeOfString:@"eztv"].location != NSNotFound ||
-         [url rangeOfString:@"vtv"].location != NSNotFound)) {
-        feedData = [WebsiteFunctions downloadDataFrom:[url stringByAppendingString:@"&strict=1"]];
-    } else {
-        feedData = [WebsiteFunctions downloadDataFrom:url];
-    }
-    
-    parsedData = [FPParser parsedFeedWithData:feedData error:&error];
+    NSData *feedData = [WebsiteFunctions downloadDataFrom:url];
+    FPFeed *parsedData = [FPParser parsedFeedWithData:feedData error:&error];
     
     int i=0;
     lastEpisodeTitle = lastEpisodeQuality = @"";
     
     for (FPItem *item in parsedData.items) {
         if (i <= maxItems) {
+            // If the user wants only episodes from eztv or vtv and this is not from them, ignore it
+            // But, don't ignore it if the episode is more than 12 hours old, because that means
+            // that they didn't release it in a good format so the user would have to use this :(
+            if (![TSUserDefaults getBoolFromKey:@"UseAdditionalSourcesHD" withDefault:YES] &&
+                [url rangeOfString:@"tvshowsapp"].location != NSNotFound &&
+                [item.description rangeOfRegex:@"eztv"].location == NSNotFound &&
+                [item.description rangeOfRegex:@"vtv"].location == NSNotFound &&
+                [[NSDate date] timeIntervalSinceDate:item.pubDate] < 12*60*60) {
+                continue;
+            }
+            
             NSMutableDictionary *Episode = [[NSMutableDictionary alloc] init];
-            NSArray *seasonAndEpisode = [TSRegexFun parseSeasonAndEpisode:[item title]];
+            NSArray *seasonAndEpisode = [TSRegexFun parseSeasonAndEpisode:item.title];
             
             if ([seasonAndEpisode count] == 3) {
-                episodeTitle = [TSRegexFun parseTitleFromString:[item title]
+                episodeTitle = [TSRegexFun parseTitleFromString:item.title
                                                  withIdentifier:seasonAndEpisode
                                                        withType:@"episode"];
                 episodeSeason = [TSRegexFun removeLeadingZero:[seasonAndEpisode objectAtIndex:1]];
                 episodeNumber = [TSRegexFun removeLeadingZero:[seasonAndEpisode objectAtIndex:2]];
                 
             } else if ([seasonAndEpisode count] == 4) {
-                episodeTitle = [TSRegexFun parseTitleFromString:[item title]
+                episodeTitle = [TSRegexFun parseTitleFromString:item.title
                                                  withIdentifier:seasonAndEpisode
                                                        withType:@"date"];
                 episodeSeason = @"-";
                 episodeNumber = @"-";
                 
             } else {
-                episodeTitle = [TSRegexFun parseTitleFromString:[item title]
+                episodeTitle = [TSRegexFun parseTitleFromString:item.title
                                                  withIdentifier:seasonAndEpisode
                                                        withType:@"other"];
                 episodeSeason = @"-";
                 episodeNumber = @"-";
             }
             
-            episodeQuality = [NSString stringWithFormat:@"%d",[TSRegexFun isEpisodeHD:[item title]]];
+            episodeQuality = [NSString stringWithFormat:@"%d",[TSRegexFun isEpisodeHD:item.title]];
             
             if ([episodeQuality intValue] == 1) {
                 qualityString = @"✓";
@@ -113,16 +112,16 @@
             
             // If no magnets, try enclosures and links
             if (link == nil) {
-                if ([item enclosures] && [[item enclosures] count] > 0) {
-                    link = [[[item enclosures] objectAtIndex:0] url];
+                if (item.enclosures && [item.enclosures count] > 0) {
+                    link = [[item.enclosures objectAtIndex:0] url];
                 } else {
-                    link = [[item link] href];
+                    link = item.link.href;
                 }
             }
             
             // RSS that have no dates. I hate it
-            if ([item pubDate]) {
-                episodeDate = [item pubDate];
+            if (item.pubDate) {
+                episodeDate = item.pubDate;
             } else {
                 episodeDate = [NSDate dateWithTimeIntervalSinceNow:-3*60];
             }
