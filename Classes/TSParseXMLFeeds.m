@@ -20,6 +20,7 @@
 #import "TorrentzParser.h"
 #import "WebsiteFunctions.h"
 #import "RegexKitLite.h"
+#define NSMaximumRange ((NSRange){.location=0UL, .length=NSUIntegerMax})
 
 @implementation TSParseXMLFeeds
 
@@ -63,8 +64,8 @@
             // that they didn't release it in a good format so the user would have to use this :(
             if (![TSUserDefaults getBoolFromKey:@"UseAdditionalSourcesHD" withDefault:YES] &&
                 [url rangeOfString:@"tvshowsapp"].location != NSNotFound &&
-                [item.description rangeOfRegex:@"eztv"].location == NSNotFound &&
-                [item.description rangeOfRegex:@"vtv"].location == NSNotFound &&
+                ![item.description isMatchedByRegex:@"eztv" options:RKLCaseless inRange:NSMaximumRange error:nil] &&
+                ![item.description isMatchedByRegex:@"vtv" options:RKLCaseless inRange:NSMaximumRange error:nil] &&
                 [[NSDate date] timeIntervalSinceDate:item.pubDate] < 12*60*60) {
                 continue;
             }
