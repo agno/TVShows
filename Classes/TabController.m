@@ -16,7 +16,6 @@
 
 #import "AppInfoConstants.h"
 #import "TabController.h"
-#import "JRFeedbackController.h"
 
 #import "TSParseXMLFeeds.h"
 #import "TSUserDefaults.h"
@@ -237,7 +236,7 @@
 
 - (IBAction) showFeedbackWindow:(id)sender
 {
-    [JRFeedbackController showFeedback];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString: TVShowsSupport]];
 }
 
 #pragma mark -
