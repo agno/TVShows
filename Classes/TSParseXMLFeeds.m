@@ -62,11 +62,13 @@
             // If the user wants only episodes from eztv or vtv and this is not from them, ignore it
             // But, don't ignore it if the episode is more than 12 hours old, because that means
             // that they didn't release it in a good format so the user would have to use this :(
+            float resortToAdditionalSourcesInterval = [TSUserDefaults getFloatFromKey:@"ResortToAdditionalSourcesInterval" withDefault:12];
+            
             if (![TSUserDefaults getBoolFromKey:@"UseAdditionalSourcesHD" withDefault:YES] &&
                 [url rangeOfString:@"tvshowsapp"].location != NSNotFound &&
                 ![item.description isMatchedByRegex:@"eztv" options:RKLCaseless inRange:NSMaximumRange error:nil] &&
                 ![item.description isMatchedByRegex:@"vtv" options:RKLCaseless inRange:NSMaximumRange error:nil] &&
-                [[NSDate date] timeIntervalSinceDate:item.pubDate] < 12*60*60) {
+                [[NSDate date] timeIntervalSinceDate:item.pubDate] < resortToAdditionalSourcesInterval*60*60) {
                 continue;
             }
             
