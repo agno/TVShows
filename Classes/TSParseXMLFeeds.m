@@ -125,6 +125,8 @@
                 episodeDate = item.pubDate;
             } else {
                 episodeDate = [NSDate dateWithTimeIntervalSinceNow:-3*60];
+                // Generate slightly different date for each episode based on episode season/number
+                episodeDate = [episodeDate addTimeInterval:60*[episodeSeason intValue] + [episodeNumber intValue]];
             }
             
             [Episode setValue:episodeTitle          forKey:@"episodeName"];
