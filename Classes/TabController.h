@@ -118,6 +118,7 @@
 - (void) updateStatus:(NSArray *)data;
 - (void) updateNextEpisode:(NSArray *)data;
 - (void) updatePoster:(NSArray *)data;
+- (IBAction) refreshPoster:(id)sender;
 - (IBAction) closeShowInfoWindow:(id)sender;
 - (IBAction) showQualityDidChange:(id)sender;
 - (void) sortSubscriptionList;

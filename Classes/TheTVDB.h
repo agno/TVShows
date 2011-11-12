@@ -26,5 +26,6 @@
 + (NSString *) getShowStatus:(NSString *)showName withShowID:(NSString *)seriesID;
 + (NSDate *) getShowNextEpisode:(NSString *)showName withShowID:(NSString *)seriesID;
 + (NSImage *) getPosterForShow:(NSString *)showName withShowID:(NSString *)seriesID withHeight:(float)height withWidth:(float)width;
++ (void) removePosterForShow:(NSString *)showName;
 
 @end

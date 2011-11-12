@@ -608,6 +608,18 @@
     }
 }
 
+- (IBAction) refreshPoster:(id)sender
+{
+    // Remove poster from the cache to force the download
+    [TheTVDB removePosterForShow:[selectedShow valueForKey:@"name"]];
+    
+    NSArray *arguments = [NSArray arrayWithObjects:[selectedShow valueForKey:@"name"],
+                          [NSString stringWithFormat:@"%@", [selectedShow valueForKey:@"tvdbID"]], nil];
+    
+    // So download it
+    [self performSelectorInBackground:@selector(setPosterForShow:) withObject:arguments];
+}
+
 - (IBAction) closeShowInfoWindow:(id)sender
 {
     // Close the window first
