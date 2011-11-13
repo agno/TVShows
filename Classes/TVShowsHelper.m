@@ -581,6 +581,12 @@
         [controller downloadTorrentShowList];
     }
     
+    // Avoid a memory leak by breaking circular references between these classes 
+    [controller setSBArrayController:nil];
+    [controller setPTArrayController:nil];
+    [controller setSubscriptionsDelegate:nil];
+    [controller setPresetsDelegate:nil];
+    
     [SBArrayController release];
     [PTArrayController release];
     [controller release];
