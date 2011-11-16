@@ -302,6 +302,10 @@
 - (IBAction) preferMagnetsDidChange:(id)sender
 {
     [TSUserDefaults setKey:@"PreferMagnets" fromBool:[preferMagnets state]];
+    [downloadLocationMenu setEnabled:![preferMagnets state]];
+    [autoOpenDownloadedFiles setEnabled:![preferMagnets state]];
+    [sortInFolders setEnabled:![preferMagnets state]];
+    [sortInSeasonFolders setEnabled:(![preferMagnets state] && [sortInFolders state])];
 }
 
 #pragma mark -
