@@ -247,4 +247,10 @@
     }
 }
 
++ (void) removePosterForShow:(NSString *)showName
+{
+    NSString *imagePath = [[[self applicationCacheDirectory] stringByAppendingPathComponent:showName] stringByAppendingFormat:@".jpg"];
+    
+    [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+}
 @end

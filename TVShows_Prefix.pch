@@ -62,4 +62,3 @@
 // I'm sure that this is entirely unorthodox, but let's make a custom
 // localization macro to save us from having to type all this crap in.
 #define TSLocalizeString(...) NSLocalizedStringFromTableInBundle(__VA_ARGS__, @"Localizable", [NSBundle bundleForClass:[self class]], nil)
-#define JRLocalizeString(...) NSLocalizedStringFromTableInBundle(__VA_ARGS__, @"JRFeedbackProvider", [NSBundle bundleForClass:[self class]], nil)

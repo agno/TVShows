@@ -16,7 +16,7 @@
 #import "TSUserDefaults.h"
 #import "AppInfoConstants.h"
 #import "ValueTransformers.h"
-
+#import "WebsiteFunctions.h"
 
 @implementation TVShowsPref
 
@@ -64,6 +64,12 @@
             [TSUserDefaults setKey:@"AutomaticallyInstalledLastUpdate" fromBool:NO];
             
             [self displayUpdateWindowForVersion:installedBuild];
+        }
+        
+        // If The Pirate Bay seems blocked, set the magnets option
+        if ([WebsiteFunctions canConnectToURL:@"http://www.google.com"] &&
+            ![WebsiteFunctions canConnectToURL:@"http://thepiratebay.org"]) {
+            [TSUserDefaults setKey:@"PreferMagnets" fromBool:YES];
         }
         
         // Relaunch System Preferences so that we know all the resources have been reloaded

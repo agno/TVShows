@@ -1,7 +1,7 @@
 "1 day" = "1 dia";
 
 /* This string is used between a date and a time, e.g, 1/1/1 at 01:01am. */
-" at " = "a les";
+" at " = " a les ";
 
 "1 hour" = "1 hora";
 
@@ -33,10 +33,10 @@
 
 "About" = "Quant a";
 
-"Add a custom RSS source" = "Afegiu una font RSS personalitzada.";
+"Add a custom RSS source" = "Afegeix una font RSS personalitzada.";
 
 /* This string is on a button. */
-"Add Custom RSS" = "Afegeix una font RSS";
+"Add Custom RSS" = "Afegeix un RSS";
 
 /* This string is on a button. */
 "Add Show" = "Nou programa";
@@ -50,11 +50,13 @@
 
 "Application Update Preferences" = "Preferències d'actualització de l'aplicació.";
 
+"Automatic check-in when an episode is downloaded" = "Check-in automàtic quan es baixa un episodi";
+
 "Automatically check for updates" = "Cerca noves versions automàticament.";
 
 "Automatically install new updates" = "Instal·la noves versions automàticament.";
 
-"Automatically open each file after download" = "Obre automàticament tots els arxius després de la baixada.";
+"Automatically open each file after download" = "Obre automàticament els arxius Torrent després de la baixada.";
 
 "Are you sure you want to uninstall TVShows? This will also remove all preferences and subscriptions." = "Esteu segur que voleu desinstal·lar el TVShows? També s'eliminaran les preferències i les subscripcions.";
 
@@ -107,7 +109,7 @@
 "Continuing" = "En emissió";
 
 /* This refers to "Custom shows" */
-"Custom" = "Personalitzats";
+"Custom" = "RSS";
 
 /* Title of a column in a table. */
 "Episode" = "Episodi";
@@ -135,7 +137,7 @@
 
 "Feed URLs" = "URL del feed";
 
-"Download HD versions by default" = "Descarrega versions HD per defecte";
+"Download HD versions by default" = "Baixa versions HD per defecte";
 
 "General Settings" = "Configuració general";
 
@@ -182,9 +184,13 @@
 /* To select a custom folder not listed. */
 "Other..." = "Un altre...";
 
+"Password:" = "Contrasenya:";
+
 "Please Select a Show:" = "Seleccioneu un programa:";
 
 "Last Checked:" = "Última comprovació:";
+
+"Prioritize Magnet links (select this if The Pirate Bay is blocked)" = "Dóna prioritat als enllaços Magnet (seleccioneu aquesta opció si The Pirate Bay està bloquejat)";
 
 "Preferences" = "Preferències";
 
@@ -201,12 +207,12 @@
 "Rating:" = "Puntuació:";
 
 /* This string is on a small button, it stands for "Reset Warnings" */
-"Reset Warn." = "Reiniciar avisos";
-
-"Save each show in its own folder" = "Desa cada programa en la seva pròpia carpeta";
+"Reset Warn." = "Rein. avisos";
 
 /* This string is on a button. */
 "Save" = "Guarda";
+
+"Save each show in its own folder" = "Desa cada programa en la seva pròpia carpeta";
 
 "Search" = "Cerca";
 
@@ -232,8 +238,6 @@
 
 "No activity has been logged yet. Have you recently installed TVShows?" = "Encara no s'ha registrat cap activitat. Heu instal·lat el TVShows recentment?";
 
-"Password:" = "Contrasenya:";
-
 "Please choose one of the following actions:" = "Escolliu una de les següents accions:";
 
 "Send Growl notifications when…" = "Envia notificacions de Growl quan…";
@@ -250,6 +254,8 @@
 /* This string is on a button. */
 "Subscribe" = "Subscriure's";
 
+"Subscribed" = "Subscrit";
+
 "Subscriptions" = "Subscripcions";
 
 /* This string is split, the full version is "Start subscription with: Next aired episode" or "Start subscription with: This episode: My Show S01E01" */
@@ -259,7 +265,12 @@
 
 "Sync shows between Miso and TVShows" = "Sincronitza programes entre Miso i el TVShows";
 
+"The check-in will be made when the download starts. This is not advisable, but it could allow you to sync episode downloads across several computers." = "El check-in es farà quan comenci la baixada. No és recomanable, però et permet sincronitzar baixades entre diversos equips.";
+
 "The file may not be released yet. Please try again later or check your internet connection. Alternatively you can download the SD version." = "Potser encara no s'ha publicat l'arxiu. Torneu-ho a provar més tard o reviseu la connexió a internet. O si no, podeu baixar la versió SD.";
+
+/* Disclaimer for a destructive action */
+"This action cannot be undone." = "Aquesta acció no es pot desfer.";
 
 /* This string is split, the full version is "Start subscription with: This episode: My Show S01E01" */
 "This episode:" = "Aquest episodi:";
@@ -279,7 +290,7 @@
 "Unable to find an HD torrent for %@" = "No es pot trobar un torrent HD per %@";
 
 /* Title of an error message or Growl notification. */
-"Unable to Update the Show List" = "No es pot descarregar la llista de programes.";
+"Unable to Update the Show List" = "No es pot actualitzar la llista de programes.";
 
 /* This string is on a button. */
 "Unsubscribe" = "Elimina";
@@ -318,7 +329,16 @@
 
 "Visit Miso" = "Visita Miso";
 
+"Warnings restored" = "Avisos reiniciats";
+
 "Website" = "Lloc web";
+
+"Why try it?" = "Per què intentar-ho?";
 
 "Yes" = "Sí";
 
+"Your preferences about warnings were restored. If needed, next time TVShows will ask for your confirmation to complete a sensitive operation." = "Les vostres preferències sobre avisos han estat reiniciades. Si és necessari, la propera vegada el TVShows us demanarà confirmació per completar una operació delicada.";
+
+"Your subscriptions will be backed up in the cloud and they can be synced between different computers." = "Es farà una còpia de les vostres subscripcions en el núvol i podreu sincronitzar-les entre diferents equips.";
+
+"Your TVShows subscriptions will be automatically synced with your followed shows on Miso. Only airings shows known by TVShows will be synced." = "Les vostres subscripcions del TVShows es sincronitzaran automàticament amb les sèries que seguiu a Miso. Només es sincronitzaran les sèries en emissió disponibles al TVShows.";

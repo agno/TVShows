@@ -461,7 +461,7 @@
             [TSUserDefaults setKey:@"checkDelay" fromFloat:5];
             break;
         default:
-            // 15 minutes
+            // 1 hour
             seconds = 1*60;
     }
     
@@ -531,7 +531,7 @@
     }
     
     // And start the thread
-    checkerThread = [[NSThread alloc] initWithTarget:self selector:@selector(runLoop) object:nil];
+    checkerThread = [[NSThread alloc] initWithTarget:self selector:@selector(runLoopAfterAwake) object:nil];
     [checkerThread start];
 }
 
@@ -580,6 +580,12 @@
         // We can now safely download the torrent show list :)
         [controller downloadTorrentShowList];
     }
+    
+    // Avoid a memory leak by breaking circular references between these classes 
+    [controller setSBArrayController:nil];
+    [controller setPTArrayController:nil];
+    [controller setSubscriptionsDelegate:nil];
+    [controller setPresetsDelegate:nil];
     
     [SBArrayController release];
     [PTArrayController release];
@@ -705,10 +711,13 @@
                 return;
             }
             
-            // If it has been two full days since the episode was aired attempt the download of any version
+            // If it has been 18 hours since the episode was aired attempt the download of any version
             // Also check that we have checked for episodes at least once in the last day
-            if ([pubDate timeIntervalSinceDate:[NSDate date]] > 2*24*60*60 &&
-                [[NSDate date] timeIntervalSinceDate:lastChecked] < 25*60*60) {
+            float anyVersionInterval = [TSUserDefaults getFloatFromKey:@"AnyVersionInterval" withDefault:18];
+            
+            if ([[NSDate date] timeIntervalSinceDate:pubDate] > anyVersionInterval*60*60 &&
+                ([[NSDate date] timeIntervalSinceDate:lastChecked] < 5*60*60 ||
+                 [[NSDate date] timeIntervalSinceDate:lastChecked] < (anyVersionInterval-5)*60*60)) {
                 chooseAnyVersion = YES;
             } else {
                 chooseAnyVersion = NO;
@@ -826,15 +835,15 @@
 - (void) openTab:(NSInteger)tabNumber
 {
     NSString *command = [NSString stringWithFormat:
-    @"tell application \"System Preferences\"                               \n"
-    @"   activate                                                           \n"
-    @"   set the current pane to pane id \"com.victorpimentel.TVShows2\"    \n"
-    @"end tell                                                              \n"
-    @"tell application \"System Events\"                                    \n"
-    @"    tell process \"System Preferences\"                               \n"
-    @"        click radio button %d of tab group 1 of window \"TVShows\"    \n"
-    @"    end tell                                                          \n"
-    @"end tell                                                    ", tabNumber];
+                         @"tell application \"System Preferences\"                               \n"
+                         @"   activate                                                           \n"
+                         @"   set the current pane to pane id \"com.victorpimentel.TVShows2\"    \n"
+                         @"end tell                                                              \n"
+                         @"tell application \"System Events\"                                    \n"
+                         @"    tell process \"System Preferences\"                               \n"
+                         @"        click radio button %d of tab group 1 of window \"TVShows\"    \n"
+                         @"    end tell                                                          \n"
+                         @"end tell                                                    ", tabNumber];
     
     NSTask *task = [[[NSTask alloc] init] autorelease];
     [task setLaunchPath:@"/usr/bin/osascript"];

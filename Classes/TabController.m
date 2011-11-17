@@ -16,7 +16,6 @@
 
 #import "AppInfoConstants.h"
 #import "TabController.h"
-#import "JRFeedbackController.h"
 
 #import "TSParseXMLFeeds.h"
 #import "TSUserDefaults.h"
@@ -237,7 +236,7 @@
 
 - (IBAction) showFeedbackWindow:(id)sender
 {
-    [JRFeedbackController showFeedback];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString: TVShowsSupport]];
 }
 
 #pragma mark -
@@ -606,6 +605,18 @@
         [showPoster setImage:poster];
         [showPoster display];
     }
+}
+
+- (IBAction) refreshPoster:(id)sender
+{
+    // Remove poster from the cache to force the download
+    [TheTVDB removePosterForShow:[selectedShow valueForKey:@"name"]];
+    
+    NSArray *arguments = [NSArray arrayWithObjects:[selectedShow valueForKey:@"name"],
+                          [NSString stringWithFormat:@"%@", [selectedShow valueForKey:@"tvdbID"]], nil];
+    
+    // So download it
+    [self performSelectorInBackground:@selector(setPosterForShow:) withObject:arguments];
 }
 
 - (IBAction) closeShowInfoWindow:(id)sender
