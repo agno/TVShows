@@ -1,7 +1,7 @@
 "1 day" = "1 dia";
 
 /* This string is used between a date and a time, e.g, 1/1/1 at 01:01am. */
-" at " = "as";
+" at " = " às ";
 
 "1 hour" = "1 hora";
 
@@ -49,6 +49,8 @@
 "An update for TVShows has been installed automatically. To disable this feature go to the Preferences tab and uncheck 'Automatically install new updates.'" = "Uma atualização para o TVShows foi instalada automaticamente. Para desativar esse recurso, vá até a aba Preferências e desmarque a opção \"Automaticamente instalar novas atualizações\".";
 
 "Application Update Preferences" = "Preferências de Atualização do Aplicativo";
+
+"Automatic check-in when an episode is downloaded" = "Fazer check-in automático quando um episódio é transferido";
 
 "Automatically check for updates" = "Automaticamente verificar por atualizações";
 
@@ -177,14 +179,18 @@
 /* This string is on a very narrow button, max 3 charaters (use a dot after that like "Act." in Spanish instead of "Activado") */
 "On" = "I";
 
-"Only download items matching the following rules:" = "Somente baixar itens de acordo com as seguintes regras:";
+"Only download items matching the following rules:" = "Somente transferir itens de acordo com as seguintes regras:";
 
 /* To select a custom folder not listed. */
 "Other..." = "Outro…";
 
+"Password:" = "Senha:";
+
 "Please Select a Show:" = "Selecione uma Série:";
 
 "Last Checked:" = "Última Verificação:";
+
+"Prioritize Magnet links (select this if The Pirate Bay is blocked)" = "Priorizar links Magnet (selecione isto se The Pirate Bay está bloqueado)";
 
 "Preferences" = "Preferências";
 
@@ -200,10 +206,13 @@
 
 "Rating:" = "Avaliação:";
 
-"Save each show in its own folder" = "Salvar cada série em sua própria pasta";
+/* This string is on a small button, it stands for "Reset Warnings" */
+"Reset Warn." = "Repor Avisos";
 
 /* This string is on a button. */
 "Save" = "Salvar";
+
+"Save each show in its own folder" = "Salvar cada série em sua própria pasta";
 
 "Search" = "Pesquisar";
 
@@ -229,13 +238,11 @@
 
 "No activity has been logged yet. Have you recently installed TVShows?" = "Nenhuma atividade foi registrada ainda. Você instalou o TVShows recentemente?";
 
-"Password:" = "Senha:";
-
 "Please choose one of the following actions:" = "Escolha uma das seguintes ações:";
 
 "Send Growl notifications when…" = "Enviar notificações Growl quando…";
 
-"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country." = "Nenhum vídeo é realmente baixado pelo TVShows, somente arquivos torrents, que por sua vez irão precisar de outros programas para serem usados. É de sua responsabilidade, usuário, decidir se é legal ou não usar este tipo de arquivo que foi feita a transferência por este aplicativo de acordo com as leis de copyright do seu país.";
+"No actual videos are downloaded by TVShows, only torrents which will require other programs to use. It is up to you, the user, to decide the legality of using any of the files downloaded by this application, in accordance with applicable copyright laws of you country." = "Nenhum vídeo é realmente transferido pelo TVShows, somente arquivos torrents, que por sua vez irão precisar de outros programas para serem usados. É de sua responsabilidade, usuário, decidir se é legal ou não usar este tipo de arquivo que foi feita a transferência por este aplicativo de acordo com as leis de copyright do seu país.";
 
 "Status" = "Estado";
 
@@ -247,6 +254,8 @@
 /* This string is on a button. */
 "Subscribe" = "Inscrever";
 
+"Subscribed" = "Inscrito";
+
 "Subscriptions" = "Inscrições";
 
 /* This string is split, the full version is "Start subscription with: Next aired episode" or "Start subscription with: This episode: My Show S01E01" */
@@ -255,6 +264,10 @@
 "Sync" = "Sincronização";
 
 "Sync shows between Miso and TVShows" = "Sincronizar séries entre Miso e TVShows";
+
+"The check-in will be made when the download starts. This is not advisable, but it could allow you to sync episode downloads across several computers." = "O check-in será feito quando a transferência iniciar-se. Isto não é aconselhável, mas permite a sincronização de transferência de episódios entre vários computadores.";
+
+"The file may not be released yet. Please try again later or check your internet connection. Alternatively you can download the SD version." = "O arquivo pode ainda não ter sido publicado. Por favor, tente novamente mais tarde ou verifique a sua conexão com a internet. Como alternativa, você pode transferir a versão SD.";
 
 /* Disclaimer for a destructive action */
 "This action cannot be undone." = "Esta ação não pode ser desfeita.";
@@ -271,7 +284,7 @@
 "TVShows Update Downloading" = "Baixando Atualização do TVShows";
 
 /* The %@ will be replaced by the name of the torrent file. */
-"Unable to download %@" = "Não foi possível fazer download de %@";
+"Unable to download %@" = "Não foi possível fazer a transferência de %@";
 
 /* The %@ will be replaced by the name of the torrent file. */
 "Unable to find an HD torrent for %@" = "Não foi possível encontrar um torrent em HD de %@";
@@ -280,7 +293,7 @@
 "Unable to Update the Show List" = "Não foi Possível Atualizar a Lista de Séries";
 
 /* This string is on a button. */
-"Unsubscribe" = "Anular Inscrição";
+"Unsubscribe" = "Remover";
 
 /* Title of an error message or Growl notification. */
 "Update Installed Automatically" = "Atualização Instalada Automaticamente";
@@ -324,3 +337,8 @@
 
 "Yes" = "Sim";
 
+"Your preferences about warnings were restored. If needed, next time TVShows will ask for your confirmation to complete a sensitive operation." = "As suas preferências sobre avisos foram restauradas. Se necessário, na próxima vez TVShows irá pedir-lhe sua confirmação para completar uma operação delicada.";
+
+"Your subscriptions will be backed up in the cloud and they can be synced between different computers." = "As suas inscricões serão armazenadas na nuvem, podendo ser sincronizadas entre vários computadores.";
+
+"Your TVShows subscriptions will be automatically synced with your followed shows on Miso. Only airings shows known by TVShows will be synced." = "As suas inscrições serão sincronizadas automaticamente com as suas séries no Miso. Apenas as séries em exibição conhecidas pelo TVShows serão sincronizadas.";
