@@ -57,6 +57,7 @@
     IBOutlet NSButton *addRSSButton;
     IBOutlet NSTextField *lastCheckedDate;
     IBOutlet NSTextField *endedRibbonText;
+    IBOutlet NSImageView *noSubscriptionsArrow;
     IBOutlet NSTableColumn *colHD;
     IBOutlet NSTableColumn *colName;
     IBOutlet NSTableColumn *colSeason;
@@ -86,6 +87,7 @@
 @property (retain) NSManagedObject *selectedShow;
 
 - (void) awakeFromNib;
+- (void) showArrowIfNeeded:(id)sender;
 - (IBAction) filterSubscriptions:(id)sender;
 - (void) resetFilters;
 - (void) refreshShowList:(NSNotification *)inNotification;

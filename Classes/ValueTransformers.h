@@ -34,3 +34,13 @@
 - (id) transformedValue:(id)value;
 
 @end
+
+@interface EmptySubscriptionsValueTransformer : NSValueTransformer {
+    
+}
+
++ (Class) transformedValueClass;
++ (BOOL) allowsReverseTransformation;
+- (id) transformedValue:(id)value;
+
+@end

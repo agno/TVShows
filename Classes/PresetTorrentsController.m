@@ -529,7 +529,7 @@
     // Now we can trigger the time-expensive task
     NSArray *results = [NSArray arrayWithObjects:showFeeds,
                         [TSParseXMLFeeds parseEpisodesFromFeeds:[showFeeds componentsSeparatedByString:@"#"]
-                                                       maxItems:50], nil];
+                                                beingCustomShow:NO], nil];
     
     if ([results count] < 2) {
         LogError(@"Could not download/parse feed(s) <%@>", showFeeds);

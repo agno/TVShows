@@ -145,6 +145,16 @@
     
     // Add color to the donate button
     [self performSelector:@selector(colorDonateButton)];
+    
+    // Draw the arrow if the user does not have any shows
+    [self performSelector:@selector(showArrowIfNeeded:) withObject:nil afterDelay:1];
+}
+
+- (void) showArrowIfNeeded:(id)sender
+{
+    if ([[SBArrayController content] count] == 0) {
+        [noSubscriptionsArrow setHidden:NO];
+    }
 }
 
 - (IBAction) filterSubscriptions:(id)sender
@@ -451,7 +461,7 @@
     // Now we can trigger the time-expensive task
     NSArray *results = [NSArray arrayWithObjects:showFeeds,
                         [TSParseXMLFeeds parseEpisodesFromFeeds:[showFeeds componentsSeparatedByString:@"#"]
-                                                       maxItems:50], nil];
+                                                beingCustomShow:([selectedShow valueForKey:@"filters"] != nil)], nil];
     
     if ([results count] < 2) {
         LogError(@"Could not download/parse feed(s) <%@>", showFeeds);
