@@ -892,7 +892,7 @@
 
 - (IBAction) quitHelper:(id)sender
 {
-    [[[PreferencesController new] autorelease] enabledControlDidChange:NO];
+    [[[[PreferencesController alloc] init] autorelease] enabledControlDidChange:NO];
     [NSApp terminate];
 }
 
@@ -928,6 +928,19 @@
                                        isSticky:YES
                                    clickContext:nil];
     }
+}
+
+- (void)updater:(SUUpdater *)updater willInstallUpdate:(SUAppcastItem *)update
+{
+    // Relaunch the TVShows Helper :)
+    NSString *daemonPath = [[NSBundle bundleWithIdentifier: TVShowsAppDomain] pathForResource:@"relaunch" ofType:nil];
+    NSString *launchAgentPath = [[[[PreferencesController alloc] init] autorelease] launchAgentPath];
+    
+    [NSTask launchedTaskWithLaunchPath:daemonPath
+                             arguments:[NSArray arrayWithObjects:launchAgentPath, @"",
+                                        [NSString stringWithFormat:@"%d", [[NSProcessInfo processInfo] processIdentifier]], nil]];
+    
+    LogInfo(@"Relaunching TVShows Helper after the successful update.");
 }
 
 - (void) dealloc

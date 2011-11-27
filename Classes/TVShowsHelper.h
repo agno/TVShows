@@ -68,5 +68,6 @@
 #pragma mark -
 #pragma mark Sparkle Delegate Methods
 - (void) updater:(SUUpdater *)updater didFindValidUpdate:(SUAppcastItem *)update;
+- (void) updater:(SUUpdater *)updater willInstallUpdate:(SUAppcastItem *)update;
 
 @end

@@ -14,10 +14,25 @@
 
 #import <Cocoa/Cocoa.h>
 #import "TVShows_Prefix.pch"
+#import "AppInfoConstants.h"
 
 // Thanks to Matt Patenaude and his blog post on how to relaunch an application.
-// Slightly modified to work with a Preference Pane.
+// Slightly modified to work with a Preference Pane and a Launch Helper.
 // http://iloveco.de/relaunching-your-application/
+
+void relaunchHelper(NSString *launchAgentPath)
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    NSTask *aTask = [[NSTask alloc] init];
+    [aTask setLaunchPath:@"/bin/launchctl"];
+    [aTask setArguments:[NSArray arrayWithObjects:@"load",@"-w",launchAgentPath,nil]];
+    [aTask launch];
+    [aTask waitUntilExit];
+    [aTask release];
+    
+    [pool drain];
+}
 
 int main(int argc, char *argv[])
 {
@@ -30,8 +45,15 @@ int main(int argc, char *argv[])
     
     NSString *appPath = [NSString stringWithCString:argv[1] encoding:NSUTF8StringEncoding];
     NSString *prefPath = [NSString stringWithCString:argv[2] encoding:NSUTF8StringEncoding];
-    BOOL success = [[NSWorkspace sharedWorkspace] openFile:[prefPath stringByExpandingTildeInPath]
-                                           withApplication:[appPath stringByExpandingTildeInPath]];
+    BOOL success = NO;
+    
+    if (prefPath.length == 0) {
+        relaunchHelper(appPath);
+        success = YES;
+    } else {
+        success = [[NSWorkspace sharedWorkspace] openFile:[prefPath stringByExpandingTildeInPath]
+                                          withApplication:[appPath stringByExpandingTildeInPath]];
+    }
     
     if (!success)
         NSLog(@"Could not relaunch application at %@", appPath);
