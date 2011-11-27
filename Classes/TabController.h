@@ -16,6 +16,7 @@
 #import <Cocoa/Cocoa.h>
 #import "SubscriptionsDelegate.h"
 #import "LRFilterBar.h"
+#import <Sparkle/SUUpdater.h>
 
 @interface TabController : NSPreferencePane
 {
@@ -126,5 +127,7 @@
 - (void) sortSubscriptionList;
 - (IBAction) unsubscribeFromShow:(id)sender;
 - (BOOL) shouldUnsubscribeFromShow;
+
+- (NSArray *)feedParametersForUpdater:(SUUpdater *)updater sendingSystemProfile:(BOOL)sendingProfile;
 
 @end

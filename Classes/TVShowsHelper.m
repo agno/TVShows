@@ -949,6 +949,73 @@
     LogInfo(@"Relaunching TVShows Helper after the successful update.");
 }
 
+- (NSArray *)feedParametersForUpdater:(SUUpdater *)updater sendingSystemProfile:(BOOL)sendingProfile
+{
+    
+    NSDictionary *iconDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                              @"menubar", @"key",
+                              ([TSUserDefaults getBoolFromKey:@"ShowMenuBarIcon" withDefault:YES] ? @"Yes" : @"No" ), @"value",
+                              @"Show the menubar icon", @"displayKey",
+                              ([TSUserDefaults getBoolFromKey:@"ShowMenuBarIcon" withDefault:YES] ? @"Yes" : @"No" ), @"displayValue",
+                              nil];
+    
+    NSDictionary *hdDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"hd", @"key",
+                            ([TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:NO] ? @"Yes" : @"No" ), @"value",
+                            @"Select HD by default", @"displayKey",
+                            ([TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:NO] ? @"Yes" : @"No" ), @"displayValue",
+                            nil];
+    
+    NSDictionary *additionalDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    @"additional", @"key",
+                                    ([TSUserDefaults getBoolFromKey:@"UseAdditionalSourcesHD" withDefault:YES] ? @"Yes" : @"No" ), @"value",
+                                    @"Use additional sources for HD", @"displayKey",
+                                    ([TSUserDefaults getBoolFromKey:@"UseAdditionalSourcesHD" withDefault:YES] ? @"Yes" : @"No" ), @"displayValue",
+                                    nil];
+    
+    NSDictionary *magnetsDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 @"magnets", @"key",
+                                 ([TSUserDefaults getBoolFromKey:@"PreferMagnets" withDefault:NO] ? @"Yes" : @"No" ), @"value",
+                                 @"Use magnets", @"displayKey",
+                                 ([TSUserDefaults getBoolFromKey:@"PreferMagnets" withDefault:NO] ? @"Yes" : @"No" ), @"displayValue",
+                                 nil];
+    
+    NSDictionary *misoDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                              @"miso", @"key",
+                              ([TSUserDefaults getBoolFromKey:@"MisoEnabled" withDefault:NO] ? @"Yes" : @"No" ), @"value",
+                              @"Enable Miso", @"displayKey",
+                              ([TSUserDefaults getBoolFromKey:@"MisoEnabled" withDefault:NO] ? @"Yes" : @"No" ), @"displayValue",
+                              nil];
+    
+    NSDictionary *delayDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                               @"delay", @"key",
+                               [NSString stringWithFormat:@"%d", (int) [TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:1]], @"value",
+                               @"Check interval for episodes", @"displayKey",
+                               @"2 hours", @"displayValue",
+                               nil];
+    
+    // Fetch subscriptions
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Subscription"
+                                              inManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
+    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+    [request setEntity:entity];
+    
+    NSError *error = nil;
+    NSArray *subscriptions = [[subscriptionsDelegate managedObjectContext] executeFetchRequest:request error:&error];
+    
+    int subscriptionsCount = [subscriptions count];
+    
+    NSDictionary *subsDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                              @"subscount", @"key",
+                              [NSString stringWithFormat:@"%d", subscriptionsCount], @"value",
+                              @"Number of subscriptions", @"displayKey",
+                              [NSString stringWithFormat:@"%d subscriptions", subscriptionsCount], @"displayValue",
+                              nil];
+    
+    NSArray *feedParams = [NSArray arrayWithObjects:iconDict, hdDict, additionalDict, magnetsDict, misoDict, delayDict, subsDict, nil];
+    return feedParams;
+}
+
 - (void) dealloc
 {
     [[NSDistributedNotificationCenter defaultCenter] removeObserver:self];
