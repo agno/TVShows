@@ -136,11 +136,15 @@
         if (!fileContents || ![self dataIsValidTorrent:fileContents]) {
             LogError(@"Unable to download file: %@ <%@>", episodeName, url);
         } else {
+            
+            // Write the data into a .torrent file and see if the file could be created
+            if (![fileContents writeToFile:saveLocation atomically:YES]) {
+                LogError(@"Unable to store .torrent file: %@ <%@>", episodeName, saveLocation);
+                return NO;
+            }
+            
             // The file downloaded successfully, continuing...
             LogInfo(@"Episode downloaded successfully: %@ <%@>", episodeName, url);
-            
-            // Write the data into a .torrent file
-            [fileContents writeToFile:saveLocation atomically:YES];
             
             // Bounce the downloads stack!
             [[NSDistributedNotificationCenter defaultCenter]
@@ -250,6 +254,18 @@
                       stringByReplacingOccurrencesOfString:@":" withString:@" "]]];
     
     return saveLocation;
+}
+
++ (NSString *) getTorrentFileFromMagnetLink:(NSString *)aMagnetLink
+{
+    NSString *magnetHash = [TSRegexFun parseHashFromMagnetLink:aMagnetLink];
+    
+    return [TSTorrentFunctions getTorrentFileFromMagnetHash:magnetHash];
+}
+
++ (NSString *) getTorrentFileFromMagnetHash:(NSString *)aMagnetHash
+{
+    return [NSString stringWithFormat:@"https://torcache.net/torrent/%@.torrent", aMagnetHash];
 }
 
 @end

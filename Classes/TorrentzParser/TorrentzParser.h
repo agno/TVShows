@@ -21,5 +21,6 @@
 + (NSString *) getAlternateTorrentForEpisode:(NSString *)anEpisode;
 + (NSArray *) getAllTorrentsFromTorrenzURL:(NSString *)aTorrentzURL;
 + (NSString *) getTorrentFromTracker:(NSString*)theBaseURL withLinkMatcher:(NSString*)theLinkMatcher appending:(NSString*)aString;
++ (NSString *) getHashFromTorrentzURL:(NSString*)theURL;
 
 @end

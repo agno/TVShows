@@ -226,8 +226,7 @@
     
     // Now we can trigger the time-expensive task
     NSArray *results = [NSArray arrayWithObjects:feeds,
-                        [TSParseXMLFeeds parseEpisodesFromFeeds:feeds
-                                                       maxItems:100], nil];
+                        [TSParseXMLFeeds parseEpisodesFromFeeds:feeds beingCustomShow:YES], nil];
     
     [self performSelectorOnMainThread:@selector(updateEpisodes:) withObject:results waitUntilDone:NO];
     

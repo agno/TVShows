@@ -16,6 +16,7 @@
 #import <Cocoa/Cocoa.h>
 #import "SubscriptionsDelegate.h"
 #import "LRFilterBar.h"
+#import <Sparkle/SUUpdater.h>
 
 @interface TabController : NSPreferencePane
 {
@@ -57,6 +58,7 @@
     IBOutlet NSButton *addRSSButton;
     IBOutlet NSTextField *lastCheckedDate;
     IBOutlet NSTextField *endedRibbonText;
+    IBOutlet NSImageView *noSubscriptionsArrow;
     IBOutlet NSTableColumn *colHD;
     IBOutlet NSTableColumn *colName;
     IBOutlet NSTableColumn *colSeason;
@@ -86,6 +88,7 @@
 @property (retain) NSManagedObject *selectedShow;
 
 - (void) awakeFromNib;
+- (void) showArrowIfNeeded:(id)sender;
 - (IBAction) filterSubscriptions:(id)sender;
 - (void) resetFilters;
 - (void) refreshShowList:(NSNotification *)inNotification;
@@ -124,5 +127,7 @@
 - (void) sortSubscriptionList;
 - (IBAction) unsubscribeFromShow:(id)sender;
 - (BOOL) shouldUnsubscribeFromShow;
+
+- (NSArray *)feedParametersForUpdater:(SUUpdater *)updater sendingSystemProfile:(BOOL)sendingProfile;
 
 @end

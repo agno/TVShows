@@ -664,9 +664,11 @@
     LogDebug(@"Checking episodes for %@.", [show valueForKey:@"name"]);
     
     NSDate *pubDate, *lastDownloaded, *lastChecked;
+    BOOL isCustomRSS = ([show valueForKey:@"filters"] != nil);
+    BOOL chooseAnyVersion = NO;
     NSArray *episodes = [TSParseXMLFeeds parseEpisodesFromFeeds:
                          [[show valueForKey:@"url"] componentsSeparatedByString:@"#"]
-                                                       maxItems:50];
+                                                beingCustomShow:isCustomRSS];
     
     if ([episodes count] == 0) {
         LogDebug(@"No episodes for %@ <%@>", [show valueForKey:@"name"], [show valueForKey:@"url"]);
@@ -674,14 +676,12 @@
         return;
     }
     
-    BOOL chooseAnyVersion = NO;
-    
     // Get the dates before checking anything, in case we have to download more than one episode
     lastDownloaded = [show valueForKey:@"lastDownloaded"];
     lastChecked = [TSUserDefaults getDateFromKey:@"lastCheckedForEpisodes"];
     
     // Filter episodes according to user filters
-    if ([show valueForKey:@"filters"] != nil) {
+    if (isCustomRSS) {
         episodes = [episodes filteredArrayUsingPredicate:[show valueForKey:@"filters"]];
     }
     
@@ -691,9 +691,9 @@
     for (NSArray *episode in episodes) {
         pubDate = [episode valueForKey:@"pubDate"];
         
-        // If the date we lastDownloaded episodes is before this torrent
-        // was published then we should probably download the episode.
-        if ([lastDownloaded compare:pubDate] == NSOrderedAscending) {
+        // If the date this torrent was published is newer than the last downloaded episode
+        // then we should probably download the episode.
+        if ([pubDate compare:lastDownloaded] == NSOrderedDescending) {
             
             // HACK HACK HACK: To avoid download an episode twice
             // Check if the sortname contains this episode name
@@ -706,7 +706,8 @@
             // Detect if the last downloaded episode was aired after this one (so do not download it!)
             // Use a cache version (lastEpisodename) because we could have download it several episodes
             // in this session, for example if the show aired two episodes in the same day
-            if (![TSRegexFun wasThisEpisode:episodeName airedAfterThisOne:lastEpisodeName]) {
+            // Do not do this for custom RSS
+            if (![TSRegexFun wasThisEpisode:episodeName airedAfterThisOne:lastEpisodeName] && !isCustomRSS) {
                 [pool drain];
                 return;
             }
@@ -749,7 +750,12 @@
                 
                 // Update the last downloaded episode name only if it was aired after the previous stored one
                 if (downloaded) {
-                    if ([TSRegexFun wasThisEpisode:episodeName
+                    if (isCustomRSS && [pubDate compare:[show valueForKey:@"lastDownloaded"]] == NSOrderedDescending) {
+                        [show setValue:pubDate forKey:@"lastDownloaded"];
+                        [[subscriptionsDelegate managedObjectContext] processPendingChanges];
+                        [subscriptionsDelegate saveAction];
+                        changed = YES;
+                    } else if ([TSRegexFun wasThisEpisode:episodeName
                                  airedAfterThisOne:[show valueForKey:@"sortName"]]) {
                         [show setValue:pubDate forKey:@"lastDownloaded"];
                         [show setValue:episodeName forKey:@"sortName"];
@@ -892,8 +898,8 @@
 
 - (IBAction) quitHelper:(id)sender
 {
-    [[[PreferencesController new] autorelease] enabledControlDidChange:NO];
-    [NSApp terminate];
+    [[[[PreferencesController alloc] init] autorelease] enabledControlDidChange:NO];
+    [NSApp terminate:sender];
 }
 
 #pragma mark -
@@ -928,6 +934,86 @@
                                        isSticky:YES
                                    clickContext:nil];
     }
+}
+
+- (void)updater:(SUUpdater *)updater willInstallUpdate:(SUAppcastItem *)update
+{
+    // Relaunch the TVShows Helper :)
+    NSString *daemonPath = [[NSBundle bundleWithIdentifier: TVShowsAppDomain] pathForResource:@"relaunch" ofType:nil];
+    NSString *launchAgentPath = [[[[PreferencesController alloc] init] autorelease] launchAgentPath];
+    
+    [NSTask launchedTaskWithLaunchPath:daemonPath
+                             arguments:[NSArray arrayWithObjects:launchAgentPath, @"",
+                                        [NSString stringWithFormat:@"%d", [[NSProcessInfo processInfo] processIdentifier]], nil]];
+    
+    LogInfo(@"Relaunching TVShows Helper after the successful update.");
+}
+
+- (NSArray *)feedParametersForUpdater:(SUUpdater *)updater sendingSystemProfile:(BOOL)sendingProfile
+{
+    
+    NSDictionary *iconDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                              @"menubar", @"key",
+                              ([TSUserDefaults getBoolFromKey:@"ShowMenuBarIcon" withDefault:YES] ? @"Yes" : @"No" ), @"value",
+                              @"Show the menubar icon", @"displayKey",
+                              ([TSUserDefaults getBoolFromKey:@"ShowMenuBarIcon" withDefault:YES] ? @"Yes" : @"No" ), @"displayValue",
+                              nil];
+    
+    NSDictionary *hdDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"hd", @"key",
+                            ([TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:NO] ? @"Yes" : @"No" ), @"value",
+                            @"Select HD by default", @"displayKey",
+                            ([TSUserDefaults getBoolFromKey:@"AutoSelectHDVersion" withDefault:NO] ? @"Yes" : @"No" ), @"displayValue",
+                            nil];
+    
+    NSDictionary *additionalDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    @"additional", @"key",
+                                    ([TSUserDefaults getBoolFromKey:@"UseAdditionalSourcesHD" withDefault:YES] ? @"Yes" : @"No" ), @"value",
+                                    @"Use additional sources for HD", @"displayKey",
+                                    ([TSUserDefaults getBoolFromKey:@"UseAdditionalSourcesHD" withDefault:YES] ? @"Yes" : @"No" ), @"displayValue",
+                                    nil];
+    
+    NSDictionary *magnetsDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 @"magnets", @"key",
+                                 ([TSUserDefaults getBoolFromKey:@"PreferMagnets" withDefault:NO] ? @"Yes" : @"No" ), @"value",
+                                 @"Use magnets", @"displayKey",
+                                 ([TSUserDefaults getBoolFromKey:@"PreferMagnets" withDefault:NO] ? @"Yes" : @"No" ), @"displayValue",
+                                 nil];
+    
+    NSDictionary *misoDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                              @"miso", @"key",
+                              ([TSUserDefaults getBoolFromKey:@"MisoEnabled" withDefault:NO] ? @"Yes" : @"No" ), @"value",
+                              @"Enable Miso", @"displayKey",
+                              ([TSUserDefaults getBoolFromKey:@"MisoEnabled" withDefault:NO] ? @"Yes" : @"No" ), @"displayValue",
+                              nil];
+    
+    NSDictionary *delayDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                               @"delay", @"key",
+                               [NSString stringWithFormat:@"%d", (int) [TSUserDefaults getFloatFromKey:@"checkDelay" withDefault:1]], @"value",
+                               @"Check interval for episodes", @"displayKey",
+                               @"2 hours", @"displayValue",
+                               nil];
+    
+    // Fetch subscriptions
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Subscription"
+                                              inManagedObjectContext:[subscriptionsDelegate managedObjectContext]];
+    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+    [request setEntity:entity];
+    
+    NSError *error = nil;
+    NSArray *subscriptions = [[subscriptionsDelegate managedObjectContext] executeFetchRequest:request error:&error];
+    
+    int subscriptionsCount = [subscriptions count];
+    
+    NSDictionary *subsDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                              @"subscount", @"key",
+                              [NSString stringWithFormat:@"%d", subscriptionsCount], @"value",
+                              @"Number of subscriptions", @"displayKey",
+                              [NSString stringWithFormat:@"%d subscriptions", subscriptionsCount], @"displayValue",
+                              nil];
+    
+    NSArray *feedParams = [NSArray arrayWithObjects:iconDict, hdDict, additionalDict, magnetsDict, misoDict, delayDict, subsDict, nil];
+    return feedParams;
 }
 
 - (void) dealloc

@@ -29,7 +29,7 @@
                                                     @"Episode ([0-9]+).([0-9]+)", // Episode 1.1 (BitSnoop)
                                                     @"([0-9]{4})(?:[[:space:]]|[.-])([0-9]{2})(?:[[:space:]]|[.-])([0-9]{2})", // YYYY MM DD
                                                     @"([0-9]{2})(?:[[:space:]]|[.-])([0-9]{2})(?:[[:space:]]|[.-])([0-9]{4})", // MM DD YYYY
-                                                    @"[^xXhH\\(0-9]([0-9]?[0-9])([0-9][0-9])[^Pp]", nil]; // 101
+                                                    @"[^a-zA-Z0-9\\(]([0-9]?[0-9])([0-9][0-9])[^a-zA-Z0-9]", nil]; // 101
     
     // Run through each of the regex strings we've listed above.
     for (NSString *regex in parseTypes) {
@@ -37,6 +37,12 @@
         
         // If there's a match then return it, otherwise do nothing.
         if([matchedRegex count] != 0) {
+            // Avoid matches with 2011, 2012, etc
+            if ([[[matchedRegex objectAtIndex:0] objectAtIndex:0] isEqualToString:@"20"] &&
+                [[matchedRegex objectAtIndex:0] objectAtIndex:2] == nil &&
+                [title isMatchedByRegex:@"201[0-9]"]) {
+                return nil;
+            }
             return [matchedRegex objectAtIndex:0];
         }
     }
@@ -51,7 +57,7 @@
 
 + (BOOL) isEpisodeHD:(NSString *)title
 {
-    return [title isMatchedByRegex:@"(720|1080|HR|x264|mkv)"];
+    return [title isMatchedByRegex:@"(720|1080)"];
 }
 
 + (NSString *) parseTitleFromString:(NSString *)title withIdentifier:(NSArray* )identifier withType:(NSString *)type
@@ -106,6 +112,15 @@
     return showTitle;
 }
 
++ (NSString *) parseHashFromMagnetLink:(NSString *)aMagnetLink
+{
+    NSString *magnetHash = [aMagnetLink stringByReplacingOccurrencesOfRegex:@"^.*btih:" withString:@""];
+    
+    magnetHash = [magnetHash stringByReplacingOccurrencesOfRegex:@"[^a-fA-F0-9].*$" withString:@""];
+    
+    return magnetHash;
+}
+
 + (NSString *) replaceHTMLEntitiesInString:(NSString *)string
 {
     string = [string stringByReplacingOccurrencesOfRegex:@"&amp;" withString:@"&"];
@@ -119,10 +134,11 @@
     NSArray *seasonAndEpisodeOne = [self parseSeasonAndEpisode:anEpisode];
     NSArray *seasonAndEpisodeTwo = [self parseSeasonAndEpisode:anotherEpisode];
     
-    // If the second episode is not actually an episode, it is the beginning
+    // If the second episode is not actually an episode, it is the beginning or
+    // it follows a straange convention, so download it
     if (seasonAndEpisodeTwo == nil) {
         return YES;
-    // But if the first episode is not, there is some error
+    // But if the first episode is not, there is probably some error
     } else if (seasonAndEpisodeOne == nil) {
         return NO;
     // If they are numbered differently, treat it as differente shows (so yes)

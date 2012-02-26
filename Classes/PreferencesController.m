@@ -397,7 +397,9 @@
     [aTask setLaunchPath:@"/bin/launchctl"];
     [aTask setArguments:[NSArray arrayWithObjects:@"load",@"-w",[self launchAgentPath],nil]];
     [aTask launch];
+    #if PREFPANE
     [aTask waitUntilExit];
+    #endif
     [aTask release];
 }
 

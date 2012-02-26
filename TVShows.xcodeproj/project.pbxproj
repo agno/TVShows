@@ -188,6 +188,7 @@
 		57D19A2B13AEF48700BDE873 /* OverflowButtonPressed.tif in Resources */ = {isa = PBXBuildFile; fileRef = 57D19A2713AEF48700BDE873 /* OverflowButtonPressed.tif */; };
 		57D19A2C13AEF48700BDE873 /* OverflowDivider.png in Resources */ = {isa = PBXBuildFile; fileRef = 57D19A2813AEF48700BDE873 /* OverflowDivider.png */; };
 		57D41B921370AFF100AB0048 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3424AF1F11EF6432009C49DD /* Localizable.strings */; };
+		57EBC9FA1482A6FA006E068F /* arrow-this.png in Resources */ = {isa = PBXBuildFile; fileRef = 57EBC9F91482A6FA006E068F /* arrow-this.png */; };
 		57F33F891376FE4C00270A75 /* TorrentzParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 573ABCC713734E9B0018F6F3 /* TorrentzParser.m */; };
 		57F7062B13AF32E5002A83E4 /* Cover-DVD.png in Resources */ = {isa = PBXBuildFile; fileRef = 57F7062913AF32E5002A83E4 /* Cover-DVD.png */; };
 		57F7062D13AF3798002A83E4 /* Cover-Bluray.png in Resources */ = {isa = PBXBuildFile; fileRef = 57F7062C13AF3798002A83E4 /* Cover-Bluray.png */; };
@@ -474,6 +475,7 @@
 		57DCE0791369533B001569D9 /* pl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = pl; path = Resources/pl.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		57E4EB3E136B9A23003E59E5 /* pt-PT */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "Resources/pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		57E4EB3F136B9A32003E59E5 /* pt-BR */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "Resources/pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		57EBC9F91482A6FA006E068F /* arrow-this.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-this.png"; sourceTree = "<group>"; };
 		57F7062913AF32E5002A83E4 /* Cover-DVD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cover-DVD.png"; sourceTree = "<group>"; };
 		57F7062C13AF3798002A83E4 /* Cover-Bluray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cover-Bluray.png"; sourceTree = "<group>"; };
 		8D202CF80486D31800D8A456 /* TVShows.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVShows.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -797,6 +799,7 @@
 		349FEE021183590500D24FC9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				57EBC9F91482A6FA006E068F /* arrow-this.png */,
 				57F7062C13AF3798002A83E4 /* Cover-Bluray.png */,
 				57F7062913AF32E5002A83E4 /* Cover-DVD.png */,
 				57D19A2513AEF48700BDE873 /* FilterBarBackground.png */,
@@ -1153,6 +1156,7 @@
 				57D19A2C13AEF48700BDE873 /* OverflowDivider.png in Resources */,
 				57F7062B13AF32E5002A83E4 /* Cover-DVD.png in Resources */,
 				57F7062D13AF3798002A83E4 /* Cover-Bluray.png in Resources */,
+				57EBC9FA1482A6FA006E068F /* arrow-this.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

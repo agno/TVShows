@@ -381,7 +381,7 @@
     if ([TSUserDefaults getBoolFromKey:@"MisoEnabled" withDefault:NO] &&
         [TSUserDefaults getBoolFromKey:@"MisoCheckInEnabled" withDefault:NO]) {
         
-        NSString *episodeName = [[inNotification userInfo] valueForKey:@"fileName"];
+        NSString *episodeName = [[inNotification userInfo] valueForKey:@"episodeName"];
         NSString *showName = [[inNotification userInfo] valueForKey:@"showName"];
         
         NSArray *seasonAndEpisode = [TSRegexFun parseSeasonAndEpisode:episodeName];

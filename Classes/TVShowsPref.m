@@ -68,7 +68,7 @@
         
         // If The Pirate Bay seems blocked, set the magnets option
         if ([WebsiteFunctions canConnectToURL:@"http://www.google.com"] &&
-            ![WebsiteFunctions canConnectToURL:@"http://thepiratebay.org"]) {
+            ![WebsiteFunctions canConnectToURL:@"http://thepiratebay.se"]) {
             [TSUserDefaults setKey:@"PreferMagnets" fromBool:YES];
         }
         

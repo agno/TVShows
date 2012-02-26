@@ -22,5 +22,7 @@
 + (BOOL) downloadEpisode:(NSObject *)episode ofShow:(NSObject *)show;
 + (BOOL) shouldDownloadSDForEpisode:(NSString *)episodeName;
 + (NSString *) saveLocationForEpisode:(NSObject *)episode ofShow:(NSString *)showName;
++ (NSString *) getTorrentFileFromMagnetLink:(NSString *)aMagnetLink;
++ (NSString *) getTorrentFileFromMagnetHash:(NSString *)aMagnetHash;
 
 @end

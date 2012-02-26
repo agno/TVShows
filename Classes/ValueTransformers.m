@@ -68,3 +68,39 @@
 }
 
 @end
+
+static NSDate *TSLastDateEmptySubscriptions = nil;
+
+@implementation EmptySubscriptionsValueTransformer
+
++ (Class) transformedValueClass;
+{
+    return [NSNumber class];
+}
+
++ (BOOL) allowsReverseTransformation
+{
+    return NO;
+}
+
+- (id) transformedValue:(id)value
+{
+    if (TSLastDateEmptySubscriptions == nil) {
+        TSLastDateEmptySubscriptions = [NSDate date];
+    }
+    
+    // For some reason, we sometimes receive nil values.
+    // Those will crash the program if we aren't careful.
+    // Check also that the last time someone ask for this was more than 500 ms
+    // to avoid false positives
+    if (value == nil || [value count] > 0 ||
+        [[NSDate date] timeIntervalSinceDate:TSLastDateEmptySubscriptions] < 0.5) {
+        TSLastDateEmptySubscriptions = [NSDate date];
+        return [NSNumber numberWithBool:YES];
+    } else {
+        TSLastDateEmptySubscriptions = [NSDate date];
+        return [NSNumber numberWithBool:NO];
+    }
+}
+
+@end
