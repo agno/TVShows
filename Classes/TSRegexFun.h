@@ -24,6 +24,7 @@
 + (BOOL) isEpisodeHD:(NSString *)title;
 + (NSString *) parseTitleFromString:(NSString *)title withIdentifier:(NSArray* )identifier withType:(NSString *)type;
 + (NSString *) parseShowFromTitle:(NSString *)title;
++ (NSString *) parseHashFromMagnetLink:(NSString *)aMagnetLink;
 + (NSString *) replaceHTMLEntitiesInString:(NSString *)string;
 + (BOOL) wasThisEpisode:(NSString *)anEpisode airedAfterThisOne:(NSString *)anotherEpisode;
 

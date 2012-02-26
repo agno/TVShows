@@ -112,6 +112,15 @@
     return showTitle;
 }
 
++ (NSString *) parseHashFromMagnetLink:(NSString *)aMagnetLink
+{
+    NSString *magnetHash = [aMagnetLink stringByReplacingOccurrencesOfRegex:@"^.*btih:" withString:@""];
+    
+    magnetHash = [magnetHash stringByReplacingOccurrencesOfRegex:@"[^a-fA-F0-9].*$" withString:@""];
+    
+    return magnetHash;
+}
+
 + (NSString *) replaceHTMLEntitiesInString:(NSString *)string
 {
     string = [string stringByReplacingOccurrencesOfRegex:@"&amp;" withString:@"&"];

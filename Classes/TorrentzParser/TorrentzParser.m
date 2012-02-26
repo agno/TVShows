@@ -16,6 +16,7 @@
 #import "TorrentzParser.h"
 #import "RegexKitLite.h"
 #import "WebsiteFunctions.h"
+#import "TSTorrentFunctions.h"
 
 @implementation TorrentzParser
 
@@ -36,9 +37,9 @@
     // Because I'm lazy, this piece of code will be useless in 2020
     // Sorry late nights viewers from the next decade
     if ([episodeName rangeOfString:@" 201"].location == NSNotFound) {
-        torrentzURLFormat = @"http://torrentz.eu/feed_any?q=%@+720p";
+        torrentzURLFormat = @"http://torrentz.eu/feed?q=%@+720p";
     } else {
-        torrentzURLFormat = @"http://torrentz.eu/feed_any?q=%%22%@%%22+720p";
+        torrentzURLFormat = @"http://torrentz.eu/feed?q=%%22%@%%22+720p";
     }
     
     // Now let's grab the search results
@@ -88,32 +89,31 @@
         NSString *torrent = nil;
         
         // Process only known trackers
-        if([tracker hasPrefix:@"http://www.vertor.com"]) {
+        if ([tracker hasPrefix:@"http://www.vertor.com"]) {
             torrent = [TorrentzParser getTorrentFromTracker:tracker
                                             withLinkMatcher:@"http://www.vertor.com/([^\"]*)mod=download([^\"]*)id=([^\"]*)"
                                                   appending:@""];
             torrent = [torrent stringByReplacingOccurrencesOfString:@"amp;" withString:@""];
-        } else if([tracker hasPrefix:@"http://thepiratebay.org"]) {
-            torrent = [TorrentzParser getTorrentFromTracker:tracker
-                                            withLinkMatcher:@"http://torrents.thepiratebay.org([^\"]*)"
-                                                  appending:@""];
-        } else if([tracker hasPrefix:@"http://btjunkie.org"]) {
+        } else if ([tracker hasPrefix:@"http://btjunkie.org"]) {
             torrent = [TorrentzParser getTorrentFromTracker:tracker
                                             withLinkMatcher:@"http://dl.btjunkie.org/torrent/([^\"]*)\\.torrent"
                                                   appending:@""];
-        } else if([tracker hasPrefix:@"http://www.btmon.com"]) {
+        } else if ([tracker hasPrefix:@"http://www.btmon.com"]) {
             torrent = [tracker stringByReplacingOccurrencesOfString:@".html" withString:@""];
-// Not trustworthy enough
-//        } else if([tracker hasPrefix:@"http://www.torrenthound.com"]) {
-//            torrent = [TorrentzParser getTorrentFromTracker:tracker
-//                                            withLinkMatcher:@"/torrent/([^\"]*)"
-//                                                  appending:@"http://www.torrenthound.com"];
+        } else if ([tracker hasPrefix:@"http://www.torrenthound.com"]) {
+            torrent = [TorrentzParser getTorrentFromTracker:tracker
+                                            withLinkMatcher:@"/torrent/([^\"]*)"
+                                                  appending:@"http://www.torrenthound.com"];
         }
         
         if (torrent != nil) {
             [torrents addObject:torrent]; 
         }
     }
+    
+    // Anyway, add torcache link as a backup plan
+    NSString *magnetHash = [TorrentzParser getHashFromTorrentzURL:aTorrentzURL];
+    [torrents addObject:[TSTorrentFunctions getTorrentFileFromMagnetHash:magnetHash]];
     
     return torrents;
 }
@@ -132,6 +132,13 @@
     } else {
         return nil;
     }
+}
+
++ (NSString *) getHashFromTorrentzURL:(NSString*)theURL
+{
+    NSString *magnetHash = [theURL stringByReplacingOccurrencesOfRegex:@".*torrentz.eu/" withString:@""];
+    
+    return magnetHash;
 }
 
 - (void)dealloc

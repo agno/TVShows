@@ -256,4 +256,16 @@
     return saveLocation;
 }
 
++ (NSString *) getTorrentFileFromMagnetLink:(NSString *)aMagnetLink
+{
+    NSString *magnetHash = [TSRegexFun parseHashFromMagnetLink:aMagnetLink];
+    
+    return [TSTorrentFunctions getTorrentFileFromMagnetHash:magnetHash];
+}
+
++ (NSString *) getTorrentFileFromMagnetHash:(NSString *)aMagnetHash
+{
+    return [NSString stringWithFormat:@"https://torcache.net/torrent/%@.torrent", aMagnetHash];
+}
+
 @end
