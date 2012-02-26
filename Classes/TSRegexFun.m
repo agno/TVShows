@@ -57,7 +57,7 @@
 
 + (BOOL) isEpisodeHD:(NSString *)title
 {
-    return [title isMatchedByRegex:@"(720|1080|HR|x264|mkv)"];
+    return [title isMatchedByRegex:@"(720|1080)"];
 }
 
 + (NSString *) parseTitleFromString:(NSString *)title withIdentifier:(NSArray* )identifier withType:(NSString *)type
