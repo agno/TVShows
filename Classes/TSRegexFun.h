@@ -27,5 +27,6 @@
 + (NSString *) parseHashFromMagnetLink:(NSString *)aMagnetLink;
 + (NSString *) replaceHTMLEntitiesInString:(NSString *)string;
 + (BOOL) wasThisEpisode:(NSString *)anEpisode airedAfterThisOne:(NSString *)anotherEpisode;
++ (NSString *) obtainFullFeed:(NSString *)aFeed;
 
 @end

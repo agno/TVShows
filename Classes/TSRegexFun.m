@@ -173,4 +173,16 @@
     return YES;
 }
 
++ (NSString *) obtainFullFeed:(NSString *)aFeed
+{
+    NSString *fullFeed = aFeed;
+    
+    if ([aFeed isMatchedByRegex:@"tvshowsapp\\.com"]) {
+        fullFeed = [aFeed stringByReplacingOccurrencesOfRegex:@"\\.xml$"
+                                                   withString:@".full.xml"];
+    }
+    
+    return fullFeed;
+}
+
 @end

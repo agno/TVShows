@@ -525,9 +525,18 @@
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
+    NSMutableArray *feeds = [NSMutableArray arrayWithArray:[showFeeds componentsSeparatedByString:@"#"]];
+    
+    // Generate the full feeds for this suscription
+    for (int i = 0; i < [feeds count]; i++) {
+        NSString *feed = [TSRegexFun obtainFullFeed:[feeds objectAtIndex:i]];
+        [feeds replaceObjectAtIndex:i
+                         withObject:feed];
+    }
+    
     // Now we can trigger the time-expensive task
     NSArray *results = [NSArray arrayWithObjects:showFeeds,
-                        [TSParseXMLFeeds parseEpisodesFromFeeds:[showFeeds componentsSeparatedByString:@"#"]
+                        [TSParseXMLFeeds parseEpisodesFromFeeds:feeds
                                                 beingCustomShow:NO], nil];
     
     if ([results count] < 2) {
