@@ -153,6 +153,8 @@
 		571D4FD013A91DE100EBD5EA /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 571D4E4513A90A7900EBD5EA /* libxml2.dylib */; };
 		5737D1BD13B4A5670092359C /* PresetTorrentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 347F1E6B11AA093C005A40AA /* PresetTorrentsController.m */; };
 		573ABCC813734E9B0018F6F3 /* TorrentzParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 573ABCC713734E9B0018F6F3 /* TorrentzParser.m */; };
+		574499AA1825AFEB00F0481E /* TVShows-Menu-Icon-Black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 574499A81825AFEB00F0481E /* TVShows-Menu-Icon-Black@2x.png */; };
+		574499AB1825AFEB00F0481E /* TVShows-Menu-Icon-White@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 574499A91825AFEB00F0481E /* TVShows-Menu-Icon-White@2x.png */; };
 		5755750F136DC9E5006D1FC9 /* TVShows-Menu-Icon-White.png in Resources */ = {isa = PBXBuildFile; fileRef = 5755750D136DC9E5006D1FC9 /* TVShows-Menu-Icon-White.png */; };
 		57557510136DC9E5006D1FC9 /* TVShows-Menu-Icon-Black.png in Resources */ = {isa = PBXBuildFile; fileRef = 5755750E136DC9E5006D1FC9 /* TVShows-Menu-Icon-Black.png */; };
 		575C0D59136A487A005DE73D /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = 575C0D58136A487A005DE73D /* VERSION */; };
@@ -427,6 +429,8 @@
 		573210E914096F2D00497D44 /* ar */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ar; path = Resources/ar.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		573ABCC613734E9B0018F6F3 /* TorrentzParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TorrentzParser.h; path = TorrentzParser/TorrentzParser.h; sourceTree = "<group>"; };
 		573ABCC713734E9B0018F6F3 /* TorrentzParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TorrentzParser.m; path = TorrentzParser/TorrentzParser.m; sourceTree = "<group>"; };
+		574499A81825AFEB00F0481E /* TVShows-Menu-Icon-Black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TVShows-Menu-Icon-Black@2x.png"; sourceTree = "<group>"; };
+		574499A91825AFEB00F0481E /* TVShows-Menu-Icon-White@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TVShows-Menu-Icon-White@2x.png"; sourceTree = "<group>"; };
 		5755750D136DC9E5006D1FC9 /* TVShows-Menu-Icon-White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TVShows-Menu-Icon-White.png"; sourceTree = "<group>"; };
 		5755750E136DC9E5006D1FC9 /* TVShows-Menu-Icon-Black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TVShows-Menu-Icon-Black.png"; sourceTree = "<group>"; };
 		575C0D58136A487A005DE73D /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
@@ -808,19 +812,21 @@
 				57F7062C13AF3798002A83E4 /* Cover-Bluray.png */,
 				57F7062913AF32E5002A83E4 /* Cover-DVD.png */,
 				57D19A2513AEF48700BDE873 /* FilterBarBackground.png */,
+				34B6914011D9F1A9001E2518 /* get.png */,
+				342FEC8411E1864000E21FC0 /* hd.png */,
+				579CAD5713AB9234006743B4 /* Miso-Logo.png */,
 				57D19A2613AEF48700BDE873 /* OverflowButton.tif */,
 				57D19A2713AEF48700BDE873 /* OverflowButtonPressed.tif */,
 				57D19A2813AEF48700BDE873 /* OverflowDivider.png */,
-				579CAD5713AB9234006743B4 /* Miso-Logo.png */,
-				342FEC8411E1864000E21FC0 /* hd.png */,
-				34B6914011D9F1A9001E2518 /* get.png */,
 				340A20B011AF0E15004351EB /* posterArtPlaceholder.jpg */,
 				571C60E2139905320072D921 /* ribbon.png */,
 				344A205811F5485900026735 /* Toggle-Knob.png */,
 				344A205911F5485900026735 /* Toggle-Slider.png */,
 				349FEE031183590500D24FC9 /* TVShows-Beta-Large.icns */,
-				5755750D136DC9E5006D1FC9 /* TVShows-Menu-Icon-White.png */,
 				5755750E136DC9E5006D1FC9 /* TVShows-Menu-Icon-Black.png */,
+				574499A81825AFEB00F0481E /* TVShows-Menu-Icon-Black@2x.png */,
+				5755750D136DC9E5006D1FC9 /* TVShows-Menu-Icon-White.png */,
+				574499A91825AFEB00F0481E /* TVShows-Menu-Icon-White@2x.png */,
 				349FEE051183590500D24FC9 /* TVShows-Off-Large.icns */,
 				349FEE071183590500D24FC9 /* TVShows-On-Large.icns */,
 			);
@@ -1128,6 +1134,8 @@
 				578A8B9E137048E500786FB8 /* TVShows-Beta-Large.icns in Resources */,
 				57D41B921370AFF100AB0048 /* Localizable.strings in Resources */,
 				5791A5FF13A92A720038A638 /* oauthAutoConfig.plist in Resources */,
+				574499AA1825AFEB00F0481E /* TVShows-Menu-Icon-Black@2x.png in Resources */,
+				574499AB1825AFEB00F0481E /* TVShows-Menu-Icon-White@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
