@@ -223,6 +223,10 @@
     
     // Parse and store all results
     for (NSString *url in urls) {
+        // Deal with NULLs feeds from the fetch controller
+        if (url == (id)[NSNull null] || [url length] == 0) {
+            continue;
+        }
         // Deal with "feed://" protocol that Safari puts in there
         for (NSMutableDictionary *episode in [self parseEpisodesFromFeed:
               [url stringByReplacingOccurrencesOfString:@"feed://" withString:@"http://"]]) {

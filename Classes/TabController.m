@@ -31,6 +31,18 @@
 #define NSAppKitVersionNumber10_5   949
 #endif
 
+#ifndef NSAppKitVersionNumber10_6
+#define NSAppKitVersionNumber10_6 1038
+#endif
+
+#ifndef NSAppKitVersionNumber10_7
+#define NSAppKitVersionNumber10_7 1115
+#endif
+
+#ifndef NSAppKitVersionNumber10_8
+#define NSAppKitVersionNumber10_8 1162
+#endif
+
 @implementation TabController
 
 @synthesize selectedShow;
@@ -78,6 +90,8 @@
     [sidebarVersionText setStringValue: [NSString stringWithFormat:@"%@ (r%@)", bundleVersion, buildVersion]];
     [sidebarDateText setStringValue:buildDate];
     [endedRibbonText setStringValue:[TSLocalizeString(@"Ended") uppercaseString]];
+    
+    [self fixEndedRibbonText];
     
     NSDate *date = [TSUserDefaults getDateFromKey:@"lastCheckedForEpisodes"];
     if (date) {
@@ -148,6 +162,23 @@
     
     // Draw the arrow if the user does not have any shows
     [self performSelector:@selector(showArrowIfNeeded:) withObject:nil afterDelay:1];
+}
+
+- (void)fixEndedRibbonText
+{
+    // Avoid this fix on Lion and before
+    if (floor(NSAppKitVersionNumber) < NSAppKitVersionNumber10_8) {
+        return;
+    }
+    
+    CIFilter *affineTransform = [[endedRibbonText contentFilters] objectAtIndex:0];
+    NSAffineTransform *inputTransform = [affineTransform valueForKey:@"inputTransform"];
+    [inputTransform rotateByRadians:-M_PI/2.0];
+    [inputTransform translateXBy:-16 yBy:-7.5];
+    
+    [affineTransform setValue:inputTransform forKey:@"inputTransform"];
+    
+    [endedRibbonText setContentFilters:[NSArray arrayWithObjects:affineTransform, nil]];
 }
 
 - (void) showArrowIfNeeded:(id)sender
