@@ -5,10 +5,17 @@ build/
 *.perspectivev3
 *.mode1v3
 *.mode2v3
+*.xcuserdatad
 
 # OSX Noise
 .DS_Store
 
-# Frequently Changed Files
-TODO
-NEWS
+# SVN Noises (just in case)
+.svn
+
+# Web Translate It
+config/
+.wti
+
+# Real "Secrets" configuration file
+Classes/AppSecretConstants.h
